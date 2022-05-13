@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>唐詩三百首 列表</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c135806c-e060-413c-98fc-b83c875b0ac8" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎋</span></div><h1 class="page-title">唐詩三百首 列表</h1></header><div class="page-body"><h2 id="90c33b1b-7c40-450c-ab48-147c555e99c4" class="">蘅塘退士原序</h2><p id="b3723ac8-969e-4a86-9df0-0714e2eb081f" class="">世俗兒童就學，即授《<a href="https://zh.wikisource.org/wiki/%E5%8D%83%E5%AE%B6%E8%A9%A9">千家詩</a>》，取其易於成誦，故流傳不廢。但其詩隨手掇拾，工拙莫辨，且止五七律絕二體，而唐宋人又雜出其間，殊乖體制。因專就唐詩中膾灸人口之作，擇其尤要者，每體得數十首，共三百餘首，錄成一篇，為家塾課本，俾童而習之，白首亦莫能廢，較《千家詩》不遠勝耶？
+ 諺云：「熟讀唐詩三百首，不會作詩也會吟」。 請以是編驗之。</p><h2 id="5a412144-8be3-4434-9b9e-e2940dd7c432" class="">五言古詩</h2><ol type="1" id="74b72ca1-2cd5-4b0c-833b-cbd5b54d3f89" class="numbered-list" start="1"><li>元結 <a href="https://zh.wikisource.org/wiki/%E8%B3%8A%E9%80%80%E7%A4%BA%E5%AE%98%E5%90%8F">賊退示官吏</a></li></ol><ol type="1" id="cdb498e9-beb0-462a-afc5-1929a7c161ee" class="numbered-list" start="2"><li>王昌齡 <a href="https://zh.wikisource.org/wiki/%E5%90%8C%E5%BE%9E%E5%BC%9F%E5%8D%97%E9%BD%8B%E7%BF%AB%E6%9C%88%E6%86%B6%E5%B1%B1%E9%99%B0%E5%B4%94%E5%B0%91%E5%BA%9C">同從弟南齋翫月憶山陰崔少府</a></li></ol><ol type="1" id="304824d8-eefb-4c00-8f95-d0453a23bd9f" class="numbered-list" start="3"><li>王維 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E7%B6%A6%E6%AF%8B%E6%BD%9B%E8%90%BD%E7%AC%AC%E9%82%84%E9%84%89">送綦毋潛落第還鄉</a></li></ol><ol type="1" id="172a042a-4f92-4255-b1c5-df89f2fbd090" class="numbered-list" start="4"><li>王維 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E5%88%A5_(%E4%B8%8B%E9%A6%AC%E9%A3%B2%E5%90%9B%E9%85%92)">送別</a></li></ol><ol type="1" id="39da0765-fedf-4648-8fa8-87f8465fe06b" class="numbered-list" start="5"><li>王維 <a href="https://zh.wikisource.org/wiki/%E9%9D%92%E8%B0%BF">青谿</a></li></ol><ol type="1" id="3c0db8da-383e-43ef-9c07-3c40a676237e" class="numbered-list" start="6"><li>王維 <a href="https://zh.wikisource.org/wiki/%E6%B8%AD%E5%B7%9D%E7%94%B0%E5%AE%B6">渭川田家</a></li></ol><ol type="1" id="ad0aba68-7fac-437b-99d0-1d65f3d9f457" class="numbered-list" start="7"><li>王維 <a href="https://zh.wikisource.org/wiki/%E8%A5%BF%E6%96%BD%E8%A9%A0">西施詠</a></li></ol><ol type="1" id="2a020619-38e8-46de-96c6-ae51817a8c6d" class="numbered-list" start="8"><li>岑參 <a href="https://zh.wikisource.org/wiki/%E8%88%87%E9%AB%98%E9%81%A9%E8%96%9B%E6%93%9A%E7%99%BB%E6%85%88%E6%81%A9%E5%AF%BA%E6%B5%AE%E5%9C%96">與高適薛據登慈恩寺浮圖</a></li></ol><ol type="1" id="0b956a8f-87be-4ef2-8d12-2d71a2c548e0" class="numbered-list" start="9"><li>李白 <a href="https://zh.wikisource.org/wiki/%E4%B8%8B%E7%B5%82%E5%8D%97%E5%B1%B1%E9%81%8E%E6%96%9B%E6%96%AF%E5%B1%B1%E4%BA%BA%E5%AE%BF%E7%BD%AE%E9%85%92">下終南山過斛斯山人宿置酒</a></li></ol><ol type="1" id="0db67383-d2d8-4f11-a540-c43fc2382a8e" class="numbered-list" start="10"><li>李白 <a href="https://zh.wikisource.org/wiki/%E6%9C%88%E4%B8%8B%E7%8D%A8%E9%85%8C_(%E8%8A%B1%E9%96%93%E4%B8%80%E5%A3%BA%E9%85%92)">月下獨酌</a></li></ol><ol type="1" id="88201670-813b-4f13-a422-bb3d1ad9a4c5" class="numbered-list" start="11"><li>李白 <a href="https://zh.wikisource.org/wiki/%E6%98%A5%E6%80%9D_(%E6%9D%8E%E7%99%BD)">春思</a></li></ol><ol type="1" id="495039aa-a0fa-4b85-b055-743b3f746040" class="numbered-list" start="12"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E6%9C%9B%E5%B6%BD_(%E5%B2%B1%E5%AE%97%E5%A4%AB%E5%A6%82%E4%BD%95)">望嶽</a></li></ol><ol type="1" id="63113acd-dc62-4b94-84c7-d77a46c4f0ba" class="numbered-list" start="13"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E8%B4%88%E8%A1%9B%E5%85%AB%E8%99%95%E5%A3%AB">贈衛八處士</a></li></ol><ol type="1" id="dd75dde5-6973-4fcd-9d99-47318bbec6f3" class="numbered-list" start="14"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E4%BD%B3%E4%BA%BA_(%E6%9D%9C%E7%94%AB)">佳人</a></li></ol><ol type="1" id="85cbeb3d-84ff-4214-8a04-19831a8c3b29" class="numbered-list" start="15"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E5%A4%A2%E6%9D%8E%E7%99%BD_(%E6%AD%BB%E5%88%A5%E5%B7%B2%E5%90%9E%E8%81%B2)">夢李白</a> 之一</li></ol><ol type="1" id="43951cf1-19d3-470a-be9b-7920d5b732e1" class="numbered-list" start="16"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E5%A4%A2%E6%9D%8E%E7%99%BD_(%E6%B5%AE%E9%9B%B2%E7%B5%82%E6%97%A5%E8%A1%8C)">夢李白</a> 之二</li></ol><ol type="1" id="92f5b067-651d-43a2-9f34-bfbab8fb5919" class="numbered-list" start="17"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E7%A7%8B%E7%99%BB%E8%98%AD%E5%B1%B1%E5%AF%84%E5%BC%B5%E4%BA%94">秋登蘭山寄張五</a></li></ol><ol type="1" id="3c373ec0-3396-4a24-a4db-683133c511c8" class="numbered-list" start="18"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E5%A4%8F%E6%97%A5%E5%8D%97%E4%BA%AD%E6%87%B7%E8%BE%9B%E5%A4%A7">夏日南亭懷辛大</a></li></ol><ol type="1" id="19b2273c-a718-467d-bda7-34782444789e" class="numbered-list" start="19"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E5%AE%BF%E6%A5%AD%E5%B8%AB%E5%B1%B1%E6%88%BF%E5%BE%85%E4%B8%81%E5%A4%A7%E4%B8%8D%E8%87%B3">宿業師山房待丁大不至</a></li></ol><ol type="1" id="897fd407-ba85-4841-9182-577fd79b6ab4" class="numbered-list" start="20"><li>丘為 <a href="https://zh.wikisource.org/wiki/%E5%B0%8B%E8%A5%BF%E5%B1%B1%E9%9A%B1%E8%80%85%E4%B8%8D%E9%81%87">尋西山隱者不遇</a></li></ol><ol type="1" id="3bfa45fe-82e2-446f-8abc-6fce7f791cae" class="numbered-list" start="21"><li>柳宗元 <a href="https://zh.wikisource.org/wiki/%E6%99%A8%E8%A9%A3%E8%B6%85%E5%B8%AB%E9%99%A2%E8%AE%80%E7%A6%AA%E7%B6%93">晨詣超師院讀禪經</a></li></ol><ol type="1" id="6cee797d-ab46-48bd-8469-ac2870286ebf" class="numbered-list" start="22"><li>柳宗元 <a href="https://zh.wikisource.org/wiki/%E6%BA%AA%E5%B1%85">溪居</a></li></ol><ol type="1" id="6ece6d54-6999-43cd-b45c-6aecbceb10ed" class="numbered-list" start="23"><li>韋應物 <a href="https://zh.wikisource.org/wiki/%E9%83%A1%E9%BD%8B%E9%9B%A8%E4%B8%AD%E8%88%87%E8%AB%B8%E6%96%87%E5%A3%AB%E7%87%95%E9%9B%86">郡齋雨中與諸文士燕集</a></li></ol><ol type="1" id="666bde3b-0bfb-4a2f-9bda-b1db320a295b" class="numbered-list" start="24"><li>韋應物 <a href="https://zh.wikisource.org/wiki/%E5%88%9D%E7%99%BC%E6%8F%9A%E5%AD%90%E5%AF%84%E5%85%83%E5%A4%A7%E6%A0%A1%E6%9B%B8">初發揚子寄元大校書</a></li></ol><ol type="1" id="e4762471-4a28-4422-ba41-9709775e02fd" class="numbered-list" start="25"><li>韋應物 <a href="https://zh.wikisource.org/wiki/%E5%AF%84%E5%85%A8%E6%A4%92%E5%B1%B1%E4%B8%AD%E9%81%93%E5%A3%AB">寄全椒山中道士</a></li></ol><ol type="1" id="4a7362bd-b0e4-4b82-b09d-203eac463b5b" class="numbered-list" start="26"><li>韋應物 <a href="https://zh.wikisource.org/wiki/%E9%95%B7%E5%AE%89%E9%81%87%E9%A6%AE%E8%91%97">長安遇馮著</a></li></ol><ol type="1" id="42b32122-90f0-4faa-9488-0d1cf6f85a16" class="numbered-list" start="27"><li>韋應物 <a href="https://zh.wikisource.org/wiki/%E5%A4%95%E6%AC%A1%E7%9B%B1%E7%9C%99%E7%B8%A3">夕次盱眙縣</a></li></ol><ol type="1" id="88607ab7-a5c3-4d99-b906-00d96f0f5bc0" class="numbered-list" start="28"><li>韋應物 <a href="https://zh.wikisource.org/wiki/%E6%9D%B1%E9%83%8A">東郊</a></li></ol><ol type="1" id="e38382c2-8820-4f73-899a-81b48354b9ef" class="numbered-list" start="29"><li>韋應物 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E6%A5%8A%E6%B0%8F%E5%A5%B3">送楊氏女</a></li></ol><ol type="1" id="f44951cc-9488-4c50-b974-af1ced34baca" class="numbered-list" start="30"><li>常建 <a href="https://zh.wikisource.org/wiki/%E5%AE%BF%E7%8E%8B%E6%98%8C%E9%BD%A1%E9%9A%B1%E5%B1%85">宿王昌齡隱居</a></li></ol><ol type="1" id="54e6a2fa-2855-419b-928b-e5838ad6e883" class="numbered-list" start="31"><li>張九齡 <a href="https://zh.wikisource.org/wiki/%E6%84%9F%E9%81%87_(%E5%AD%A4%E9%B4%BB%E6%B5%B7%E4%B8%8A%E4%BE%86)">感遇</a> 之一</li></ol><ol type="1" id="5e3e3cee-d0cb-4ba1-aabb-3485bb7f78db" class="numbered-list" start="32"><li>張九齡 <a href="https://zh.wikisource.org/wiki/%E6%84%9F%E9%81%87_(%E8%98%AD%E8%91%89%E6%98%A5%E8%91%B3%E8%95%A4)">感遇</a> 之二</li></ol><ol type="1" id="9a2e2471-7a34-4e3f-93b7-b26bc6aae4c0" class="numbered-list" start="33"><li>張九齡 <a href="https://zh.wikisource.org/wiki/%E6%84%9F%E9%81%87_(%E5%B9%BD%E6%9E%97%E6%AD%B8%E7%8D%A8%E8%87%A5)">感遇</a> 之三</li></ol><ol type="1" id="ad73afa4-966a-48d9-9147-014de9f25921" class="numbered-list" start="34"><li>張九齡 <a href="https://zh.wikisource.org/wiki/%E6%84%9F%E9%81%87_(%E6%B1%9F%E5%8D%97%E6%9C%89%E4%B8%B9%E6%A9%98)">感遇</a> 之四</li></ol><ol type="1" id="2e9c2c22-f5d1-4ff3-8380-186db18aca13" class="numbered-list" start="35"><li>綦毋潛 <a href="https://zh.wikisource.org/wiki/%E6%98%A5%E6%B3%9B%E8%8B%A5%E8%80%B6%E6%BA%AA">春泛若耶溪</a></li></ol><h2 id="86695403-0ed1-4fc0-b52c-bc1c15602f92" class="">七言古詩</h2><ol type="1" id="73c1d8bb-3932-4e0f-972d-c455001681b1" class="numbered-list" start="1"><li>元結 <a href="https://zh.wikisource.org/wiki/%E7%9F%B3%E9%AD%9A%E6%B9%96%E4%B8%8A%E9%86%89%E6%AD%8C%E4%B8%A6%E5%BA%8F">石魚湖上醉歌並序</a></li></ol><ol type="1" id="7b32231d-e448-4f8e-89ea-6e883bd2be35" class="numbered-list" start="2"><li>白居易 <a href="https://zh.wikisource.org/wiki/%E9%95%B7%E6%81%A8%E6%AD%8C">長恨歌</a></li></ol><ol type="1" id="5f63c3c2-0d71-486b-9e67-3d21c0b86243" class="numbered-list" start="3"><li>白居易 <a href="https://zh.wikisource.org/wiki/%E7%90%B5%E7%90%B6%E8%A1%8C">琵琶行並序</a></li></ol><ol type="1" id="807beddb-56c0-435b-a36a-1c6038352369" class="numbered-list" start="4"><li>岑參 <a href="https://zh.wikisource.org/wiki/%E8%B5%B0%E9%A6%AC%E5%B7%9D%E8%A1%8C%E5%A5%89%E9%80%81%E5%B0%81%E5%A4%A7%E5%A4%AB%E5%87%BA%E5%B8%AB%E8%A5%BF%E5%BE%81">走馬川行奉送封大夫出師西征</a></li></ol><ol type="1" id="72c9580d-70df-4a89-a9db-56d8f3689cbe" class="numbered-list" start="5"><li>岑參 <a href="https://zh.wikisource.org/wiki/%E8%BC%AA%E8%87%BA%E6%AD%8C%E5%A5%89%E9%80%81%E5%B0%81%E5%A4%A7%E5%A4%AB%E5%87%BA%E5%B8%AB%E8%A5%BF%E5%BE%81">輪臺歌奉送封大夫出師西征</a></li></ol><ol type="1" id="2f99f460-9aae-4c3f-8724-9785dc303b39" class="numbered-list" start="6"><li>岑參 <a href="https://zh.wikisource.org/wiki/%E7%99%BD%E9%9B%AA%E6%AD%8C%E9%80%81%E6%AD%A6%E5%88%A4%E5%AE%98%E6%AD%B8%E4%BA%AC">白雪歌送武判官歸京</a></li></ol><ol type="1" id="b4f67002-ec55-4606-a76c-5f2fbb7421a5" class="numbered-list" start="7"><li>李白 <a href="https://zh.wikisource.org/wiki/%E5%BB%AC%E5%B1%B1%E8%AC%A0%E5%AF%84%E7%9B%A7%E4%BE%8D%E7%A6%A6%E8%99%9B%E8%88%9F">廬山謠寄盧侍禦虛舟</a></li></ol><ol type="1" id="f63cc31c-6626-4c89-aae7-6274a86049a5" class="numbered-list" start="8"><li>李白 <a href="https://zh.wikisource.org/wiki/%E5%A4%A2%E9%81%8A%E5%A4%A9%E5%A7%A5%E5%90%9F%E7%95%99%E5%88%A5">夢遊天姥吟留別</a></li></ol><ol type="1" id="476462c3-60f6-4ba8-8fb1-7e7b6197b4a9" class="numbered-list" start="9"><li>李白 <a href="https://zh.wikisource.org/wiki/%E9%87%91%E9%99%B5%E9%85%92%E8%82%86%E7%95%99%E5%88%A5">金陵酒肆留別</a></li></ol><ol type="1" id="1b8bd317-73aa-4765-9301-73892d8f1c79" class="numbered-list" start="10"><li>李白 <a href="https://zh.wikisource.org/wiki/%E5%AE%A3%E5%B7%9E%E8%AC%9D%E6%9C%93%E6%A8%93%E9%A4%9E%E5%88%A5%E6%A0%A1%E6%9B%B8%E5%8F%94%E9%9B%B2">宣州謝朓樓餞別校書叔雲</a></li></ol><ol type="1" id="207a245b-4b05-4c3c-8af4-d64a0b379bd5" class="numbered-list" start="11"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E9%9F%93%E7%A2%91">韓碑</a></li></ol><ol type="1" id="f35c7069-b634-40c5-83fd-deee4550cc9b" class="numbered-list" start="12"><li>李頎 <a href="https://zh.wikisource.org/wiki/%E5%8F%A4%E6%84%8F_(%E6%9D%8E%E9%A0%8E)">古意</a></li></ol><ol type="1" id="7929630e-9066-4a17-a323-94c5f7b30d68" class="numbered-list" start="13"><li>李頎 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E9%99%B3%E7%AB%A0%E7%94%AB">送陳章甫</a></li></ol><ol type="1" id="f817b252-756c-49fb-815e-27a514594b35" class="numbered-list" start="14"><li>李頎 <a href="https://zh.wikisource.org/wiki/%E7%90%B4%E6%AD%8C_(%E6%9D%8E%E9%A0%8E)">琴歌</a></li></ol><ol type="1" id="9b2aa9f4-91c4-49b1-8ead-1bd6ddcc2fcb" class="numbered-list" start="15"><li>李頎 <a href="https://zh.wikisource.org/wiki/%E8%81%BD%E8%91%A3%E5%A4%A7%E5%BD%88%E8%83%A1%E7%AC%B3%E5%85%BC%E5%AF%84%E8%AA%9E%E5%BC%84%E6%88%BF%E7%B5%A6%E4%BA%8B">聽董大彈胡笳兼寄語弄房給事</a></li></ol><ol type="1" id="70df0e61-0edc-4cab-a98e-3c73722e2982" class="numbered-list" start="16"><li>李頎 <a href="https://zh.wikisource.org/wiki/%E8%81%BD%E5%AE%89%E8%90%AC%E5%96%84%E5%90%B9%E8%A7%B1%E7%AF%A5%E6%AD%8C">聽安萬善吹觱篥歌</a></li></ol><ol type="1" id="e24514aa-07c8-40ef-9099-e11884e537ae" class="numbered-list" start="17"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E9%9F%8B%E8%AB%B7%E9%8C%84%E4%BA%8B%E5%AE%85%E8%A7%80%E6%9B%B9%E5%B0%87%E8%BB%8D%E7%95%AB%E9%A6%AC%E5%9C%96">韋諷錄事宅觀曹將軍畫馬圖</a></li></ol><ol type="1" id="4a133d49-3516-4c44-8398-45c206655ace" class="numbered-list" start="18"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E4%B8%B9%E9%9D%92%E5%BC%95%E8%B4%88%E6%9B%B9%E9%9C%B8%E5%B0%87%E8%BB%8D">丹青引贈曹霸將軍</a></li></ol><ol type="1" id="40b3f925-43a2-4e05-b2ed-874b1928bc53" class="numbered-list" start="19"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E5%AF%84%E9%9F%93%E8%AB%AB%E8%AD%B0%E6%B3%A8">寄韓諫議注</a></li></ol><ol type="1" id="fa5a792d-b3a0-4ccd-b23b-34d25a925324" class="numbered-list" start="20"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E5%8F%A4%E6%9F%8F%E8%A1%8C">古柏行</a></li></ol><ol type="1" id="5c983d03-df5b-461d-9a90-b59fca06053e" class="numbered-list" start="21"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E8%A7%80%E5%85%AC%E5%AD%AB%E5%A4%A7%E5%A8%98%E5%BC%9F%E5%AD%90%E8%88%9E%E5%8A%8D%E5%99%A8%E8%A1%8C%E4%B8%A6%E5%BA%8F">觀公孫大娘弟子舞劍器行並序</a></li></ol><ol type="1" id="317dffab-d6da-437f-b54a-289bdd5080f4" class="numbered-list" start="22"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E5%A4%9C%E6%AD%B8%E9%B9%BF%E9%96%80%E6%AD%8C">夜歸鹿門歌</a></li></ol><ol type="1" id="a83c2cab-c52c-40bd-ae44-b3e5e2733e89" class="numbered-list" start="23"><li>柳宗元 <a href="https://zh.wikisource.org/wiki/%E6%BC%81%E7%BF%81">漁翁</a></li></ol><ol type="1" id="ea461dd7-2eb4-4a01-8acd-a77a7b90dd43" class="numbered-list" start="24"><li>陳子昂 <a href="https://zh.wikisource.org/wiki/%E7%99%BB%E5%B9%BD%E5%B7%9E%E8%87%BA%E6%AD%8C">登幽州臺歌</a></li></ol><ol type="1" id="109f62ce-6871-4808-91a0-349a68adf81a" class="numbered-list" start="25"><li>韓愈 <a href="https://zh.wikisource.org/wiki/%E5%B1%B1%E7%9F%B3">山石</a></li></ol><ol type="1" id="28f66486-7609-40cc-a83b-62bcb9e1004f" class="numbered-list" start="26"><li>韓愈 <a href="https://zh.wikisource.org/wiki/%E5%85%AB%E6%9C%88%E5%8D%81%E4%BA%94%E5%A4%9C%E8%B4%88%E5%BC%B5%E5%8A%9F%E6%9B%B9">八月十五夜贈張功曹</a></li></ol><ol type="1" id="5f4f5d91-2c40-47f2-a190-6d405d101b62" class="numbered-list" start="27"><li>韓愈 <a href="https://zh.wikisource.org/wiki/%E8%AC%81%E8%A1%A1%E5%B6%BD%E5%BB%9F%E9%81%82%E5%AE%BF%E5%B6%BD%E5%AF%BA%E9%A1%8C%E9%96%80%E6%A8%93">謁衡嶽廟遂宿嶽寺題門樓</a></li></ol><ol type="1" id="56d6d536-5e22-4173-a1a2-a3a8c522ecca" class="numbered-list" start="28"><li>韓愈 <a href="https://zh.wikisource.org/wiki/%E7%9F%B3%E9%BC%93%E6%AD%8C_(%E9%9F%93%E6%84%88)">石鼓歌</a></li></ol><h2 id="0266dcd0-c15d-45e5-9318-e1f05cb69edf" class="">樂府</h2><ol type="1" id="a1e264d2-56b6-4e1d-888d-db0c39054b14" class="numbered-list" start="1"><li>王之渙 <a href="https://zh.wikisource.org/wiki/%E5%87%BA%E5%A1%9E_(%E7%8E%8B%E4%B9%8B%E6%B8%99)">出塞</a></li></ol><ol type="1" id="58ffa6aa-c7e7-4f6a-9eb9-cea9a0cd36fb" class="numbered-list" start="2"><li>王昌齡 <a href="https://zh.wikisource.org/wiki/%E5%87%BA%E5%A1%9E_(%E7%A7%A6%E6%99%82%E6%98%8E%E6%9C%88%E6%BC%A2%E6%99%82%E9%97%9C)">出塞</a></li></ol><ol type="1" id="dfad9e8c-dc4e-4c17-a139-aa1030538347" class="numbered-list" start="3"><li>王昌齡 <a href="https://zh.wikisource.org/wiki/%E5%A1%9E%E4%B8%8B%E6%9B%B2_(%E8%9F%AC%E9%B3%B4%E7%A9%BA%E6%A1%91%E6%9E%97)">塞下曲</a> 之一</li></ol><ol type="1" id="163f3d2d-a36c-46c6-a597-ae4539c560c9" class="numbered-list" start="4"><li>王昌齡 <a href="https://zh.wikisource.org/wiki/%E5%A1%9E%E4%B8%8B%E6%9B%B2_(%E9%A3%B2%E9%A6%AC%E6%B8%A1%E7%A7%8B%E6%B0%B4)">塞下曲</a> 之二</li></ol><ol type="1" id="4498d8e1-1c3a-488b-a2a6-0a1b91e218f5" class="numbered-list" start="5"><li>王昌齡 <a href="https://zh.wikisource.org/wiki/%E9%95%B7%E4%BF%A1%E6%80%A8_(%E7%8E%8B%E6%98%8C%E9%BD%A1)">長信怨</a></li></ol><ol type="1" id="1655d2be-3678-4d05-92ed-7af7e4e992ba" class="numbered-list" start="6"><li>王維 <a href="https://zh.wikisource.org/wiki/%E6%B8%AD%E5%9F%8E%E6%9B%B2">渭城曲</a></li></ol><ol type="1" id="32ddb534-09c2-4c5b-bcfc-602271163240" class="numbered-list" start="7"><li>王維 <a href="https://zh.wikisource.org/wiki/%E7%A7%8B%E5%A4%9C%E6%9B%B2_(%E7%8E%8B%E7%B6%AD)">秋夜曲</a></li></ol><ol type="1" id="15364ffa-2d23-4a9f-b230-80b232ad8d25" class="numbered-list" start="8"><li>王維 <a href="https://zh.wikisource.org/wiki/%E6%B4%9B%E9%99%BD%E5%A5%B3%E5%85%92%E8%A1%8C">洛陽女兒行</a></li></ol><ol type="1" id="cb69812c-e5fd-43ba-b551-86b930b42313" class="numbered-list" start="9"><li>王維 <a href="https://zh.wikisource.org/wiki/%E8%80%81%E5%B0%87%E8%A1%8C_(%E7%8E%8B%E7%B6%AD)">老將行</a></li></ol><ol type="1" id="6c087d08-a7b3-4103-9d22-aeb337d25144" class="numbered-list" start="10"><li>王維 <a href="https://zh.wikisource.org/wiki/%E6%A1%83%E6%BA%90%E8%A1%8C_(%E7%8E%8B%E7%B6%AD)">桃源行</a></li></ol><ol type="1" id="6445abff-a8e5-4b71-a8b9-01e8c2fa6e22" class="numbered-list" start="11"><li>李白 <a href="https://zh.wikisource.org/wiki/%E6%B8%85%E5%B9%B3%E8%AA%BF_(%E9%9B%B2%E6%83%B3%E8%A1%A3%E8%A3%B3%E8%8A%B1%E6%83%B3%E5%AE%B9)">清平</a> 之一</li></ol><ol type="1" id="0e32a003-a518-4ea2-87af-630194a2166c" class="numbered-list" start="12"><li>李白 <a href="https://zh.wikisource.org/wiki/%E6%B8%85%E5%B9%B3%E8%AA%BF_(%E4%B8%80%E6%9E%9D%E7%B4%85%E8%89%B7%E9%9C%B2%E5%87%9D%E9%A6%99)">清平調</a> 之二</li></ol><ol type="1" id="45a93de8-0900-4af9-bf82-3806b3d1f19b" class="numbered-list" start="13"><li>李白 <a href="https://zh.wikisource.org/wiki/%E6%B8%85%E5%B9%B3%E8%AA%BF_(%E5%90%8D%E8%8A%B1%E5%82%BE%E5%9C%8B%E5%85%A9%E7%9B%B8%E6%AD%A1)">清平調</a> 之三</li></ol><ol type="1" id="1439a5aa-e67f-4d6d-9c9f-1e8eaf69d77e" class="numbered-list" start="14"><li>李白 <a href="https://zh.wikisource.org/wiki/%E5%B0%87%E9%80%B2%E9%85%92_(%E6%9D%8E%E7%99%BD)">將進酒</a></li></ol><ol type="1" id="435ebca6-e3a9-42bd-bfc3-157228c7ca4e" class="numbered-list" start="15"><li>李白 <a href="https://zh.wikisource.org/wiki/%E7%8E%89%E9%9A%8E%E6%80%A8_(%E6%9D%8E%E7%99%BD)">玉階怨</a></li></ol><ol type="1" id="0c474099-1a8a-4535-9e2b-b700c18775e3" class="numbered-list" start="16"><li>李白 <a href="https://zh.wikisource.org/wiki/%E9%95%B7%E7%9B%B8%E6%80%9D_(%E9%95%B7%E7%9B%B8%E6%80%9D%E5%9C%A8%E9%95%B7%E5%AE%89)">長相思</a> 之一</li></ol><ol type="1" id="4a5fa2a7-4d91-49fb-84dc-161e6298fd72" class="numbered-list" start="17"><li>李白 <a href="https://zh.wikisource.org/wiki/%E9%95%B7%E7%9B%B8%E6%80%9D_(%E6%97%A5%E8%89%B2%E6%AC%B2%E7%9B%A1%E8%8A%B1%E5%90%AB%E7%85%99)">長相思</a> 之二</li></ol><ol type="1" id="1997b3a4-133c-4630-a021-d6486e0d6080" class="numbered-list" start="18"><li>李白 <a href="https://zh.wikisource.org/wiki/%E8%A1%8C%E8%B7%AF%E9%9B%A3_(%E9%87%91%E6%A8%BD%E6%B8%85%E9%85%92%E6%96%97%E5%8D%81%E5%8D%83)">行路難</a> 之一</li></ol><ol type="1" id="be9ba39f-c0d1-447e-b2ca-175149d997fd" class="numbered-list" start="19"><li>李白 <a href="https://zh.wikisource.org/wiki/%E8%A1%8C%E8%B7%AF%E9%9B%A3_(%E5%A4%A7%E9%81%93%E5%A6%82%E9%9D%92%E5%A4%A9)">行路難</a> 之二</li></ol><ol type="1" id="e4d02eec-d1a9-4e4f-9a20-2487cb1de1c9" class="numbered-list" start="20"><li>李白 <a href="https://zh.wikisource.org/wiki/%E8%A1%8C%E8%B7%AF%E9%9B%A3_(%E6%9C%89%E8%80%B3%E8%8E%AB%E6%B4%97%E6%BD%81%E5%B7%9D%E6%B0%B4)">行路難</a> 之三</li></ol><ol type="1" id="7452211b-9f42-4934-bcd5-1ab7fcc947ea" class="numbered-list" start="21"><li>李白 <a href="https://zh.wikisource.org/wiki/%E9%95%B7%E5%B9%B2%E8%A1%8C_(%E5%A6%BE%E9%AB%AE%E5%88%9D%E8%A6%86%E9%A1%8D)">長干行</a></li></ol><ol type="1" id="54f9ab77-f5ea-4de2-91ec-c333c43b2b86" class="numbered-list" start="22"><li>李白 <a href="https://zh.wikisource.org/wiki/%E8%9C%80%E9%81%93%E9%9B%A3_(%E6%9D%8E%E7%99%BD)">蜀道難</a></li></ol><ol type="1" id="3b5deae4-5ca9-4dc1-bf17-6a2fcbd40437" class="numbered-list" start="23"><li>李白 <a href="https://zh.wikisource.org/wiki/%E5%AD%90%E5%A4%9C%E5%90%B3%E6%AD%8C/%E6%98%A5%E6%AD%8C">子夜吳歌</a> 之春歌</li></ol><ol type="1" id="e0a91bbf-9392-4a33-b9df-f114957c7b03" class="numbered-list" start="24"><li>李白 <a href="https://zh.wikisource.org/wiki/%E5%AD%90%E5%A4%9C%E5%90%B3%E6%AD%8C/%E5%A4%8F%E6%AD%8C">子夜吳歌</a> 之夏歌</li></ol><ol type="1" id="898f79d2-dfea-4969-bb8d-d2e27bb3760d" class="numbered-list" start="25"><li>李白 <a href="https://zh.wikisource.org/wiki/%E5%AD%90%E5%A4%9C%E5%90%B3%E6%AD%8C/%E7%A7%8B%E6%AD%8C">子夜吳歌</a> 之秋歌</li></ol><ol type="1" id="c1e85e02-2ab2-40e2-b651-2df4aacac015" class="numbered-list" start="26"><li>李白 <a href="https://zh.wikisource.org/wiki/%E5%AD%90%E5%A4%9C%E5%90%B3%E6%AD%8C/%E5%86%AC%E6%AD%8C">子夜吳歌</a> 之冬歌</li></ol><ol type="1" id="db5f21d3-0f67-4266-936b-8b344b841db2" class="numbered-list" start="27"><li>李白 <a href="https://zh.wikisource.org/wiki/%E9%97%9C%E5%B1%B1%E6%9C%88_(%E6%9D%8E%E7%99%BD)">關山月</a></li></ol><ol type="1" id="45110f11-c665-4fea-a9ca-209c5a60506d" class="numbered-list" start="28"><li>李益 <a href="https://zh.wikisource.org/wiki/%E6%B1%9F%E5%8D%97%E6%9B%B2_(%E5%AB%81%E5%BE%97%E7%9E%BF%E5%A1%98%E8%B3%88)">江南曲</a></li></ol><ol type="1" id="f0625947-2aef-47cf-a7c1-b6e920c6975b" class="numbered-list" start="29"><li>李頎 <a href="https://zh.wikisource.org/wiki/%E5%8F%A4%E5%BE%9E%E8%BB%8D%E8%A1%8C">古從軍行</a></li></ol><ol type="1" id="246522ee-e8e5-4d46-9054-79a260ff9b6d" class="numbered-list" start="30"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E5%85%B5%E8%BB%8A%E8%A1%8C">兵車行</a></li></ol><ol type="1" id="e4fba965-c700-4266-818e-67d5a8d6a5e5" class="numbered-list" start="31"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E9%BA%97%E4%BA%BA%E8%A1%8C">麗人行</a></li></ol><ol type="1" id="b3bfbde8-58b9-4c93-b1b1-75abe1fb8cca" class="numbered-list" start="32"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E5%93%80%E6%B1%9F%E9%A0%AD">哀江頭</a></li></ol><ol type="1" id="b2a6ecdb-0018-4148-8d5e-5071df1b2a23" class="numbered-list" start="33"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E5%93%80%E7%8E%8B%E5%AD%AB">哀王孫</a></li></ol><ol type="1" id="a269ad06-ca71-41ff-8694-612db4d26efa" class="numbered-list" start="34"><li>杜秋娘 <a href="https://zh.wikisource.org/wiki/%E9%87%91%E7%B8%B7%E8%A1%A3">金縷衣</a></li></ol><ol type="1" id="1c47c706-9887-452f-8d0b-19eee50bbb06" class="numbered-list" start="35"><li>沈佺期 <a href="https://zh.wikisource.org/wiki/%E7%8D%A8%E4%B8%8D%E8%A6%8B_(%E6%B2%88%E4%BD%BA%E6%9C%9F)">獨不見</a></li></ol><ol type="1" id="20ba3f97-07c0-44b3-a1f3-6a0e339708ab" class="numbered-list" start="36"><li>孟郊 <a href="https://zh.wikisource.org/wiki/%E7%83%88%E5%A5%B3%E6%93%8D">烈女操</a></li></ol><ol type="1" id="31286df4-d201-4e9b-bcd3-943f376d7669" class="numbered-list" start="37"><li>孟郊 <a href="https://zh.wikisource.org/wiki/%E9%81%8A%E5%AD%90%E5%90%9F_(%E5%AD%9F%E9%83%8A)">遊子吟</a></li></ol><ol type="1" id="c6317e7f-2f33-4422-b886-0dbcdf27bd5d" class="numbered-list" start="38"><li>高適 <a href="https://zh.wikisource.org/wiki/%E7%87%95%E6%AD%8C%E8%A1%8C_(%E9%AB%98%E9%81%A9)">燕歌行</a> 并序</li></ol><ol type="1" id="b88229b4-7dc0-4c2e-8d07-d1fac01e36c8" class="numbered-list" start="39"><li>崔顥 <a href="https://zh.wikisource.org/wiki/%E9%95%B7%E5%B9%B2%E8%A1%8C%E4%B9%8B%E4%B8%80">長干行之一</a></li></ol><ol type="1" id="8267e570-e033-4f78-ada4-93e10edb7a25" class="numbered-list" start="40"><li>崔顥 <a href="https://zh.wikisource.org/wiki/%E9%95%B7%E5%B9%B2%E8%A1%8C%E4%B9%8B%E4%BA%8C">長干行之二</a></li></ol><ol type="1" id="27d10e5a-bc35-4b1d-9627-33a872927f3e" class="numbered-list" start="41"><li>盧綸 <a href="https://zh.wikisource.org/wiki/%E5%A1%9E%E4%B8%8B%E6%9B%B2%E4%B9%8B%E4%B8%80">塞下曲之一</a></li></ol><ol type="1" id="b61a9278-3ed1-4758-abd2-d824853638c2" class="numbered-list" start="42"><li>盧綸 <a href="https://zh.wikisource.org/wiki/%E5%A1%9E%E4%B8%8B%E6%9B%B2%E4%B9%8B%E4%BA%8C">塞下曲之二</a></li></ol><ol type="1" id="7107d1ff-db84-4d49-8f82-d3d1d319117f" class="numbered-list" start="43"><li>盧綸 <a href="https://zh.wikisource.org/wiki/%E5%A1%9E%E4%B8%8B%E6%9B%B2%E4%B9%8B%E4%B8%89">塞下曲之三</a></li></ol><ol type="1" id="5fcdf916-6af2-4bb7-88b0-3ca97b994d30" class="numbered-list" start="44"><li>盧綸 <a href="https://zh.wikisource.org/wiki/%E5%A1%9E%E4%B8%8B%E6%9B%B2%E4%B9%8B%E5%9B%9B">塞下曲之四</a></li></ol><h2 id="73a30c3c-db04-4af8-9e53-e15569dd66e7" class="">五言律詩</h2><ol type="1" id="69192e31-8987-4db1-bf30-85f6dd19e298" class="numbered-list" start="1"><li>王勃 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E6%9D%9C%E5%B0%91%E5%BA%9C%E4%B9%8B%E4%BB%BB%E8%9C%80%E5%B7%9E">送杜少府之任蜀州</a></li></ol><ol type="1" id="85cd41d0-9d74-4bbf-aa06-719a4507437d" class="numbered-list" start="2"><li>王維 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E6%A2%93%E5%B7%9E%E6%9D%8E%E4%BD%BF%E5%90%9B">送梓州李使君</a></li></ol><ol type="1" id="8c1de6b4-d904-4e85-9ad6-f8154bba743e" class="numbered-list" start="3"><li>王維 <a href="https://zh.wikisource.org/wiki/%E6%BC%A2%E6%B1%9F%E8%87%A8%E7%9C%BA">漢江臨眺</a></li></ol><ol type="1" id="9f1d32e1-83df-44e8-9416-1eb324e47166" class="numbered-list" start="4"><li>王維 <a href="https://zh.wikisource.org/wiki/%E7%B5%82%E5%8D%97%E5%88%A5%E6%A5%AD">終南別業</a></li></ol><ol type="1" id="f296fb99-ce8f-4594-8b22-6b04fa56013c" class="numbered-list" start="5"><li>王維 <a href="https://zh.wikisource.org/wiki/%E7%B5%82%E5%8D%97%E5%B1%B1_(%E7%8E%8B%E7%B6%AD)">終南山</a></li></ol><ol type="1" id="5e4226be-b193-49ee-b0af-a16c81c232e5" class="numbered-list" start="6"><li>王維 <a href="https://zh.wikisource.org/wiki/%E9%85%AC%E5%BC%B5%E5%B0%91%E5%BA%9C">酬張少府</a></li></ol><ol type="1" id="296fc3fd-c912-47f2-98e1-edca41dcbf14" class="numbered-list" start="7"><li>王維 <a href="https://zh.wikisource.org/wiki/%E9%81%8E%E9%A6%99%E7%A9%8D%E5%AF%BA">過香積寺</a></li></ol><ol type="1" id="da813ba7-97a3-4197-98ca-3ef74ed551c2" class="numbered-list" start="8"><li>王維 <a href="https://zh.wikisource.org/wiki/%E8%BC%9E%E5%B7%9D%E9%96%91%E5%B1%85%E8%B4%88%E8%A3%B4%E7%A7%80%E6%89%8D%E8%BF%AA">輞川閑居贈裴秀才迪</a></li></ol><ol type="1" id="f351fd85-433e-432f-a353-4138ac599c6e" class="numbered-list" start="9"><li>王維 <a href="https://zh.wikisource.org/wiki/%E5%B1%B1%E5%B1%85%E7%A7%8B%E6%9A%9D">山居秋暝</a></li></ol><ol type="1" id="8fccb719-fec2-401e-817a-5a4da0c7655c" class="numbered-list" start="10"><li>王維 <a href="https://zh.wikisource.org/wiki/%E6%AD%B8%E5%B5%A9%E5%B1%B1%E4%BD%9C">歸嵩山作</a></li></ol><ol type="1" id="63373fc4-4d5c-4f4d-8183-cebfb8df9b0e" class="numbered-list" start="11"><li>王灣 <a href="https://zh.wikisource.org/wiki/%E6%AC%A1%E5%8C%97%E5%9B%BA%E5%B1%B1%E4%B8%8B">次北固山下</a></li></ol><ol type="1" id="3c6b581d-b311-4687-90f8-591d034ebbd0" class="numbered-list" start="12"><li>司空曙 <a href="https://zh.wikisource.org/wiki/%E9%9B%B2%E9%99%BD%E9%A4%A8%E8%88%87%E9%9F%93%E7%B4%B3%E5%AE%BF%E5%88%A5">雲陽館與韓紳宿別</a></li></ol><ol type="1" id="9916c52f-2312-4231-8ff4-2bce05ef7fb0" class="numbered-list" start="13"><li>司空曙 <a href="https://zh.wikisource.org/wiki/%E5%96%9C%E5%A4%96%E5%BC%9F%E7%9B%A7%E7%B6%B8%E8%A6%8B%E5%AE%BF">喜外弟盧綸見宿</a></li></ol><ol type="1" id="ab85e89b-4d0e-4641-931c-a938e50c850f" class="numbered-list" start="14"><li>司空曙 <a href="https://zh.wikisource.org/wiki/%E8%B3%8A%E5%B9%B3%E5%BE%8C%E9%80%81%E4%BA%BA%E5%8C%97%E6%AD%B8">賊平後送人北歸</a></li></ol><ol type="1" id="e3d9dbc5-b73f-4213-8f74-9fd421d7da0f" class="numbered-list" start="15"><li>白居易 <a href="https://zh.wikisource.org/wiki/%E8%B3%A6%E5%BE%97%E5%8F%A4%E5%8E%9F%E8%8D%89%E9%80%81%E5%88%A5">賦得古原草送別</a></li></ol><ol type="1" id="d38098ec-a09f-4319-b362-fcfb2177876f" class="numbered-list" start="16"><li>宋之問 <a href="https://zh.wikisource.org/wiki/%E9%A1%8C%E5%A4%A7%E5%BA%BE%E5%B6%BA%E5%8C%97%E9%A9%9B">題大庾嶺北驛</a></li></ol><ol type="1" id="9de7cb4e-f259-4d93-8a85-b9f4730cf7b9" class="numbered-list" start="17"><li>岑參 <a href="https://zh.wikisource.org/wiki/%E5%AF%84%E5%B7%A6%E7%9C%81%E6%9D%9C%E6%8B%BE%E9%81%BA">寄左省杜拾遺</a></li></ol><ol type="1" id="9baefafa-3acf-40f2-a9a9-8ad5bdec99e3" class="numbered-list" start="18"><li>李白 <a href="https://zh.wikisource.org/wiki/%E8%81%BD%E8%9C%80%E5%83%A7%E6%BF%AC%E5%BD%88%E7%90%B4">聽蜀僧濬彈琴</a></li></ol><ol type="1" id="ed78c8bd-fe22-495a-a4bc-64ca5893cdca" class="numbered-list" start="19"><li>李白 <a href="https://zh.wikisource.org/wiki/%E5%A4%9C%E6%B3%8A%E7%89%9B%E6%B8%9A%E6%87%B7%E5%8F%A4">夜泊牛渚懷古</a></li></ol><ol type="1" id="00fbffa2-4f9a-4881-b610-ca0f1eaa574a" class="numbered-list" start="20"><li>李白 <a href="https://zh.wikisource.org/wiki/%E8%B4%88%E5%AD%9F%E6%B5%A9%E7%84%B6">贈孟浩然</a></li></ol><ol type="1" id="5e8ffd3a-4025-44cd-a0b9-f9070c03868c" class="numbered-list" start="21"><li>李白 <a href="https://zh.wikisource.org/wiki/%E6%B8%A1%E8%8D%8A%E9%96%80%E9%80%81%E5%88%A5">渡荊門送別</a></li></ol><ol type="1" id="2a149f38-0a9e-4821-aa70-d6ab476914e2" class="numbered-list" start="22"><li>李白 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E5%8F%8B%E4%BA%BA_(%E6%9D%8E%E7%99%BD)">送友人</a></li></ol><ol type="1" id="68f89f33-9960-4667-9b6a-b11f4b6ad14b" class="numbered-list" start="23"><li>李益 <a href="https://zh.wikisource.org/wiki/%E5%96%9C%E8%A6%8B%E5%A4%96%E5%BC%9F%E5%8F%88%E8%A8%80%E5%88%A5">喜見外弟又言別</a></li></ol><ol type="1" id="06ed312a-b640-4ee9-8485-55e0d69f8c26" class="numbered-list" start="24"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E6%B6%BC%E6%80%9D">涼思</a></li></ol><ol type="1" id="9b67ff63-1797-41cb-ae16-a9b2124fd66f" class="numbered-list" start="25"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E5%8C%97%E9%9D%92%E8%98%BF">北青蘿</a></li></ol><ol type="1" id="92d53f2c-e74f-4fbc-8eff-4daacb44e857" class="numbered-list" start="26"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E8%9F%AC_(%E6%9D%8E%E5%95%86%E9%9A%B1)">蟬</a></li></ol><ol type="1" id="e2da5787-1386-4c95-829e-8b7bcc42616c" class="numbered-list" start="27"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E9%A2%A8%E9%9B%A8_(%E6%9D%8E%E5%95%86%E9%9A%B1)">風雨</a></li></ol><ol type="1" id="7b705dd4-3082-4583-a3ed-3dab45107539" class="numbered-list" start="28"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E8%90%BD%E8%8A%B1_(%E6%9D%8E%E5%95%86%E9%9A%B1)">落花</a></li></ol><ol type="1" id="eed999f5-3d79-4f2f-b8d4-45dc460bba97" class="numbered-list" start="29"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E7%99%BB%E5%B2%B3%E9%99%BD%E6%A8%93_(%E6%9D%9C%E7%94%AB)">登岳陽樓</a></li></ol><ol type="1" id="0c8cfb29-c739-4987-9221-55228b30140e" class="numbered-list" start="30"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E5%A5%89%E6%BF%9F%E9%A9%9B%E9%87%8D%E9%80%81%E5%9A%B4%E5%85%AC%E5%9B%9B%E9%9F%BB">奉濟驛重送嚴公四韻</a></li></ol><ol type="1" id="3146aec0-a46f-4ece-8e48-0d2375f6cab1" class="numbered-list" start="31"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E5%88%A5%E6%88%BF%E5%A4%AA%E5%B0%89%E5%A2%93">別房太尉墓</a></li></ol><ol type="1" id="34e7ca6b-2f26-47a0-9f6b-fef9d4607bb9" class="numbered-list" start="32"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E6%97%85%E5%A4%9C%E6%9B%B8%E6%87%B7">旅夜書懷</a></li></ol><ol type="1" id="90085967-5eaa-4e4b-bf4a-3976b6d5fcf1" class="numbered-list" start="33"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E8%87%B3%E5%BE%B7%E4%BA%8C%E8%BC%89%E7%94%AB%E8%87%AA%E4%BA%AC%E9%87%91%E5%85%89%E9%96%80%E5%87%BA_%E9%96%93%E9%81%93%E6%AD%B8%E9%B3%B3%E7%BF%94_%E4%B9%BE%E5%85%83%E5%88%9D%E5%BE%9E%E5%B7%A6%E6%8B%BE%E9%81%BA%E7%A7%BB%E8%8F%AF%E5%B7%9E%E6%8E%BE_%E8%88%87%E8%A6%AA%E6%95%85%E5%88%A5_%E5%9B%A0%E5%87%BA%E6%AD%A4%E9%96%80_%E6%9C%89%E6%82%B2%E5%BE%80%E4%BA%8B">至德二載甫自京金光門出 間道歸鳳翔 乾元初從左拾遺移華州掾 與親故別 因出此門 有悲往事</a></li></ol><ol type="1" id="915c346b-bed8-499f-9140-b579efd3c3a8" class="numbered-list" start="34"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E6%9C%88%E5%A4%9C%E6%86%B6%E8%88%8D%E5%BC%9F">月夜憶舍弟</a></li></ol><ol type="1" id="5ba40671-064f-4d13-82fe-0a571b978e1b" class="numbered-list" start="35"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E5%A4%A9%E6%9C%AB%E6%87%B7%E6%9D%8E%E7%99%BD">天末懷李白</a></li></ol><ol type="1" id="2db6ee03-cef6-46bf-9072-422fa1164439" class="numbered-list" start="36"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E6%9C%88%E5%A4%9C_(%E6%9D%9C%E7%94%AB)">月夜</a></li></ol><ol type="1" id="321c763f-a88b-49f7-9abd-77c96697c0e5" class="numbered-list" start="37"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E6%98%A5%E6%9C%9B">春望</a></li></ol><ol type="1" id="bdbb2050-b269-47bb-8486-6413c96e7125" class="numbered-list" start="38"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E6%98%A5%E5%AE%BF%E5%B7%A6%E7%9C%81">春宿左省</a></li></ol><ol type="1" id="2cb6412e-dabc-454c-814b-5baa8380415b" class="numbered-list" start="39"><li>杜牧 <a href="https://zh.wikisource.org/wiki/%E6%97%85%E5%AE%BF_(%E6%9D%9C%E7%89%A7)">旅宿</a></li></ol><ol type="1" id="065f540c-9bdd-4b89-b3a0-82e35df83f64" class="numbered-list" start="40"><li>杜荀鶴 <a href="https://zh.wikisource.org/wiki/%E6%98%A5%E5%AE%AE%E6%80%A8">春宮怨</a></li></ol><ol type="1" id="9cda7596-d02c-43a9-a506-43c863df126c" class="numbered-list" start="41"><li>杜審言 <a href="https://zh.wikisource.org/wiki/%E5%92%8C%E6%99%89%E9%99%B5%E8%B7%AF%E4%B8%9E%E6%97%A9%E6%98%A5%E9%81%8A%E6%9C%9B">和晉陵路丞早春遊望</a></li></ol><ol type="1" id="f05745b3-db56-41d2-be6b-e1595a9206c5" class="numbered-list" start="42"><li>沈佺期 <a href="https://zh.wikisource.org/wiki/%E9%9B%9C%E8%A9%A9_(%E6%B2%88%E4%BD%BA%E6%9C%9F)">雜詩</a></li></ol><ol type="1" id="19d63f95-24f0-469e-b3dc-3761fd54ddd5" class="numbered-list" start="43"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E5%AE%BF%E6%A1%90%E5%BB%AC%E6%B1%9F%E5%AF%84%E5%BB%A3%E9%99%B5%E8%88%8A%E9%81%8A">宿桐廬江寄廣陵舊遊</a></li></ol><ol type="1" id="27114f1d-1872-463d-bec8-e4a7eb569d99" class="numbered-list" start="44"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E7%95%99%E5%88%A5%E7%8E%8B%E7%B6%AD_(%E5%AD%9F%E6%B5%A9%E7%84%B6)">留別王維</a></li></ol><ol type="1" id="586ca6da-167a-4a46-bcd4-11fe466fb966" class="numbered-list" start="45"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E6%97%A9%E5%AF%92%E6%9C%89%E6%87%B7">早寒有懷</a></li></ol><ol type="1" id="fee4fe44-2421-468e-aa0b-6e427fc56c78" class="numbered-list" start="46"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E6%AD%B2%E6%9A%AE%E6%AD%B8%E5%8D%97%E5%B1%B1">歲暮歸南山</a></li></ol><ol type="1" id="c9518878-93b0-49eb-8408-f723c1859320" class="numbered-list" start="47"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E9%81%8E%E6%95%85%E4%BA%BA%E8%8E%8A">過故人莊</a></li></ol><ol type="1" id="4f92d53f-957e-47fa-9f26-d037aa7aa678" class="numbered-list" start="48"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E7%A7%A6%E4%B8%AD%E6%84%9F%E7%A7%8B%E5%AF%84%E9%81%A0%E4%B8%8A%E4%BA%BA">秦中感秋寄遠上人</a></li></ol><ol type="1" id="865bd771-cf34-4f7a-bbf6-77d068835d7d" class="numbered-list" start="49"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E8%87%A8%E6%B4%9E%E5%BA%AD%E8%B4%88%E5%BC%B5%E4%B8%9E%E7%9B%B8">臨洞庭贈張丞相</a></li></ol><ol type="1" id="323a18d1-69b4-4c01-b6d1-6b6585a60994" class="numbered-list" start="50"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E8%88%87%E8%AB%B8%E5%AD%90%E7%99%BB%E5%B3%B4%E5%B1%B1">與諸子登峴山</a></li></ol><ol type="1" id="7bfb9207-8db3-4cbe-95ae-75bce6f6c6d1" class="numbered-list" start="51"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E5%AE%B4%E6%A2%85%E9%81%93%E5%A3%AB%E5%B1%B1%E6%88%BF">宴梅道士山房</a></li></ol><ol type="1" id="3ee84c00-c2a2-43e4-8f55-abeafea30d5e" class="numbered-list" start="52"><li>韋莊 <a href="https://zh.wikisource.org/wiki/%E7%AB%A0%E8%87%BA%E5%A4%9C%E6%80%9D">章臺夜思</a></li></ol><ol type="1" id="aa04a4bc-be74-4c64-b611-48c104952e00" class="numbered-list" start="53"><li>韋應物 <a href="https://zh.wikisource.org/wiki/%E6%B7%AE%E4%B8%8A%E5%96%9C%E6%9C%83%E6%A2%81%E5%B7%9D%E6%95%85%E4%BA%BA">淮上喜會梁川故人</a></li></ol><ol type="1" id="e8990646-ba18-48f6-a4ea-39d9143a7c7a" class="numbered-list" start="54"><li>韋應物 <a href="https://zh.wikisource.org/wiki/%E8%B3%A6%E5%BE%97%E6%9A%AE%E9%9B%A8%E9%80%81%E6%9D%8E%E5%86%91">賦得暮雨送李冑</a></li></ol><ol type="1" id="6c4a8697-ebfa-45fd-b99c-cf78fc2fccce" class="numbered-list" start="55"><li>唐玄宗 <a href="https://zh.wikisource.org/wiki/%E7%B6%93%E9%84%92%E9%AD%AF%E7%A5%AD%E5%AD%94%E5%AD%90%E8%80%8C%E6%AD%8E%E4%B9%8B">經鄒魯祭孔子而歎之</a></li></ol><ol type="1" id="259af1af-50fe-4158-8325-37772f25a8d9" class="numbered-list" start="56"><li>馬戴 <a href="https://zh.wikisource.org/wiki/%E7%81%9E%E4%B8%8A%E7%A7%8B%E5%B1%85">灞上秋居</a></li></ol><ol type="1" id="3b52fed9-e7e8-40e7-957e-9dc1bb87165a" class="numbered-list" start="57"><li>馬戴 <a href="https://zh.wikisource.org/wiki/%E6%A5%9A%E6%B1%9F%E6%87%B7%E5%8F%A4_(%E9%A6%AC%E6%88%B4)">楚江懷古</a></li></ol><ol type="1" id="66888903-b5ac-4731-b919-d8c05c0085e9" class="numbered-list" start="58"><li>崔塗 <a href="https://zh.wikisource.org/wiki/%E9%99%A4%E5%A4%9C%E6%9C%89%E6%87%B7_(%E5%B4%94%E5%A1%97)">除夜有懷</a></li></ol><ol type="1" id="984c275b-f460-428e-aec8-4b26d00574d2" class="numbered-list" start="59"><li>崔塗 <a href="https://zh.wikisource.org/wiki/%E5%AD%A4%E9%9B%81">孤雁</a></li></ol><ol type="1" id="21fb1ac1-5f22-4e11-bf6a-b31a9d998cb7" class="numbered-list" start="60"><li>常建 <a href="https://zh.wikisource.org/wiki/%E9%A1%8C%E7%A0%B4%E5%B1%B1%E5%AF%BA%E5%BE%8C%E7%A6%AA%E9%99%A2">題破山寺後禪院</a></li></ol><ol type="1" id="e3b084df-2f35-4e77-8eac-06dd8e05b0cb" class="numbered-list" start="61"><li>張九齡 <a href="https://zh.wikisource.org/wiki/%E6%9C%9B%E6%9C%88%E6%87%B7%E9%81%A0">望月懷遠</a></li></ol><ol type="1" id="22eef467-0245-4ef7-b5c3-0844f0f6ad6d" class="numbered-list" start="62"><li>張喬 <a href="https://zh.wikisource.org/wiki/%E6%9B%B8%E9%82%8A%E4%BA%8B_(%E5%BC%B5%E5%96%AC)">書邊事</a></li></ol><ol type="1" id="32082028-755a-47be-8027-d3d1cd7dabbb" class="numbered-list" start="63"><li>張籍 <a href="https://zh.wikisource.org/wiki/%E6%B2%92%E8%95%83%E6%95%85%E4%BA%BA">沒蕃故人</a></li></ol><ol type="1" id="55666d09-a400-4988-b204-fdbad9c264d8" class="numbered-list" start="64"><li>許渾 <a href="https://zh.wikisource.org/wiki/%E7%A7%8B%E6%97%A5%E8%B5%B4%E9%97%95%E9%A1%8C%E6%BD%BC%E9%97%9C%E9%A9%9B%E6%A8%93">秋日赴闕題潼關驛樓</a></li></ol><ol type="1" id="a038ef03-9727-4429-aa0d-e24b89612faa" class="numbered-list" start="65"><li>許渾 <a href="https://zh.wikisource.org/wiki/%E6%97%A9%E7%A7%8B">早秋</a></li></ol><ol type="1" id="1b4ee431-6265-4cb9-8cf2-6261292aa644" class="numbered-list" start="66"><li>溫庭筠 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E4%BA%BA%E6%9D%B1%E9%81%8A">送人東遊</a></li></ol><ol type="1" id="5f5c22ea-8421-4204-80e3-81060743e584" class="numbered-list" start="67"><li>僧皎然 <a href="https://zh.wikisource.org/wiki/%E5%B0%8B%E9%99%B8%E9%B4%BB%E6%BC%B8%E4%B8%8D%E9%81%87">尋陸鴻漸不遇</a></li></ol><ol type="1" id="b7fcc267-2ffd-4063-8b49-85df2c875bf3" class="numbered-list" start="68"><li>劉長卿 <a href="https://zh.wikisource.org/wiki/%E5%B0%8B%E5%8D%97%E6%BA%AA%E5%B8%B8%E9%81%93%E5%A3%AB">尋南溪常道士</a></li></ol><ol type="1" id="8f7d600a-b195-4100-b3f1-4d0b557c2bf6" class="numbered-list" start="69"><li>劉長卿 <a href="https://zh.wikisource.org/wiki/%E6%96%B0%E5%B9%B4%E4%BD%9C_(%E5%8A%89%E9%95%B7%E5%8D%BF)">新年作</a></li></ol><ol type="1" id="58196ed1-4fad-4a0f-8688-2a2e42186a93" class="numbered-list" start="70"><li>劉長卿 <a href="https://zh.wikisource.org/wiki/%E7%A7%8B%E6%97%A5%E7%99%BB%E5%90%B3%E5%85%AC%E8%87%BA%E4%B8%8A%E5%AF%BA%E9%81%A0%E7%9C%BA">秋日登吳公臺上寺遠眺</a></li></ol><ol type="1" id="9287bcbc-0563-4e7b-bcde-f1052090b40c" class="numbered-list" start="71"><li>劉長卿 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E6%9D%8E%E4%B8%AD%E4%B8%9E%E6%AD%B8%E6%BC%A2%E9%99%BD%E5%88%A5%E6%A5%AD">送李中丞歸漢陽別業</a></li></ol><ol type="1" id="94ab41fa-3cb3-4257-9eb8-e75d3f80790a" class="numbered-list" start="72"><li>劉長卿 <a href="https://zh.wikisource.org/wiki/%E9%A4%9E%E5%88%A5%E7%8E%8B%E5%8D%81%E4%B8%80%E5%8D%97%E9%81%8A">餞別王十一南遊</a></li></ol><ol type="1" id="2876ff05-3dbc-4bbd-b6a1-338592ea6407" class="numbered-list" start="73"><li>劉禹錫 <a href="https://zh.wikisource.org/wiki/%E8%9C%80%E5%85%88%E4%B8%BB%E5%BB%9F">蜀先主廟</a></li></ol><ol type="1" id="e75cacf2-7f4c-4626-bd56-6468d6dbd56e" class="numbered-list" start="74"><li>劉眘虛 <a href="https://zh.wikisource.org/wiki/%E9%97%95%E9%A1%8C_(%E5%8A%89%E7%9C%98%E8%99%9B)">闕題</a></li></ol><ol type="1" id="26229c7d-a6da-4435-8979-d878bb071815" class="numbered-list" start="75"><li>盧綸 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E6%9D%8E%E7%AB%AF_(%E7%9B%A7%E7%B6%B8)">送李端</a></li></ol><ol type="1" id="03d7b1f5-e7e9-4e25-817f-3acacdb31438" class="numbered-list" start="76"><li>錢起 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E5%83%A7%E6%AD%B8%E6%97%A5%E6%9C%AC">送僧歸日本</a></li></ol><ol type="1" id="8061a5f6-8042-4358-ad19-cbe93fcd122e" class="numbered-list" start="77"><li>錢起 <a href="https://zh.wikisource.org/wiki/%E8%B0%B7%E5%8F%A3%E6%9B%B8%E9%BD%8B%E5%AF%84%E6%A5%8A%E8%A3%9C%E9%97%95">谷口書齋寄楊補闕</a></li></ol><ol type="1" id="b0201540-0297-49b4-adf6-fcb75e378be5" class="numbered-list" start="78"><li>駱賓王 <a href="https://zh.wikisource.org/wiki/%E5%9C%A8%E7%8D%84%E8%A9%A0%E8%9F%AC">在獄詠蟬</a> 并序</li></ol><ol type="1" id="0b526422-5e4f-4ba2-a116-00dc5731e499" class="numbered-list" start="79"><li>戴叔倫 <a href="https://zh.wikisource.org/wiki/%E6%B1%9F%E9%84%89%E6%95%85%E4%BA%BA%E5%81%B6%E9%9B%86%E5%AE%A2%E8%88%8D">江鄉故人偶集客舍</a></li></ol><ol type="1" id="f9af20b9-a93a-432b-b363-e79ae8ded704" class="numbered-list" start="80"><li>韓翃 <a href="https://zh.wikisource.org/wiki/%E9%85%AC%E7%A8%8B%E8%BF%91%E7%A7%8B%E5%A4%9C%E5%8D%B3%E4%BA%8B%E8%A6%8B%E8%B4%88">酬程近秋夜即事見贈</a></li></ol><h2 id="f908a864-ffef-409f-a03d-ca8ba3781f18" class="">七言律詩</h2><ol type="1" id="1e9bd75c-c6c7-4310-a121-e76b55bc5dfe" class="numbered-list" start="1"><li>元稹 <a href="https://zh.wikisource.org/wiki/%E9%81%A3%E6%82%B2%E6%87%B7%E4%B9%8B%E4%B8%80">遣悲懷之一</a></li></ol><ol type="1" id="2a8e36f3-8926-4a03-9284-8824ef55960e" class="numbered-list" start="2"><li>元稹 <a href="https://zh.wikisource.org/wiki/%E9%81%A3%E6%82%B2%E6%87%B7%E4%B9%8B%E4%BA%8C">遣悲懷之二</a></li></ol><ol type="1" id="d3bed810-ed0e-4350-bbbe-8c9ffbf3d491" class="numbered-list" start="3"><li>元稹 <a href="https://zh.wikisource.org/wiki/%E9%81%A3%E6%82%B2%E6%87%B7%E4%B9%8B%E4%B8%89">遣悲懷之三</a></li></ol><ol type="1" id="72118804-bf14-456f-a719-be93081ad283" class="numbered-list" start="4"><li>王維 <a href="https://zh.wikisource.org/wiki/%E5%92%8C%E8%B3%88%E8%88%8D%E4%BA%BA%E6%97%A9%E6%9C%9D%E5%A4%A7%E6%98%8E%E5%AE%AE%E4%B9%8B%E4%BD%9C">和賈舍人早朝大明宮之作</a></li></ol><ol type="1" id="26652ad1-a3ed-4c9e-b958-a849c8e42236" class="numbered-list" start="5"><li>王維 <a href="https://zh.wikisource.org/wiki/%E8%B4%88%E9%83%AD%E7%B5%A6%E4%BA%8B">贈郭給事</a></li></ol><ol type="1" id="4a48ba0e-cb99-40f7-b96f-a45c0410e754" class="numbered-list" start="6"><li>王維 <a href="https://zh.wikisource.org/wiki/%E5%A5%89%E5%92%8C%E8%81%96%E5%88%B6%E5%BE%9E%E8%93%AC%E8%90%8A%E5%90%91%E8%88%88%E6%85%B6%E9%96%A3%E9%81%93%E4%B8%AD%E7%95%99%E6%98%A5%E9%9B%A8%E4%B8%AD%E6%98%A5%E6%9C%9B%E4%B9%8B%E4%BD%9C%E6%87%89%E5%88%B6">奉和聖制從蓬萊向興慶閣道中留春雨中春望之作應制</a></li></ol><ol type="1" id="3f5a61b8-7869-4f82-b714-f1086c5788a3" class="numbered-list" start="7"><li>王維 <a href="https://zh.wikisource.org/wiki/%E7%A9%8D%E9%9B%A8%E8%BC%9E%E5%B7%9D%E8%8E%8A%E4%BD%9C">積雨輞川莊作</a></li></ol><ol type="1" id="e07b11cc-ca06-40bc-8d9d-f189e6f1c0e7" class="numbered-list" start="8"><li>白居易 <a href="https://zh.wikisource.org/wiki/%E8%87%AA%E6%B2%B3%E5%8D%97%E7%B6%93%E4%BA%82%EF%BC%8C%E9%97%9C%E5%85%A7%E9%98%BB%E9%A5%91%EF%BC%8C%E5%85%84%E5%BC%9F%E9%9B%A2%E6%95%A3%EF%BC%8C%E5%90%84%E5%9C%A8%E4%B8%80%E8%99%95%E3%80%82%E5%9B%A0%E6%9C%9B%E6%9C%88%E6%9C%89%E6%84%9F%EF%BC%8C%E8%81%8A%E6%9B%B8%E6%89%80%E6%87%B7%E5%AF%84%E4%B8%8A%EF%BC%8C%E6%B5%AE%E6%A2%81%E5%A4%A7%E5%85%84%EF%BC%8C%E6%96%BC%E6%BD%9B%E4%B8%83%E5%85%84%EF%BC%8C%E7%83%8F%E6%B1%9F%E5%8D%81%E4%BA%94%E5%85%84%EF%BC%8C%E5%85%BC%E7%A4%BA%E7%AC%A6%E9%9B%A2%EF%BC%8C%E5%8F%8A%E4%B8%8B%E9%82%BD%E5%BC%9F%E5%A6%B9">自河南經亂，關內阻饑，兄弟離散，各在一處。因望月有感，聊書所懷寄上，浮梁大兄，於潛七兄，烏江十五兄，兼示符離，及下邽弟妹</a></li></ol><ol type="1" id="890f0013-0659-4e0e-b60b-a3f0a521d200" class="numbered-list" start="9"><li>岑參 <a href="https://zh.wikisource.org/wiki/%E5%A5%89%E5%92%8C%E4%B8%AD%E6%9B%B8%E8%88%8D%E4%BA%BA%E8%B3%88%E8%87%B3%E6%97%A9%E6%9C%9D%E5%A4%A7%E6%98%8E%E5%AE%AE">奉和中書舍人賈至早朝大明宮</a></li></ol><ol type="1" id="dc0aad27-312a-490e-98a8-003791c5a7c2" class="numbered-list" start="10"><li>李白 <a href="https://zh.wikisource.org/wiki/%E7%99%BB%E9%87%91%E9%99%B5%E9%B3%B3%E5%87%B0%E8%87%BA">登金陵鳳凰臺</a></li></ol><ol type="1" id="f07ae6db-d127-4b40-9e01-b7248782a0aa" class="numbered-list" start="11"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E7%84%A1%E9%A1%8C_(%E7%9B%B8%E8%A6%8B%E6%99%82%E9%9B%A3%E5%88%A5%E4%BA%A6%E9%9B%A3)">無題</a></li></ol><ol type="1" id="1392e8cd-12da-4b4f-8340-642d8c2e5497" class="numbered-list" start="12"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E7%84%A1%E9%A1%8C_(%E9%B3%B3%E5%B0%BE%E9%A6%99%E7%BE%85%E8%96%84%E5%B9%BE%E9%87%8D)">無題之一</a></li></ol><ol type="1" id="4076d7ff-f903-45b3-9363-0e372e8e7420" class="numbered-list" start="13"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E7%84%A1%E9%A1%8C_(%E9%87%8D%E5%B8%B7%E6%B7%B1%E4%B8%8B%E8%8E%AB%E6%84%81%E5%A0%82)">無題之二</a></li></ol><ol type="1" id="7c2b1403-72fb-4f3a-83f0-075e4e2a946c" class="numbered-list" start="14"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E9%8C%A6%E7%91%9F">錦瑟</a></li></ol><ol type="1" id="08641b90-ef50-4829-bc7c-f8fd43134528" class="numbered-list" start="15"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E9%9A%8B%E5%AE%AE_(%E7%B4%AB%E6%B3%89%E5%AE%AE%E6%AE%BF%E9%8E%96%E7%85%99%E9%9C%9E)">隋宮</a></li></ol><ol type="1" id="267c5ded-4fa2-44c7-abee-3a42d757405f" class="numbered-list" start="16"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E7%84%A1%E9%A1%8C_(%E4%BE%86%E6%98%AF%E7%A9%BA%E8%A8%80%E5%8E%BB%E7%B5%95%E8%B9%A4)">無題之一</a></li></ol><ol type="1" id="4807d0fd-c96d-4b9e-957a-b55feeabb244" class="numbered-list" start="17"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E7%84%A1%E9%A1%8C_(%E9%A2%AF%E9%A2%AF%E6%9D%B1%E9%A2%A8%E7%B4%B0%E9%9B%A8%E4%BE%86)">無題之二</a></li></ol><ol type="1" id="4db6a3ef-c7d9-4c76-a7d6-643ff2eda924" class="numbered-list" start="18"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E7%B1%8C%E7%AD%86%E9%A9%9B_(%E6%9D%8E%E5%95%86%E9%9A%B1)">籌筆驛</a></li></ol><ol type="1" id="4df913b2-1878-4967-8b64-90d6a573afa9" class="numbered-list" start="19"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E7%84%A1%E9%A1%8C_(%E6%98%A8%E5%A4%9C%E6%98%9F%E8%BE%B0%E6%98%A8%E5%A4%9C%E9%A2%A8)">無題</a></li></ol><ol type="1" id="b3987613-3c3e-4e93-9367-08b0eaf172ba" class="numbered-list" start="20"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E6%98%A5%E9%9B%A8_(%E6%9D%8E%E5%95%86%E9%9A%B1)">春雨</a></li></ol><ol type="1" id="bcc647f0-f3d9-477c-8b79-5ca1415e4c3d" class="numbered-list" start="21"><li>李頎 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E9%AD%8F%E8%90%AC%E4%B9%8B%E4%BA%AC">送魏萬之京</a></li></ol><ol type="1" id="275bb636-bcfa-419f-b69b-d3c61d1137d7" class="numbered-list" start="22"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E8%A9%A0%E6%87%B7%E5%8F%A4%E8%B7%A1%E4%B9%8B%E4%B8%80">詠懷古跡之一</a></li></ol><ol type="1" id="87196377-013f-4094-b554-d577e44d5f7e" class="numbered-list" start="23"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E8%A9%A0%E6%87%B7%E5%8F%A4%E8%B7%A1%E4%B9%8B%E4%BA%8C">詠懷古跡之二</a></li></ol><ol type="1" id="6f7b98e3-ed6d-4a90-aa33-af158f29cefd" class="numbered-list" start="24"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E8%A9%A0%E6%87%B7%E5%8F%A4%E8%B7%A1%E4%B9%8B%E4%B8%89">詠懷古跡之三</a></li></ol><ol type="1" id="5bdaa540-bc53-4a69-901d-5b2cba78bd5f" class="numbered-list" start="25"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E8%A9%A0%E6%87%B7%E5%8F%A4%E8%B7%A1%E4%B9%8B%E5%9B%9B">詠懷古跡之四</a></li></ol><ol type="1" id="c89a019b-b55c-405a-adf9-ec7ee65be76e" class="numbered-list" start="26"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E8%A9%A0%E6%87%B7%E5%8F%A4%E8%B7%A1%E4%B9%8B%E4%BA%94">詠懷古跡之五</a></li></ol><ol type="1" id="366cba4a-0a0e-4ea4-bc21-fc8f3bbcc6ad" class="numbered-list" start="27"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E8%81%9E%E5%AE%98%E8%BB%8D%E6%94%B6%E6%B2%B3%E5%8D%97%E6%B2%B3%E5%8C%97">聞官軍收河南河北</a></li></ol><ol type="1" id="3cbadc49-1134-4b15-b084-06b06131a1e6" class="numbered-list" start="28"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E5%AE%BF%E5%BA%9C">宿府</a></li></ol><ol type="1" id="f335a6a1-1ad0-4ca4-9e94-ab501ac54adb" class="numbered-list" start="29"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E9%96%A3%E5%A4%9C">閣夜</a></li></ol><ol type="1" id="30feb17d-4589-4e91-b194-fa6b10a4ded3" class="numbered-list" start="30"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E7%99%BB%E9%AB%98">登高</a></li></ol><ol type="1" id="da04880d-2035-42d5-afb0-5f14dda6ca93" class="numbered-list" start="31"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E7%99%BB%E6%A8%93_(%E6%9D%9C%E7%94%AB)">登樓</a></li></ol><ol type="1" id="0756706a-2ee2-4232-a513-338baadcbff9" class="numbered-list" start="32"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E8%9C%80%E7%9B%B8">蜀相</a></li></ol><ol type="1" id="ae545579-c283-4179-bd85-996c6ac9503f" class="numbered-list" start="33"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E5%AE%A2%E8%87%B3">客至</a></li></ol><ol type="1" id="3730709f-e69d-47ef-8f39-c302811f97f6" class="numbered-list" start="34"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E9%87%8E%E6%9C%9B_(%E8%A5%BF%E5%B1%B1%E7%99%BD%E9%9B%AA%E4%B8%89%E5%A5%87%E6%88%8D)">野望</a></li></ol><ol type="1" id="759955b8-93d7-4629-8b04-e562f6969ad6" class="numbered-list" start="35"><li>柳宗元 <a href="https://zh.wikisource.org/wiki/%E7%99%BB%E6%9F%B3%E5%B7%9E%E5%9F%8E%E6%A8%93%E5%AF%84%E6%BC%B3%E6%B1%80%E5%B0%81%E9%80%A3%E5%9B%9B%E5%B7%9E%E5%88%BA%E5%8F%B2">登柳州城樓寄漳汀封連四州刺史</a></li></ol><ol type="1" id="99ea9b5b-e7c7-4b5a-89ff-bf07749c7812" class="numbered-list" start="36"><li>皇甫冉 <a href="https://zh.wikisource.org/wiki/%E6%98%A5%E6%80%9D_(%E7%9A%87%E7%94%AB%E5%86%89)">春思</a></li></ol><ol type="1" id="88e95cf8-a1b5-4b7d-bdb7-8bf744a7d9c1" class="numbered-list" start="37"><li>韋應物 <a href="https://zh.wikisource.org/wiki/%E5%AF%84%E6%9D%8E%E5%84%8B%E5%85%83%E9%8C%AB">寄李儋元錫</a></li></ol><ol type="1" id="74a79030-4228-4058-bec3-5045a4dc06e6" class="numbered-list" start="38"><li>祖詠 <a href="https://zh.wikisource.org/wiki/%E6%9C%9B%E8%96%8A%E9%96%80">望薊門</a></li></ol><ol type="1" id="ef17f3d8-d1f2-4b93-8b1a-2135d7f43995" class="numbered-list" start="39"><li>秦韜玉 <a href="https://zh.wikisource.org/wiki/%E8%B2%A7%E5%A5%B3(%E7%A7%A6%E9%9F%9C%E7%8E%89)">貧女</a></li></ol><ol type="1" id="e01a6eb0-e8cd-4962-a1f8-3c104f2d9eb3" class="numbered-list" start="40"><li>高適 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E6%9D%8E%E5%B0%91%E5%BA%9C%E8%B2%B6%E5%B3%BD%E4%B8%AD%E7%8E%8B%E5%B0%91%E5%BA%9C%E8%B2%B6%E9%95%B7%E6%B2%99">送李少府貶峽中王少府貶長沙</a></li></ol><ol type="1" id="3f3d1c6e-4bb1-4c43-9f4d-02e461446e30" class="numbered-list" start="41"><li>崔曙 <a href="https://zh.wikisource.org/wiki/%E4%B9%9D%E6%97%A5%E7%99%BB%E6%9C%9B%E4%BB%99%E8%87%BA%E5%91%88%E5%8A%89%E6%98%8E%E5%BA%9C">九日登望仙臺呈劉明府</a></li></ol><ol type="1" id="8a11d373-f63b-4c85-bd09-51dd91846f3c" class="numbered-list" start="42"><li>崔顥 <a href="https://zh.wikisource.org/wiki/%E9%BB%83%E9%B6%B4%E6%A8%93">黃鶴樓</a></li></ol><ol type="1" id="92cbd536-6bd6-4e3c-966b-126d9d5fec7e" class="numbered-list" start="43"><li>崔顥 <a href="https://zh.wikisource.org/wiki/%E8%A1%8C%E7%B6%93%E8%8F%AF%E9%99%B0">行經華陰</a></li></ol><ol type="1" id="93e15a14-d9f0-4098-9d32-9f1765a89d3e" class="numbered-list" start="44"><li>溫庭筠 <a href="https://zh.wikisource.org/wiki/%E5%88%A9%E6%B4%B2%E5%8D%97%E6%B8%A1">利洲南渡</a></li></ol><ol type="1" id="eb63759c-41a0-44e4-b200-eba34ffc37e2" class="numbered-list" start="45"><li>溫庭筠 <a href="https://zh.wikisource.org/wiki/%E8%98%87%E6%AD%A6%E5%BB%9F">蘇武廟</a></li></ol><ol type="1" id="c33d9d50-66a9-418b-ba36-1b022613bb2d" class="numbered-list" start="46"><li>劉長卿 <a href="https://zh.wikisource.org/wiki/%E6%B1%9F%E5%B7%9E%E9%87%8D%E5%88%A5%E8%96%9B%E5%85%AD%E6%9F%B3%E5%85%AB%E4%BA%8C%E5%93%A1%E5%A4%96">江州重別薛六柳八二員外</a></li></ol><ol type="1" id="92ee3bfd-e434-40bb-bfdd-232d92e6ff60" class="numbered-list" start="47"><li>劉長卿 <a href="https://zh.wikisource.org/wiki/%E9%95%B7%E6%B2%99%E9%81%8E%E8%B3%88%E8%AA%BC%E5%AE%85">長沙過賈誼宅</a></li></ol><ol type="1" id="403aafb8-d1be-4058-8ca1-0b7402c15302" class="numbered-list" start="48"><li>劉長卿 <a href="https://zh.wikisource.org/wiki/%E8%87%AA%E5%A4%8F%E5%8F%A3%E8%87%B3%E9%B8%9A%E9%B5%A1%E6%B4%B2%E6%9C%9B%E5%B2%B3%E9%99%BD%E5%AF%84%E5%85%83%E4%B8%AD%E4%B8%9E">自夏口至鸚鵡洲望岳陽寄元中丞</a></li></ol><ol type="1" id="993e3eed-f670-416a-bde8-8dadbd607ba8" class="numbered-list" start="49"><li>劉禹錫 <a href="https://zh.wikisource.org/wiki/%E8%A5%BF%E5%A1%9E%E5%B1%B1%E6%87%B7%E5%8F%A4">西塞山懷古</a></li></ol><ol type="1" id="87667f35-31fc-48d4-99a1-6a29e309a661" class="numbered-list" start="50"><li>盧綸 <a href="https://zh.wikisource.org/wiki/%E6%99%9A%E6%AC%A1%E9%84%82%E5%B7%9E">晚次鄂州</a></li></ol><ol type="1" id="0c64711f-f201-4522-a5af-571a867eb60f" class="numbered-list" start="51"><li>錢起 <a href="https://zh.wikisource.org/wiki/%E8%B4%88%E9%97%95%E4%B8%8B%E8%A3%B4%E8%88%8D%E4%BA%BA">贈闕下裴舍人</a></li></ol><ol type="1" id="ef966fa0-82b2-450f-993d-7a005ddfb4b8" class="numbered-list" start="52"><li>薛逢 <a href="https://zh.wikisource.org/wiki/%E5%AE%AE%E8%A9%9E_(%E8%96%9B%E9%80%A2)">宮詞</a></li></ol><ol type="1" id="02a8ede4-6111-446c-874f-fa8ae5865827" class="numbered-list" start="53"><li>韓翃 <a href="https://zh.wikisource.org/wiki/%E5%90%8C%E9%A1%8C%E4%BB%99%E9%81%8A%E8%A7%80">同題仙遊觀</a></li></ol><h2 id="22beed89-0e3f-4694-8fa5-559baae5c859" class="">五言絕句</h2><ol type="1" id="b4dad285-ba4e-4d0c-ad5e-cafd6a855262" class="numbered-list" start="1"><li>元稹 <a href="https://zh.wikisource.org/wiki/%E8%A1%8C%E5%AE%AE">行宮</a></li></ol><ol type="1" id="c19ac911-65ee-45aa-a12c-a9e9f0352b37" class="numbered-list" start="2"><li>王之渙 <a href="https://zh.wikisource.org/wiki/%E7%99%BB%E9%B8%9B%E9%9B%80%E6%A8%93_(%E7%8E%8B%E4%B9%8B%E6%B8%99)">登鸛雀樓</a></li></ol><ol type="1" id="3cbe3191-3c92-4388-8d5f-21da54164676" class="numbered-list" start="3"><li>王建 <a href="https://zh.wikisource.org/wiki/%E6%96%B0%E5%AB%81%E5%A8%98">新嫁娘</a></li></ol><ol type="1" id="93dba76b-85ef-4237-ba4b-bb420678744e" class="numbered-list" start="4"><li>王維 <a href="https://zh.wikisource.org/wiki/%E7%9B%B8%E6%80%9D">相思</a></li></ol><ol type="1" id="170bc565-c32a-46ed-a480-b7a4fa77f34b" class="numbered-list" start="5"><li>王維 <a href="https://zh.wikisource.org/wiki/%E9%9B%9C%E8%A9%A9_(%E5%90%9B%E8%87%AA%E6%95%85%E9%84%89%E4%BE%86)">雜詩</a></li></ol><ol type="1" id="c9d0e2c5-b8f1-4eaa-94d9-cb76606ebc14" class="numbered-list" start="6"><li>王維 <a href="https://zh.wikisource.org/wiki/%E9%B9%BF%E5%AF%A8_(%E7%8E%8B%E7%B6%AD)">鹿寨</a></li></ol><ol type="1" id="91d15dd1-0086-4bc0-859f-542467cda703" class="numbered-list" start="7"><li>王維 <a href="https://zh.wikisource.org/wiki/%E7%AB%B9%E9%87%8C%E9%A4%A8_(%E7%8E%8B%E7%B6%AD)">竹里館</a></li></ol><ol type="1" id="3dd04551-4790-439d-841e-04d71c885fcb" class="numbered-list" start="8"><li>王維 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E5%88%A5_(%E5%B1%B1%E4%B8%AD%E7%9B%B8%E9%80%81%E7%BD%B7)">送別</a></li></ol><ol type="1" id="980593df-6129-41fb-815d-0ac386e0284b" class="numbered-list" start="9"><li>白居易 <a href="https://zh.wikisource.org/wiki/%E5%95%8F%E5%8A%89%E5%8D%81%E4%B9%9D">問劉十九</a></li></ol><ol type="1" id="fa0472a7-f0ff-438d-965a-3fda8a53be6d" class="numbered-list" start="10"><li>西鄙人 <a href="https://zh.wikisource.org/wiki/%E5%93%A5%E8%88%92%E6%AD%8C">哥舒歌</a></li></ol><ol type="1" id="b3480892-24fc-4cb3-881e-b5429117b1a4" class="numbered-list" start="11"><li>李白 <a href="https://zh.wikisource.org/wiki/%E9%9D%9C%E5%A4%9C%E6%80%9D">靜夜思</a></li></ol><ol type="1" id="6a9f0a2f-74be-4434-a3c5-c8f0d69d3a05" class="numbered-list" start="12"><li>李白 <a href="https://zh.wikisource.org/wiki/%E6%80%A8%E6%83%85_(%E7%BE%8E%E4%BA%BA%E6%8D%B2%E7%8F%A0%E7%B0%BE)">怨情</a></li></ol><ol type="1" id="09065dbb-e829-444a-bc5d-1be133f4afc0" class="numbered-list" start="13"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E7%99%BB%E6%A8%82%E6%B8%B8%E5%8E%9F">登樂游原</a></li></ol><ol type="1" id="ee041f25-65af-4550-b510-b4fe683248ec" class="numbered-list" start="14"><li>李端 <a href="https://zh.wikisource.org/wiki/%E8%81%BD%E7%AE%8F_(%E6%9D%8E%E7%AB%AF)">聽箏</a></li></ol><ol type="1" id="104eec88-682e-41e3-b8ab-21af186098ba" class="numbered-list" start="15"><li>李頻 <a href="https://zh.wikisource.org/wiki/%E6%B8%A1%E6%BC%A2%E6%B1%9F_(%E6%9D%8E%E9%A0%BB)">渡漢江</a></li></ol><ol type="1" id="30850fe8-2a9b-48a6-b312-2f40c06740dd" class="numbered-list" start="16"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E5%85%AB%E9%99%A3%E5%9C%96">八陣圖</a></li></ol><ol type="1" id="dcd5fcee-70d9-4f49-899e-28a139ae856e" class="numbered-list" start="17"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E5%AE%BF%E5%BB%BA%E5%BE%B7%E6%B1%9F">宿建德江</a></li></ol><ol type="1" id="4efaf763-a5b2-4b8a-b989-e33ba0c5c85b" class="numbered-list" start="18"><li>孟浩然 <a href="https://zh.wikisource.org/wiki/%E6%98%A5%E6%9B%89_(%E5%AD%9F%E6%B5%A9%E7%84%B6)">春曉</a></li></ol><ol type="1" id="445edbc4-6f1a-4c41-99af-acb45af60da6" class="numbered-list" start="19"><li>金昌緒 <a href="https://zh.wikisource.org/wiki/%E6%98%A5%E6%80%A8_(%E9%87%91%E6%98%8C%E7%B7%92)">春怨</a></li></ol><ol type="1" id="8197ce32-96b9-446d-a960-5338a0f0a49e" class="numbered-list" start="20"><li>柳宗元 <a href="https://zh.wikisource.org/wiki/%E6%B1%9F%E9%9B%AA">江雪</a></li></ol><ol type="1" id="02e5cdf6-ee67-477c-9d19-85de9e2f23ed" class="numbered-list" start="21"><li>韋應物 <a href="https://zh.wikisource.org/wiki/%E7%A7%8B%E5%A4%9C%E5%AF%84%E4%B8%98%E5%93%A1%E5%A4%96">秋夜寄丘員外</a></li></ol><ol type="1" id="bab72d0c-1c2a-49cf-bf38-396cc3030c70" class="numbered-list" start="22"><li>祖詠 <a href="https://zh.wikisource.org/wiki/%E7%B5%82%E5%8D%97%E6%9C%9B%E9%A4%98%E9%9B%AA">終南望餘雪</a></li></ol><ol type="1" id="c5892b6f-7370-43a8-9996-52976943e942" class="numbered-list" start="23"><li>張祜 <a href="https://zh.wikisource.org/wiki/%E4%BD%95%E6%BB%BF%E5%AD%90_(%E5%BC%B5%E7%A5%9C)">何滿子</a></li></ol><ol type="1" id="0f2dfb2c-6031-4c26-bd4f-98a8b99ec7e7" class="numbered-list" start="24"><li>賈島 <a href="https://zh.wikisource.org/wiki/%E5%B0%8B%E9%9A%B1%E8%80%85%E4%B8%8D%E9%81%87">尋隱者不遇</a></li></ol><ol type="1" id="e6c7fae0-b8de-4c61-9ada-f2a796b67e72" class="numbered-list" start="25"><li>裴迪 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E5%B4%94%E4%B9%9D">送崔九</a></li></ol><ol type="1" id="1ad8a596-e4dd-4284-bae9-83a05693e943" class="numbered-list" start="26"><li>劉長卿 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E9%9D%88%E6%BE%88">送靈澈</a></li></ol><ol type="1" id="269ad2e5-3a75-4fac-8824-969175e4007c" class="numbered-list" start="27"><li>劉長卿 <a href="https://zh.wikisource.org/wiki/%E5%BD%88%E7%90%B4">彈琴</a></li></ol><ol type="1" id="a134aa32-dbdf-4e03-911d-94073d4e6014" class="numbered-list" start="28"><li>劉長卿 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E4%B8%8A%E4%BA%BA">送上人</a></li></ol><ol type="1" id="3b962b9b-7b98-49e2-80f2-3ae8717def21" class="numbered-list" start="29"><li>權德輿 <a href="https://zh.wikisource.org/wiki/%E7%8E%89%E8%87%BA%E9%AB%94">玉臺體</a></li></ol><h2 id="e74783ef-a409-4dae-911f-cb568494146c" class="">七言絕句</h2><ol type="1" id="4a880b81-5b35-4b79-81fb-551a7caa46d8" class="numbered-list" start="1"><li>下江南王昌齡 <a href="https://zh.wikisource.org/wiki/%E8%8A%99%E8%93%89%E6%A8%93%E9%80%81%E8%BE%9B%E6%BC%B8_(%E5%AF%92%E9%9B%A8%E9%80%A3%E5%A4%A9%E5%A4%9C%E5%85%A5%E6%B9%96)">芙蓉樓送辛漸</a></li></ol><ol type="1" id="f4e15eb2-162f-4aab-b4e1-b09998a94577" class="numbered-list" start="2"><li>王昌齡 <a href="https://zh.wikisource.org/wiki/%E9%96%A8%E6%80%A8_(%E7%8E%8B%E6%98%8C%E9%BD%A1)">閨怨</a></li></ol><ol type="1" id="50de9e67-786d-4423-91d8-d727fa46fc42" class="numbered-list" start="3"><li>王昌齡 <a href="https://zh.wikisource.org/wiki/%E6%98%A5%E5%AE%AE%E6%9B%B2">春宮曲</a></li></ol><ol type="1" id="ab42e9a1-3853-4fe4-a40b-28623a6b6613" class="numbered-list" start="4"><li>王維 <a href="https://zh.wikisource.org/wiki/%E4%B9%9D%E6%9C%88%E4%B9%9D%E6%97%A5%E6%86%B6%E5%B1%B1%E6%9D%B1%E5%85%84%E5%BC%9F">九月九日憶山東兄弟</a></li></ol><ol type="1" id="9c558884-affd-47d9-bd2f-e66312c5102f" class="numbered-list" start="5"><li>王翰 <a href="https://zh.wikisource.org/wiki/%E6%B6%BC%E5%B7%9E%E8%A9%9E_(%E8%91%A1%E8%90%84%E7%BE%8E%E9%85%92%E5%A4%9C%E5%85%89%E6%9D%AF)">涼州詞</a></li></ol><ol type="1" id="5fcabf7e-b484-4a89-b840-cee21e6261e4" class="numbered-list" start="6"><li>白居易 <a href="https://zh.wikisource.org/wiki/%E5%AE%AE%E8%A9%9E_(%E7%99%BD%E5%B1%85%E6%98%93)">宮詞</a></li></ol><ol type="1" id="a292c8ba-bde4-43a4-aea3-b8dce917ef50" class="numbered-list" start="7"><li>朱慶餘 <a href="https://zh.wikisource.org/wiki/%E5%AE%AE%E4%B8%AD%E8%A9%9E">宮中詞</a></li></ol><ol type="1" id="09436828-0e96-4dbd-b7e0-f193bd6f99c7" class="numbered-list" start="8"><li>朱慶餘 <a href="https://zh.wikisource.org/wiki/%E8%BF%91%E8%A9%A6%E4%B8%8A%E5%BC%B5%E6%B0%B4%E9%83%A8">近試上張水部</a></li></ol><ol type="1" id="5d7aa5d7-b722-4bbc-8242-8eb83bcbb67b" class="numbered-list" start="9"><li>岑參 <a href="https://zh.wikisource.org/wiki/%E9%80%A2%E5%85%A5%E4%BA%AC%E4%BD%BF">逢入京使</a></li></ol><ol type="1" id="b1c920fe-05b3-4a17-898c-da9528745f51" class="numbered-list" start="10"><li>李白 <a href="https://zh.wikisource.org/wiki/%E9%80%81%E5%AD%9F%E6%B5%A9%E7%84%B6%E4%B9%8B%E5%BB%A3%E9%99%B5">送孟浩然之廣陵</a></li></ol><ol type="1" id="95cfc238-72f3-4082-b015-d8f2638b44e8" class="numbered-list" start="11"><li>李白 <a href="https://zh.wikisource.org/wiki/%E4%B8%8B%E6%B1%9F%E9%99%B5">下江陵</a></li></ol><ol type="1" id="a79bfd41-81b8-4876-9758-4a7a0cc411c3" class="numbered-list" start="12"><li>李益 <a href="https://zh.wikisource.org/wiki/%E5%A4%9C%E4%B8%8A%E5%8F%97%E9%99%8D%E5%9F%8E%E8%81%9E%E7%AC%9B">夜上受降城聞笛</a></li></ol><ol type="1" id="a131facf-ff5d-427a-a227-7db6e95f64c9" class="numbered-list" start="13"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E8%B3%88%E7%94%9F">賈生</a></li></ol><ol type="1" id="cc1cfe84-122a-4ab1-9982-62c0b08c9af7" class="numbered-list" start="14"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E9%9A%8B%E5%AE%AE_(%E4%B9%98%E8%88%88%E5%8D%97%E9%81%8A%E4%B8%8D%E6%88%92%E5%9A%B4)">隋宮</a></li></ol><ol type="1" id="0983b188-45ba-4586-86e3-ec801801cb39" class="numbered-list" start="15"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E7%91%A4%E6%B1%A0">瑤池</a></li></ol><ol type="1" id="42e37e3b-7043-4124-bbff-a92917f851f1" class="numbered-list" start="16"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E5%AB%A6%E5%A8%A5">嫦娥</a></li></ol><ol type="1" id="a352309b-f903-4b60-adf5-ac014c64bdc3" class="numbered-list" start="17"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E5%A4%9C%E9%9B%A8%E5%AF%84%E5%8C%97">夜雨寄北</a></li></ol><ol type="1" id="c58efac5-7f24-41b1-99bf-15a1a9ff07d9" class="numbered-list" start="18"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E5%AF%84%E4%BB%A4%E7%8B%90%E9%83%8E%E4%B8%AD">寄令狐郎中</a></li></ol><ol type="1" id="c2f8c073-c38e-4098-aee2-f92250e7cf2d" class="numbered-list" start="19"><li>李商隱 <a href="https://zh.wikisource.org/wiki/%E7%82%BA%E6%9C%89">為有</a></li></ol><ol type="1" id="d202f64b-e4a8-4e0b-b30e-467e1c18f620" class="numbered-list" start="20"><li>杜甫 <a href="https://zh.wikisource.org/wiki/%E6%B1%9F%E5%8D%97%E9%80%A2%E6%9D%8E%E9%BE%9C%E5%B9%B4">江南逢李龜年</a></li></ol><ol type="1" id="0b0c74f1-21ea-4b42-9f95-cf6a9461f3f6" class="numbered-list" start="21"><li>杜牧 <a href="https://zh.wikisource.org/wiki/%E8%B4%88%E5%88%A5_(%E5%A8%89%E5%A8%89%E8%A4%AD%E8%A4%AD%E5%8D%81%E4%B8%89%E9%A4%98)">贈別</a> 之一</li></ol><ol type="1" id="7cbdd214-c6dc-47e3-90bc-2253a90a8d02" class="numbered-list" start="22"><li>杜牧 <a href="https://zh.wikisource.org/wiki/%E8%B4%88%E5%88%A5_(%E5%A4%9A%E6%83%85%E5%8D%BB%E4%BC%BC%E7%B8%BD%E7%84%A1%E6%83%85)">贈別</a> 之二</li></ol><ol type="1" id="d3d69d42-e998-4ed3-beee-6e7c8cee18db" class="numbered-list" start="23"><li>杜牧 <a href="https://zh.wikisource.org/wiki/%E9%87%91%E8%B0%B7%E5%9C%92_(%E6%9D%9C%E7%89%A7)">金谷園</a></li></ol><ol type="1" id="365a699b-8276-43e9-9331-5fef3eabecd6" class="numbered-list" start="24"><li>杜牧 <a href="https://zh.wikisource.org/wiki/%E5%AF%84%E6%8F%9A%E5%B7%9E%E9%9F%93%E7%B6%BD%E5%88%A4%E5%AE%98">寄揚州韓綽判官</a></li></ol><ol type="1" id="2bd1713d-f1d7-479c-a26b-ec8ca7c04bf6" class="numbered-list" start="25"><li>杜牧 <a href="https://zh.wikisource.org/wiki/%E9%81%A3%E6%87%B7(%E6%9D%9C%E7%89%A7)">遣懷</a></li></ol><ol type="1" id="6131b0dc-bd31-4b9e-88c3-71210e0da9da" class="numbered-list" start="26"><li>杜牧 <a href="https://zh.wikisource.org/wiki/%E7%A7%8B%E5%A4%95_(%E6%9D%9C%E7%89%A7)">秋夕</a></li></ol><ol type="1" id="13a977d5-70e5-49a3-b71d-e77fc7722b99" class="numbered-list" start="27"><li>杜牧 <a href="https://zh.wikisource.org/wiki/%E5%B0%87%E8%B5%B4%E5%90%B3%E8%88%88%E7%99%BB%E6%A8%82%E6%B8%B8%E5%8E%9F">將赴吳興登樂游原</a></li></ol><ol type="1" id="6f3185ad-8723-45e2-b0a9-3e222f63b053" class="numbered-list" start="28"><li>杜牧 <a href="https://zh.wikisource.org/wiki/%E8%B5%A4%E5%A3%81">赤壁</a></li></ol><ol type="1" id="5ed7ba1f-ed01-4f8a-a0d6-0bb05a621a0e" class="numbered-list" start="29"><li>杜牧 <a href="https://zh.wikisource.org/wiki/%E6%B3%8A%E7%A7%A6%E6%B7%AE">泊秦淮</a></li></ol><ol type="1" id="e68f31a1-a618-4ab6-a34a-1eab8a631421" class="numbered-list" start="30"><li>柳中庸 <a href="https://zh.wikisource.org/wiki/%E5%BE%81%E4%BA%BA%E6%80%A8">征人怨</a></li></ol><ol type="1" id="f2566012-fc7f-4f4a-bb17-343c6237ff79" class="numbered-list" start="31"><li>韋莊 <a href="https://zh.wikisource.org/wiki/%E9%87%91%E9%99%B5%E5%9C%96">金陵圖</a></li></ol><ol type="1" id="c1bc7898-5a53-4775-9bbe-c34bc9dfa2fd" class="numbered-list" start="32"><li>韋應物 <a href="https://zh.wikisource.org/wiki/%E6%BB%81%E5%B7%9E%E8%A5%BF%E6%BE%97">滁州西澗</a></li></ol><ol type="1" id="386f8be8-c613-46ef-9d0f-f44afb5f069b" class="numbered-list" start="33"><li>張旭 <a href="https://zh.wikisource.org/wiki/%E6%A1%83%E8%8A%B1%E8%B0%BF">桃花谿</a></li></ol><ol type="1" id="f20d2130-83a3-4a09-9fa3-21d59fe6fab9" class="numbered-list" start="34"><li>張泌 <a href="https://zh.wikisource.org/wiki/%E5%AF%84%E4%BA%BA_(%E5%BC%B5%E6%B3%8C)">寄人</a></li></ol><ol type="1" id="0f9fe9c7-f37a-4cc2-9367-0deb0996f4b2" class="numbered-list" start="35"><li>張祜 <a href="https://zh.wikisource.org/wiki/%E9%A1%8C%E9%87%91%E9%99%B5%E6%B8%A1">題金陵渡</a></li></ol><ol type="1" id="870bf2c9-6eda-409d-ac64-c9daaee27243" class="numbered-list" start="36"><li>張祜 <a href="https://zh.wikisource.org/wiki/%E8%B4%88%E5%85%A7%E4%BA%BA">贈內人</a></li></ol><ol type="1" id="5d69c1d5-c84d-4c50-a8d2-8b91c62f4618" class="numbered-list" start="37"><li>張祜 <a href="https://zh.wikisource.org/wiki/%E9%9B%86%E9%9D%88%E8%87%BA%E4%B9%8B%E4%B8%80">集靈臺之一</a></li></ol><ol type="1" id="787d5a0d-e4de-4bf0-b4d6-cdb842e07c11" class="numbered-list" start="38"><li>張祜 <a href="https://zh.wikisource.org/wiki/%E9%9B%86%E9%9D%88%E8%87%BA%E4%B9%8B%E4%BA%8C">集靈臺之二</a></li></ol><ol type="1" id="4a007ce2-8abc-4d34-944c-8c16963024be" class="numbered-list" start="39"><li>張繼 <a href="https://zh.wikisource.org/wiki/%E6%A5%93%E6%A9%8B%E5%A4%9C%E6%B3%8A">楓橋夜泊</a></li></ol><ol type="1" id="ca8b9b30-2c24-4756-8220-d87d4b6c0efa" class="numbered-list" start="40"><li>陳陶 <a href="https://zh.wikisource.org/wiki/%E9%9A%B4%E8%A5%BF%E8%A1%8C_(%E9%99%B3%E9%99%B6)">隴西行</a></li></ol><ol type="1" id="b5bad15b-4078-4fef-9395-5644641a06b0" class="numbered-list" start="41"><li>無名氏 <a href="https://zh.wikisource.org/wiki/%E9%9B%9C%E8%A9%A9_(%E7%84%A1%E5%90%8D%E6%B0%8F)">雜詩</a></li></ol><ol type="1" id="8cc9c7df-e1a7-41f1-bbe9-71f8cbd83653" class="numbered-list" start="42"><li>賀知章 <a href="https://zh.wikisource.org/wiki/%E5%9B%9E%E9%84%89%E5%81%B6%E6%9B%B8_(%E5%B0%91%E5%B0%8F%E9%9B%A2%E5%AE%B6%E8%80%81%E5%A4%A7%E5%9B%9E)">回鄉偶書</a></li></ol><ol type="1" id="968fb458-caac-41ff-a1e5-0787c23cd257" class="numbered-list" start="43"><li>溫庭筠 <a href="https://zh.wikisource.org/wiki/%E7%91%A4%E7%91%9F%E6%80%A8">瑤瑟怨</a></li></ol><ol type="1" id="8435abd6-05ac-466e-805f-c9d7aaf1f20d" class="numbered-list" start="44"><li>劉方平 <a href="https://zh.wikisource.org/wiki/%E6%9C%88%E5%A4%9C_(%E5%8A%89%E6%96%B9%E5%B9%B3)">月夜</a></li></ol><ol type="1" id="2ea6bb33-6508-46d2-96c6-676a5e1f93b9" class="numbered-list" start="45"><li>劉方平 <a href="https://zh.wikisource.org/wiki/%E6%98%A5%E6%80%A8_(%E5%8A%89%E6%96%B9%E5%B9%B3)">春怨</a></li></ol><ol type="1" id="aafbad3b-4c4e-4160-99f9-8a658eb84b0c" class="numbered-list" start="46"><li>劉禹錫 <a href="https://zh.wikisource.org/wiki/%E7%83%8F%E8%A1%A3%E5%B7%B7">烏衣巷</a></li></ol><ol type="1" id="3eedca81-aea3-46d6-8d3b-ef3fdff5325e" class="numbered-list" start="47"><li>劉禹錫 <a href="https://zh.wikisource.org/wiki/%E6%98%A5%E8%A9%9E_(%E5%8A%89%E7%A6%B9%E9%8C%AB)">春詞</a></li></ol><ol type="1" id="4cbea303-6284-4ade-ab35-2382f96f0cfa" class="numbered-list" start="48"><li>鄭畋 <a href="https://zh.wikisource.org/wiki/%E9%A6%AC%E5%B5%AC%E5%9D%A1_(%E9%84%AD%E7%95%8B)">馬嵬坡</a></li></ol><ol type="1" id="4612f2b0-5f9a-4b15-adcf-782fb1e1a932" class="numbered-list" start="49"><li>韓翃 <a href="https://zh.wikisource.org/wiki/%E5%AF%92%E9%A3%9F_(%E9%9F%93%E7%BF%83)">寒食</a></li></ol><ol type="1" id="5aa1766e-99a8-4459-a477-6da985732d97" class="numbered-list" start="50"><li>韓偓 <a href="https://zh.wikisource.org/wiki/%E5%B7%B2%E6%B6%BC">已涼</a></li></ol><ol type="1" id="b54d4d3e-be31-4475-9cc3-51e11b02959d" class="numbered-list" start="51"><li>顧況 <a href="https://zh.wikisource.org/wiki/%E5%AE%AE%E8%A9%9E_(%E7%8E%89%E6%A8%93%E5%A4%A9%E5%8D%8A%E8%B5%B7%E7%AC%99%E6%AD%8C)">宮詞</a></li></ol></div></article></body></html>

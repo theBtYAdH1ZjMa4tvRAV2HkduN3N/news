@@ -1,0 +1,711 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>16張麻將玩法</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b6189552-f56f-4eb9-9664-b221965c64c8" class="page sans"><header><h1 class="page-title">16張麻將玩法</h1></header><div class="page-body"><h1 id="3584173c-76cf-48a8-b184-444c989ae7b8" class="">玩法</h1><h3 id="9300711d-c294-421b-92ae-af134a01cf65" class="">麻將簡介</h3><p id="c990ce36-60a2-4c05-ae76-b6972dda5fdd" class="">關於麻將的起源，歷史上並沒有明確的記載，有人認為是起源於春秋戰國時代，也有人認為是明朝萬曆年間發明的，但不論其來源到底為何，可以確定的是它絕對是中國的國粹，並也影響整個華人社會超過了好幾百年。然而到了民國初年，麻將從大陸傳入了台灣，也從原本的廣東13張玩法演變成台灣的16張玩法，並衍生出了專屬於台灣的獨特麻將玩法與文化。</p><h3 id="f9d42996-737e-4b03-924d-c889abb88ed8" class="">麻將牌介紹</h3><p id="bc75377d-e130-4b80-8bc8-a2c48a59af04" class="">一整副麻將包含了萬子、筒子、索子及字牌等四種花色，每張牌有四張。另外，台灣十六張還必須用到松、蘭、竹、菊及春、夏、秋、冬八張花牌，加起來總共一百四十四張。讓我們來看看每張牌的樣貌：</p><ul id="8a807422-12c3-4a99-ad3c-29ee60ee8109" class="bulleted-list"><li style="list-style-type:disc"><strong>萬子</strong>：一萬到九萬，每一數四張，共三十六張牌。</li></ul><ul id="457d24b1-0e55-4ac0-a4c3-8bf85dd9c0ec" class="bulleted-list"><li style="list-style-type:disc"><strong>索子</strong>：又稱”條子”。一條到九條，每一數四張，共三十六張牌。</li></ul><ul id="36f0a3c6-0b36-408b-9755-a8e9e6229075" class="bulleted-list"><li style="list-style-type:disc"><strong>筒子</strong>：又稱”餅子”。一筒到九筒，每一數有四張，共三十六張牌。</li></ul><ul id="5dc17624-fd53-426d-9408-0453eac31be4" class="bulleted-list"><li style="list-style-type:disc"><strong>字牌</strong>：共有東、南、西、北、中、發、白七種，每種四張。</li></ul><ul id="f5d61efd-bd37-4d67-b022-67c735e1bcc9" class="bulleted-list"><li style="list-style-type:disc"><strong>花牌</strong>：共有松蘭竹菊及春夏秋冬八張。</li></ul><h3 id="688f1f9a-fb21-4891-8ba0-3077a0c1f17d" class="">麻將基本規則介紹</h3><p id="0b952e16-f059-4dbd-83e9-b2c4560ac37f" class="">麻將必須四個人才能玩。每次從開牌到胡牌或流局的這一段牌局過程稱之為「手」，每手皆會由一名玩家當莊家，若該手牌局結束時是莊家胡牌，則該玩家下一手牌局可以繼續當莊家，稱之為「連莊」。若該手牌局莊家並未胡牌，則由逆時針方向計算的下家來做莊家，並依序輪流做莊。每一「圈」牌局會在四位玩家都輪流做過莊家後結束。</p><p id="41b517e1-1f3f-4ad0-becd-743080d67ba2" class="">台灣16張麻將的玩法就是要將手中的牌湊成五組「順子」或「刻子」，再加上一對「將」才能夠胡牌。</p><h3 id="67336423-11e7-49d5-a495-7a7afa48fab0" class="">麻將玩法介紹</h3><ul id="380f1aa3-e355-4b07-8a8c-ef3e5ea72ffd" class="bulleted-list"><li style="list-style-type:disc"><strong>抓位</strong>每圈開始前，先把東、南、西、北風牌蓋住放在桌上，之後四家各拿一張牌，並依照所拿之風牌決定座位。</li></ul><ul id="f0b8958e-cda7-4f54-bba7-e3f8eaac5393" class="bulleted-list"><li style="list-style-type:disc"><strong>起莊</strong>牌局開始前由坐東位者先擲出骰子，按其擲出的點數，由東位開始逆時針算，數到者即為莊家。接著不需由莊家重擲骰子，直接由莊家門前開牌。例如擲到六點，則由坐北位者開始做莊。</li></ul><ul id="f7790190-ba75-4431-a67e-3416489ddee5" class="bulleted-list"><li style="list-style-type:disc"><strong>開牌</strong>開牌方式為從開門者前面的牌疊右側算起並開始取牌。如擲八點，從開門者右側第九疊開始取牌。取牌是由莊家開始，依反時針方向輪流，每次取兩疊（四張）牌，至取完十六張牌為止；最後莊家多拿一張牌，稱為「開門」。</li></ul><ul id="02316b1d-57e8-40d6-8648-b0c9ab51c308" class="bulleted-list"><li style="list-style-type:disc"><strong>補花</strong>若拿到花牌，則由莊家開始依逆時針方向，依次於牌疊後方補足與花牌相等之牌，不補牌或補完牌後請喊「過補」或「請補」，以提示下家進行補牌。若所補之牌仍然是花牌，須等到四家都補完後才可再補。 牌局進行時，因摸進花牌者後所再補進之牌，恰巧讓您胡牌，則算槓上開花並加一台。 ( 在戲谷麻將遊戲內，抓位、起莊、開牌與補花皆由系統幫玩家自動處理 )</li></ul><ul id="1406c205-2b96-4233-bcec-25aed6e7f212" class="bulleted-list"><li style="list-style-type:disc"><strong>摸牌與打牌</strong>在牌局進行的過程中，把不要的牌丟入海底，即稱為「打牌」；牌打出去後，若並無任何伊嘉欲吃牌或碰牌，則下家即可進行摸牌，並再把不要的牌丟入海底，此反覆的行為依逆時針順次循環，直到有人胡牌或流局為止。</li></ul><ul id="c02fcd01-160a-4633-8558-6ae60a72a25b" class="bulleted-list"><li style="list-style-type:disc"><strong>吃牌</strong>若上家丟出之牌可讓你湊成順子，即可「吃牌」，但你不能吃下家或對家所丟出的牌，且吃進來的牌必須放在順子中間。</li></ul><ul id="23818c57-0f5c-40b9-a6c6-1ecdf024bbf3" class="bulleted-list"><li style="list-style-type:disc"><strong>碰牌</strong>不管上家、對家或下家，只要其丟出的牌可讓你湊成刻子，即可「碰牌」。</li></ul><ul id="5b9a64dc-c5d4-48d6-ac8f-cc84fb80d5ee" class="bulleted-list"><li style="list-style-type:disc"><strong>槓牌</strong>若手中已握有三張相同的牌，此時若再進一張相同的牌，即可進行「槓牌」的動作，並可再補摸一張牌。槓牌又分成「明槓」、「暗槓」與「補槓」。 「明槓」：若任何一家打出之牌可讓你湊成槓子，即可喊「槓」，此為「明槓」。 「暗槓」：若本身握有四張相同的牌，亦可喊「槓」，此為「暗槓」。 「補槓」：假設您手中已經有之前喊&quot;碰&quot;的牌組，此時如果其他玩家再丟相同的牌時，您不能喊「槓」，若是自己摸進相同的牌，則可進行「補槓」的動作。 「槓牌」後所補的牌若是剛好讓您自摸胡牌，此種胡牌稱之為「槓上開花」，可再多加一台。</li></ul><ul id="5717d197-4d85-4db5-accc-6cf5ac6ed130" class="bulleted-list"><li style="list-style-type:disc"><strong>聽牌</strong>牌局進行的過程中，只需再加上第十七張牌便達成胡牌條件的狀況，就叫做「聽牌」。 備註：在戲谷麻將遊戲內，若您點選了「宣告聽牌」按鈕，便不能再換牌，如最後能順利胡牌，可多加台數。</li></ul><ul id="45d99b6b-df9e-4b08-99cf-61f62c043821" class="bulleted-list"><li style="list-style-type:disc"><strong>胡牌</strong>藉著不斷摸牌、丟牌、吃、碰、槓牌的過程，將手中的牌組合成順子、刻子或槓子，這些每三張或每四張一組所組合完成的牌，就稱為「面子」。一副牌必須湊成五組面子外加一對眼牌，才可以胡牌。 若是別家打出的牌，剛好可以讓自己湊成胡牌型態時，即可叫「胡牌」，而該家就稱為放炮或放槍，此時只有算放槍者一人輸；若胡的牌是自己所摸進的，則稱為「自摸」，其他三家皆算輸。 ( 備註：在戲谷麻將遊戲內，當需要「吃牌」、「碰牌」、「槓牌」、「聽牌」、「胡牌」，系統會自動彈出提示之功能選項介面，玩家可以選擇要吃碰槓聽胡，或是放棄來進行摸牌。)</li></ul><ul id="bb40aa31-a598-432f-9670-4e3945be8e20" class="bulleted-list"><li style="list-style-type:disc"><strong>流局</strong>每次牌局最後必須留下八疊（16張）不能摸，牌局中每槓一次，則需再多留一張，若摸到最後一直沒有人胡牌，就稱為「海底流局」，莊家則繼續連莊，又稱臭莊。</li></ul><ul id="4dfed1d6-d3f0-4acb-9a69-2df39416f5c4" class="bulleted-list"><li style="list-style-type:disc"><strong>輸贏結算</strong>每一次胡牌，至少可以贏的基本數目稱為「底」，按照胡牌台型所贏的額外數目就稱為「台」，結算輸贏金額時，就是將每底的數目加上總台數乘以每台的數目。 例如：甲乙丙丁四人玩的牌局為50底/20台，若丙放槍給甲，經結算過後甲贏4台，則甲就可從丙身上獲得50+20x 4= 130元。</li></ul><h1 id="29974a6f-93e8-4f3c-823d-533066ad3d20" class="">麻將算台輕鬆學，一次搞懂三元、花槓、四喜…</h1><p id="f21dd74c-b5dd-4d00-bac6-9dc5d213789e" class="">「莊連拉到底幾台？」、「怎樣才是門清？」、「阿我這個花有沒有台啊？」、「我這樣到底有沒有台？？」朋友相揪打麻將，但總是搞不懂台數到底怎麼算？別擔心，各位在麻將牌桌上的煩惱我們都聽到了，擅長將複雜的資訊整理圖表的 <a href="https://www.facebook.com/RedesignInfo/posts/1141488676271307">Re Lab 資訊改造實驗室</a>，將複雜的麻將算台整理成一目瞭然的圖表，推出「那些年你都不會算的麻將台數表」讓你一次搞懂麻將台數計算方式，更貼心整理各種牌桌上的小禁忌，看完這篇教學，算台不求人，打牌不傷和氣！</p><h2 id="bd88b33e-dd25-4bb8-94db-b46b7e64bee8" class="">麻將台數基礎規則</h2><figure id="7c5bb54f-9c6d-4fa3-b035-b627ee937742" class="image"><a href="https://lh5.googleusercontent.com/5WXAAUps4mgWZbCv9arTVIFvWDwFBzbUHDAlCLynbOTLWJR4pN6xuv2ZXBvHi_pcenJKMNbJgPTdtChzHolHu1YZShV0bUbm7zgVbDzj997YivLEOLziLvlY0LoJ6WEMpdNHofHP"><img src="https://lh5.googleusercontent.com/5WXAAUps4mgWZbCv9arTVIFvWDwFBzbUHDAlCLynbOTLWJR4pN6xuv2ZXBvHi_pcenJKMNbJgPTdtChzHolHu1YZShV0bUbm7zgVbDzj997YivLEOLziLvlY0LoJ6WEMpdNHofHP"/></a></figure><h3 id="4a10a1aa-fabe-4cd0-82d6-7b8a249d73e1" class="">每局付錢計算方式</h3><ul id="69f83f3e-beee-49be-81ca-dd8cf71a6be1" class="bulleted-list"><li style="list-style-type:disc">台數付錢的計算公式＝底＋台
+• 底：每局輸贏都要付的基本額
+• 台：台數就是贏錢的單位，依照麻將牌面組合計算</li></ul><h3 id="79730e06-38d0-4c34-b40a-7945314bfa6a" class="">對子、順子、刻字、將牌</h3><p id="6bf5d346-c4a8-4ce4-ad47-edb1574e287a" class="">進入麻將算台說明前，也幫大家複習幾個常用字詞：
+• 對子：兩張相同的麻將牌組合，例如：兩張一萬
+• 順子：三張相同花色、數字相連的麻將牌，例如：一萬、二萬、三萬
+• 刻子：三張相同的麻將牌，就像是撲克牌的三條。刻子又可以再分為碰出的「明刻」和抓在手中的「暗刻」
+• 將牌：麻將胡牌時，必須具備的單獨對子，和手牌中其他的順子、刻子無關</p><h2 id="f2a9fa72-223f-4ffc-a700-417c0c2fb610" class="">#1 莊家/自摸台</h2><figure id="46b72707-dc0a-4028-b1da-cb75a3d324b6" class="image"><a href="https://lh3.googleusercontent.com/VWC1IFt7DN9u4IzvYL1Q08TqPd9X5Oj8HVGLF_eixwrJU3lmJl6Ru5BfEOCUdmIfCVCsgZovsRPX-JQk2G83SwyNDBhQ1K0vTluh0tl6eSCsx-A4u3g2DwDTYjwC-_1jKLDc5nVs"><img src="https://lh3.googleusercontent.com/VWC1IFt7DN9u4IzvYL1Q08TqPd9X5Oj8HVGLF_eixwrJU3lmJl6Ru5BfEOCUdmIfCVCsgZovsRPX-JQk2G83SwyNDBhQ1K0vTluh0tl6eSCsx-A4u3g2DwDTYjwC-_1jKLDc5nVs"/></a></figure><h3 id="7c7c8362-c029-471c-b3a9-1ad55dc3c076" class="">莊家台數</h3><p id="28dbd3fe-9198-4f94-beef-6b4b97d8e85e" class="">莊家無論胡牌或是放炮都會算一台。</p><p id="ae4ac285-6b2d-40f1-a59d-96d8a5c8e402" class="">莊家連莊拉莊：莊家胡牌或是流局稱為連莊，連莊即有拉莊，除了莊家原本基本的一台，每連莊一次就再加兩台。舉例，連莊一次時，原本莊家即有一台，加上連莊兩台，共三台；連莊兩次時，原本三台再加兩台，共五台。相反的，當莊家連莊時放炮或其他玩家自摸時，也要賠上贏家的台數加上莊家連莊的台數，舉例來說，連莊一次時，其他玩家以一台胡牌，莊家輸須賠一台加上連莊三台；共四台。</p><p id="79f6b981-9b10-4d60-b831-9cc42f030104" class="">莊家連莊台數是莊家的基本台，所有下面提到的其他牌面台數，都另計累加上去。</p><h3 id="a5422cee-ae23-4073-b0e9-19cc07feec9f" class="">自摸台</h3><ul id="d254ac79-7543-4bbc-b708-4dc5b3b6803f" class="bulleted-list"><li style="list-style-type:disc">自模：自己摸到胡牌的牌，算一台。
+• 門清：胡牌時，不吃、不碰、不明槓，16 張牌都在自己的牌內，算一台。
+• 門清自摸：門清的狀況下自摸，算三台。
+• 海底撈月：摸進流局前最後一張牌，剛好胡牌而自摸，算一台。</li></ul><h2 id="467e315f-2615-476a-900d-d90e2a14b844" class="">#2 單吊台</h2><figure id="26de1b37-02a3-4a00-8432-465104194a1c" class="image"><a href="https://lh5.googleusercontent.com/XpTnJKZgoWBRkI2QgUlMPEP74zATzXQzM2_Sbn-A2UUBs8oI7INXx3kI_WONA362Xd5JEg2tavaxTSVlUBaeRIh388kyfhqqMEYoyovHKUpToZt4wN1BEMjm-qM1aRRiFh_do_Jq"><img src="https://lh5.googleusercontent.com/XpTnJKZgoWBRkI2QgUlMPEP74zATzXQzM2_Sbn-A2UUBs8oI7INXx3kI_WONA362Xd5JEg2tavaxTSVlUBaeRIh388kyfhqqMEYoyovHKUpToZt4wN1BEMjm-qM1aRRiFh_do_Jq"/></a></figure><p id="06aa9b6e-e19d-4d1a-99ae-4ca2acf7764b" class="">單吊都算一台，包含「偏張」、「崁張」、「獨聽」三種種類：</p><ul id="b65fdc21-7614-41df-b98d-e07587ed39e9" class="bulleted-list"><li style="list-style-type:disc">偏張：又稱為「單邊」或是「邊獨」，指的是只單獨聽一張的順子，例如有一萬、二萬聽三萬，這種情況算一台。
+• 崁張：又稱為「中洞」，指的是聽順子中間的那張牌，例如有四筒、六筒聽五筒，這種情況也算一台。
+• 獨聽：又稱為「單騎」，指的是當所有搭子都配完，只聽最後一張牌的情況算一台。不過要注意，若同時聽將牌和順子，例如聽一張「二萬」或是三張「四萬」，拿到二萬或是三萬都能胡，這種情況就不人算是「獨聽」。</li></ul><h2 id="257665c3-b4bc-46b1-8579-31e34dbace12" class="">#3 圈風台</h2><figure id="53735e22-e865-4c50-a431-462e13030e07" class="image"><a href="https://lh3.googleusercontent.com/HAaeK6toq6tFTpAtM0MF9wBrXdcRv4tHP8de_5sv90ao15hXYxQlRbDflpxp6OAWBSs8vWrPsfnzdgfugUVrxsCu4Ie6b7uAcYfadYYzktQbaroRpWNtut1tbHIyw7o1gN3IDARA"><img src="https://lh3.googleusercontent.com/HAaeK6toq6tFTpAtM0MF9wBrXdcRv4tHP8de_5sv90ao15hXYxQlRbDflpxp6OAWBSs8vWrPsfnzdgfugUVrxsCu4Ie6b7uAcYfadYYzktQbaroRpWNtut1tbHIyw7o1gN3IDARA"/></a></figure><p id="8a27a780-97ca-49e4-bb1e-f7d480bf9110" class="">圈風台都是算一台，包含「圈風刻」、「門風刻」兩種：</p><ul id="c43307bf-ef8b-459b-8f2c-130c6a4e8358" class="bulleted-list"><li style="list-style-type:disc">圈風刻：只要附和「圈風」即有一台，例如目前是東風圈，拿到三張東風就算一台。
+• 門風刻：依自己的坐風，拿到三張算一台，例如現在坐北，拿到三張北風的話，就可算一台。</li></ul><h2 id="72e90eed-1d38-4f9e-93fc-240d20149675" class="">#4 三元台</h2><figure id="6fe6ceef-494c-4975-a3d5-d198bb33fec0" class="image"><a href="https://lh5.googleusercontent.com/LCPf9t5wpYzeYewbxzGh3a98UGhTIYXXpQJy37RVD7jZ1d7PNCpeuDrt9KJ2pJRwtqhOTtNKe8x8j-sOC5Cht0QbaATX4uyR1iBUe4CJAcWYbis4OUNzufv__PwVqsCdjXBgSeyw"><img src="https://lh5.googleusercontent.com/LCPf9t5wpYzeYewbxzGh3a98UGhTIYXXpQJy37RVD7jZ1d7PNCpeuDrt9KJ2pJRwtqhOTtNKe8x8j-sOC5Cht0QbaATX4uyR1iBUe4CJAcWYbis4OUNzufv__PwVqsCdjXBgSeyw"/></a></figure><p id="39c67e15-c8d6-40d5-abe1-850fd385b2a0" class="">三元指的是「中、發、白」，三元台可分為「三元刻」、「小三元」、「大三元」三種：</p><ul id="44464045-5df2-4d4f-8e29-9a87e54fe073" class="bulleted-list"><li style="list-style-type:disc">三元刻：中、發、白任何一組刻子或是槓子，算一台。
+• 小三元：胡牌時有中、發、白三元牌，任兩組刻子和將牌，這種情況就是小三元，算四台。
+• 大三元：胡牌時有中、發、白三元牌，三副刻子的情況，就算八台。</li></ul><h2 id="bd2d3cea-1b61-42c1-a9d8-2def49f4730c" class="">#5 四喜台</h2><figure id="95c577f3-7236-4806-85fd-8ce44c9c1ff7" class="image"><a href="https://lh6.googleusercontent.com/cocfuJgDDTRxkhSpWEGwrjioHwtClAyuuGgDeY923ignbROxBIL7e2iaKvcWW8GAcXvLfNQ3hqkGYU6slTqgUH6EPkG3J6uKKhZNGFeo4ge8ZdmdHPFlE-5HLAN9foxtgPG7ucaY"><img src="https://lh6.googleusercontent.com/cocfuJgDDTRxkhSpWEGwrjioHwtClAyuuGgDeY923ignbROxBIL7e2iaKvcWW8GAcXvLfNQ3hqkGYU6slTqgUH6EPkG3J6uKKhZNGFeo4ge8ZdmdHPFlE-5HLAN9foxtgPG7ucaY"/></a></figure><p id="cd4f475b-e8a5-4da5-be23-810b47df8992" class="">「四喜」指的是同時有「東、南、西、北」的刻子、對子，包含「小四喜」、「大四喜」兩種：</p><ul id="3a7a9c5b-acdc-42d0-9245-abc93c11a46b" class="bulleted-list"><li style="list-style-type:disc">小四喜：胡牌時有「風牌」的三副刻子及將牌，例如：三張「東風」＋三張「南風」＋三張「西風」＋兩張「北風」，小四喜算八台。可自行約定是否要另外計算風刻台。
+• 大四喜：胡牌時有四副「風刻」組成的牌，也就是三張「東風」＋三張「南風」＋三張「西風」＋三張「北風」，大四喜算十六台，不另計算風刻台。</li></ul><h2 id="48169792-0442-4718-b2fa-1c3d08b3891a" class="">#6 花槓</h2><figure id="7a97b3e1-dbab-4fb8-932a-a606d26992bf" class="image"><a href="https://lh6.googleusercontent.com/_94PoQ_Xmdsno5iGongVPLhVdI8EHQrr3oaj3ALeUKhZrpCJJssn0AG05Hh3eW9sPYwPObfha2SMLJzUX8Wdu7YGDbnnaUMpj9M-fkgjpzEkUnTcdyIWHqAvvOnWTpsPLVhELvbB"><img src="https://lh6.googleusercontent.com/_94PoQ_Xmdsno5iGongVPLhVdI8EHQrr3oaj3ALeUKhZrpCJJssn0AG05Hh3eW9sPYwPObfha2SMLJzUX8Wdu7YGDbnnaUMpj9M-fkgjpzEkUnTcdyIWHqAvvOnWTpsPLVhELvbB"/></a></figure><p id="722b0501-0f3d-48ba-8f45-a68330fff14e" class="">花牌有「四季：春、夏、秋、冬」以及「四君子：梅、蘭、菊、竹」。而花槓分為正花和花槓兩種算法。
+• 正花：開門的玩家為東家，拿到對應座位的正花即有一台。四個玩家的花數計算如下：
+◦ 東家一花，春、梅
+◦ 南家二花，夏、蘭
+◦ 西家三花，秋、菊
+◦ 北家四花，冬、竹
+• 花槓：拿到四季或是四君子即有兩台。例如同時拿到「春、夏、秋、冬」，或是「梅、蘭、菊、竹」，算兩台。</p><h2 id="678807ab-891c-40b0-b9b2-56858fc44656" class="">#7 搶槓</h2><figure id="28517847-d07f-47c7-8c40-b23c56c5eee7" class="image"><a href="https://lh3.googleusercontent.com/FXHa1a7BDuz6K9UMAYSswoUCx3pveVO7roCCTBECuIsR-LswiKxXFp4q2IFtED_XjwZ3MKTqHGDz3V8sGDOWdxrWay4XeQFqKo4ggjzviVcxTQPMIkzsShGDVMtEn5jNpCpaByxD"><img src="https://lh3.googleusercontent.com/FXHa1a7BDuz6K9UMAYSswoUCx3pveVO7roCCTBECuIsR-LswiKxXFp4q2IFtED_XjwZ3MKTqHGDz3V8sGDOWdxrWay4XeQFqKo4ggjzviVcxTQPMIkzsShGDVMtEn5jNpCpaByxD"/></a></figure><p id="e14c7fe0-1b34-46e6-8408-afcef4bbf446" class="">搶槓包含「搶槓」、「槓上開花」、「七搶一」、「八仙過海」四種情況。</p><ul id="7e18ccee-a9d0-41f0-9243-927706cfb6c8" class="bulleted-list"><li style="list-style-type:disc">搶槓：當別家喊槓，正巧是補槓的牌是自己要胡的牌，就可以搶槓胡牌，算一台。
+• 槓上開花：不論是暗槓、加槓、或是補花後所摸進的牌剛好是自己能胡牌的情況，就稱為槓上開花，算一台，還可以加計自摸。
+• 七搶一：如果手上拿齊七張花牌，當其中一家拿到最後一張花牌時，玩家可搶入花牌並且補牌；補牌那張若胡牌，即為七搶一，台數為八台，被搶花者為放槍。另一種情況為，如果手上拿齊六張花牌，而其中一玩家持有一張花牌，當本家摸進第八張花牌時，可以搶花補牌，若胡牌，也為七搶一。此外，莊家連拉照算，不計正花、花槓。
+• 八仙過海：手上拿齊八張花牌（四季＋四君子）時，即可胡牌，視同自摸，算八台。和七搶一一樣，莊家連拉照算、不計正花、花槓。</li></ul><h2 id="d13de74b-6e18-47d3-ac1e-928646247909" class="">#8 特殊牌</h2><figure id="15dd8da4-8000-4c42-9453-0d5b55de52c1" class="image"><a href="https://lh3.googleusercontent.com/iSVMFJAYLhBnXcfFmCFoE_JBN4Gp1TrnRP8psvSFT540B_jPwLg2TDCWb9a-IEiUxd24ftlwquLOlrexY4oJrZA61PZhh7mbCAbREU1FJ4G2AG5GvX0WKLJ6ENy2cSPMTyoKxgEM"><img src="https://lh3.googleusercontent.com/iSVMFJAYLhBnXcfFmCFoE_JBN4Gp1TrnRP8psvSFT540B_jPwLg2TDCWb9a-IEiUxd24ftlwquLOlrexY4oJrZA61PZhh7mbCAbREU1FJ4G2AG5GvX0WKLJ6ENy2cSPMTyoKxgEM"/></a></figure><ul id="6aba2ca1-c280-473a-a5b5-ec026c93bac4" class="bulleted-list"><li style="list-style-type:disc">全求人：牌全都是吃或碰，手中只剩下一張牌，並因為任何一家放炮，就稱為「全求人」，算兩台，自摸不算。</li></ul><ul id="748f5ebd-bd1b-418f-8fa1-bdba309c8101" class="bulleted-list"><li style="list-style-type:disc">平胡：胡牌者手牌要符合「無字、無花、無刻」、不是聽「偏、崁、獨」並且「不是自摸」的情況稱為「平胡」，算兩台。玩家可自行約定是否加算門清。
+• 對對胡：也有人稱「碰碰胡」，只要牌全都是對子所組成，沒有任何順子的情況就稱為「對對胡」，算四台。對子可以是自摸進來的，也可以是碰來的。</li></ul><h2 id="7dd443d1-2c05-49b9-9b33-81fdfc899095" class="">#9 暗刻台</h2><figure id="cff9b001-a07d-40b8-b261-018c8c590801" class="image"><a href="https://lh4.googleusercontent.com/SPlc6rxJvBbFIWF7OVQajHgR15IE-Fe7FXmYOSm56yZDwWz4RD6AtMaL9b7IqSS1yY43zkxe5hMRzmCMfE69iyyNvIuH8K_91nW-NKLHL06iV4y76Y5ZcsliebEuNWOiR_wXWkZA"><img src="https://lh4.googleusercontent.com/SPlc6rxJvBbFIWF7OVQajHgR15IE-Fe7FXmYOSm56yZDwWz4RD6AtMaL9b7IqSS1yY43zkxe5hMRzmCMfE69iyyNvIuH8K_91nW-NKLHL06iV4y76Y5ZcsliebEuNWOiR_wXWkZA"/></a></figure><p id="2b0bc825-f20a-41cb-b5eb-acae65cb28e2" class="">暗刻指的是自己摸進的刻子，不是「碰」其他玩家的明牌，暗刻台包含「三暗刻」、「四暗刻」、「五暗刻」三種：</p><ul id="3c3d752c-c126-460d-877d-32ddfc9ebfcc" class="bulleted-list"><li style="list-style-type:disc">三暗刻：胡牌時手中有三副刻子，包括暗槓，可加兩台。
+• 四暗刻：胡牌時手中有四副刻子，包括暗槓，可加五台。
+• 五暗刻：胡牌時手中有五副刻子，包括暗槓，可加八台。此外要注意的是，五暗刻時，必定也是對對胡，原本理應是不計對對胡的，但是因為五暗刻只有加八台，比四暗刻五台＋對對胡四台還少，所以五暗刻的情況，必計對對胡。</li></ul><h2 id="178f4065-1a50-466a-a4d8-9ca4ae4b0938" class="">#10 一色台</h2><figure id="54610602-f9b5-4c6a-8130-c3f092b2716c" class="image"><a href="https://lh5.googleusercontent.com/f7oeBoax-NrBSSrpaqv38lVmtMV67RCTXeI9eSF_1OUuh_VN-gsrW5SSJY-TM4GZSTherLhtlI2B2O-y0CDDYs0nMIxY-2R-HWkjkoF3sgyYJyF8YuAenDC9anvRQ74gTIZTlw5_"><img src="https://lh5.googleusercontent.com/f7oeBoax-NrBSSrpaqv38lVmtMV67RCTXeI9eSF_1OUuh_VN-gsrW5SSJY-TM4GZSTherLhtlI2B2O-y0CDDYs0nMIxY-2R-HWkjkoF3sgyYJyF8YuAenDC9anvRQ74gTIZTlw5_"/></a></figure><ul id="e91e5d0f-ac02-4de2-a14e-34a37e828075" class="bulleted-list"><li style="list-style-type:disc">一色台：包含「混一色」、「清一色」、「字一色」三種狀況。
+• 混一色：由一種花色的序數牌以及字牌組成的牌型。例如：一、二、三、四、五、六筒＋中中中＋發發發＋東東，算四台。
+• 清一色：由一種花色的序數排組成的牌型，例如：一二三萬＋四五六萬＋七八九萬＋兩張七萬，算八台。
+• 字一色：胡牌完全由字牌「東、南、西、北、中、發、白」所組成時，就稱為字一色，算十六台。玩家可以自行約定是否另計對對胡、大三元、四喜。</li></ul><h2 id="2156f856-9259-43ec-83d3-4ec87bf208b0" class="">#11 天地胡</h2><figure id="75ce6844-b620-48eb-a258-4485dd8e641e" class="image"><a href="https://lh5.googleusercontent.com/ohdbP82XoLwzBy3w88mKIGMARHVO66gw9kQZmS0dKTqPxCIZJLjELxn9r11SfH_C8N-WQJ783cxgY_sICxNv2uxJADKCpH9QQV6HFzz9b_80XqwHkYBf5T1tQSOhpq-LoSSM526L"><img src="https://lh5.googleusercontent.com/ohdbP82XoLwzBy3w88mKIGMARHVO66gw9kQZmS0dKTqPxCIZJLjELxn9r11SfH_C8N-WQJ783cxgY_sICxNv2uxJADKCpH9QQV6HFzz9b_80XqwHkYBf5T1tQSOhpq-LoSSM526L"/></a></figure><p id="b4abf199-99e9-4a34-9dce-597489ed45f0" class="">天地胡包含「人胡」、「地胡」、「天胡」三種情況：
+• 人胡：牌局一開始，第一巡內還沒摸牌前，沒有發生吃、碰、槓的情況就胡他人的牌，稱為人胡，算十六台。不另計門清之外，其餘都另計。
+• 地胡：適用於莊家之外其他玩家，在第一輪抓玩牌就自模，即為地胡，算十六台。不計自摸、門清、不求人，其餘另計。
+• 天胡：只適用於莊家，當莊家在牌局第一輪抓完後立即胡牌就稱為天胡，算二十四台。不計門清、自摸、獨聽、槓上開花，其餘另計。</p><h2 id="768b185f-e3d8-40a4-8f67-e401517313aa" class="">#12 麻將常見禁忌</h2><figure id="e1698e29-1df1-4e5d-923a-e94abd2b7433" class="image"><a href="https://lh3.googleusercontent.com/njtibVrkpyMWs7wh0hgskMxLAEJDNgZb2AMzRtymp_NbmJwApu4DSHw_Nnev43ST1IZPDKLSjXgmyEgEwNkd88mR6hYWvurAPn2nU3B1F9oIji2t12M5j-Itsqpao1UIsXS6sPtC"><img src="https://lh3.googleusercontent.com/njtibVrkpyMWs7wh0hgskMxLAEJDNgZb2AMzRtymp_NbmJwApu4DSHw_Nnev43ST1IZPDKLSjXgmyEgEwNkd88mR6hYWvurAPn2nU3B1F9oIji2t12M5j-Itsqpao1UIsXS6sPtC"/></a></figure><p id="3cde007a-ecc7-4f61-997e-041d09bbd1ce" class="">「誒下家不能槓上家啦不要亂槓」、「自摸放進去不算辣！」新手剛上牌桌是不是常聽到各種麻將規則提醒呢？文末也分享各種打麻將時的小禁忌，打牌前先筆記起來！</p><p id="b0414755-c77f-48b7-ae56-f8c52d5e65e3" class="">1.南風發財，連續四張西：「難發財」的諧音；連續四張西則有「一路歸西」不吉利的象徵。
+2.自摸「不靠張」「不敲牌」「不掉牌」：防止換牌、藏牌等作弊行為。
+3.下家不可槓上家：同樣都是摸牌，等於多此一舉，但如果是玩見字、見花就沒差。
+4.明槓不能自摸：同樣是為了防止換牌，但有些人也會玩槓上開花加一台的玩法。
+5.北風對著自己：北風碰牌後不能倒放，不然運氣會背。
+6.不能拍肩或拍背：會影響他人運勢。
+7.不背對大門、廁所、書櫃、窗戶。
+8.連莊不能離開座位、動桌腳、上廁所，不然會影響運氣。
+9.不要在牌桌上借錢：輸錢借錢傷和氣，贏的借錢會把自己的好運借出去。</p><figure id="3c57f8bb-038e-48e4-b762-f63b5f4d2f25" class="image"><a href="https://lh6.googleusercontent.com/ecjkZeJGA3S0Ec3UcwH1m2Uumb6uAJmKUR4L4pw3XBXut1FtufsdNIZABjnKEZUFF73Otl9JomwpzhBwLdFZgV_l65hkbCwlQhrm0cDKThMhn2sdBuKpXTlIZditnMH3GBj9MIab"><img src="https://lh6.googleusercontent.com/ecjkZeJGA3S0Ec3UcwH1m2Uumb6uAJmKUR4L4pw3XBXut1FtufsdNIZABjnKEZUFF73Otl9JomwpzhBwLdFZgV_l65hkbCwlQhrm0cDKThMhn2sdBuKpXTlIZditnMH3GBj9MIab"/></a></figure><hr id="d65bd8dc-f030-4169-87b7-d6ea6d6a01e4"/><hr id="fbc58fd3-33df-451f-ae30-3f9ca281ecf2"/><hr id="dbb85d09-edc5-4917-b2ac-c2c88da9c50c"/><hr id="cc61ac81-9f7d-4594-88ee-5c7deaffe4e0"/><p id="4dae3645-71e8-4f50-ac88-40e871b09265" class="">
+</p></div></article></body></html>

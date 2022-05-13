@@ -1,0 +1,707 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>DISC 個性分析</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9ab669a9-8233-4de2-a2c2-1933acf8aa97" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🐒</span></div><h1 class="page-title">DISC 個性分析</h1></header><div class="page-body"><p id="a90ba339-58b2-4f64-91fb-5a67eb0b11f9" class="">
+</p><p id="419b1f15-20b5-42bc-95b5-e4b2d52b67aa" class="">DISC 這四個單字普遍來說肯定不陌生，DISC理論是1920年由美國心理學家馬斯頓（Dr. Marston）研究古希臘的性格學說去探究人類行為模式所發展而成。此理論認為每個人的性格都是由四種「基本元素」所組成，這四種類型由橫軸(內向/被動 vs 外向/主動)，以及縱軸(任務型/以事為主vs關係型/以人為主)所劃分，分別以四種代表性動物呈現，其行事風格類似者會展現類似的行為，並成為一個人處理事情的方式。DISC是至今最廣泛應用在人格特質測驗、人際溝通及領導學(向上或向下管理)之理論，小編就這四大人格特質說明如下：</p><p id="9c9b6317-cf2b-43d6-b254-ae29bc1e5d0d" class=""><strong>一、四大人格特質</strong></p><ol type="1" id="97a4fe43-dec2-43c3-858c-a2d8ff949acb" class="numbered-list" start="1"><li><strong>Dominance(支配型)</strong></li></ol><ul id="d85c0268-926d-4ce7-aabe-5ec40c0a4571" class="bulleted-list"><li style="list-style-type:disc"><strong>代表性動物：老虎</strong></li></ul><ul id="47c5fc5e-ed5d-4711-89f0-37036a21a129" class="bulleted-list"><li style="list-style-type:disc"><strong>位置：</strong>「外向/主動」與「任務型/以事為主」之集合</li></ul><ul id="7996900d-fdd5-4b82-9ec6-a8831d639719" class="bulleted-list"><li style="list-style-type:disc"><strong>特質：</strong>步調明快、果斷、執行力高、企圖心強、有話直說、權威風格、個人主義、績效導向、重視結果與效率、重實質報酬、接受挑戰、掌控性高、決策快速</li></ul><ul id="cf180611-c7e6-4eba-bfb4-1bc54378ff3b" class="bulleted-list"><li style="list-style-type:disc"><strong>缺點：</strong>易固執且沒耐心、不善體貼與讚美、見林不見樹、難以忍受愚昧</li></ul><ul id="ac3adee3-f8b1-40a9-919b-1cf0103db6d9" class="bulleted-list"><li style="list-style-type:disc"><strong>動機：</strong>權力、掌控、指揮</li></ul><ol type="1" id="179663ba-9b15-49fd-800e-c9b59631b8e2" class="numbered-list" start="1"><li><strong>Influence(影響型)</strong></li></ol><ul id="9c7e0dfa-adcb-41dc-bd7b-8c39761d1aa6" class="bulleted-list"><li style="list-style-type:disc"><strong>代表性動物：孔雀</strong></li></ul><ul id="ec1c90a2-0d9a-42a0-b875-2395c8c8a1b6" class="bulleted-list"><li style="list-style-type:disc"><strong>位置：</strong>「外向/主動」與「關係型/以人為主」之集合</li></ul><ul id="c35f5fcb-0885-408c-8ce5-4cc406618109" class="bulleted-list"><li style="list-style-type:disc"><strong>特質：</strong>樂觀主義、重視形象/人際關係/表現/浪漫、具想像力/創意、喜歡分享與表達、有趣、健談不怕生、活力充沛、不喜例行公事、熱心、常為團隊活力來源</li></ul><ul id="856edb43-9362-4996-9e0d-642f2626c0c9" class="bulleted-list"><li style="list-style-type:disc"><strong>缺點：</strong>天馬行空、注意力不持久、易情緒化、不自覺畫餅、愛說大道理、跳躍式思考、缺乏邏輯、遇到困難容易閃躲</li></ul><ul id="2aafecc9-2dbd-4842-9b7e-154ebd729252" class="bulleted-list"><li style="list-style-type:disc"><strong>動機：</strong>舞台、受歡迎、肯定、掌聲、認同</li></ul><ol type="1" id="af87c490-dc65-49fd-9962-c5cb77f091cb" class="numbered-list" start="1"><li><strong>Steadiness(穩健型)</strong></li></ol><ul id="6b3d0753-8da1-48be-b891-49e01243743e" class="bulleted-list"><li style="list-style-type:disc"><strong>代表性動物：無尾熊</strong></li></ul><ul id="e14e2950-ad01-4f05-9c2f-da9c3e13a597" class="bulleted-list"><li style="list-style-type:disc"><strong>位置：</strong>「內向/被動」與「關係型/以人為主」之集合</li></ul><ul id="b4901b81-382b-403e-9149-b65f88dafe83" class="bulleted-list"><li style="list-style-type:disc"><strong>特質：</strong>按部就班、有耐心與毅力、善傾聽、以和為貴、團隊合作、情緒穩定、在乎別人感受、追求穩定、好溝通、不直接、配合度高、服從指示</li></ul><ul id="fc6cd9d0-655e-4771-a750-252bac19556e" class="bulleted-list"><li style="list-style-type:disc"><strong>缺點：</strong>害怕重大決定及快速改變、怕衝突、過度小心(保守)、猶豫不決、較無主見</li></ul><ul id="35544f8d-7f1b-454f-81cc-d8cc90b393e3" class="bulleted-list"><li style="list-style-type:disc"><strong>動機：</strong>被接納、安全感、穩定</li></ul><ol type="1" id="5ebc351f-5db1-4b3b-b058-9c318b70595f" class="numbered-list" start="1"><li><strong>Compliance (分析型)</strong></li></ol><ul id="fdd44f37-0731-45f5-b6da-9274dead7b81" class="bulleted-list"><li style="list-style-type:disc"><strong>代表性動物：貓頭鷹</strong></li></ul><ul id="a26be65a-da07-4ebc-a086-0130d0af5e4f" class="bulleted-list"><li style="list-style-type:disc"><strong>位置：</strong>「內向/被動」與「任務型/以事為主」之集合</li></ul><ul id="0bef2da3-369c-4346-916e-1b1550880e90" class="bulleted-list"><li style="list-style-type:disc"><strong>特質：</strong>邏輯清晰有條理、善思考及分析、完美主義、深思熟慮、謹慎務實、重視細節與數字、不喜無法預測、不喜出頭</li></ul><ul id="96c87213-eb9e-4431-8ee1-e67e50fad5af" class="bulleted-list"><li style="list-style-type:disc"><strong>缺點：</strong>吹毛求疵、見樹不見林、不自覺複雜化問題、過度理性</li></ul><ul id="05182461-a634-466e-b1a2-e74ab5dabcb1" class="bulleted-list"><li style="list-style-type:disc"><strong>動機：</strong>回歸目的、高品質、精確性<figure id="21d90aae-8957-4864-b7eb-ee603837ac14" class="image"><a href="https://todaynews.jwint.net/TodayNews/disc1.jpg"><img src="https://todaynews.jwint.net/TodayNews/disc1.jpg"/></a></figure><figure id="6dcc4821-e8b4-439b-9e34-a7d0d59b603c" class="image"><a href="https://todaynews.jwint.net/TodayNews/disc2.jpg"><img src="https://todaynews.jwint.net/TodayNews/disc2.jpg"/></a></figure></li></ul><p id="5107de60-0da1-4130-8874-b8b9eec77677" class=""><strong>二、適應各類型教戰守則</strong></p><p id="f9d96520-56cf-485e-a5cb-075c1c07885a" class=""><strong>如果對方是</strong></p><p id="8835a660-349f-4b6b-bd9e-c8b26e887af0" class="">
+</p><p id="ac9d7056-56de-470c-9f7a-e3800037899e" class=""><strong>老虎 (支配型)</strong></p><ul id="026e62f4-14fe-4205-acb0-617c880f2a5a" class="bulleted-list"><li style="list-style-type:disc">盡可能支持他所追求的目標</li></ul><ul id="1a9729c6-ef0f-44cb-ad99-996573c2c455" class="bulleted-list"><li style="list-style-type:disc">若不同意對方的看法而提出不同建議，應根據事實而非個人感覺</li></ul><ul id="4db01274-036c-4793-8e31-25c813c07a31" class="bulleted-list"><li style="list-style-type:disc">面對咄咄逼人，要讓對方知道你可以處理事情</li></ul><ul id="d4f72eb2-d89f-40d2-9d90-c82eddfa7981" class="bulleted-list"><li style="list-style-type:disc">要精確、有效率、長話短說</li></ul><ul id="109e5ea9-e125-4245-bdf9-631240597cde" class="bulleted-list"><li style="list-style-type:disc">主動表明自己的需求，迅速切入問題重點與核心</li></ul><ul id="dcd85906-4b8f-4844-ad12-19000aa2dde0" class="bulleted-list"><li style="list-style-type:disc">處理的結果比過程更重要(結果論)</li></ul><ul id="7b767f4e-ad68-47e5-b977-73fabe543cca" class="bulleted-list"><li style="list-style-type:disc">將往來關係公式化</li></ul><ul id="e2321ae4-475d-4539-a294-016fa843b94f" class="bulleted-list"><li style="list-style-type:disc"><strong>要讓他滿意就是：決定由他，給建議!</strong></li></ul><p id="a49075de-61c1-4230-aa46-9e7a2a92e7e1" class=""><strong>孔雀 (影響型)</strong></p><ul id="ddb85a5e-7b23-49b5-addb-57afe356a0da" class="bulleted-list"><li style="list-style-type:disc">儘可能支持他們的計劃、點子及夢想</li></ul><ul id="843d8384-2875-4b04-ab75-5b6b7d18f034" class="bulleted-list"><li style="list-style-type:disc">面對可能的誇大其辭，要多用同理心讓對方知道你重視他</li></ul><ul id="9ac95f8e-3130-42b5-9972-eff5d015e919" class="bulleted-list"><li style="list-style-type:disc">保持愉悅、有活力、隨和，維持快速步調</li></ul><ul id="ed71e989-4d6d-4992-a2ef-2964f3176a68" class="bulleted-list"><li style="list-style-type:disc">原諒他們容易分心，且勿一開始就切入重點</li></ul><ul id="71a49848-570a-43a5-a519-6e1ceae0a546" class="bulleted-list"><li style="list-style-type:disc">別與他們討論過度細節問題，否則你會很挫折</li></ul><ul id="766f8c0f-c26b-464b-94fa-9e22f752dd35" class="bulleted-list"><li style="list-style-type:disc">要懂得聽話中話，並歸納確認其重點需求</li></ul><ul id="b1f08e19-0879-4f3e-bf17-a80c1818e1fd" class="bulleted-list"><li style="list-style-type:disc">試著別與他們爭辯，因你很少會贏</li></ul><ul id="98bb35a3-ee5b-4acb-a633-7ea7dcdb7dff" class="bulleted-list"><li style="list-style-type:disc">處理過程比結果重要(在乎交談氣氛)，需營造有利的溝通環境</li></ul><ul id="c57a665d-6424-4f26-9cc1-1670e606dbf4" class="bulleted-list"><li style="list-style-type:disc"><strong>要讓他滿意就是：多讚美他，讓他show!</strong></li></ul><p id="29df3314-d121-4917-bd22-daba60f42afb" class=""><strong>無尾熊 (穩定型)</strong></p><ul id="36e8e40c-d89b-496f-9488-edfb9246d9ff" class="bulleted-list"><li style="list-style-type:disc">表現出真誠友善、耐心傾聽及支持他的感覺</li></ul><ul id="f4a19858-5ec4-4946-aab8-d9deff2d2778" class="bulleted-list"><li style="list-style-type:disc">給他時間信任你</li></ul><ul id="689e55ca-17fb-40c8-b8fd-fd4838b13217" class="bulleted-list"><li style="list-style-type:disc">多用同理心及朋友角度關心，讓對方知道你重視他</li></ul><ul id="5e16a3d4-877e-4503-aead-b7f6fa824ba4" class="bulleted-list"><li style="list-style-type:disc">多用引導方式了解對方需求，主動告知處理過程，化被動為主動</li></ul><ul id="f3decdcd-3fa4-45ba-8ef5-680063123c36" class="bulleted-list"><li style="list-style-type:disc">當你們看法不同時，應先處理個人情緒而非討論事實</li></ul><ul id="65381f65-3e20-4614-b453-487a98fa60eb" class="bulleted-list"><li style="list-style-type:disc">以相對緩慢、非正式但持續的步調進行</li></ul><ul id="a48f7869-6d14-418c-ba40-e4478506c067" class="bulleted-list"><li style="list-style-type:disc">處理過程比結果重要：體諒他的難處，給予更多的關懷與安全感</li></ul><ul id="1ed4343f-1482-4b72-a9fc-972089ea9049" class="bulleted-list"><li style="list-style-type:disc"><strong>要讓他滿意就是：明確告訴他該怎麼做!</strong></li></ul><p id="76b0ce36-2bd4-4f92-a826-0fac87297adb" class=""><strong>貓頭鷹 (分析型)</strong></p><ul id="283f3c98-483a-4227-badd-0031dbb77f76" class="bulleted-list"><li style="list-style-type:disc">盡可能支持他們有條理、思慮縝密的方法(實事求是的做事方法)</li></ul><ul id="29660a02-52fb-4c99-ba5c-3b83ef6bb0b2" class="bulleted-list"><li style="list-style-type:disc">讓他知道為何而做，列出計劃的優缺點並作分析</li></ul><ul id="a6e74450-7c2a-44c9-b301-946df5d68c7b" class="bulleted-list"><li style="list-style-type:disc">堅定提出明確的證據，有理才能走遍天下</li></ul><ul id="635c5006-5be1-4e09-a20e-45ac837fbabc" class="bulleted-list"><li style="list-style-type:disc">遵循規範與程序，用行動展現你的承諾，而非只是隨口說說</li></ul><ul id="3ed9307f-b406-4601-b707-6cf1320775a9" class="bulleted-list"><li style="list-style-type:disc">要注意細節、精確性及邏輯性</li></ul><ul id="6dbd298d-589e-46e8-8eca-30407e043d79" class="bulleted-list"><li style="list-style-type:disc">原諒他的冷靜，他不易帶入私人情緒且理智思考，建議多聽再回應</li></ul><ul id="ca827c74-94cf-47bc-bf7a-84e44ee7ac0c" class="bulleted-list"><li style="list-style-type:disc">明確告知你能做什麼，莫含糊其詞，有困難時直說</li></ul><ul id="03c8280f-7337-4220-980d-c7c75f648522" class="bulleted-list"><li style="list-style-type:disc">處理結果比過程重要：不在乎處理人是誰，只要有效解決問題即可</li></ul><ul id="c89f6f24-db87-437f-bbca-bd033fc30904" class="bulleted-list"><li style="list-style-type:disc"><strong>要讓他滿意就是：明確告訴他為何要做!</strong></li></ul><p id="b21483e5-cef9-4ecc-bf8f-304a363d347c" class=""><strong>三、結論</strong></p><ol type="1" id="e1972514-5d14-4d02-832f-f576b9418f0a" class="numbered-list" start="1"><li><strong>在職場上，DISC對角線時而存在相剋(互不欣賞)；但在婚姻中，對角線卻常形成互補，惟互補的性格在職場團隊中仍具備相當重要性(Diversity)，端看如何知人善用</strong>。你不妨想像若團隊中的成員清一色都是同樣的特質會出現什麼樣的結果呢？若全部都是無尾熊，組織文化肯定沒有創新這個選項；若全部都是老虎，可能一天到爭論不休；若全部都是貓頭鷹，組織溫度肯定很藍色；若全部都是孔雀，達成目標的溝通成本可能超乎想像。若從歷史故事來舉例，劉邦是常常被人津津樂道的典範。劉邦是文不如蕭何、武不及韓信、運籌遠遜於張良, 但漢初三傑及後來陳平皆能夠為他所用，最終成就其劉邦一統天下的局面。</li></ol><ol type="1" id="14cfd7aa-bf00-40bc-a8b2-ce98dc85e6f0" class="numbered-list" start="2"><li>若將DISC理論應用在向上管理層面，建議花一些時間從旁觀察，你自然會發現老闆的所重視的點與偏好。譬如老闆喜歡喜歡同中求異還是異中求同？喜歡聽口頭報告或是閱讀書面文件？喜歡冒險改變還是擔心被改變？喜歡掌握大原則或是關注細節裡的競爭力？喜歡量化管理(數字敏感度)或是質量並重？喜歡分析比較或是一語道破？喜歡理性中帶點感性或是感性中帶點理性？<strong>別忘了主管跟我們都一樣，人對於「和自己對盤(理念相符)」的人容易產生好感，時間久了便累積成信任，信任久了便形成信賴</strong>(涵蓋兩個信任：一是信任你的專業，可以解決問題；二是信任你的人品，不會害他)，自然而然就更容易授權。</li></ol><ol type="1" id="eb6c261c-ce1d-4a67-b4f4-30b1ea78da41" class="numbered-list" start="3"><li><strong>四大人格特質並無絕對好壞，多數人也常同時具備二種以上的特質，誠如我們可能同時具備多重社會角色</strong>(Social role)一樣，隨著外在環境與風險的變化而自發性調整與修正當下角色，以尋求適應與生存，惟差別僅在主要特質上殊為明顯。最後，小編建議可透過DISC人格特質分析，分別從自我覺察、團隊管理與向上管理三個角度去延伸應用。</li></ol><ul id="e9fbf1e4-df9d-4bc5-9980-e29a12aa2ded" class="bulleted-list"><li style="list-style-type:disc"><strong>對自我覺察而言，</strong>要看待的是如何持續強化並放大自己的優點，認清自己的缺點並避免讓缺點造成關鍵影響<strong>。</strong></li></ul><ul id="0634dbf7-e731-4746-841e-635eaec94d04" class="bulleted-list"><li style="list-style-type:disc"><strong>對團隊管理而言，</strong>要知人善任，把對的人放在對的位置，而非硬要一個擅長游擊的隊員去練習捕手的位置，更非要每位球員都要學習游擊的位置(同一雙鞋子硬套在不同人腳上)，以期知己知彼，百戰百勝。</li></ul><ul id="730e1d8a-6902-48c5-b8b5-3d0a21b9bf04" class="bulleted-list"><li style="list-style-type:disc"><strong>對向上管理而言，</strong>認清老闆的偏好與厭惡，然後「投其所好」。惟投其所好，並非巴結逢迎、譁眾取寵，更不是要你忘了自己的角色與責任而默默當個透明人，而是避免明知老闆明顯不喜歡卻不斷挑戰他的底線，除非他們所做出的決策已逾越了法律的邊緣線或是為了解決一個問題而創造了更大的問題<strong>。</strong></li></ul><p id="66386753-46b4-44cd-8faa-a90bb3e9ee7a" class="">
+</p><p id="7fdb35a8-17a5-4cd2-842c-5eda35eb77ac" class="">
+</p><p id="abc6e3c4-0823-4386-b874-139e2196f576" class="">
+</p><hr id="ed735e5c-5094-414e-97c6-dd9ed1192f57"/><hr id="c89193e7-7e74-4568-b8b7-862b11909a8b"/><hr id="e99aee15-7461-4dc6-b238-f8e8c9658a8a"/><p id="d100f26d-8404-4239-a478-ea340cc9dd5e" class="">
+</p><h1 id="614d44f6-d85f-48bb-bd00-594c6847e1df" class="">DISC</h1><h1 id="956a63dd-c9c8-4ef5-aada-98a1b20c4797" class="">A－B</h1><p id="64cd72a2-456b-4f96-84c4-2776db5c5eec" class="">嚴肅
+愛開玩笑</p><p id="4774a700-1d0d-4f3f-beda-7a0a4c2a3476" class="">決定事情時，果斷
+決定時，猶豫不定</p><p id="a1c67af3-81a0-4441-a22d-61f9bc20e383" class="">較在乎對錯
+較在乎人的感受</p><p id="b450f7af-d759-4431-b6f2-f6326b9777bd" class="">較在乎是否完成
+較在乎環境及過程</p><p id="20f6d823-836f-4e5b-b60c-174b03e2c778" class="">不喜歡聊天
+喜歡閒聊</p><p id="2c8a6e4c-8ae4-4502-b68b-791f3c460aed" class="">情感不喜歡外露
+情感自然流露</p><p id="c14abcfe-f773-48c1-86ad-437b6de27888" class="">平時穿著正式
+平時穿著輕鬆</p><p id="12a6032b-d4f3-40bc-a0de-752ac0b2d1ee" class="">正經，有板有眼
+親切，隨和</p><p id="87ee8a5f-b1c4-4f56-b81b-b004001d24e9" class="">時間管理
+自然時間</p><p id="474c45c9-c6ee-42ef-8327-2630aac50929" class="">精打細算
+大致估算</p><p id="10f95b07-8588-44fc-b914-1244c580d181" class="">事前規劃，按表操課
+依大致方向，因勢而動</p><p id="19e83719-4423-4ea4-acb9-d6914832a539" class="">獨善其身
+助人，好團隊活動</p><p id="cdb104d9-cc90-44ba-9c73-80d9376d99fb" class="">說話有條理
+說話自由發散</p><h1 id="a59b8e76-da32-433f-8465-bd730a357f1a" class="">C－D</h1><p id="c178c5ea-5b7e-4ade-a9af-53c0eb9a93c0" class="">走路較慢
+較快走</p><p id="b62a1973-e06c-4b65-9af7-c9a4bf565b85" class="">說話聲音輕柔
+說話大聲，有力</p><p id="d0b3a8a0-4d30-490a-afed-9bcee73da3b0" class="">提意見時常先用試探語氣
+直接表達立場</p><p id="2ed2a1c5-f28c-42c8-9ec9-7f5512f03b20" class="">正襟危坐
+不拘小節</p><p id="516309e2-df9f-4722-b7ef-6ef393e2fe1a" class="">做時有點拖延
+想到立即去做</p><p id="8c7f6095-efed-49ec-b637-10100eb4b61d" class="">眼神較不與人接觸
+眼神正面接觸</p><p id="c6c45d20-f063-4634-b4f2-56bc5df50df1" class="">與人交往是被動的
+主動的人際關係</p><p id="530363ff-4b91-421f-8ffe-35a25f04ed68" class="">喜歡傾聽
+說話常占多數</p><p id="90b3b2f7-8a3e-4182-8009-391a0c761f70" class="">優柔 寡斷
+果斷 乾脆</p><p id="e3687a3f-44ea-4e21-9f32-5a443961daae" class="">喜歡穩定 安全感
+喜歡冒險 新鮮活動</p><p id="d7872f1c-5cfc-472d-b112-015d62818477" class="">注重細節
+大而化之</p><p id="12b83a25-c543-4d31-8d2c-98eabe9a799e" class="">不會催別人做決定
+催人做決定</p><hr id="9a32b20c-8859-4ec3-a35b-83f3e9976976"/><h3 id="27870bb5-e008-4f68-9668-54a7b8bd69c0" class="">DISC</h3><p id="bd4b31ff-9c32-45cc-ab65-6c3ef8b2ebdc" class="">A－B =&gt; 喜事&lt;=&gt;喜人 =&gt; 7&lt;=&gt;7
+C－D =&gt; 細心 被動&lt;=&gt;果斷 主動 =&gt; 7&lt;=&gt;7</p><p id="5587a7ff-dbd4-413c-8b5a-994c519acc4c" class="">對事，細心：貓頭鷹
+對事，果斷：老虎
+對人，果斷：孔雀
+對人，細心：無尾熊
+2/2 內：變色龍</p><p id="6412a6a9-0cd5-45db-a271-bcfa38ba9e63" class="">
+</p><p id="1f73bab6-e4b4-4e7e-9984-287ae8b6cb85" class="">
+</p><hr id="4704b211-d148-4747-8aa3-34c5edc83bc9"/><h3 id="96a0ee07-47da-4dc8-a9d5-38e6c867540f" class="">貓頭鷹 compliance 遵守</h3><ul id="5abc897e-e261-47a3-a654-eddc8fe1ca89" class="bulleted-list"><li style="list-style-type:disc">謹慎小心</li></ul><ul id="32426de2-8e69-451e-91d8-e833cd19aabe" class="bulleted-list"><li style="list-style-type:disc">按部就班</li></ul><ul id="f0427206-0058-4753-a4f3-218230fe9f6a" class="bulleted-list"><li style="list-style-type:disc">一絲不苟</li></ul><ul id="c17f3014-f0bd-4e8b-8f13-2e8a0f467886" class="bulleted-list"><li style="list-style-type:disc">推理性強</li></ul><ul id="75e4412c-aac7-4adc-a898-38f91750807f" class="bulleted-list"><li style="list-style-type:disc">嚴肅精確</li></ul><ul id="e8fbd187-5a6c-4ba6-ab2f-ac3325fe5b66" class="bulleted-list"><li style="list-style-type:disc">完美主義</li></ul><ul id="675218f6-da72-43df-bbdb-c85397f1c5e1" class="bulleted-list"><li style="list-style-type:disc">對所有的變化都希望有完整報告</li></ul><ul id="8821563a-97b6-4c7f-920a-fe1394df2dcc" class="bulleted-list"><li style="list-style-type:disc">準確，高品質，穩健，結構</li></ul><ul id="fcfb906b-35df-4272-a540-3b50420200de" class="bulleted-list"><li style="list-style-type:disc">完整完成工作</li></ul><ul id="d0d42e25-4ca9-4a6f-8f0f-c5d25c94890b" class="bulleted-list"><li style="list-style-type:disc">規格化的行程與制度</li></ul><ul id="d3752d2a-c1e0-4b62-b8ce-64974fc24076" class="bulleted-list"><li style="list-style-type:disc">基本的權利保障</li></ul><h3 id="bda6f6a1-1d4d-4cc4-a6d3-0b92d67cab0e" class="">老虎 dominance 支配</h3><ul id="a5dc9a2c-b727-4f6d-ae97-db2e809662d4" class="bulleted-list"><li style="list-style-type:disc">果決</li></ul><ul id="33932d89-c5bc-407d-99bf-648e353b4c2a" class="bulleted-list"><li style="list-style-type:disc">直率</li></ul><ul id="707ae95b-37d6-4f8c-9fa1-564d9e46aa13" class="bulleted-list"><li style="list-style-type:disc">獨立</li></ul><ul id="079f6ef7-a268-48d4-acd6-cc6e5cb34d6f" class="bulleted-list"><li style="list-style-type:disc">實際</li></ul><ul id="9340b8d2-1102-414e-a687-6d5e1a61c8bd" class="bulleted-list"><li style="list-style-type:disc">效率</li></ul><ul id="3491dbba-14c4-4e80-8945-9255caadbe34" class="bulleted-list"><li style="list-style-type:disc">目標導向</li></ul><ul id="8127e967-df9f-4630-a26e-46e69f0a99f1" class="bulleted-list"><li style="list-style-type:disc">希望得到完成任務的頭銜</li></ul><ul id="c1b81277-9818-4d2b-ab09-e0764fe74466" class="bulleted-list"><li style="list-style-type:disc">喜歡發號命令，不喜歡接受命令</li></ul><ul id="db988fdc-1ae7-48c8-b0ee-bffac29c32e8" class="bulleted-list"><li style="list-style-type:disc">只要有成果，就能保持愉快及大度</li></ul><ul id="4d8db673-b8ed-4401-ad8e-2c26c66d6655" class="bulleted-list"><li style="list-style-type:disc">只有在他認同的目標下，才能發揮組織合作的能力</li></ul><h3 id="2ccf87ae-3a37-4b5e-8807-a84fc0702fb4" class="">孔雀 influence 影響</h3><ul id="a85280bf-bfbf-4b4b-b418-a5ee27020ad5" class="bulleted-list"><li style="list-style-type:disc">率真</li></ul><ul id="3e8cdfe0-ce29-4eac-9bf1-82b551c8b0f4" class="bulleted-list"><li style="list-style-type:disc">開放</li></ul><ul id="053329e0-ce4f-45c0-bd6f-c3c8fb3acb02" class="bulleted-list"><li style="list-style-type:disc">熱誠</li></ul><ul id="e6b1a6fd-4637-436a-9c9d-4a83d5a65bed" class="bulleted-list"><li style="list-style-type:disc">具說服力</li></ul><ul id="fc0b11b7-c027-4261-b8f7-d31ce9deb580" class="bulleted-list"><li style="list-style-type:disc">幽默趣味</li></ul><ul id="c5017383-6fc4-4e27-a19f-206fa92e760c" class="bulleted-list"><li style="list-style-type:disc">要名，受尊重，要名望</li></ul><ul id="98e27852-f5f6-4ad6-aa9a-bd9147073fce" class="bulleted-list"><li style="list-style-type:disc">金錢的回饋</li></ul><ul id="253262c6-0590-493f-96bc-b4b9380a5deb" class="bulleted-list"><li style="list-style-type:disc">公開的讚揚</li></ul><ul id="13856f1e-c94b-42ab-9c08-5a1571b2d15e" class="bulleted-list"><li style="list-style-type:disc">很有的朋友</li></ul><ul id="dba35163-693d-4169-af0c-e90bfdfc771a" class="bulleted-list"><li style="list-style-type:disc">很多外界網路</li></ul><ul id="878c28bf-4510-48cb-82ca-4b1268d819b8" class="bulleted-list"><li style="list-style-type:disc">要良好的工作環境</li></ul><h3 id="1737672e-1bff-4bd1-b39a-a66ebb5dcac3" class="">無尾熊 steadiness 穩健</h3><ul id="b330b0f0-7e1a-4b98-be8d-cf3400b96fb3" class="bulleted-list"><li style="list-style-type:disc">有耐心</li></ul><ul id="bacd8d02-9f72-4544-abb1-2ed6b605e784" class="bulleted-list"><li style="list-style-type:disc">支持他人</li></ul><ul id="4a07468e-b733-49b0-a05c-428d5f13c5de" class="bulleted-list"><li style="list-style-type:disc">行動效率高</li></ul><ul id="447f1f09-8432-4384-840c-02112ebfb0c8" class="bulleted-list"><li style="list-style-type:disc">平易近人</li></ul><ul id="40fd3972-4481-41ad-8bf4-6b291e4e8730" class="bulleted-list"><li style="list-style-type:disc">喜歡和諧</li></ul><ul id="9e580048-9394-4aaa-987c-90c0ddba06a1" class="bulleted-list"><li style="list-style-type:disc">和諧</li></ul><ul id="acd0717c-dffd-49bc-966d-9696a70377f8" class="bulleted-list"><li style="list-style-type:disc">要適當的利益</li></ul><ul id="f2444092-d384-47f5-9d13-76239c163ede" class="bulleted-list"><li style="list-style-type:disc">充分的時間</li></ul><ul id="77fc056c-287a-43ab-8124-da413c1332da" class="bulleted-list"><li style="list-style-type:disc">要有時間去適應變化</li></ul><ul id="223b7cbf-9ec4-4f79-9cd7-2079a9c00daf" class="bulleted-list"><li style="list-style-type:disc">要有經公正認可的</li></ul><ul id="fa75e8cc-03ae-4226-90a0-fd0965f21a15" class="bulleted-list"><li style="list-style-type:disc">穩定，可預測的環境</li></ul><h3 id="332ea311-cb41-4509-a117-64713dc1cfe9" class="">變色龍</h3><ul id="9dac6b74-88cb-4ab7-a6cd-f3d52c3f7e97" class="bulleted-list"><li style="list-style-type:disc">老二主義</li></ul><ul id="4a760407-b774-4f22-b710-d544a9f28263" class="bulleted-list"><li style="list-style-type:disc">能屈能伸</li></ul><ul id="f35ecaff-8190-4896-a376-e227dffd571c" class="bulleted-list"><li style="list-style-type:disc">善溝通</li></ul><ul id="98ad0d4c-83d3-47bd-97b5-91d091ede6e1" class="bulleted-list"><li style="list-style-type:disc">演什麼像什麼</li></ul><ul id="ec737483-35e9-4405-8d31-019b1523b9b5" class="bulleted-list"><li style="list-style-type:disc">牆頭草，兩面倒</li></ul></div></article></body></html>

@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Live view</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3a9795c1-d85b-4311-b1d5-7718047f7c22" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎦</span></div><h1 class="page-title">Live view</h1></header><div class="page-body"><p id="bdb93102-8c37-4ccc-bd1c-d9ee6b708e61" class="">ALL</p><p id="911af56b-a4e0-433e-ab03-a74e8cd560c3" class=""><a href="https://tw.live/hhs/">合歡山</a></p><p id="44e03930-0ccc-4709-ae2f-f823d12538f7" class=""><a href="https://thbcctv07.thb.gov.tw/T14A-d61a0c91">武嶺</a></p><p id="fbd12b74-5bb0-4ae4-a7dc-19d58b2cbda6" class=""><a href="https://www.youtube.com/watch?v=JVY1ZI6lnqI">EU 伊拉克里歐 Ηράκλειο 希臘</a></p><p id="2468b534-133c-40be-9c54-ced8b8f09a14" class=""><a href="https://www.youtube.com/watch?v=z0sZNeSnqGU">EU 希臘 Hotel Angelica</a></p><p id="8cb15816-61c0-405d-bdb2-c1c1a37fc7e5" class=""><a href="https://www.youtube.com/watch?v=WQmhY_3yhF8">EU Angelus ARCB 天主教布加勒斯特總教區 C3RR+WC 布加勒斯特 羅馬尼亞</a></p><p id="4f4f9433-b2b8-4d74-bd07-eb557cfaea4e" class=""><a href="https://www.youtube.com/watch?v=EXikUQLRJm4">EU Germany Blick über Hamburg / View over Hamburg,</a></p><p id="501672dc-acec-4043-a7d3-c532485697a8" class=""><a href="https://www.youtube.com/watch?v=QvMhgjH_9eo">EU Křižovatka Pražská x Českoskalická, Náchod 布拉格</a></p><p id="7cd45b16-eb20-41ed-ad54-92153763e081" class=""><a href="https://www.youtube.com/watch?v=KMTL1ixd984">EU Le Sacré-Coeur de Montmartre - PARIS</a></p><p id="fdc00081-63ef-4c0b-b023-2950d576bc1e" class=""><a href="https://www.youtube.com/watch?v=mFPIVJ6E15I">EU Netherlands Noorderplassen - Almere</a></p><p id="20ccc218-a387-4436-8380-12537a6fc611" class=""><a href="https://www.youtube.com/watch?v=y7QcpQwxHrA">EU Orvieto Live Stream</a></p><p id="bcaa9f5b-a273-4c34-b767-d91176388723" class=""><a href="https://www.youtube.com/watch?v=St7aTfoIdYQ">EU Oxford Martin School Webcam - Broad Street, Oxford</a></p><p id="bbaad72f-18da-4caa-b928-3113189d5302" class=""><a href="https://www.youtube.com/watch?v=UaJM7HxOhHw">EU Prague 布拉格</a></p><p id="979c62a7-ef0a-4473-9c8f-39cc643f5d08" class=""><a href="https://www.youtube.com/watch?v=BPXtn15_9qo">EU Venice Italy,Rialto Bridge</a></p><p id="c01276ff-7c73-432a-8987-1fd23ff1049d" class=""><a href="https://www.youtube.com/watch?v=Y8yjuXPQhj4">JP 上高地河童橋ライブカメラ KAMIKOCHI KAPPA-BASHI</a></p><p id="5b05868a-bdf0-4000-aa5a-2a4342aa8115" class=""><a href="https://www.youtube.com/watch?v=O8kzbTtnhao">JP 大阪空港</a></p><p id="b74d6d68-3ff1-4fca-8881-b78ce76b6167" class=""><a href="https://www.youtube.com/watch?v=kW34b6W0izM">JP 中伊豆ワイナリーシャトーT.S 富士山ライブカメラ</a></p><p id="3cdc803c-4c16-493f-8dfb-c03d5ae70b83" class=""><a href="https://www.youtube.com/watch?v=_f4YyIfw1dA">JP 平夢テラス・富士山ライブカメラ</a></p><p id="3e1797df-8726-453a-819e-423ddba6013e" class=""><a href="https://www.youtube.com/watch?v=9Qa2y8or4-Y">JP 札幌天空ライブ</a></p><p id="bdfade3c-9d82-451d-a0bc-1caf5d4048f7" class=""><a href="https://www.youtube.com/watch?v=65OhdzBc-wM">JP 白浜町 沙灘</a></p><p id="22a1afe8-3056-4cb0-b191-88d9b8c99e4f" class=""><a href="https://www.youtube.com/watch?v=iTg9JNgh1Hw">JP 石垣 海</a></p><p id="174253c7-4aac-4e24-8f8e-a537d826aec9" class=""><a href="https://www.youtube.com/watch?v=syWQ07_-Py4">JP 石垣 颱風</a></p><p id="4d0a3679-1b46-4c23-b653-ed27bff638b4" class=""><a href="https://www.youtube.com/watch?v=lIGkJPQU6cM">JP 佐田岬半島</a></p><p id="444727b4-64a6-427b-8b1e-30d9865ee364" class=""><a href="https://www.youtube.com/watch?v=ndbzlARh7CI">JP 沖縄本島宮城海岸 砂辺遺跡</a></p><p id="fc252594-e1a3-4a32-93a6-475645794b73" class=""><a href="https://www.youtube.com/watch?v=uOIa3mBoRGo">JP 沖縄 首里城公園</a></p><p id="e50ae0db-792f-4a1a-8c76-156efcf69f42" class=""><a href="https://www.youtube.com/watch?v=bVDW6cxr2GE">JP 足立美術館庭園</a></p><p id="f5cf91da-9ccf-4fd5-a511-fdcbd3bb4818" class=""><a href="https://www.youtube.com/watch?v=bnuvDcFvPtg">JP 京都の風景｜東寺五重塔</a></p><p id="3a8eb292-a2f7-4c24-86f5-b770587fc736" class=""><a href="https://www.youtube.com/watch?v=Lo1mf9sTVjg">JP 岡垣町波津海岸</a></p><p id="262d2333-fb76-42c0-8225-052d4a2a08cf" class=""><a href="https://www.youtube.com/watch?v=9zzYggagLLU">JP 明石海峡お天気カメラ</a></p><p id="3427f1b2-cee5-4d31-aaaf-33eb9d915af9" class=""><a href="https://www.youtube.com/watch?v=JPjOWitzIhU">JP 東京塔 TOKYO TOWER</a></p><p id="e8d06a04-c6ea-4fcf-8a44-f12aa1d6dc06" class=""><a href="https://www.youtube.com/watch?v=4a-2AZ_3iiE">JP 東京タワー、お台場東京 大橋</a></p><p id="a18e8b34-71f6-4831-94f8-e56c07caf7ed" class=""><a href="https://www.youtube.com/watch?v=EzutJfugmKo">JP 東京タワーを海側</a></p><p id="a25c60b1-0ce9-487c-bb6b-d25474b96492" class=""><a href="https://www.youtube.com/watch?v=Kpe6bFR6r_8">JP 東京の空　東。日の出・東京ゲートブリッジ・羽田空港の飛行機</a></p><p id="6e966649-dc3e-4c52-9324-dda512531479" class=""><a href="https://www.youtube.com/watch?v=2B7l0JFVqkY">JP 南海和歌山市駅周辺のライブ ストリーム</a></p><p id="5bda5037-ed2f-443c-b672-4cfd2131069c" class=""><a href="https://www.youtube.com/watch?v=rdF0ehJpIqU">JP 首都高速台場線。東京の夜景</a></p><p id="59dd530c-220a-43c6-bec0-faeb5dedc18c" class=""><a href="https://www.youtube.com/watch?v=a-YXuxhR3_g">JP 宮古</a></p><p id="08a68c7e-3068-450d-b80d-2f551fd8c497" class=""><a href="https://www.youtube.com/watch?v=QX-km4Hgn1c">JP 桜島</a></p><p id="6701c7d6-28a1-473d-938d-536e36f6d0df" class=""><a href="https://www.youtube.com/watch?v=ZrJyATrrKVs">JP 海洋博公園 熱帯ドリームセンター 遠見台からの眺め</a></p><p id="40fcfa6d-7ff3-4f56-bbf5-32f9f39022cd" class=""><a href="https://www.youtube.com/watch?v=373KtfaLYAM">JP 海越しの立山連峰</a></p><p id="38ad94a3-9e51-4e79-854a-7aac731c5744" class=""><a href="https://www.youtube.com/watch?v=chsUgnxuxw4">JP 琉球Shinposha的現場相機。</a></p><p id="c2007f5d-fb24-44dc-93ad-c677c9566987" class=""><a href="https://www.youtube.com/watch?v=MdguYC0lTns">JP 草津温泉・本白根山防災カメラ</a></p><p id="2b48094d-2f0d-48a8-ba84-0d5fe71cefae" class=""><a href="https://www.youtube.com/watch?v=aiha9DM6c00">JP 草津温泉「湯畑」移動式</a></p><p id="e155325b-a70b-402d-a9a2-3be38718aa58" class=""><a href="https://www.youtube.com/watch?v=sWl0UAevNIw">JP 草津温泉「湯畑」湯滝前</a></p><p id="4e8862cc-9eb4-407c-ae03-0094bed2e916" class=""><a href="https://www.youtube.com/watch?v=q5U4AEiLt5U">JP 渋谷スクランブル交差点 ライブ映像</a></p><p id="db556c9c-6518-4116-b9a2-22ebeb10d078" class=""><a href="https://www.youtube.com/watch?v=usq4vFVpXGs">JP 現在の琵琶湖の様子</a></p><p id="a5f2876f-3160-43cd-99d5-ab27eb01520f" class=""><a href="https://www.youtube.com/watch?v=ZQCRysMO3hc">JP 鹿児島県沖永良部島知名町のおきえらぶフローラルホテル5階からの太平洋側の眺望です。</a></p><p id="5a1f66a0-04fe-4970-bdaf-b232a4122411" class=""><a href="https://www.youtube.com/watch?v=5nbe01u2lbg">JP 鹿児島より 枕崎観光ホテル岩戸 中央方向</a></p><p id="3d8b61e3-aaaf-4562-96d0-b4ba24a40d10" class=""><a href="https://www.youtube.com/watch?v=rJlRZnwk6zs">JP 鹿屋体育大学 高須海岸</a></p><p id="7d04763f-ca48-4943-8b2e-5be048d4f1cb" class=""><a href="https://www.youtube.com/watch?v=jnuacQgCEEA">JP 富士山　田子の浦港</a></p><p id="b807e7c5-01c3-46de-bca8-a99958791910" class=""><a href="https://www.youtube.com/watch?v=7hvreiGBg9Y">JP 富士山ライブカメラ</a></p><p id="ccf59e24-b042-441a-bbd6-57ba7b96c1ab" class=""><a href="https://www.youtube.com/watch?v=BtI_AGX4qzc">JP 富士山ライブカメラ 河口湖駅前</a></p><p id="9140a1ff-34ff-4b81-8db5-eaa1179c3f2a" class=""><a href="https://www.youtube.com/watch?v=e-wDKg7fBa8">JP 富士河口湖町の月、日…精進湖の樹海から富士山と</a></p><p id="95112d86-e42a-4864-bafc-087596e563ff" class=""><a href="https://www.youtube.com/watch?v=eNI9m7D5BV0">JP 愛媛県松山市堀江海水浴場</a></p><p id="dd141a81-c5f4-45f2-9ec0-f21af8242ad6" class=""><a href="https://www.youtube.com/watch?v=YlAlJcWhVbg">JP 葉山ダイビング</a></p><p id="cb8bb17f-36ca-4ea3-9a7e-f43670ee015e" class=""><a href="https://www.youtube.com/watch?v=cqjaUAloHzQ">JP 道後温泉本館</a></p><p id="5f3dfb4f-b56a-4f3c-a41f-ace3647f61eb" class=""><a href="https://www.youtube.com/watch?v=xpCR_v0N9CA">JP 緊急台風浸水速報</a></p><p id="968b73ed-1a22-43bc-9456-458803d5bf7d" class=""><a href="https://www.youtube.com/watch?v=CWNjN2bYzsA">JP 静岡市さった峠　広重の富士山</a></p><p id="34e9f169-cb97-4aa1-8a15-29675eea2f8f" class=""><a href="https://www.youtube.com/watch?v=CWNjN2bYzsA">JP 静岡市さった峠　広重の富士山</a></p><p id="029debce-1389-4f7d-883a-87183b028614" class=""><a href="https://www.youtube.com/watch?v=YmuQJM2inVg">JP Beach Terrace KUSHIMOTO</a></p><p id="71d0d3ea-5e79-44de-8a72-dc3fa604a3b6" class=""><a href="https://www.youtube.com/watch?v=e7J83Ey3yJk">JP Live 森ラジオ ステーション×森遊会</a></p><p id="199af7cd-2d7b-4c0b-b06a-09b5de5e3432" class=""><a href="https://www.youtube.com/watch?v=DhvCkVecBS0">JP Tokyo Skytree 東京スカイツリーライブカメラ</a></p><p id="144e9c7d-4c75-462a-86b6-893e7b1e4aac" class=""><a href="https://www.youtube.com/watch?v=4ZVUmEUFwaY">News 三粒</a></p><p id="b4906190-2b2b-436b-b1a2-078a4c902955" class=""><a href="https://www.youtube.com/watch?v=ED4QXd5xAco">News 公視</a></p><p id="53dd0fdd-8224-407e-8766-3bc8847bc8a4" class=""><a href="https://www.youtube.com/watch?v=sHVv4H_mva0">News 公視台語</a></p><p id="3e3a49f1-04de-415b-be24-c63fde6f3463" class=""><a href="https://www.youtube.com/watch?v=NbjI0cARzjQ">News 台視</a></p><p id="da036d5e-4bd8-4d29-beff-25139df50b30" class=""><a href="https://www.youtube.com/watch?v=XxJKnDLYZz4">News 民視</a></p><p id="9b7b2756-8e71-49d8-af93-3de8df3edbd6" class=""><a href="https://www.youtube.com/watch?v=plDqw6o0LXg">News 地震</a></p><p id="3d19dd04-f2a2-4e31-9612-93a11d37ff86" class=""><a href="https://www.youtube.com/watch?v=Xus3yLt9s8E">News 地震二</a></p><p id="13221578-0bfa-4f88-8501-4fe3d349362b" class=""><a href="https://cctv.taskinghouse.com/">News 即時影像網</a></p><p id="eaf06012-0eaf-4aaf-9c59-133f1bd14143" class=""><a href="https://www.youtube.com/watch?v=vCDDYb_M2B4">NEWS CCTV</a></p><p id="eb382f43-0d34-4a8e-9170-8584f5747a58" class=""><a href="https://www.youtube.com/watch?v=coYw-eVU0Ks">NEWS JapanNews24</a></p><p id="9eedf507-9b18-4e09-96ea-912d108904d3" class=""><a href="https://www.youtube.com/watch?v=Hu1FkdAOws0">NEWS TVBS</a></p><p id="3a9cdc6b-7617-45b3-9a80-54669699bbf7" class=""><a href="https://www.youtube.com/watch?v=5y6pzx1Sthk">TP 七星山</a></p><p id="973d97e1-3e09-47df-b483-c7148e039e5a" class=""><a href="https://www.youtube.com/watch?v=BU_IE0EfH3I">TP 二子坪停車場</a></p><p id="8aa6478d-6e39-4124-87b1-b775e915bb55" class=""><a href="https://www.youtube.com/watch?v=3_maZrKOwxE">TP 三貂角燈塔</a></p><p id="60d769ef-803a-403c-8405-2c2bcc5246bc" class=""><a href="https://www.youtube.com/watch?v=i4XBl4xcVYY">TP 大屯自然公園</a></p><p id="7232e42a-068e-4385-9d0b-5998c8bb57f5" class=""><a href="https://www.youtube.com/watch?v=loRVOrX_JpA">TP 小油坑</a></p><p id="a53edb5c-9a4f-492c-9343-989fba1de3eb" class=""><a href="https://www.youtube.com/watch?v=WGLUUH5HEVA">TP 公館</a></p><p id="56c3b228-157c-4bc7-b5c0-ec434d1548a6" class=""><a href="https://www.youtube.com/watch?v=_3dkNHV1e0s">TP 自由廣場</a></p><p id="1635e5be-4faa-4127-9cbf-62895f98573e" class=""><a href="https://www.youtube.com/watch?v=pOKy3TLZo1s">TP 西門町</a></p><p id="1e16c786-ea6a-4a8e-b757-4e5fd4ee0ab8" class=""><a href="https://www.youtube.com/watch?v=lComd4NWXeE">TP 冷水坑停車場</a></p><p id="5eb609c5-9dc5-40da-9b36-16f021316fa0" class=""><a href="https://www.youtube.com/watch?v=XQ2lhRS_8wQ">TP 板橋直播</a></p><p id="1bf86113-ea91-4379-898e-2cec729f6419" class=""><a href="https://www.youtube.com/watch?v=qJUVVjCjFaw">TP 烏來吊橋、烏來老街</a></p><p id="6c82b51e-d057-48cb-8b76-ff0df26f6956" class=""><a href="https://www.eocemis.gov.taipei/cctv/45a3bda5/">TP 彩虹橋</a></p><p id="3993654b-e80a-46c2-bf20-7afc41ed8f14" class=""><a href="https://www.youtube.com/watch?v=086tQI5PTS0">TP 淡水高塔 夕陽</a></p><p id="856041de-cd0a-4e59-a12d-289d9224ae34" class=""><a href="https://www.youtube.com/watch?v=oe8VL8xP8VA">TP 華山</a></p><p id="3a576b82-e1ca-4c19-9761-56ba73aba58c" class=""><a href="https://www.youtube.com/watch?v=DB-RCx_C8D4">TP 街景 全家</a></p><p id="c7a9194b-c092-4ce3-b527-e0bdb46dc922" class=""><a href="https://www.youtube.com/watch?v=adLrnWPFHlA">TP 陽明書屋遠眺</a></p><p id="b0ff4dcd-5790-44c5-98ec-947ece04fcb3" class=""><a href="https://www.youtube.com/watch?v=AAnXQt8-gRs">TP 圓山</a></p><p id="6c9cb60e-2f07-4eb1-a1be-85310fcae008" class=""><a href="https://www.youtube.com/watch?v=1y5dcfnv-Ss">TP 新莊區中正路/思源路 大漢橋下</a></p><p id="c90560e8-2caa-4895-b753-97b07a99be60" class=""><a href="https://www.youtube.com/watch?v=Iot2IHfilic">TP 擎天崗</a></p><p id="03dd800a-c277-426f-9e1d-d26d9512a9d3" class=""><a href="https://www.youtube.com/watch?v=Iot2IHfilic">TP 擎天崗草原</a></p><p id="efecf72e-bf72-420e-8548-a15b545172fe" class=""><a href="https://www.youtube.com/watch?v=Iot2IHfilic">TP 擎天崗草原</a></p><p id="cd1014f4-35c9-4c55-a2ea-ab55844f89b6" class=""><a href="https://www.travel.taipei/zh-tw/livestream/">TP Taipei Live By Gov</a></p><p id="89d9d830-9880-4444-99bc-9044ea787549" class=""><a href="https://www.youtube.com/watch?v=tWdI0YfY93Y">TW 七星潭</a></p><p id="96457dd5-cd59-4cee-8401-5c930840b2c0" class=""><a href="https://www.youtube.com/watch?v=fbUFdumjTk4">TW 二仁溪_崇德橋，高雄市</a></p><p id="44dc9ed4-faa8-4812-b5a0-32be0fc9c184" class=""><a href="https://www.youtube.com/watch?v=s85zAQT_RFc">TW 太平雲梯</a></p><p id="49e46909-4984-450b-9caa-0f1a573df7b0" class=""><a href="https://www.youtube.com/watch?v=m3pbYDeAsaw">TW 石門水庫</a></p><p id="bb1ec38c-5fa8-47fe-8f66-b1409f9c7fa5" class=""><a href="https://cctv.taskinghouse.com/hhs/">TW 合歡山</a></p><p id="58a43c42-bd58-481d-8586-7f2b56e7613d" class=""><a href="https://www.youtube.com/watch?v=9stq0cMgrVY">TW 拉拉山遊客中心</a></p><p id="61b4ce01-f741-42ac-b88c-53a2d2b7fdb7" class=""><a href="https://www.youtube.com/watch?v=tWdI0YfY93Y">TW 花蓮 七星潭</a></p><p id="75c1c835-8bff-486b-8a63-989aa9d31b52" class=""><a href="https://www.youtube.com/watch?v=hq4QsXmdPhc">TW 花蓮 七星潭 2</a></p><p id="731988fd-638c-49a3-9db1-3f8fba0524ed" class=""><a href="https://www.youtube.com/watch?v=wT-8Z1Y9V4o">TW 花蓮海岸_忘憂亭</a></p><p id="0c79abd6-968f-4d47-907a-67c1d65fa020" class=""><a href="https://www.youtube.com/watch?v=qDuezipiYmg">TW 花蓮縣吉安鄉 南濱守望哨，</a></p><p id="254bf08c-76aa-479f-9994-386dc827040b" class=""><a href="https://www.youtube.com/watch?v=hDsasK-UaGQ">TW 花蓮 鯉魚潭</a></p><p id="36b235d1-62ce-4dd2-83b1-6c906e798182" class=""><a href="https://www.youtube.com/watch?v=C9prl7Kvs1U">TW 桃園機場</a></p><p id="ba0e10f4-0ceb-408a-9a6d-5427a6133c4d" class=""><a href="https://www.youtube.com/watch?v=nyujahUbL0I">TW 馬祖北竿白沙港</a></p><p id="c253b64a-6d88-4208-b188-d7dfcea9f1f9" class=""><a href="https://www.youtube.com/watch?v=sKrqs-5Auqo">TW 高雄海岸_赤崁海堤</a></p><p id="647b4f84-9221-47e3-9664-5235e3b7dd0b" class=""><a href="https://www.youtube.com/watch?v=scWoQpDqvnU">TW 高雄機場候位</a></p><p id="28b72813-3f23-486f-98d7-dc1932f7d061" class=""><a href="https://www.youtube.com/watch?v=jMgpYksDR-E">TW 雪霸國家公園-汶水遊客中心</a></p><p id="b57e678f-39c2-4024-a217-a8d820740858" class=""><a href="https://www.youtube.com/watch?v=DvfItpSZ1Ug">TW 雪霸國家公園-武陵遊憩區</a></p><p id="bab1e109-574b-408d-ae22-1e002929a7a6" class=""><a href="https://www.youtube.com/watch?v=sZIqICJpQMw">TW 雪霸國家公園-雪見遊憩區</a></p><p id="87a84a12-4d20-4070-8cad-c570abe9dfe7" class=""><a href="https://www.youtube.com/watch?v=yeoV-wBdoxQ">TW 黃金海岸，台南</a></p><p id="b31e767c-e0bb-4b51-9f18-35b19a62d262" class=""><a href="https://www.youtube.com/watch?v=yeoV-wBdoxQ">TW 黃金海岸，台南 2</a></p><p id="f8855122-9b7a-4e1a-ac44-063749856a6b" class=""><a href="https://www.youtube.com/watch?v=9FeSF1mzr9Q">TW 嘉義 牛埔仔愛情大草原</a></p><p id="f15540be-8657-466a-8c74-a2fab910c1b5" class=""><a href="https://www.youtube.com/watch?v=C3BsSZcceqc">TW 嘉義 阿里山 里佳資訊站</a></p><p id="7b2e8294-0375-4a50-bc22-f2dbf25c5593" class=""><a href="https://www.youtube.com/watch?v=7dB_Id384f8">TW 嘉義 觸口遊客中心</a></p><p id="da142786-807d-403f-b82b-954621bea65b" class=""><a href="https://www.youtube.com/watch?v=gSnFqsSj8KQ">TW 臺北天文館福壽山農場星空直播</a></p><p id="3f73f017-9a51-478e-bd72-389af02fdc6f" class=""><a href="https://www.youtube.com/watch?v=-6p3FKRucLE">TW 臺東航空站</a></p><p id="8cf6f118-3893-433c-a391-cc400e77a2a0" class=""><a href="https://www.youtube.com/watch?v=zWG9bWQuyrc">TW 澎湖機場候補</a></p><p id="169ec087-c078-4193-915b-f171901f00a1" class=""><a href="https://www.youtube.com/watch?v=cPh2vzrtG_w">TW 礁溪寒沐酒店</a></p><p id="c073f161-8cf4-4208-b89d-c0ee862617cf" class=""><a href="https://www.youtube.com/watch?v=fa7wCF6JL1w">US clearwater beach tampa</a></p><p id="b443189f-af9a-4cfc-9d97-c0f34ecb4696" class=""><a href="https://www.youtube.com/watch?v=nPsaWA2HkCY">US Reagan National Airport - Washington D.C.</a></p><p id="323c8e3b-b20a-43cd-abcf-8e8537ec6e9a" class=""><a href="https://www.youtube.com/watch?v=GLCMF6GhPRA">US The University of Tampa</a></p><p id="6ab1817f-cbf6-405d-9fa2-23d59946a0b6" class=""><a href="https://www.youtube.com/watch?v=4qyZLflp-sI">US Times Square: 1560 Broadway</a></p><p id="dfbd515b-fb80-4846-9ec3-d3d1d2cdb52b" class=""><a href="https://www.youtube.com/watch?v=GKfBZC1d2QE">US Venice Beach, California</a></p><p id="37ea01b9-2c38-40f8-a145-93130b1be7b1" class=""><a href="https://www.youtube.com/watch?v=EpvIAopAYbw">WD澳州 墨爾本</a></p><p id="b893e2c9-0413-4d6a-9a95-814cf4077efa" class=""><a href="https://www.youtube.com/watch?v=ZLwP3T7Hd5k">WD 澳門議事亭前地</a></p><p id="19b38d1d-b5de-46f3-8a75-69967a2ff28c" class=""><a href="https://www.youtube.com/watch?v=TmM_Q-ymGIE">WD Bang Makham, Koh Samui, Thailand</a></p><p id="475e1c3e-ddec-4021-9484-baf6da3033f6" class=""><a href="https://www.youtube.com/watch?v=GdmjdsvsQg0">WD Marina Phuket Resort, Karon Beach 玛里娜度假酒店 位于卡隆海滩的南岬</a></p><p id="7d53af43-3eed-4853-a4cc-1824b74d5d3e" class=""><a href="https://www.youtube.com/watch?v=X2ULICuEwjs">WD NEPAL KATHMANDU -</a></p><p id="b5d2fa58-c754-4966-a4c3-df5b06094283" class=""><a href="https://www.youtube.com/watch?v=-Mjke0IYOwk">WD Rosario Marina</a></p><p id="034b9014-4f97-4178-83c7-23a40dc9ca54" class=""><a href="https://www.youtube.com/watch?v=1_VentsoqIk">WD Singapore South</a></p><p id="c959238f-0185-40ad-99f4-0ad8902b87f4" class=""><a href="https://www.youtube.com/watch?v=0MSfVKhfafw">WD The Green Leaf Slopes - Niseko Village</a></p><p id="ef7dfd9f-2c48-44e5-a94a-6c7638a85fe7" class=""><a href="https://www.youtube.com/watch?v=JlqrHo-Rsi0">WD THE WORLD LIVE special version</a></p></div></article></body></html>

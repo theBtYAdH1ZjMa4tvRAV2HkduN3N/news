@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>collection tool 211225</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e97d7e13-48fa-4618-919e-e990b03543cf" class="page sans"><header><h1 class="page-title">collection tool 211225</h1></header><div class="page-body"><ul id="26e46a7b-ab01-4768-9128-f7ca48a98d3d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.ifsp.tv/play?id=RWw4NPxzSMN">东京制面所</a></li></ul><ul id="2491f354-45c5-440e-8bce-385e8b46de26" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.protectedtext.com/sdkjwerosdvkjseoj3wrjsfer0sjsfojsfoijefsfoijweroijewr">Ethereum</a></li></ul><ul id="c9b6dd37-933e-4ca5-8bb3-188649b27b9f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.cdc.gov.tw/Bulletin/Detail/CH9ulKnJV8KjzHAoNAS49g?typeid=9">二級警戒</a></li></ul><ul id="beb73083-ea1c-4eb0-bf6c-f2970165a6f9" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.itread01.com/">basic coding</a></li></ul><ul id="83b11f7c-18b0-429e-8cfa-bf8e4e60b519" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.zhihu.com/question/24780891">戴維森學院介紹</a></li></ul><ul id="3f6f642f-7110-4eb1-867a-83a1feee28ac" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.protectedtext.com/825ade12d931009c3aed3eaf9de6a40aa8a14fbb61a4a2bd33d24ad91b49">pen</a></li></ul><ul id="d554f522-78c4-4507-a410-8a474cceed2f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.mulanci.org/">歌詞</a></li></ul><ul id="af311a6d-31d9-4ac5-94b5-75b4034ec79b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://calendar.google.com/calendar/u/0/embed?src=bvt9qudbq1easjfjk1sn99ip19pt8e4b@import.calendar.google.com&amp;ctz=Asia/Taipei">台大日曆</a></li></ul><ul id="9766a445-30a0-4d65-8a7a-dff8269db76c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://domains.google.com/registrar?hl=zh-TW">google domains</a></li></ul><ul id="ca10516c-ceac-4ce3-b851-cad9920b58cb" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.youtube.com/playlist?list=PL9P9juNnx4d4NwgmL5NKgVXrJ1BQFn8qW">老歌</a></li></ul><ul id="009142e7-c080-46d3-a644-91cb2db11e96" class="bulleted-list"><li style="list-style-type:disc"><a href="https://friend.jwint.net/radio/wdav-128k.m3u">wdav m3u</a></li></ul><ul id="b600d7cb-52e0-497f-b142-a435975c26e1" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.itread01.com/">basic coding</a></li></ul><ul id="31ae46d3-0c91-47cb-af1c-6be968d56826" class="bulleted-list"><li style="list-style-type:disc"><a href="https://10.10.1.1:5001/webman/index.cgi">NAS</a></li></ul><ul id="74559c27-9e7c-4eb1-a3cc-5a2d54cb3d2a" class="bulleted-list"><li style="list-style-type:disc"><a href="https://unicode.org/emoji/charts/emoji-list.html">Emoji</a></li></ul><ul id="4d9b6976-d01e-4ea6-a6c3-bfd8ebad5d83" class="bulleted-list"><li style="list-style-type:disc"><a href="https://in-the-sky.org/satmap_worldmap.php">人造衛星 即時位置</a></li></ul><ul id="b8140f65-dcb7-49a4-a4c3-ea37c02a5464" class="bulleted-list"><li style="list-style-type:disc"><a href="https://medium.com/@p5d12000/%E5%B7%A5%E7%A8%8B%E5%B8%AB%E6%87%89%E8%A9%B2%E6%94%BE%E5%BF%83%E5%A4%A7%E8%86%BD%E5%9C%B0%E5%89%B5%E9%80%A0%E6%8A%80%E8%A1%93%E8%B2%A0%E5%82%B5-a8022d85810">工程師應該放心大膽地創造技術負債</a></li></ul><ul id="eb724954-b826-4fd9-98ef-9ddcc93fd48f" class="bulleted-list"><li style="list-style-type:disc"><a href="http://m.zwbk.org/">中國百科</a></li></ul><ul id="ac2b5e7a-8229-4405-b4a8-73bdfe21cfd8" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.ftchinese.com/channel/numbers-china.html">中國經濟數字</a></li></ul><ul id="3033cc77-ffb5-465f-b769-277b27f75b70" class="bulleted-list"><li style="list-style-type:disc"><a href="https://taipeionlinenuannuan.wordpress.com/">台北 online</a></li></ul><ul id="28a2e53a-408c-4504-9a4b-52988588b47a" class="bulleted-list"><li style="list-style-type:disc"><a href="http://gissrv4.sinica.edu.tw/gis/twhgis/">台灣古地圖</a></li></ul><ul id="e4d6850c-5573-4372-b87b-74e7e25f2ea0" class="bulleted-list"><li style="list-style-type:disc"><a href="http://gissrv4.sinica.edu.tw/gis/twhgis.html">台灣古地圖</a></li></ul><ul id="b88127d8-a185-41c3-bd90-afaa24709273" class="bulleted-list"><li style="list-style-type:disc"><a href="https://zh.wikisource.org/wiki/%E5%85%A8%E5%85%83%E6%9B%B2">全元曲</a></li></ul><ul id="b2795e76-c889-4a5c-b96e-7c6bcd8fd87b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://sites.google.com/site/jdkjfuvhssiwjskdhajsbyrhwbcj/fsjsdfiouekjndalndsfineljkndjnusdfinsdfjnsdcjnsdcinsjnascljnascjilnascljansdlkjnsacljndcljndcijnasljnsacjnsacljnzscljn/sjsdfkljdsfkljsdffds">成功思維</a></li></ul><ul id="692df837-3fb0-44b2-9d63-c64a954da5c3" class="bulleted-list"><li style="list-style-type:disc"><a href="https://zh.wikisource.org/zh-hant/%E5%AE%8B%E8%A9%9E%E4%B8%89%E7%99%BE%E9%A6%96">宋詞三百首</a></li></ul><ul id="d12335fc-e8b9-4f07-ab18-c68c082cec0f" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.pedaily.cn/">投資客 pedaily</a></li></ul><ul id="34cb5e69-43b6-4c1f-8d05-75d6a974151c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://en.gallerix.ru/album/Claude-Monet">知名畫作</a></li></ul><ul id="c22d6bc1-a19c-4bc3-b2be-604c61b7b15e" class="bulleted-list"><li style="list-style-type:disc"><a href="http://tamweb.tam.gov.tw/v3/mobile/list.asp?mtype=c1">星空新訊</a></li></ul><ul id="a8c31398-c2b4-4911-8f1d-2effb62a9b87" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.new-awa.com/pages/%E6%B4%97%E8%BB%8A%E6%95%99%E5%AD%B8">洗車教學</a></li></ul><ul id="7b2d7dd8-c10e-4d28-b4c4-b2397f573d99" class="bulleted-list"><li style="list-style-type:disc"><a href="http://highscope.ch.ntu.edu.tw/">科學 Online</a></li></ul><ul id="d90ee282-e71c-4308-b484-6578ef52e8f1" class="bulleted-list"><li style="list-style-type:disc"><a href="http://highscope.ch.ntu.edu.tw/wordpress/?page_id=20">科學Online 數學</a></li></ul><ul id="09269e1f-bdf9-481e-bcd0-d2578980fd3b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.ixl.com/">美國 12年教育課程 網上練習</a></li></ul><ul id="3a367288-ca87-4b80-92f1-19ad1b8ee07c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.metmuseum.org/art/collection/">美國 大都會博物館</a></li></ul><ul id="baefbc00-1e6f-418c-bf83-81634d4fee70" class="bulleted-list"><li style="list-style-type:disc"><a href="https://zh.wikisource.org/wiki/%E5%94%90%E8%A9%A9%E4%B8%89%E7%99%BE%E9%A6%96">唐詩三百首</a></li></ul><ul id="bfa0cd15-9dcb-4857-9ced-932f7c078b1f" class="bulleted-list"><li style="list-style-type:disc"><a href="http://tw.hiking.biji.co/">健行筆記</a></li></ul><ul id="6589a4a8-ee12-4617-baac-78602b2eaa41" class="bulleted-list"><li style="list-style-type:disc"><a href="http://dmz21.moea.gov.tw/GA/#/o04">經濟部統計</a></li></ul><ul id="e8f4465d-c54e-4c30-84e1-a24f8ad74a75" class="bulleted-list"><li style="list-style-type:disc"><a href="http://m.meke.cn/SearchWorks/1/%E6%80%A7%E6%84%9F">Beauty Meke</a></li></ul><ul id="aac692e0-14b9-4d9d-ba50-ae7c0a3a62c0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.ptt.cc/bbs/Beauty/index.html">Beauty PTT</a></li></ul><ul id="f54a6ff2-a757-498d-b139-9b2bd03a6589" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.yeitu.com/meinv/">Beauty YeiTu</a></li></ul><ul id="d4d2f1ac-e1c9-49a8-8cac-c6a430e8a3e9" class="bulleted-list"><li style="list-style-type:disc"><a href="https://landscapeewew.wordpress.com/">b good girl</a></li></ul><ul id="fe918935-131a-4c78-94b9-3f27b0f6f240" class="bulleted-list"><li style="list-style-type:disc"><a href="http://mulberrypoems.blogspot.tw/">blog 詩歌</a></li></ul><ul id="a15c212f-0cf8-4f12-bde2-7844e2194d63" class="bulleted-list"><li style="list-style-type:disc"><a href="https://peterjohn99.wordpress.com/">Blog Good Scenery share</a></li></ul><ul id="7047fe3f-ca97-484c-a3af-122eca8d4e5b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://justjii-justdrink.rhcloud.com/">Blog IT Tech JII</a></li></ul><ul id="2914b92b-269a-4785-8eef-641db1cadba6" class="bulleted-list"><li style="list-style-type:disc"><a href="https://justthinkformyworld.wordpress.com/">Blog JustThink</a></li></ul><ul id="4d6fc2de-bbbc-42a7-acde-3b4b1a9c5b1a" class="bulleted-list"><li style="list-style-type:disc"><a href="https://vksharesomethingtoyou.wordpress.com/">Blog Share To World</a></li></ul><ul id="fe48feb0-db24-4adc-b492-73574ebf6379" class="bulleted-list"><li style="list-style-type:disc"><a href="https://justthinkformyworld.wordpress.com/">Blog Some word</a></li></ul><ul id="81b5462b-a7aa-4181-9039-71821610bc9c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://landscapeewew.wordpress.com/">Blog Yes, Show Girl</a></li></ul><ul id="314a7da3-b189-4f04-83f8-156680d86ae1" class="bulleted-list"><li style="list-style-type:disc"><a href="http://single9.net/2016/01/%E6%83%B3%E5%BB%BA%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84-cloud9-%E9%9B%B2%E7%AB%AF%E7%92%B0%E5%A2%83%EF%BC%9F%E5%85%A9%E6%AD%A5%E9%A9%9F%E8%AE%93%E4%BD%A0%E6%93%81%E6%9C%89%EF%BC%81/">Cloud9</a></li></ul><ul id="d2b225f9-0b9e-43e6-b6d3-4117b7d3ba4e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.codecademy.com/learn/javascript">Javascript learn</a></li></ul><ul id="111d1004-d0f8-4e06-8690-e5d564250b98" class="bulleted-list"><li style="list-style-type:disc"><a href="http://jsbooks.revolunet.com/">JSbooks</a></li></ul><ul id="b50a7247-f9c7-4d73-a9e1-5b7d1ec70927" class="bulleted-list"><li style="list-style-type:disc"><a href="https://book.vik.im/">Kindle book vik</a></li></ul><ul id="fdc80b1a-9e85-4dc0-a09f-d04b615ebfba" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.lenstore.co.uk/vc/24-hour-london/#/8">London 24 hr</a></li></ul><ul id="368a6d2b-6e5d-499b-851f-45226c329d5a" class="bulleted-list"><li style="list-style-type:disc"><a href="https://images.nasa.gov/search-results?q=galaxy&amp;page=1&amp;media=image&amp;yearStart=1920&amp;yearEnd=2018">Nasa image</a></li></ul><ul id="a19879d2-c09c-4724-9eb2-32ba7eb666a6" class="bulleted-list"><li style="list-style-type:disc"><a href="http://ok-google.io/">OK Google Command</a></li></ul><ul id="9ff6516b-dd38-4381-831a-91335b735ff3" class="bulleted-list"><li style="list-style-type:disc"><a href="https://piknu.com/u/avjapan">Piknu web instagram</a></li></ul><ul id="703fccf5-a870-4616-a727-6d38fc624841" class="bulleted-list"><li style="list-style-type:disc"><a href="http://pnn.tw/">PNN</a></li></ul><ul id="c6ee6746-5198-4860-849d-faa696bd94a8" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.ptt.cc/bbs/index.html">PTT</a></li></ul><ul id="6c98d875-e5e4-4bfe-a6d4-004283e2ce46" class="bulleted-list"><li style="list-style-type:disc"><a href="https://sites.google.com/site/jdkjfuvhssiwjskdhajsbyrhwbcj/fsjsdfiouekjndalndsfineljkndjnusdfinsdfjnsdcjnsdcinsjnascljnascjilnascljansdlkjnsacljndcljndcijnasljnsacjnsacljnzscljn/sflkjsdflkjsdflkjsdfkjsdfsdflkjdsflksdfkldsf">PWA</a></li></ul><ul id="53acf87d-8296-41d4-acd7-d5378d1e8690" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.learnpython.org/">Python Learn</a></li></ul><ul id="780f410c-dc1a-4382-9e76-c742297b3bb5" class="bulleted-list"><li style="list-style-type:disc"><a href="https://en.wikipedia.org/wiki/Quality_assurance">Quality Assurance</a></li></ul><ul id="4bf11e09-3fdb-42ae-91f8-5a0439a7b3aa" class="bulleted-list"><li style="list-style-type:disc"><a href="https://hey-siri.io/">Siri command</a></li></ul><ul id="29a76f5d-f4ec-4dbd-9624-0c4252363f5e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://builtwith.com/">Site profile builtwith</a></li></ul><ul id="021b770e-a22c-43ec-995a-fcf585274c9e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://dl.sony.com/">Sony Neural Network</a></li></ul><ul id="8bc45f63-d96a-4a2d-b442-615d67e0d35a" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.n2yo.com/">Space station location</a></li></ul><ul id="040cfd39-bd49-4ecd-bd53-e2977bd04e26" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.cmoney.tw/finance/f00040.aspx?s=2332">Stock 2332</a></li></ul><ul id="31b30e05-ef39-4d15-b0f5-f128aa32a7b0" class="bulleted-list"><li style="list-style-type:disc"><a href="http://wiki.mbalib.com/zh-tw/%E8%B5%84%E4%BA%A7%E8%B4%9F%E5%80%BA%E8%A1%A8">Stock MBA</a></li></ul><ul id="aa955924-f52d-4c66-a526-fba84e844218" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.stockq.org/taiwan/">Stock q</a></li></ul><ul id="7450126c-b7e6-49ca-85b9-6efbb3f646fa" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.amazon.in/Taj-Mahal-Tea-500g/dp/B00O8WODFE/ref=lp_4861889031_1_6?s=grocery&amp;ie=UTF8&amp;qid=1495506204&amp;sr=1-6">TajMahal Tea 印度茶</a></li></ul><ul id="4933efff-d928-40a8-bc2e-079ffd7f41e8" class="bulleted-list"><li style="list-style-type:disc"><a href="https://blog.sean.taipei/2017/05/telegram-bot">Telegram bot teach</a></li></ul><ul id="eb8eebad-4053-4b23-aae9-cd8730b16288" class="bulleted-list"><li style="list-style-type:disc"><a href="http://timely.tv/">Timely TV</a></li></ul><ul id="56ffbd4f-8d67-41c8-8e1d-83ece83f3bb1" class="bulleted-list"><li style="list-style-type:disc"><a href="https://newsilist.wordpress.com/">wp china word</a></li></ul><ul id="7531ac32-1bf4-434d-b3c4-71e2a9bfc414" class="bulleted-list"><li style="list-style-type:disc"><a href="https://foodsogoodewew.wordpress.com/">wp food so good</a></li></ul><ul id="663192ac-47c3-40df-b329-e9993e1dc220" class="bulleted-list"><li style="list-style-type:disc"><a href="https://landscapeewew.wordpress.com/">wp good girl</a></li></ul><ul id="c353ce86-b732-42a4-9056-93ab4b8f33b4" class="bulleted-list"><li style="list-style-type:disc"><a href="https://peterjohn99.wordpress.com/">WP good view</a></li></ul><ul id="2a6b5851-f099-46c0-b473-71340d6314f5" class="bulleted-list"><li style="list-style-type:disc"><a href="https://justthinkformyworld.wordpress.com/">wp I think</a></li></ul><ul id="b846ec81-fcb4-4c5c-abf4-7426641fcdd3" class="bulleted-list"><li style="list-style-type:disc"><a href="https://sharesomethingtosomeone.wordpress.com/">wp share with you</a></li></ul><ul id="339fb6ac-5580-46ba-98ed-62a0d692b979" class="bulleted-list"><li style="list-style-type:disc"><a href="https://taipeionlinenuannuan.wordpress.com/">WP taipei online</a></li></ul><ul id="2ae7507f-98ad-4b26-9928-d366aaca083d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://newsworldabc.wordpress.com/">wp Taiwan Think</a></li></ul><ul id="9f9bb54e-796b-441c-a818-bc5a216ed0b6" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.104.com.tw/jb/wage/">104 薪資訊息</a></li></ul><ul id="bdf304db-b6eb-4e71-ae77-4556d02a63b9" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.haplaytour.com/zh/Taiwan">哈旅行</a></li></ul><ul id="cc20b922-34fd-41d6-a398-6e6cac717087" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.google.com/maps/@23.5966339,119.5060596,3a,90y,76.47h,73.33t/data=!3m6!1e1!3m4!1sbMBSXmHg-0A9EFGOFH1aeg!2e0!7i13312!8i6656">澎湖 和興麵線 盧錦福 西嶼鄉池東村157號 06 9981121</a></li></ul><ul id="0bc5dffa-faed-4009-a305-f61353b346a4" class="bulleted-list"><li style="list-style-type:disc"><a href="https://aescrypto.com/">aescrypto</a></li></ul><ul id="71eaa47e-d542-47ed-b126-2f608f906c3b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://emn178.github.io/online-tools/md5.html">md5</a></li></ul><ul id="fb02757a-0b7d-401c-8c9e-9ad049fe8019" class="bulleted-list"><li style="list-style-type:disc"><a href="https://guide.michelin.com/tw/zh_TW">michellin food guide</a></li></ul><ul id="1c8c2fe4-6889-4821-a5a8-5d718f951dcf" class="bulleted-list"><li style="list-style-type:disc"><a href="http://pda.freeway.gov.tw/">1968 pda</a></li></ul><ul id="ed9989a5-0a07-478d-9d0a-c99842481ce9" class="bulleted-list"><li style="list-style-type:disc"><a href="https://goo.gl/aqeQDj">公開文章</a></li></ul><ul id="fe67183d-cd4b-405e-98e2-3b3af0b6db7b" class="bulleted-list"><li style="list-style-type:disc"><a href="http://bit.do/rfv">紀錄</a></li></ul><ul id="204e3a9a-d279-4856-96c3-7778e6d496ce" class="bulleted-list"><li style="list-style-type:disc"><a href="https://send.firefox.com/">Share File Upload</a></li></ul><ul id="514e2f21-9b30-44f5-8d04-5cc8012065fe" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.yizhanshu.com/">一站書</a></li></ul><ul id="2f5681fd-8013-4d8d-a6a8-84e0621b01e8" class="bulleted-list"><li style="list-style-type:disc"><a href="http://168.thb.gov.tw/thb/navigate.do">公路 TV</a></li></ul><ul id="a43bca9c-8f16-42f3-91b4-9a0f032ca31b" class="bulleted-list"><li style="list-style-type:disc"><a href="http://fhy.wra.gov.tw/fhy/Monitor/CCTV">水利署 TV</a></li></ul><ul id="7d8e851f-6e7b-49a5-9c40-fbf0fb2f4cf2" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.railway.gov.tw/tw/RemainSeat/Remain_Seat.html">火車 到花蓮車票</a></li></ul><ul id="eb66ab53-8f52-4bce-bff2-5a3614c22a8f" class="bulleted-list"><li style="list-style-type:disc"><a href="http://twtraffic.tra.gov.tw/twrail/mobile/home.aspx">火車查詢 M</a></li></ul><ul id="5864a16e-ab8a-4e51-802c-98d2ec657430" class="bulleted-list"><li style="list-style-type:disc"><a href="http://railway.hinet.net/">火車 訂票</a></li></ul><ul id="505809ce-1ae9-4be0-81c3-d4244d9d3db4" class="bulleted-list"><li style="list-style-type:disc"><a href="http://twtraffic.tra.gov.tw/twrail/TW_Quicksearch.aspx">火車時刻表</a></li></ul><ul id="d6379c23-384b-4ccd-8f5f-fcc04d640b75" class="bulleted-list"><li style="list-style-type:disc"><a href="http://twtraffic.tra.gov.tw/twrail/EasySearch.aspx">火車簡易查詢</a></li></ul><ul id="ce6c15f9-8650-4fcd-8679-c55ed2d15de8" class="bulleted-list"><li style="list-style-type:disc"><a href="http://tms.bote.gov.taipei/ttc2/main.jsp">台北市路況</a></li></ul><ul id="b21dd7ec-f1e2-43cd-91d1-3f569ce311a8" class="bulleted-list"><li style="list-style-type:disc"><a href="http://117.56.158.67/T14A-d61a0c91">合歡山武嶺</a></li></ul><ul id="4ddb2e63-ff05-476b-b1f4-2d8ef887090c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.taroko.gov.tw/content/images/livecamera/%E5%90%88%E6%AD%A1%E7%BE%A4%E5%B3%B0.jpg">合歡山群峰</a></li></ul><ul id="d91dee42-cca1-41f3-a698-8813c06994a3" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.shuwu.mobi/">我的小書屋</a></li></ul><ul id="afcd71cb-88a5-437e-9962-bfc4b972214c" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.17track.net/zh-hk">找 包裹</a></li></ul><ul id="022c98fe-f561-49c2-a293-111f7cbb7f22" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.google.com.tw/search?num=30&amp;newwindow=1&amp;biw=1280&amp;bih=682&amp;q=site%3A%2F%2Fhttp%3A%2F%2Fclassnet.yizhong.xm.fj.cn%2F+pdf+%E8%8E%8A%E5%AD%90&amp;oq=site%3A%2F%2Fhttp%3A%2F%2Fclassnet.yizhong.xm.fj.cn%2F+pdf+%E8%8E%8A%E5%AD%90&amp;gs_l=serp.3...374634.377020.0.377297.10.10.0.0.0.0.77.537.10.10.0....0...1c.1j4.64.serp..0.0.0.gjlaDGYFCoQ">找 書</a></li></ul><ul id="92b5595c-e37e-44b0-9dac-c4af4d98caaf" class="bulleted-list"><li style="list-style-type:disc"><a href="http://163.20.160.14/~word/modules/myalbum_search/index.php">找 書法</a></li></ul><ul id="0fbb680b-dc57-40fe-a2f4-4c9b0388a94c" class="bulleted-list"><li style="list-style-type:disc"><a href="http://health.businessweekly.com.tw/GSearchDoc.aspx?city=CITY000000003&amp;dist=&amp;dep=&amp;key=&amp;t=1&amp;pro=0000">找 醫院</a></li></ul><ul id="b57a0de8-b927-45b4-a56a-b25c5d58c7bc" class="bulleted-list"><li style="list-style-type:disc"><a href="https://privacytools.twngo.xyz/">保密工具網頁</a></li></ul><ul id="8b2e20f9-9f57-49b6-bd5a-3ff7db418f5c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://docs.google.com/forms/d/e/1FAIpQLSea8lC8hOZqIN6yna1OUZa-ezgtG7s_uwh0rX9R_DW2HWcP2Q/viewform">紀錄</a></li></ul><ul id="e93a4188-ef71-4b36-be50-ccf2f8a19998" class="bulleted-list"><li style="list-style-type:disc"><a href="http://0123456789.tw/">計程車費 各種計算</a></li></ul><ul id="54d8f448-0ce4-4138-9693-40060ac7d077" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.taoyuan-airport.com/chinese">桃園機場</a></li></ul><ul id="91e2207c-f187-48ef-94be-066c83333221" class="bulleted-list"><li style="list-style-type:disc"><a href="http://dict.mini.moe.edu.tw/cgi-bin/gdic/gsweb.cgi?ccd=1ci6iH&amp;o=wframe04.htm">國語字典</a></li></ul><ul id="eef6033f-5252-40f8-89de-009cffef15fd" class="bulleted-list"><li style="list-style-type:disc"><a href="http://dict.concised.moe.edu.tw/jbdic/search.htm">國語辭典</a></li></ul><ul id="207e78f7-2a28-4d6a-ba73-384efd78b8fc" class="bulleted-list"><li style="list-style-type:disc"><a href="http://dict.revised.moe.edu.tw/cbdic/">教育部字典</a></li></ul><ul id="67860f47-6d40-4f94-a5ab-deb3c836fa2d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://time.is/">現在 時間</a></li></ul><ul id="e12c5169-d286-44ef-8e97-b4e14973d9f2" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.chinaports.com/shiptracker/olv3/index.jsp">船 位置</a></li></ul><ul id="cdba5ff9-4d25-4496-9d7d-448b0b4c2846" class="bulleted-list"><li style="list-style-type:disc"><a href="http://maplestage.com/drama/jp">楓林</a></li></ul><ul id="a889d0a7-95f5-40cd-8b2c-051bfb5754f0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://leapfroggingbus.tw/">跳蛙公車</a></li></ul><ul id="dc797cab-c473-4531-a715-c17f17cda3cc" class="bulleted-list"><li style="list-style-type:disc"><a href="https://talis.coa.gov.tw/talis/">農地銀行</a></li></ul><ul id="779e68e9-1db0-4057-8161-5f7cd2066258" class="bulleted-list"><li style="list-style-type:disc"><a href="https://bit.do/dsdslucky">暫記</a></li></ul><ul id="31f4d6e0-1d91-49c1-b5e8-8f3d1a153dfd" class="bulleted-list"><li style="list-style-type:disc"><a href="https://tw.piliapp.com/timer/stopwatch/">碼錶</a></li></ul><ul id="f0092414-95c7-4616-93dc-6ce634099eb7" class="bulleted-list"><li style="list-style-type:disc"><a href="http://140.111.180.117:90/GetImage.cgi?CH=1?rdn=0.061000987609579393">蘇澳 安南國小</a></li></ul><ul id="b5468714-97dc-446a-b298-cb048df8892b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://cn.bing.com/dict">Bing Dic</a></li></ul><ul id="c16ca3ad-0485-4a5e-a380-2a4e96064d18" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.bing.com/news?mkt=zh-CN">Bing Search CN</a></li></ul><ul id="e3ef6014-61b6-4f22-82f3-fc167c8ebcf6" class="bulleted-list"><li style="list-style-type:disc"><a href="https://sites.google.com/site/aniuheretoyou/dsskjfdfkjvoisdfnew23jkn32jn32jnjnsfnfjknsjk3nfdjkdsfjfkjsdfrnfjknsdfjnefrnwejnewkj">bit.do vkgoo</a></li></ul><ul id="adea17fa-8f46-4f0e-9b1b-cd3bc6e3923f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://sites.google.com/site/aniuheretoyou/dsskjfdfkjvoisdfnew23jkn32jn32jnjnsfnfjknsjk3nfdjkdsfjfkjsdfrnfjknsdfjnefrnwejnewkj">Bit.do/vkgoo</a></li></ul><ul id="2de76a26-55ee-4e56-95b8-05c3567a0671" class="bulleted-list"><li style="list-style-type:disc"><a href="https://kiset.org/">Chat online</a></li></ul><ul id="8f8594bd-f22b-41a0-8cc1-876f66737a81" class="bulleted-list"><li style="list-style-type:disc"><a href="https://time.is/">Clock</a></li></ul><ul id="04931c63-bfcd-48c4-8939-9af28475aa1b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://pan.baidu.com/">DISK Baidu</a></li></ul><ul id="44d195ce-42b0-4397-87a4-cc5f0bd8b5ec" class="bulleted-list"><li style="list-style-type:disc"><a href="https://duckduckgo.com/">Duck duck go</a></li></ul><ul id="614491d5-09d5-42ac-a652-708ed3d317ce" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.epsonconnect.com/">Epson Cloud</a></li></ul><ul id="da9ca083-a852-4f3e-9509-52b599d1464d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ethercalc.org/q6bdfsv8h6me">Ether Calc online excel</a></li></ul><ul id="02863890-2509-4a1b-9403-6088d5350985" class="bulleted-list"><li style="list-style-type:disc"><a href="https://send.firefox.com/">Firefox 傳檔</a></li></ul><ul id="51a1106e-4b5d-4455-93be-db552f06dda3" class="bulleted-list"><li style="list-style-type:disc"><a href="https://send.firefox.com/">firefox file share send</a></li></ul><ul id="87f6c37c-3df6-4463-9cf2-0cbc1fac12ec" class="bulleted-list"><li style="list-style-type:disc"><a href="https://zh-tw.flightaware.com/">FlightAware</a></li></ul><ul id="81474d7a-0014-4bcc-ac80-24681f8aa2a3" class="bulleted-list"><li style="list-style-type:disc"><a href="http://big5.ftchinese.com/channel/english.html">FT 英文學習</a></li></ul><ul id="13fefa13-11a9-4df5-be84-70a793836bbd" class="bulleted-list"><li style="list-style-type:disc"><a href="https://geoiptool.com/">GeoIP</a></li></ul><ul id="f03a402d-6bdf-433d-a8cf-e49b1b2a4371" class="bulleted-list"><li style="list-style-type:disc"><a href="https://en.greatfire.org/">GFW tool</a></li></ul><ul id="1cd08606-e322-44e7-96a2-4143a7ba4e8f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://goo.gl/g76M1u">jpastory</a></li></ul><ul id="51841b25-750b-4b70-85af-1c3d0af5a779" class="bulleted-list"><li style="list-style-type:disc"><a href="http://keepvid.com/">Keepvid download</a></li></ul><ul id="920cdf6a-6ac8-4034-86e1-16ec262f805f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://laverna.cc/">laverna 本地記事</a></li></ul><ul id="dcf14021-4dbd-4581-b4dd-7f47cea697fc" class="bulleted-list"><li style="list-style-type:disc"><a href="https://laverna.cc/">Laverna 本地記事本</a></li></ul><ul id="37c0bb48-8a27-43d2-a8cb-9cb06724c7cb" class="bulleted-list"><li style="list-style-type:disc"><a href="http://spec.commonmark.org/dingus/">Markdown editor</a></li></ul><ul id="d360bdad-3a41-4384-8181-c1b7a92189ad" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.miraclesalad.com/webtools/md5.php">MD5 sum</a></li></ul><ul id="25cd2c1a-1155-4a4d-86ca-9d0b4febfff6" class="bulleted-list"><li style="list-style-type:disc"><a href="https://app.mindmup.com/map/new/1513217402613">mind map</a></li></ul><ul id="e513657d-b61b-4b3b-9085-e2daad88aca4" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.coolutils.com/online/MP3-to-MP4">MP3 2 MP4</a></li></ul><ul id="8629d9cb-67d9-417b-ac13-e62e2034432e" class="bulleted-list"><li style="list-style-type:disc"><a href="http://online-audio-converter.com/tw/">MP4 2 MP3</a></li></ul><ul id="0a2c2928-f8af-4f98-bc55-12055d9db26e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.onlinevideoconverter.com/zh">MP4 2 MP3</a></li></ul><ul id="2a774b00-b5cb-4f63-a42d-884be272d1da" class="bulleted-list"><li style="list-style-type:disc"><a href="http://myip.com.tw/">myip</a></li></ul><ul id="e7fad9d7-bc5c-4d5d-b18c-d545f09d9a02" class="bulleted-list"><li style="list-style-type:disc"><a href="https://worldview.earthdata.nasa.gov/">NASA daily view</a></li></ul><ul id="1f71ff6e-7893-42d7-b53a-12b6e7c589d0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.nodebeginner.org/index-zh-tw.html">NodeJS Learn</a></li></ul><ul id="f91ba59e-f262-4e24-afd6-001f01423284" class="bulleted-list"><li style="list-style-type:disc"><a href="https://privacytools.twngo.xyz/">Privacy tool page</a></li></ul><ul id="1589da05-0717-4833-b807-fdee04bb49ec" class="bulleted-list"><li style="list-style-type:disc"><a href="https://privacytools.twngo.xyz/">Privacy Tools</a></li></ul><ul id="2fe42aaa-30fb-4bc3-8bd7-ad6c5a0a66be" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.the-qrcode-generator.com/">QR Code gen</a></li></ul><ul id="5cc301ee-e094-49cb-9036-b4847b6cf696" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.rapidtables.com/">Rapid Tables</a></li></ul><ul id="49ab1b8c-ad3d-428f-9877-bada7488c313" class="bulleted-list"><li style="list-style-type:disc"><a href="http://send-email.org/">Send mail</a></li></ul><ul id="2baceea4-2af2-4cfa-8bde-a78ee2241460" class="bulleted-list"><li style="list-style-type:disc"><a href="https://sim360.co/">SIM360 vs</a></li></ul><ul id="92a42c84-a9fe-4281-be9c-c65e864107bb" class="bulleted-list"><li style="list-style-type:disc"><a href="https://musiclab.chromeexperiments.com/Song-Maker/">Song maker</a></li></ul><ul id="63655002-2790-4e6a-b8c3-015e4046b201" class="bulleted-list"><li style="list-style-type:disc"><a href="https://musiclab.chromeexperiments.com/Spectrogram/">Spectrogram</a></li></ul><ul id="6ffc5094-4517-4996-8092-0f8b9aa3b1d0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://speechnotes.co/">Speech Notes</a></li></ul><ul id="c088014f-3965-4e48-97c1-202f9d98f85e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.notion.so/owl-nest/beta.speedtest.net">SpeedTest</a></li></ul><ul id="59fc7b61-f79a-4cf7-bcd8-4b3e036655ea" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.speedtest.net/">Speed Test</a></li></ul><ul id="c394f416-e399-4a82-b78d-8adfb0728af1" class="bulleted-list"><li style="list-style-type:disc"><a href="http://speedtest.fdossena.com/">Speed Test Code</a></li></ul><ul id="35013049-d14a-4221-a6fe-c227283506f7" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.cmoney.tw/finance/f00040.aspx?s=2332">Stock 2332</a></li></ul><ul id="4a62e7bc-5d53-4003-b7fe-e9cc9409dfe8" class="bulleted-list"><li style="list-style-type:disc"><a href="https://sites.google.com/site/abprwp/home/562">Team view id</a></li></ul><ul id="8277a51a-9d93-45a9-a58f-4de490531d34" class="bulleted-list"><li style="list-style-type:disc"><a href="https://panopticlick.eff.org/">Test Browser</a></li></ul><ul id="9bbe720f-29d1-4a2b-ba09-284369008637" class="bulleted-list"><li style="list-style-type:disc"><a href="https://code2flow.com/app">Text 2 FlowChat</a></li></ul><ul id="e4efa4bc-5f3e-4df2-b156-3c22e1762548" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.planttext.com/">Text 2 PlantText</a></li></ul><ul id="96220c46-ec41-4098-b83e-4007ecf28529" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.websequencediagrams.com/">Text 2 SequenceDiagram</a></li></ul><ul id="82798c6a-0fe3-4965-8437-49d408b312fc" class="bulleted-list"><li style="list-style-type:disc"><a href="https://write-box.appspot.com/">Text editor</a></li></ul><ul id="7a6512e2-9b52-4aa0-8603-a09e484e5523" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.hemingwayapp.com/">Text Editor</a></li></ul><ul id="72c29061-9526-4fec-8e33-8b418b9b9186" class="bulleted-list"><li style="list-style-type:disc"><a href="http://www.rapidtables.com/tools/notepad.htm">Text Editor</a></li></ul><ul id="5bebb016-03d2-43b3-805b-02fa8d6db8c4" class="bulleted-list"><li style="list-style-type:disc"><a href="https://laverna.cc/">Text Editor Markdown note Laverna</a></li></ul><ul id="3cad9da3-0592-4107-b542-86b901dd913e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://stackedit.io/editor">Text Editor support markdown</a></li></ul><ul id="5038a827-9cbc-4cce-9d07-420f03fa2907" class="bulleted-list"><li style="list-style-type:disc"><a href="https://time.is/">Time Now</a></li></ul><ul id="40dded45-3154-4322-9335-3aee031f8b36" class="bulleted-list"><li style="list-style-type:disc"><a href="https://sites.google.com/site/aniuheretoyou/salkjsdflksjdflkjvjndkjnsdfjfiefkjlnfvlkjndkljndkjnfkljnfdlkjndfvljdnljndfvjdfn">Tor</a></li></ul><ul id="34163b7a-c7de-4da4-9b25-f9992ff17da1" class="bulleted-list"><li style="list-style-type:disc"><a href="http://taipei.youbike.com.tw/cht/f11.php">uBike</a></li></ul><ul id="64771df4-932a-4ece-baae-1068508eeb8a" class="bulleted-list"><li style="list-style-type:disc"><a href="https://upload.disroot.org/">Upload disroot file share tool</a></li></ul><ul id="779b6031-13b3-4e4f-b7bd-7f9a0e301849" class="bulleted-list"><li style="list-style-type:disc"><a href="https://upload.disroot.org/">upload file share</a></li></ul><ul id="d5124f53-1285-440e-acf3-2fa5006d1786" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.virustotal.com/en/">virus scan</a></li></ul><ul id="8cc9fe0c-b363-40de-a350-7e2a40360785" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.onlinevideoconverter.com/video-converter">Youtube download</a><a href="https://sites.google.com/site/abprwp/sdfsdfsfwewedfsdfsdfdfwerfwef">ptlist in site</a></li></ul><ul id="507a1554-7a18-4f58-bba0-2f0a1e484f2d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://easymap.land.moi.gov.tw/Index">地號查詢地圖</a></li></ul><ul id="93bb7cd8-da98-4425-a84d-32d42b643b52" class="bulleted-list"><li style="list-style-type:disc"><a href="https://taliss.coa.gov.tw/alies/index.aspx">農地資訊地圖</a></li></ul><ul id="d545b5dc-32b0-449b-a1c8-c808446d6f58" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.itread01.com/">itread01</a></li></ul></div></article></body></html>
