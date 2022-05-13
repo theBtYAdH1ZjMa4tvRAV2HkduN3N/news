@@ -1,0 +1,695 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Day08-更強大的網頁排版利器！Grid</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a53329ab-5254-432e-9c1d-b004c7984dc1" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🏒</span></div><h1 class="page-title">Day08-更強大的網頁排版利器！Grid</h1></header><div class="page-body"><h1 id="b1608c5c-4c45-43f9-8cb9-1e3e72284a87" class=""><strong>前言</strong></h1><p id="fed73c2a-80a0-4ef2-abb8-21d0837fe196" class="">在昨天的 <strong>flexbox</strong> 介紹相信大家對於排版已經有了初步的了解，藉由 <strong>flexbox</strong> 讓網頁排版不再困難，然而前端世界變化萬千，比 <strong>flexbox</strong> 更厲害的排版樣式： <strong>grid</strong> 出來了。</p><h1 id="bc477d54-ab05-4ee2-a6d3-35965d7abad8" class=""><strong>什麼是grid</strong></h1><p id="163ab395-df78-430d-8931-f7471b0a2b09" class=""><strong>grid</strong> 就是一個一個的網格，如果說 <strong>flexbox</strong> 是針對一維(單行)的排版，那麼 <strong>grid</strong> 就是針對二維(多行)的排版， 在 <strong>gird</strong> 的世界裡，我們要做的就是把整個 <strong>container</strong> 的行數以及列數定義好，之後的排版只要用第幾行第幾列的方式去填元素就可以讓元素擺在想要的位置非常方便，筆者在這邊提供一個有趣的<a href="http://cssgridgarden.com/">網站</a>，這個網站利用可愛的介面以及簡單的程式碼讓大家可以循序漸進的了解 <strong>grid</strong> 的強大排版能力。</p><figure id="9fc5899d-5ad5-4695-9965-4253f3abf2c3" class="image"><a href="https://css-tricks.com/wp-content/uploads/2016/03/grid-start-end-c.png"><img src="https://css-tricks.com/wp-content/uploads/2016/03/grid-start-end-c.png"/></a></figure><h1 id="900c6830-6715-4e42-9a04-4a1dbca7f9c4" class=""><strong>屬性介紹</strong></h1><p id="999db87f-c3e6-4fe8-95f4-3e9da8bea79f" class=""><strong>grid</strong> 的屬性可以分成外部容器以及內部容器兩類：</p><ul id="ffeae15a-332d-4376-baff-95c34f61b3bd" class="bulleted-list"><li style="list-style-type:disc"><strong>外部容器</strong><ul id="4c7ba053-6c9f-4054-91e5-2982ee2bb7da" class="bulleted-list"><li style="list-style-type:circle"><strong>display</strong><p id="1111133f-be77-4c66-b6d7-4bb249016e5c" class=""><strong>grid</strong> 一樣也分為 <code>display: grid;</code> 以及 <code>display: inline-grid</code> ，差別在於兩個 <strong>grid container</strong> 之間需不需要換行。</p></li></ul><ul id="730ccbf6-a196-4106-8d93-89a4e45ff1c1" class="bulleted-list"><li style="list-style-type:circle"><strong>grid-template-columns</strong><p id="b26cb5e2-5a9f-4ed6-9ff8-8f759c379c2f" class="">定義 <strong>grid</strong> 有多少行以及每行寬度，舉例來說：假如此 <strong>grid</strong> 具有五行，每行寬度均為原寬度的10%，則寫法如下。</p><pre id="b1d90074-d8f9-4f8f-a165-d386e08d1edc" class="code code-wrap"><code>.container {
+  grid-template-columns: 10% 10% 10% 10% 10%;
+/* 也可以簡寫為 */grid-template-columns: repeat(5, 10%);
+}
+</code></pre></li></ul><ul id="3d123f8b-d869-4fdf-9a55-25720ed1a8d4" class="bulleted-list"><li style="list-style-type:circle"><strong>grid-template-rows</strong><p id="fe7d4982-93de-4d7a-8694-b60b6fe0ab28" class="">定義 <strong>grid</strong> 有多少列以及每列高度，舉例來說：假如此 <strong>grid</strong> 具有五列，每列高度均為100px，則寫法如下。</p><pre id="960b66c4-311a-4647-9d64-059a3aeb58b2" class="code code-wrap"><code>.container {
+  grid-template-rows: 100px 100px 100px 100px 100px;
+/* 也可以簡寫為 */grid-template-rows: repeat(5, 100px);
+}
+</code></pre><blockquote id="d802d693-098a-4acd-af69-40899bb0a8e4" class="">grid 有一個長度新的單位： fr ，這個 fr 代表的是 可用空間的分塊(fraction) ，也就是將剩餘空間做等比例切割後產生的網格，舉例來說： 假如我有一個5 * 5的container，我在grid-template-columns: 定義成 10% 10% 2fr 1fr 1fr，我那5個column中會有2個的寬度是目前container寬度10%然後再將剩餘的空間切割成1個寬度為(100% - 2 * 10%) * (2/4)大小的column以及2個寬度為(100% - 2 * 10%) * (1/4)大小的column。</blockquote><figure id="0776d866-8c87-4dcf-a5bc-63b981a5f6cb" class="image"><a href="https://image.slidesharecdn.com/worldofcssgrid-180114203100/95/world-of-css-grid-13-638.jpg?cb=1515962153"><img src="https://image.slidesharecdn.com/worldofcssgrid-180114203100/95/world-of-css-grid-13-638.jpg?cb=1515962153"/></a></figure></li></ul><ul id="1899ca8f-1c3d-40b3-bf8b-2d09e072e641" class="bulleted-list"><li style="list-style-type:circle"><strong>grid-auto-columns/grid-auto-rows</strong><p id="dbf55928-55b1-4cd8-9eaa-3a760cf46aa8" class="">定義 <strong>grid</strong> 內每個網格的寬高且每個網格寬高均會一致，寫法如下。</p><pre id="f256deaf-207c-447f-8ded-30202a10403c" class="code code-wrap"><code>.container {
+  grid-auto-columns: 100px;
+}
+</code></pre><p id="a3cebecf-c99d-4151-94db-a6abaf4920a6" class="">這邊要講兩個重要的 <strong>grid</strong> 格線：</p><ul id="c5052a32-79eb-4270-9b8a-00bc850baba2" class="bulleted-list"><li style="list-style-type:square"><strong>明式格線(Explicit grid)</strong><p id="ca6bc896-e64b-4861-b141-7a399f897ca7" class="">需清楚定義整個 <strong>container</strong> 具有多少行以及多少列，可客製化每個網格的寬高 <code>grid-template-columns/grid-template-rows</code> 屬於此類。</p></li></ul><ul id="a7267b70-7a0a-4022-85fa-e13d9efc35f7" class="bulleted-list"><li style="list-style-type:square"><strong>暗式格線(Implicit grid)</strong><p id="c171d25e-b3bd-4e53-996e-93f5c0cb4aa0" class="">無需清楚定義整個 <strong>container</strong> 具有多少行以及多少列，無法客製化每個網格的寬高 <code>grid-auto-columns/grid-auto-rows</code> 屬於此類。</p></li></ul></li></ul><ul id="5e074a32-33d0-4af5-8141-0ee31fc68a93" class="bulleted-list"><li style="list-style-type:circle"><strong>grid-template-areas</strong><p id="9e6499d3-2986-4190-bf97-b9625ac1cd4b" class="">定義 <strong>grid</strong> 每一個網格的名稱，舉例來說：下圖是一個簡單的 <strong>3*3 grid</strong> 裡面分成了四大區塊。</p><figure id="5ac7a478-8d15-4507-ab1c-3bd70cb96969" class="image"><a href="https://i0.wp.com/slicejack.com/wp-content/uploads/2017/08/grid-area.png?resize=640%2C470&amp;ssl=1"><img src="https://i0.wp.com/slicejack.com/wp-content/uploads/2017/08/grid-area.png?resize=640%2C470&amp;ssl=1"/></a></figure><p id="8b72a7a1-4735-484a-be03-4addde57fea0" class="">這時候只要像下方這樣寫就可以達到上圖的樣式了。</p><pre id="c8f769c5-c7bd-454a-9bc0-2f35998115bc" class="code code-wrap"><code>.container {
+  grid-template-areas:
+    &quot;header header header&quot;
+    &quot;content content sidebar&quot;
+    &quot;footer footer footer&quot;;
+}
+</code></pre><blockquote id="d147591d-5c7a-4dbe-8f9e-ecfb44de63d0" class="">溫馨小提醒：每一列的網格名稱可以重複出現但不可分離，因此 &quot;sidebar content content sidebar&quot; 是錯誤的，所以如果兩側都要有sidebar的話可以定義成這樣 sidebar1 content content sidebar2 。</blockquote></li></ul><ul id="abb561c0-b80d-42ce-a801-8cff2135db15" class="bulleted-list"><li style="list-style-type:circle"><strong>grid-auto-flow</strong><p id="8c2854b0-1a47-4dc2-8379-336fc08fba0c" class="">定義 <strong>grid</strong> 的排列方式。</p><ul id="71309f26-b074-4530-9114-0546bf3c2bc1" class="bulleted-list"><li style="list-style-type:square"><strong>row</strong><p id="d8955f7c-2830-48c2-a0e9-2902e76946a3" class="">預設值， <strong>grid</strong> 內的元素會以橫向(左到右)排列。</p></li></ul><ul id="7e9a66cf-71ec-48a9-adaf-bb9906ce3ab2" class="bulleted-list"><li style="list-style-type:square"><strong>column</strong><p id="3f8f53a4-b787-47aa-bb3f-8c726f1da1ff" class=""><strong>grid</strong> 內的元素會以縱向(上到下)排列。</p></li></ul><ul id="6a5cd0be-130e-4231-824a-08a2afc9a34a" class="bulleted-list"><li style="list-style-type:square"><strong>dense(row dense/column dense)</strong><p id="dcfeaf98-1382-4a14-8da7-4906d264cfdb" class=""><strong>grid</strong> 內的小元素優先排列，可能會造成排序上的優先問題，不建議使用。</p></li></ul></li></ul><ul id="cc563638-600e-4f57-908b-a2762f698b6a" class="bulleted-list"><li style="list-style-type:circle"><strong>grid-gap/grid-column-gap/grid-row-gap</strong><p id="9d7a382b-6e58-40d6-9672-dc306e65c6d4" class="">定義 <strong>grid</strong> 水平及垂直隔線的間格，其中 <strong>grid-gap</strong> 為 <strong>grid-column-gap</strong> 以及 <strong>grid-row-gap</strong> 的結合，寫法如下。</p><pre id="a48b27c6-8489-4da6-9556-77ee47bee5a9" class="code code-wrap"><code>.container {
+  grid-row-gap: 15px;/* 每列會有15px的間格 */grid-column-gap: 10px;/* 每行會有10px的間格 *//* 將上面兩行結合 */grid-gap: 15px 10px;/* 先寫列再寫行 */
+}
+</code></pre></li></ul></li></ul><ul id="23817dc7-b632-446a-99e4-621f5938a611" class="bulleted-list"><li style="list-style-type:disc"><strong>內部容器</strong><ul id="4fdc6ef8-4290-43f8-a411-020a22d3a188" class="bulleted-list"><li style="list-style-type:circle"><strong>grid-column-start/grid-row-start</strong><p id="d36af573-8298-4236-a95e-3aa92059a428" class="">定義 <strong>grid</strong> 內元素的寬/高起始網格。</p></li></ul><ul id="6037ccb5-5244-4e85-bbd8-6d85a1b7d17a" class="bulleted-list"><li style="list-style-type:circle"><strong>grid-column-end/grid-row-end</strong><p id="e2d12e4a-f6ce-4366-9183-04b2dd22c97d" class="">定義 <strong>grid</strong> 內元素的寬/高終止網格。</p></li></ul><blockquote id="a0e9f8b7-adea-4675-8672-7423ab9f68d0" class="">溫馨小提醒：假如我有一個元素佔了第一個網格到第三個網格，這時候 start 為 1 而 end 為 4 而不是 3 喔！如果怕自己會忘記在 end 的地方加一，也可以用 span number 來寫， number 為所佔網格數目因此 end 的值就可以改寫成 span 3 而不用寫 4 ，這樣就不用擔心自己會寫錯了。</blockquote><ul id="c49111ae-88da-4ea8-8520-8dec5ef3966b" class="bulleted-list"><li style="list-style-type:circle"><strong>grid-column/grid-row</strong><p id="39a9e395-e04c-4b56-a5e9-dd0e9f5f2e59" class="">將上面兩個合併，中間用 <code>/</code> 分開， <code>/</code> 左邊為 <strong>start</strong> 右邊為 <strong>end</strong> 。</p></li></ul><ul id="c135be5b-b958-4aa7-aec7-38f904ac3a40" class="bulleted-list"><li style="list-style-type:circle"><strong>grid-area</strong><p id="d8cb4abe-d040-443e-816f-c246f29b8348" class="">定義 <strong>grid</strong> 內元素位置，對應到 <code>grid-template-areas</code> 的區塊名稱，寫法如下。</p><pre id="bc9d12f0-0464-4403-8c41-7f300dcf68f7" class="code code-wrap"><code>.container {
+  grid-template-areas: &quot;header header&quot;;
+}
+.header {
+  grid-area: header;
+}
+</code></pre></li></ul></li></ul><h1 id="9f2affcc-a0ae-4123-add2-014661302fe7" class=""><strong>總結</strong></h1><p id="508b42a2-793d-4a27-8b5b-7d154c812807" class=""><strong>grid</strong> 跳脫了以往一列一列的排版模式，要想成每一個不同的元素被安排在特定的網格中，也讓 <strong>HTML</strong> 的結構變得更單純不會過於複雜，今天的總結<a href="https://codepen.io/Andy-Chen/pen/ZqvGzE">練習</a>延續昨天的 <strong>flexbox</strong> 練習，只不過改成 <strong>grid</strong> 的版本，讀者們可以藉以比較看看 <strong>flex</strong> 以及 <strong>grid</strong> 之間的差異。</p><ul id="1381a598-ebca-48f9-83a3-97dc92275edb" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10204380#reply">留言</a></li></ul><ul id="f6dcc04a-b307-477a-bef4-7f11cd605693" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/users/login">追蹤</a></li></ul><ul id="a5420677-2874-4603-83c5-347618d38a38" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/users/login">檢舉</a></li></ul><ul id="5a26d427-890a-4609-b5b0-0a780158f11b" class="bulleted-list"><li style="list-style-type:disc"></li></ul><ul id="6c2663dc-917e-4887-b758-31c52186f89f" class="bulleted-list"><li style="list-style-type:disc"></li></ul><ul id="6be3d553-4ed2-4989-b6b3-a3f608b9b57b" class="bulleted-list"><li style="list-style-type:disc"></li></ul><p id="35b52151-8cc9-4c99-a9a8-80e37cb80bb1" class=""><a href="https://ithelp.ithome.com.tw/articles/10204061"><strong>上一篇</strong></a><a href="https://ithelp.ithome.com.tw/articles/10204061">Day07-網頁排版利器！Flexbox</a></p><p id="7d902837-ce6f-4fca-8f9e-2c3bcc3e1f7e" class=""><a href="https://ithelp.ithome.com.tw/articles/10204689"><strong>下一篇</strong></a><a href="https://ithelp.ithome.com.tw/articles/10204689">Day09-CSS定位系統！position</a></p><p id="ebcf258b-6545-4d74-bf60-b39ff7a7a0a9" class=""><strong>系列文</strong></p><p id="3fd7f70d-f47d-41e5-bf67-13da841339dd" class=""><a href="https://ithelp.ithome.com.tw/users/20111948/ironman/1776"><strong>從0開始的網頁生活！30天從網頁新手到網頁入門</strong></a> 共 30 篇</p><p id="c937b752-de1c-4e3f-8668-5373a8a7d879" class=""><strong>目錄</strong></p><p id="59ec0e21-5427-4e96-afca-3448f8fd66db" class=""><a href="https://ithelp.ithome.com.tw/rss/series/1776">RSS系列文</a></p><p id="8bfba3a6-c3bc-4e69-8fdb-a32e7c5717cd" class=""><a href="https://ithelp.ithome.com.tw/users/login">訂閱系列文</a></p><p id="12b421b0-c646-43c7-b938-f52aee1f3ea8" class="">164 人訂閱</p><ol type="1" id="67a1106e-ae1e-4607-af3d-a3109b435100" class="numbered-list" start="1"><li>26<a href="https://ithelp.ithome.com.tw/articles/10209142">Day26-終端機操作</a></li></ol><ol type="1" id="0cc788f9-6c7e-4dbd-8e17-2b9b5d01a95a" class="numbered-list" start="2"><li>27<a href="https://ithelp.ithome.com.tw/articles/10209326">Day27-JS模組化！(安裝套件篇)</a></li></ol><ol type="1" id="716e1d8e-a56d-442e-8235-6f2e899899a1" class="numbered-list" start="3"><li>28<a href="https://ithelp.ithome.com.tw/articles/10209508">Day28-JS模組化！(匯入匯出篇)</a></li></ol><ol type="1" id="34e7847b-e40c-43de-83c3-ecdf7c4e6eec" class="numbered-list" start="4"><li>29<a href="https://ithelp.ithome.com.tw/articles/10209683">Day29-JS模組化！(套件結合篇)</a></li></ol><ol type="1" id="2d1504f6-7d7b-4fa5-bc3c-edb36acf3712" class="numbered-list" start="5"><li>30<a href="https://ithelp.ithome.com.tw/articles/10209831">Day30-結語</a></li></ol><p id="45a6cad5-210f-4477-a609-e79c05a23e47" class=""><a href="https://ithelp.ithome.com.tw/users/20111948/ironman/1776">完整目錄</a></p></div></article></body></html>

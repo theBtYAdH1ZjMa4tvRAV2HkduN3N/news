@@ -1,0 +1,680 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>vim key by vk</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="37596f45-a61f-4130-8691-2971214a7c00" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎁</span></div><h1 class="page-title">vim key by vk</h1></header><div class="page-body"><h1 id="7dc4a52f-e91e-4a5a-af78-5fa47eb55daf" class="">vi</h1><h3 id="163f9e0e-a0de-4298-8648-a1c198aed267" class="">Usual command in normal mode</h3><ul id="62b5504f-ba5b-4885-9d50-20ca94c03517" class="bulleted-list"><li style="list-style-type:disc">hjkl :direct step</li></ul><ul id="933417ca-282f-4113-9c0f-0974bdc2e6fe" class="bulleted-list"><li style="list-style-type:disc">H,L :page up/down</li></ul><ul id="13a2a17a-3485-4a1c-892e-558f9e41c0eb" class="bulleted-list"><li style="list-style-type:disc">u :undo<ul id="42f1a474-004b-4653-987d-5888b40fa9ea" class="bulleted-list"><li style="list-style-type:circle">^r :redo</li></ul></li></ul><ul id="b00f900e-5df6-41dc-b7df-566fa7fa4c74" class="bulleted-list"><li style="list-style-type:disc"><code>:q</code> :quit</li></ul><ul id="ffced705-3498-46e7-a1ad-dc3b96880835" class="bulleted-list"><li style="list-style-type:disc"><code>:w</code> :write</li></ul><ul id="3630feb6-f4dd-4989-bf97-9d4d66d8dce1" class="bulleted-list"><li style="list-style-type:disc">^f :find file</li></ul><ul id="c032a397-5906-4507-846c-4fc67d7c8709" class="bulleted-list"><li style="list-style-type:disc"><code>:terminal</code> : open a terminal window ( same ^w N )<ul id="bcdea237-d4c5-4947-a88d-d5b7ac2e9467" class="bulleted-list"><li style="list-style-type:circle">^\ ^n :back to normail mode<ul id="318a2687-fa32-490d-a353-a0126d86a609" class="bulleted-list"><li style="list-style-type:square">i : back to terminal mode</li></ul></li></ul><ul id="ce228e0d-10e0-4dd1-8599-cb71c43d2a04" class="bulleted-list"><li style="list-style-type:circle"><code>^w &quot;&quot;</code> : paste</li></ul><ul id="22d688da-af5b-4b91-a3d1-769fffcd0f9c" class="bulleted-list"><li style="list-style-type:circle"><code>^w :</code> =goto command</li></ul></li></ul><ul id="01f131a6-57fe-430d-9f83-cea4ec6871ec" class="bulleted-list"><li style="list-style-type:disc">G :move to end of file<ul id="e6be7060-f3d4-49e0-8768-dd1a774bb05b" class="bulleted-list"><li style="list-style-type:circle">gg :move to begin of file</li></ul></li></ul><ul id="fefab031-82d8-4eb1-969b-9ef00b9ef572" class="bulleted-list"><li style="list-style-type:disc">:?, :/ =search backward/forward</li></ul><ul id="93f9f01e-54e8-4a5a-9837-f03cb7857040" class="bulleted-list"><li style="list-style-type:disc">:%s/$A/$B/gc =replace $A to $B</li></ul><ul id="0b0492e6-784f-4d1f-8eb1-1d94a9c384ce" class="bulleted-list"><li style="list-style-type:disc">^u,^d :page up / down<ul id="058f8d6f-2224-4a96-9edc-a0f1b39d923c" class="bulleted-list"><li style="list-style-type:circle">gg :goto top</li></ul><ul id="b60b12c5-8c62-4b63-bfdd-a86d319c4054" class="bulleted-list"><li style="list-style-type:circle">G :goto end of file</li></ul></li></ul><ul id="2e28f79f-5051-4ed4-be31-4f46862523ac" class="bulleted-list"><li style="list-style-type:disc"><code>:#</code> :jump to line #</li></ul><h3 id="2c75aaa3-b6f7-495b-9b4e-041bbe8102b3" class="">Insert mode</h3><ul id="527eb1c5-fc17-488b-8e5e-2330f6251905" class="bulleted-list"><li style="list-style-type:disc">alt-u :undo</li></ul><ul id="0bc4763e-b192-490d-b859-11b94a9a95dd" class="bulleted-list"><li style="list-style-type:disc">alt-jkhl :move direct</li></ul><ul id="c30638bb-eb5d-4104-bdc6-a4cf53fbba2c" class="bulleted-list"><li style="list-style-type:disc"></li></ul><h3 id="358a259f-c937-415b-af88-e8ef0b0d66b2" class="">Selection mode :Delete ,copy &amp; paste</h3><ol type="1" id="eddf1b57-3b86-46ec-8c25-efc4178ba18c" class="numbered-list" start="1"><li>v :enter selection mode<ol type="a" id="7ed0070d-c823-4a4c-abbe-27bbd5c85766" class="numbered-list" start="1"><li>V :enter linewise selection mode</li></ol><ol type="a" id="eb77fd19-15b0-4fe2-a422-d9fe9bf8ffcd" class="numbered-list" start="2"><li>^v : enter block selection mode</li></ol></li></ol><ol type="1" id="baaeb05d-adfd-4652-bbfa-14d299d4c92c" class="numbered-list" start="2"><li>h, j, k and l :to move left, down, up, right respectively</li></ol><ol type="1" id="b28f865f-627b-4802-bf4e-91d14e7ef06f" class="numbered-list" start="3"><li>d :cut (delete)</li></ol><ol type="1" id="388a747f-c9f3-42e7-874b-45db962a6ce9" class="numbered-list" start="4"><li>y :copy (yank)</li></ol><ol type="1" id="f2da6d06-40de-4111-8204-8591aa3d0377" class="numbered-list" start="5"><li>p :paste</li></ol><ul id="177f6f26-8837-436e-a3bd-49c6dff7df4e" class="bulleted-list"><li style="list-style-type:disc">dd :delete one line</li></ul><ul id="8f324caf-fc5d-48d1-9ce3-dfd077abe951" class="bulleted-list"><li style="list-style-type:disc">d#d :delete # lines</li></ul><ul id="1092ed45-0397-4001-b78e-0938979068ff" class="bulleted-list"><li style="list-style-type:disc">x :detete char</li></ul><h3 id="64eeb14b-8622-4ec1-85a9-c0a741251a51" class="">Split</h3><ul id="c33d2886-d331-4518-b358-1362dcfc4591" class="bulleted-list"><li style="list-style-type:disc">^W,<ul id="c7e02e7c-94b0-420a-b619-fba5e9889120" class="bulleted-list"><li style="list-style-type:circle">s :create a horizontal split.</li></ul><ul id="ae18f9e3-b9af-4dee-abef-436ca2fd09e4" class="bulleted-list"><li style="list-style-type:circle">v :create a vertical split.</li></ul><ul id="23fbe5bc-dde1-4364-8d5b-46a3bbec5e54" class="bulleted-list"><li style="list-style-type:circle">jkhl :switch split<ul id="689bac25-f6c5-4e01-a3a9-432f138dc700" class="bulleted-list"><li style="list-style-type:square">also ^jkhl same</li></ul><ul id="c671dfca-78c5-48c5-90c8-3e18f1a03344" class="bulleted-list"><li style="list-style-type:square">also direction key</li></ul></li></ul><ul id="e990320e-4307-4cf9-9ddb-b2a9650597f4" class="bulleted-list"><li style="list-style-type:circle">,+ :horizental smaller/bigger</li></ul><ul id="80663532-f9b5-4811-ad05-4e935523f0ca" class="bulleted-list"><li style="list-style-type:circle">&lt;,&gt; :vertical smaller/bigger</li></ul><ul id="5e8c799e-f239-4912-b27a-131ed41e67d1" class="bulleted-list"><li style="list-style-type:circle"><code>:resize x</code> :horizental size change<ul id="2052ea5f-147b-44c0-b772-5b3e2a992355" class="bulleted-list"><li style="list-style-type:square"><code>res +/-x</code> : add or decress horizental size</li></ul></li></ul><ul id="e2736dee-6a86-443e-8f0a-d351a15cd305" class="bulleted-list"><li style="list-style-type:circle"><code>:vertical resize x</code> :vertical size change to x<ul id="f9410b23-d566-4982-aa12-a131266bcce4" class="bulleted-list"><li style="list-style-type:square"><code>:vertical resze +x</code> : vertical size add x</li></ul></li></ul><ul id="de62e2f7-d782-4876-98b7-185c6a2404ab" class="bulleted-list"><li style="list-style-type:circle">| :maximum vertical</li></ul><ul id="c352ae86-ad16-461c-bfeb-d7444752516e" class="bulleted-list"><li style="list-style-type:circle">_ :maximum horizental</li></ul><ul id="bb2ed965-34f5-4747-8f06-06aed44ce95e" class="bulleted-list"><li style="list-style-type:circle">= :equal all size</li></ul><ul id="65372049-88ff-4e3e-a87a-60af05a9fe74" class="bulleted-list"><li style="list-style-type:circle">r,R :swap</li></ul><ul id="1c5eca0d-6897-491b-a362-dbfa977c8139" class="bulleted-list"><li style="list-style-type:circle">T :current to new window</li></ul><ul id="1f2c16e2-ec8e-4b8d-a954-e279b8750cc0" class="bulleted-list"><li style="list-style-type:circle">c :close split</li></ul><ul id="0afeed87-607b-4fa3-9a3f-4e5d38ae1e5b" class="bulleted-list"><li style="list-style-type:circle">o :close all split except current</li></ul></li></ul><h3 id="c4258ea3-948d-4b8d-b6be-fb56e7c7f634" class="">Tab</h3><ul id="1b344f90-e8e6-4909-b996-52f03fc3849d" class="bulleted-list"><li style="list-style-type:disc">:tabe =create new tab with $file<ul id="b5c71799-f0fa-4537-a382-ca99b0c47a04" class="bulleted-list"><li style="list-style-type:circle">:tabe $FileName</li></ul></li></ul><ul id="7dfbf506-a1fd-4108-a051-f3a8bce79a98" class="bulleted-list"><li style="list-style-type:disc">gt :next tab</li></ul><ul id="c1e06303-efbd-48bf-9f6b-2eb066c4af4a" class="bulleted-list"><li style="list-style-type:disc">gT :previous tab</li></ul><ul id="cf78fa9e-7716-40b5-9e44-bcccaf45fc67" class="bulleted-list"><li style="list-style-type:disc">#gt :goto # tab</li></ul><ul id="aa6ce1a1-ce58-4679-8d8c-88f1b55f4c5b" class="bulleted-list"><li style="list-style-type:disc">^w c :close</li></ul><ul id="923003d4-b1b3-4c2e-b251-0bc8e3b9c33e" class="bulleted-list"><li style="list-style-type:disc">:tab ball =show all buffer in tab</li></ul><h3 id="940483da-8320-4479-95e6-a9acef7c08c6" class="">New &amp; Open</h3><ul id="b6f30730-0edb-4979-962c-4a91953dcc97" class="bulleted-list"><li style="list-style-type:disc">:e $FileName =edit file</li></ul><ul id="b7ba64a0-a5cf-4298-9514-cf22ce0f9f97" class="bulleted-list"><li style="list-style-type:disc">:new =create a new file</li></ul><ul id="f5e1cc4a-cce8-4232-a8ac-236fcb3b363e" class="bulleted-list"><li style="list-style-type:disc">:ls =list all opened files</li></ul><ul id="ef9a7c77-95f6-4950-98db-1a85d1938929" class="bulleted-list"><li style="list-style-type:disc">:ls will show your open buffers.<ul id="be10bcd9-e4df-4f3d-8322-fad183a3b45f" class="bulleted-list"><li style="list-style-type:circle">:buffers =as :ls</li></ul></li></ul><ul id="e8dfba66-85df-4cb3-9652-b2c8b336109e" class="bulleted-list"><li style="list-style-type:disc">:b $number =open the specified buffer in the current pane.</li></ul><ul id="47d7d536-5b29-44be-8b02-4b8d3cf75aca" class="bulleted-list"><li style="list-style-type:disc">:b $FileNamePrefix =open relative file buffer</li></ul><ul id="a340bc90-a071-4474-9414-79ca9ba995af" class="bulleted-list"><li style="list-style-type:disc">:bn =buffer next</li></ul><ul id="774003db-d3ce-45c2-ae71-38be65a9091f" class="bulleted-list"><li style="list-style-type:disc">:bp =buffer previous</li></ul><h3 id="c0d8f69d-2c5b-41d9-aa25-05bcd1f2ac60" class="">Search &amp; Replace(substitute)</h3><ul id="c5d0e3f9-8729-41ff-8f0e-368bea52e54a" class="bulleted-list"><li style="list-style-type:disc">:s/foo/bar/g :substitute
+Find each occurrence of &#x27;foo&#x27; (in the <em><strong>current line only</strong></em>), and replace it with &#x27;bar&#x27;.</li></ul><ul id="daff3bef-c908-4d61-8d48-b9c33644079b" class="bulleted-list"><li style="list-style-type:disc">:%s/foo/bar/g
+Find each occurrence of &#x27;foo&#x27; (in <em><strong>all</strong></em> lines), and replace it with &#x27;bar&#x27;.</li></ul><ul id="f8f83d3a-90a2-4019-9948-3183ad5b4f64" class="bulleted-list"><li style="list-style-type:disc">:%s/foo/bar/gc
+Change each &#x27;foo&#x27; to &#x27;bar&#x27;, but <em><strong>ask</strong></em> for confirmation first.</li></ul><ul id="58e477ee-42e7-4aa2-9acc-728327c027a6" class="bulleted-list"><li style="list-style-type:disc">:%s/\&lt;foo\&gt;/bar/gc
+Change only whole words <em><strong>exactly matching</strong></em> &#x27;foo&#x27; to &#x27;bar&#x27;; ask for confirmation.</li></ul><ul id="1f1b6608-e109-44c1-9721-b111f925a09f" class="bulleted-list"><li style="list-style-type:disc">:%s/foo/bar/gci
+Change each &#x27;foo&#x27; (<em><strong>case insensitive</strong></em> due to the i flag) to &#x27;bar&#x27;; ask for confirmation.</li></ul><ul id="433849f7-9004-495f-99da-1febb3353d2b" class="bulleted-list"><li style="list-style-type:disc">:%s/foo\c/bar/gc is the same because \c makes the search <em><strong>case insensitive</strong></em>.
+This may be wanted after using :set noignorecase to make searches case sensitive (the default).</li></ul><ul id="11f45863-f551-49d7-a6e2-5b11ae7cc4c5" class="bulleted-list"><li style="list-style-type:disc">:%s/foo/bar/gcI
+Change each &#x27;foo&#x27; (case sensitive due to the I flag) to &#x27;bar&#x27;; ask for confirmation.</li></ul><ul id="3bf78f1f-31e0-4ef2-801d-2061c622d800" class="bulleted-list"><li style="list-style-type:disc">:%s/foo\C/bar/gc is the same because \C makes the search case sensitive.
+This may be wanted after using :set ignorecase to make searches case insensitive.</li></ul><h3 id="ddf14825-f374-4e87-8fb0-2222b2fd12b7" class="">You Complete Me</h3><p id="1e24840f-89cb-4201-924c-c0679feece46" class="">In insert mode</p><ul id="bf2a97fa-f567-427b-b879-30b0c944b6af" class="bulleted-list"><li style="list-style-type:disc">^p :basic tab completion, pulling from a variety of sources</li></ul><ul id="60ddc13e-2fbc-42bc-b9db-211e6a97f417" class="bulleted-list"><li style="list-style-type:disc">^n :the same as ^P but backward</li></ul><ul id="0f0e5ea5-6895-464a-b655-2d6066fa896f" class="bulleted-list"><li style="list-style-type:disc">^X ^L	:whole line completion</li></ul><ul id="17d8063f-a496-46b4-b9b1-6c601ca1d1a0" class="bulleted-list"><li style="list-style-type:disc">^X ^O	:syntax-aware omnicompletion</li></ul><h3 id="13d17faa-501d-4f59-8af2-2ee0d132c388" class="">NerdTree</h3><ul id="59c6b370-c8be-4a2c-a55d-c89d106663b8" class="bulleted-list"><li style="list-style-type:disc">,nn :toggle tool</li></ul><ul id="2def0da7-bbe6-4c8a-ab2c-ad82d3916cf1" class="bulleted-list"><li style="list-style-type:disc"><code>:NERDTree</code> :open this tool</li></ul><ul id="66a2b6f1-d163-4022-a8f7-f563a91c37b9" class="bulleted-list"><li style="list-style-type:disc"><code>:NERDTreeClose</code> :close</li></ul><ul id="db71499b-c4f0-4129-b585-942d0cfef708" class="bulleted-list"><li style="list-style-type:disc">o :open the file in a new buffer or open/close directory.</li></ul><ul id="731d905c-c297-4d4f-8db5-73d1a8ffba62" class="bulleted-list"><li style="list-style-type:disc">t :open the file in a new tab.</li></ul><ul id="67fe4f91-919f-48dc-80be-543f03889915" class="bulleted-list"><li style="list-style-type:disc">i :open the file in a new horizontal split.</li></ul><ul id="3723b51b-4758-4579-bd09-05c9b2a0e016" class="bulleted-list"><li style="list-style-type:disc">s :open the file in a new vertical split.</li></ul><ul id="773ef15c-5827-4dba-8e7e-f736586a8d41" class="bulleted-list"><li style="list-style-type:disc">p :go to parent directory.</li></ul><ul id="0fd808f9-263a-4cea-887d-fcc0570176d3" class="bulleted-list"><li style="list-style-type:disc">r :refresh the current directory.</li></ul><h3 id="46fbe86a-e4e8-4b0d-94ba-4ec98137b188" class="">Other</h3><ul id="094d5f2e-fbee-4ba9-82a8-f6a06c6d54ed" class="bulleted-list"><li style="list-style-type:disc">^- :smaller font</li></ul><ul id="c7acb443-cb89-40f0-b704-49a2085b6403" class="bulleted-list"><li style="list-style-type:disc">^+ :lager font</li></ul><ul id="de8012ac-fa46-4efc-8c13-b3dcd2b6e55d" class="bulleted-list"><li style="list-style-type:disc">:w =write</li></ul><ul id="59038edb-1837-4636-8d9f-5b7f9bd0eb69" class="bulleted-list"><li style="list-style-type:disc">:q =quit</li></ul><h3 id="23a3916f-d30d-4bb4-9bdc-9d78acdc6d84" class="">More in .vimrc</h3><ul id="2cf2fd72-752e-4e1a-af6d-8ccd3d960a32" class="bulleted-list"><li style="list-style-type:disc"><code>set nu</code> :show line number</li></ul><h3 id="bbf347de-3955-416c-a267-960e7af4e181" class="">The Ultimate vimrc</h3><p id="4d0b393b-df2c-44f8-9c5c-222423ed14c2" class=""><a href="https://github.com/amix/vimrc">https://github.com/amix/vimrc</a> .Good ./vimrc and auto install many tools. Install commands as:</p><pre id="ccc58af4-3aa2-41a4-b5dc-a78a8fafb69e" class="code code-wrap"><code>git clone --depth=1 &lt;https://github.com/amix/vimrc.git&gt; ~/.vim_runtime
+sh ~/.vim_runtime/install_awesome_vimrc.sh
+</code></pre><p id="0db2ff67-ff37-4f33-9f18-9b9b216e42f1" class="">This script includeed plugins</p><ul id="4280aa2e-8816-4b79-b73e-4b255ea18115" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/mileszs/ack.vim">ack.vim</a>: Vim plugin for <code>the_silver_searcher</code> (ag) or ack -- a wicked fast grep</li></ul><ul id="a66d5c2e-e56a-4948-b128-422cc6ce0f7f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/vim-scripts/bufexplorer.zip">bufexplorer.zip</a>: Quickly and easily switch between buffers. This plugin can be opened with <code>&lt;leader+o&gt;</code></li></ul><ul id="4e5cac13-07c0-456d-a7fc-c4a68f2a7558" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/ctrlpvim/ctrlp.vim">ctrlp.vim</a>: Fuzzy file, buffer, mru and tag finder. It&#x27;s mapped to <code>&lt;Ctrl+F&gt;</code></li></ul><ul id="890572b2-e2d0-4f44-9ec7-633f1a302e3b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/junegunn/goyo.vim">goyo.vim</a> and <a href="https://github.com/amix/vim-zenroom2">vim-zenroom2</a>:</li></ul><ul id="46b2fcee-ebe5-4d1f-ae00-a5f5d199ff3b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/itchyny/lightline.vim">lightline.vim</a>: A light and configurable statusline/tabline for Vim</li></ul><ul id="ef2a7f7a-6cce-432c-899d-91042ea687bb" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/scrooloose/nerdtree">NERD Tree</a>: A tree explorer plugin for vim</li></ul><ul id="933d3428-5a74-419b-a8b8-3ce1011ebf43" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/amix/open_file_under_cursor.vim">open_file_under_cursor.vim</a>: Open file under cursor when pressing <code>gf</code></li></ul><ul id="da4dc261-4fb2-44a0-b8eb-93e6cc06d23e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/tpope/vim-pathogen">pathogen.vim</a>: Manage your vim runtimepath</li></ul><ul id="126177c3-bbf9-4f98-9841-5474f56464e5" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/garbas/vim-snipmate">snipmate.vim</a>: snipmate.vim aims to be a concise vim script that implements some of TextMate&#x27;s snippets features in Vim</li></ul><ul id="d0429510-a0e7-4b30-b07e-b91eb296d79b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/w0rp/ale">ale</a>: Syntax and lint checking for vim (ALE requires NeoVim &gt;= 0.2.0 or Vim 8 with +timers +job +channel)</li></ul><ul id="390cf483-27f5-4356-8637-8d3c93584256" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/tpope/vim-commentary">vim-commentary</a>: Comment stuff out. Use <code>gcc</code> to comment out a line (takes a count), <code>gc</code> to comment out the target of a motion. <code>gcu</code> uncomments a set of adjacent commented lines.</li></ul><ul id="58c75df9-914c-4516-b6b5-b854af7afaf5" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/terryma/vim-expand-region">vim-expand-region</a>: Allows you to visually select increasingly larger regions of text using the same key combination</li></ul><ul id="3328698a-5e67-4388-8b69-5b7b68f48d56" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/tpope/vim-fugitive">vim-fugitive</a>: A Git wrapper so awesome, it should be illegal</li></ul><ul id="cf4639d9-96d8-44df-96cd-6d16e39dc84e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/michaeljsmith/vim-indent-object">vim-indent-object</a>: Defines a new text object representing lines of code at the same indent level. Useful for python/vim scripts</li></ul><ul id="d7aa6e8e-0429-4d7d-b9b9-7d1a040ac5db" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/terryma/vim-multiple-cursors">vim-multiple-cursors</a>: Sublime Text style multiple selections for Vim, CTRL+N is remapped to CTRL+S (due to YankRing)</li></ul><ul id="bcb532ed-4c25-4026-8d23-e6c33a70199c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/maxbrunsfeld/vim-yankstack">vim-yankstack</a>: Maintains a history of previous yanks, changes and deletes</li></ul><ul id="4570d177-0256-46e9-8609-5a0e2bf57ff0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/amix/vim-zenroom2">vim-zenroom2</a> Remove all clutter and focus only on the essential. Similar to iA Writer or Write Room</li></ul><ul id="62939f3c-c6e7-476f-b3d2-a06bd3e9e47c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/mattn/gist-vim">gist-vim</a> Easily create gists from Vim using the <code>:Gist</code> command</li></ul><ul id="64e1bbad-3c08-473d-a2f5-1e88d56ce0af" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/nathanaelkane/vim-indent-guides">vim-indent-guides</a> Is a plugin for visually displaying indent levels in Vim</li></ul><ul id="2f1875f9-37a3-41a3-8423-58085b1d9a5f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/editorconfig/editorconfig-vim">editorconfig-vim</a> EditorConfig helps maintain consistent coding styles for multiple developers working on the same project across various editors and IDEs.</li></ul><h3 id="fde0c4fa-57c2-42ec-89af-5adc9892a49a" class="">Vim Tips Wiki</h3><p id="3e9585d6-09f1-43c7-b9bd-587d7260881e" class=""><a href="https://vim.fandom.com/wiki/Accessing_the_system_clipboard">https://vim.fandom.com/wiki/Accessing_the_system_clipboard</a></p><h3 id="67604340-7148-49d4-a8e5-596c389f71e3" class="">plugin</h3><p id="22a2b00c-e1bd-475d-964a-1681b24f552c" class=""><a href="https://github.com/preservim/nerdtree">https://github.com/preservim/nerdtree</a>
+Tree view of direct</p></div></article></body></html>

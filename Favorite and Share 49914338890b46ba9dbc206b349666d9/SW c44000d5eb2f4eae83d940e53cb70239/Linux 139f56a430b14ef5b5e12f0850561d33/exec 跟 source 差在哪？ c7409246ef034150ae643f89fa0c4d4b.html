@@ -1,0 +1,700 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>exec 跟 source 差在哪？</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c7409246-ef03-4150-ae64-3f89fa0c4d4b" class="page sans"><header><h1 class="page-title">exec 跟 source 差在哪？</h1></header><div class="page-body"><p id="f63560a0-7a2e-4611-ab3d-54a546e0e8ab" class="">
+</p><p id="44fd5526-f467-4963-8312-3f0f1848161f" class="">
+</p><p id="bcd4b39c-60fc-41bd-8da9-beef63763b75" class="">
+</p><h1 id="0bde731e-989b-4601-926f-8e59c96ef099" class="">exec 跟 source 差在哪？</h1><p id="cedddde6-b0cc-41bc-b774-695316217016" class="">这次让我们从 CU shell 版的一个实例帖子来谈起吧： (论坛改版后，原链接已经失效)</p><p id="8cdf90e6-ec91-4007-9e69-f22db921905b" class="">例中的提问原文如下：</p><blockquote id="ea50acde-a7d1-4a37-b8e3-befd8b27462f" class="">帖子提问:<p id="0b1160ea-e667-48a5-8f50-554860c601a9" class="">cd /etc/aa/bb/cc 可以执行 但是把这条命令放入 shell 脚本后，shell 脚本不执行！ 这是什么原因？</p></blockquote><p id="953d6d3c-c458-48ee-b231-77f6b903974f" class="">意思是：运行 shell 脚本，并没有移动到 / etc/aa/bb/cc 目录。</p><p id="9d83d241-41ad-4563-8ec0-5e6eb1c8002b" class="">我当时如何回答暂时别去深究，先让我们了解一下进程 (process) 的概念好了。</p><p id="8af1d193-09f6-4ba9-8dd5-21704f2a096f" class="">首先，我们所执行的任何程序，都是父进程 (parent process) 产生的一个 子进程 (child process), 子进程在结束后，将返回到父进程去。 此现象在 Linux 中被称为<code>fork</code>。</p><p id="17e44aec-e6e0-4b46-b685-b8a31b4d2731" class="">(为何要称为 fork 呢？ 嗯，画一下图或许比较好理解...^_^)</p><p id="0ede5b8a-584f-4578-b97d-57e3ce0ea9e8" class="">当子进程被产生的时候，将会从父进程那里获得一定的资源分配、及 (更重要的是) 继承父进程的环境。</p><p id="ee98dbd2-7f40-4893-973b-e094cf968bac" class="">让我们回到上一章所谈到的 &quot;环境变量&quot; 吧： <strong>所谓环境变量其实就是那些会传给子进程的变量</strong>。 简单而言, &quot;遗传性&quot; 就是区分本地变量与环境变量的决定性指标。 然而，从遗传的角度来看，我们不难发现环境变量的另一个重要特征： <strong>环境变量只能从父进程到子进程单向传递。 换句话说：在子进程中环境如何变更，均不会影响父进程的环境</strong>。</p><p id="fa8e33bd-5170-4809-8476-31d4beb99e82" class="">接下来，在让我们了解一下 shell 脚本 (shell script) 的概念. 所谓 shell script 讲起来很简单，就是将你平时在 shell prompt 输入的多行 <code>command line</code>, 依序输入到一个文件文件而已。</p><p id="2271bab1-1eae-4b48-b555-d7c6a247b669" class="">再结合以上两个概念 (process + script)，那应该不难理解如下的这句话的意思了： 正常来说，当我们执行一个 shell 
+script 时，其实是先产生一个 sub-shell 的子进程， 然后 sub-shell 再去产生命令行的子进程。 
+然则，那让我们回到本章开始时，所提到的例子在重新思考：</p><blockquote id="93f10c9c-3ddc-42c3-bcde-8d6a6f7afc85" class="">帖子提问:<p id="f326b6f6-e32e-4136-a33e-7c8c82aaae02" class=""><code>cd/etc/aa/bb/cc</code> 可以执行 但是把这条命令放入 shell 脚本后，shell 脚本不执行！ 这是什么原因？</p></blockquote><p id="6a649197-6efb-416b-8a62-f2807eecda67" class="">意思是：运行 shell 脚本，并没有移动到 <code>/etc/aa/bb/cc</code> 目录。</p><p id="541390d1-e2ad-4cd4-9e6c-11b45cff5188" class="">我当时的答案是这样的：</p><blockquote id="1697a3e0-9c30-49c1-b2b6-11122fb877c4" class="">因为，我们一般跑的 shell script 是用 sub-shell 去执行的。 从 process 的概念来看，是 parent 
+process 产生一个 child process 去执行， 当 child 结束后，返回 parent, 但 parent 的环境是不会因 
+child 的改变而改变的。 所谓的环境变量元数很多，如 effective id(euid)，variable, working dir 
+等等... 其中的 working dir($PWD) 正是楼主的疑问所在： 当用 sub-shell 来跑 script 
+的话，sub-shell 的 $pwd 会因为 cd 而变更， 但返回 primary shell 时，$PWD 是不会变更的。</blockquote><p id="0e8a32cc-16d0-44ae-9754-dc8007c534a3" class="">能够了解问题的原因及其原理是很好的，但是？ 如何解决问题，恐怕是我们更应该感兴趣的是吧？</p><p id="c042d8a8-4375-4202-8a0d-c6894e128668" class="">那好，接下来，再让我们了解一下<code>source</code>命令好了。 当你有了<code>fork</code>的概念之后，要理解<code>soruce</code>就不难：</p><p id="a37c493f-e6f9-4cd9-ab94-18c7ab2d7e34" class="">所谓<code>source</code>，就是让 script 在当前 shell 内执行、 而不是产生一个 sub-shell 来执行。 由于所有执行结果均在当前 shell 内执行、而不是产生一个 sub-shell 来执行。</p><p id="bf404aba-cefb-4dac-a05c-86114679e20f" class="">因此, 只要我们原本单独输入的 script 命令行，变成<code>source</code>命令的参数， 就可轻而易举地解决前面提到的问题了。</p><p id="62665f76-5a9f-4e8e-a7e4-f73c26e3943d" class="">比方说，原本我们是如此执行 script 的：</p><p id="0815b1a4-c367-40ec-bad2-acc779cac3fd" class=""><code>$ ./my_script.sh</code></p><p id="c7724724-da49-47e8-b708-6538b92ff384" class="">现在改成这样既可：</p><p id="4e4dec4d-3a02-4727-9314-a4ef6d27e97e" class=""><code>$ source ./my_script.sh</code></p><p id="4830d1b7-d632-48c6-bfad-af90b873d4ae" class="">或者：</p><p id="d6d79dc4-ef85-4818-890a-32c6bcfac432" class=""><code>$ . ./my_script.sh</code></p><p id="fde41e59-ecfb-4917-9d50-5a2ed360f2e4" class="">说到这里，我想，各位有兴趣看看<code>/etc</code>底下的众多设定的文件， 应该不难理解它们被定义后，如何让其他 script 读取并继承了吧？</p><p id="9fde240f-6a3f-4ee4-97ef-b7f38ac01348" class="">若然，日后，你有机会写自己的 script， 应也不难专门指定一个设定的文件以供不同的 script 一起 &quot;共用&quot; 了... ^_^</p><p id="b75ed1fe-5cca-4fe7-bae4-7f201df7a842" class="">okay, 到这里，若你搞懂<code>fork</code>与<code>source</code>的不同， 那接下来再接受一个挑战：</p><blockquote id="6dae49b5-e544-41da-9c4c-34687ecf887d" class="">那exec又与source/fork有何不同呢？</blockquote><p id="7a24227c-6896-4f2b-beb0-ffcd0223cdbc" class="">哦... 要了解<code>exec</code>或许较为复杂，尤其是扯上<code>File Decscriptor</code>的话... 不过，简单来说：</p><blockquote id="6c8bbcf2-59b3-4974-bc1e-2891b2275973" class="">exec 也是让 script 在同一个进程上执行，但是原有进程则被结束了。 简言之，原有进程能否终止，就是exec与source/fork的最大差异了。</blockquote><p id="82bf4518-1684-453d-a8a8-9ea7a571e87d" class="">嗯，光是从理论去理解，或许没那么好消化， 不如动手 &quot;实践 + 思考&quot; 来得印象深刻哦。</p><p id="0b2bd1fe-37fc-489a-9a05-ae9c90b87d72" class="">下面让我们为两个简单的 script，分别命名为 1.sh 以及 2.sh</p><p id="0473bcce-d7a3-43fa-be9d-ca4b54d595c0" class="">1.sh</p><p id="2b8e7bcd-6c8c-4553-8d1a-0884348f1cdf" class=""><code>#!/bin/bash</code></p><pre id="4f9b5949-f33d-41d3-a24c-58b0d811712b" class="code code-wrap"><code>A=B
+echo &quot;PID for 1.sh before exec/source/fork:$$&quot;
+export A
+echo &quot;1.sh: \$A is $A&quot;
+case $1 in
+        exec)
+                echo &quot;using exec...&quot;
+                exec ./2.sh ;;
+        source)
+                echo &quot;using source...&quot;
+                . ./2.sh ;;
+        *)
+                echo &quot;using fork by default...&quot;
+                ./2.sh ;;
+esac
+echo &quot;PID for 1.sh after exec/source/fork:$$&quot;
+echo &quot;1.sh: \$A is $A&quot;</code></pre><p id="961cfb26-75e0-4d4b-be50-f18944bfbf3f" class="">2.sh</p><p id="0800a40c-8aee-464a-bf58-a93ef00e7478" class=""><code>#!/bin/bash</code></p><pre id="be68cd42-97b7-4cfd-91b2-d75c32eb4fe2" class="code code-wrap"><code>echo &quot;PID for 2.sh: $$&quot;
+echo &quot;2.sh get \$A=$A from 1.sh&quot;
+A=C
+export A
+echo &quot;2.sh: \$A is $A&quot;</code></pre><p id="3a0da64a-450c-4514-8e55-84d69d80f793" class="">然后分别跑如下参数来观察结果：</p><pre id="8e4c0a19-e229-4d4b-aec4-4717342296d8" class="code code-wrap"><code>$ ./1.sh fork
+$ ./1.sh source
+$ ./1.sh exec</code></pre></div></article></body></html>

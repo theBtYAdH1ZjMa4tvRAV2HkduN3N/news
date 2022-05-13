@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>如何判定是感冒症狀還是奧密克戎</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ea214d3d-d979-453b-9610-b7a889f231f8" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🕓</span></div><h1 class="page-title">如何判定是感冒症狀還是奧密克戎</h1></header><div class="page-body"><p id="70b01b4b-662d-48ba-842e-65045b1bf3af" class="block-color-gray"><a href="https://www.bbc.com/zhongwen/trad/science-59682454">https://www.bbc.com/zhongwen/trad/science-59682454</a></p><p id="d5159ffd-74ce-4a3e-a2a3-d87c38d16701" class="">
+</p><figure id="d970e00b-2ebf-4751-af13-8bda137a9404" class="image"><a href="%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9A%E6%98%AF%E6%84%9F%E5%86%92%E7%97%87%E7%8B%80%E9%82%84%E6%98%AF%E5%A5%A7%E5%AF%86%E5%85%8B%E6%88%8E%20ea214d3dd979453b9610b7a889f231f8/_124062715_ca48ae91-a750-4eda-84bc-a2c94eeae155.jpg"><img style="width:640px" src="%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9A%E6%98%AF%E6%84%9F%E5%86%92%E7%97%87%E7%8B%80%E9%82%84%E6%98%AF%E5%A5%A7%E5%AF%86%E5%85%8B%E6%88%8E%20ea214d3dd979453b9610b7a889f231f8/_124062715_ca48ae91-a750-4eda-84bc-a2c94eeae155.jpg"/></a></figure><p id="d7a190d7-f74f-43b7-a19c-263958423e1e" class=""><strong>新冠病毒繼續變異，奧密克戎（Omicron）仍主導目前全球疫情，現有數據顯示奧密克戎雖然極易傳播，但感染髮病後病情並不像之前其他新冠變異株那麼嚴重，出現的症狀比較輕微。</strong></p><p id="48ca548c-6413-40b0-8514-d2ac2bde794d" class="">那麼，如何判斷自己究竟是感染了新冠病毒還是普通感冒？</p><p id="dca28de3-04fd-4eba-a363-27096dee41df" class="">根據英格蘭官方最新 Covid-19 症狀清單，除了原來的三項 —— 發燒、新出現的持續咳嗽、嗅覺和味覺喪失，還包括以下九項：</p><ul id="7adae998-1f60-4652-9631-98631db326d9" class="bulleted-list"><li style="list-style-type:disc">呼吸急促</li></ul><ul id="394c5e60-3c67-47ee-ba23-81c5351456c1" class="bulleted-list"><li style="list-style-type:disc">感覺疲勞、筋疲力盡</li></ul><ul id="305babbd-0833-41c5-986f-563c4cc61cb3" class="bulleted-list"><li style="list-style-type:disc">身體疼痛</li></ul><ul id="d7851004-34d7-42fa-81c2-55c9711af36d" class="bulleted-list"><li style="list-style-type:disc">頭痛</li></ul><ul id="3a97a8eb-e860-497a-b776-eb8a61311de6" class="bulleted-list"><li style="list-style-type:disc">喉嚨痛</li></ul><ul id="7883223e-6102-45c7-8e6f-57281e249c64" class="bulleted-list"><li style="list-style-type:disc">鼻塞或流鼻涕</li></ul><ul id="9efd2e91-d845-4f37-8496-6e85afceb3b7" class="bulleted-list"><li style="list-style-type:disc">味覺喪失</li></ul><ul id="44b9184b-51e5-4c37-9607-8d73e1d103d4" class="bulleted-list"><li style="list-style-type:disc">腹瀉</li></ul><ul id="ee909d10-b795-4914-b907-0093654e71b7" class="bulleted-list"><li style="list-style-type:disc">感覺不舒服或生病</li></ul><p id="0d8101ce-662f-4d8d-bac4-0acf0a4d5851" class="">感染新冠病毒的人也會出現打噴嚏，流鼻水等症狀</p><p id="bb555ef3-8fbe-4d07-8a29-5977a01d525a" class="">奧密克戎對有些人似乎就比較像是感冒。</p><p id="5fb50686-ab0b-446c-8286-f95f103e99bb" class="">根據新冠症狀跟蹤軟件 ZOE 的數據，Covid 檢測陽性的人最常見的五種症狀是流鼻涕 ( 83% )、疲勞 ( 71% )、喉嚨痛 ( 69% )、頭痛 ( 69% ) 和打噴嚏 ( 68% )。</p><p id="8cbf64fe-758f-4ce3-a44a-55c80b5c0ed2" class="">之前其他的新冠變異毒株更可能會引發味覺或嗅覺喪失或改變，新出現的、持續性的咳嗽，還有發燒等症狀，這些仍然被列為新冠疾病的三種典型症狀。</p><p id="8c28abef-0e5d-4ab3-a9d3-2b795c84838f" class="">在實驗室內分析PCR核酸檢測採集到的樣本，可以顯示引起感染的病毒是奧密克戎、德爾塔或其他變異毒株。</p><p id="79716915-2f0e-4f81-8c6a-950c7c89917a" class="">要確認感染病例是否為奧密克戎，需要進行完整的基因分析，可能會需要四至五天的時間。</p><p id="89b754f8-1c99-4e1a-b97f-0261782365eb" class="">仔細觀察檢測樣本提供的基因物質，科學家能夠確認該感染樣本是否為奧密克戎，或是已經廣泛傳播的德爾塔。</p><h2 id="7933a2d5-829c-47ac-9be7-0a2f040e3fc8" class="">關於新冠病毒、變異株、長新冠、檢測、疫苗和治療，如果您有問題希望得到解答，請用下表提交：</h2><p id="c9f49d13-bba8-4daa-90f7-725da7d7c883" class="">&lt;div pseudo=&quot;-webkit-input-placeholder&quot; id=&quot;placeholder&quot; style=&quot;display: block !important;&quot;&gt;新冠疫情反復，疫苗接種、口服藥研發持續推進。關於新冠檢測、疫苗、治療和防疫，眼下您最關注、最想知道的還有什麽？歡迎提問。如被確診患長新冠，歡迎分享親身經歷。&lt;/div&gt;&lt;div&gt;&lt;/div&gt;</p><p id="245cf5b2-dcc3-4060-959a-a3f3f320ecd5" class="">發燒意味著身體正在抵抗外來的感染</p><p id="75ea2c9f-9cfe-4330-a6f9-e135f58ab2b2" class="">對於大多數接種過疫苗的人——以及兒童，即使他們沒有接種疫苗——新冠病毒感染症狀通常是輕微的，通常會持續長達一周。</p><p id="1d8c74dc-4f86-44f1-afef-bb97dba5ceb7" class="">但有些人感染風險比常人更高，尤其需要注意免疫保護，這些人包括：</p><ul id="4e914a96-147c-42fd-a74a-585e4a836beb" class="bulleted-list"><li style="list-style-type:disc">老年人</li></ul><ul id="7ac498ce-ba5d-4141-b839-8636f0f44dd0" class="bulleted-list"><li style="list-style-type:disc">孕婦</li></ul><ul id="1aa6b613-8076-4cf6-acbe-196ff8e26be8" class="bulleted-list"><li style="list-style-type:disc">未接種疫苗的人</li></ul><ul id="87c7d65d-8c37-44a0-af3d-37068d0d8ad5" class="bulleted-list"><li style="list-style-type:disc">免疫系統脆弱，易患嚴重疾病的人，無論年齡</li></ul><ul id="0b60b73e-6685-43a8-bf2d-2e1d3e3ff537" class="bulleted-list"><li style="list-style-type:disc">有慢性疾病的人，無論年齡</li></ul><p id="5c0c5aaf-43a4-482f-988e-d503acda1493" class="">部分早產或患有心臟病的幼兒也有感染另一種呼吸道病毒 RSV 的風險。</p><p id="73e152f0-0bb1-4510-b8a8-2eef4eabeea2" class="">體溫超過攝氏37.8度為發燒，發燒意味著身體正在抵抗外來的感染，有可能是任何感染，而不只是新冠病毒。</p><p id="d0a7fa92-422c-4ebe-8e5c-de03512203ba" class="">最好要用體溫計測量體溫，但如果沒有體溫計，可以觸摸胸口或背部是否感覺發熱。</p><p id="b81369dc-3ef5-42da-80d5-f87651845b1f" class="">如果只是得了普通感冒不太可能會發燒，雖然發燒並不一定是感染新冠病毒，但有發燒症狀就必須進行新冠病毒檢測。</p><p id="7f9fc3c2-ad68-4f52-ad2c-e4af0c7395b3" class="">普通感冒或流行性感冒都有可能會咳嗽，以及其他症狀。</p><p id="d9e02c12-7ded-4259-ac74-1c59448939b7" class="">和普通感冒相比，流感通常發作得更突然，症狀更明顯也更嚴重。除了喉嚨痛和流鼻水或鼻塞等症狀之外，流感患者經常出現肌肉酸痛，發冷，頭痛，疲倦，全身性症狀較明顯。</p><p id="d8dfc881-7a56-480c-861a-40df385aeb96" class="">打噴嚏時噴出的飛沫也會傳染疾病，所以打噴嚏時還是要用紙巾遮蓋口鼻</p><p id="4302cc5f-2cb4-4ccf-ac97-ec48f4dea280" class="">普通感冒發作情況比較緩慢，程度也比較輕微，但會讓你感覺不舒服，除了咳嗽之外，可能還有打噴嚏，喉嚨痛，流鼻水等症狀，流感那種全身發冷，發燒，肌肉酸痛和頭痛等症狀比較少見。</p><p id="80e3a19f-aaf5-46a5-adb1-661662e65cf6" class="">新冠疾病出現的咳嗽症狀是在超過一個小時的時間裏咳嗽劇烈不停，或者是在24小時之內，出現三次以上的咳嗽劇烈不停的現象。</p><p id="b2594424-b15b-4d53-b099-0cfb1091daa7" class="">如果本身因為有其他慢性病或健康問題而經常咳嗽，那麼新冠病毒會讓咳嗽更加劇烈嚴重。</p><p id="216a4df8-8c0f-41f4-88c0-12283ea8265b" class="">如果有新出現的、持續性的咳嗽，就必須去做新冠病毒檢測。</p></div></article></body></html>

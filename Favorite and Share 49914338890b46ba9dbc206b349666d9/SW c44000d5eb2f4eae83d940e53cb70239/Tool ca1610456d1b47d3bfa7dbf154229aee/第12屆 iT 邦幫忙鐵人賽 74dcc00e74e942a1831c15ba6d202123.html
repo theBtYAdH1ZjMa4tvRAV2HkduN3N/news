@@ -1,0 +1,673 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>第12屆 iT 邦幫忙鐵人賽</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="74dcc00e-74e9-42a1-831c-15ba6d202123" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⛳</span></div><h1 class="page-title">第12屆 iT 邦幫忙鐵人賽</h1></header><div class="page-body"><p id="9699179b-9330-42e4-8f35-347a4151e763" class=""><a href="https://ithelp.ithome.com.tw/2020-12th-ironman">https://ithelp.ithome.com.tw/2020-12th-ironman</a></p><p id="6512ad90-3ad6-4646-ac23-cf61f309947d" class="">Sponser List :</p><ul id="4cc999cf-fdb3-4d63-be04-6f2daaef9e14" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/272990202896967/">IoT Taiwan</a></li></ul><ul id="a912cedc-d75b-4fe4-8119-c385928effcb" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/1852135541678378/">AI人工智慧與機器人社團</a></li></ul><ul id="f4a04c30-9b0b-444f-8456-f61cd48aeeb8" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/reactjs.tw/">ReactJS.TW</a></li></ul><ul id="7fdfdcc2-52b9-455b-8dea-170826b9aefb" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/node.js.tw/">node.js台灣</a></li></ul><ul id="32c379d5-9bea-4d9a-9887-d3bfd9811546" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/JSDC.TW/">JSDC Taiwan</a></li></ul><ul id="bfafb1de-3ef5-4d86-8c4f-22b6a67544b2" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/study4tw/">Study4.TW</a></li></ul><ul id="980be755-13f4-4ba9-abe7-0c84cb9d3724" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/flink.tw/">Taiwan Flink User Group</a></li></ul><ul id="cba85492-0390-4cfa-8857-d9ac9ff8e501" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/HITCON/">台灣駭客年會 HITCON 聊天交流區</a></li></ul><ul id="7f0d5b3a-9a37-4c52-a5c7-b82d1cb40e02" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/HITCONGIRLS/">HITCON GIRLS</a></li></ul><ul id="2c11181c-464b-48a8-abb7-7833f3b893e3" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/augularjs.tw/">Angular Taiwan</a></li></ul><ul id="9f3d92a1-5fce-4fb0-a28b-75d355a68cfd" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/ai.tuesday/">A.I and data science in Taiwan</a></li></ul><ul id="e2fcfe5f-5019-4481-af47-b25f3871c0bd" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/RLadiesTaipei/">R-Ladies Taipei</a></li></ul><ul id="6fbed219-8a5b-4a9d-9af0-7cad76064c08" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/DevOpsTaiwan/">DevOps Taiwan</a></li></ul><ul id="fe2d186b-a149-4c66-b5f6-17e77c0d4376" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/laravel.tw/">laravel 台灣</a></li></ul><ul id="6ab61560-fcbb-49ab-a509-2ad5f360d4d6" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/kotlintwn/">Taiwan Kotlin User Group</a></li></ul><ul id="67f7ffe6-3ee5-4a3e-be5c-036c45fec994" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/117755722221972/">Kotlin Taipei</a></li></ul><ul id="eb9f1b8f-a69e-4a3e-8737-fae956b0529d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/djangogirls.taiwan/">Django Girls Taiwan</a></li></ul><ul id="376b79fd-178c-401e-9390-d35dbe92fafe" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/f2e.tw/">Front-End Developers Taiwan</a></li></ul><ul id="4431b321-6ffd-4efc-ab1a-9c67606f9229" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/javascript.tw/">JavaScript.tw</a></li></ul><ul id="8a6b6986-fd08-40e0-ae06-80c37b1b136d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/dataengineering.tw/">臺灣資料工程協會</a></li></ul><ul id="8dafb285-9da1-431d-9c3b-1935606a9736" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/hadoop.tw/">Taiwan Hadoop User Group</a></li></ul><ul id="1dda04fe-190a-491a-b512-d2e3fa766660" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/graphql.tw/">GraphQL Taiwan</a></li></ul><ul id="33d3a890-461e-4c62-9825-5a31b38f7711" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/smartofeverything/">智慧家庭實驗室 - 基於人工智慧+物聯網的AIoT居家設計</a></li></ul><ul id="e8466751-380c-4f82-bfaf-86fdfb00e765" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/git.tw/">Git.tw</a></li></ul><ul id="e39cb67c-4d00-43fb-8674-3009059d3f4b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/spark.tw/">Taiwan Spark User Group</a></li></ul><ul id="a4d1e3d7-6b1f-4a7c-9cd4-ba2116925e83" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/142197385837507/">Ruby Taiwan</a></li></ul><ul id="b644c519-6cf9-4c81-bb98-040f7c929a71" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/twjug/">Taiwan Java User Group</a></li></ul><ul id="4877b76d-1fb0-40a1-84de-7c0865ac48e2" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/PythonDataScience/">Python 資料科學與人工智慧</a></li></ul><ul id="17ff28ec-a077-4441-b677-63f3a4e65641" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/AzureTWUG/">azure taiwan user group</a></li></ul><ul id="bd76025a-9411-4f7a-bd58-f9ae02cf12f0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/vuejs.tw/">Vue.js Taiwan 台灣</a></li></ul><ul id="371eb546-d05d-4dc7-aeb9-6ab534bf152f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/elastictaiwan/">elasticsearch taiwan - elk 台灣臉書群</a></li></ul><ul id="c5abdf4b-e4aa-420a-ab36-00466e5cc6b0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/AgileALM.TW/">DevOps、敏捷開發、及ALM台灣社群</a></li></ul><ul id="394ccea0-97c7-432b-951a-f6110a33afd4" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/638953292826177/">Agile Testing in Taiwan</a></li></ul><ul id="30b26834-61b2-4d8e-bf4e-c4047d8d2014" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/179345672472/">Scrum Community in Taiwan</a></li></ul><ul id="85cd4a63-aa78-4f4a-ba56-d2f41703a3c0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/laragirlstw/">LaraGirls</a></li></ul><ul id="681c35d7-0a59-4c75-a56c-b1d77a503ac3" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/2027602154187130/">PyTorch Taiwan</a></li></ul><ul id="a279d629-c677-4b47-8ca8-1c1a7ad05dd9" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/1920310881349899/">AI Startups Taiwan</a></li></ul><ul id="a18a737d-9237-4fc6-be2a-8c9adce1acb5" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/cloudnative.tw/">Cloud Native Taiwan User Group</a></li></ul><ul id="3ffaab61-4a03-4761-a112-519a73df5cbe" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/1948109392087807/">深度機器學習 線上讀書會</a></li></ul><ul id="eeb54610-655b-438a-88fd-503e0d44db74" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/actclub.tw/">台灣敏捷協會 ACT</a></li></ul><ul id="a43ffeb6-286d-4d35-ba2d-43a627670f4e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/205835109792195/">Ai人工智慧/機器人學習 交流俱樂部</a></li></ul><ul id="953b9dab-0ffb-4a39-814f-7b9f7764550f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/906048196159262/">react 線上讀書會</a></li></ul><ul id="09fdd38e-b2e3-4f1c-8703-76e7d1f06c5d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/angularstudygroup/">Angular 線上讀書會</a></li></ul><ul id="5b65a46b-9891-4c64-b73b-d76e45515c01" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.facebook.com/groups/mdbusergroup">MongoDB User Group TW</a></li></ul><p id="d56b4a27-ef83-4498-9936-3a13dc46dcfb" class="">
+</p><p id="f1a0fdc8-5810-4837-9701-a87ba3bfee64" class="">
+</p><p id="d847514f-e71c-497b-b7d7-df6186c5206e" class="">
+</p><p id="91f41da8-fdaa-4804-bf58-e95cd04e8909" class="">
+</p><ul id="1f801473-e2d5-4184-915d-ebeb375d7cd3" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/contest?tab=hot#ir-list"><strong>熱門文章</strong></a></li></ul><ul id="ee59daa1-d015-4257-a08f-721f894eda0c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"></a><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"><strong>Security</strong></a> <a href="https://ithelp.ithome.com.tw/users/20129897/ironman"> seadog007</a> 於 2020-10-02 發表 ｜ 204736 次瀏覽 ｜<figure id="13eb5524-d88b-438d-af1b-1416da9cfb2f" class="image"><a href="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"><img src="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"/></a></figure><p id="4543cbbe-c31e-4ff1-99cc-422280e7fc75" class=""><a href="https://ithelp.ithome.com.tw/users/20129897/ironman/3431">從 0 開始的 Web Security</a> 系列 第 17 天</p><h1 id="6f36c8e4-d348-49bf-a334-053bbbf1a158" class=""><strong>Day 17 網路層攻擊實例 - IP Spoofing</strong></h1><p id="11a17aee-d1e8-4912-8f4b-8daabdf419ed" class="">昨天我們講到了 OSI L3 網路層的攻擊向量 而我們今天就要來實作其中一種 也就是在網際網路上最常見到的一種攻擊 IP Spoofing IP Spoof...</p><figure id="27bee4e4-834d-4f0e-b3f3-40c5235506ed" class="image"><a href="https://member.ithome.com.tw/avatars/151357?s=ithelp"><img src="https://member.ithome.com.tw/avatars/151357?s=ithelp"/></a></figure><p id="085a0979-71e7-4003-8c35-062d6730331d" class="">團隊<a href="https://ithelp.ithome.com.tw/2020-12th-ironman/signup/team/139">Seal and Friends</a></p></li></ul><ul id="7c8736d0-3a14-409d-b592-bf472e2ac44a" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"></a><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"><strong>Security</strong></a> <a href="https://ithelp.ithome.com.tw/users/20129897/ironman"> seadog007</a> 於 2020-10-03 發表 ｜ 186783 次瀏覽 ｜<figure id="bec48739-c9cb-424b-8101-f693101e2ed5" class="image"><a href="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"><img src="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"/></a></figure><p id="003d129c-da07-4e3e-a256-3e7625d29b08" class=""><a href="https://ithelp.ithome.com.tw/users/20129897/ironman/3431">從 0 開始的 Web Security</a> 系列 第 18 天</p><h1 id="a8f1632d-8ef8-4e18-af54-b5473c5c43b6" class=""><strong>Day 18 OSI L1 ~ L3 綜合威脅</strong></h1><p id="b185cf14-d343-4476-8b89-ab13993bffcd" class="">我們在前一週多的時間，看到了 L1 ~ L3 的不同攻擊 而我們今天就會來聊聊這些攻擊要如何帶給一般使用者威脅 網路架構 在現今網路架構下，一般終端用戶不外...</p><figure id="39a19536-e230-49df-bb06-bdd358dc2bfb" class="image"><a href="https://member.ithome.com.tw/avatars/151357?s=ithelp"><img src="https://member.ithome.com.tw/avatars/151357?s=ithelp"/></a></figure><p id="9620ffa5-3f37-4b1c-a63e-c2c7d9e217bb" class="">團隊<a href="https://ithelp.ithome.com.tw/2020-12th-ironman/signup/team/139">Seal and Friends</a></p></li></ul><ul id="c2fe959c-e88c-460c-8a87-72ca4c53b3c8" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"></a><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"><strong>Security</strong></a> <a href="https://ithelp.ithome.com.tw/users/20129897/ironman"> seadog007</a> 於 2020-10-04 發表 ｜ 178068 次瀏覽 ｜<figure id="97d5f1d3-b200-47f5-9045-12dadac62fff" class="image"><a href="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"><img src="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"/></a></figure><p id="2b64d7d1-cfff-45b9-abac-847fd319d1fd" class=""><a href="https://ithelp.ithome.com.tw/users/20129897/ironman/3431">從 0 開始的 Web Security</a> 系列 第 19 天</p><h1 id="5d500ca0-3106-46cb-955a-7c095097fc68" class=""><strong>Day 19 BGP Protocol (1)</strong></h1><p id="65b9217c-e974-44a7-8cd9-ca7b8af54b2c" class="">在之前 Day 5 有說到網際網路的路由處理與交換原則 但大家有沒有想過，不同 AS 之間是怎麼彼此交換路由的呢？ 在 Day 5 的講解中，只有說到 AS...</p><figure id="30da2e43-0b45-426a-af9e-c0b39b6b175e" class="image"><a href="https://member.ithome.com.tw/avatars/151357?s=ithelp"><img src="https://member.ithome.com.tw/avatars/151357?s=ithelp"/></a></figure><p id="ba664b49-eeff-4a69-80ac-2cb5ab1e4428" class="">團隊<a href="https://ithelp.ithome.com.tw/2020-12th-ironman/signup/team/139">Seal and Friends</a></p></li></ul><ul id="3ec7431a-24d1-41d9-b5a9-481310ac05c7" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"></a><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"><strong>Security</strong></a> <a href="https://ithelp.ithome.com.tw/users/20129897/ironman"> seadog007</a> 於 2020-10-05 發表 ｜ 167698 次瀏覽 ｜<figure id="1de391f3-3b6c-4e70-8fa2-9df037dc6d2e" class="image"><a href="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"><img src="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"/></a></figure><p id="f682ad17-4c88-4fad-8520-01fd8982658a" class=""><a href="https://ithelp.ithome.com.tw/users/20129897/ironman/3431">從 0 開始的 Web Security</a> 系列 第 20 天</p><h1 id="c94537f0-cb1b-4cf0-b73c-ecdfd644aa58" class=""><strong>Day 20 BGP Protocol (2)</strong></h1><p id="2b02eb52-45eb-4a92-a9db-2a03d3161e11" class="">昨天我們講解了一下 BGP 路由協定的一些基本概念 今天我們將會講解 BGP 實際傳輸封包與實際案例的分析 BGP 封包類型 BGP 主要有四種類型的封包，...</p><figure id="746889b9-8fc8-434d-a9d0-f2a4bb08775c" class="image"><a href="https://member.ithome.com.tw/avatars/151357?s=ithelp"><img src="https://member.ithome.com.tw/avatars/151357?s=ithelp"/></a></figure><p id="458420cb-2df7-41da-8438-221a3b19ce5c" class="">團隊<a href="https://ithelp.ithome.com.tw/2020-12th-ironman/signup/team/139">Seal and Friends</a></p></li></ul><ul id="bda9b9f4-f384-4c65-8c02-189ee514e4da" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"></a><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"><strong>Security</strong></a> <a href="https://ithelp.ithome.com.tw/users/20129897/ironman"> seadog007</a> 於 2020-10-06 發表 ｜ 167238 次瀏覽 ｜<figure id="2d76a399-b42d-4e02-88cc-57f7cf952f83" class="image"><a href="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"><img src="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"/></a></figure><p id="56b07eed-2820-4480-9318-fe16bbc49045" class=""><a href="https://ithelp.ithome.com.tw/users/20129897/ironman/3431">從 0 開始的 Web Security</a> 系列 第 21 天</p><h1 id="95641300-a9d5-4d76-bcd1-bb380472770a" class=""><strong>Day 21 BGP 與網路安全</strong></h1><p id="df9009cc-92b0-4bee-86fc-f76f01fe83ef" class="">前兩天我們看到了 BGP 的基本運作與網路封包 而我們今天就要來談談 BGP 與網際網路安全的關係 Internet Routing Security BG...</p><figure id="87dd69fe-45d4-4eed-ac03-99327b602ab6" class="image"><a href="https://member.ithome.com.tw/avatars/151357?s=ithelp"><img src="https://member.ithome.com.tw/avatars/151357?s=ithelp"/></a></figure><p id="6399abdb-8efd-491a-8c5b-032d495bc944" class="">團隊<a href="https://ithelp.ithome.com.tw/2020-12th-ironman/signup/team/139">Seal and Friends</a></p></li></ul><ul id="79bf1e76-828a-4bcd-8f28-11b9f79e21cb" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"></a><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"><strong>Security</strong></a> <a href="https://ithelp.ithome.com.tw/users/20129897/ironman"> seadog007</a> 於 2020-09-26 發表 ｜ 78292 次瀏覽 ｜<figure id="775221f5-ad83-48e3-ad7f-5e72d7405f81" class="image"><a href="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"><img src="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"/></a></figure><p id="f933332f-6db2-4016-a75d-3274f1aa827e" class=""><a href="https://ithelp.ithome.com.tw/users/20129897/ironman/3431">從 0 開始的 Web Security</a> 系列 第 11 天</p><h1 id="4b5bba67-a714-4730-b832-a6f8f3d16e09" class=""><strong>Day 11 攻擊向量 (2) - 連結層 (OSI L2)</strong></h1><p id="845a4de9-4849-4b35-b479-7dc92b61ff50" class="">前幾天我們看到了 Layer 1 實體層的安全問題與實作 而今天我們將會看到下一層 Layer 2 連結層的一些常見的協定安全問題 OSI Layer 2...</p><figure id="bbbe55df-d520-4b0b-906a-021dc431e6dc" class="image"><a href="https://member.ithome.com.tw/avatars/151357?s=ithelp"><img src="https://member.ithome.com.tw/avatars/151357?s=ithelp"/></a></figure><p id="d96d3e68-6eed-439a-9246-f27ad86b245d" class="">團隊<a href="https://ithelp.ithome.com.tw/2020-12th-ironman/signup/team/139">Seal and Friends</a></p></li></ul><ul id="e9cd8b1d-0e4e-41ed-aa1a-e265ba4cc929" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"></a><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"><strong>Security</strong></a> <a href="https://ithelp.ithome.com.tw/users/20129897/ironman"> seadog007</a> 於 2020-09-25 發表 ｜ 77741 次瀏覽 ｜<figure id="5d7ecc08-ecf2-40fe-8788-37ae8e698c9f" class="image"><a href="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"><img src="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"/></a></figure><p id="8326c49d-c873-4253-b5ce-eef537c53d7b" class=""><a href="https://ithelp.ithome.com.tw/users/20129897/ironman/3431">從 0 開始的 Web Security</a> 系列 第 10 天</p><h1 id="b3f3fbba-9926-4216-abe5-84300feb6eea" class=""><strong>Day 10 物理層攻擊實作 - Wireless Security</strong></h1><p id="4dc7f151-24e3-4a5e-9109-9e3b747e9d67" class="">在前兩天我們看到了有實體的傳輸安全 而今天要介紹的無線安全，則是截然不同的領域 無線 vs. 有線 無線傳輸與有線傳輸最大的不同在於 無線電波使用無線電進行...</p><figure id="b15ff26f-b1a0-46d7-bd52-73104909f636" class="image"><a href="https://member.ithome.com.tw/avatars/151357?s=ithelp"><img src="https://member.ithome.com.tw/avatars/151357?s=ithelp"/></a></figure><p id="90300f48-f687-4fc3-89b6-45d31894682b" class="">團隊<a href="https://ithelp.ithome.com.tw/2020-12th-ironman/signup/team/139">Seal and Friends</a></p></li></ul><ul id="9d6451d0-7713-4429-94bd-d242316ee8cf" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"></a><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"><strong>Security</strong></a> <a href="https://ithelp.ithome.com.tw/users/20129897/ironman"> seadog007</a> 於 2020-09-23 發表 ｜ 76990 次瀏覽 ｜<figure id="3efd805d-dc68-442f-a02e-6133a188b213" class="image"><a href="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"><img src="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"/></a></figure><p id="0e2a8a8b-f84c-431a-8bb3-9a1823b90a8a" class=""><a href="https://ithelp.ithome.com.tw/users/20129897/ironman/3431">從 0 開始的 Web Security</a> 系列 第 8 天</p><h1 id="3537600f-20e6-45d6-8be8-14cc49e13585" class=""><strong>Day 8 物理層攻擊實作 - Ethernet Tapping</strong></h1><p id="104726d2-c562-43d6-8e0f-cc12b0117094" class="">Day 8 物理層攻擊實作 - Ethernet Tapping 昨天介紹了不同介質的 Layer 1 攻擊 不如我們今天就來實作一個吧 我們今天先較簡單的...</p><figure id="4de5e7c1-3530-47ba-b60c-4b929c2ab743" class="image"><a href="https://member.ithome.com.tw/avatars/151357?s=ithelp"><img src="https://member.ithome.com.tw/avatars/151357?s=ithelp"/></a></figure><p id="ce21ec47-0913-4b44-b390-cb6847f09b66" class="">團隊<a href="https://ithelp.ithome.com.tw/2020-12th-ironman/signup/team/139">Seal and Friends</a></p></li></ul><ul id="6ac8a618-307b-473c-9acb-f9f418e83b24" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"></a><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"><strong>Security</strong></a> <a href="https://ithelp.ithome.com.tw/users/20129897/ironman"> seadog007</a> 於 2020-09-27 發表 ｜ 73838 次瀏覽 ｜<figure id="97936d11-d358-4e04-8b21-379d9e6ec7a9" class="image"><a href="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"><img src="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"/></a></figure><p id="312a83f6-a7e2-4ba0-afb0-4a8755a2e926" class=""><a href="https://ithelp.ithome.com.tw/users/20129897/ironman/3431">從 0 開始的 Web Security</a> 系列 第 12 天</p><h1 id="fed3c7d6-922f-44b9-933e-a45f634a53c8" class=""><strong>Day 12 連結層攻擊實作 - MAC Flooding</strong></h1><p id="f53846fe-a1be-4d14-a212-f88e87ee1729" class="">今天開始將會有一連串的 L2 攻擊實作 因為時間比較趕（還我休息的假日阿 QQ） 所以我們先來講解 MAC Flooding 這個攻擊 MAC Forwar...</p><figure id="4d18ca10-f3ab-4b97-8de9-255f8d999946" class="image"><a href="https://member.ithome.com.tw/avatars/151357?s=ithelp"><img src="https://member.ithome.com.tw/avatars/151357?s=ithelp"/></a></figure><p id="ba7c84a8-a9bc-4aca-ae7b-204d9a44ecd4" class="">團隊<a href="https://ithelp.ithome.com.tw/2020-12th-ironman/signup/team/139">Seal and Friends</a></p></li></ul><ul id="55db760f-8e57-4d98-9c1f-b527d289e00d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"></a><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/security"><strong>Security</strong></a> <a href="https://ithelp.ithome.com.tw/users/20129897/ironman"> seadog007</a> 於 2020-09-24 發表 ｜ 73794 次瀏覽 ｜<figure id="24185a00-da55-48aa-be30-36c7c2558467" class="image"><a href="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"><img src="https://ithelp.ithome.com.tw/static/2020-12th-ironman/images/signup/group/security.png"/></a></figure><p id="3a06610f-a5ac-4a03-b4a8-64399214764b" class=""><a href="https://ithelp.ithome.com.tw/users/20129897/ironman/3431">從 0 開始的 Web Security</a> 系列 第 9 天</p><h1 id="2017b02b-12a5-41c2-a766-8b0106ec0883" class=""><strong>Day 9 物理層攻擊實作 - Fiber Tapping</strong></h1><p id="b869b8cb-4968-4cda-88f2-6c69b806a51c" class="">昨天我們看到了雙絞線的監聽實作 而今天我們就來看看光纖的監聽吧 先向大家道歉 QQ 我雖然有光纖，但放在學校，所以今天只能講解一些原理與講解別人實作 今天也...</p><figure id="ce0f6e6a-0fa0-4ff6-bf89-11c51398c228" class="image"><a href="https://member.ithome.com.tw/avatars/151357?s=ithelp"><img src="https://member.ithome.com.tw/avatars/151357?s=ithelp"/></a></figure><p id="b24abc3a-f161-4c41-aba2-6dafb1ca06b3" class="">團隊<a href="https://ithelp.ithome.com.tw/2020-12th-ironman/signup/team/139">Seal and Friends</a></p></li></ul><ul id="1824b98a-584a-4837-a70b-614749fe4c13" class="bulleted-list"><li style="list-style-type:disc">上一頁</li></ul><ul id="a2ec3765-93fa-48f2-af10-58763c8e098e" class="bulleted-list"><li style="list-style-type:disc">1</li></ul><ul id="ef79a4bf-4359-47d8-a64f-a18b9a6c9dc7" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/contest?page=2#ir-list">2</a></li></ul><ul id="134c10bf-e870-43a5-95f6-287934886688" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/contest?page=3#ir-list">3</a></li></ul><ul id="dc08cf01-062e-41c8-9ed2-38931a9b4513" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/contest?page=4#ir-list">4</a></li></ul><ul id="4b573af4-60ce-4437-8356-54015d256f64" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/contest?page=5#ir-list">5</a></li></ul><ul id="6b311c14-7440-48e4-84ce-bc62c0652372" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/contest?page=6#ir-list">6</a></li></ul><ul id="cfb6ec76-54a8-4540-b395-cd5bbcbdb343" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/contest?page=7#ir-list">7</a></li></ul><ul id="1ca1707e-ebc3-4b47-adf9-3bd23c3e3475" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/contest?page=8#ir-list">8</a></li></ul><ul id="8968a3b8-c99f-4e15-810c-b99f13eb20e3" class="bulleted-list"><li style="list-style-type:disc">...</li></ul><ul id="8038a3ab-c956-43b2-8c29-69752adf5e6d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/contest?page=1188#ir-list">1188</a></li></ul><ul id="89f68ff9-a79d-4193-99a6-8cd0c78da390" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/contest?page=1189#ir-list">1189</a></li></ul><ul id="db9b631c-9f4d-4c38-bc5a-9cd60924981c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/2020-12th-ironman/contest?page=2#ir-list">下一頁</a></li></ul></div></article></body></html>

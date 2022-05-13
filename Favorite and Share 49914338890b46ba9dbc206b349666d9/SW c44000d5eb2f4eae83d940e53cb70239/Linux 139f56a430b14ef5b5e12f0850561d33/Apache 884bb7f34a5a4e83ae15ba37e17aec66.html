@@ -1,0 +1,767 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Apache</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="884bb7f3-4a5a-4e83-ae15-ba37e17aec66" class="page sans"><header><h1 class="page-title">Apache</h1></header><div class="page-body"><p id="8c086aef-1df1-4952-8850-5e79aaea35a0" class="">Apache
+<a href="http://lms.ctl.cyut.edu.tw/sysdata/53/20253/doc/bde3934073d34191/attach/1094276.htm">http://lms.ctl.cyut.edu.tw/sysdata/53/20253/doc/bde3934073d34191/attach/1094276.htm</a></p><p id="84c7aa49-71f7-4d59-9464-857a4f49a2e7" class="">Apache Http Server</p><p id="4ec7b908-7a22-4279-85e0-182e79b7a4b5" class="">一. 特性</p><p id="5543f095-6d52-40f3-8095-d2b12a04a155" class="">最有名的網站伺服器</p><p id="19ef7c2f-435f-4f13-9f87-84ca3fefb3f4" class="">不需收費的軟體</p><p id="97f7c8b3-2e2d-4634-8a39-466f63055231" class="">可以在Ms windows平台與Linux平台上執行</p><p id="6618936a-7a17-4962-879d-ba23c9b240de" class="">模組化的功能調整，支援動態載入模組</p><p id="db4c94b7-6da5-425a-a0a7-b1a8c74787a8" class="">安裝容易, 可用命令列與圖形介面安裝</p><p id="43be5868-bd07-488d-8e05-b8b030308d98" class=""><a href="http://www.apache.org/">http://www.apache.org</a></p><p id="29b25ff8-637f-41e0-97ea-08ee6a9a992d" class="">二. 啟動與停止</p><p id="5e5a73e1-3ce8-4061-83c6-b944b3d582c3" class="">若要啟動Apache，可執行以下指令：
+/etc/init.d/apache2 start</p><p id="ede6f434-463b-458e-b401-d870737db059" class="">若要停止Apache，可執行以下指令：
+/etc/init.d/apache2 stop</p><p id="e358e961-fd57-410f-9b5b-45c15fed532b" class="">當有設定改變, 若要重新啟動Apache，可執行以下指令：
+/etc/init.d/apache2 restart</p><p id="34cd7d4e-7160-4236-a290-57704ff194b1" class="">三. Apache伺服器目錄結構
+當安裝完Apache後, 相關的檔案與目錄結構如下:
+/usr/sbin</p><p id="bb1ad400-e782-444d-a035-c42ec6642b43" class="">可執行檔</p><p id="8dbdf76d-eb01-4a97-ae5c-93a16e35459f" class="">/etc/apache2/*</p><p id="7c724cb2-45ef-40ae-b016-4e2d6e987208" class="">設定檔</p><p id="a44f1b4c-719d-4fb3-8951-86016afe53ea" class="">/var/www
+資料網頁的預設根目錄</p><p id="8d5a5a1e-9e77-4e88-94cc-5dd6bf91defc" class="">/usr/lib/apache2/modules
+模組檔案</p><p id="cf7d7bb8-3053-4b51-ab1e-eee7756b714b" class="">/var/log/apache2/*</p><p id="c1466080-435a-4184-8d15-b61759bcaa42" class="">記錄檔</p><p id="2836cb08-0359-4511-951c-4a7b87257140" class="">/etc/init.d/apache2
+服務啟動檔案</p><p id="46cb9a7c-a647-4c3a-8f99-b2c85b67e382" class="">/etc/run/apache2.pid
+狀態檔</p><p id="9d86c541-3da5-4e72-beef-97bedf5264be" class="">四. 測試Apache是否安裝完成
+測試Apache是否安裝完成:</p><p id="b64d8369-3e2b-4955-b73c-3aac2d79a269" class="">輸入http://127.0.0.1, 或http://主機的IP位址.
+可以顯示網頁表示成功.�Y</p><p id="55af0778-3dbb-461c-a5c4-dead22ad0309" class="">Apache伺服器預設的相關設定:
+�U使用者帳號:www-data(UID:33)</p><p id="12e05a62-181e-4db7-94ca-8f1948fe79a4" class="">群組：www-data (GID:33)
+�U資料網頁的預設根目錄與檔案：/var/www/index.html</p><p id="1c2210b4-5586-40ff-9396-976516f2169e" class="">設定練習:</p><p id="4b0d9de5-e35b-4094-bee3-fd97bd81434a" class="">建立一個網頁如http://127.0.0.1/test/test.html
+1.試著改變/var/www/test資料夾的權限為700、744、755，</p><p id="c487dba9-0f66-41f2-a199-24d8de79f18d" class="">測試是否能夠正常連到http://127.0.0.1/test/test.html</p><p id="ccc9f88a-d0ec-4a25-b47b-9928e39800b1" class="">2.試著改變檔案test.html的權限為700、744、755，</p><p id="25714216-7729-42e8-907b-f1f92867cdfe" class="">測試是否能夠正常連到http://127.0.0.1/test/test.html</p><p id="7a807a83-c7a6-41ea-af6d-c25ad2f9b3a0" class="">五. Apache2伺服器設定檔
+主要設定檔：/etc/apache2/apache2.conf
+定義Apache伺服器的主要行為與環境變數</p><p id="222eee07-57c0-4bb3-b8a7-25ab6476db32" class="">apache2.conf中可以引入(include)的其他設定檔, 如下說明：
+/etc/apache2/envvars
+Apache環境變數</p><p id="cd254647-35f6-47df-874d-d071dda5c5f5" class="">/etc/apache2/httpd.conf
+網頁伺服器的變數設定：逾時值、最大連線數等…</p><p id="6fd47c1d-89e0-4914-a04d-7e6f76746371" class="">/etc/apache2/ports.conf
+Apache監聽的IP位址與通訊埠(port)</p><p id="4b4a1a72-3453-47d5-92f4-88d0e2a6f12a" class="">/etc/apache2/sites-available/
+可用虛擬主機的設定檔目錄</p><p id="84bce94a-4be6-4617-a1c4-5a7997aac22c" class="">/etc/apache2/sites-enabled/
+已啟用的虛擬主機的設定檔目錄</p><p id="1934bbac-68e0-44cc-b5df-53102159fcf3" class="">/etc/apache2/conf.d
+使用者自訂的的設定檔</p><p id="f210d2e9-3e83-4ea6-bcf1-dab0a29b57e5" class="">/etc/apache2/mods-available/
+可用模組(module)的目錄</p><p id="bfd9faa6-32f0-4fe6-ac14-44a17b8d4b1b" class="">/etc/apache2/mods-enabled/
+已啟用模組的目錄</p><p id="6db413f7-24f8-49a0-b23d-861c26a279ef" class="">六.啟動或關閉模組 (module)</p><p id="10580384-4376-4b1e-b0b8-f842069cf246" class="">如果要啟動模組，可以先在 mods-available 裡面寫好不同的模組設定檔。</p><p id="bc407138-abb1-42ef-b383-dbf462e40e1a" class="">當需要啟用這些模組時，再在mods-enabled目錄中建立 soft link 連接到 mods-available 來啟用。</p><p id="a8377d37-30a4-4f96-ae2e-a98c8a2ecf10" class="">察看可用模組(mods-available)設定檔：</p><p id="2b520f85-9d8c-4b0e-8b41-32b49d1bc184" class="">cyut@ubuntu:~$ ls /etc/apache2/mods-available/
+auth_dbm.load     deflate.load     ssl.conf            ssl.load
+auth_ldap.load    expires.load     php5.conf           suexec.load
+cache.load        ext_filter.load  php5.load           unique_id.load
+‧‧‧(略)‧‧‧</p><p id="c74ba707-6b49-4e09-871c-b6ed090d64f8" class="">察看啟用模組(mods-enabled)設定檔：</p><p id="7bd7750a-af99-4820-b69f-6b606ceea670" class="">cyut@ubuntu:~$ ls -l /etc/apache2/mods-enabled/
+...略...    cgi.load -&gt; /etc/apache2/mods-available/cgi.load
+...略...    php5.conf -&gt; /etc/apache2/mods-available/php5.conf
+...略...    php5.load -&gt; /etc/apache2/mods-available/php5.load
+...略...    userdir.conf -&gt; /etc/apache2/mods-available/userdir.conf
+...略...    userdir.load -&gt; /etc/apache2/mods-available/userdir.load</p><p id="0109a28f-1998-4de5-ac36-6c61cfc36a5d" class="">如以上範例，我們可以看到 Apache2有很多模組可以使用。當啟用 PHP或其他模組時, 可以發現這些啟用的模組</p><p id="365917a3-de52-46b9-a6f4-2629e1bbf453" class="">只不過是個符號連結檔，這些檔案會連接到 mods-availabe 裡面，只要刪除這些連結檔，就會關閉模組的使用。</p><p id="86123d6d-7fd9-468a-ba2c-59ee032bdad8" class="">其中模組有 load 和 conf 兩個檔，前者是負責讀入該模組的函式庫，後者是該模組的設定檔，所以啟用或刪除時</p><p id="5ed90594-608d-4c07-b639-67255c2123fc" class="">要兩個都建立或刪除符號連結。</p><p id="89d03b6d-a61e-4cdb-9557-0c8bb92f37fc" class="">關閉 PHP 模組範例 (刪除符號連結法)：</p><p id="f766d5dd-3157-4395-9352-76a9581a5203" class="">rm /etc/apache2/mods-enabled/php5.load
+rm /etc/apache2/mods-enabled/php5.conf
+/etc/init.d/apache2 restart</p><p id="4250067d-094e-4093-a4e5-632b7b8a960e" class="">啟用 PHP 模組範例 (建立符號連結法)：</p><p id="c6b41de4-6c57-40b6-a3f4-79513e9a910a" class="">ln -s /etc/apache2/mods-available/php5.load /etc/apache2/mods-enabled/php5.load
+ln -s /etc/apache2/mods-available/php5.conf /etc/apache2/mods-enabled/php5.conf
+/etc/init.d/apache2 restart</p><p id="4d9922c9-6b84-4ae6-b88c-cad9930398f6" class="">在 Ubuntu 裡面也有程式可以管理模組的啟動與關閉。</p><p id="f1a97c4c-974d-4b4e-8e43-07afb4f26bd9" class="">關閉 PHP 模組範例 ：</p><p id="db55aa1a-c6a5-4a49-8de8-9a85095a1413" class="">a2dismod php5
+/etc/init.d/apache2 restart</p><p id="8f524e3b-aadc-45df-b2d1-2229cbd3393e" class="">啟用 PHP 模組範例 ：</p><p id="c3be41c9-5324-466f-a26f-657c4fbba279" class="">a2enmod php5
+/etc/init.d/apache2 restart</p><p id="b01f204f-5551-4b59-972b-52d803e5ae5d" class="">六.啟動或關閉虛擬主機 (sites)</p><p id="e52e142c-b91c-4347-97e1-5438e7ef258e" class="">Apache2 安裝好以後，系統裡面只有一個虛擬主機(站台)，也就是預設根目錄在 /var/www 的那個網站。</p><p id="19b82a55-dc84-4355-b078-d0f94345db9e" class="">如果有需要, Apache2可以建立多個虛擬站台。</p><p id="660c0a6a-3e1e-4b37-84b6-4318190a1cff" class="">察看可用的站台：</p><p id="4bf9503f-dd34-4982-ba7e-6b4083daa36e" class="">cyut@ubuntu:~$  ls /etc/apache2/sites-available/
+default</p><p id="d35952da-e7d1-41c3-b645-9737cdf9d687" class="">察看啟用的站台：</p><p id="d17c15f5-2c7b-40d0-a623-bf9998fe8ab6" class="">cyut@ubuntu:~$ ls -l /etc/apache2/sites-enabled/
+...略...   000-default -&gt; /etc/apache2/sites-available/default</p><p id="7468047e-83d3-409c-8592-eac7f934eff5" class="">如以上範例，我們看到符號連結和之前模組啟用與關閉一樣，</p><p id="da4dd231-587a-45be-9bb1-f74e291d8ce1" class="">所以也可以直接建立或刪除符號連結，或者用工具程式進行啟用與關閉。</p><p id="81c085be-4c03-44f0-a180-07e44ce14c71" class="">七.增加虛擬主機</p><p id="b5a4e3d5-e9dd-4adb-9b14-2c1e805241dc" class="">虛擬主機(Virtual Host) 的定義是一台 Apache 主機可以處理超過一個 domain，</p><p id="76e96e62-c54b-4e88-95ea-1dffd6b75ff7" class="">例如有兩個網址都同時對應到該主機 IP，而主機能依照網址不同給與不同的網頁。</p><p id="9cc093eb-f6af-4fc5-864d-bb424a18d9f3" class="">所以用這種方式可以在同一台主機上架很多網站。</p><p id="253b4dbe-08b6-4a9b-aa6e-7bed40a1b12c" class="">Client 和 Server 溝通時，在 HTTP 1.1 協定中規定 Client 要在表頭送出 Host</p><p id="bc30223b-dfe7-4f30-9851-d8d8ae36250e" class="">告訴 Server 是要連到哪一個主機，因此 Server 可以依據這個判定要送回的網頁是哪一個。</p><p id="b75d37cc-aa11-4fbf-a964-1733c01dc068" class="">若要建立新的虛擬主機，首先要確定的是該網域已經設定好 DNS 紀錄，並將該紀錄指向主機的 IP。</p><p id="0961cb84-c776-4e11-ac20-919a16f4538b" class="">以下假設新增的虛擬主機 之網址是 <a href="http://www.cyut.org/">www.cyut.org</a>，而虛擬主機網頁放置的地方是 /home/cyut。</p><p id="ad133980-c29a-4a80-94ae-3b493430bd24" class="">設定練習:</p><p id="9fd9ed28-3632-4ed0-a5aa-071e7446203c" class="">由於預設主機的設定檔 default 已經是很完整的架構，我們就直接用它來當範本稍微修改給虛擬主機用。</p><p id="6af0645d-141c-410e-9960-f245674aa73b" class="">步驟一: 複製範本
+cd /etc/apache2/sites-available
+cp default cyut           # 這個 cyut 是自己設定的，可以自己命名</p><p id="a27a6cb2-c181-4930-9bc1-16eef79f7d14" class="">步驟二: 編輯這個新的設定檔。</p><p id="6516dcfc-50dc-4070-b417-82eab68bf772" class="">新的虛擬主機 /etc/apache2/sites-enabled/cyut 設定檔如下：</p><h1 id="a90469df-7b7b-486d-a822-7bb81ab3e8bd" class="">NameVirtualHost * # 這一行要註解起來</h1><p id="4d55ed89-8d05-4b7b-99a6-9b6303aa37e5" class="">DocumentRoot /home/cyut            # 修改網頁放置的根目錄
+ServerName <a href="http://www.cyut.org/">www.cyut.org</a>             # 加入該虛擬主機所傾聽的網域
+&lt;Directory /home/cyut&gt;             # 修改定義網頁權限的路徑
+Options Indexes FollowSymLinks MultiViews
+AllowOverride None
+Order allow,deny
+allow from all
+&lt;/Directory&gt;</p><p id="ad7e28d5-248e-4543-8a4e-3f75a8c78acd" class="">簡單的說，只有要改 4 個地方，先註解掉 NameVirtuHost 後，再修改兩個和根目錄有關的路徑，</p><p id="a8f00761-7eac-406a-9a20-3c02102dd3da" class="">還有加入新設定 ServerName，其他的地方都可以不需要更動。</p><p id="945c19e3-7428-4a10-849b-477e63118390" class="">啟用新的虛擬主機站台：
+a2ensite cyut
+/etc/init.d/apache2 restart</p><p id="ca789bbc-c456-46f8-9370-fbc071431080" class="">關閉 cyut 站台範例：</p><p id="6bc5d898-933e-4614-8445-6b94b4fbd5ba" class="">a2dissite cyut
+/etc/init.d/apache2 restart</p><p id="b2b45f8d-de7b-4db0-80bf-4427472e3320" class="">八. apache2.conf 設定</p><p id="520332aa-9a0a-4c75-a678-b507069679c1" class="">這裡精選在 apache2.conf 裡面比較重要的設定。</p><h1 id="0ec7e7a8-4020-4d38-9816-9668709fad18" class="">Apache Server 設定檔放置處</h1><p id="7555158c-97d8-4d67-b6f7-ddd31f69edc9" class="">ServerRoot &quot;/etc/apache2&quot;</p><h1 id="f5971e1f-0965-4291-98c8-84eead459d87" class="">Client 多久沒回應就 timeout，網路狀態不好可改大一點。</h1><p id="f78a9a57-7ce7-46b5-8b43-634501a432d2" class="">Timeout 300</p><h1 id="6d46f587-8293-4bf0-a204-0f6e1f0ba2f2" class="">KeepAlive 為是否開啟連續請求的功能，當打開時每次 Client 端建立連線後，</h1><h1 id="3518013f-d80d-4f38-9c6c-70583b19a20b" class="">可以要求數個檔案，而不必要重新建立連線。建議把它打開，會有比較好的效能。</h1><p id="6929eceb-c633-45ba-b02a-fe18b1e14b34" class="">KeepAlive On</p><h1 id="3e593d89-2dee-4275-8982-48c590ecae05" class="">MaxKeepAliveRequests 是每次 Client 端建立連線後，可以要求最大的檔案數，</h1><h1 id="4a71b082-c999-431d-a2ad-1ce62648e0fa" class="">讀者設成 0 為不限制，或者可以把它設高一點，尤其是在網頁很複雜的時候，</h1><h1 id="d8518588-38bb-4738-8b7f-af551a01bb85" class="">效能會有明顯改善。通常設 100 到 300 之間已經很夠用啦！</h1><p id="53a5b267-aac9-4db8-8122-893b69c0d960" class="">MaxKeepAliveRequests 100</p><h1 id="1e943fce-36da-4b49-abe9-9b56c1b41792" class="">KeepAliveTimeout 是當連續請求時，Clinet 端多久沒有在繼續請求就把他踢下線。</h1><h1 id="77a5cbe8-4cbf-44fc-b818-c7ac7be92b4a" class="">這個單位是秒鐘，不要開太大，不然資源可以會被這些不請求的 Client 端佔著。</h1><p id="24bcddea-7be3-48be-9a35-93837ad7de89" class="">KeepAliveTimeout 15</p><h1 id="51cddbd1-5092-4015-b4c9-46225f09e12f" class="">StartServers 為 Apache2 啟動時，會啟用幾個 processes，讀者可以透過 ps -aux</h1><h1 id="65510753-54b0-484e-8d9c-b0caa0fcbf5c" class="">來驗證。若您的網站流量很大，可以改大一點，但是若用量沒有那麼大，會浪費</h1><h1 id="ac926c34-1fbc-4a59-a91b-49a1ee581cd1" class="">系統資源，通常預設的 5 已經很夠用了。</h1><h1 id="569b419f-c9ed-4af6-a9ec-6b322f67b13b" class="">MinSpareServers 可閒置的最少 processes，通常都會設定的和 StartServers 一樣。</h1><h1 id="bab33e94-8462-4c30-9fe1-e752b00205c9" class="">MaxSpareServers 最大可閒置的 processes，若您的網站流量時大時小，那麼這個值</h1><h1 id="64110c99-f270-4754-9c04-f4dfd1327fb3" class="">可以設大一點，避免人多的時候要開新的 processes，但是設太大會增加系統資源。</h1><h1 id="4b770bdb-9cac-4833-9d72-ad9efdc7e8f9" class="">MaxClients 最多可以有幾個客戶端連線，預設的 20 似乎有點少，可以視您網站的</h1><h1 id="ec72d077-7189-443a-9ba9-9f3d6b1111d1" class="">規模改到 200 以上。但是預設不能超過 256，若要超過的話需要自己額外加上</h1><h1 id="720ad643-049f-4f79-9280-960f0292527c" class="">ServerLimit 的參數，定義最大可以有幾個 Client，這個值最大到 20000，若</h1><h1 id="f856c68c-a556-4301-a53c-a44eef532ab7" class="">還要在大的話就要修改原始碼的定義。</h1><h1 id="e9d23690-a14e-4d9d-84c0-3ccbcc9274f1" class="">MaxRequestsPerChild 每一個 processes 可以有多少個連線數要求。通常設成 0 為</h1><h1 id="e5858ea1-e9a9-482c-86f7-c4ead0b8f9cb" class="">不限制。</h1><p id="08f1c12e-53e2-4ca5-ba4c-688c763ea8b7" class="">&lt;IfModule prefork.c&gt;
+StartServers         5
+MinSpareServers      5
+MaxSpareServers     10</p><h1 id="5dcf6c01-a545-47d3-a6e3-0b445ed3bc75" class="">ServerLimit 3000 # 若 MaxClient 要大於 256，需要有這一個參數。</h1><p id="88284a5f-b58a-4499-a680-cf58ce28f1c5" class="">MaxClients          20
+MaxRequestsPerChild  0
+&lt;/IfModule&gt;</p><h1 id="a055a8de-2bd9-4e24-9cfe-4ac06e6e4877" class="">在設定檔內，還有其他 MPM 可以修改，如 worker 和 perchild 等，但這些在有</h1><h1 id="3a87604e-cf05-4d13-a264-1b7b7e8c6d3c" class="">PHP 的環境下不會使用到，所以讀者可以不要管他們。</h1><h1 id="766e343f-848a-4890-bc69-dcc52387eaa3" class="">Apache2 Server 執行時所用的帳號和群組，若沒有特別的理由，可以不用更動。</h1><p id="d15adfb5-204b-4f40-ae66-c9c8deeafe25" class="">User www-data
+Group www-data</p><h1 id="affb1e24-c736-46e4-a4d3-f4c5947439bb" class="">全域的錯誤紀錄檔放置處，個別虛擬主機的設定可以在 sites-available 另外指定。</h1><p id="491ed8ef-2f65-4aba-b208-2337d34102eb" class="">ErrorLog /var/log/apache2/error.log</p><h1 id="10def5e0-24b5-4061-9644-7bc710a9afe4" class="">後面那些 AddCharset 是指可以支援的編碼，預設都設好了，不要改動。</h1><p id="13885b00-4ea4-4857-ab39-f532db7a38c5" class="">#AddDefaultCharset	Big5
+AddCharset utf-8       .utf8
+AddCharset big5	       .big5 .b5</p><h1 id="49e5ddf7-255a-43c9-9e0f-cd42799eecd6" class="">若沒有明確指定網頁檔名，Apache2 會依序以下順序來嘗試送給 client 端瀏覽器</h1><p id="d6a78117-ef56-4dc5-8591-51246dc5bd24" class="">DirectoryIndex index.html index.cgi <a href="http://index.pl/">index.pl</a> index.php index.xhtml</p><p id="22954580-1a79-44d3-8fb9-8ce89e33a0f2" class="">操作練習:</p><p id="9747e456-7b41-47c7-9fc3-c4bc6856f37c" class="">試著在瀏覽器打入：<a href="http://127.0.0.1/error%E9%80%99%E5%80%8B%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E9%80%A3%E7%B5%90%EF%BC%8C">http://127.0.0.1/error這個不存在的連結，</a></p><p id="d935ea83-9cda-4ed1-9c91-2e7ac34d1dc3" class="">檢視看看/var/log/apache2/error.log 的檔案內容有沒有改變？</p><p id="59307368-5b1f-4743-b38b-a64f4cabde08" class="">九. 個別虛擬主機或網站的設定</p><p id="b50e19d5-5b2f-4df3-abb7-26c4088380c7" class="">在 apache2.conf 只作一些全域的設定，若要設定個別虛擬主機或網站的設定，</p><p id="97f05060-451c-48d4-87ea-c3ecb1225437" class="">需要修改的地方就在 /etc/apache2/sites-available/ 裡面。</p><p id="e0d0535c-58f5-41ee-a7ad-4e1b14cd8e42" class="">這裡介紹預設的網站 default 裡面的架構，其他額外增加的虛擬主機設定方式是一樣的。</p><p id="a9c4262b-0e53-4892-9e1f-451121a1c70c" class="">預設網頁 /etc/apache2/sites-available/default 的設定檔如下：</p><p id="b689c0c0-1e5e-4555-8575-a2c5d9f596fd" class="">NameVirtualHost *
+&lt;VirtualHost *&gt;
+ServerAdmin dbtsai@localhost        # 網頁管理者 E-Mail
+DocumentRoot /var/www              # 網頁放置的根目錄</p><h1 id="90fb2e7d-c6f1-47d2-b3c5-0696528f4476" class="">Options 裡面可以有許多參數，以下將個別簡介。</h1><h1 id="643462fd-8de1-4d36-81b4-18484d98c153" class="">Indexes 當 Client 找不到 index.html 等首頁時，就列出該目錄底下</h1><h1 id="070d8d3d-83a9-4799-8d09-ea6efbce975d" class="">所有檔案。因此有一點危險性存在，通常是建議關閉。</h1><h1 id="c8ff3c22-a52d-4db0-bfdd-cd4dc9eda93b" class="">FollowSymLinks 讓您在該目錄底下可以讀取到符號連結到非網頁根目錄內的</h1><h1 id="62f49df1-fd53-4a8a-94f5-4bbeaa93d583" class="">檔案。例如現在根目錄是 /var/www，我們建立一個從</h1><h1 id="29ac3bfb-8a78-4501-acc2-f5970ff8226f" class="">/home/web 建立一個 soft link 到 /var/www/web 後，</h1><h1 id="5a79e843-ea15-4166-a002-576bd45fe023" class="">若有開啟這個選項，才能讀取到 /var/www/web 的內容。</h1><h1 id="f25eded9-bd18-4b4c-829a-849c208034bf" class="">MultiViews 提供同一個網址有多國語言的功能。原來是依照 Client 送來</h1><h1 id="7b64e933-20c0-4f05-99cc-37783427e0b3" class="">的語言偏好 header 送回不同語言版本的網頁。例如 Google</h1><h1 id="ffaf7093-6abb-4e3a-9429-7d6b54c8a94b" class="">就是採用這種方式達成同一網址有多國語言的功能。</h1><h1 id="12182e14-560f-4259-ac9c-22e07d0e778e" class=""></h1><h1 id="66eb228e-4b7d-4935-b5e7-9df239a28f7a" class="">AllowOverride 和 .htacces 有關。 .htaccess 可以在網頁目錄下取代全域的</h1><h1 id="24fcd6b4-fa1e-449f-9e5a-5875e3cd13f7" class="">網站設定，這樣的好處是可以讓一般使用者不用有 root 權限就可以修改</h1><h1 id="b392dff2-1ff7-46c7-82f5-ecb378bc268c" class="">參數，使用彈性也會比較大。它可以設定的參數有以下幾個。</h1><h1 id="31287bc8-074c-43bb-b387-cbc810332500" class="">AuthConfig 可以在 .htaccess 裡面設定網頁認證的功能</h1><h1 id="153280d9-e81a-4d08-8b40-a638dffcc569" class="">Options 可以在 .htaccess 裡面重設 Options 選項</h1><h1 id="11965fe8-b04a-478b-9e0b-bd7696516eb7" class="">All 以上所有功能都能在 .htaccess 被重設</h1><h1 id="2b6c159c-54bb-4f4b-9003-4f8832aabd0c" class="">None 不使用 .htaccess 來重設變數</h1><pre id="466395e4-e329-4a95-afc2-c5cfce6ecc04" class="code code-wrap"><code>&lt;Directory /var/www/&gt;              # 定義該目錄的網頁權限
+	Options Indexes FollowSymLinks MultiViews
+	AllowOverride None
+	Order allow,deny
+	allow from all
+&lt;/Directory&gt;
+</code></pre><h1 id="bd24277b-f31b-43b6-b724-79cd83912595" class="">設定 CGI 程式相關參數</h1><pre id="2b2b1d6f-8a80-40f3-aa8c-5cec4cd04512" class="code code-wrap"><code>ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+&lt;Directory &quot;/usr/lib/cgi-bin&quot;&gt;
+	AllowOverride None
+	Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+	Order allow,deny
+	Allow from all
+&lt;/Directory&gt;
+</code></pre><h1 id="472e47c7-a2ab-449e-b581-84883fa59018" class="">錯誤紀錄檔放置的地方</h1><pre id="1f49e1a1-96cb-4017-ae55-ce0400021a70" class="code code-wrap"><code>ErrorLog /var/log/apache2/error.log
+</code></pre><h1 id="aa2c1fda-f5d0-458d-8978-bff5738775d3" class="">錯誤紀錄檔的紀錄層級，不同的設定會有不同的紀錄精細度。</h1><pre id="b76a7c98-3e84-4cc8-82c3-6b684650a3b9" class="code code-wrap"><code>LogLevel warn
+</code></pre><h1 id="2c854b43-f970-49cf-b84a-d2a23b8721b0" class="">瀏覽紀錄檔的放置處，裡面紀錄了 Client 端詳細資訊</h1><pre id="14de3ec2-b9e8-4e19-839b-a33bc3e27ca6" class="code code-wrap"><code>CustomLog /var/log/apache2/access.log combined
+ServerSignature On
+</code></pre><p id="0a042a0b-68d4-426e-a2d1-2ee59a6e254e" class="">&lt;/VirtualHost&gt;</p><p id="76b5c160-d017-4d97-87e9-e7449faf40c3" class="">操作練習:</p><p id="69122868-88cd-43b8-b1b6-d18cd1301613" class="">當 Client 找不到 index.html 等首頁時，就列出該目錄底下所有檔案。因此有危險性存在，建議關閉。</p><p id="73d522d4-317b-47f3-bdd5-3e576ec4e755" class="">關閉方法如下:</p><p id="2e424fcf-4a03-4374-9b92-a1d1d273eb97" class="">找出下列設定, 在Index前面加上-號, 例如 -Index, 再重新啟動Apache即可。</p><p id="d016c805-9b7f-471f-b299-1298204eb944" class="">Options Indexes FollowSymLinks MultiViews</p><p id="7575596a-2886-4e11-bcd2-393fb584a1a2" class="">接者進行測試, 重新連結網頁, 若找不到 index.html 等首頁時，就禁止看目錄內容了。</p><p id="49553555-98ba-41e0-951c-c334af97cabb" class="">十. 啟用個人網頁</p><p id="ecff905c-bae9-41cb-9815-1a5ac9e85d71" class="">Apache2 把使用者個人網頁獨立到一個額外的模組和設定檔。</p><p id="cae5b901-83ab-4490-ac9f-d3f303065a30" class="">啟用個人網頁：
+a2enmod userdir
+/etc/init.d/apache2 restart</p><p id="80b25bea-f0a1-49fd-adb0-a91a582a1c0e" class="">關閉個人網頁：
+a2dismod userdir
+/etc/init.d/apache2 restart</p><p id="3693fe9d-d88a-4806-bff8-9f6f77d7fd09" class="">個人網頁的設定可以不需要修改, 相關參數如下。</p><p id="0d8fa20c-8108-4e61-80a9-23de52509858" class="">個人網頁設定檔 /etc/apache2/mods-available/userdir.conf：
+&lt;IfModule mod_userdir.c&gt;</p><h1 id="70262b63-2254-4410-b916-eefe82bcaf65" class="">在使用者家目錄底下的 public_html 為個人網頁目錄</h1><pre id="701920a3-0bd0-44e5-bf2d-3a9de28997dd" class="code code-wrap"><code>    UserDir public_html
+</code></pre><h1 id="fe738976-2fd6-4071-b806-aaddcf102aa4" class="">關閉 root 不能使用個人網頁</h1><pre id="e378c591-b3a0-41f1-8194-c2797cffab37" class="code code-wrap"><code>    UserDir disabled root
+</code></pre><h1 id="6121e175-9255-4eea-ab53-717c0226fc2a" class="">以下是預設的個人網頁目錄設定，若讀者要修改成不是放在 public_html 的話，</h1><h1 id="539f5fbd-00ba-488d-ad83-204704bcc262" class="">要同時修改 UserDir 和 以下的 Directory 裡面的目錄位置。</h1><pre id="c29b1e68-dcc8-432e-9ff3-c85ecb2cdad8" class="code code-wrap"><code>    &lt;Directory /home/*/public_html&gt;
+            AllowOverride FileInfo AuthConfig Limit
+            Options MultiViews Indexes SymLinksIfOwnerMatch IncludesNoExec
+    &lt;/Directory&gt;
+</code></pre><p id="94579f74-2bc0-4bf5-9bdc-285f44453060" class="">&lt;/IfModule&gt;</p><p id="6f7e106c-fbea-48fe-9a01-b4868c5c4951" class="">設定好了以後，一般使用者可以在自己家目錄底下建立 public_html 的目錄來存放網頁，</p><p id="961f1e64-09d5-4b1f-8806-b9bda89f7001" class="">並且瀏覽器可以透過 <a href="http://127.0.0.1/~UserName/">http://127.0.0.1/~UserName/</a> 來連到該使用者的個人網頁，其中 UserName 是使用者的帳號。</p><p id="a7c16518-1519-4f4f-9837-fcd8f2bc89e1" class="">操作練習:</p><p id="0224347b-8e1e-4d31-b096-b5b3275ff4fc" class="">啟用UserDir的Apache模組，並試著建立一個網頁，能夠在以&quot;<a href="http://127.0.0.1/~%E5%B8%B3%E8%99%9F/">http://127.0.0.1/~帳號/</a>&quot; 的網址連線。</p><p id="94849d0a-b87f-4ba6-ae60-3600a40ad606" class="">
+</p><p id="1935e211-6c1b-495d-a919-236f0933b5f7" class="">
+</p><p id="104b3669-2571-4bd9-9753-d78c98b47d6c" class="">
+</p><p id="577e56f6-54cc-4fc6-8a6b-1ae68a1e64d2" class="">
+</p><p id="b3927b52-2e0d-46a6-8a62-2b46629e2601" class="">apache webdav</p><p id="828ac0c3-e5d3-45ad-b913-e9d9569a9fdd" class=""><a href="http://herb123456.pixnet.net/blog/post/1009884-%E3%80%90apache%E3%80%91webdav-%E7%9B%B8%E9%97%9C%E8%A8%AD%E5%AE%9A">http://herb123456.pixnet.net/blog/post/1009884-【apache】webdav-相關設定</a></p></div></article></body></html>

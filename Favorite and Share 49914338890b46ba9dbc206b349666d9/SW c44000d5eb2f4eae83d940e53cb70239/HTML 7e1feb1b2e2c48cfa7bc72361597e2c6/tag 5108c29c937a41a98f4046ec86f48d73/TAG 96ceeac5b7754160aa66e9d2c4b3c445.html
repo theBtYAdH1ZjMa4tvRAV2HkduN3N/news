@@ -1,0 +1,675 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>TAG</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="96ceeac5-b775-4160-aa66-e9d2c4b3c445" class="page sans"><header><h1 class="page-title">TAG</h1></header><div class="page-body"><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Title</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Tag</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Description</th></tr></thead><tbody><tr id="d92e8f33-971e-4bff-9fba-2776566ae61b"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20d92e8f33971e4bff9fba2776566ae61b.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_comment.asp">&lt;!--...--&gt;</a></td><td class="cell-hn}\">Defines a comment</td></tr><tr id="431341e9-ef9d-40ca-abb9-54e958bf26ee"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20431341e9ef9d40caabb954e958bf26ee.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_doctype.asp">&lt;!DOCTYPE&gt;</a></td><td class="cell-hn}\">Defines the document type</td></tr><tr id="ace90b23-4f69-43d1-bb58-603d178dbc97"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20ace90b234f6943d1bb58603d178dbc97.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_a.asp">&lt;a&gt;</a></td><td class="cell-hn}\">Defines a hyperlink</td></tr><tr id="dac19dd7-9530-443c-ac53-1875074e895e"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20dac19dd79530443cac531875074e895e.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_abbr.asp">&lt;abbr&gt;</a></td><td class="cell-hn}\">Defines an abbreviation or an acronym</td></tr><tr id="c3afb502-a2b7-490f-a846-05b1f275510a"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20c3afb502a2b7490fa84605b1f275510a.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_acronym.asp">&lt;acronym&gt;</a></td><td class="cell-hn}\">Not supported in HTML5. Use <a href="https://www.w3schools.com/tags/tag_abbr.asp">&lt;abbr&gt;</a> instead.Defines an acronym</td></tr><tr id="7cc99fab-5347-4d7a-bb61-a44867231654"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%207cc99fab53474d7abb61a44867231654.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_address.asp">&lt;address&gt;</a></td><td class="cell-hn}\">Defines contact information for the author/owner of a document</td></tr><tr id="8f942957-a086-4065-8a15-69d639d355b6"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%208f942957a08640658a1569d639d355b6.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_applet.asp">&lt;applet&gt;</a></td><td class="cell-hn}\">Not supported in HTML5. Use <a href="https://www.w3schools.com/tags/tag_embed.asp">&lt;embed&gt;</a> or <a href="https://www.w3schools.com/tags/tag_object.asp">&lt;object&gt;</a> instead.Defines an embedded applet</td></tr><tr id="452cc37b-27c6-4634-93a1-d85b835b2508"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20452cc37b27c6463493a1d85b835b2508.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_area.asp">&lt;area&gt;</a></td><td class="cell-hn}\">Defines an area inside an image map</td></tr><tr id="20882518-14b4-4815-9319-66ef830a2325"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%202088251814b44815931966ef830a2325.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_article.asp">&lt;article&gt;</a></td><td class="cell-hn}\">Defines an article</td></tr><tr id="015b5160-3727-4e1c-bab1-4575c2c552c4"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20015b516037274e1cbab14575c2c552c4.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_aside.asp">&lt;aside&gt;</a></td><td class="cell-hn}\">Defines content aside from the page content</td></tr><tr id="4a60f096-7a97-4064-a1ff-3a62eee85db6"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%204a60f0967a974064a1ff3a62eee85db6.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_audio.asp">&lt;audio&gt;</a></td><td class="cell-hn}\">Defines embedded sound content</td></tr><tr id="6c230d80-c54e-45eb-aff5-eb67fdb3d129"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%206c230d80c54e45ebaff5eb67fdb3d129.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_b.asp">&lt;b&gt;</a></td><td class="cell-hn}\">Defines bold text</td></tr><tr id="6aeacc86-cf15-4c0f-ba9a-443ced9af52b"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%206aeacc86cf154c0fba9a443ced9af52b.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_base.asp">&lt;base&gt;</a></td><td class="cell-hn}\">Specifies the base URL/target for all relative URLs in a document</td></tr><tr id="a1768b22-3156-45d7-85a4-ab88261aa758"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20a1768b22315645d785a4ab88261aa758.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_basefont.asp">&lt;basefont&gt;</a></td><td class="cell-hn}\">Not supported in HTML5. Use CSS instead.Specifies a default color, size, and font for all text in a document</td></tr><tr id="fe38091a-5a4b-4a51-a41c-4447aab71adb"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20fe38091a5a4b4a51a41c4447aab71adb.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_bdi.asp">&lt;bdi&gt;</a></td><td class="cell-hn}\">Isolates a part of text that might be formatted in a different direction 
+from other text outside it</td></tr><tr id="9064275d-d6f7-4485-9bcb-fd7bd2f4b7df"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%209064275dd6f744859bcbfd7bd2f4b7df.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_bdo.asp">&lt;bdo&gt;</a></td><td class="cell-hn}\">Overrides the current text direction</td></tr><tr id="d62d249a-0c76-4f88-b0a2-f785df9bc58f"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20d62d249a0c764f88b0a2f785df9bc58f.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_big.asp">&lt;big&gt;</a></td><td class="cell-hn}\">Not supported in HTML5. Use CSS instead.Defines big text</td></tr><tr id="aed7aeae-2314-4055-b6d3-943a287f0274"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20aed7aeae23144055b6d3943a287f0274.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_blockquote.asp">&lt;blockquote&gt;</a></td><td class="cell-hn}\">Defines a section that is quoted from another source</td></tr><tr id="502e4ab3-3e1b-4012-822d-75d85db069fd"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20502e4ab33e1b4012822d75d85db069fd.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_body.asp">&lt;body&gt;</a></td><td class="cell-hn}\">Defines the document&#x27;s body</td></tr><tr id="1928ab26-22ea-4cec-8f61-95ab7fa91369"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%201928ab2622ea4cec8f6195ab7fa91369.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_br.asp">&lt;br&gt;</a></td><td class="cell-hn}\">Defines a single line break</td></tr><tr id="eb47fdd4-01f3-4bcb-8774-dce7d3cb9e1a"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20eb47fdd401f34bcb8774dce7d3cb9e1a.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_button.asp">&lt;button&gt;</a></td><td class="cell-hn}\">Defines a clickable button</td></tr><tr id="5c9726a4-3fed-4127-b278-3c6c4dcfe129"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%205c9726a43fed4127b2783c6c4dcfe129.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_canvas.asp">&lt;canvas&gt;</a></td><td class="cell-hn}\">Used to draw graphics, on the fly, via scripting (usually JavaScript)</td></tr><tr id="f4a55337-d63f-45e9-9415-720fce1c7027"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20f4a55337d63f45e99415720fce1c7027.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_caption.asp">&lt;caption&gt;</a></td><td class="cell-hn}\">Defines a table caption</td></tr><tr id="849c52c6-426a-473a-99bc-e900bce13242"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20849c52c6426a473a99bce900bce13242.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_center.asp">&lt;center&gt;</a></td><td class="cell-hn}\">Not supported in HTML5. Use CSS instead.Defines centered text</td></tr><tr id="f53d424d-8ce7-4d90-9873-e5f2c1d920a4"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20f53d424d8ce74d909873e5f2c1d920a4.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_cite.asp">&lt;cite&gt;</a></td><td class="cell-hn}\">Defines the title of a work</td></tr><tr id="ca169ab4-f000-40b4-bddc-2c650101c5fe"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20ca169ab4f00040b4bddc2c650101c5fe.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_code.asp">&lt;code&gt;</a></td><td class="cell-hn}\">Defines a piece of computer code</td></tr><tr id="2adf7c4f-a0f0-4bf6-a88a-36939c4cd5bf"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%202adf7c4fa0f04bf6a88a36939c4cd5bf.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_col.asp">&lt;col&gt;</a></td><td class="cell-hn}\">Specifies column properties for each column within a &lt;colgroup&gt; element</td></tr><tr id="9f954bf4-aa72-4450-9d71-7fd589e769c7"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%209f954bf4aa7244509d717fd589e769c7.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_colgroup.asp">&lt;colgroup&gt;</a></td><td class="cell-hn}\">Specifies a group of one or more columns in a table for formatting</td></tr><tr id="3f72fd14-af5a-4110-84b0-0084825124f9"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%203f72fd14af5a411084b00084825124f9.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_data.asp">&lt;data&gt;</a></td><td class="cell-hn}\">Adds a machine-readable 
+translation of a given content</td></tr><tr id="31130cad-d937-4d3a-9f68-36e446f07798"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2031130cadd9374d3a9f6836e446f07798.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_datalist.asp">&lt;datalist&gt;</a></td><td class="cell-hn}\">Specifies a list of pre-defined options for input controls</td></tr><tr id="99036629-02de-420b-b7ac-9c0f918e175b"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%209903662902de420bb7ac9c0f918e175b.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_dd.asp">&lt;dd&gt;</a></td><td class="cell-hn}\">Defines a description/value of a term in a description list</td></tr><tr id="a00e9ecc-45f2-4ae7-8084-f44cc9a57e01"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20a00e9ecc45f24ae78084f44cc9a57e01.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_del.asp">&lt;del&gt;</a></td><td class="cell-hn}\">Defines text that has been deleted from a document</td></tr><tr id="33d24a77-ed43-4d4b-845b-aef900f70477"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2033d24a77ed434d4b845baef900f70477.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_details.asp">&lt;details&gt;</a></td><td class="cell-hn}\">Defines additional details that the user can view or hide</td></tr><tr id="e57e3abe-cb4d-4e9f-aa13-932479e3166c"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20e57e3abecb4d4e9faa13932479e3166c.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_dfn.asp">&lt;dfn&gt;</a></td><td class="cell-hn}\">Specifies a term that is going to be defined within the content</td></tr><tr id="9bcdd13a-5a67-4643-99fe-b51281fdbd42"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%209bcdd13a5a67464399feb51281fdbd42.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_dialog.asp">&lt;dialog&gt;</a></td><td class="cell-hn}\">Defines a dialog box or window</td></tr><tr id="e331ca57-3bc7-409c-a769-c414e9aab6b0"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20e331ca573bc7409ca769c414e9aab6b0.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_dir.asp">&lt;dir&gt;</a></td><td class="cell-hn}\">Not supported in HTML5. Use <a href="https://www.w3schools.com/tags/tag_ul.asp">&lt;ul&gt;</a> instead.Defines a directory list</td></tr><tr id="93e2360d-7979-4987-b220-5eee13678f04"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2093e2360d79794987b2205eee13678f04.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_div.asp">&lt;div&gt;</a></td><td class="cell-hn}\">Defines a section in a document</td></tr><tr id="38954ef6-e3a4-43f0-b470-40c9af2b383a"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2038954ef6e3a443f0b47040c9af2b383a.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_dl.asp">&lt;dl&gt;</a></td><td class="cell-hn}\">Defines a description list</td></tr><tr id="7da4ae4f-51b6-4e26-8135-20e91d6fd7fd"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%207da4ae4f51b64e26813520e91d6fd7fd.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_dt.asp">&lt;dt&gt;</a></td><td class="cell-hn}\">Defines a term/name in a description list</td></tr><tr id="6a24c7ae-cf02-4103-9b2d-03a0dba47c63"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%206a24c7aecf0241039b2d03a0dba47c63.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_em.asp">&lt;em&gt;</a></td><td class="cell-hn}\">Defines emphasized text</td></tr><tr id="88f8b55a-3d5f-4bec-aa53-295ed30f56a0"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2088f8b55a3d5f4becaa53295ed30f56a0.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_embed.asp">&lt;embed&gt;</a></td><td class="cell-hn}\">Defines a container for an external application</td></tr><tr id="192b7187-f16b-47d9-b0a7-dec635fe7e6d"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20192b7187f16b47d9b0a7dec635fe7e6d.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_fieldset.asp">&lt;fieldset&gt;</a></td><td class="cell-hn}\">Groups related elements in a form</td></tr><tr id="2b8fd0b2-b528-481b-9a0d-cec4aa8fb5ba"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%202b8fd0b2b528481b9a0dcec4aa8fb5ba.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_figcaption.asp">&lt;figcaption&gt;</a></td><td class="cell-hn}\">Defines a caption for a &lt;figure&gt; element</td></tr><tr id="69698f64-4bb8-43a3-ab53-218672d762fa"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2069698f644bb843a3ab53218672d762fa.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_figure.asp">&lt;figure&gt;</a></td><td class="cell-hn}\">Specifies self-contained content</td></tr><tr id="9246727f-24c6-4be4-944f-1fd6c0a1340a"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%209246727f24c64be4944f1fd6c0a1340a.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_font.asp">&lt;font&gt;</a></td><td class="cell-hn}\">Not supported in HTML5. Use CSS instead.Defines font, color, and size for text</td></tr><tr id="1a25c783-beea-4aac-9b42-bd9ebec25750"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%201a25c783beea4aac9b42bd9ebec25750.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_footer.asp">&lt;footer&gt;</a></td><td class="cell-hn}\">Defines a footer for a document or section</td></tr><tr id="1ea2f3a1-0f2b-4df6-8d08-405e807badda"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%201ea2f3a10f2b4df68d08405e807badda.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_form.asp">&lt;form&gt;</a></td><td class="cell-hn}\">Defines an HTML form for user input</td></tr><tr id="dbbce22b-db05-4c1a-8185-22a385ac2bdf"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20dbbce22bdb054c1a818522a385ac2bdf.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_frame.asp">&lt;frame&gt;</a></td><td class="cell-hn}\">Not supported in HTML5.Defines a window (a frame) in a frameset</td></tr><tr id="880aea47-6a7a-450f-8322-01b039878fd2"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20880aea476a7a450f832201b039878fd2.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_frameset.asp">&lt;frameset&gt;</a></td><td class="cell-hn}\">Not supported in HTML5.Defines a set of frames</td></tr><tr id="4c0055fe-3268-4c74-9a5d-cfa7cba4b1fc"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%204c0055fe32684c749a5dcfa7cba4b1fc.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_hn.asp">&lt;h1&gt; to &lt;h6&gt;</a></td><td class="cell-hn}\">Defines HTML headings</td></tr><tr id="414eef6a-6977-4390-a6e2-be1c829737c0"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20414eef6a69774390a6e2be1c829737c0.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_head.asp">&lt;head&gt;</a></td><td class="cell-hn}\">Contains metadata/information for the document</td></tr><tr id="b464483a-29bd-4c22-8675-ef13a677f6ef"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20b464483a29bd4c228675ef13a677f6ef.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_header.asp">&lt;header&gt;</a></td><td class="cell-hn}\">Defines a header for a document or section</td></tr><tr id="f1820d67-90a6-4133-b592-aafb5ffd232b"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20f1820d6790a64133b592aafb5ffd232b.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_hr.asp">&lt;hr&gt;</a></td><td class="cell-hn}\">Defines a thematic change in the content</td></tr><tr id="98677d51-3467-45b7-b89f-23b972768159"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2098677d51346745b7b89f23b972768159.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_html.asp">&lt;html&gt;</a></td><td class="cell-hn}\">Defines the root of an HTML document</td></tr><tr id="85348b31-81bc-4fb0-b854-530b4ac24425"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2085348b3181bc4fb0b854530b4ac24425.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_i.asp">&lt;i&gt;</a></td><td class="cell-hn}\">Defines a part of text in an alternate voice or mood</td></tr><tr id="5ebaf425-b877-48a0-8e21-9cbee05e2d5f"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%205ebaf425b87748a08e219cbee05e2d5f.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_iframe.asp">&lt;iframe&gt;</a></td><td class="cell-hn}\">Defines an inline frame</td></tr><tr id="e801b3e5-93f5-46e5-ba79-88fc5ac26f23"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20e801b3e593f546e5ba7988fc5ac26f23.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_img.asp">&lt;img&gt;</a></td><td class="cell-hn}\">Defines an image</td></tr><tr id="904b972e-cc45-4a85-a434-006f461037ac"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20904b972ecc454a85a434006f461037ac.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_input.asp">&lt;input&gt;</a></td><td class="cell-hn}\">Defines an input control</td></tr><tr id="41110c5f-a217-46ed-b6b4-3f3b9fce7183"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2041110c5fa21746edb6b43f3b9fce7183.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_ins.asp">&lt;ins&gt;</a></td><td class="cell-hn}\">Defines a text that has been inserted into a document</td></tr><tr id="dd191511-c4a6-4a65-9536-cb0ddfe9cb4e"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20dd191511c4a64a659536cb0ddfe9cb4e.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_kbd.asp">&lt;kbd&gt;</a></td><td class="cell-hn}\">Defines keyboard input</td></tr><tr id="425753b8-6d22-4044-b39c-2a96c391b1f5"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20425753b86d224044b39c2a96c391b1f5.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_label.asp">&lt;label&gt;</a></td><td class="cell-hn}\">Defines a label for an &lt;input&gt; element</td></tr><tr id="fe00e494-44bf-4d43-87a9-50d039958a17"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20fe00e49444bf4d4387a950d039958a17.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_legend.asp">&lt;legend&gt;</a></td><td class="cell-hn}\">Defines a caption for a &lt;fieldset&gt; element</td></tr><tr id="828b9927-299d-454e-9e93-48f59da99ea8"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20828b9927299d454e9e9348f59da99ea8.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_li.asp">&lt;li&gt;</a></td><td class="cell-hn}\">Defines a list item</td></tr><tr id="7c26771c-1812-457b-95fe-c9f7e51e892b"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%207c26771c1812457b95fec9f7e51e892b.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_link.asp">&lt;link&gt;</a></td><td class="cell-hn}\">Defines the relationship between a document and an external resource (most 
+used to link to style sheets)</td></tr><tr id="40dad1b3-1a2c-42fe-8a07-3d0918ab2bda"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2040dad1b31a2c42fe8a073d0918ab2bda.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_main.asp">&lt;main&gt;</a></td><td class="cell-hn}\">Specifies the main content of a document</td></tr><tr id="0f4820fb-c74f-48a9-8089-ed445b219b08"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%200f4820fbc74f48a98089ed445b219b08.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_map.asp">&lt;map&gt;</a></td><td class="cell-hn}\">Defines an image map</td></tr><tr id="eec887b0-b432-418a-9443-6dcb79108d70"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20eec887b0b432418a94436dcb79108d70.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_mark.asp">&lt;mark&gt;</a></td><td class="cell-hn}\">Defines marked/highlighted text</td></tr><tr id="78decfc2-4c8f-4e7d-a56e-790fdfa1caef"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2078decfc24c8f4e7da56e790fdfa1caef.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_meta.asp">&lt;meta&gt;</a></td><td class="cell-hn}\">Defines metadata about an HTML document</td></tr><tr id="a3ebf841-b641-45e3-aa77-045eb33b7f5c"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20a3ebf841b64145e3aa77045eb33b7f5c.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_meter.asp">&lt;meter&gt;</a></td><td class="cell-hn}\">Defines a scalar measurement within a known range (a gauge)</td></tr><tr id="d77e3097-c047-49b2-ba16-06869f0716b8"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20d77e3097c04749b2ba1606869f0716b8.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_nav.asp">&lt;nav&gt;</a></td><td class="cell-hn}\">Defines navigation links</td></tr><tr id="df86d325-145f-4a65-8ea3-a995ebb60e96"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20df86d325145f4a658ea3a995ebb60e96.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_noframes.asp">&lt;noframes&gt;</a></td><td class="cell-hn}\">Not supported in HTML5.Defines an alternate content for users that do not support frames</td></tr><tr id="22129689-313f-4727-b1fb-b481bc5534e0"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2022129689313f4727b1fbb481bc5534e0.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_noscript.asp">&lt;noscript&gt;</a></td><td class="cell-hn}\">Defines an alternate content for users that do not support 
+client-side scripts</td></tr><tr id="4c815314-d055-4db8-9e62-0298389bf16d"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%204c815314d0554db89e620298389bf16d.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_object.asp">&lt;object&gt;</a></td><td class="cell-hn}\">Defines a container for an external application</td></tr><tr id="17906f37-5b72-47fe-bab4-7136219704fb"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2017906f375b7247febab47136219704fb.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_ol.asp">&lt;ol&gt;</a></td><td class="cell-hn}\">Defines an ordered list</td></tr><tr id="7854efaf-9018-4fdb-b923-225c57e10f25"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%207854efaf90184fdbb923225c57e10f25.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_optgroup.asp">&lt;optgroup&gt;</a></td><td class="cell-hn}\">Defines a group of related options in a drop-down list</td></tr><tr id="5ec56d98-1bb8-4973-8378-0d964c410adf"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%205ec56d981bb8497383780d964c410adf.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_option.asp">&lt;option&gt;</a></td><td class="cell-hn}\">Defines an option in a drop-down list</td></tr><tr id="643c0ff9-dc33-4568-add6-ccdad28e4ede"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20643c0ff9dc334568add6ccdad28e4ede.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_output.asp">&lt;output&gt;</a></td><td class="cell-hn}\">Defines the result of a calculation</td></tr><tr id="562dca33-688a-42d7-b6e8-7e7fff4bfd67"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20562dca33688a42d7b6e87e7fff4bfd67.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_p.asp">&lt;p&gt;</a></td><td class="cell-hn}\">Defines a paragraph</td></tr><tr id="c0925d72-bcb9-4f30-9c85-5fe5803cb712"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20c0925d72bcb94f309c855fe5803cb712.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_param.asp">&lt;param&gt;</a></td><td class="cell-hn}\">Defines a parameter for an object</td></tr><tr id="fdf6e6a8-6619-430c-bef5-688eb4c3d4e9"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20fdf6e6a86619430cbef5688eb4c3d4e9.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_picture.asp">&lt;picture&gt;</a></td><td class="cell-hn}\">Defines a container for multiple image resources</td></tr><tr id="70d982b2-9c67-4e71-a049-4b0de2c3f678"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2070d982b29c674e71a0494b0de2c3f678.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_pre.asp">&lt;pre&gt;</a></td><td class="cell-hn}\">Defines preformatted text</td></tr><tr id="1c221b9c-ca67-45e6-a7c2-a0a9546cda77"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%201c221b9cca6745e6a7c2a0a9546cda77.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_progress.asp">&lt;progress&gt;</a></td><td class="cell-hn}\">Represents the progress of a task</td></tr><tr id="e456ea15-2219-4275-b909-2ee99ca984b0"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20e456ea1522194275b9092ee99ca984b0.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_q.asp">&lt;q&gt;</a></td><td class="cell-hn}\">Defines a short quotation</td></tr><tr id="15186c99-ce07-44f1-a0f8-cb270c42656b"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2015186c99ce0744f1a0f8cb270c42656b.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_rp.asp">&lt;rp&gt;</a></td><td class="cell-hn}\">Defines what to show in browsers that do not support ruby annotations</td></tr><tr id="ee33e965-a9ae-4c2f-b58d-8ad9a92a3e94"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20ee33e965a9ae4c2fb58d8ad9a92a3e94.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_rt.asp">&lt;rt&gt;</a></td><td class="cell-hn}\">Defines an explanation/pronunciation of characters (for East Asian 
+typography)</td></tr><tr id="866ff41e-b4b0-438e-ab75-4e4b9eb95e37"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20866ff41eb4b0438eab754e4b9eb95e37.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_ruby.asp">&lt;ruby&gt;</a></td><td class="cell-hn}\">Defines a ruby annotation (for East Asian typography)</td></tr><tr id="00dd485b-396f-493f-b4ad-dda4c2c7b5cf"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2000dd485b396f493fb4addda4c2c7b5cf.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_s.asp">&lt;s&gt;</a></td><td class="cell-hn}\">Defines text that is no longer correct</td></tr><tr id="f6cec602-0220-4daa-a350-30a61986df05"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20f6cec60202204daaa35030a61986df05.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_samp.asp">&lt;samp&gt;</a></td><td class="cell-hn}\">Defines sample output from a computer program</td></tr><tr id="d44d6eb8-9825-4a3e-9adf-ef3e5b6dbdcb"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20d44d6eb898254a3e9adfef3e5b6dbdcb.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_script.asp">&lt;script&gt;</a></td><td class="cell-hn}\">Defines a client-side script</td></tr><tr id="5cdab627-1f62-4efa-b3d3-8521d7826fa0"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%205cdab6271f624efab3d38521d7826fa0.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_section.asp">&lt;section&gt;</a></td><td class="cell-hn}\">Defines a section in a document</td></tr><tr id="219435c8-ded8-4966-9cdb-909f04295385"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20219435c8ded849669cdb909f04295385.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_select.asp">&lt;select&gt;</a></td><td class="cell-hn}\">Defines a drop-down list</td></tr><tr id="2902ca5f-e416-4609-bb07-422a156d993b"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%202902ca5fe4164609bb07422a156d993b.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_small.asp">&lt;small&gt;</a></td><td class="cell-hn}\">Defines smaller text</td></tr><tr id="d14b587a-65c8-4b07-8c95-6b190d3d1d41"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20d14b587a65c84b078c956b190d3d1d41.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_source.asp">&lt;source&gt;</a></td><td class="cell-hn}\">Defines multiple media resources for media elements (&lt;video&gt; and &lt;audio&gt;)</td></tr><tr id="e5578424-de7c-463b-a74b-ccfef42edbcb"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20e5578424de7c463ba74bccfef42edbcb.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_span.asp">&lt;span&gt;</a></td><td class="cell-hn}\">Defines a section in a document</td></tr><tr id="9ce48990-998c-4ccd-92f9-24e5e7ea3d08"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%209ce48990998c4ccd92f924e5e7ea3d08.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_strike.asp">&lt;strike&gt;</a></td><td class="cell-hn}\">Not supported in HTML5. Use <a href="https://www.w3schools.com/tags/tag_del.asp">&lt;del&gt;</a> or <a href="https://www.w3schools.com/tags/tag_s.asp">&lt;s&gt;</a> instead.Defines strikethrough text</td></tr><tr id="515db762-e13f-418c-b64b-6c39d4e84052"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20515db762e13f418cb64b6c39d4e84052.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_strong.asp">&lt;strong&gt;</a></td><td class="cell-hn}\">Defines important text</td></tr><tr id="846685d8-ed37-4a8d-892b-3ff6a6cef1da"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20846685d8ed374a8d892b3ff6a6cef1da.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_style.asp">&lt;style&gt;</a></td><td class="cell-hn}\">Defines style information for a document</td></tr><tr id="c8ba3d85-723f-4067-ac24-12a3887cfb0a"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20c8ba3d85723f4067ac2412a3887cfb0a.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_sub.asp">&lt;sub&gt;</a></td><td class="cell-hn}\">Defines subscripted text</td></tr><tr id="1f331ede-815a-41cb-ad79-60a8115b7dde"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%201f331ede815a41cbad7960a8115b7dde.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_summary.asp">&lt;summary&gt;</a></td><td class="cell-hn}\">Defines a visible heading for a &lt;details&gt; element</td></tr><tr id="1fae85ad-bfad-426b-9b16-d92035b43e2d"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%201fae85adbfad426b9b16d92035b43e2d.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_sup.asp">&lt;sup&gt;</a></td><td class="cell-hn}\">Defines superscripted text</td></tr><tr id="51ce337c-3696-432b-a4c2-39b75cb06efd"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2051ce337c3696432ba4c239b75cb06efd.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_svg.asp">&lt;svg&gt;</a></td><td class="cell-hn}\">Defines a container for SVG graphics</td></tr><tr id="fc8eb0b3-0ed2-4bcd-90df-32f8b43217c0"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20fc8eb0b30ed24bcd90df32f8b43217c0.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_table.asp">&lt;table&gt;</a></td><td class="cell-hn}\">Defines a table</td></tr><tr id="9857d00e-5647-48ab-9142-481f3bb01bed"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%209857d00e564748ab9142481f3bb01bed.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_tbody.asp">&lt;tbody&gt;</a></td><td class="cell-hn}\">Groups the body content in a table</td></tr><tr id="77b509c1-9b59-47a8-aa1b-c3ea9f8182d5"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2077b509c19b5947a8aa1bc3ea9f8182d5.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_td.asp">&lt;td&gt;</a></td><td class="cell-hn}\">Defines a cell in a table</td></tr><tr id="7bae67d2-7307-489d-a770-985c1fa14b7c"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%207bae67d27307489da770985c1fa14b7c.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_template.asp">&lt;template&gt;</a></td><td class="cell-hn}\">Defines a container for content that should be hidden when the page loads</td></tr><tr id="0711f9c6-f50a-4e20-8714-7766d7993576"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%200711f9c6f50a4e2087147766d7993576.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_textarea.asp">&lt;textarea&gt;</a></td><td class="cell-hn}\">Defines a multiline input control (text area)</td></tr><tr id="230f700c-4b6b-401e-83f4-714ca170d155"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20230f700c4b6b401e83f4714ca170d155.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_tfoot.asp">&lt;tfoot&gt;</a></td><td class="cell-hn}\">Groups the footer content in a table</td></tr><tr id="43ccabbc-cba1-43f1-90e6-e5ed89e183e4"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2043ccabbccba143f190e6e5ed89e183e4.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_th.asp">&lt;th&gt;</a></td><td class="cell-hn}\">Defines a header cell in a table</td></tr><tr id="0009eb46-fe46-4de8-a571-6f3f409f5742"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%200009eb46fe464de8a5716f3f409f5742.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_thead.asp">&lt;thead&gt;</a></td><td class="cell-hn}\">Groups the header content in a table</td></tr><tr id="830e53b0-2ef9-47fe-a60b-e0110e701ca6"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20830e53b02ef947fea60be0110e701ca6.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_time.asp">&lt;time&gt;</a></td><td class="cell-hn}\">Defines a specific time (or datetime)</td></tr><tr id="d1c091ff-0b61-47e8-940b-122c1ce28e22"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20d1c091ff0b6147e8940b122c1ce28e22.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_title.asp">&lt;title&gt;</a></td><td class="cell-hn}\">Defines a title for the document</td></tr><tr id="9d677672-fb92-4a67-88e1-e97999903ef0"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%209d677672fb924a6788e1e97999903ef0.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_tr.asp">&lt;tr&gt;</a></td><td class="cell-hn}\">Defines a row in a table</td></tr><tr id="3167fb91-53f2-4833-a1d5-6582629000eb"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%203167fb9153f24833a1d56582629000eb.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_track.asp">&lt;track&gt;</a></td><td class="cell-hn}\">Defines text tracks for media elements (&lt;video&gt; and &lt;audio&gt;)</td></tr><tr id="d8314acf-3b2d-43a0-8e94-a5708a97eb12"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20d8314acf3b2d43a08e94a5708a97eb12.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_tt.asp">&lt;tt&gt;</a></td><td class="cell-hn}\">Not supported in HTML5. Use CSS instead.Defines teletype text</td></tr><tr id="03f31ff4-e8e7-4224-aa8c-59d10965a16c"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2003f31ff4e8e74224aa8c59d10965a16c.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_u.asp">&lt;u&gt;</a></td><td class="cell-hn}\">Defines some text that is unarticulated and styled differently from normal 
+text</td></tr><tr id="1a5cce7f-55be-4642-a3da-cadf3fdbd4da"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%201a5cce7f55be4642a3dacadf3fdbd4da.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_ul.asp">&lt;ul&gt;</a></td><td class="cell-hn}\">Defines an unordered list</td></tr><tr id="670009a4-ab3f-482a-b993-2fb737174bbe"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20670009a4ab3f482ab9932fb737174bbe.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_var.asp">&lt;var&gt;</a></td><td class="cell-hn}\">Defines a variable</td></tr><tr id="37c14efc-165c-42ac-8168-4c01492daad1"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%2037c14efc165c42ac81684c01492daad1.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_video.asp">&lt;video&gt;</a></td><td class="cell-hn}\">Defines embedded video content</td></tr><tr id="603c2d6c-9d04-4241-aa7c-3b2d4d198a5b"><td class="cell-title"><a href="TAG%2096ceeac5b7754160aa66e9d2c4b3c445/Untitled%20603c2d6c9d044241aa7c3b2d4d198a5b.html">Untitled</a></td><td class="cell-L?M]"><a href="https://www.w3schools.com/tags/tag_wbr.asp">&lt;wbr&gt;</a></td><td class="cell-hn}\">Defines a possible line-break</td></tr></tbody></table></div></article></body></html>

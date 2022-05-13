@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>SSD必備知識</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="edf0a122-0858-48da-be0f-9ebacd2191ca" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🛥️</span></div><h1 class="page-title">SSD必備知識</h1></header><div class="page-body"><p id="71cb6943-7510-415c-9dc3-df1b7ee8dbef" class="">
+</p><p id="3764abac-d97b-4d20-a743-68908b9767f4" class="">從早些年的低容量高單價，SSD 在這幾年的價格逐漸下滑，儲存規格亦逐年提昇，已經到大多數人都能接受的地步，說是到了採購的甜蜜點亦不為過，不管是尋求極致的效能表現，或是文書遊戲的基本需求，都能夠找到適合級別的產品，</p><p id="3609bb1d-3e3d-4c44-8476-fb381123f5be" class="">然而 SSD 演化至今，介面的種類逐漸變得複雜，不像傳統 HDD 一樣，只需要單一的 SATA 介面就能搞定。如果在購物網站上輸入「SSD」查詢，除了熟悉的2.5吋規格外，甚至還會出現介面卡形式以及長得像口香糖般的長條狀SSD，如果不是經常關注儲存產品發展的使用者，很可能會因此混淆，到底該選擇哪一種 SSD 規格比較適合？以及自己的系統能否完全發揮 SSD 的高速優勢，透過這篇專題一次告訴你。</p><h2 id="8d7bb7e6-e4b8-4012-9733-02aae975b2ff" class=""><strong>認識SSD的四大介面</strong></h2><p id="c5efb678-7424-4496-9fff-dc65218b1fd7" class="">在目前消費端的 SSD 儲存市場上，總共存在有4種介面規格的產品，分別是 SATA、mSATA、PCIe 與M.2，但就市場的佔有率來說，還是以 SATA 及M.2為主流，但就傳輸速度來說，其實並非M.2介面就一定優於 SATA 介面，還得依據其所支援的標準而定。</p><h3 id="38c7ef8b-7e2a-4eaf-af75-aeb753820c3e" class=""><strong>SATA與mSATA</strong></h3><p id="70c0c99a-e9fe-4efb-bcaa-14075f9175d7" class="">SATA 應該是大多數人最為熟悉的介面，由以前的 IDE/PATA 介面發展而來，且一直都是電腦系統中專門用於連接硬碟、光碟機等設備的傳輸介面，現行普遍採用的 SATA 6Gb/s 規格（或稱 SATA III），自2009年頒布以來已將近10年，因此採用此介面的 SSD 的數量也是最多的，其後雖然也有支援更高傳輸速度的 SATA Express及 U.2介面的推出，但支援的產品實在太少。而 mSATA 可算是 SATA 的衍生介面，其主要差異在於採用嵌入式設計，縮減了安裝的尺寸，因此通常在筆電上比較常見。mSATA 在傳輸速率上並無特別升級之處，同樣為6Gb/s，對於傳統機械式硬碟來說，SATA 的6Gb/s 頻寬足矣，然而對於講求高速的 SSD 來說，6Gb/s 反而成為了一種限制，乃致於 SATA 規格的 SSD 極速，天生就無法突破600MB/s 的門檻，也因此 mSATA SSD 的地位不上不下，除了舊型筆電之外，有逐漸淘汰的趨勢。</p><h3 id="19481bf9-b316-4eb6-9fd5-127bee968730" class=""><strong>從PCIe到M.2</strong></h3><p id="57833b41-109c-4029-84ef-68f2eec377de" class="">既然 SATA 的頻寬無法滿足SSD，就得另尋解決之道，可分別以 PCIe 和M.2作代表，PCIe 介面的發展沿襲自 AGP，原本是因應顯示卡而獨立出來的圖形加速介面，目前主流是 PCIe 3.0，頻寬則依通道數而有所不同，如x1、x4、x8、x16等等，以3.0版的規格來說，即使是最低的x1，其頻寬也將近有1000MB/s，比 SATA 自然是快上不少，所以廠商將 SSD 改由 PCIe 介面進行傳輸以求提高效率，也是可以理解的，但 PCIe SSD 同樣會面臨到體積的問題，一般筆電不可能有多餘空間容納下一張介面卡，所以 Intel 力推新一代的M.2介面，不但足以整合上述所有介面的優點，卻也同時讓它成為 SSD 有史以來最複雜的混合型介面。</p><figure id="696c0cfb-2dba-4682-be28-3f40a56f5c15" class="image"><a href="https://obs.line-scdn.net/0h4t_PnoMEa1tiKUA093sUDFh_aDRRRXhYBh86WCFHNW8aGCUFV04gbk58ZmMfHiwFC08iOUYvcGofHCleChgg/w644"><img src="https://obs.line-scdn.net/0h4t_PnoMEa1tiKUA093sUDFh_aDRRRXhYBh86WCFHNW8aGCUFV04gbk58ZmMfHiwFC08iOUYvcGofHCleChgg/w644"/></a></figure><p id="2f501eab-b30c-41ef-ba76-308c3e09e148" class="">隨著 SSD 硬體介面的差異，在主機板上安裝的位置亦有所不同，隨各家而異。（此處以技嘉 H370 AORUS GAMING 3 WIFI 主機板為例）</p><p id="3a36798d-6b70-4e0c-9d5c-7be263454072" class="">▲ 隨著 SSD 硬體介面的差異，在主機板上安裝的位置亦有所不同，隨各家而異。（此處以技嘉 H370 AORUS GAMING 3 WIFI 主機板為例）</p><figure id="15a30f34-4627-448a-bef2-ac17e20852f7" class="image"><a href="https://obs.line-scdn.net/0hBa7mG2DvHU4KFDYhn2ViGTBCHiE5eA5NbiJMTUl6Q3pyJVMQP3FVeyYSQypzJVoQY3JbKScXBn93IV9LYXJV/w644"><img src="https://obs.line-scdn.net/0hBa7mG2DvHU4KFDYhn2ViGTBCHiE5eA5NbiJMTUl6Q3pyJVMQP3FVeyYSQypzJVoQY3JbKScXBn93IV9LYXJV/w644"/></a></figure><p id="275a1839-09e8-4113-ad41-0d5c126ddc95" class="">四種 SSD 介面的比較</p><p id="1b4f9445-8f75-4223-8110-f9701a914e1d" class="">▲ 四種 SSD 介面的比較</p><h2 id="5953ba42-7e57-4acd-8192-3ec4f9d242db" class=""><strong>變化多端的M.2規格</strong></h2><p id="a6547711-a3ef-4d16-9b43-0f6609404ec6" class="">M.2前身為 NGFF（Next Generation Form Factor），是由 Intel 所主推的一種全新介面規範，用以取代 mSATA，並首先導入到筆電平台，目的同樣是為了推動小型化系統的發展，不過 Intel 在制訂M.2介面的規範時，並未限制其所使用的訊號協定，僅定義了尺寸規格與工作電壓等項目，也因此M.2得以相容於多種介面訊號控制器，包括 SATA、PCIe、USB、音訊等等，對於廠商在設計產品時，可提供更高的自由度。</p><h3 id="993751c3-1382-4382-9c2e-767ce7cfd357" class=""><strong>三種插槽形式及其變化</strong></h3><p id="9d3f0946-6e7d-4cf0-936f-a362bc910561" class="">然而這樣的高自由度與混合性，也讓M.2介面變得複雜許多，首先在插槽方面，M.2就區分為 Socket 1、Socket 2、Socket 3等3種形式，所對應的鍵位也有所不同，Socket 1主要針對無線網卡，對應的鍵位為 A Key，為避免混淆這裡就先略過不提。M.2 SSD 主要適用於 Socket 2、Socket 3這兩種插槽，Socket 2插槽可以支援走 SATA 及 PCIe x2通道的M.2 SSD，所對應的鍵位為 B Key，而 Socket 3插槽則支援走 PCIe x4通道的M.2 SSD，對應的鍵位為 M Key，兩種插槽因為防呆缺口的位置不一樣，所以無法混用，不過市面上有些 M.2 SSD 產品為了能同時兼容於兩種插槽，便把金手指的部分設計成 B+M Key 的形式，但是…能夠插得進去，不代表就能夠正常使用，因為某些主機板上的M.2插槽僅能支援 PCIe 通道，如果你插入 SATA 的M.2 SSD，那麼就會無法偵測到，除非廠商在設計時，就已經加入 SATA 及 PCIe 的控制器，使它能夠兼容於兩者，這部分各家不一，只能從主機板規格表上自行查詢。另外，如果是走 SATA 通道的M.2 SSD，那麼一樣會受到6Gb/s 頻寬的限制，在傳輸效能上等同於2.5吋的 SATA SSD。</p><h3 id="76ef5555-6c41-4dea-86e4-0aae48776c61" class=""><strong>SSD</strong><strong>尺寸也有差異</strong></h3><p id="0fdf58d7-5aec-424e-9c3f-074671ad56f3" class="">關於 M.2 SSD 你還會看到幾個數字，如2242、2260、2280等等，其實是代表 M.2 SSD 的尺寸大小，如2280就是寬22mm、長80mm，此外依照記憶體顆粒排列的不同，還會有單面及雙面的差別，不過多數設備廠商都會預留足夠的安裝空間，如果擔心也可再確認一下。</p><figure id="62d756ca-a8de-4880-8714-3a055f1bcc4a" class="image"><a href="https://obs.line-scdn.net/0ht-cYRQeJKwJeIABtyytUVWR2KG1tTDgBOhZ6AR1OdTYmEWVca0I2N3IgcTF2F2xcMBZjZnspMDMjFWkHNUM2/w644"><img src="https://obs.line-scdn.net/0ht-cYRQeJKwJeIABtyytUVWR2KG1tTDgBOhZ6AR1OdTYmEWVca0I2N3IgcTF2F2xcMBZjZnspMDMjFWkHNUM2/w644"/></a></figure><p id="9c548d96-7492-4dff-b87d-ddb7a6810539" class="">電腦升級SSD必備知識－ 搞懂規格再出手，提昇效能不必愁</p><figure id="c3dee787-35fa-4976-bc4d-d605204a11a3" class="image"><a href="https://obs.line-scdn.net/0h07AWLFwdbxh8LkR36fcQT0Z4bHdPQnwbGBg-Gz9AMSwEHyFGSUF0LVAmOShYFihGEhgmeVwtdCkBGy0dF050/w644"><img src="https://obs.line-scdn.net/0h07AWLFwdbxh8LkR36fcQT0Z4bHdPQnwbGBg-Gz9AMSwEHyFGSUF0LVAmOShYFihGEhgmeVwtdCkBGy0dF050/w644"/></a></figure><p id="017512ff-6820-4722-95fe-03c5c5da9a38" class="">M.2 SSD 的金手指鍵位</p><p id="ad6d603e-94f2-4e85-9447-8bab09c0e9e8" class="">▲ M.2 SSD 的金手指鍵位</p><figure id="60462de1-ef18-4d74-9a5a-320cb57cee90" class="image"><a href="https://obs.line-scdn.net/0hJk8_AQubFUQFJj4rkFxqEz9wFis2SgZHYRBER0ZIS3B9F1saMEMPcSknSychFFIabEBTISImDnV4E1dBbkAP/w644"><img src="https://obs.line-scdn.net/0hJk8_AQubFUQFJj4rkFxqEz9wFis2SgZHYRBER0ZIS3B9F1saMEMPcSknSychFFIabEBTISImDnV4E1dBbkAP/w644"/></a></figure><p id="e66d99c2-3024-4db3-9186-2f3d41dea3bd" class="">M.2介面重點規格</p><p id="15ed35d7-239e-4193-b0f4-c44946531f69" class="">▲ M.2介面重點規格</p><h2 id="97f6797f-165b-444e-9b87-594ed424a457" class=""><strong>解放SSD傳輸能力的NVMe標準</strong></h2><p id="7690a4d6-ae66-4a46-912f-2f01b38142e6" class="">走 PCIe 通道的 SSD 產品，雖然價格比 SATA 的 SSD 要貴上一些，但也會隨著時間逐步調降，然而包括 PCIe 介面與M.2介面在內的 SSD，最近又有許多宣稱支援 NVMe 標準的新產品接連推出，平平都是走 PCIe 通道，有無 NVMe 到底差別在哪？</p><h3 id="197bb9a0-56d4-48ee-ad1b-6bf7dc6fc5de" class=""><strong>針對SSD最佳化的控制標準</strong></h3><p id="3c49b27e-60a8-4ef9-a6ef-5ae13f3c0742" class="">要講 NVMe 就得先從 AHCI 說起，AHCI（Advanced Host Controller Interface，進階主機控制器介面），是一種儲存裝置的傳輸控制標準，從 SATA 3Gb/s（SATA II）時代便開始普遍應用，而當初在訂定 AHCI 標準時，並未預料到有 SSD 的誕生，於是初期許多 SATA 和 PCIe 的消費型 SSD，也就直接採行此一標準，但由於 AHCI 標準並非針對 SSD 的特性所打造，所以 Intel 又另外製訂了新一代的 NVMe（Non-Volatile Memory Express）標準，並鎖定 PCIe 匯流排介面的 SSD 來進行最佳化，這也是你不會在SATA的SSD上看到支援 NVMe 標準的原因，畢竟 SATA 有著頻寬的先天限制。採用 NVMe 標準的 SSD，擁有較低的延遲以及更高的 IOPS 表現，甚至在功耗的需求上也比較低。目前 NVMe 標準正持續發展中，例如最新的 NVMe 1.3版就是去年推出的，目前市面上也有許多支援的產品，相信最快在明年，NVMe SSD 就會成為市場上的主流產品。</p><h3 id="85503fe0-7d2c-4ee7-bca2-67b01cb40a06" class=""><strong>系統要求較高</strong></h3><p id="74c28ffc-701b-42cf-90e2-f1390f14de05" class="">雖然 NVMe SSD 的效能高，但相對的，安裝的電腦平台也需具備一定水準，在軟體方面，Windows 8.1及Windows 10均有內建 NVMe 驅動程式，若是 Windows 7的話，則需要看各家是否有釋出驅動程式，如果要把 NVMe SSD 作為開機碟的話，標準就更嚴格了，依 Intel 官方說明文件，系統 BIOS 需要支援 UEFI 2.3.1版本以上，並將作業系統安裝到 GPT 分割區，才能夠正常開機，此外，較高階的 NVMe SSD 通常可支援到PCIe 3.0 x4通道，意味 CPU 的等級也不能太差，才有足夠的通道數供 PCIe 使用，新組裝的電腦比較無須擔憂這些問題，但如果是舊電腦的話，可能就需要確認一下平台的支援性了。</p><figure id="1639b057-92ca-4bcb-9c18-34ea1efcafed" class="image"><a href="https://obs.line-scdn.net/0hcnGFuIN5PEF6Pxcu4KlDFkBpPy5JUy9CHgltQjlRYnUCDnIfQAtzdFY7ayNeD3sfFAl2JFs5J3AHCn5EEgpz/w644"><img src="https://obs.line-scdn.net/0hcnGFuIN5PEF6Pxcu4KlDFkBpPy5JUy9CHgltQjlRYnUCDnIfQAtzdFY7ayNeD3sfFAl2JFs5J3AHCn5EEgpz/w644"/></a></figure><p id="9b13c1a5-9f65-41e9-8af1-a6ca2ea1373a" class="">如果電腦中並沒有M.2規格插槽的話，也可透過轉接卡的方式來進行安裝。</p><p id="be8b9d35-bfbc-4359-9c01-b884e21b3937" class="">▲ 如果電腦中並沒有M.2規格插槽的話，也可透過轉接卡的方式來進行安裝。</p><figure id="1c7a922c-a75e-4f22-904d-55d44ff5311a" class="image"><a href="https://obs.line-scdn.net/0hChgIe4BkHEdaMDcoz-1jEGBmHyhpXA9EPgZNRBleQnMiAVIZb18DcnY1F3B2B1sZNAZVJXg0B3YnBV5CMVAD/w644"><img src="https://obs.line-scdn.net/0hChgIe4BkHEdaMDcoz-1jEGBmHyhpXA9EPgZNRBleQnMiAVIZb18DcnY1F3B2B1sZNAZVJXg0B3YnBV5CMVAD/w644"/></a></figure><p id="fedfedad-be8f-47a8-b36c-989dfa2deb47" class="">同樣是 PCIe SSD，支援 NVMe 標準的 SSD 的傳輸效能，硬是比 AHCI 標準高出一大截。</p><p id="a6bd4a00-d98e-4982-83dc-49291c6f276e" class="">▲ 同樣是 PCIe SSD，支援 NVMe 標準的 SSD 的傳輸效能，硬是比 AHCI 標準高出一大截。</p><figure id="f93b06e0-593b-471c-9357-63ebaae998ab" class="image"><a href="https://obs.line-scdn.net/0hd4Ptyr_wOxttDRB095VETFdbOHReYSgYCTtqGC5jZS8VPHVFVzkjLkFdNntGbXxFA2NyeU8KICoQOHkeBTgj/w644"><img src="https://obs.line-scdn.net/0hd4Ptyr_wOxttDRB095VETFdbOHReYSgYCTtqGC5jZS8VPHVFVzkjLkFdNntGbXxFA2NyeU8KICoQOHkeBTgj/w644"/></a></figure><p id="53e4ed25-2926-412a-9c0b-f38af9e4580e" class="">NVMe 與 AHCI 的特性比較</p><p id="91883a10-d131-44b3-9e59-bff85ba2d34c" class="">▲ NVMe 與 AHCI 的特性比較</p><p id="8300275a-9117-4014-a7da-e87053acc5b8" class="">下一頁為你介紹多款SSD！</p><h2 id="fcd2f5c2-dd81-40da-86ac-5fe7223428c7" class=""><strong>Micron Crucial BX500：入門SSD的超值選擇</strong></h2><figure id="8a49ec34-6d57-4a95-b099-84f08a5e61b8" class="image"><a href="https://obs.line-scdn.net/0htdcvOoWhK0teDwAkxJFUHGRZKCRtYzhIOjl6SB1hdX8mPmUVZDtsfnJdInxya2wVMDlhL3IKMHojOmlONjps/w644"><img src="https://obs.line-scdn.net/0htdcvOoWhK0teDwAkxJFUHGRZKCRtYzhIOjl6SB1hdX8mPmUVZDtsfnJdInxya2wVMDlhL3IKMHojOmlONjps/w644"/></a></figure><p id="c105ca93-978d-4032-ae06-ca4ede6d69eb" class="">電腦升級SSD必備知識－ 搞懂規格再出手，提昇效能不必愁</p><blockquote id="9e9e241e-ec57-4fcb-a63e-91fb083ea892" class=""></blockquote><blockquote id="5310b291-1193-4f2f-857f-4c9a487ac26c" class="">規格■ 介面：SATA 6Gb/s■ 最大容量：480GB■ 讀取速度：540MB/s■ 寫入速度：500MB/s■ 保固：3年廠商資訊■捷元（代理） ■02-2795-6677 ■www.genuine.com.tw市場價格新台幣 約2,299元（480GB）</blockquote><p id="8a9a8935-d31f-414c-a196-1b8840bd4851" class="">2.5吋的 SATA SSD 雖理論速度比不上 PCIe，但在多數情況之下，速度體驗的差距，並沒有想像中那麼大，而且價格也相對便宜，消費門檻進一步降低，其市場在一時之間還不至於萎縮，像是美光在今年出推出主力的 MX500之後，近期再推出入門等級的 BX500，採塑膠外殼降低成本，搭載 SMI 主控及自家3D TLC 記憶體顆粒，共推出120GB、240GB及480GB等3種規格，寫入耐受度達40TB～120TB，除了讀寫速度表現不錯外，還支援多重資料完整性演算技術，可防止資料遺失，並透過動態寫入加速來提高寫入速度，並支援過熱保護，還隨附工具軟體協助使用者備份資料及監控 SSD 健康狀態。</p><h2 id="18b4a5de-ade9-4a60-b6a6-eace8e55dcd0" class=""><strong>HyperX Fury RGB：機殼裡最閃亮的一顆星</strong></h2><figure id="bf864870-ee8e-4b92-a277-71a5942e8c41" class="image"><a href="https://obs.line-scdn.net/0hHLnfEFEjF2NTHzwMybpoNGlJFAxgcwRgNylGYBBxSVcrLlk9aS5bVn8WTgAre1A9PXFRBHEeDFIuKlVmOy1b/w644"><img src="https://obs.line-scdn.net/0hHLnfEFEjF2NTHzwMybpoNGlJFAxgcwRgNylGYBBxSVcrLlk9aS5bVn8WTgAre1A9PXFRBHEeDFIuKlVmOy1b/w644"/></a></figure><p id="0f2160df-2a67-42fc-9461-5654124c3f40" class="">電腦升級SSD必備知識－ 搞懂規格再出手，提昇效能不必愁</p><blockquote id="57379773-052a-4f95-97a7-c8d0b0566a88" class=""></blockquote><blockquote id="9a9658e9-cf1d-4cd2-b30e-1cf773846374" class="">規格■ 介面：SATA 6Gb/s■ 最大容量：960GB■ 讀取速度：550MB/s■ 寫入速度：480MB/s■ 保固：3年廠商資訊■金士頓科技 ■0800-666-200 ■www.hyperxgaming.com市場價格新台幣 約9499元（960GB）</blockquote><p id="24a3a8fb-d0c1-42e6-8288-b25870679513" class="">由於 SSD 的高速效能，早期不少產品皆以遊戲體驗訴求做為出發點，國內的金士頓科技更是早早就佔好位置，發展 HyperX 電競品牌，當時許多 SSD 都頗獲好評，而這款 Fury RGB 更是 HyperX 暌違已久的新血，除了採用 Marvell 88SS1074控制器，最大的特色就是加入了時下流行的 RGB 燈光，而且並非是寥寥數顆做點綴而已，Fury RGB SSD 足足安裝了75顆 LED 晶粒，並透過頂部外蓋設計來凸顯燈光效果，厚度及重量也因此提昇不少，此外還可透過菊鍊與其他 RGB 裝置進行燈光同步。共推出3種容量規格，耐寫量由低至高分別為 120TB、240TB、480TB，MTBF 均達到100萬小時。</p><h2 id="430d40e7-bfa5-408c-ada6-c6dc09300961" class=""><strong>Seagate BarraCuda SSD：消費級SSD再現，容量上探2TB</strong></h2><figure id="03cce448-d86d-42cb-9711-3641068db65e" class="image"><a href="https://obs.line-scdn.net/0hLPP2rvehE39tSzgQ-BlsKFcdEBBeJwB8CX1CfC4lTUsVel0hWCxYSkFDTx9FeFQhBC1aHUlICE4QflF6BXpY/w644"><img src="https://obs.line-scdn.net/0hLPP2rvehE39tSzgQ-BlsKFcdEBBeJwB8CX1CfC4lTUsVel0hWCxYSkFDTx9FeFQhBC1aHUlICE4QflF6BXpY/w644"/></a></figure><p id="67b5009e-667b-4752-8d2a-27dd8fad359f" class="">電腦升級SSD必備知識－ 搞懂規格再出手，提昇效能不必愁</p><blockquote id="de12c8b0-e4b3-4772-8612-33cc46150165" class=""></blockquote><blockquote id="2b22c107-bdeb-4340-bc2d-b7aa2e7e5a6f" class="">規格■ 介面：SATA 6Gb/s■ 最大容量：2TB■ 讀取速度：560MB/s■ 寫入速度：540MB/s■ 保固：5年廠商資訊■台灣希捷科技 ■02-2514-2287 ■www.seagate.com/tw/zh/市場價格尚未開賣</blockquote><p id="72047e43-3a27-454b-b71c-0f545a6ac095" class="">雖身為傳統硬碟大廠，其實 Seagate 在幾年前也推出過消費級600與600 Pro SSD，但主力一直都放在企業市場，直到今年才又推出新一代消費級，並冠上 BarraCuda 的名稱，從名稱上不難想像是結合了 Seagate 這兩年主打的守護者形象。BarraCuda 代表的就是效能、可靠性，是裝機的好選擇，雖然採用 SATA 6Gb/s 介面而非最新的 M.2 NVMe 規格，但容量最大達2TB，MTBF 亦達180 萬小時，以2TB版本來說，耐用性更達到1,067TBW，加上讀寫速度都在500MB/s 以上，即使是在 SATA SSD 產品當中，傳輸效能也是非常突出的，尤其國外價格更在萬元以下，是尋求高速、大容量款式 SSD 的好選擇。</p><h2 id="38ba6fca-d4f4-4543-8b7a-b4c0b6eedf62" class=""><strong>Plextor M9Pe(Y)：獨家韌體技術，強化傳輸穩定性</strong></h2><figure id="e037096a-188b-4828-ad8a-bfe0fd0db5af" class="image"><a href="https://obs.line-scdn.net/0hiHTBcjhwNmdpOx0I_D5JMFNtNQhaVyVkDQ1nZCpVaFMRCng5XFl6UkVra1dFCHE5B1VxB0QzLVYUDnRiAlh6/w644"><img src="https://obs.line-scdn.net/0hiHTBcjhwNmdpOx0I_D5JMFNtNQhaVyVkDQ1nZCpVaFMRCng5XFl6UkVra1dFCHE5B1VxB0QzLVYUDnRiAlh6/w644"/></a></figure><p id="3aa37ae3-414b-463d-a06b-3730d611cad1" class="">電腦升級SSD必備知識－ 搞懂規格再出手，提昇效能不必愁</p><blockquote id="444810ab-f496-4050-899b-85bb11b98844" class=""></blockquote><blockquote id="342cb974-5398-40cb-b776-214dcd5fd69a" class="">規格■ 介面：PCIe NVMe■ 最大容量：1TB■ 讀取速度：3,200MB/s■ 寫入速度：2,100MB/s■ 保固：5年廠商資訊■Plextor ■03-612-5203 ■www.plextor.com市場價格新台幣 約10,799元（1TB）</blockquote><p id="8c03f654-3cfb-417f-b62e-0fdf823ef379" class="">Plextor 在年初推出的 M9Pe 系列SSD，包含 PCIe 及M.2兩種介面，其中 M.2又分為有散熱片的 M9Pe(G)及無散熱片的 M9Pe(GN)等兩種版本，無論是桌機、迷你電腦或是筆電的用戶，都能兼顧到安裝上的需求，而其中 PCIe 版本的 M9Pe(Y)，也是 Plextor 首度加入 RGB LED 的產品，所強調的自然也是電競的風格，此外記憶體顆粒採用 Toshiba 64層3D NAND Flash，控制器支援 PCIe 3.0 x4 NVMe 規格，最大循序讀取及寫入速度分別達到3,200MB/s 與2,100MB/s，加上整合了自家 TrueSpeed、Robust Data Hold-out Algorithm 先進資料延伸演算法等技術，確保 SSD 在長時間使用後依然能保持平穩的高性能。</p><h2 id="da5c3cf4-3738-420b-9bfa-c9f3e6fc187d" class=""><strong>Samsung 970 EVO：最高速的大容量NVMe SSD</strong></h2><figure id="89999a31-632b-4ec8-b1ef-78852564672f" class="image"><a href="https://obs.line-scdn.net/0hAcvZRT6NHkxLIzUj3llhG3F1HSN4Tw1PLxVPTwhNQHgzElASfkYEeWcgRnRhFVkSIkVYKW0lBX02FlxJIEUE/w644"><img src="https://obs.line-scdn.net/0hAcvZRT6NHkxLIzUj3llhG3F1HSN4Tw1PLxVPTwhNQHgzElASfkYEeWcgRnRhFVkSIkVYKW0lBX02FlxJIEUE/w644"/></a></figure><p id="7040814e-6f2a-4ea7-ac56-93210f60d182" class="">電腦升級SSD必備知識－ 搞懂規格再出手，提昇效能不必愁</p><blockquote id="7c6ca3e3-d2a5-4ac1-b878-4140c1a1c77a" class=""></blockquote><blockquote id="a72480f2-4c3b-4795-a0a3-e8a679ec181b" class="">規格■ 介面：M.2 NVMe■ 容量：2TB■ 讀取速度：3,500MB/s■ 寫入速度：2,500MB/s■ 保固：5年廠商資訊■台灣三星電子 ■800-296-968 ■www.samsung.com/tw/市場價格新台幣 約20,999元（2TB）</blockquote><p id="35ca9681-bb90-4c99-abea-ce207ec622e6" class="">今年三星首度將旗下品牌記憶儲存相關產品引進台灣市場，讓國內使用者得以享用公司貨的保固政策，而三星身為全球最大記憶體製造商，其 SSD 從晶片到控制器，均擁有一套完備的解決方案，這款970 EVO SSD，即採用三星最新的 V-NAND 技術，使用與新增強的 Phoenix 控制器，採  PCIe Gen 3.0x4、NVMe 1.3介面，最大容量亦達到2TB，是專為從事影音製作、編輯或模擬等高工作量的技術用戶、遊戲玩家與專業人士所設計，搭配智能 TurboWrite 技術，2TB 版本最高讀取速度達到3,500MB/s，寫入亦達2500MB/s，傳輸效率比前一代還高出32％之多，2TB 版本的耐用性亦達1,200 TBW。</p><h2 id="bb81f06f-4002-48aa-8da6-b69279b74d12" class=""><strong>WD Black NVMe SSD：架構大幅更新，寫入效能卓越</strong></h2><figure id="82f84d73-8b27-4f36-be90-067d075f261f" class="image"><a href="https://obs.line-scdn.net/0hGLKRxdWaGGN2KzMM4w9nNEx9GwxFRwtgEh1JYDVFRlcOGlY9Q0tVVlorRFYMGV89GB1QDVEpA1ILHlpmHUpV/w644"><img src="https://obs.line-scdn.net/0hGLKRxdWaGGN2KzMM4w9nNEx9GwxFRwtgEh1JYDVFRlcOGlY9Q0tVVlorRFYMGV89GB1QDVEpA1ILHlpmHUpV/w644"/></a></figure><p id="bb77ba8b-9c2e-43fc-b7bd-282f3186562f" class="">電腦升級SSD必備知識－ 搞懂規格再出手，提昇效能不必愁</p><blockquote id="2b960aaa-c7d3-4a27-a0de-b645967504fd" class=""></blockquote><blockquote id="d2c7bc4e-47be-48b6-a038-2a9f4325ebe8" class="">規格■ 介面：M.2 NVMe■ 最大容量：1TB■ 讀取速度：3,400MB/s■ 寫入速度：2,800MB/s■ 保固：5年廠商資訊■威騰電子 ■00801-147-186 ■www.wdc.com/zh-tw/市場價格新台幣 約9,550元（1TB）</blockquote><p id="5b75a968-023b-4951-af03-570bc6ec738c" class="">WD 今年所出的這款M.2黑標 SSD 是第二代產品，但由於外觀十分相像，採購時需特別留意 NVMe 字樣，由於第一代的效能未達預期，WD 對於新款黑標 SSD 可是下足了苦心，採用全新的垂直整合式 SSD 平台，主控晶片亦由M家改為自家設計的控制晶片，並移置於 PCB 板正中央，兼收傳輸與散熱之利，加上升級後的 nCache 3.0演算法，更進一步提高了傳輸速率，讀取速度最高來到了3,400MB/s，使其效能在市場上足以名列前茅。值得一提的是，WD Black NVMe SSD 在耐用度方面也大為提昇，1TB產品的耐用度達600TBW，500GB及250GB分別為300TBW 和200TBW，此外並提供5年的有限保固。</p><h2 id="a446c060-5fdc-4fad-b3d9-5014b438b77f" class=""><strong>Toshiba XG6：導入96層3D NAND堆疊技術</strong></h2><figure id="54b1f94f-26bc-46e3-9305-464d801b80c8" class="image"><a href="https://obs.line-scdn.net/0hsgOSsZsvLEhyKgcn5zZTH0h8LydBRj9LFhx9SzFEcnwKG2IWR0kwfV4rdXpXSmsWHERrKVEiN3kPH25NGU4w/w644"><img src="https://obs.line-scdn.net/0hsgOSsZsvLEhyKgcn5zZTH0h8LydBRj9LFhx9SzFEcnwKG2IWR0kwfV4rdXpXSmsWHERrKVEiN3kPH25NGU4w/w644"/></a></figure><p id="5f274df5-2841-4456-8d3f-5914d384e30f" class="">電腦升級SSD必備知識－ 搞懂規格再出手，提昇效能不必愁</p><blockquote id="0eaadb5e-e2ab-45a9-8dd6-b3e56c7d0284" class=""></blockquote><blockquote id="a1c6438b-d085-45ea-8304-72147a80cd8a" class="">規格■ 介面：M.2 NVMe■ 最大容量：1TB■ 讀取速度：3,180MB/s■ 寫入速度：2,960MB/s■ 保固：5年 廠商資訊■台灣東芝記憶體 ■02-2508-9909 ■business.toshiba-memory.com市場價格請洽廠商</blockquote><p id="fb8d0358-11d4-4f09-aa23-5c21655afb89" class="">為了提高快閃記憶體容量，廠商開發出利用堆疊的方式來增加儲存密度，這就是3D NAND Flash，隨著技術發展，所堆疊的單元層數也越來越高，目前市場多以32層與64層為主，不過90層以上將是接下來的競爭重點，作為全球第二大 NAND 晶片的生產商東芝記憶體，當然責無旁貸，在近期發表搭載96層3D TLC 快閃記憶體的XG6 SSD，成為市場領頭羊之一。XG6採用PCIe 3.0 x4 通道與 NVMe 1.3a標準，除了循序讀取可達到3,000MB/s 以上，循序寫入速度亦能突破3,000MB/s，加上 MTTF 達150萬小時，表現非常亮眼，截稿前雖然台灣上市日期未定，但相信很快就能市面上買到了。</p><h2 id="de19550b-60eb-4181-a752-f52e8c8ccc66" class=""><strong>XPG SX6000 Pro：搭載Realtek主控的電競SSD</strong></h2><figure id="6600e6a4-804a-4e72-960e-dc124d77d45f" class="image"><a href="https://obs.line-scdn.net/0h93TJt6ZGZhxpM01z_MUZS1NlZXNaX3UfDQU3HypdOCgRAihCXAUpKUVjOClGBSFCBwUvckk0fS0UBiQZAl0p/w644"><img src="https://obs.line-scdn.net/0h93TJt6ZGZhxpM01z_MUZS1NlZXNaX3UfDQU3HypdOCgRAihCXAUpKUVjOClGBSFCBwUvckk0fS0UBiQZAl0p/w644"/></a></figure><p id="2772a1a0-f632-452e-ae02-0875479de62b" class="">電腦升級SSD必備知識－ 搞懂規格再出手，提昇效能不必愁</p><blockquote id="eaaada88-8393-4d82-b33b-4c8b67e6dde0" class=""></blockquote><blockquote id="ab054ea4-a1e9-4c39-b34c-ad2c81ebe024" class="">規格■ 介面：M.2 NVMe■ 最大容量：1TB■ 讀取速度：2,100MB/s■ 寫入速度：1,500MB/s■ 保固：5年 廠商資訊■威剛科技 ■0800-309-309 ■http://www.xpg.com/tw/市場價格請洽廠商</blockquote><p id="b90559d7-c1c8-4350-808c-853687f031b0" class="">由威剛所發展出的 XPG 電競品牌，旗下產品當然還是以儲存類為主，已經陸續推出不少電競專用的 SSD 及記憶體系列，近期推出的 SX6000 Pro，可算是之前 SX6000系列 SSD 的升級版，支援的 NVMe 版本從1.2升級1.3，比較特別的是使用了Realtek最新的 RTS5763DL 主控晶片，搭配64層3D TLC NAND Flash，支援 HMB（Host Memory Buffer）與 SLC Caching 技術，並透過 LDPC 錯誤校正機制，確保資料傳輸的準確度，此外即使是大容量的款式，亦採用單面的設計，厚度更薄，適於輕薄筆電，減少安裝相容度問題，MTBF 更達到了200萬小時。截稿時 SX6000 Pro 雖尚未開賣，但預估也是走相對平價的路線。</p><h1 id="fdfb6025-3219-40a9-8bd0-8d6b8f7b68ce" class=""><strong>SSD必備知識</strong></h1></div></article></body></html>

@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>治療抑鬱症新方——取自蘑菇的迷幻藥</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="bf98749a-7248-47db-963f-4b47a25019cc" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🕹️</span></div><h1 class="page-title">治療抑鬱症新方——取自蘑菇的迷幻藥</h1></header><div class="page-body"><p id="e7f04020-262b-4c9b-85da-4780342eaa1e" class="">2022年4月13日</p><figure id="6efa7da7-084f-4eb9-8882-cd9940264289" class="image"><a href="https://ichef.bbci.co.uk/news/640/cpsprodpb/17EF3/production/_124153089_240659975_284023580201393_1795825176855648309_n.jpg"><img src="https://ichef.bbci.co.uk/news/640/cpsprodpb/17EF3/production/_124153089_240659975_284023580201393_1795825176855648309_n.jpg"/></a></figure><p id="6f066ca5-6f34-43cd-b0bc-e242f2d8d41b" class="">圖像來源，Getty Images</p><p id="fde2c021-d34b-47d3-a2e1-5a73d4ac6892" class="">圖像加註文字，</p><p id="652156d5-ff48-483c-8898-b0938099cb3b" class="">賽洛西賓又被稱作裸蓋菇素，能讓患者大腦區域間聯繫活躍，幫助他們擺脫抑鬱</p><p id="17df30ba-0687-4043-8249-40b8080479ef" class=""><strong>研究發現，一種名為賽洛西賓（Psilocybi）藥物似乎能夠讓人的大腦擺脫嚴重抑鬱症，效果好於其他同類藥物。</strong></p><p id="464db2f2-8630-4452-a555-9214f945a99c" class="">賽洛西賓又被稱作裸蓋菇素，這是從所謂迷幻蘑菇（magic mushrooms）中提取的藥物。迷幻蘑菇指200多種包含致幻劑的不同的蘑菇。美洲原住民在宗教儀式中利用迷幻蘑菇的特別功效已經有數千年的歷史。</p><p id="2c7e795a-9fc0-4703-a9fc-b4cd7ee7504b" class="">最近，英國這項研究對60個人進行了腦部掃描。研究人員說，賽洛西賓對治療抑鬱症有獨特的療效。研究人員還對迷幻藥物經其他多種精神健康失調的療效進行了研究。但是抑鬱症患者被警告不要擅自服用賽洛西賓。</p><h2 id="45a4e7ab-57f8-4782-964a-90e1bb53997c" class="">賽洛西賓</h2><p id="041fd60e-f362-4b9b-befc-272115943914" class="">研究人員讓接受試驗的患者服用了一種賽洛西賓的合成劑，試驗在嚴格的醫護條件下進行。試驗前，試驗進行當中和試驗過後，參加實驗者都能得到專業的心理支持。</p><p id="5cf9d5d1-8c8c-470a-a06b-f33c036d6ac1" class="">在試驗種掃描顯示患者大腦的不同區域相互聯繫增加。這些患者更可能在數月後體驗到情緒改善。相比之下，服用一種標凖抗抑鬱藥物的患者的大腦則沒有呈現上述變化。</p><p id="6814fbb9-c8ca-42a1-bbc1-b7ac1d014ecc" class="">英國帝國理工大學致幻劑研究中心的負責人大衛·納特（David Nutt）在這項最新的研究種說，賽洛西賓的療效令人「激動」，而且「很重要」。</p><figure id="a7e091cc-ec69-445c-8908-f7ec838a0cdf" class="image"><a href="https://ichef.bbci.co.uk/news/640/cpsprodpb/234B/production/_124153090_275916440_1066924417194624_3829034136863906121_n.jpg"><img src="https://ichef.bbci.co.uk/news/640/cpsprodpb/234B/production/_124153090_275916440_1066924417194624_3829034136863906121_n.jpg"/></a></figure><p id="cddf7826-b7a2-4845-84fc-da84448a6f12" class="">圖像來源，Getty Images</p><p id="e011eb68-b79b-429a-9c55-b6455d05c7b0" class="">圖像加註文字，</p><p id="63bf8748-a468-479b-a321-e3e513d9daee" class="">迷幻蘑菇指200多種包含致幻劑的不同的蘑菇</p><p id="6360f8f6-ec30-44ee-917e-eb1412c243b3" class="">他說在抑鬱狀態種，人腦陷入某種軌道，某種特定的負面思維模式而不能自拔。但是患者在服用賽洛西賓後，大腦進入開放狀態，經過3周後變得「更靈活，富有變化」。</p><p id="fb1cd0b2-61af-4c7a-acff-f360ee265898" class="">他說試驗引證了他們最初的預測，證明了賽洛西賓能夠成為治療抑鬱症的另一種有效藥物。</p><h2 id="3894d9bd-a5af-4ea7-a449-593efd12a13b" class="">大腦活動</h2><p id="cb03493e-73d5-4d13-b1ac-82a11ed21fe1" class="">迷幻藥物是一種致幻劑，能夠對人所有的感官產生影響，會改變人的思維，時間感和情緒。</p><p id="60206bed-fb29-4426-ae30-7c79529b8899" class="">一般抗抑鬱藥物通常需要患者每天服用，但是賽洛西賓患者只需要服用一次或兩次就能產生相同的療效。當然這種效果還有待更進一步的研究，更多患者臨牀檢驗才能得到證明。</p><p id="7b035d06-816d-4fa2-ad87-8e123eda866d" class="">上述研究結果發表在自然醫藥雜誌上，其中包括了兩個研究。在第一個研究種所有患者都服用賽洛西賓；第二個研究進行了隨機控制試驗，一些人服用賽洛西賓，另外一些人服用了一種不同的抗抑鬱藥物。</p><p id="cbce0dec-befc-45f4-be73-026d431c7d5e" class="">帝國理工大學致幻劑研究中心的羅賓·卡哈特-哈里斯（Robin Carhart-Harris）教授說，現在還不清楚服用賽洛西賓促成大腦活動改變能夠維持多長時間，有必要進行更多研究弄清這個問題。</p><p id="84f403d5-9117-4516-8abe-b8cfc021e3e5" class="">他說在試驗種一些患者出現反覆，可能是經過一段時間後他們的大腦有恢復到從前那種活動模式，即抑鬱症患者的大腦活動模式。</p><h1 id="0b478ea6-ee0a-43c4-89ea-47b6381bb4ec" class=""></h1><hr id="562027ce-a0db-46be-adc7-c9e74552761f"/><h1 id="555eb699-b7ba-46c4-839e-a069f95dd1bd" class="">精神與心理疾病治療：「迷幻藥」或許大有作為</h1><ul id="f40accdf-9607-4441-a80a-a8e639bf210b" class="bulleted-list"><li style="list-style-type:disc">阿萊士·塞裏恩（Alex Therrien）</li></ul><ul id="0cba3ebe-f9c2-4b1d-a2d7-777e44d7fba0" class="bulleted-list"><li style="list-style-type:disc">BBC健康衛生事務記者</li></ul><p id="c74cefd7-4392-4847-893d-e20ca6e9a957" class="">2018年7月9日</p><figure id="8bfb9f09-6284-4fbf-bf87-93e6b3dbdb1c" class="image"><a href="https://ichef.bbci.co.uk/news/640/cpsprodpb/1607E/production/_102283209_d294bf3b-ae25-4cd9-9b20-e0d526dab691.jpg"><img src="https://ichef.bbci.co.uk/news/640/cpsprodpb/1607E/production/_102283209_d294bf3b-ae25-4cd9-9b20-e0d526dab691.jpg"/></a></figure><p id="06290ca6-7370-4776-83a4-192e96a6a41d" class="">圖像來源，Getty Images</p><p id="a0206760-c773-44d0-97bb-e2247842f1ce" class=""><strong>一提到迷幻蘑菇（magic mushrooms）和LSD(麥角酸二乙基酰胺)等，人們通常會把它與1960年代的嬉皮士聯繫起來，而不是醫學實驗。</strong></p><p id="bd3f13b1-692e-42d3-a52d-ddb41599fbb7" class="">但是，科學家現在希望利用這類能夠讓人產生幻覺的藥物特點幫助治療精神與心理疾病，看它們是否具有心靈癒合的潛力？</p><p id="0592d008-289a-4c4b-b930-1963b8a8c8ff" class="">一些較小規模的研究已經顯示，致幻劑在治療抑鬱症、上癮症以及創傷後壓力症（post-traumatic stress disorder， PTSD,也稱創傷後遺症）等方面令人鼓舞。</p><p id="b07cb7cc-9196-4871-aedc-9f24b8280146" class="">英國倫敦帝國學院的研究人員將進行至少為期2年的大規模試驗，比較其中一種致幻劑藥物是否在治療抑鬱症方面比現有的主要抗抑鬱藥物更有效。</p><p id="71205781-75b3-4320-a042-5691ac7ae6fd" class="">將領導這一研究的卡哈特-哈里斯博士（Dr Robin Carhart-Harris）說，&quot;致幻劑具有變革式的巨大潛力，這並不是誇張&quot;。</p><h2 id="02fc9d69-2783-4fbd-a414-9bcb413b735c" class="">背景和爭議</h2><p id="fa74490d-4c47-43bc-8b2e-b6665f07af85" class="">其實，這並不是致幻劑第一次引起科學家們的注意，早在50年前科學家就對此感興趣。</p><p id="66e0198b-4056-416f-9a3b-60af2a529aa2" class="">當時，人們認為致幻劑大有潛力，可以用於治療一系列的心理健康障礙。科學家為此進行了1000多項研究。</p><p id="682ec246-9f07-4346-9425-ac44bd180819" class="">但由於這些藥物的特點，爭議重重。不得不停止試驗。</p><figure id="fc9d37a4-fbd9-44fd-b0a6-1b876e5c8d3b" class="image"><a href="https://ichef.bbci.co.uk/news/640/cpsprodpb/04D6/production/_102283210_10371444-ef27-4d15-9519-1a9fac1d02be.jpg"><img src="https://ichef.bbci.co.uk/news/640/cpsprodpb/04D6/production/_102283210_10371444-ef27-4d15-9519-1a9fac1d02be.jpg"/></a></figure><p id="1b80bbdb-13a5-434e-9de7-e4ffee5ca83b" class="">圖像來源，Getty Images</p><p id="c0fdaa04-07ee-4829-b7e5-c637efd44857" class="">圖像加註文字，</p><p id="b21287f0-4176-4e1f-aa5f-76a7b68c7c1b" class="">參與研究的科學家之一Timothy Leary</p><p id="84fc9a2c-5794-4c68-b69d-b24f33fc4eba" class="">因為當時（1960年代）許多歌唱界和娛樂界名人把致幻劑當作毒品來吸食，給其帶來了&quot;惡名&quot;。</p><p id="b65845f4-70c2-4ac5-a540-2857b28057ab" class="">加之報紙和媒體對其的負面報道等，出於安全考慮美國在1968年把致幻劑藥物定為非法。儘管當時一些科學家希望能對此做深入研究，並能利用它們的治療潛力。所有的研究不得不嘎然停止。</p><p id="3b41a8dc-27c4-4d4f-b160-11c017d60891" class="">特別是1971年，聯合國就有關藥品公約正式結束了對該類藥品的科學研究。</p><p id="16a9f2d8-0059-41c6-ba70-35279567a76b" class="">目前，出於需要以及政府的特批，許多科學家又開始把注意力轉移到迷幻蘑菇中的一種叫裸蓋菇鹼（psilocybin）的化合物上。</p><p id="a340bed2-d7df-4762-8d50-0cf1fd54e75c" class="">90年代已經有人首開先河，展開對致幻劑的研究。但此類研究直到2000年以後才開始經歷&quot;科學復興&quot;。</p><p id="8f8e3467-99b2-44df-be57-bd6b40a1ac4e" class="">根據美國約翰·霍普金斯大學（Johns Hopkins University in the US）的研究，裸蓋菇鹼可以讓那些由於得了癌症而導致抑鬱症的人症狀減輕80%。</p><p id="715ca778-ca69-4011-96cc-d029631d1c30" class="">同時，它還可以讓人成功戒煙，其療效要比目前戒煙藥物更好。</p><h2 id="ea1516e5-0682-47e4-94a3-2d662794d961" class="">杏仁核部位</h2><p id="6854d6c8-06fb-4632-923b-7bedeae9cc40" class="">卡哈特-哈里斯博士也成為英國研究裸蓋菇鹼如何影響人類大腦的第一位科學家。</p><p id="9eca9516-5bad-4a8f-9547-3675f7197a22" class="">他的研究之一發現，裸蓋菇鹼具有重新&quot;啟動&quot;大腦的能力，特別是對那些患有無法治療的抑鬱症患者身上。</p><figure id="d64d269d-8ec6-4032-8fa9-615335ea1cc6" class="image"><a href="https://ichef.bbci.co.uk/news/640/cpsprodpb/2BE6/production/_102283211_0476a05d-aa33-41db-887b-e71a06a462e7.jpg"><img src="https://ichef.bbci.co.uk/news/640/cpsprodpb/2BE6/production/_102283211_0476a05d-aa33-41db-887b-e71a06a462e7.jpg"/></a></figure><p id="612baa2a-7092-4ac3-994e-6d31cb734202" class="">圖像來源，Getty Images</p><p id="0b2dc4a2-13dd-4031-9af2-31fb02ebbbde" class="">圖像加註文字，</p><p id="303e847e-0ca6-408d-ad33-836e77bceb02" class="">像任何藥物一樣，迷幻藥也是有風險的。</p><p id="44918174-917d-49d2-8d79-23c3fe464ad4" class="">據信，裸蓋菇鹼主要影響人腦兩大區域，杏仁核（the amygdala）和默認網絡（the default-mode network）。</p><p id="0ca21ac5-2007-497f-b28c-d97552a00952" class="">其中，杏仁核區域是負責主管人腦情緒部位，即恐懼、焦慮等等情緒。</p><p id="a57037bb-27d9-4fa3-9123-2a31c175ca4a" class="">雖然，研究人員還不完全明白裸蓋菇鹼是如何影響大腦的，但是卡哈特-哈里斯博士相信，它可以有效地&quot;使大腦加熱&quot;，讓人們可以克服大腦中根深蒂固的自毀思維模式等。</p><p id="f37030ee-6ddf-48bb-9f60-75ee7fea3584" class="">卡哈特-哈里斯博士表示，加上理療師的幫助，那些接受治療的患者可以重新以一種更加健康的方式校凖大腦。</p><h2 id="64a67efc-da7b-4f9a-a4b5-6fa3af725f9c" class="">風險猶存</h2><p id="33aa8b3f-7aa1-4386-bf35-e1f3aaba699b" class="">當然，這類致幻類藥物並不是沒有風險的。雖然它不會對人體造成什麼毒害，但是它會讓人產生不適和負面影響（bad trips），因而可能會導致服用者失控自殘等。</p><p id="1daa535d-6b30-4947-9a15-9e3df396ce8b" class="">此外，它還會加劇已有的一些心理健康問題，導致出現精神問題。</p><p id="e6263edc-902a-4379-8e6e-dd6f32d90fb5" class="">科學家用於試驗的藥物質量更純，並且具有豐富的醫學經驗，參加試驗的人也不會有潛在的精神問題，但人們平時所使用的這類娛樂藥物就不一樣了。</p><p id="e4cbef76-7942-4994-a875-55106da41600" class="">倫敦國王學院精神病學研究院（the Institute of Psychiatry at King&#x27;s College London）的拉克博士（Dr James Rucker）將對裸蓋菇鹼的安全性能進行試驗。</p><p id="f8ce84fc-f05f-4573-813a-16122505a593" class="">他說，即使裸蓋菇鹼安全有效，也可能至少要等5年甚至更長才能使其合法在醫學上作為治療使用。</p><p id="11fd21ba-84f3-4a40-9185-68ae774982c1" class="">那麼，致幻劑是否能夠證明是治療突破，具有徹底改變心理健康的能力呢？</p><p id="829b4625-b1f2-4b5f-b1ec-4391e8f18b6d" class="">卡哈特-哈里斯博士說，即使大型試驗證明致幻劑的治療作用，恐怕也不是對每個人都適用， 特別是那些有不愉快經歷的人。</p><p id="166597f2-5840-4be5-8d27-af8bafb82392" class="">拉克博士則說，在精神疾病治療方面，沒有一種藥物或方法是對人人都有效的。</p><p id="a6c48d0e-94b7-428d-88a6-b9ed868a6a43" class="">但是，人們至少多了一項選擇。</p></div></article></body></html>

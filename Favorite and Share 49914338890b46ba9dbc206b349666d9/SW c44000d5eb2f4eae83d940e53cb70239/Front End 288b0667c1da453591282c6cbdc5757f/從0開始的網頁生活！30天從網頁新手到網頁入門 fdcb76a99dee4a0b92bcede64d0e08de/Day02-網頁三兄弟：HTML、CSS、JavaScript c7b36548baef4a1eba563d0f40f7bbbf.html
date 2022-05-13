@@ -1,0 +1,675 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Day02-網頁三兄弟：HTML、CSS、JavaScript</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c7b36548-baef-4a1e-ba56-3d0f40f7bbbf" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🛠️</span></div><h1 class="page-title">Day02-網頁三兄弟：HTML、CSS、JavaScript</h1></header><div class="page-body"><h1 id="185c41a1-a779-4745-806b-85d5b11bd519" class=""><strong>網頁架構</strong></h1><p id="8169895c-659d-4c5c-84dd-71fdf7e1e841" class="">在正式進入網頁教學之前先來簡單介紹一下構成網頁三大元素：</p><p id="d58b5438-0af8-4ef9-8024-946db668a06d" class=""><a href="https://zh.wikipedia.org/wiki/HTML">HTML</a></p><p id="76703d49-a781-431b-80fd-9bf4e288efe3" class="">、</p><p id="08bd70e1-d422-4f7b-a99b-365dd93b8266" class=""><a href="https://zh.wikipedia.org/wiki/%E5%B1%82%E5%8F%A0%E6%A0%B7%E5%BC%8F%E8%A1%A8">CSS</a></p><p id="e3ea9255-a790-4585-9658-abe7ccc10adf" class="">、</p><p id="68cb5eac-c523-4f12-9301-8f78fa61d1e4" class=""><a href="https://zh.wikipedia.org/wiki/JavaScript">JavaScript</a></p><figure id="94f5b0a2-574c-438e-8e29-4ed5d8dbb2ac" class="image"><a href="https://i.imgur.com/GIqgBgG.jpg"><img src="https://i.imgur.com/GIqgBgG.jpg"/></a></figure><p id="018bfd4a-48fe-420c-a004-c01b9827f42c" class="">由上圖可以發現 <strong>HTML</strong> 負責的就是把網頁的結構生出來，所以看起來都方方正正的不是那麼美觀，而 <strong>CSS</strong> 就是負責把外貌給顯示出來，讓網頁的外貌看起來美觀一些，最後 <strong>JavaScript</strong> 再負責去控制網頁裡面的內容以及使用者的操作行為。</p><h1 id="3c05f3d2-373b-443f-9c95-adc132721f7e" class=""><strong>HTML</strong></h1><p id="9b1b8acf-ba29-40f9-88ec-4bb34df60374" class=""><strong>HTML</strong> 就是管理網頁的架構，一個好的網頁其 <strong>HTML</strong> 可以說是相當單純且具有易讀性，這種網頁不但方便前端工程師進行後續的維護外，也比較容易讓你的網頁增加曝光率讓搜尋引擎能把你的網頁擺在最前面，此種行為稱為 <a href="https://zh.wikipedia.org/wiki/%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E%E6%9C%80%E4%BD%B3%E5%8C%96">SEO</a>，而目前 <strong>HTML</strong> 已經發布到第五版同時也是目前最廣為使用的版本，因此大家常聽到的 <strong>HTML5</strong> 其實就是指第五版的 <strong>HTML</strong> 喔！</p><h1 id="305238f8-60a6-4ffe-8f08-bfbb14f27029" class=""><strong>HTML 基本觀念</strong></h1><p id="3ced3be0-369f-4bcb-bc45-f07c7a723f5d" class=""><strong>HTML</strong> 內的 <strong>元素(element)</strong> 有兩個重要的基本觀念：巢狀結構以及 <strong>屬性(attribute)</strong>。</p><ul id="b1c68010-8da6-4738-978e-f2b7277b1c0d" class="bulleted-list"><li style="list-style-type:disc"><strong>巢狀結構</strong><p id="f6ac8dfa-bbf3-4032-8e42-e908fdec6fc6" class=""><strong>HTML</strong> 內的 <strong>element</strong> 排序屬於巢狀結構，巢狀結構簡單來說就是一層一層的概念，舉例來說</p><pre id="f4475600-fbd4-4ce8-9c44-5d85760408cd" class="code code-wrap"><code>&lt;div&gt;
+  &lt;p&gt;Hello World&lt;/p&gt;
+&lt;/div&gt;
+</code></pre><p id="34d46e30-e869-424d-bce5-13fae706a611" class="">可以看到 <code>&lt;p&gt;</code> 這個 <strong>element</strong> 被 <code>&lt;div&gt;</code> 這個 <strong>element</strong> 包起來，代表 <code>&lt;div&gt;</code> 在 <code>&lt;p&gt;</code> 的上層，這邊會用兩個專有名詞來稱呼上下層之間的關係，上層稱為 <strong>父元素</strong> 下層稱為 <strong>子元素</strong> ，更多詳細的 <strong>父元素</strong> 以及 <strong>子元素</strong> 的觀念將會在明天的文章加以敘述。</p></li></ul><ul id="a9c79327-38f7-47b9-ba06-f18452525635" class="bulleted-list"><li style="list-style-type:disc"><strong>Attribute</strong><p id="ad6c1c7e-4d86-4f47-82be-f7496d96c070" class=""><strong>Attribute</strong> 簡單來說就是用來敘述 <strong>element</strong> 的相關性質，舉例來說</p><pre id="17e06628-4129-49fb-822e-038d057fdc32" class="code code-wrap"><code>&lt;div class=&quot;txt&quot; id=&quot;uniqueTxt&quot;&gt;Hello World&lt;/div&gt;
+&lt;!-- placeholder為提示文字 --&gt;&lt;input placeholder=&quot;請輸入文字&quot; id=&quot;input&quot; /&gt;
+&lt;!-- href為超連結網址 --&gt;&lt;a href=&quot;www.google.com.tw&quot; class=&quot;link&quot;&gt;Google&lt;/a&gt;
+</code></pre><p id="620d9b4b-425e-4628-bcf4-61979776709e" class="">可以看到在 <strong>element</strong> 裡面寫了 <code>class</code> 、 <code>placeholder</code> 、 <code>href</code> 這些不是 <strong>element</strong> 的東西，這種附加在 <strong>element</strong> 上的東西就稱之為 <strong>attribute</strong> ，更多詳細的 <strong>attributes</strong> 可以參考這個<a href="https://www.w3schools.com/TAGS/ref_attributes.asp">網站</a>，這邊就介紹每個 <strong>element</strong> 都可以用的 <strong>global attributes</strong> 。</p><ul id="96c88f6c-d9bf-4145-84b4-7ef10aeda5e9" class="bulleted-list"><li style="list-style-type:circle"><strong>Global Attributes</strong><p id="5828ef95-fa3f-4d34-ade2-c08639eb2421" class="">回到剛剛的例子，我們可以發現 <code>class</code> 跟 <code>id</code> 這兩個 <strong>attribute</strong> 都出現在好幾個不同的 <strong>element</strong> 裡面，這些就是 <strong>global attribute</strong> ，至於 <strong>global attribute</strong> 的相關用途會在底下的 <strong>CSS 基礎觀念</strong> 加以敘述，這邊有一個重要的觀念要交代，一個 <strong>element</strong> 可以有無數個 <code>class</code> 可是只能有一個 <code>id</code>，這邊可以用一個簡單的方式來思考，一個人可以有很多種角色，但是只會有一個身分證字號，而 <code>class</code> 就是男生、學生，<code>id</code> 就是身分證字號。</p></li></ul></li></ul><h1 id="9a88fa06-b8be-48e5-8dac-aad3412c24d1" class=""><strong>CSS</strong></h1><p id="1206e121-edce-40d9-8253-d602b33c08f8" class=""><strong>CSS</strong> 就是管理網頁的外貌，<strong>CSS</strong> 之於網頁如同化妝品之於人類，因此 <strong>CSS</strong> 相當考驗工程師的美感，像筆者就完全沒有美感不懂設計刻出來的網頁通常都奇醜無比XD</p><p id="7bdb836f-d44b-408d-93e7-e3f78853ff1b" class="">而目前 <strong>CSS</strong> 已經發布到第三版同時也是目前最廣為使用的版本，因此大家常聽到的 <strong>CSS3</strong> 其實就是指第三版的 <strong>CSS</strong> 喔！</p><h1 id="b1b4901b-30ff-44d4-aeb0-878d2f90b2c8" class=""><strong>CSS 基本觀念</strong></h1><p id="ea633fa5-c39a-4189-8775-bd59025c9ae2" class="">還記得上面提到的 <strong>global attributes</strong> 嗎？為什麼需要 <strong>global attributes</strong> 呢？這個就是為了讓 <strong>CSS</strong> 可以快速的幫這些 <strong>element</strong> 加上專屬的樣式，一般可以分成三種方式來替 <strong>element</strong> 加樣式。</p><ul id="8404da1f-ce0c-4e84-8319-d469c659f59e" class="bulleted-list"><li style="list-style-type:disc"><strong>style attribute(inline style)</strong><p id="d658268c-0796-4929-ba57-76e1367be0f7" class="">這種是最直觀也最簡單的，也就是直接在 <strong>element</strong> 裡寫 <strong>style</strong>，這邊有個小小的觀念，其實 <strong>CSS</strong> 是有階級之分的，大家覺得在下面的圖片中這三個 <code>Hello World</code> 分別會變成什麼顏色呢？</p><figure id="a7072975-1bec-4da2-989b-b408a569557a" class="image"><a href="https://i.imgur.com/lDTuGoC.jpg"><img src="https://i.imgur.com/lDTuGoC.jpg"/></a></figure><p id="1903d0f9-304e-4ea6-94ad-872afb203bb5" class="">答案是綠色、藍色、紅色，所以可想而知 <strong>CSS</strong> 讀取的優先順序為： <strong>inline style</strong> &gt; <strong>id</strong> &gt; <strong>class</strong> 。</p><figure id="e24a1801-a14c-4b6f-995d-bc53904d9497" class="image"><a href="https://i.imgur.com/2ydL8ce.jpg"><img src="https://i.imgur.com/2ydL8ce.jpg"/></a></figure><p id="4e265482-d280-4e31-a1fc-d82ed92cb5fd" class="">難道沒有其他方法可以強制覆蓋 <strong>element</strong> 內的 <strong>style</strong> 嗎？答案是有的，只需要加上 <code>!important</code> 就可以了，像下圖這樣。</p><figure id="5feba888-28ea-411f-99ee-162d132a80d3" class="image"><a href="https://i.imgur.com/RZQfjyn.jpg"><img src="https://i.imgur.com/RZQfjyn.jpg"/></a></figure></li></ul><ul id="a7c27126-2640-4b80-a8ba-587c50db174a" class="bulleted-list"><li style="list-style-type:disc"><strong>style tag(</strong><code><strong>&lt;style&gt;</strong></code><strong>)</strong><p id="c36872bd-6c80-4ddb-8c71-2c3fce03a123" class="">這邊就是實作樣式的地方啦，這邊通常都會用 <code>class</code> 以及 <code>id</code> 來描述，在寫法上 <code>class</code> 會用 <code>.className</code> 而 <code>id</code> 會用 <code>#idName</code> 來區分。</p></li></ul><ul id="b7400ce4-bb65-4904-8adc-023f9be2a0bc" class="bulleted-list"><li style="list-style-type:disc"><strong>link ref import css files</strong><p id="6d226359-858b-4bad-9b5a-df81740768ed" class="">最後一種方法就是寫 <strong>CSS</strong> 檔來描述網頁內的各個樣式並利用 <a href="https://www.w3schools.com/css/css_howto.asp">link tag</a> 來連結檔案。</p></li></ul><h1 id="3e7937cd-17d4-45a9-8227-651642607c6b" class=""><strong>JavaScript</strong></h1><p id="9b8cea85-c1c6-4140-bc10-0509fd4242c5" class=""><strong>JavaScript</strong> 就是管理網頁的內容以及使用者的操作行為，因此 <strong>JavaScript</strong> 可以說是網頁最重要同時也是最難學的一個環節了，有一個程式語言叫做 <strong>Java</strong> 很多人都會誤以為這個程式語言跟 <strong>JavaScript</strong> 是一樣的東西，但他們兩個完全不一樣喔，所以不要被名字看起來很像就混淆了，而筆者也會花最多時間在寫有關 <strong>JavaScript</strong> 的文章上，讓讀者們可以真正了解網頁的世界。</p><h1 id="a430472b-8a4a-42eb-868e-5a36f41b6999" class=""><strong>JavaScript 基本觀念</strong></h1><p id="3fe39150-3db6-47d4-9887-8af064381fb7" class="">上面提到 <strong>JavaScript</strong> 的存在就是為了要控制網頁的內容，所以可以猜想到 <strong>JavaScript</strong> 最重要的概念就是要控制 <strong>HTML</strong> 中的各個 <strong>element</strong>，既然要控制 <strong>element</strong> 那勢必得提供相對應的 <a href="https://developer.mozilla.org/zh-TW/docs/Web/API">Web API</a>，在剛剛的連結中可能會被裡面琳瑯滿目的 <strong>API</strong> 嚇到，這邊筆者建議看懂 <a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Document">DOM API</a> 即可，更詳細的 <strong>API</strong> 介紹會在下一篇文章加以敘述，講了這麼多好像都沒有真正提到如何寫 <strong>JavaScript</strong>，這邊跟 <strong>CSS</strong> 一樣有三種方法，而且三種方法都是一樣的道理喔！</p><ul id="0ced0df4-7f19-4c28-b50c-8d688819bfd5" class="bulleted-list"><li style="list-style-type:disc"><strong>Attribute</strong><p id="db632781-ae1d-40b8-a753-bf5609a58af1" class="">熟悉的 <strong>attribute</strong> 又來啦，相信聰明的你應該推想得知可以把 <strong>JavaScript</strong> 寫在 <strong>HTML</strong> 的 <strong>element</strong> 內了，沒錯的確是可以這樣不過比較少人用就是了，畢竟不會有人想真的寫一段落落長的程式碼綁在 <strong>element</strong> 中，比較正常的做法是在 <strong>element</strong> 內寫上 <strong>onClick</strong> 之類的 <strong>attribute</strong> 綁上 <strong>function</strong> 然後再到等等要講的 <strong>script</strong> 裡面去實作 <strong>function</strong> ，這裡你可能會有一個疑問： <strong>click</strong> 就 <strong>click</strong> 為啥還要多加一個 <strong>on</strong> 變成 <strong>onClick</strong> 呢？</p><ul id="7de4a1fe-ce56-486c-95b5-b82483bce5e8" class="bulleted-list"><li style="list-style-type:circle"><strong>click</strong><p id="5d210645-9548-4710-8b1d-9bdf1081159e" class=""><strong>click</strong> 為 <strong>事件(event)</strong> ，事件非常的單純只負責通風報信，舉例來說當有個 <strong>element</strong> 被點擊，那這個 <strong>element</strong> 就被觸發了 <strong>click</strong> 這個 <strong>event</strong> ，他不用去管後續的動作只需要告知說我被點擊了而已。</p></li></ul><ul id="31936777-bafb-4e48-a2ce-eb4a3d36f936" class="bulleted-list"><li style="list-style-type:circle"><strong>onClick</strong><p id="bd87f06a-2d96-4c24-9bb5-c0309eac9a58" class=""><strong>onClick</strong> 為處理事件的 <strong>處理器(handler)</strong> 所以會是一個 <strong>function</strong> 型態，舉例來說當一個 <strong>element</strong> 觸發 <strong>click</strong> 事件後會呼叫 <strong>onClick</strong> 來進行 <strong>click</strong> 後的動作。</p></li></ul><p id="34872daa-ee24-4c69-b7a9-c0a33bd4de4b" class="">所以我們可以推斷先有 <strong>event</strong> 才會有 <strong>handler</strong> ，這也是為什麼在 <strong>element</strong> 上面會直接寫 <strong>onClick</strong> 而不是 <strong>click</strong> 的原因，那如果我偏偏不直接寫 <strong>handler</strong> 而要用 <strong>event</strong> 的方式撰寫要怎麼做呢？這時候就需要 <code>addEventListener()</code> 了。</p><p id="abecc580-9454-43a1-8af0-8d666a9afbc8" class=""><code>addEventListener()</code> 簡單來說就是個替 <strong>element</strong> 監聽事件的監聽器，而 <code>addEventListener()</code> 一共有三個參數： <strong>event</strong> 、 <strong>handler</strong> 、 <strong>boolean value</strong> 。</p><ul id="54fa5cac-3c6d-42ff-ada8-c2aed8af5847" class="bulleted-list"><li style="list-style-type:circle"><strong>event</strong><p id="996a2f80-d91a-427e-824a-af2a932194b3" class="">這個就不用再多做介紹了，就是擺上要監聽的事件名稱，更多詳細的事件名稱可以參考這個<a href="https://developer.mozilla.org/zh-TW/docs/Web/Events">網站</a>。</p></li></ul><ul id="f93297f7-5107-47a9-b0bb-24b5f2ce2a63" class="bulleted-list"><li style="list-style-type:circle"><strong>handler</strong><p id="2e9b7988-1d37-4226-8d69-4c57e96ede5e" class="">這裡就是要寫上 <strong>handler</strong> ，負責去執行 <strong>event</strong> 的後續動作。</p></li></ul><ul id="275eff10-607c-4f03-9922-75469f0b06cc" class="bulleted-list"><li style="list-style-type:circle"><strong>boolean value</strong><p id="6a88431d-7ab8-49f2-9311-0acb79a6edd7" class="">這裡牽扯到兩個很重要的事件流程，分別為 <strong>事件冒泡(bubbling)</strong> 以及 <strong>事件捕獲(capture)</strong> 。</p><ul id="a53a8ab1-c5c6-43d7-9103-2430791a961a" class="bulleted-list"><li style="list-style-type:square"><strong>bubbling</strong><p id="548ca746-051d-4d3b-9259-0d33feb46ef1" class="">從觸發事件的 <strong>element</strong> 開始，將事件往上傳遞直到 <strong>document</strong> 。</p><figure id="ce3095ad-cfdf-4bcf-8ef5-564fc8bf9437" class="image"><a href="http://www.java2s.com/Tutorials/JavascriptImage/eventBubble.png"><img src="http://www.java2s.com/Tutorials/JavascriptImage/eventBubble.png"/></a></figure></li></ul><ul id="607c4826-311d-4084-90ef-16e11d3bce12" class="bulleted-list"><li style="list-style-type:square"><strong>catpure</strong><p id="a5a9b767-ce2a-4ef1-abd1-ac220e509cc1" class="">從 <strong>document</strong> 開始逐漸往下找尋觸發事件的 <strong>element</strong> 。</p><figure id="2a6c39e6-c83e-4d6c-8236-5db57438e74e" class="image"><a href="http://www.java2s.com/Book/JavaScriptImages/eventCapture.png"><img src="http://www.java2s.com/Book/JavaScriptImages/eventCapture.png"/></a></figure></li></ul><p id="46023f4f-b69a-4878-86a2-e40be4c016a7" class="">可以發現兩者的差別只有在於流程順序而已，在大部分的狀況下通常事件流程都不會有順序上的差別，只有在少部分的情況下就會有順序上的差別，可以參考這個<a href="https://codepen.io/Andy-Chen/pen/VEmPOO">範例</a>。</p></li></ul></li></ul><ul id="f45f1773-aae4-4f18-8cee-976f38116117" class="bulleted-list"><li style="list-style-type:disc"><strong>script tag(</strong><code><strong>&lt;script&gt;</strong></code><strong>)</strong><p id="a57f13f4-8440-4110-8f12-da9e7b7c0954" class="">這邊就是實作 <strong>JavaScript</strong> 的地方啦，概念就跟 <strong>CSS</strong> 一樣。</p></li></ul><ul id="85fc93db-8f9b-4732-94ec-5653bb51c838" class="bulleted-list"><li style="list-style-type:disc"><strong>script src import js files</strong><p id="d6c268b4-7f24-488f-8ac9-551be50e10d0" class="">跟 <strong>CSS</strong> 不同的地方是 <a href="https://www.w3schools.com/tags/att_script_src.asp">script tag</a> 本身就可以連結 <strong>js</strong> 檔案，只需要加個 <code>src</code> 這個 <strong>attribute</strong> 就可以了，不像 <strong>CSS</strong> 還需要透過 <code>&lt;link&gt;</code> 來連結檔案。</p></li></ul><h1 id="5cac2c2a-ab67-4868-9794-8c73e26dc2d0" class=""><strong>總結小練習</strong></h1><p id="8eb9dc76-57eb-4e77-8d93-48e8a8882097" class="">這裡筆者提供一個<a href="https://codepen.io/Andy-Chen/pen/EdKQbb">小練習</a>方便讓讀者熟悉上述的各個觀念，<a href="https://codepen.io/">CodePen</a> 是一個相當好用的網頁練習工具同時也是一個<a href="https://zh.wikipedia.org/wiki/%E6%89%80%E8%A6%8B%E5%8D%B3%E6%89%80%E5%BE%97">所見即所得(wysiwyg)</a> 編輯器，不像 <strong>w3school</strong> 或 <a href="https://jsfiddle.net/">JSFiddle</a> 在每次更改完程式碼還要按RUN重新跑一次，以這點來說真的非常方便很適合作為網頁練習工具，而且很多大神都會在上面發布自己所寫的版面提供給大家參考，未來筆者練習題也都會優先擺在 <strong>CodePen</strong> 上提供給讀者們使用。</p><h1 id="a9816e4f-5006-4044-bb45-e0b97e44155a" class=""><strong>參考資料</strong></h1><p id="406053eb-8477-4c64-a0a5-d2d3d7887964" class="">這邊筆者提供一個以前在學習網頁時每天必逛的網頁 <a href="https://www.w3schools.com/">w3school</a>，這個網站提供了網頁全部的基本知識，如果上述的觀念有哪些地方不是很理解都可以在此網站找到解答喔！</p></div></article></body></html>

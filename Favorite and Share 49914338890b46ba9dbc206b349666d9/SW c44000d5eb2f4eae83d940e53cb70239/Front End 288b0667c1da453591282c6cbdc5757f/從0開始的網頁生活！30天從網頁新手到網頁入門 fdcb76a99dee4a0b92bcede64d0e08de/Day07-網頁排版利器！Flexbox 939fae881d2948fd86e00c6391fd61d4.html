@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Day07-網頁排版利器！Flexbox</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="939fae88-1d29-48fd-86e0-0c6391fd61d4" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🌀</span></div><h1 class="page-title">Day07-網頁排版利器！Flexbox</h1></header><div class="page-body"><h1 id="d046b5a3-73cd-44f8-a237-5f9cf3096fe2" class=""><strong>前言</strong></h1><p id="3650cba8-1cbf-40d4-8426-50915fae0c7c" class="">網頁最重要的就是排版，一般來說網頁是由一個一個的 <strong>區塊(block)</strong> 組合而成，要排得好看基本上都要給定寬高，但這種排法會讓每個區塊過於死板，即便不把寬高寫死而是用百分比符號代替，這種寫法雖不會過於死板但有可能會讓區塊大小不夠精準，於是有彈性的區塊： <strong>Flexbox</strong> 出來了。</p><h1 id="c665a1a9-a1e8-4b33-a746-0be1541a5b6a" class=""><strong>基本概念</strong></h1><p id="d25994ee-9c52-48bc-afe8-861775346f76" class="">在正式介紹之前先來了解一下 <strong>Flexbox</strong> 的基本概念，與一般的區塊不同， <strong>Flexbox</strong> 多了 <strong>水平起點(main start)</strong> 與 <strong>水平終點(main end)</strong> 、 <strong>垂直起點(cross start)</strong> 與 <strong>垂直終點(cross end)</strong> 、水平線與垂直線，這種非常細節性的屬性都是為了要讓區塊變得更加有彈性，這也讓 <strong>Flexbox</strong> 逐漸取代一般的區塊。</p><figure id="201db41a-2ecc-4918-86d5-bdd059a44f0b" class="image"><a href="https://az787680.vo.msecnd.net/user/%E5%91%A8%E6%94%BF%E8%BC%9D/ca2fae2c-d1d1-443b-83a1-eb793a30581c/1525241598_89066.png"><img src="https://az787680.vo.msecnd.net/user/%E5%91%A8%E6%94%BF%E8%BC%9D/ca2fae2c-d1d1-443b-83a1-eb793a30581c/1525241598_89066.png"/></a></figure><p id="0f0facd6-8d74-4a27-bd7d-a4006dc2738c" class=""><strong>Flexbox</strong> 講求的是同一個父元素中，其子元素的自由排版，也因此以下種種屬性設定都是寫在父元素而非寫在子元素中喔！</p><figure id="94f358a6-db54-4827-86cb-68a0af1bc916" class="image"><a href="https://css-tricks.com/wp-content/uploads/2014/05/flex-container.svg"><img src="https://css-tricks.com/wp-content/uploads/2014/05/flex-container.svg"/></a></figure><h1 id="eb54e690-cb56-4514-869a-92296e084fb7" class=""><strong>屬性介紹</strong></h1><p id="52b3a640-1661-46ed-a7a9-f3ceb267ccf0" class=""><strong>Flexbox</strong> 的屬性可以分為以下幾點：</p><ul id="49543133-11be-42be-9f79-893d7471b1f9" class="bulleted-list"><li style="list-style-type:disc"><strong>display</strong><p id="877546ce-c492-4488-8927-a50294c2d38f" class=""><strong>display</strong> 可以說是 <strong>CSS</strong> 中最基本的屬性了，而 <strong>Flexbox</strong> 基本上也跟一般的區塊一樣可以分成 <code>display: flex;</code> 以及 <code>display: inline-flex;</code> 兩種，而這兩種的差別也跟一般的區塊一樣只在於元素後方需不需要換行而已。</p></li></ul><ul id="56b8bf2a-49ee-4151-8bd4-bfefa2d7f76f" class="bulleted-list"><li style="list-style-type:disc"><strong>flex-direction</strong><p id="f5ff17a0-417a-4399-9f44-d18bc76c2c64" class="">這個屬性主要是設定 <strong>Flexbox</strong> 內的元素 <strong>排列方向</strong> ，其值可分為以下四種：</p><ul id="3a2255a1-4660-4f0b-837a-cf82ae62c048" class="bulleted-list"><li style="list-style-type:circle"><strong>row</strong>元素由左到右排序，為 <strong>flex direction</strong> 的預設值。<figure id="5e474694-e6ff-4c01-8e0a-2f30db7e1976" class="image"><a href="https://i.imgur.com/gLuqRpn.jpg"><img src="https://i.imgur.com/gLuqRpn.jpg"/></a></figure></li></ul><ul id="309a1955-9ad5-42f5-98c2-dc7d4d25b1d0" class="bulleted-list"><li style="list-style-type:circle"><strong>row-reverse</strong>元素由右到左排序。<figure id="6fcee4f5-f4ea-47bc-93df-ca4dbc4e52dc" class="image"><a href="https://i.imgur.com/esBYRnm.jpg"><img src="https://i.imgur.com/esBYRnm.jpg"/></a></figure></li></ul><ul id="26563f00-8b0f-48af-9c75-80c9ab703479" class="bulleted-list"><li style="list-style-type:circle"><strong>column</strong>元素由上到下排序。<figure id="5b84fb79-5824-43d5-8972-5567d58886ef" class="image"><a href="https://i.imgur.com/ZRq2NE6.jpg"><img src="https://i.imgur.com/ZRq2NE6.jpg"/></a></figure></li></ul><ul id="8823e181-1aa6-41e3-8c50-8209b85a64b1" class="bulleted-list"><li style="list-style-type:circle"><strong>column-reverse</strong>元素由下到上排序。<figure id="caf0a40a-dece-431a-a3cc-9f5b63b57345" class="image"><a href="https://i.imgur.com/Lsvtpjc.jpg"><img src="https://i.imgur.com/Lsvtpjc.jpg"/></a></figure></li></ul></li></ul><ul id="45d7cf06-efd4-4d44-a70b-6ae7624b6590" class="bulleted-list"><li style="list-style-type:disc"><strong>justify-content</strong><p id="b2597646-19e9-467b-99e2-163331df2cb1" class="">這個屬性主要是設定 <strong>Flexbox</strong> 內的元素 <strong>水平對齊位置</strong> ，其值可分為以下五種：</p><ul id="bb5fa879-77a2-44b4-b494-bd7dffdcc79a" class="bulleted-list"><li style="list-style-type:circle"><strong>flex-start</strong>元素對齊水平方向最左邊的 main start，為預設值。<figure id="39716602-0acb-45fe-a983-139ed3c99399" class="image"><a href="https://i.imgur.com/PaxVJny.jpg"><img src="https://i.imgur.com/PaxVJny.jpg"/></a></figure></li></ul><ul id="1129d43d-53d8-4841-996d-ed931b115be3" class="bulleted-list"><li style="list-style-type:circle"><strong>flex-end</strong>元素對齊水平方向最右邊的 main end。<figure id="8bc1540c-1fd3-45d0-8e6f-17324ab17396" class="image"><a href="https://i.imgur.com/GTdcTpj.jpg"><img src="https://i.imgur.com/GTdcTpj.jpg"/></a></figure></li></ul><ul id="4b79e600-5c33-4cdc-a377-77630899687e" class="bulleted-list"><li style="list-style-type:circle"><strong>center</strong>元素水平置中。<figure id="c30ffba9-2806-48b7-871e-443d03eeaa6f" class="image"><a href="https://i.imgur.com/tavxcVC.jpg"><img src="https://i.imgur.com/tavxcVC.jpg"/></a></figure></li></ul><ul id="b629cef4-7bb0-4597-b48e-303b89c86963" class="bulleted-list"><li style="list-style-type:circle"><strong>space-between</strong>元素平均分配，但左右兩邊的元素會對齊 main start 以及 main end。<figure id="f7c7e34c-3c50-4ce0-b458-0a8b9e53814a" class="image"><a href="https://i.imgur.com/ciT1OEs.jpg"><img src="https://i.imgur.com/ciT1OEs.jpg"/></a></figure></li></ul><ul id="f4578011-f430-4d8f-8f27-af6a8e4bb4e2" class="bulleted-list"><li style="list-style-type:circle"><strong>space-around</strong>元素平均分配，每個元素間距都會一致。<figure id="6c19d7f3-5f32-4973-bc02-29cbd7f61555" class="image"><a href="https://i.imgur.com/neTUclU.jpg"><img src="https://i.imgur.com/neTUclU.jpg"/></a></figure></li></ul></li></ul><ul id="cebb42be-5287-4d6a-8f97-d319fca1b40c" class="bulleted-list"><li style="list-style-type:disc"><strong>align-items</strong><p id="4ca3c44e-24a9-444c-9e7c-fac0bb0ef39a" class="">這個屬性主要是設定 <strong>Flexbox</strong> 內的元素 <strong>垂直對齊位置</strong> ，其值可分為以下五種：</p><ul id="299c5f14-db3c-49a2-945d-cc7c35568dd3" class="bulleted-list"><li style="list-style-type:circle"><strong>flex-start</strong>元素對齊垂直方向最上面的 cross start。<figure id="862c55af-ef60-4ab0-a4ce-cfc43e819237" class="image"><a href="https://i.imgur.com/gYmixVS.jpg"><img src="https://i.imgur.com/gYmixVS.jpg"/></a></figure></li></ul><ul id="57747db9-48e6-4412-b971-0588cfabe99c" class="bulleted-list"><li style="list-style-type:circle"><strong>flex-end</strong>元素對齊垂直方向最下面的 cross end。<figure id="bc0df6ca-34b3-4c55-a635-294203dc80dc" class="image"><a href="https://i.imgur.com/fQ7IudI.jpg"><img src="https://i.imgur.com/fQ7IudI.jpg"/></a></figure></li></ul><ul id="f79ba526-9695-47cf-8d42-c0265b58e8e5" class="bulleted-list"><li style="list-style-type:circle"><strong>center</strong>元素垂直置中。<figure id="58207780-63e4-4a29-953b-d6c8ff5292f1" class="image"><a href="https://i.imgur.com/kr4yfQy.jpg"><img src="https://i.imgur.com/kr4yfQy.jpg"/></a></figure></li></ul><ul id="a6cbc59c-3fec-4045-a663-9fc9582590d0" class="bulleted-list"><li style="list-style-type:circle"><strong>stretch</strong>元素撐滿整個高度，為預設值。<figure id="25c87fac-70e3-4863-bbed-669fbc637cc7" class="image"><a href="https://i.imgur.com/TSpX1bt.jpg"><img src="https://i.imgur.com/TSpX1bt.jpg"/></a></figure></li></ul><ul id="6de939ac-621b-4a75-af2e-66225f72c7c2" class="bulleted-list"><li style="list-style-type:circle"><strong>baseline</strong>以元素內的所有內容為基線對齊。<figure id="fd2ef6a9-2b74-4514-a6ff-1d8a7fde99d8" class="image"><a href="https://i.imgur.com/Uo9AlW4.jpg"><img src="https://i.imgur.com/Uo9AlW4.jpg"/></a></figure></li></ul></li></ul><ul id="ae96a1d7-4cb8-4f48-8a88-b1cbf2ce5535" class="bulleted-list"><li style="list-style-type:disc"><strong>align-self</strong><p id="cb6dc494-ae55-414b-a95e-6dcbb2bbf66b" class="">這個屬性跟上面的 <strong>align-items</strong> 可以說是一模一樣，差別在於 <strong>align-self</strong> 是針對單一元素而不是整個元素，也因此這個屬性比較特別是寫在子元素中而不是父元素。</p></li></ul><figure id="95d1881e-a437-4df3-83ed-184eadb2af74" class="image"><a href="http://w3.unpocodetodo.info/css3/images/flex-align-self.gif"><img src="http://w3.unpocodetodo.info/css3/images/flex-align-self.gif"/></a></figure><ul id="75707112-6dab-4d0b-a565-2f29ee1e7055" class="bulleted-list"><li style="list-style-type:disc"><strong>align-content</strong><p id="ba0a260f-5464-4491-b268-2fe5b1f5f98e" class="">這個屬性也跟上面的 <strong>align-items</strong> 很像，差別在於 <strong>align-items</strong> 是針對 <strong>單行元素</strong> 而 <strong>align-content</strong> 是針對 <strong>多行元素</strong> 。</p><ul id="9ccce3c7-caee-4dc8-8524-3c7d75b30cd9" class="bulleted-list"><li style="list-style-type:circle"><strong>flex-start</strong>元素對齊垂直方向最上面的 cross start。<figure id="3d63ddd3-dd0c-43e3-a015-911f3e87b026" class="image"><a href="https://i.imgur.com/XIRF6QN.jpg"><img src="https://i.imgur.com/XIRF6QN.jpg"/></a></figure></li></ul><ul id="c5fa298f-e7b1-456f-b800-fe8d56d1878e" class="bulleted-list"><li style="list-style-type:circle"><strong>flex-end</strong>元素對齊垂直方向最下面的 cross end。<figure id="f6519463-60fe-4337-b04c-17db089556b2" class="image"><a href="https://i.imgur.com/meyNZaC.jpg"><img src="https://i.imgur.com/meyNZaC.jpg"/></a></figure></li></ul><ul id="31d858f0-975f-46f2-98fd-ca2fd9bb779f" class="bulleted-list"><li style="list-style-type:circle"><strong>center</strong>元素垂直置中。<figure id="1d095cab-1295-4c0b-9a8c-136e3bc58571" class="image"><a href="https://i.imgur.com/sU0m594.jpg"><img src="https://i.imgur.com/sU0m594.jpg"/></a></figure></li></ul><ul id="8fa56742-097a-45e2-ba22-64400c85d328" class="bulleted-list"><li style="list-style-type:circle"><strong>space-between</strong>第一行元素對齊上方 cross start，最後一行元素對齊下方 cross end。<figure id="22cdd524-ac65-4fe1-ad5a-30ecb2e5d7c7" class="image"><a href="https://i.imgur.com/P0ZMe8S.jpg"><img src="https://i.imgur.com/P0ZMe8S.jpg"/></a></figure></li></ul><ul id="51651cf5-84ea-4f7f-963b-3aa1916e7b2d" class="bulleted-list"><li style="list-style-type:circle"><strong>space-around</strong>每行元素平均分布，間距一致。<figure id="003fe33c-a949-4d96-bd06-6438ef3188ca" class="image"><a href="https://i.imgur.com/0CNtB0J.jpg"><img src="https://i.imgur.com/0CNtB0J.jpg"/></a></figure></li></ul><ul id="7d94abce-0711-40c4-a258-078bfff63337" class="bulleted-list"><li style="list-style-type:circle"><strong>stretch</strong>元素撐滿整個高度，為預設值。<figure id="2ce77b2d-ded1-462a-a6f1-1604fafef021" class="image"><a href="https://i.imgur.com/yGkD4Vs.jpg"><img src="https://i.imgur.com/yGkD4Vs.jpg"/></a></figure></li></ul></li></ul><ul id="7ea7221e-6ce8-42d5-ad30-5f944c1f9fd1" class="bulleted-list"><li style="list-style-type:disc"><strong>order</strong><p id="397daf1f-57b8-4032-a0e6-eb4b57e3a376" class="">這個屬性主要是設定 <strong>Flexbox</strong> 內的元素順序，也因此這個屬性也是寫在子元素中，元素將由數值從小到大排序。</p></li></ul><figure id="ae790731-056a-4875-8883-1bcad00977a0" class="image"><a href="https://codropspz-tympanus.netdna-ssl.com/codrops/wp-content/uploads/2015/02/order-illustration.png"><img src="https://codropspz-tympanus.netdna-ssl.com/codrops/wp-content/uploads/2015/02/order-illustration.png"/></a></figure><ul id="3e18bd0a-6b91-4e50-8405-5194542ede9d" class="bulleted-list"><li style="list-style-type:disc"><strong>flex-wrap</strong><p id="17f28b0a-ab2e-4f01-8ac5-740c87303957" class="">這個屬性主要是設定 <strong>Flexbox</strong> 內的元素是否換行，在 <strong>inline-flex</strong> 的設定中，子元素會以單行方式撐滿整個父元素且不會換行，也因此需要此屬性進行換行，此屬性的值可分為以下三種：</p><ul id="78fd2655-bc50-4391-aa89-4b161b607890" class="bulleted-list"><li style="list-style-type:circle"><strong>nowrap</strong>不換行，為預設值。<figure id="cf669a75-dfec-40fa-baba-7a17cb9174e5" class="image"><a href="https://i.imgur.com/jhxvy9M.jpg"><img src="https://i.imgur.com/jhxvy9M.jpg"/></a></figure></li></ul><ul id="b617b1ca-115f-4305-b060-830d16b31a29" class="bulleted-list"><li style="list-style-type:circle"><strong>wrap</strong>換行。<figure id="28129e4e-6639-4b78-b99d-fe30753be66b" class="image"><a href="https://i.imgur.com/qSTvV8i.jpg"><img src="https://i.imgur.com/qSTvV8i.jpg"/></a></figure></li></ul><ul id="0804296c-c915-4916-b75e-108f411aec4b" class="bulleted-list"><li style="list-style-type:circle"><strong>wrap-reverse</strong>換行但元素反轉。<figure id="6a3e6114-8fc2-4149-9fab-00f5ce97e313" class="image"><a href="https://i.imgur.com/8hB7Zot.jpg"><img src="https://i.imgur.com/8hB7Zot.jpg"/></a></figure></li></ul></li></ul><ul id="21c6af19-175b-4569-9425-ee55ac4a9dd2" class="bulleted-list"><li style="list-style-type:disc"><strong>flex</strong><p id="4a4ada79-7049-495a-8867-bd376efd7bf4" class=""><strong>flex</strong> 這個屬性是由三種不同的屬性結合而成： <strong>flex grow</strong> 、 <strong>flex shrink</strong> 、 <strong>flex basis</strong> ，主要作用就是讓 <strong>Flexbox</strong> 內的元素進行彈性的比例伸縮，以下三種屬性皆是寫在子元素中，且值都為數值不可為負值，最小值為0。</p><ul id="095500bd-da50-4ffb-9016-58a5f53951db" class="bulleted-list"><li style="list-style-type:circle"><strong>flex-basis</strong><p id="77fde557-24af-4ee8-b47e-8f9a4e422d96" class="">子元素是否進行伸縮的依據，預設值為0。</p></li></ul><ul id="87697de8-a294-4768-a72e-f620bfaa060e" class="bulleted-list"><li style="list-style-type:circle"><strong>flex-grow</strong>當子元素 <strong>flex-basis</strong> 的值小於 <strong>flex-grow</strong> 所指定的值，則元素會進行 <strong>伸展</strong> ，預設數值為0。<figure id="f12f4fb6-a9ce-4838-a8ba-9c0001fbf527" class="image"><a href="http://www.lukewilson.net/images/2017/02/fg.png"><img src="http://www.lukewilson.net/images/2017/02/fg.png"/></a></figure></li></ul><ul id="3f103fb1-a9e5-4841-8e91-6f300418ee1a" class="bulleted-list"><li style="list-style-type:circle"><strong>flex-shrink</strong>當子元素 <strong>flex-basis</strong> 的值大於 <strong>flex-grow</strong> 所指定的值，則元素會進行 <strong>壓縮</strong> ，預設數值為1。<figure id="d9e14979-de0e-4b2f-9536-2634db1aab6c" class="image"><a href="http://petersommerhoff.com/wp-content/uploads/2017/03/flex-shrink-example.png"><img src="http://petersommerhoff.com/wp-content/uploads/2017/03/flex-shrink-example.png"/></a></figure></li></ul></li></ul><h1 id="66036828-46b6-4dbb-a377-31e4e615863d" class=""><strong>block與flexbox比較</strong></h1><p id="3ac58a68-afc3-487b-8163-95a6c2a95201" class=""><strong>flexbox</strong> 最厲害的地方就在於可以用簡單的 <strong>CSS</strong> 寫法來達到工程師想要的版面，這邊用一個最顯著的<a href="https://codepen.io/Andy-Chen/pen/rqwPXQ">例子</a>來看 <strong>block</strong> 與 <strong>flexbox</strong> 是如何讓元素置中，可以發現 <strong>flexbox</strong> 真的簡單很多。</p><h1 id="bda53e5c-6936-4d1f-aee8-71a33260ef2c" class=""><strong>總結練習</strong></h1><p id="e219f20f-9a0b-475d-b996-46df12f5c192" class=""><strong>Flexbox</strong> 可以說是非常好用的排版利器，只要學會了 <strong>flexbox</strong> ，任何版面都可以順利刻出來，就像這個<a href="https://codepen.io/Andy-Chen/pen/NgGwyM">例子</a>，而且目前主流的瀏覽器都有支援這個 <strong>CSS</strong> ，未來當你寫 <strong>Flexbox</strong> 寫久了一定會不自覺的說：我不需要不支援 <strong>Flexbox</strong> 的瀏覽器 <strong>(a.k.a IE)</strong> XD</p></div></article></body></html>

@@ -1,0 +1,888 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Git commands</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9a8941c1-484a-44ef-befe-076807f21175" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🌉</span></div><h1 class="page-title">Git commands</h1></header><div class="page-body"><h2 id="0f70ba1b-583e-43cf-89bc-b6bc05dc5883" class="">Working with local repositories</h2><h3 id="36e466b1-766d-454d-8c54-f36d12cc3222" class="">git init</h3><p id="0ce658f1-b84a-4887-87ec-2d625fbd53b6" class="">This command turns a directory into an empty Git repository. This is the first step in creating a repository. After running git init, adding and committing files/directories is possible.</p><p id="9eb79357-5ce6-46a8-8054-1ba0387354c9" class="">Usage:</p><pre id="80b87b51-a350-4f11-8b04-d77d72f76bc9" class="code code-wrap"><code># change directory to codebase
+$ cd /file/path/to/code
+
+# make directory a git repository
+$ git init</code></pre><p id="d3b85099-b29e-4e6f-ac5a-a18af0679e80" class="">In Practice:</p><pre id="48738fcb-3f51-4c81-8f50-e00bf06d95ab" class="code code-wrap"><code># change directory to codebase
+$ cd /Users/computer-name/Documents/website
+
+# make directory a git repository
+$ git init
+Initialized empty Git repository in /Users/computer-name/Documents/website/.git/</code></pre><h3 id="5e89391f-b3f0-4693-9213-84a060658f12" class="">git add</h3><p id="545da4ab-11bc-40c7-8a9c-8cc4e0e63c0f" class="">Adds files in the to the staging area for Git. Before a file is available to commit to a repository, the file needs to be added to the Git index (staging area). There are a few different ways to use git add, by adding entire directories, specific files, or all unstaged files.</p><p id="7f301796-ba3c-498c-82a4-6d3278a93992" class="">Usage:</p><pre id="6314af4e-86fc-426e-812d-d4e39e0e1284" class="code code-wrap"><code>$ git add &lt;file or directory name&gt;</code></pre><p id="4f5a73a7-6926-4ea9-967b-b5f1d9f74d3b" class="">In Practice:</p><pre id="618eb808-8353-46be-8be0-54bab5ff885e" class="code code-wrap"><code># To add all files not staged:
+$ git add .
+
+# To stage a specific file:
+$ git add index.html
+
+# To stage an entire directory:
+$ git add css</code></pre><h3 id="b1035f44-a977-42ff-9095-41f4e93ad4ff" class="">git commit</h3><p id="ab30e0c1-cf35-4593-a26f-b16a3fed7890" class="">Record the changes made to the files to a local repository. For easy reference, each commit has a unique ID.</p><p id="1f29cf82-71a0-4c33-be2c-9f2f8a5a1ac2" class="">It’s best practice to include a message with each commit explaining the changes made in a commit. Adding a commit message helps to find a particular change or understanding the changes.</p><p id="eba30ce2-d778-4a85-aa3f-711a038ad6f6" class="">Usage:</p><pre id="356ea38c-2621-424e-887e-0dcb39aac95c" class="code code-wrap"><code># Adding a commit with message
+$ git commit -m &quot;Commit message in quotes&quot;</code></pre><p id="7c1efb2f-adb6-4fbb-bd8e-8f8d1af5d34f" class="">In Practice:</p><pre id="a48cae88-9131-49f6-bdae-f640eb646e9a" class="code code-wrap"><code>$ git commit -m &quot;My first commit message&quot;
+[SecretTesting 0254c3d] My first commit message
+1 file changed, 0 insertions(+), 0 deletions(-)
+create mode 100644 homepage/index.html</code></pre><h3 id="bad743c3-150c-4c30-a8c7-512420d3c92e" class="">git status</h3><p id="e85f034b-7770-4bf9-b162-79164cb08804" class="">This command returns the current state of the repository.</p><p id="0ce6a0ce-2b10-4b9b-ab30-e7fa1336ccaf" class=""><em>git status</em> will return the current working branch. If a file is in the staging area, but not committed, it shows with <em>git status</em>. Or, if there are no changes it’ll return <em>nothing to commit, working directory clean.</em></p><p id="7f8bea63-d697-4df8-8859-a36cb96090cb" class="">Usage:</p><pre id="d3a4193f-0c57-4d96-af8d-d63194e770a3" class="code code-wrap"><code>$ git status</code></pre><p id="c1166b8f-8ffd-47a4-8f7c-32da85ff3b03" class="">In Practice:</p><pre id="acaeffc2-f451-41ef-877c-37868ed4ccc2" class="code code-wrap"><code># Message when files have not been staged (git add)
+$ git status
+On branch SecretTesting
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+
+  	homepage/index.html
+
+# Message when files have been not been committed (git commit)
+$ git status
+On branch SecretTesting
+Your branch is up-to-date with &#x27;origin/SecretTesting&#x27;.
+Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+
+        new file:   homepage/index.html
+
+# Message when all files have been staged and committed
+$ git status
+On branch SecretTesting
+nothing to commit, working directory clean</code></pre><h3 id="601cfb3e-b2d0-4ee0-b51e-86623b7966e3" class="">git config</h3><p id="24d3b877-f13a-40c1-a554-aee59f7883a2" class="">With Git, there are many configurations and settings possible. <em>git config</em> is how to assign these settings. Two important settings are user user.name and user.email. These values set what email address and name commits will be from on a local computer. With <em>git config</em>, a <em>--global</em> flag is used to write the settings to all repositories on a computer. Without a <em>--global</em> flag settings will only apply to the current repository that you are currently in.</p><p id="757994de-aeab-4501-8ad8-b0f4a390f339" class="">There are many other variables available to edit in <em>git config</em>. From editing color outputs to changing the behavior of <em>git status</em>. Learn about <em>git config</em> settings in the official <a href="https://git-scm.com/docs/git-config">Git documentation</a>.</p><p id="0fe76cf6-0e45-4341-898c-ffd090b0f277" class="">Usage:</p><pre id="91c3abe1-fd6f-45f0-9dd6-e4530bc6030d" class="code code-wrap"><code>$ git config &lt;setting&gt; &lt;command&gt;</code></pre><p id="7e844264-28cf-457d-9c2c-e3646d6c1b1c" class="">In Practice:</p><pre id="b277dda5-7419-41ff-985d-d1b0d36ccb99" class="code code-wrap"><code># Running git config globally
+$ git config --global user.email &quot;my@emailaddress.com&quot;
+$ git config --global user.name &quot;Brian Kerr&quot;
+
+# Running git config on the current repository settings
+$ git config user.email &quot;my@emailaddress.com&quot;
+$ git config user.name &quot;Brian Kerr&quot;</code></pre><h3 id="4ad5fb67-3ab8-4783-ab1c-dc4dfacf352c" class="">git branch</h3><p id="02690f9b-fbf1-4389-82f8-ab2d70ff1eda" class="">To determine what branch the local repository is on, add a new branch, or delete a branch.</p><p id="42908bbd-048c-4ee5-9a82-e53bd7933996" class="">Usage:</p><pre id="06fd2094-4542-44ec-8d9e-22a742112d4e" class="code code-wrap"><code># Create a new branch
+$ git branch &lt;branch_name&gt;
+
+# List all remote or local branches
+$ git branch -a
+
+# Delete a branch
+$ git branch -d &lt;branch_name&gt;</code></pre><p id="2bb22848-7c52-4f7b-a91f-29ccb15c5d1c" class="">In Practice:</p><pre id="6a751fe6-db7b-48fa-9b0c-4c3c098f3efb" class="code code-wrap"><code># Create a new branch
+$ git branch new_feature
+
+# List branches
+$ git branch -a
+* SecretTesting
+  new_feature
+  remotes/origin/stable
+  remotes/origin/staging
+  remotes/origin/master -&gt; origin/SecretTesting
+
+# Delete a branch
+$ git branch -d new_feature
+Deleted branch new_feature (was 0254c3d).</code></pre><h3 id="df908aaa-57dd-41a7-9b50-9af4d63740fb" class="">git checkout</h3><p id="10bca15c-b267-449d-a778-5e1724a2d117" class="">To start working in a different branch, use <em>git checkout</em> to switch branches.</p><p id="2b534196-0728-4fe9-9419-027779ac7783" class="">Usage:</p><pre id="cd4d45e7-f503-410d-ad8e-2e969c8a43c6" class="code code-wrap"><code># Checkout an existing branch
+$ git checkout &lt;branch_name&gt;
+
+# Checkout and create a new branch with that name
+$ git checkout -b &lt;new_branch&gt;</code></pre><p id="7aa0aecf-338f-4dcb-9e13-7c60ac128b46" class="">In Practice:</p><pre id="15f4d1db-2016-40f0-8a6e-f8606351f79a" class="code code-wrap"><code># Switching to branch &#x27;new_feature&#x27;
+$ git checkout new_feature
+Switched to branch &#x27;new_feature&#x27;
+
+# Creating and switching to branch &#x27;staging&#x27;
+$ git checkout -b staging
+Switched to a new branch &#x27;staging&#x27;</code></pre><h3 id="8ec37c1d-dbf9-43d2-b703-638deec77cf3" class="">git merge</h3><p id="56924d69-40d9-4ca3-984c-08c665aa8df3" class="">Integrate branches together. <em>git merge</em> combines the changes from one branch to another branch. For example, merge the changes made in a staging branch into the stable branch.</p><p id="c10fcfdf-2f81-4833-b523-b8e331cb2ee5" class="">Usage:</p><pre id="a5a774fd-05bf-4a03-8629-50d8c54e352a" class="code code-wrap"><code># Merge changes into current branch
+$ git merge &lt;branch_name&gt;</code></pre><p id="7e955338-a1e2-46ac-a747-469e10c0fa22" class="">In Practice:</p><pre id="655d7302-3abb-482b-bbf3-0337dc095857" class="code code-wrap"><code># Merge changes into current branch
+$ git merge new_feature
+Updating 0254c3d..4c0f37c
+Fast-forward
+ homepage/index.html | 297 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 297 insertions(+)
+ create mode 100644 homepage/index.html</code></pre><h2 id="28e9bb59-7f41-49c1-b9a3-48c34f3e3eed" class="">Working with remote repositories</h2><h3 id="967eecec-49f8-4283-b405-78e32cd49af1" class="">git remote</h3><p id="3945e151-9f30-4d81-a73c-68e80804ab97" class="">To connect a local repository with a remote repository. A remote repository can have a name set to avoid having to remember the URL of the repository.</p><p id="241bbdc8-c9ce-49bb-b1f5-09110d38a25b" class="">Usage:</p><pre id="636b2d52-e5bd-4555-b109-ee9e2ae40c8f" class="code code-wrap"><code># Add remote repository
+$ git remote &lt;command&gt; &lt;remote_name&gt; &lt;remote_URL&gt;
+
+# List named remote repositories
+$ git remote -v</code></pre><p id="dd38fea3-6f2d-4d2a-bdbc-d4a4462503ba" class="">In Practice:</p><pre id="3b161fe5-fa9f-485b-aaa8-dc0f464faf61" class="code code-wrap"><code># Adding a remote repository with the name of beanstalk
+$ git remote add origin git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git
+
+# List named remote repositories
+$ git remote -v
+origin git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git (fetch)
+origin git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git (push)</code></pre><p id="10624b05-3a5d-4c1d-9c62-4fdaad1f8b9b" class=""><em>Note: A remote repository can have any name. It’s common practice to name the remote repository ‘origin’.</em></p><h3 id="456a20d1-88c8-40ca-971b-52b97b59cf47" class="">git clone</h3><p id="bb07ffe1-9559-4a1d-9309-39ee54541f7f" class="">To create a local working copy of an existing remote repository, use <em>git clone</em> to copy and download the repository to a computer. Cloning is the equivalent of <em>git init</em> when working with a remote repository. Git will create a directory locally with all files and repository history.</p><p id="477c29ba-9d3a-450a-a393-0dffc5e28ff2" class="">Usage:</p><pre id="1256ba66-f418-44c3-a0c4-32451a06ba78" class="code code-wrap"><code>$ git clone &lt;remote_URL&gt;</code></pre><p id="1c29cb49-b006-42f7-bc50-d798444b6d09" class="">In Practice:</p><pre id="bb60dbbd-86a3-4f53-b151-22e29dcb0feb" class="code code-wrap"><code>$ git clone git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git
+Cloning into &#x27;repository_name&#x27;...
+remote: Counting objects: 5, done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 5 (delta 0), reused 0 (delta 0)
+Receiving objects: 100% (5/5), 3.08 KiB | 0 bytes/s, done.
+Checking connectivity... done.</code></pre><h3 id="faf9a554-f94a-4fab-a570-b8045f64337a" class="">git pull</h3><p id="2bbbdc4c-fa71-4a4d-af5d-e978a62e1e74" class="">To get the latest version of a repository run <em>git pull</em>. This pulls the changes from the remote repository to the local computer.</p><p id="cb3a6662-126d-40c2-a70a-5f3cb643f8e1" class="">Usage:</p><pre id="0d3fe2ff-8d79-4e2e-99ee-7606eb71764e" class="code code-wrap"><code>$ git pull &lt;branch_name&gt; &lt;remote_URL/remote_name&gt;</code></pre><p id="c5ec2590-8abc-4b0a-8b6b-91bd3b01943d" class="">In Practice:</p><pre id="e1c8320f-b4e8-491e-b0d0-48904b3628d1" class="code code-wrap"><code># Pull from named remote
+$ git pull origin staging
+From account_name.git.beanstalkapp.com:/account_name/repository_name
+ * branch            staging    -&gt; FETCH_HEAD
+ * [new branch]      staging    -&gt; origin/staging
+Already up-to-date.
+
+# Pull from URL (not frequently used)
+$ git pull git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git staging
+From account_name.git.beanstalkapp.com:/account_name/repository_name
+ * branch            staging    -&gt; FETCH_HEAD
+ * [new branch]      staging    -&gt; origin/staging
+Already up-to-date.</code></pre><h3 id="89e6899c-8922-4962-9d6a-551bb360519c" class="">git push</h3><p id="c7fab1d3-825f-41fa-b42c-fa17be7d95e5" class="">Sends local commits to the remote repository. <em>git push</em> requires two parameters: the remote repository and the branch that the push is for.</p><p id="dda206ce-60fc-4ef1-a50b-e9c77b1c38dc" class="">Usage:</p><pre id="188b0b25-35ec-4f26-b045-e38df3fee0da" class="code code-wrap"><code>$ git push &lt;remote_URL/remote_name&gt; &lt;branch&gt;
+
+# Push all local branches to remote repository
+$ git push —all</code></pre><p id="dc13d715-45a3-422c-8d87-0fc494e1be0c" class="">In Practice:</p><pre id="69457742-9277-46ba-bfee-96c3d2e0aa7f" class="code code-wrap"><code># Push a specific branch to a remote with named remote
+$ git push origin staging
+Counting objects: 5, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (5/5), 734 bytes | 0 bytes/s, done.
+Total 5 (delta 2), reused 0 (delta 0)
+To git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git
+   ad189cb..0254c3d  SecretTesting -&gt; SecretTesting
+
+# Push all local branches to remote repository
+$ git push --all
+Counting objects: 4, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 373 bytes | 0 bytes/s, done.
+Total 4 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git
+   0d56917..948ac97  master -&gt; master
+   ad189cb..0254c3d  SecretTesting -&gt; SecretTesting</code></pre><h2 id="9b52bc26-b406-44ec-b797-7485e1e661dc" class="">Advanced Git Commands</h2><h3 id="d7150c17-f6a7-4207-820f-5d95a58704c0" class="">git stash</h3><p id="661e6464-a217-439a-94c9-93d74e1b8cce" class="">To save changes made when they’re not in a state to commit them to a repository. This will store the work and give a clean working directory. For instance, when working on a new feature that’s not complete, but an urgent bug needs attention.</p><p id="f0bb4e07-6803-4935-bda6-8334d348e078" class="">Usage:</p><pre id="b26e8cf8-3d96-491a-9810-73730e97356e" class="code code-wrap"><code># Store current work with untracked files
+$ git stash -u
+
+# Bring stashed work back to the working directory
+$ git stash pop</code></pre><p id="f065eb17-cd5e-49b5-8bb4-b40515b4c2c6" class="">In Practice:</p><pre id="2831f6d4-2951-4bd9-bd10-efa949de81d3" class="code code-wrap"><code># Store current work
+$ git stash -u
+Saved working directory and index state WIP on SecretTesting: 4c0f37c Adding new file to branch
+HEAD is now at 4c0f37c Adding new file to branch
+
+# Bring stashed work back to the working directory
+$ git stash pop
+On branch SecretTesting
+Your branch and &#x27;origin/SecretTesting&#x27; have diverged,
+and have 1 and 1 different commit each, respectively.
+  (use &quot;git pull&quot; to merge the remote branch into yours)
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+        modified:   index.html
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+Dropped refs/stash@{0} (3561897724c1f448ae001edf3ef57415778755ec)</code></pre><h3 id="a4636ef1-8fe9-47fa-bfa4-e165c0d4717c" class="">git log</h3><p id="7b69dde3-da00-4704-a9bd-659011f1da3a" class="">To show the chronological commit history for a repository. This helps give context and history for a repository. <em>git log</em> is available immediately on a recently cloned repository to see history.</p><p id="3c9ac1d7-f0e0-4e27-a8d9-2cadd0f4bf00" class="">Usage:</p><pre id="3f5bc1d9-c858-4adf-a4df-f984bf56a005" class="code code-wrap"><code># Show entire git log
+$ git log
+
+# Show git log with date pameters
+$ git log --&lt;after/before/since/until&gt;=&lt;date&gt;
+
+# Show git log based on commit author
+$ git log --&lt;author&gt;=&quot;Author Name&quot;
+</code></pre><p id="c13a5999-e0e1-43fb-bb2a-5a2980d8ba6d" class="">In Practice:</p><pre id="3cc5aeab-1df7-4f48-9989-78b1bcdbdbbf" class="code code-wrap"><code># Show entire git log
+$ git log
+commit 4c0f37c711623d20fc60b9cbcf393d515945952f
+Author: Brian Kerr &lt;my@emailaddress.com&gt;
+Date:   Tue Oct 25 17:46:11 2016 -0500
+
+    Updating the wording of the homepage footer
+
+commit 0254c3da3add4ebe9d7e1f2e76f015a209e1ef67
+Author: Ashley Harpp &lt;my@emailaddress.com&gt;
+Date:   Wed Oct 19 16:27:27 2016 -0500
+
+    My first commit message
+
+# Show git log with date pameters
+$ git log --before=&quot;Oct 20&quot;
+commit 0254c3da3add4ebe9d7e1f2e76f015a209e1ef67
+Author: Ashley Harpp &lt;my@emailaddress.com&gt;
+Date:   Wed Oct 19 16:27:27 2016 -0500
+
+    My first commit message
+
+# Show git log based on commit author
+$ git log --author=&quot;Brian Kerr&quot;
+commit 4c0f37c711623d20fc60b9cbcf393d515945952f
+Author: Brian Kerr &lt;my@emailaddress.com&gt;
+Date:   Tue Oct 25 17:46:11 2016 -0500
+
+    Updating the wording of the homepage footer</code></pre><h3 id="51b2c7ec-b85a-4892-afcf-bbf6ece1a0ea" class="">git rm</h3><p id="2f3c728f-0d85-471a-a41a-3a0ddffbe033" class="">Remove files or directories from the working index (staging area). With <em>git rm</em>, there are two options to keep in mind: force and cached. Running the command with force deletes the file. The cached command removes the file from the working index. When removing an entire directory, a recursive command is necessary.</p><p id="8e27da80-9be3-4418-92ce-e8334658f940" class="">Usage:</p><pre id="ff309a9d-e184-453b-a381-2fb7caf0f01f" class="code code-wrap"><code># To remove a file from the working index (cached):
+$ git rm --cached &lt;file name&gt;
+
+# To delete a file (force):
+$ git rm -f &lt;file name&gt;
+
+# To remove an entire directory from the working index (cached):
+$ git rm -r --cached &lt;directory name&gt;
+
+# To delete an entire directory (force):
+$ git rm -r -f &lt;file name&gt;</code></pre><p id="57c97072-2722-42b6-a54a-72e20732a0b9" class="">In Practice:</p><pre id="31f9d394-0d89-42de-989d-49bb1037a079" class="code code-wrap"><code># To remove a file from the working index:
+$ git rm --cached css/style.css
+rm &#x27;css/style.css&#x27;
+
+# To delete a file (force):
+$ git rm -f css/style.css
+rm &#x27;css/style.css&#x27;
+
+# To remove an entire directory from the working index (cached):
+$ git rm -r --cached css/
+rm &#x27;css/style.css&#x27;
+rm &#x27;css/style.min.css&#x27;
+
+# To delete an entire directory (force):
+$ git rm -r -f css/
+rm &#x27;css/style.css&#x27;
+rm &#x27;css/style.min.css&#x27;
+</code></pre><h2 id="a1cced17-43b7-4ff6-838f-886bdd2e56a7" class="">More Git Resources</h2><p id="7a29bc3b-ccbe-44d6-a519-bed2ee63d2b2" class="">Ready to learn more about Git and it’s different commands? There are countless articles and sites on Git, here are some of our favorites:</p><ul id="ab6b5544-ac2c-4401-a88b-8349856b7b4b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://git-scm.com/">The official Git site</a></li></ul><ul id="02069e76-a668-4979-a064-8e2943a7454d" class="bulleted-list"><li style="list-style-type:disc"><a href="http://gitref.org/">Git reference</a></li></ul><ul id="cf13392c-084f-47cd-bfc9-890c062bafb6" class="bulleted-list"><li style="list-style-type:disc"><a href="https://wiki.spheredev.org/index.php/Git_for_the_lazy">Git for the lazy</a></li></ul><ul id="6327527b-f2d4-43e0-901b-585585c6d850" class="bulleted-list"><li style="list-style-type:disc"><a href="https://git-scm.com/book/en/v2">Pro Git (Book)</a></li></ul><ul id="d76618a8-b2cf-47fc-846e-ddd4a26c1c8f" class="bulleted-list"><li style="list-style-type:disc"><a href="http://blog.beanstalkapp.com/post/134929320564/writing-meaningful-commit-messages">Writing meaningful commit messages</a></li></ul><ul id="8d8ad929-0381-4354-8d53-6b3ac147ffe9" class="bulleted-list"><li style="list-style-type:disc"><a href="https://codewords.recurse.com/issues/two/git-from-the-inside-out">Git from the inside out</a></li></ul></div></article></body></html>

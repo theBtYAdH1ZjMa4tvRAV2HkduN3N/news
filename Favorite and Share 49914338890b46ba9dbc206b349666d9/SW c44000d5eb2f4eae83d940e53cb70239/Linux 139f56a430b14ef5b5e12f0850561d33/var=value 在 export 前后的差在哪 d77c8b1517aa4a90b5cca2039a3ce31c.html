@@ -1,0 +1,753 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>var=value 在 export 前后的差在哪?</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d77c8b15-17aa-4a90-b5cc-a2039a3ce31c" class="page sans"><header><h1 class="page-title">var=value 在 export 前后的差在哪?</h1></header><div class="page-body"><p id="42ab329e-4c6a-4f90-8f99-b65db287af9e" class="">
+</p><p id="9abdf587-5e90-4c51-92c2-d5dc0b38959d" class="">
+</p><h1 id="b3be9251-7ef4-416b-99d6-c58880e2a4b8" class="">var=value 在 export 前后的差在哪?</h1><p id="1fc73e97-1d6f-497c-a7ba-8ec736d8ba05" class="">这次让我们暂时丢开<code>command line</code>,
+先了解一下bash变量(variable)吧...</p><p id="99d72b4c-b01e-4a0d-bdff-aa6e4ac2ddd3" class="">所谓的变量，就是利用一个固定的&quot;名称&quot;(name),
+来存取一段可以变化的&quot;值&quot;(value)。</p><h2 id="456b28c8-987d-445e-9021-6f79351bf176" class="">变量设定(set)</h2><p id="97ffaa58-aa78-4079-b0e3-01819b044033" class="">在bash中， 你可以用&quot;=&quot;来设定或者重新定义变量的内容：</p><pre id="15a560f7-f301-4006-be44-98faf70ae0f3" class="code code-wrap"><code>name=value</code></pre><p id="1726a96b-0cc9-4e80-bf24-78f9086ac710" class="">在设定变量的时候，得遵守如下规则：</p><ul id="13e90361-6d21-4d82-8200-2b459d5fdb85" class="bulleted-list"><li style="list-style-type:disc">等号左右两边不能使用分隔符号(IFS),也应避免使用shell的保留元字符(meta charactor);</li></ul><ul id="6ef07224-1bec-4a2e-9c7c-d188075e5cf6" class="bulleted-list"><li style="list-style-type:disc">变量的名称(name)不能使用$符号;</li></ul><ul id="6b323f98-1a42-4e85-8823-962d0cab1141" class="bulleted-list"><li style="list-style-type:disc">变量的名称(name)的首字符不能是数字(number)。</li></ul><ul id="f79d2566-9545-4dcc-badf-80f8d1c1f250" class="bulleted-list"><li style="list-style-type:disc">变量的名称(name)的长度不可超过256个字符。</li></ul><ul id="494fee7f-4636-41ba-81bd-1f7aa41cf472" class="bulleted-list"><li style="list-style-type:disc">变量的名称(name)及变量的值的大小写是有区别的、敏感的(case sensitive，)</li></ul><p id="45487061-2a52-4691-9455-63c71bbd194f" class="">如下是一些变量设定时常见的错误：</p><pre id="fb16e35a-08b4-4d2b-9984-8d8b3ffc6526" class="code code-wrap"><code>A= B #=号前后不能有IFS
+1A=B #变量名称不能以数字开头
+$A=B #变量的名称里有$
+a=B  #这跟a=b是不同的,(这不是错误，提醒windows用户)</code></pre><p id="ac72853f-67ff-4beb-9097-da86a554592a" class="">如下则是可以接受的设定：</p><pre id="64ba533a-79de-4dee-8a5c-363c9a66b7b9" class="code code-wrap"><code>A=&quot; B&quot; #IFS被关闭，参考前面的quoting章节
+A1=B   #并非以数字开头
+A=$B   #$可用在变量的值内
+This_Is_A_Long_Name=b #可用_连接较长的名称或值，且有大小区别；</code></pre><h2 id="e3e743dc-4aa8-4e9b-8ad0-4ffa92a10d27" class="">变量替换(substitution)</h2><p id="3d669ca2-6775-4790-886b-a2d6b7a679a9" class="">shell 之所以强大，其中的一个因素是它可以在命令行中对变量作
+替换(substitution)处理。
+在命令行中使用者可以使用$符号加上变量名称(除了用=定义变量名称之外)，
+将变量值给替换出来，然后再重新组建命令行。</p><p id="d7bb075a-9d89-47e9-b91f-30bdcfe36d16" class="">比方:</p><pre id="76723a56-f5b7-43ac-b4d7-46dd43e468bf" class="code code-wrap"><code>$ A=ls
+$ B=la
+$ C=/tmp
+$ $A -$B $C</code></pre><p id="a3536e66-b72f-46d2-bf0d-eb7d4221c146" class="">以上命令行的第一个<code>$</code>是<code>shell prompt</code>, 并不在命令行之内。
+必须强调的是，我们所提的变量替换，只发生在<code>command line</code>上面。
+(是的，请让我们再次回到命令行吧！) 仔细分析,最后那行
+<code>command line</code>,不难发现在被执行前(在输入<code>CR</code>字符之前)，
+<code>$</code>符号对每一个变量作替换处理(将变量的值替换出来再重组命令行),
+最后会得出如下命令行：</p><pre id="70d7876b-8af9-4f60-a112-ee3007215053" class="code code-wrap"><code>ls -la /tmp</code></pre><p id="5866f97d-35f9-4470-95d9-2aace368ff9f" class="">还记得第二章，我请大家&quot;务必理解&quot;的那两句吗？
+若你忘了，我这里重贴一遍：</p><blockquote id="6c7a0f20-3425-43d1-a47a-75b9b59f693b" class="">Note:<p id="b5e99ed9-a1ff-4c2c-91eb-09e994adcb70" class="">若从技术的细节来看，<code>shell</code>会依据<code>IFS</code>(Internal Field Seperator)
+将<code>command line</code>所输入的文字拆解为&quot;字段&quot;(word/field)。
+然后再针对特殊字符(meta)先作处理，最后重组整行<code>command line</code>。</p></blockquote><p id="fecafcba-ed1f-449d-8aca-923325d5d564" class="">这里的<code>$</code>就是<code>command line</code>中最经典的meta之一了，
+就是作变量替换的。在日常的shell操作中，
+我们常会使用<code>echo</code>命令来查看特定的变量的值，
+例如：</p><pre id="c322f8ff-02e4-4f16-a1b8-23750bc297d5" class="code code-wrap"><code>$ echo $A -$B $C</code></pre><p id="46638458-ff9e-4e8e-9cfd-5d57113cbe9f" class="">我们已学过，<code>echo</code>命令只单纯将其argument送至&quot;标准输出&quot;(stdout, 通常是我们的屏幕)。
+所以上面的命令会在屏幕上得到如下结果：</p><pre id="b5bdddad-f91e-40f2-8808-3cbf5c573ae0" class="code code-wrap"><code>ls -al /tmp</code></pre><p id="15c9f6e3-41d5-4ec4-81ac-357fe706a04f" class="">这是由于<code>echo</code>命令在执行时，会先将<code>$A</code> (ls)、<code>$B</code> (la)跟<code>$C</code> (/tmp)给替换出来；
+利用shell对变量的替换处理能力，我们在设定变量时就更为灵活了：</p><pre id="c65084a0-89f5-40f2-931b-413b1df83f4e" class="code code-wrap"><code>A=B
+B=$A</code></pre><p id="0872dcee-4a7a-4ac1-970e-015ed34cbbd5" class="">这样，B的变量值就可继承A变量&quot;当时&quot;的变量值了。
+不过，不要以&quot;数学逻辑&quot;来套用变量的设定，比方说：</p><pre id="5e7c97dd-a50f-45a8-b91a-95bb009f1ede" class="code code-wrap"><code>A=B
+B=C</code></pre><p id="8de12490-639d-4187-a7c2-27bc07875d0b" class="">这样，并不会让A的变量值变成C。再如：</p><pre id="3241b427-a611-46fa-9130-9dfb3253898f" class="code code-wrap"><code>A=B
+B=$A
+A=C</code></pre><p id="9e4c6fe2-0b8e-4a08-8d87-19f8a3343bdb" class="">同样也不会让B的值变成C。</p><p id="281c1632-3d28-47a5-b9d7-08acdd8393c3" class="">上面是单纯定义了两个不同名称的变量：
+A 与 B, 它们的取值分别是C与B。</p><p id="39acc167-4abb-4d11-8217-179003c36ac4" class="">若变量被重复定义的话，则原有值为新值所取代。(这不正是&quot;可变的量&quot;吗？^_^)
+当我们在设定变量的时候，请记住这点：<strong>用一个名称存储一个数值</strong>， 仅此而已。</p><p id="c92cf026-92a3-424a-958f-e976c2844488" class="">此外， 我们也可以利用命令行的变量替换能力来&quot;扩充&quot;(append)变量的值：</p><pre id="5ac67828-c57c-451e-b3c7-b2144b19593f" class="code code-wrap"><code>A=B:C:D
+A=$A:E
+</code></pre><p id="72fdb14c-abbe-4c94-a3f0-ad96144369ed" class="">这样， 第一行我们设定A的值为&quot;B:C:D&quot;,
+然后,第二行再将值扩充为&quot;B:C:D:E&quot;。</p><p id="441a3323-f62d-478b-9b22-92fe54db002e" class="">上面的扩充的范例，我们使用分隔符号(:)来达到扩充的目的，
+要是没有分隔符的话，如下是有问题的：</p><pre id="d5222ec1-2ebe-4c05-b050-1cb3a18f3ede" class="code code-wrap"><code>A=BCD
+B=$AE</code></pre><p id="4ae7515b-c258-4e58-b778-8c05fe0c3a4e" class="">因为第二次是将A的值继承$AE的替换结果，而非$A再加E。
+要解决此问题，我们可用更严谨的替换处理：</p><pre id="23447523-19c9-4fa8-9b7e-468805c53f6f" class="code code-wrap"><code>A=BCD
+A=${A}E</code></pre><p id="4010ec92-695d-4987-8c67-927b209613f3" class="">上例中，我们使用{}将变量名称范围给明确定义出来，
+如此一来， 我们就可以将A的变量值从BCD给扩充为BCDE。</p><blockquote id="1245f62c-36cd-4938-8cf7-ae97cbaeba6c" class="">Tips:
+关于${name}事实上还可以做到更多的变量处理能力，
+这些均属于比较进阶阶段的变量处理，现阶段暂不介绍了，
+请大家自行参考资料。</blockquote><h2 id="2d644bd1-2a9a-4463-86ed-0bc3aa35e6c5" class="">export 变量</h2><p id="e14ec4ef-9423-4665-822c-c2357c109ccb" class="">严格来说，我们在当前shell中所定义的变量，均属于
+&quot;本地变量&quot;(local variable), 只有经过<code>export</code>命令的
+&quot;输出&quot;处理，才能成为&quot;环境变量&quot;(environment variable)：</p><pre id="6a5751ac-2393-42bd-9d39-92eb5383301c" class="code code-wrap"><code>$ A=B
+$ export A</code></pre><p id="f0bd4a7f-d953-4ee0-9a63-f6552752e7de" class="">或者</p><pre id="4cdca005-0cda-42f7-be50-0466c6bcf1da" class="code code-wrap"><code>$ export A=B</code></pre><p id="1dd83f5b-ec2d-4d92-bb52-60bff8d04f53" class="">经过<code>export</code>输出处理之后，变量A就能成为一个环境变量
+供其后的命令使用。在使用<code>export</code>的时候，请别忘记
+shell在命令行对变量的&quot;替换&quot;(substitution)处理。</p><p id="d4088440-fa0c-4c12-9198-ec86780885d4" class="">比方说：</p><pre id="a601fd53-5781-4b5b-8dd8-eb7ddf409408" class="code code-wrap"><code>$ A=B
+$ B=C
+$ export $A</code></pre><p id="d61c0dbb-d6b5-415b-851d-34b2da09e3b7" class="">上面的命令并未将A输出为&quot;环境变量&quot;，而是将B导出
+这是因为在这个命令行中，$A会首先被替换为B,然后在&quot;塞回&quot;
+作<code>export</code>的参数。</p><p id="b5ec05c5-ba72-4e74-a3af-16fac490f9f1" class="">要理解这个<code>export</code>，事实上需要从process(进程)的角度来理解才能透彻。
+我们将于下一章为大家说明process(进程)的概念，敬请留意。</p><h2 id="6bd668c0-5ea1-4996-856b-1326c1344c7a" class="">取消变量(unset)</h2><p id="0c9d2cee-9f88-4a16-8c50-a7535944df28" class="">要取消一个变量，在bash中可使用<code>unset</code>命令来处理：</p><pre id="9842f396-9708-44fe-b823-13f849fa9ff2" class="code code-wrap"><code>    unset A</code></pre><p id="0a29856d-e516-429c-b945-72dee63fedef" class="">与<code>export</code>一样，<code>unset</code>命令行，也同样会作
+变量替换(这其实是 shell 的功能之一)，
+因此:</p><pre id="f520a654-97e9-4071-8886-15135f88dda4" class="code code-wrap"><code>$ A=B
+$ B=C
+$ unset $A</code></pre><p id="50b34543-ccea-455f-9d73-701dd6e76027" class="">事实上，所取消的是变量 B 而不是 A。</p><p id="76544168-0840-4b96-b812-320a1d168328" class="">此外，变量一旦经过 unset 取消之后，
+其结果是将整个变量拿掉，而不是取消变量的值。</p><p id="95de2e04-5ef1-4d81-b9b8-a6be36b5027d" class="">如下两行其实是很不一样的：</p><pre id="98a73fb5-f2d1-425f-b3e2-cfe965685215" class="code code-wrap"><code>$ A=
+$ unset A</code></pre><p id="46eed7d4-9edc-4808-bc95-7c276b782bcf" class="">第一行只是将变量 A 设定为&quot;空值&quot;(null value),
+但第二行则是让变量 A 不存在。
+虽然用眼睛来看，
+这两种变量的状态在如下的命令结果中都是一样的：</p><pre id="beb0290e-e715-4ad1-9024-e9edf54b446c" class="code code-wrap"><code>$ A=
+$ echo $A
+
+$ unset A
+$ echo $A</code></pre><p id="702a5129-09c0-4f0b-9d05-9538d943dc39" class="">请学员务必能识别null value 与 unset的本质区别，
+这在一些进阶的变量处理上是很严格的。</p><p id="fa517d91-a21a-43b0-9ebb-9e4132678f18" class="">比方说：</p><pre id="9f7d7fea-43de-4c94-bcf4-89e5aa1ea25a" class="code code-wrap"><code>$ str=    #设为null
+$ var=${str=expr} #定义var
+$ echo $var
+
+$ echo $str
+
+$ unset str #取消str
+$ var=${str=expr} #定义var
+$ echo $var
+expr
+$ echo $str
+expr</code></pre><p id="3b67bdb4-39aa-4ce3-b734-197e9bf0eeb7" class="">聪明的读者(yes, you!)，稍加思考的话，
+应该不难发现为何同样的var=${str=expr}
+在str为null与unset之下的不同吧？</p></div></article></body></html>

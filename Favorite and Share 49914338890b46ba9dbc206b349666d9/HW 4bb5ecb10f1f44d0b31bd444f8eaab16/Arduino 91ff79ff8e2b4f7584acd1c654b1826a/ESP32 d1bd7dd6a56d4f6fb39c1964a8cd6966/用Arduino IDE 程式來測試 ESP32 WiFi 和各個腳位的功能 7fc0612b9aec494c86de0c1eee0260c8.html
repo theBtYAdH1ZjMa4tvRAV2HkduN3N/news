@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>用Arduino IDE 程式來測試 ESP32 WiFi 和各個腳位的功能</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7fc0612b-9aec-494c-86de-0c1eee0260c8" class="page sans"><header><h1 class="page-title">用Arduino IDE 程式來測試 ESP32 WiFi 和各個腳位的功能</h1></header><div class="page-body"><figure id="10ce6ed4-e8bc-4199-8ffa-be49788599f6"><a href="https://sites.google.com/view/rayarduino/esp32-wifi" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Ray 的 Arduino 教學 - ESP32 WiFi</div><div class="bookmark-description">簡介 ESP32 結合了 WiFi 和藍牙 (Bluetooth Low Energy) 無線操控的功能。本專題用Arduino IDE 程式來測試 ESP32 WiFi 的功能，並用一個 LED 來確認板子上腳位的位置。</div></div><div class="bookmark-href"><img src="https://ssl.gstatic.com/atari/images/public/favicon.ico" class="icon bookmark-icon"/>https://sites.google.com/view/rayarduino/esp32-wifi</div></div><img src="https://lh3.googleusercontent.com/fYy0o73vNsuyoggotZRS-d-piSd4_j8qpVuE4cbbSlK749P-NNjp1_jYiPSq4QBB0FUkug=w16383" class="bookmark-image"/></a></figure><h2 id="78053e03-5cfd-485b-ab8d-1bc943ec2575" class="">簡介</h2><h3 id="f6d53a3a-8457-4b97-b3f1-3172f75ae457" class=""></h3><p id="fc99267e-7a35-45a9-9efb-a6b1a693b080" class=""><strong>ESP32 結合了 WiFi 和藍牙 (Bluetooth Low Energy) 無線操控的功能。本專題用Arduino IDE 程式來測試 ESP32 WiFi 的功能，並用一個 LED 來確認板子上腳位的位置。</strong></p><figure id="3f86b8c8-eca0-4e65-bc90-7ec6d8ec2ad5" class="image"><a href="https://lh6.googleusercontent.com/lb9nm0-iUbJNh2d1eX-U5Tu8krx7s1nXIh3B8at1OlHb5ML9pX1hDsmkY2IeD30kAAQEbTECO7jfuorEX3BjKrAln4kGgRW8IrIJMeTDQXs8wdyuelIL5z19X7ozzewFbg=w1280"><img src="https://lh6.googleusercontent.com/lb9nm0-iUbJNh2d1eX-U5Tu8krx7s1nXIh3B8at1OlHb5ML9pX1hDsmkY2IeD30kAAQEbTECO7jfuorEX3BjKrAln4kGgRW8IrIJMeTDQXs8wdyuelIL5z19X7ozzewFbg=w1280"/></a></figure><h3 id="4285197a-f600-4d9f-9216-ae73cec3d51a" class=""></h3><h3 id="b6e55f01-cd13-4519-bfae-392976220c1e" class="">ESP32 依其功能的需要，已經開發了很多不同的板子。本專題使用的是 ESP32S。但不同的板子之間只要有標示 ESP-WROOM-32 晶片，應該就可以操作本網頁上各個測試的步驟。</h3><h3 id="3fafad99-0068-45cf-93da-52427100a9a9" class=""></h3><h3 id="1bcd9bf3-df0c-48c8-9d61-dcca68ca9e5d" class="">ESP32 有一個 3.3 V 伏特的穩壓器，可控制進入板子的電壓為 3.3 伏特。另外ESP32 也具有 CP2102 晶片，可以不經過 FTDI ，直接用電腦程式化。</h3><h3 id="c3a828b2-942f-4da3-bd16-64cbd43e702a" class=""></h3><h3 id="dbd29735-fc5b-483b-97e2-c16d50602097" class="">板子上有 ENABLE 和 BOOT 兩個按鈕。按下 ENABLE，ESP32 重新開機。當您按住 BOOT 按鈕，ESP32 重新開機並處於接受被程式化的狀態。</h3><h3 id="21c700e4-a999-41a1-9144-4850044e2908" class=""></h3><p id="6bee248b-2ac6-4373-a0a6-1624b1fae7f9" class=""><strong>ESP32S 各個腳位的功能，如下圖所示：(本圖摘自 RandomNerdTutorials.com)</strong></p><figure id="e65eeef9-e2b3-4f3e-b7c0-e0f23896a8b6" class="image"><a href="https://lh6.googleusercontent.com/klK0bvWwknqPLk89ToGX2EJ3_HxZxJPQ0NFmlcohKITYIhBYi_VV8MhijY-oeFW4OVGkJWYQXQuBrrN0VEGODEClmfTNaNrdrIgn9d2vO4AfVYRWnJEWZMkEVgAhtPUqRg=w1280"><img src="https://lh6.googleusercontent.com/klK0bvWwknqPLk89ToGX2EJ3_HxZxJPQ0NFmlcohKITYIhBYi_VV8MhijY-oeFW4OVGkJWYQXQuBrrN0VEGODEClmfTNaNrdrIgn9d2vO4AfVYRWnJEWZMkEVgAhtPUqRg=w1280"/></a></figure><h2 id="e8e28b7d-e5cf-4b8e-9ab3-6076fd28fac3" class=""></h2><h2 id="94056063-4964-4578-bbf6-38cb86281712" class="">安裝 ESP 32 板子在 Arduino IDE 裡面：</h2><h3 id="088f8543-0867-4e0d-ad5f-d9f80269b228" class=""></h3><h3 id="84997541-6ae7-413e-a7ca-63e3ba4ff340" class="">步驟一：確認你電腦裡面 Arduino 是最新版本。較舊的 Arduino 版本，無法安裝 ESP32 開發板。</h3><h3 id="e1be4b48-58e3-4096-8014-be40ee7422db" class=""></h3><h3 id="2970569a-a70d-453b-8375-a723870f0394" class="">步驟二：打開電腦 Arduino 。點選工具 &gt; 開發板 ＞ 開發板管理員。輸入 ESP32。螢幕出現 &quot;ESP32 by Espressif Systems ...&quot;，選擇最新版本，並按安裝。</h3><h3 id="29ac4fc8-e532-4816-85a4-b6b4cb9470ec" class=""></h3><h3 id="c3a4cb0d-838a-40b7-822b-e4b7a6e485c1" class="">步驟三：將 ESP32 USB插入電腦內。點選 Arduino 工具 ＞ 開發版 ＞ ESP32 Arduino ＞ DOIT ESP32 DEVKIT V1。若您的開發版不是 ESP32S，此步驟請選擇相對應您板子的選項。</h3><h3 id="0ca41fec-e008-476d-9cf6-fdd608af28f1" class=""></h3><p id="df6bda11-63d7-41f0-ab96-c3fb53874cdf" class=""><strong>步驟四：點選 Arduino 工具 ＞ 序列埠。勾選出現的 COM port。如果序列埠一直停在 COM Port not found/not available，請再等一會兒，電腦會自己找到 Arduino 軟體系統內的 driver 並安裝。要是一直沒有出現 COM port，表示你電腦裡面沒有 CP2102 driver。可以 Google “CP2102 driver download”，或至 </strong><a href="https://www.google.com/url?q=https%3A%2F%2Fwww.silabs.com%2Fdevelopers%2Fusb-to-uart-bridge-vcp-drivers&amp;sa=D&amp;sntz=1&amp;usg=AFQjCNEdlkkNsG-Ni9omtgVNmaYbk6aDLQ"><strong>Silicon Labs 網站</strong></a><strong> 下載。另外一個可能的原因是: 你的USB傳輸線，只有充電的功能，沒有資料傳輸的功能。換一條有資料傳輸功能的USB傳輸線即可。</strong></p><h2 id="2b97e079-9d78-4e78-bc81-b99d40dc386e" class=""></h2><h2 id="a2a0ddd5-d5e3-44dc-9128-1c0e8d777ddb" class="">讓 ESP32 掃描一下，您所處環境的 WiFi:</h2><h3 id="0d68e7a9-f78c-4a63-a117-0640dda5282c" class=""></h3><h3 id="46c68dd9-e0fe-4c5c-9fb5-f56477a7d595" class="">確認上個步驟，已將 ESP32 板子安裝在 Arduino IDE 裡面。用 USB 傳輸線，連接 ESP 32 到你的電腦。確認 COM Port 已經連上。</h3><h3 id="f0f9e76d-6e68-40a9-baf5-925a7d058720" class=""></h3><h3 id="950bfab8-c890-47d3-8107-c254b276f495" class="">點選 Arduino 檔案 ＞ 範例 ＞WiFi ＞WiFiScan 。螢幕上會出現程式 WiFiScan。點選 Arduino 上傳按鈕，Arduino 會先編譯程式並自動上傳程式到 ESP32 板子上。(如 WiFiScan 程式找不到，可複製貼上下方程式於 Arduino 內。)</h3><h3 id="10a2a607-8e50-4edf-881f-52f727244cc8" class=""></h3><h3 id="8aa21e65-490b-46d3-841a-0deb6d5a2826" class="">如果程式上傳失敗，出現訊息 “Failed to connect to ESP32...”，這表示你的 ESP32 不處於可以被上傳指令的模式。此時只要按住板子上的 BOOT 按鈕，再點 Arduino 上傳鈕，當編譯訊息出現 “Connecting...” 的時候，再放開 BOOT 按鈕。如此，應可成功上傳程式。</h3><h3 id="1aa85c6e-22fb-4a02-b400-d363e74c0611" class=""></h3><h3 id="3d00a114-7cdc-4693-80c0-85e284a2a0a3" class="">待程式上傳成功後，打開 Arduino 序列埠螢幕，調整 baud rate 為 115200。再按一下板子上的 ENABLE 按鈕，應該從序列埠螢幕上，就可以看到 ESP32 掃描到的附近 WiFi 網路。</h3><h3 id="e49013bc-0c84-4b3e-b33c-6548f7ece991" class=""></h3><p id="6a797b6b-8bdc-4559-9e83-f634e6b39f2e" class=""><strong>WiFiScan 程式及操作 YouTube 影片:</strong></p><h2 id="89d772f2-6d67-4ee4-84d1-f8312fcf155f" class=""></h2><h2 id="d80b4cc4-0fb7-4794-a152-0d3b5676e3cd" class="">結合 ESP32 和一個 LED ，用 Arduino IDE 程式讓 LED 閃爍。</h2><h3 id="e540eb02-18fe-475d-8edd-41243e8133f5" class=""></h3><h3 id="fce863f2-b2d4-4398-bef7-9bb4bef16964" class="">材料: ESP32S 開發版，330 歐姆電阻， LED，麵包版，電線。</h3><h3 id="59768e96-fc4b-422e-8de4-2438bc934584" class=""></h3><h3 id="bc235b88-b81f-4897-b307-5b9d5287d7e2" class="">如下方接線圖。LED 長腳接 ESP32 的 GPIO 23。LED 短腳接一個 330 歐姆的電阻，電阻另一端接 Arduino GND。 不同的板子，其接腳 (pinout) 不同。確認在你的板子上 GPIO 23 是哪一根 pin。以本專題 ESP32S 為例，GPIO 23 在右邊第一根。</h3><h3 id="8912bfb0-10f6-446a-83d0-3c7362ca018f" class=""></h3><h3 id="4b6222d7-7f20-4806-a895-ab8dbe76fa7d" class="">上傳程式前，確認你的 Arduino 開發板是否正確，COM Port是否接上。本專題開發版是 &quot;DOIT ESP32 DEVKIT V1&quot;。按下 Arduino 上傳程式鈕後，再按住 ESP32 BOOT 鈕。待程式編驛訊息出現 &quot;Connecting...&quot; 後，再鬆開 BOOT 鈕。如此可讓程式順利上傳到 ESP 32。</h3><h3 id="959fe4d6-2456-44bf-801b-d5c79d6f4cd4" class=""></h3><p id="34ee70bd-b65a-45b0-80bb-5728822d0b4f" class=""><strong>程式上傳成功後，就可看到 LED 每一秒鐘閃爍一次。</strong></p><figure id="804fd894-a64c-4b81-a855-55a646b12f83" class="image"><a href="https://lh3.googleusercontent.com/Na7nJGPIl275q_QGPiMJraIv6FeMq1-Mbt2CJbLt7qMXHntCj9mi9P0gtQ9UNQxK5qQW6aVT17gJCZm5lesKGqKCDrTtPV-H5VI3mZijzDrPsXqV-sbjFZt-AsHAzunsuA=w1280"><img src="https://lh3.googleusercontent.com/Na7nJGPIl275q_QGPiMJraIv6FeMq1-Mbt2CJbLt7qMXHntCj9mi9P0gtQ9UNQxK5qQW6aVT17gJCZm5lesKGqKCDrTtPV-H5VI3mZijzDrPsXqV-sbjFZt-AsHAzunsuA=w1280"/></a></figure><h3 id="6b4aadaf-7a2c-4762-891a-dea2f15b519c" class=""></h3><p id="f03aeb5a-397d-400e-a81c-e02e9f41f0eb" class=""><strong>LED 閃爍 接線圖及程式</strong></p><h2 id="97ead903-b27a-433f-a33a-0a1a3d2a9d0e" class=""></h2><h2 id="13b41d5a-e635-4e40-a0d4-de1449695c34" class="">創客點子</h2><h3 id="1942a8ad-3b73-415c-a423-956ffe9bf92f" class=""></h3><h3 id="52989145-b1db-4c86-a52b-bd0d0759ebe6" class="">用 LED 或蜂鳴器 (buzzer)， 試試 ESP32 上的其他GPIO 腳位。</h3></div></article></body></html>

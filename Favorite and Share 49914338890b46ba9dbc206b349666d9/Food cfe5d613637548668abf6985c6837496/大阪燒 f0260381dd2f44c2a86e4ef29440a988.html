@@ -1,0 +1,672 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>大阪燒</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f0260381-dd2f-44c2-a86e-4ef29440a988" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🛼</span></div><h1 class="page-title">大阪燒</h1></header><div class="page-body"><h1 id="e94a9a58-b72b-40bb-8967-ab77114a728e" class="">台北哪裡有好吃的大阪燒？5 間日本人推薦口味最道地、這家隱身條通超有fu</h1><p id="323de871-c222-4712-91a2-18514eacce97" class="">文／Japaholic　
+                                    
+                        2022/04/07 15:51</p><p id="39d1351c-6951-4a28-a705-00aa9edbd59e" class="">提到日本的鐵板料理，一定會浮現拿著大鏟子在鐵板上翻炒的大阪燒（お好み焼き，中文為御好燒或隨意燒），擠上日式酸甜美乃滋、還鋪著滿滿的隨著熱氣飄動的柴魚片以及海苔，還可以加入炒麵成為廣島燒呢！大阪燒不僅口味多元，還兼具視覺及味覺的享受，這次要來介紹台北的大阪燒店家，
+ 即使還沒辦法自由的來去日本，還是能夠在台北吃到道地又好吃的大阪燒喔！</p><h3 id="7fe94f6f-fcbe-4329-a94b-050effe43d03" class="">月島文字燒</h3><p id="2263a17c-0763-4cbd-9058-cc37ec7ef707" class="">已經在台北開業約10多年的「月島文字燒」，店內不只有文字燒、大阪燒，還有MIX摩登燒，而且都由店員做桌邊服務，只要自己拿小鏟子吃就可以囉！月島文字燒開業多年可以說是具有一定水準口碑、不會出錯的選擇，稍擠的店內是日本小酒館風格，而大阪燒用料也實在不馬虎且份量適中，第一次吃大阪燒的話非常推薦來這邊喔！</p><figure id="cc20caaf-5fb9-45ed-ae2c-62e0c7a9ba88" class="image"><a href="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-1-idKuL.jpg"><img src="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-1-idKuL.jpg"/></a></figure><p id="4f05456e-65bb-48ce-906b-fa1d562bb4aa" class="">▲</p><p id="2abb411d-71de-4024-9060-bf14318ddf06" class=""><a href="https://www.facebook.com/%E6%9C%88%E5%B3%B6%E6%96%87%E5%AD%97%E7%87%92%E5%8F%B0%E5%8C%97%E5%BF%A0%E5%AD%9Dsogo%E5%BA%97-176321972409868/?ref=page_internal">圖片來源</a></p><blockquote id="a3183d82-d8b6-428f-89f9-1cb7800d167a" class="">まさか台湾でもお好み焼き食べれるなんで(*´∀｀*)幸せ者だ!#月島文字燒#お好み焼き#飯テロ pic.twitter.com/P2iV84Sg6o<p id="4fe2685d-d3e9-4824-bc73-dfe7eba07e81" class=""><a href="https://twitter.com/gogogo12337/status/1435125204267663360?ref_src=twsrc%5Etfw">September 7, 2021</a></p></blockquote><p id="69db9232-b3cf-4bb5-bcd6-6edd09686b49" class="">月島文字燒■地址：台北市大安區忠孝東路四段126之13號■電話：02-2721-5081■營業時間：11:30-14:30（週六至15:00）、17:00-22:00■<a href="https://www.facebook.com/%E6%9C%88%E5%B3%B6%E6%96%87%E5%AD%97%E7%87%92%E5%8F%B0%E5%8C%97%E5%BF%A0%E5%AD%9Dsogo%E5%BA%97-176321972409868/?ref=page_internal">FACE BOOK</a></p><h3 id="a19f0ae9-d591-42df-a772-29d9046ebb91" class="">吉野家庭餐廳 お好み焼き-よしの</h3><p id="f62f76b9-d735-448f-8875-7da719cb425c" class="">在台北市中心最多日本人聚集的條通裡，有著一家外觀低調樸實、掛著「お好み焼き」布條的家庭餐廳，據說來店裡90%的客人都是日本人，可以保證口味相當的有日本味。店內分為日式坐席跟一般座位，菜單上的滿滿的日式家庭料理，餐點的份量都頗大，讓價格顯得相當的平實。由於吉野家庭餐廳的大阪燒份量頗大，如果一個人吃的話可能會有點多，建議找多一點人一起到吉野家庭餐廳，可以吃多種口味的大阪燒，或是加點其他日式家庭料理，還可以同時體驗日本家庭餐廳的氛圍呢。</p><p id="b0596b20-7760-4776-af66-1279927b84aa" class="">吉野家庭餐廳 お好み焼き-よしの■地址：台北市中山區林森北路119巷24號■電話：02-2541-4570■營業時間：18:00-23:00</p><h3 id="cfa777cc-7e51-4e11-8f3a-23cc091a1959" class="">日式愛好燒 紅葉</h3><p id="f3c7f3d0-8e92-437a-8b34-3985751c4363" class="">位在離古亭捷運站走路約5分鐘的小店舖，店面雖小、有點不起眼但是相當的受歡迎喔！店名的「愛好燒」就是直接將大阪燒「お好み焼」直翻成中文。</p><figure id="f348acec-6d01-46d4-9455-b5781446cf16" class="image"><a href="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-12-icr9f.jpg"><img src="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-12-icr9f.jpg"/></a></figure><p id="816853c6-1814-47cd-8671-36dfff8669f7" class="">▲</p><p id="b09191d7-29e7-4d24-9aee-6a24a26b5a5f" class=""><a href="https://www.facebook.com/momiji01/?ref=page_internal">圖片來源</a></p><p id="87a5937f-c675-454a-be91-ddab6f52bc5b" class="">價格非常平實，且美味度不輸給連鎖店，店內的愛好燒是道地的日本關西口味，熟客都非常推薦加點炒麵與半熟蛋，店內整個氛圍就像是坐在日本的居酒屋一樣，懷念日本小店氛圍的朋友，推薦來紅葉吃吃看喔！原本店面由一對日本老夫婦一起經營，但身為大廚的老爺爺已經逝世，目前是由老奶奶一人打理，營業時間縮短之外，等待時間可能會比較長，想吃到道地的日本味就稍微等候一下吧。</p><figure id="5e2794c1-8b75-4fde-9138-bc85e5f6f886" class="image"><a href="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-2-QjezL.jpg"><img src="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-2-QjezL.jpg"/></a></figure><p id="f84cb893-4cae-4670-888b-467d2a2d1e2d" class="">▲</p><p id="6ee7832b-905f-4a27-9273-49faf163a8c4" class=""><a href="https://www.facebook.com/momiji01/?ref=page_internal">圖片來源</a></p><p id="b50f94d7-8159-461b-887e-7471df601cca" class="">日式愛好燒 紅葉（お好み焼 もみじ）■地址：台北市中正區晉江街18巷18弄4號■電話：02-2368-8223■營業時間：17:00-21:00，週三公休■<a href="https://www.facebook.com/momiji01/?ref=page_internal">FACE BOOK</a></p><h3 id="0c9d8ea6-24aa-403e-b3a3-58b10e750322" class="">鐵之腕 和風鐵板料理</h3><p id="d3b3b3d5-3473-4b3a-9cd9-111ec5f890c0" class="">由日本人經營的居酒屋，店內的菜色也相當的多元、餐點口味相當道地，店裡日本客人也是絡繹不絕；提到鐵之腕的大阪燒，據說是許多網友心中的大阪燒第一名，口味較偏傳統的重口味，大阪燒具有一定的厚度紮實又不失蓬鬆，餡料也是給的不手軟，特別的是大阪燒基底分為原味、山藥及蕃茄三種口味，可以依自己喜好來選擇大阪燒風味。</p><figure id="863cdfe3-a8b6-4df0-b714-d4254918ea0e" class="image"><a href="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-3-krolY.jpg"><img src="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-3-krolY.jpg"/></a></figure><p id="b7dab65b-d538-44f0-8861-f9712ada5134" class="">▲</p><p id="6eafce49-e9f1-41d9-9caf-790b9f392779" class=""><a href="https://www.facebook.com/tetsuwan.tw/?ref=page_internal">圖片來源</a></p><figure id="4702670e-bb7e-4142-934d-400427b05b7a" class="image"><a href="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-7-IJ8ki.jpg"><img src="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-7-IJ8ki.jpg"/></a></figure><p id="61f9532b-51a5-436e-9a0d-ae81bfa452da" class="">▲</p><p id="512a8b50-0965-433b-99ee-3485e346b902" class=""><a href="https://www.facebook.com/tetsuwan.tw/?ref=page_internal">圖片來源</a></p><p id="8020db40-0548-4ab7-9b00-4f7316307e7b" class="">てつわん～和式鉄板料理屋■地址：台北市中山區松江路77巷12號■電話：02-2518-2295■營業時間：18:00-23:00，週日公休■<a href="https://www.facebook.com/tetsuwan.tw/?ref=page_internal">FACE BOOK</a></p><h3 id="1165cb41-dc17-4956-9418-49e723ac8589" class="">東京大阪燒</h3><p id="873e58f6-0cf7-4705-8f9a-86ea84ce6494" class="">隱藏在市場內的小店舖，小小的店裡不到10個座位，所用製作大阪燒的配料都是選用日本製，老闆每天備料所以能夠保證食材新鮮，雖隱藏在市場裡但大阪燒口味卻相當道地，且價格平價又能吃得飽，據說尖峰時刻沒有排隊半小時是吃不到的！店內用餐的話餐具還會附上小鏟子，配上店內裝潢相當的有日本風情，是附近的上班族的午餐愛店之一。</p><figure id="ed78d0dc-e0aa-454e-83c5-b4a7bb8c04b7" class="image"><a href="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-4-yHJFL.jpg"><img src="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-4-yHJFL.jpg"/></a></figure><p id="cddabbf2-0bd3-43f2-90d8-050e4fc2eb6d" class="">▲</p><p id="6736fc43-86ec-4437-80b0-8cf71e07565a" class=""><a href="https://www.facebook.com/TokyoOkonomiyakiTaipei291">圖片來源</a></p><p id="4854db63-c87b-4f19-ae1d-177fb7594bf7" class="">東京大阪燒除了必點的大阪燒之外，店內不時出現的提拉米蘇、蘋果塔等點心，也是老饕們必點的品項，都是出自老闆娘之手，據說週六公休就是去外面授課呢！</p><figure id="22d0e89b-9d0f-4087-b000-336e5bfcbfe8" class="image"><a href="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-5-bBSf7.jpg"><img src="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-5-bBSf7.jpg"/></a></figure><p id="c1fbbaca-3d07-4205-91d2-d7021ae4c8e0" class="">▲</p><p id="89c3ec26-5156-4467-97eb-b677ad494e42" class=""><a href="https://www.facebook.com/TokyoOkonomiyakiTaipei291">圖片來源</a></p><figure id="212921ca-1397-475a-870f-46f50ad00f13" class="image"><a href="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-6-qyi0f.jpg"><img src="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-6-qyi0f.jpg"/></a></figure><p id="58771efc-66fc-4b5c-8a1a-3cbfcc371cef" class="">▲</p><p id="6d423109-4c68-4392-89bd-087c7557563a" class=""><a href="https://www.facebook.com/TokyoOkonomiyakiTaipei291">圖片來源</a></p><p id="1dabff72-3034-426f-94b7-8da55f43cff6" class="">東京大阪燒■地址：台北市松山區南京東路五段291巷42號■電話：0982-788-820■營業時間：12:00-21:00，週六公休■<a href="https://www.facebook.com/TokyoOkonomiyakiTaipei291">FACE BOOK</a></p><p id="398f6b67-c695-485d-a8c3-5179548a735e" class="">是不是已經有想去回味日本大阪燒的衝動了呢？文內介紹的每家大阪燒都有各自的特色，也有各自的擁護者，但共通點都是相當美味，不論有沒有吃過大阪燒，都相當推薦去嘗嘗看這道日本平民美食喔！</p><p id="d431dffa-46be-42b4-bd5c-7222ed9932df" class="">※本文內容授權自《Japaholic／</p><p id="11aa2d88-07c8-4258-a557-6a5613c39280" class=""><a href="https://www.japaholic.com/tw/article/detail/910381-2022%E5%B9%B4%E5%8F%B0%E5%8C%97%E9%81%93%E5%9C%B0%E5%A4%A7%E9%98%AA%E7%87%92%E6%8E%A8%E8%96%A6%EF%BC%81%E5%9C%A8%E5%8F%B0%E5%8C%97%E4%B9%9F%E8%83%BD%E5%90%83%E5%88%B0%E9%81%93%E5%9C%B0%E5%A4%A7%E9%98%AA%E7%87%92#heading_910381_3">原文連結</a></p><figure id="6a185557-c4ca-406a-9590-2cb4063040ff" class="image"><a href="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-74-HhrH3.jpg"><img src="https://img.ltn.com.tw/Upload/playing/page/2022/02/23/220223-25909-74-HhrH3.jpg"/></a></figure><p id="636a8341-ddbc-4c10-9ad5-09fc61de1632" class="">滿足好奇心旺盛的日系女子們的願望，提供在旅遊書上絕對找不到的日本在地即時觀光情報、到日本必買的購物資訊新消息。</p><p id="40251fb2-6d8a-4f2d-9e48-97d2710b4aff" class="">「該去日本旅遊了」，讓妳讀了之後會有這樣的念頭。讓妳的日常生活中，想要融入更多一點的「日式風格」。</p><p id="24bc48ce-2f77-4c0d-a044-2dd898ca809a" class="">在Japaholic讓妳的生活更添風味。►www.japaholic.com/tw</p><p id="a74bc1b5-67c3-41b4-aa38-b431d7d8bf91" class=""><strong>延伸閱讀</strong><strong>》</strong><a href="https://www.japaholic.com/tw/article/detail/910351-%E5%8F%B0%E5%8C%97%E8%B6%85%E9%81%93%E5%9C%B0%E6%97%A5%E5%BC%8F%E7%AB%A0%E9%AD%9A%E7%87%92%E5%BA%97%E6%8E%A8%E8%96%A6%EF%BC%81%E5%9C%A8%E5%8F%B0%E6%97%A5%E6%9C%AC%E4%BA%BA%E4%B9%9F%E8%83%BD%E6%BB%BF%E8%B6%B3%E9%84%89%E6%84%81%E7%9A%84%E5%A5%BD%E6%BB%8B%E5%91%B3"><strong>台北超道地日式章魚燒店推薦！在台日本人也能滿足鄉愁的好滋味</strong></a><strong>》</strong><a href="https://www.japaholic.com/tw/article/detail/827972-2022%E5%B9%B4%E6%97%A5%E6%9C%AC%E6%A2%85%E9%85%92%E6%8E%A8%E8%96%A6%E6%AC%BE%EF%BC%81%E5%8F%B0%E7%81%A3%E4%B9%9F%E8%B2%B7%E5%BE%97%E5%88%B0%E7%9A%84%E5%85%AD%E6%AC%BE%E5%BF%85%E8%B2%B7%E4%B8%8D%E6%95%97%E5%BE%AE%E9%86%BA%E7%B6%93%E5%85%B8"><strong>2022年日本梅酒推薦款！台灣也買得到的六款必買不敗微醺經典</strong></a></p></div></article></body></html>

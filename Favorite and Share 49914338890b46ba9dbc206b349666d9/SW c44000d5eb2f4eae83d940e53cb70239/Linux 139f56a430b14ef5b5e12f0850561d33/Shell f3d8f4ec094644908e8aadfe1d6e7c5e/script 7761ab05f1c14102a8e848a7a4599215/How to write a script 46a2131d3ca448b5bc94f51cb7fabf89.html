@@ -1,0 +1,856 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>How to write a script</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="46a2131d-3ca4-48b5-bc94-f51cb7fabf89" class="page sans"><header><h1 class="page-title">How to write a script</h1></header><div class="page-body"><p id="bb27e359-87a4-4456-9b59-f929596a7b02" class="">shell gramma</p><p id="ddca8dd7-b628-49ac-b6f9-efe246124142" class=""><a href="https://blog.twtnn.com/2013/12/shell-script.html">https://blog.twtnn.com/2013/12/shell-script.html</a><a href="http://linux.vbird.org/linux_basic/0340bashshell-scripts.php">http://linux.vbird.org/linux_basic/0340bashshell-scripts.php</a></p><p id="c19ea423-fd8e-4075-bff6-03ccafd86846" class="">指令，
+而把這些指令存被在文字檔中，再交由Shell執行，就是Script。
+一般會將Shell <a href="http://xn--script-g43j00ia33ii23n0opkxr.sh/">Script的副檔名命名為.sh</a>，雖然副檔名在Linux中並非必要，
+但是有副檔名可以讓我們更容易管理這些檔案。</p><p id="116aebae-7d6a-451e-8449-04bae75ac0fe" class=""><a href="http://xn--test-k84f91i7ll3ww89b7iup57d.sh/">假設有一個名為test.sh</a> 的 Shell Script，首先用文字編輯器來撰寫內容如下：
+#!/bin/bash
+echo Hello World</p><p id="f9c9dbde-1fbf-40e5-941a-3501a27b2e70" class="">第一行是必需的，它是用來定義你要使用的 shell。Linux中有許多的Shell可以使用，
+如：ksh、bash，但是彼此之間語法有所差異，所以我們首先需要定義使用哪一個Shell。
+而第二行的 echo 代表列出一個字串，預設會把後面的字串「Hello World」顯示在螢幕上。
+將test.sh存檔後，可以用下列其中一種方式執行它：
+1、直接輸入 sh <a href="http://test.sh/">test.sh</a>
+2、改變test.sh的權限，加上可以執行的權限，
+chmod a+x <a href="http://test.sh/">test.sh</a>
+接著直接執行它：
+./test.sh</p><p id="46b8e365-3195-4656-924b-4f5282fab5d3" class="">在Shell Script中，「#」表示註解，在#後面將視為註解並且被程式忽略。
+例如：
+#pwd
+ls -l
+Shell只會執行ls -l，而不會執行ls -l</p><p id="0bf613a5-bbd5-4f32-a138-5c916b0d2691" class="">而「;」 則代表指令的分隔，例如：
+pwd;ls -l
+和
+pwd
+ls -l
+都是一樣執行pwd及ls -l。</p><p id="3cd73fc2-8783-4d41-acc8-b997a007ea3d" class="">二、變數的使用
+在Shell Script中，所有的變數都視為字串，因此不需要在定義變數類型。
+在Shell中定義和使用變數時並不一樣。
+例如，定義一個變數id並且設定值為2013001，接著還要將印出變數的值：
+id=2013001 -&gt; 定義變數時前面不加「$」符號
+echo $id   -&gt; 使用變數時前面要加「$」符號
+注意，在等號的二邊不可以有空白，否則將出現錯誤。</p><p id="f7dd5b2b-028d-40ab-83b9-45c49570ba6b" class="">再介紹一個範例：
+dir=/home/oracle
+ls $dir</p><p id="44b589f8-a5c7-4b6a-aef9-e95fe94d7951" class="">這裡我們定義了變數dir的值為/home/oracle，接著用ls指令來印出變數dir，
+此時指令會變為ls /home/oracle，所以就把目錄中所有檔案都列出來。</p><p id="b547a5cc-2708-45b8-88fe-84360b877a29" class="">我們再來看一個例子，說明如何使用變數來定義變數：
+$ tmppath=/tmp$ tmpfile=$tmppath/abc.txt$ echo $tmpfile
+/tmp/abc.txt</p><p id="8e34f4f9-b53f-4a2b-ab61-da808c1bd475" class="">我們也可以把指令的輸出傳回給變數，指令前後加上關鍵字「<code>」， 它是位於鍵盤左上角「數字鍵1」左邊的按鍵： now=</code>date`
+echo now
+結果會秀出「Mon Dec 16 09:31:44 EAT 2013」</p><p id="ec927416-fbcc-4009-99df-e587038718b9" class="">此外，雙引號與單引號字串對變數解釋有不同的意義，
+如果是使用單引號，則變數會當成一般文字；雙引號才會解譯成變數，例如：
+a=123
+echo &quot;$a&quot; -&gt;結果是123
+echo &#x27;$a&#x27; -&gt;結果是$a</p><p id="46f1c921-8eeb-468d-8608-d6bfcd383d2b" class="">Script也可以要求使用者輸入資料，利用read指令來讀取輸入的資料。如下：
+#!/bin/sh
+printf &quot;Please input your name:&quot;
+read Name
+echo &quot;Your name is $Name&quot;</p><p id="511c63a2-4b53-4f01-9675-2d51d8bf82b3" class="">由於echo指令內定會自動換行，所以我們使用printf這個指令來輸出字串。
+<a href="http://xn--test01-9o7il2l8vdf19aq4ax0a878cha689u1miiz9n.sh/">我們將上述內容存成檔案test01.sh</a>，接著執行它：
+[root@oel62 test]# sh <a href="http://test01.sh/">test01.sh</a>
+Please input your name: Job -&gt;提示要輸入名字，此時輸入的是Job
+Your name is Job</p><p id="6f8067ea-3eaa-4c47-b29f-59857b8cc1cb" class="">Shell Script有一些預設的特殊變數如下：
+$? ：表示上一個指令的離開狀況，一般指令正常離開會傳回 0。不正常離開則會傳回 1、2 等數值。
+$1 ：表示輸入的第一個參數，$2 則為第二個參數，依此類推。
+$0 ：shell script的檔名。
+$@ ：即代表 $1, $2,....直到所有參數結束。也就是說 $@ 代表了 &quot;$1&quot; &quot;$2&quot; &quot;$3&quot;....。
+$* ：所有參數無間隔的連在一起，成為單一個參數。也就是說 $* 代表了 &quot;$1 $2 $3...&quot;</p><p id="b93d1d29-a7ae-4869-b792-bd8bc3f151e0" class="">三、運算符號
+在 shell 中的四則運算必須使用 expr 這個指令來輔助。注意，在 + - * / 的二邊都有空白，如果沒有空白將產生錯誤：
+expr 6 - 2
+sum=<code>expr 10 + 20</code>
+echo $sum
+結果：
+4
+30</p><p id="4b550021-53be-4e5b-91d5-d0eac7f8162d" class="">還有要特別注意的是乘號 * 。因為 * 有其他意義，所以要使用 \* 來代表。另外，也可以用 % 來求餘數。
+count=<code>expr 9 \\* 3</code>
+echo $count
+echo <code>expr $count % 3</code>
+結果：
+27
+0</p><p id="2f489d71-d1a4-44fe-a8eb-a856571f0a03" class="">簡單的條件判斷是以 &amp;&amp; 及 || 這二個符號來表示。
+a &amp;&amp; b如果 a 是真，則執行 b。如果 a 是假，則不執行 b。
+a || b如果 a 是假，則執行 b。如果 a 是真，則不執行 b。
+例如：
+ls /home &amp;&amp; echo YES
+ls /dev/aaaa &amp;&amp; echo YES
+結果：
+YES
+ls: /dev/aaaa: No such file or directory</p><p id="8a5224e8-8539-4df0-b283-84f1eb68fb35" class="">接著我們使用 test 及 [ 來做運算，運算所傳回的結果是真 (true) 或假 ( false)。
+我們可以將它應用在條件判斷上。test 和 [ 都是一個指令，我們可以使用 test 並在其後加上參數來判斷真假。
+或者也可以使用 [ 表達式 ] 來替代 test，要注意的是 [ ] 中的必須有空白間隔。</p><p id="81f3a0ab-8f3b-403d-9af9-4f4357ac1cd3" class="">表達式說明如下：
+-n str1      ：如果字串 str1 的長度大於 0 則傳回 true。
+-z str1      ：如果字串 str1 的長度等於 0 則傳回 true。
+str1  = str2 ：如果字串str1等於字串str2則傳回 true，等號二邊有空白。
+str1 != str2 ：如果 str1 不等於 str2 則傳回 true。!= 的二邊有空白。
+a -eq b      ：Equal，a 等於 b 則傳回真 (true)。
+a -ne b      ：Not equal，a 不等於 b 則傳回真 (true)。
+a -gt b      ：Grwater than，a 大於 b 則傳回真 (true)。
+a -lt b      ：Less Than，a 小於 b 則傳回真 (true)。
+a -ge b      ：Greater or equal，a 大於或等於 b 則傳回真 (true)。
+a -le b      ：Less or equal，a 小於或等於 b 則傳回真 (true)。</p><p id="674bdd9c-c14a-443b-b2ba-f10e9aa55e21" class="">我們舉例來說明：
+test 5 -eq 5 &amp;&amp; echo true
+test abc!=cde &amp;&amp; echo true
+[ 6 -lt 10 ] &amp;&amp; echo true
+結果：
+true
+true
+true</p><p id="4fa826df-5f8e-4c5e-855d-bc683c7bd9eb" class="">四、流程控制
+1、if 的條件判斷
+基本語法：
+if condition-list
+then list
+elif condition-list
+then list
+else list
+fi</p><p id="f25b6f73-7553-4b66-9d61-d6d96913101c" class="">範例：
+if [ $1 = &quot;aa&quot; ]
+then
+echo &quot;YES&quot;
+else
+echo &quot;NO&quot;
+fi</p><p id="f1f59fa3-e945-45a8-a4ed-9a8598f994cf" class="">範例二：
+$ ee <a href="http://test.sh/">test.sh</a>
+#!/bin/sh
+if [ $1 -gt 10 ]
+then echo &quot; $1 is bigger then 10&quot;
+elif [ $1 -ge 0 ]
+then echo &quot; $1 is between 5 and 0. &quot;
+else echo &quot;$1 is less then 0.&quot;
+fi</p><p id="262101a6-958c-45e4-9068-9f4603ef9524" class="">2、while 及 until 迴圈
+基本語法：
+while condition-list
+do list
+done</p><p id="896f226d-7763-420e-9f97-8e8a69b3a0c8" class="">until condition-list
+do list
+done
+範例一：
+#!/bin/sh
+i=1
+while [ $i -le 10 ]
+do
+echo $i
+i=<code>expr $i + 1</code>
+done
+說明：首先令變數 i=1，接著在當i小於等於10執行迴圈的內容，而每次執行迴圈一次，則i加1。</p><p id="1e9d4e83-45b4-493f-baed-61e6c46ede13" class="">範例二：
+#!/bin/sh
+i=1
+until [ $i -gt 10 ]
+do
+echo $i
+i=<code>expr $i + 1</code>
+done</p><p id="7481188e-4975-4ed9-b9b0-0b7c7b617ea8" class="">說明：首先令變數 i=1，接著迴圈會判斷，一直執行到i大於10才停止。
+每跑一次迴圈就i就加1。</p><p id="c4bafc28-179c-48dd-adb4-ac4ec7a5ced8" class="">3、for 迴圈
+基本語法：
+for name in word1 word2 …
+do do-list
+done</p><p id="a391b70e-3113-499a-9575-f87b6365123d" class="">for name
+do do-list
+done</p><p id="1a56425c-5e0a-49fc-b425-492c2ef1f680" class="">範例一：
+#!/bin/sh
+for color_name in blue red green
+do
+echo $color_name
+done</p><p id="915abdc5-bb22-4257-8f82-69cc50185d65" class="">說明：這個Script中，會在每一次迴圈中將關鍵字in後面的字串分配給變數color_name，
+然後印出變數 color。</p><p id="16494978-b46f-4258-bd17-7f6781804766" class="">4、case 判斷
+基本語法：
+case word in
+pattern1) list1 ;;
+pattern2) list2 ;;
+…
+esac</p><p id="1826c6ab-0fae-4cbf-9dda-bc5ca649746a" class="">範例：
+case $num1 in
+1|2|3)       echo $num1 is between 0~3;;
+4|5|6|7)       echo $num1 is between 4~7;;
+8|9)           echo $num1 is 8 or 9;;
+*)             echo $num1 is not on the list;;
+esac</p><p id="f9c386c2-6e2e-4cdb-80da-2b8112dd1399" class="">6、函式的運用
+Shell Script中也可以使用函式 (function) 來將程式模組化。
+基本語法：
+name ( )
+{
+statement
+}</p><p id="20015ae3-6b99-4cdf-a65b-1bb1573aabd5" class="">函式有幾個要注意的地方：
+A、在使用函式之前一定要先定義它，也就是在一個 Shell Script 中，一定要先寫函式的內容，
+在函式之後再寫一般的程式部份。
+B、在Script中的變數全部都是全域變數 (Global)，所以函式中的變數會影響函式之外的其他部份。
+C、在命令列中輸入的參數是以 $1,$2來讀取，但是這些參數並沒有辦法在函式中使用。
+傳給函式的方法和在命令列中一樣，例如：[函式名稱] arg1 arg2..。
+傳進函式的變數一樣會以 $1,$2來儲存並使用。</p><p id="7e1cbb01-852b-4499-ba7b-9e737f988370" class="">範例：
+addnum1 ( )
+{
+echo &#x27;Function $1 is&#x27; $1
+echo &#x27;Function $2 is&#x27; $2
+}</p><p id="52ef2658-c1e2-4795-980a-8e0b88814c22" class="">echo &#x27;Command $1 is&#x27; $1
+echo &#x27;Command $2 is&#x27; $2</p><p id="f5fe573d-cc6b-48b6-b08b-3b2d6f048e08" class="">a=<code>expr $1 + 10</code>
+b=<code>expr $2 + 10</code>
+addnum1 $a $b</p><p id="3fc043b1-1d62-476b-946c-cdbc174f573a" class="">程式執行：
+[root@oel62 test]# ./test01.sh 2 3
+結果：
+Command $1 is 2
+Command $2 is 3
+Function $1 is 12
+Function $2 is 13</p></div></article></body></html>

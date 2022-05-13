@@ -1,0 +1,811 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>jQuery 簡介</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5e5b7944-18f0-4ed8-9d99-68be7a21cb65" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🏥</span></div><h1 class="page-title">jQuery 簡介</h1></header><div class="page-body"><h2 id="186277c0-98f7-45f4-8f2b-4f5734262d54" class=""></h2><h3 id="bbd30c73-9611-463f-a7ea-c16aacca4cd8" class="">∗ jQuery</h3><h3 id="1c10b374-e966-44aa-a4e1-4028e06d8c8d" class="">▸ jQuery 是一個 JavaScript 檔案，內含許多函式，因此是一個函式庫 (Library)</h3><h3 id="a9f76ec5-31a9-44b2-9dc3-6cf788ddad36" class="">▸ 與傳統 DOM 查詢一樣，但 jQuery 的語法較簡潔，提供的函式更多、功能更強</h3><h3 id="c9046c5d-e951-4549-9676-ffd3159480fe" class="">▸ jQuery 利用 CSS 樣式搜尋網頁元素，再利用 jQuery 函式進一步處理</h3><h3 id="ef54b556-4ac2-4279-9236-a059589bb6b2" class="">✶ 例1：選擇 &lt;li class=&quot;hot&quot;&gt; 元素 → 以&#x27;li.hot&#x27;為搜尋字串</h3><h3 id="b7d6da56-1de8-4152-8e85-510e1e0af26f" class="">jQuery(&#x27;li.hot&#x27;);</h3><h3 id="73cacb96-8f53-410b-9ed6-a39c3f1e86c9" class="">✶ 例2：選擇後利用函式 .addClass() 新增 CSS 類別</h3><h3 id="fd8799e2-d6e8-4ae5-9707-f627f38f6283" class="">jQuery(&#x27;li.hot&#x27;).addClass(&#x27;complete&#x27;);</h3><h3 id="cee717fa-7397-4add-bfad-29c919f87b15" class="">結果：&lt;li class=&quot;hot complete&quot;&gt;</h3><h3 id="e565c084-9bcc-43d2-9d4b-26521e845ac1" class="">▸ jQuery 可以 $ 符號代替，例如：$(&#x27;li.hot&#x27;);</h3><h3 id="7ae66d62-d855-41c0-afc5-231c1903173a" class="">▸ 常用指令：</h3><pre id="01af6d69-8a0f-45e0-acce-7b7e9bb2a72f" class="code code-wrap"><code>var $element = $(&#x27;#theId&#x27;);          # 取得 id 為 &#x27;theId&#x27; 的 HTML 元素
+var $element = $(&#x27;.theClass&#x27;);       # 取得 class 為 &#x27;theClass&#x27; 的 HTML 元素
+var content = $(&#x27;#theId&#x27;).html();    # 回覆元素的 HTML 內容
+$(&#x27;#theId&#x27;).html(&#x27;The content&#x27;);     # 設定元素的 HTML 內容
+</code></pre><h3 id="57dffc3e-a760-4bd3-8660-0c9019930f5f" class="">✶ 習慣上，會在 jQuery 物件變數前加上 $ 號，以標明其為 jQuery 物件</h3><h3 id="b6b0f2e4-e06a-42f9-9790-0c0d1f110550" class="">∗ 兩種方式匯入 jQuery</h3><h3 id="d2fb4383-f230-43b1-8024-5b493a294e67" class="">▸ 下載檔案：下載 jquery-x.x.x.min.js 並置於 js 目錄中，然後建立連結：</h3><h3 id="04657d81-a717-4962-9c9b-42c429d2e9e9" class="">&lt;script src=&quot;js/jquery-x.x.x.min.js&quot;&gt;&lt;/script&gt;</h3><h3 id="a27acc52-edbd-46b2-95c7-71aa98f09014" class="">✶ x.x.x：版本 (2.x.x 版不支援 IE&lt;=8)</h3><h3 id="e50734a9-1c22-4b19-a706-d4a3c2bfae87" class="">✶ *.min.js：縮小板 (Minified)，空白及回車字元全部刪除 (一般版約 250KB，縮小版約 9KB)</h3><h3 id="a735c2d0-4af1-4623-ba7a-0cfd14716bd7" class="">✶ 優點：不需依賴其他伺服器</h3><h3 id="68fade3d-ccdc-489c-95cb-62c65f1318b7" class="">▸ 透過 CDN (Content delivery network) 連結：</h3><h3 id="96e73b41-4473-4047-a955-439fad2ed80d" class="">&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/x.x.x/jquery.min.js&quot;&gt;&lt;/script&gt;</h3><h3 id="bb8051ee-f160-41e7-9e51-4f5ba5638903" class="">✶ 優點：使用者的瀏覽器非常可能已有 jQuery，因此完全不需要下載</h3><h3 id="689a3e41-1d02-4563-bf0b-24c2942e4c95" class="">✶ Google jQuery 版本資訊： <a href="https://developers.google.com/speed/libraries/devguide#jquery">https://developers.google.com/speed/libraries/devguide#jquery</a></h3><h3 id="0420b7bf-fb3c-408b-aa1a-342475687e03" class="">→ 建議使用此方式</h3><h3 id="1f5a26e9-1759-4738-9b7a-57bec7d243f1" class="">∗ jQuery 的優點 (相對於純 JavaScript)</h3><h3 id="5eff9c02-2765-412b-8e25-dfbcc780afda" class="">▸ jQuery 所有的功能都能以純 JavaScript 完成，但 jQuery 使程式設計更簡單，口號：Write less, do more.</h3><h3 id="2d8c438f-39ea-4876-8e73-9b4d3a7adbf7" class="">▸ 簡單的選擇器</h3><h3 id="fb437493-3e8c-405f-9b5e-dddc04ff3a08" class="">✶ 使用前端工程師們早已熟悉的 CSS 選擇模式，語法較簡潔</h3><h3 id="ffcc7abc-7fc3-4115-9f23-70dfffe03f7c" class="">✶ 選擇速度更快，且正確率提高</h3><h3 id="e1a6bd1c-4fae-4ff0-8812-9133b06de73e" class="">▸ 程式碼大幅減少</h3><h3 id="b2a2835f-773f-4143-95f9-8b5e7294c542" class="">✶ 處理器可以一次應用在所有選擇到的元素，無需撰寫迴圈個別處理</h3><h3 id="0157d9d2-3119-4939-9ac3-7f49bb9f79ba" class="">✶ DOM tree 處理效率高：加入或移除元素、處理事件、淡入淡出、處理 Ajax 請求等都更為方便</h3><h3 id="94880693-8059-4ea8-a2bb-2cedf50a1434" class="">✶ 方便的 DOM 選擇器與鏈式語法，例如：</h3><h3 id="c7abadad-ee47-4f33-927a-7acdecea5870" class="">$(&#x27;p.myParagraph&#x27;).addClass(&#x27;red&#x27;).show(&#x27;slow&#x27;);</h3><h3 id="a97dbb62-4613-4c5b-b8f8-ec04b3ce3ed3" class="">▸ 跨瀏覽器，無需針對不同瀏覽器撰寫不同程式，亦無需撰寫倒退程式</h3><h3 id="306a7548-900a-483a-b926-383d5b531ca7" class="">✶ jQuery 有特色偵查 (Feature detection)，自動選擇適當的程式</h3><h3 id="a8f4aa0f-3c17-4015-8b93-9ad94e6a9129" class="">▸ 提供更多、功能更強的函式</h3><h3 id="4df03a15-2c08-4b5e-ae76-b97b2e80d715" class="">∗ jQuery 與 JavaScript 比較範例</h3><h3 id="50e10955-571c-4b30-90f6-b717fee42f0b" class="">fadeIn.html：</h3><pre id="ce9d11f8-0b63-4158-ba7c-21cce392ef88" class="code code-wrap"><code>&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;ul&gt;
+  &lt;li&gt;第 1 項&lt;/li&gt;
+  &lt;li&gt;第 2 項&lt;/li&gt;
+  &lt;li&gt;第 3 項&lt;/li&gt;
+  &lt;li&gt;第 4 項&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/fadeIn.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="f34e4561-50cb-4832-a7c4-0dc0429a69b4" class="">▸ 功能：先隱藏前三個 &lt;/li&gt; 元素，然後在 2 秒內淡入</h3><h3 id="6f5f64b7-05fb-45aa-8718-481011f5b1ca" class="">✶ JavaScript fadeIn.js (近 20 行)：</h3><pre id="7d78e0fc-7167-4f66-a7df-e8c83b05da39" class="code code-wrap"><code>lis = document.getElementsByTagName(&#x27;li&#x27;);
+for (i=0; i&lt;3; i++) {
+  lis[i].style.display = &#x27;none&#x27;;
+}
+
+for (i=0; i&lt;3; i++) {
+  fadeIn(lis[i]);
+}
+
+// fade in
+function fadeIn(el, display){
+  el.style.opacity = 0;
+  el.style.display = display || &quot;block&quot;;
+  (function fade() {
+    var val = parseFloat(el.style.opacity);
+    if (!((val += .01) &gt; 1)) {
+      el.style.opacity = val;
+      requestAnimationFrame(fade);
+    }
+  })();
+}
+</code></pre><h3 id="5f58c7b9-4a6b-4984-93b7-f972cd9c1847" class="">✶ jQuery fadeIn.js (1 行)：</h3><pre id="69523bef-b861-4672-bcf2-f9a685dd0b0f" class="code code-wrap"><code>$(&#x27;li:lt(3)&#x27;).hide().fadeIn(2000);
+</code></pre><h3 id="e7f998ee-b775-44d3-91f2-c8a54205fcd9" class="">∗ 再訪先前的練習</h3><h3 id="4016e665-6c86-4fac-a111-7bcb1a291504" class="">▸ String variable：將 string-variable.html 如下修改，並另存新檔為 string-variable2.html</h3><pre id="d83c092c-e65d-4a69-92d0-2703d5fc11ee" class="code code-wrap"><code>...
+&lt;/div&gt;
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/string-variable2.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="99051609-73aa-43d7-9462-ffd8e19eda79" class="">string-variable2.js</h3><pre id="6726360a-89a3-4efa-b3e9-1fbcee4f48fd" class="code code-wrap"><code>$(document).ready(function() {
+
+  var username = &#x27;親愛的顧客&#x27;;
+  var message = &#x27;歡迎看看我們最新推出的系列&#x27;;
+
+  $(&#x27;#name&#x27;).html(username);
+  $(&#x27;#note&#x27;).html(message);
+
+});
+</code></pre><h3 id="be817a20-aca2-4055-bcd7-721f2b857bce" class="">✶ document：JavaScript 的文件物件 (Document object)</h3><h3 id="69fabcb8-c126-4e9f-a809-e83161998540" class="">✶ $(document)：jQuery 的文件物件</h3><h3 id="1bd251c8-db3f-428f-b182-8d4af5d51222" class="">✶ .ready(...)：呼叫 jQuery 文件物件的方法，在文件就緒 (Ready，所有 HTML 元素均載入完畢) 後，執行 ready() 函式</h3><h3 id="9c7339bc-be74-4dae-8c6e-87c41a40e871" class="">✶ function() { ... }：匿名函式 (稍後第 3 章說明)</h3><h3 id="099c18c4-34e5-4b22-95a8-a915f15dd708" class="">▸ String with quotes：將 string-with-quotes.html 如下修改，並另存新檔為 string-with-quotes2.html</h3><pre id="da6d1b54-45ab-4438-b46d-008bd94ea4a7" class="code code-wrap"><code>...
+&lt;/div&gt;
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/string-with-quotes2.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="b280158e-8fbe-4be7-aa3c-8b27674117b8" class="">string-with-quotes2.js</h3><pre id="075bbebd-34e2-491e-8d75-62fe5b238312" class="code code-wrap"><code>$(document).ready(function() {
+
+  var title = &#x27;特殊顧客的特殊價格&#x27;;
+  var message = &#x27;&lt;a href=&quot;sale.html&quot;&gt;75折！&lt;/a&gt;&#x27;;
+
+  $(&#x27;#title&#x27;).html(title);
+  $(&#x27;#note&#x27;).html(message);
+
+});
+</code></pre><h3 id="fb018a9b-d8ba-408a-bc51-f58f6d38ca53" class="">▸ Numeric variable：將 numeric-variable.html 如下修改，並另存新檔為 numeric-variable2.html</h3><pre id="afa271e6-9f01-40ee-9f98-03a8c801b3fb" class="code code-wrap"><code>...
+&lt;/div&gt;
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/numeric-variable2.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="a94b1346-9850-42e4-afbc-b8ef5ff98533" class="">numeric-variable2.js</h3><pre id="004cd502-fc1c-4b7a-b7dd-83c92152f9d2" class="code code-wrap"><code>$(document).ready(function() {
+
+  var price = 50;
+  var quantity = 14;
+  var total = price*quantity;
+
+  $(&#x27;#cost&#x27;).html(&#x27;小計：$&#x27; + total);
+
+});
+</code></pre><h3 id="f58161f5-93f7-405b-8cf4-0f4965f2daf4" class="">✶ $(&#x27;#cost&#x27;).html(&#x27;小計：$&#x27; + total)：擷取 id 為 cost 的 HTML 元素，
+然後設定其 HTML 內容，JavaScript 在頁面尋找元素的模式和 CSS 相同，兩者相容因此廣受歡迎</h3><h3 id="44d69ae3-789d-49db-ad97-05669ffa51b6" class="">▸ Array literal：將 array-literal.html 如下修改，並另存新檔為 array-literal2.html</h3><pre id="992a5fa6-02dc-4d4c-8bb8-dcc3c9f0e8a8" class="code code-wrap"><code>...
+&lt;/div&gt;
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/array-literal2.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="f63b284d-d62a-47b5-bc0d-b23fe07c8f82" class="">array-literal2.js</h3><pre id="e6982ce5-3768-475a-8132-41c21b546481" class="code code-wrap"><code>$(document).ready(function() {
+
+  var colors = [&#x27;white&#x27;, &#x27;black&#x27;, &#x27;custom&#x27;];
+
+  $(&#x27;#colors&#x27;).html(colors[0]);
+
+});
+</code></pre><h3 id="e7bae57f-626a-4fd2-a7f0-697ac3d1febb" class="">▸ Array constructor：將 array-constructor.html 如下修改，並另存新檔為 array-constructor2.html</h3><pre id="00e67b3b-4c51-4ec4-a205-f7aceb765fc4" class="code code-wrap"><code>...
+&lt;/div&gt;
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/array-constructor2.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="b7342c55-6a14-4dc5-ba47-d895b4d12185" class="">array-constructor2.js</h3><pre id="db41003c-2243-4f4c-8660-43badc2c8667" class="code code-wrap"><code>$(document).ready(function() {
+
+  var colors = new Array(&#x27;white&#x27;, &#x27;black&#x27;, &#x27;custom&#x27;);
+
+  $(&#x27;#colors&#x27;).html(colors[0]);
+
+});
+</code></pre><h3 id="b7c419bc-de4f-4305-a2ae-c953c820a9e6" class="">▸ Arithmetic operator：將 arithmetic-operator.html 如下修改，並另存新檔為 arithmetic-operator2.html</h3><pre id="cb7fdacc-bf3d-44a7-8ae1-c15a21e99345" class="code code-wrap"><code>...
+&lt;/body&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/arithmetic-operator2.js&quot;&gt;&lt;/script&gt;
+...
+</code></pre><h3 id="ca60f431-ac09-4dbf-854e-c843968720fd" class="">arithmetic-operator2.js</h3><pre id="708c5191-361d-40dd-af6f-ab33488aaf72" class="code code-wrap"><code>$(document).ready(function() {
+
+  var subtotal = (13 + 1) * 5;
+  var shipping = 0.5 * (13 + 1);
+  var total = subtotal + shipping;
+
+  $(&#x27;#subtotal&#x27;).html(subtotal);
+  $(&#x27;#shipping&#x27;).html(shipping);
+  $(&#x27;#total&#x27;).html(total);
+
+});
+</code></pre><h3 id="6459ac68-a851-4925-ab42-efa37fc59c23" class="">▸ String operator：將 string-operator.html 如下修改，並另存新檔為 string-operator2.html</h3><pre id="fc2aee19-201a-4aee-8279-4fbe088508ec" class="code code-wrap"><code>...
+&lt;/div&gt;
+&lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/string-operator2.js&quot;&gt;&lt;/script&gt;
+...
+</code></pre><h3 id="d6c1b5e8-2f59-4017-b597-970be4c60b02" class="">string-operator2.js</h3><pre id="828e4dd5-de21-4452-b96a-9ab2eceeddb5" class="code code-wrap"><code>$(document).ready(function() {
+
+  var greeting = &#x27;您好，&#x27;;
+  var name = &#x27;張先生&#x27;;
+  var welcomeMessage = greeting + name + &#x27;!&#x27;;
+
+  $(&#x27;#greeting&#x27;).html(welcomeMessage);
+</code></pre></div></article></body></html>

@@ -1,0 +1,679 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>vi</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="fd5b9e52-3f7d-4a0e-8f9a-b6702919a80d" class="page sans"><header><h1 class="page-title">vi</h1></header><div class="page-body"><p id="42be06f2-e6a1-484e-b7b4-8820352ad37a" class="">vi</p><h3 id="75696b35-7e0e-4715-aefe-2b4d011d019b" class="">install</h3><pre id="48f657a1-1eee-4645-9457-89d8bb1efe79" class="code code-wrap"><code>git clone --depth=1 &lt;https://github.com/amix/vimrc.git&gt; ~/.vim_runtime
+sh ~/.vim_runtime/install_awesome_vimrc.sh
+</code></pre><h2 id="6bbafff4-bae3-4dd6-bfc9-1bfa75b6e3aa" class="">command</h2><h3 id="3492b2d4-580c-4a5d-949a-0fb48b6fa215" class="">Usual command in normal mode</h3><ul id="7d9e84f7-7dce-4b42-8e6f-be48bb79365b" class="bulleted-list"><li style="list-style-type:disc">hjkl :direct step</li></ul><ul id="65914657-edc0-41fb-a687-a199fc18a3ca" class="bulleted-list"><li style="list-style-type:disc">H,L :page up/down</li></ul><ul id="b0c6a7d3-3e99-4aab-8dee-929ffa4203c9" class="bulleted-list"><li style="list-style-type:disc">u :undo<ul id="56660bc6-a1e6-4de7-91e4-34fa4abe6e97" class="bulleted-list"><li style="list-style-type:circle">^r :redo</li></ul></li></ul><ul id="84c98504-3992-48bf-90fe-09d07937bf5d" class="bulleted-list"><li style="list-style-type:disc"><code>:q</code> :quit</li></ul><ul id="7be68f59-949f-4e4c-913f-f1718dc1b89f" class="bulleted-list"><li style="list-style-type:disc"><code>:w</code> :write</li></ul><ul id="28960abf-1648-4cc6-833f-a236a4cb1c9a" class="bulleted-list"><li style="list-style-type:disc">^f :find file</li></ul><ul id="cff42ec4-331f-487e-9e6f-7170276afbf3" class="bulleted-list"><li style="list-style-type:disc"><code>:terminal</code> : open a terminal window ( same ^w N )<ul id="3e7212ce-a071-4da7-a1e4-87ab0c9c8c57" class="bulleted-list"><li style="list-style-type:circle">^\ ^n :back to normail mode<ul id="45a6de11-4e30-4c7a-ba02-ebc7a5cbf5d1" class="bulleted-list"><li style="list-style-type:square">i : back to terminal mode</li></ul></li></ul><ul id="41119458-18d7-4fdd-b09a-dfb859e4748b" class="bulleted-list"><li style="list-style-type:circle"><code>^w &quot;&quot;</code> : paste</li></ul><ul id="d481f2b8-d6d3-4423-ad0a-39594ec39c64" class="bulleted-list"><li style="list-style-type:circle"><code>^w :</code> =goto command</li></ul></li></ul><ul id="b65a3df3-c18b-4a80-9bbd-6f73fc09cb7d" class="bulleted-list"><li style="list-style-type:disc">G :move to end of file<ul id="682cb587-ad2e-475c-b5dc-697729aa1aac" class="bulleted-list"><li style="list-style-type:circle">gg :move to begin of file</li></ul></li></ul><ul id="37f4d085-d39c-4829-b66e-38c9e2db54d9" class="bulleted-list"><li style="list-style-type:disc">:?, :/ =search backward/forward</li></ul><ul id="5677d983-adb3-41c7-9af8-b50cdb25c7ab" class="bulleted-list"><li style="list-style-type:disc">:%s/$A/$B/gc =replace $A to $B</li></ul><ul id="7d9fb267-55b1-424b-a715-7f22e00eb6b8" class="bulleted-list"><li style="list-style-type:disc">^u,^d :page up / down<ul id="81e55af6-432c-474d-bffc-147e5e43cba3" class="bulleted-list"><li style="list-style-type:circle">gg :goto top</li></ul><ul id="eeb79719-296f-4d46-b094-bb949c105ed1" class="bulleted-list"><li style="list-style-type:circle">G :goto end of file</li></ul></li></ul><ul id="b44f4af9-26d5-4fac-a0ca-1365f7e03623" class="bulleted-list"><li style="list-style-type:disc"><code>:#</code> :jump to line #</li></ul><h3 id="0df16004-b626-4083-aef5-769b99cd0876" class="">Insert mode</h3><ul id="eaf7cad5-f9e5-4e95-b046-3f3dfdc7fad4" class="bulleted-list"><li style="list-style-type:disc">alt-u :undo</li></ul><ul id="49ddc78a-63b9-4184-b559-37d5de6cbbb7" class="bulleted-list"><li style="list-style-type:disc">alt-jkhl :move direct</li></ul><h3 id="b3e809e8-9a8b-4c93-a9aa-b3d21edb405d" class="">Selection mode :Delete ,copy &amp; paste</h3><ol type="1" id="217132b0-7356-4311-81be-1f9e810bc81b" class="numbered-list" start="1"><li>v :enter selection mode<ol type="a" id="70472d2a-df1e-4d3d-aa12-3718545903d6" class="numbered-list" start="1"><li>V :enter linewise selection mode</li></ol><ol type="a" id="543a35e0-aa92-465d-ab33-3f1fcf47f5f0" class="numbered-list" start="2"><li>^v : enter block selection mode</li></ol></li></ol><ol type="1" id="b4ce3f3b-23f8-4972-85b9-a8c732bc3e28" class="numbered-list" start="2"><li>h, j, k and l :to move left, down, up, right respectively</li></ol><ol type="1" id="d66e174c-8541-43bb-b00a-dd1d58be5d0d" class="numbered-list" start="3"><li>d :cut (delete)</li></ol><ol type="1" id="96f7cfd6-6618-4cdb-835a-91dd2d03aa96" class="numbered-list" start="4"><li>y :copy (yank)</li></ol><ol type="1" id="cda02b2c-e852-4361-94fd-87bf58e43e4b" class="numbered-list" start="5"><li>p :paste</li></ol><ul id="38328827-69b7-40be-b428-75f862470ffc" class="bulleted-list"><li style="list-style-type:disc">dd :delete one line</li></ul><ul id="b0463518-e47e-4ddf-ba75-1829c9c1b946" class="bulleted-list"><li style="list-style-type:disc">d#d :delete # lines</li></ul><ul id="ea543491-709e-4e71-b7bb-4599b7cb8b0c" class="bulleted-list"><li style="list-style-type:disc">x :detete char</li></ul><h3 id="f26ef1c2-5bcc-46ed-93f7-1f87967e9d06" class="">Split</h3><ul id="a91f16f8-c39e-4a81-a5b5-fb5f600fe37f" class="bulleted-list"><li style="list-style-type:disc">^W,<ul id="ef42a94a-3b01-4b63-82f4-63f802e71050" class="bulleted-list"><li style="list-style-type:circle">s :create a horizontal split.</li></ul><ul id="0a89094d-37f6-4cfc-8b48-1b9421e7cc4a" class="bulleted-list"><li style="list-style-type:circle">v :create a vertical split.</li></ul><ul id="e0261281-e8dd-4131-8dd4-adde6625bb8e" class="bulleted-list"><li style="list-style-type:circle">jkhl :switch split<ul id="9818f8f9-76f3-4a7a-adec-23029495e3be" class="bulleted-list"><li style="list-style-type:square">also ^jkhl same</li></ul><ul id="e4b1321d-d430-4dcf-a813-8f3312eb0df6" class="bulleted-list"><li style="list-style-type:square">also direction key</li></ul></li></ul><ul id="14e823c4-3123-4f65-a3e5-d5efe0916bc6" class="bulleted-list"><li style="list-style-type:circle">,+ :horizental smaller/bigger</li></ul><ul id="f5f61bca-7f33-49f2-8ea1-c4f1dce50a07" class="bulleted-list"><li style="list-style-type:circle">&lt;,&gt; :vertical smaller/bigger</li></ul><ul id="a4662e52-06c9-4afa-80cc-b712f7df69dd" class="bulleted-list"><li style="list-style-type:circle"><code>:resize x</code> :horizental size change<ul id="10f4ec1a-74b3-4500-abaa-b39911f2993a" class="bulleted-list"><li style="list-style-type:square"><code>res +/-x</code> : add or decress horizental size</li></ul></li></ul><ul id="d37ee7ea-3f16-4680-b8ab-910c679bf2b0" class="bulleted-list"><li style="list-style-type:circle"><code>:vertical resize x</code> :vertical size change to x<ul id="72c3499d-b907-4fae-9cfb-831003c2d14d" class="bulleted-list"><li style="list-style-type:square"><code>:vertical resze +x</code> : vertical size add x</li></ul></li></ul><ul id="793f64f9-3e5b-4793-a82e-45e32ae2ef79" class="bulleted-list"><li style="list-style-type:circle">| :maximum vertical</li></ul><ul id="73873fb1-bef0-4df6-ba46-fa86c6016bd5" class="bulleted-list"><li style="list-style-type:circle">_ :maximum horizental</li></ul><ul id="c903bdca-e97e-44a4-9253-22238392f9d8" class="bulleted-list"><li style="list-style-type:circle">= :equal all size</li></ul><ul id="5a895292-65e6-4a5d-888a-e31324f78b81" class="bulleted-list"><li style="list-style-type:circle">r,R :swap</li></ul><ul id="770ce930-323f-4815-8d07-e4cca8e68096" class="bulleted-list"><li style="list-style-type:circle">T :current to new window</li></ul><ul id="ecd3eccf-28cf-47c7-9f62-a763d48a1ff1" class="bulleted-list"><li style="list-style-type:circle">c :close split</li></ul><ul id="adae9575-2256-421b-a16d-d97f267094b9" class="bulleted-list"><li style="list-style-type:circle">o :close all split except current</li></ul></li></ul><h3 id="d110b22d-a1f6-4c5c-9fcb-94abd930d268" class="">Tab</h3><ul id="db418e6e-7495-46cb-aa1e-c53671002932" class="bulleted-list"><li style="list-style-type:disc">:tabe =create new tab with $file<ul id="512d080f-82bd-430c-be72-d63c0b4a8a68" class="bulleted-list"><li style="list-style-type:circle">:tabe $FileName</li></ul></li></ul><ul id="e92efdd2-f7f0-4ebb-8f02-f81878aa8d83" class="bulleted-list"><li style="list-style-type:disc">gt :next tab</li></ul><ul id="74a4222c-b8e2-4a53-8cf8-2e035c7ea474" class="bulleted-list"><li style="list-style-type:disc">gT :previous tab</li></ul><ul id="1fff1b1c-46c7-4518-9a9e-8a67c2bf90f5" class="bulleted-list"><li style="list-style-type:disc">#gt :goto # tab</li></ul><ul id="22c499b0-9d73-413f-9d3b-ce505d167ce8" class="bulleted-list"><li style="list-style-type:disc">^w c :close</li></ul><ul id="12b7a349-b206-4ca4-b97f-a6d0130d1650" class="bulleted-list"><li style="list-style-type:disc">:tab ball =show all buffer in tab</li></ul><h3 id="5a751709-e1ca-4d81-a226-37bba4094438" class="">New &amp; Open</h3><ul id="94024427-4eeb-4315-b8f8-de2faa9e0c56" class="bulleted-list"><li style="list-style-type:disc">:e $FileName =edit file</li></ul><ul id="962b71f7-a5df-409c-9e0d-b839f805f73f" class="bulleted-list"><li style="list-style-type:disc">:new =create a new file</li></ul><ul id="91b1ed77-139a-4ec4-87b5-599cd92816af" class="bulleted-list"><li style="list-style-type:disc">:ls =list all opened files</li></ul><ul id="0b0d27f0-a1dd-4a65-ad0f-e8576109252b" class="bulleted-list"><li style="list-style-type:disc">:ls will show your open buffers.<ul id="fee64d07-4e21-4c35-81ed-0e3e96283d27" class="bulleted-list"><li style="list-style-type:circle">:buffers =as :ls</li></ul></li></ul><ul id="ed569377-6d54-44b7-ac07-a6417bdae693" class="bulleted-list"><li style="list-style-type:disc">:b $number =open the specified buffer in the current pane.</li></ul><ul id="bb76d6b2-0673-4c2a-91b4-d42324e1beea" class="bulleted-list"><li style="list-style-type:disc">:b $FileNamePrefix =open relative file buffer</li></ul><ul id="65c254f0-f65d-45a0-a1b6-000759507412" class="bulleted-list"><li style="list-style-type:disc">:bn =buffer next</li></ul><ul id="db0aae01-0172-4099-bef7-3ce8a3f767a9" class="bulleted-list"><li style="list-style-type:disc">:bp =buffer previous</li></ul><h3 id="50d6efc0-571b-47d9-ba15-593fd60a2af3" class="">Search &amp; Replace(substitute)</h3><ul id="f1b06039-1b6a-4d07-9c53-078cfe5fe0a7" class="bulleted-list"><li style="list-style-type:disc">:s/foo/bar/g :substitute
+Find each occurrence of &#x27;foo&#x27; (in the <em><strong>current line only</strong></em>), and replace it with &#x27;bar&#x27;.</li></ul><ul id="9af6602f-345a-4cd1-a260-c594009985f1" class="bulleted-list"><li style="list-style-type:disc">:%s/foo/bar/g
+Find each occurrence of &#x27;foo&#x27; (in <em><strong>all</strong></em> lines), and replace it with &#x27;bar&#x27;.</li></ul><ul id="af67323c-36a5-4eef-aa42-bfeb4d6f2714" class="bulleted-list"><li style="list-style-type:disc">:%s/foo/bar/gc
+Change each &#x27;foo&#x27; to &#x27;bar&#x27;, but <em><strong>ask</strong></em> for confirmation first.</li></ul><ul id="8f738a24-939d-4446-8885-46415262fdbd" class="bulleted-list"><li style="list-style-type:disc">:%s/\&lt;foo\&gt;/bar/gc
+Change only whole words <em><strong>exactly matching</strong></em> &#x27;foo&#x27; to &#x27;bar&#x27;; ask for confirmation.</li></ul><ul id="e56527d1-b8b7-48ec-9bb6-a473f8847df2" class="bulleted-list"><li style="list-style-type:disc">:%s/foo/bar/gci
+Change each &#x27;foo&#x27; (<em><strong>case insensitive</strong></em> due to the i flag) to &#x27;bar&#x27;; ask for confirmation.</li></ul><ul id="e0dc3b29-d7b1-451f-a0b5-ec00a8a6c325" class="bulleted-list"><li style="list-style-type:disc">:%s/foo\c/bar/gc is the same because \c makes the search <em><strong>case insensitive</strong></em>.
+This may be wanted after using :set noignorecase to make searches case sensitive (the default).</li></ul><ul id="8e096077-c057-4f17-83ae-8b46916bd91b" class="bulleted-list"><li style="list-style-type:disc">:%s/foo/bar/gcI
+Change each &#x27;foo&#x27; (case sensitive due to the I flag) to &#x27;bar&#x27;; ask for confirmation.</li></ul><ul id="c760f566-6d79-41d5-8499-28c234e5a88a" class="bulleted-list"><li style="list-style-type:disc">:%s/foo\C/bar/gc is the same because \C makes the search case sensitive.
+This may be wanted after using :set ignorecase to make searches case insensitive.</li></ul><h3 id="cb8122b2-96bb-4b64-809b-aa80170c119b" class="">You Complete Me</h3><p id="6dd18bce-f8ee-496f-861b-8728a3689d6a" class="">In insert mode</p><ul id="b51ca296-dbf4-48c4-bae7-fad12e8b3c42" class="bulleted-list"><li style="list-style-type:disc">^p :basic tab completion, pulling from a variety of sources</li></ul><ul id="c9c75816-37f4-495b-b4c2-7e126b5aeb99" class="bulleted-list"><li style="list-style-type:disc">^n :the same as ^P but backward</li></ul><ul id="021775b5-c6e8-41cf-b2d7-05917de121db" class="bulleted-list"><li style="list-style-type:disc">^X ^L	:whole line completion</li></ul><ul id="f03abda7-124e-44af-b96e-ea614245f878" class="bulleted-list"><li style="list-style-type:disc">^X ^O	:syntax-aware omnicompletion</li></ul><h3 id="978b3be2-a02b-4960-9e16-a00883d29e92" class="">NerdTree</h3><ul id="fdaa63d3-de7e-40b3-811d-d6c6e53cf136" class="bulleted-list"><li style="list-style-type:disc">,nn :toggle tool</li></ul><ul id="e135dba5-7ff9-480f-8e3f-bbb27b5a0bed" class="bulleted-list"><li style="list-style-type:disc"><code>:NERDTree</code> :open this tool</li></ul><ul id="7d1afbf8-4136-41ae-94cd-61fd307863fe" class="bulleted-list"><li style="list-style-type:disc"><code>:NERDTreeClose</code> :close</li></ul><ul id="ada20875-5e51-4ec7-af25-0e1f07be2405" class="bulleted-list"><li style="list-style-type:disc">o :open the file in a new buffer or open/close directory.</li></ul><ul id="74c94f9c-ffb3-4eb5-b899-2a0f63188228" class="bulleted-list"><li style="list-style-type:disc">t :open the file in a new tab.</li></ul><ul id="8acaaf8d-1147-420e-8280-f541d495d5dc" class="bulleted-list"><li style="list-style-type:disc">i :open the file in a new horizontal split.</li></ul><ul id="f1638d2a-1de3-4cc9-bdc7-3ab123c983db" class="bulleted-list"><li style="list-style-type:disc">s :open the file in a new vertical split.</li></ul><ul id="b76e553f-c99b-4a76-8495-a8a2ef1fac4e" class="bulleted-list"><li style="list-style-type:disc">p :go to parent directory.</li></ul><ul id="1e929acf-9631-420c-a61b-cc042cc922af" class="bulleted-list"><li style="list-style-type:disc">r :refresh the current directory.</li></ul><ul id="88766ab4-d5a5-4fe2-98cd-2b303a3e5dc9" class="bulleted-list"><li style="list-style-type:disc">I: Toggle hidden files</li></ul><ul id="cba10f47-3768-48c0-bb2f-d9b7d9324a14" class="bulleted-list"><li style="list-style-type:disc">m: Show the NERD Tree menu</li></ul><ul id="9481be75-6d29-4f37-bda8-fb5120f84e13" class="bulleted-list"><li style="list-style-type:disc">R: Refresh the tree, useful if files change outside of Vim</li></ul><ul id="69b02966-e990-4078-afa9-c9d4f650e591" class="bulleted-list"><li style="list-style-type:disc">?: Toggle NERD Tree&#x27;s quick help</li></ul><h3 id="dab46858-30e1-49b7-96f2-8c845beafcef" class="">Other</h3><ul id="7e1e6e1b-66de-4234-8cfb-c49c840e5cfb" class="bulleted-list"><li style="list-style-type:disc">^- :smaller font</li></ul><ul id="d6638ce8-6480-47a6-a929-117e6117d3f1" class="bulleted-list"><li style="list-style-type:disc">^+ :lager font</li></ul><ul id="64b460f7-2575-4284-8dfe-e8ed84530226" class="bulleted-list"><li style="list-style-type:disc">:w =write</li></ul><ul id="5b5bc215-0f5f-4ff9-8259-280dcfcd5e57" class="bulleted-list"><li style="list-style-type:disc">:q =quit</li></ul><ul id="04f3ceb5-5275-4ec4-9cc5-e4cdd7cbccb9" class="bulleted-list"><li style="list-style-type:disc">:map : show all mappings</li></ul><ul id="512242c7-6d64-4653-b82f-8f135afebc17" class="bulleted-list"><li style="list-style-type:disc">:nmap for normal mode mappings</li></ul><ul id="08112b31-2afa-4bf6-a6e3-fbbaeb54da91" class="bulleted-list"><li style="list-style-type:disc">:vmap for visual mode mappings</li></ul><ul id="19ae25f1-bdb2-40ec-b2c6-85d2e19fbfac" class="bulleted-list"><li style="list-style-type:disc">:imap for insert mode mappings</li></ul><h3 id="7e353ab4-f66e-42b4-9693-f5377332a04d" class="">More in .vimrc</h3><ul id="c41c4434-e9a3-4977-8cc9-e246d36430d5" class="bulleted-list"><li style="list-style-type:disc"><code>set nu</code> :show line number</li></ul><h2 id="6888ad6a-9985-4dbd-97e0-304c6358946c" class="">more</h2><p id="27f3ba68-78fd-4a34-b9d0-54058ce3d0aa" class=""><a href="https://www.protectedtext.com/viprwp">https://www.protectedtext.com/viprwp</a></p></div></article></body></html>

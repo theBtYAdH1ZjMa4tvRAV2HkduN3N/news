@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Andriod Studio 從入門到進入狀況</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="efe15bb9-72e4-4f9a-9828-8d2ba4531ff0" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🌉</span></div><h1 class="page-title">Andriod Studio 從入門到進入狀況</h1></header><div class="page-body"><ol type="1" id="174b67dc-14f4-47c0-a0f3-0cb5161359d6" class="numbered-list" start="1"><li>沒學過Android程式，對Android程式有興趣的人</li></ol><ol type="1" id="3ab61ee5-793d-4a5b-989b-b7a7424f6f05" class="numbered-list" start="2"><li>稍微學過Android程式，想要重新再加強基本觀念的人</li></ol><ol type="1" id="654b3ae8-c8e1-4b4e-b59d-dd5155970304" class="numbered-list" start="3"><li>我只是路過，只不過想看看而已，哪那麼多理由？</li></ol><p id="881a7111-120d-4986-8c0b-9392f43b8f88" class="">不管是什麼樣的人，如果對我的文章有疑問或想要進一步補充的，都歡迎在下面留言一起討論學習。</p><ul id="86dadf81-2ad4-4db6-b55b-d7cdd41dd045" class="bulleted-list"><li style="list-style-type:disc">-----------------------------可愛的分隔線又來了------------------------------</li></ul><p id="0d10cb2a-b17b-4929-a58f-d851d517d429" class="">接下來進入正題了，要學Android應用程式，第一件事當然就是要先安裝程式，Android官方建議寫Android程式要用Android Studio編寫，於是今天我們就來下載安裝Android Studio吧！</p><p id="392df3d4-8991-44ff-8681-c60e5a5bf94c" class="">要安裝Android Studio主要需要安裝下列三者1.安裝 Java 開發工具包(Java Development Kit , JDK)2.安裝 Android Studio3.安裝Android 軟體開發套件 (Software Development Kit, SDK)</p><p id="f565e7de-ef52-425f-8b1f-3b0aa7ccac6a" class="">1.安裝 Java 開發工具包(Java Development Kit , JDK)</p><ul id="77e9bbb7-9d53-4d49-a64b-1384fc0f0707" class="bulleted-list"><li style="list-style-type:disc">至<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Oracle官網</a>下載適當的JDK版本，點選【DOWNLOAD】<figure id="9de85566-ba41-4c14-bb69-d050c98b45a4" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/20105694KldR7GvVCe.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/20105694KldR7GvVCe.png"/></a></figure></li></ul><ul id="ba72b54b-6899-47b5-b723-a8442460feda" class="bulleted-list"><li style="list-style-type:disc">選擇接受(Accept License Agreement)，以Windows作業系統為例，下載32或64位元的安裝檔Windows x86 = 32位元Windows x64 = 64位元如果不知道自己電腦的是多少位元，把滑鼠移到「我的電腦」點選右鍵可以看到<figure id="11861c9f-2f0b-4df6-ae8e-fbdd45edc39e" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/20105694Tpvcz20gsK.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/20105694Tpvcz20gsK.png"/></a></figure></li></ul><ul id="3c336bd4-e04b-4503-94ae-32c551d45060" class="bulleted-list"><li style="list-style-type:disc">根據作業系統，下載下來安裝即可</li></ul><p id="468cc519-9c7e-4348-98b9-290c57caf37e" class="">2.安裝 Android Studio</p><ul id="a1ceb6b8-0ef4-4b60-bbbb-0c38aadf0946" class="bulleted-list"><li style="list-style-type:disc">到 <a href="https://developer.android.com/studio/index.html">Android Developer官網</a> 下載Android Studio<figure id="f744862e-0103-4ef1-aa23-afe3f41fdf6a" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/20105694lhQD9Aw1Xf.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/20105694lhQD9Aw1Xf.png"/></a></figure></li></ul><ul id="f994380e-96ff-4aa8-9436-87253e857531" class="bulleted-list"><li style="list-style-type:disc">你必須勾選已閱讀並同意授權條款, 然後才能按一下 Download Android Studio 鈕, 就會開始下載檔案。<figure id="833bbad5-c64a-42c3-93dd-4e2dc008e103" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/20105694mDptE5cTz3.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/20105694mDptE5cTz3.png"/></a></figure></li></ul><ul id="571ed26f-ff12-436f-a709-2e956d7efb75" class="bulleted-list"><li style="list-style-type:disc">執行下載的Android Studio安裝檔，接著一直點擊「Next 」直到下圖步驟，設定Android Studio 與 Android SDK 的安裝路徑，點擊「Next」。<figure id="d2da0609-2c4f-4f9c-b3fd-3623ef9162eb" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/20105694xbk5OjjBNc.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/20105694xbk5OjjBNc.png"/></a></figure></li></ul><ul id="f2409c29-9488-4937-8f93-5aada2fdfbcd" class="bulleted-list"><li style="list-style-type:disc">設定 Android Studio 在開始功能表中的項目名稱，使用預設即可，點擊「Install」進行安裝。<figure id="8a20162a-f500-4055-9ab4-0e448fbb9cf4" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/20105694pilLklUugx.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/20105694pilLklUugx.png"/></a></figure></li></ul><ul id="3bec41fb-1d0c-4e97-8546-e72420ad70c0" class="bulleted-list"><li style="list-style-type:disc">安裝完成後，點選Next就會進入下面的畫面，可勾選「Start Android Studio」，點擊「Finish」後會直接啟動 Android Studio。<figure id="6b1805c9-8711-4d68-8888-526595a32a12" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/20105694EynMp10ufh.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/20105694EynMp10ufh.png"/></a></figure></li></ul><ul id="209f0608-665a-4c68-86e7-9fcdef32be97" class="bulleted-list"><li style="list-style-type:disc">第一次執行 Android Studio 時會提示，是否要從以前的版本導入設置，沒有的話使用預設，點擊「OK」<figure id="d04d2a99-8bed-4ccc-adb7-443b93048c75" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/20105694L7Rt9eGOoc.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/20105694L7Rt9eGOoc.png"/></a></figure></li></ul><p id="d13ca78d-96a4-41a1-b6a3-b6d02c0e26ea" class="">3.安裝Android 軟體開發套件 (Software Development Kit, SDK)</p><ul id="a7e140a5-2b91-4499-a5b8-4ee817c6625b" class="bulleted-list"><li style="list-style-type:disc">看到這畫面代表你Android Studio已經安裝好了，接著要開始安裝Android SDK，繼續點擊【Next】<figure id="be67d907-5dfa-4fd1-9c97-dcdf4932d426" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/20105694OUXQehuTwH.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/20105694OUXQehuTwH.png"/></a></figure></li></ul><ul id="962c617b-ac38-471c-9c21-4930ad68a623" class="bulleted-list"><li style="list-style-type:disc">安裝類型選擇「Standard」，點擊【Next】<figure id="ff146439-3f7e-449e-b754-ccae5e8cb1ba" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/201056947FBfRQ5Lhk.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/201056947FBfRQ5Lhk.png"/></a></figure></li></ul><ul id="39481358-4b4b-4ffa-911f-c27e47cf876e" class="bulleted-list"><li style="list-style-type:disc">選擇編輯器的樣式，這是新版的Andriod Studio才有</li></ul><ul id="392afd2c-f153-43e9-a54f-a6eca73a6749" class="bulleted-list"><li style="list-style-type:disc">原本的畫面(點擊白色區域的畫面)<figure id="b070c37b-d710-45d5-be93-30fb6b6f822d" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/20105694PvkTDS0J4W.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/20105694PvkTDS0J4W.png"/></a></figure></li></ul><ul id="c476e55b-3ed6-48c9-b52b-8b72cd50af42" class="bulleted-list"><li style="list-style-type:disc">點擊黑色區域的畫面<figure id="2dc5274a-8eb0-4330-9142-b8043f3fb023" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/20105694hCMwGlkeHR.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/20105694hCMwGlkeHR.png"/></a></figure></li></ul><ul id="25d8c8fe-73b2-4f63-98af-1349b0eb80dd" class="bulleted-list"><li style="list-style-type:disc">選好後點選Next進入以下畫面，點選Finish按鈕<figure id="e5726eec-d5b1-4d0d-aebf-8081296781da" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/20105694Jo0j6UIJv2.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/20105694Jo0j6UIJv2.png"/></a></figure></li></ul><ul id="0a488bcb-bac3-4c8e-b478-6e60cc98a938" class="bulleted-list"><li style="list-style-type:disc">接著會自動開始下載Android SDK相關套件（只會下載最新版），這邊等待時候取決於你的網路速度。<figure id="43ee1b92-f6ee-4d35-9313-bf3eb3cb8bf0" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/20105694uuLoW8tMSC.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/20105694uuLoW8tMSC.png"/></a></figure></li></ul><ul id="7ad9f881-dad1-487b-b0b9-87d420e71b9c" class="bulleted-list"><li style="list-style-type:disc">點選Show Details會顯示下載的檔案名稱，當Android SDK下載完畢後最下方會顯示「Done」，接著點擊「Finish」<figure id="186d0e7f-4092-461f-9350-acdc1d1ed6b9" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181007/20105694g0HeiOvg3p.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181007/20105694g0HeiOvg3p.png"/></a></figure></li></ul><p id="3bacad27-581d-49c0-af82-f2e40fd46400" class="">參考資料<a href="http://learnexp.tw/%E3%80%90android%E3%80%91android-studio%E5%AE%89%E8%A3%9D%E6%95%99%E5%AD%B8-%E5%BE%9E0%E5%88%B01/">【Android】模擬器Android Studio安裝教學 從0到1</a></p><ul id="59c19120-2a5c-4c46-9651-11ccf43e2a57" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10200176#reply">留言</a></li></ul><ul id="732fda31-4b9d-4088-9d1f-84cf56516a9c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/users/login">追蹤</a></li></ul><ul id="1d9fb1f5-29a7-46f5-85fd-51597eee7a9c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/users/login">檢舉</a></li></ul><ul id="54aacf08-c9ce-4615-a972-ed888bcc2024" class="bulleted-list"><li style="list-style-type:disc"></li></ul><ul id="deb8d260-4ec7-4265-a0fa-3ae5a068b56e" class="bulleted-list"><li style="list-style-type:disc"></li></ul><ul id="a02e6968-ddd9-46ad-b50a-c4c07c33cf87" class="bulleted-list"><li style="list-style-type:disc"></li></ul><p id="72d5d521-a7ff-4412-9fd7-2fa831e337f9" class=""><a href="https://ithelp.ithome.com.tw/articles/10200150"><strong>上一篇</strong></a><a href="https://ithelp.ithome.com.tw/articles/10200150">[Day 00] 前言 - 心情隨筆</a></p><p id="b088b110-a650-4c25-ae88-77b05d9d4d1f" class=""><a href="https://ithelp.ithome.com.tw/articles/10200466"><strong>下一篇</strong></a><a href="https://ithelp.ithome.com.tw/articles/10200466">[Day 02] 我的第一個Android程式 - Hello Android!</a></p><p id="8c09f70a-635c-4dc6-aee3-85363866ec68" class=""><strong>系列文</strong></p><p id="a6031e00-131c-41c3-b67e-791f257ee8aa" class=""><a href="https://ithelp.ithome.com.tw/users/20105694/ironman/1642"><strong>[Andriod] Andriod Studio 從入門到進入狀況</strong></a> 共 33 篇</p><p id="fed14194-836b-47ba-858e-ba3c8d552b59" class=""><strong>目錄</strong></p><p id="700d0945-9c37-401e-b828-2a31b35147eb" class=""><a href="https://ithelp.ithome.com.tw/rss/series/1642">RSS系列文</a></p><p id="041eb2df-7069-40cb-85a2-aaa9f52da1f7" class=""><a href="https://ithelp.ithome.com.tw/users/login">訂閱系列文</a></p><p id="204279fd-19d0-4286-9bef-7a635b13c49b" class="">141 人訂閱</p><ol type="1" id="a5bbdc17-f08d-4bf0-a03b-5ba8ee13ce4f" class="numbered-list" start="1"><li>29<a href="https://ithelp.ithome.com.tw/articles/10207667">[Day 28] 我的第一個Android程式 - BMI程式設計(十七) 從其他頁面帶資料回來</a></li></ol><ol type="1" id="813c33eb-dd73-4e7e-a23a-aedcacca1ecc" class="numbered-list" start="2"><li>30<a href="https://ithelp.ithome.com.tw/articles/10207911">[Day 29] 我的第一個Android程式 - BMI程式設計(十八) 從其他頁面帶資料回來(二)</a></li></ol><ol type="1" id="a841aeaf-d29f-4a06-adc3-57bea254e030" class="numbered-list" start="3"><li>31<a href="https://ithelp.ithome.com.tw/articles/10208200">[Day 30] Android程式設計完結篇 - 改變API版本的方式(一)</a></li></ol><ol type="1" id="a1b5681f-533c-415c-8374-8f5e96d1c45e" class="numbered-list" start="4"><li>32<a href="https://ithelp.ithome.com.tw/articles/10208404">[Day 31] Android程式設計完結篇 - 改變API版本的方式(二)</a></li></ol><ol type="1" id="682ec7ae-1e75-4adf-b0ea-a7b76d66ecae" class="numbered-list" start="5"><li>33<a href="https://ithelp.ithome.com.tw/articles/10208611">[Day 32] Android程式設計真的完結篇 - 來個閒聊結束吧</a></li></ol><p id="a2b32949-7461-474c-86e5-51a054e9567c" class=""><a href="https://ithelp.ithome.com.tw/users/20105694/ironman/1642">完整目錄</a></p><p id="e1683c35-82f2-433e-a8ab-3f0bbfb0394d" class=""><a href="https://ithelp.ithome.com.tw/users/20105694/ironman/1642">[Andriod] Andriod Studio 從入門到進入狀況</a></p></div></article></body></html>

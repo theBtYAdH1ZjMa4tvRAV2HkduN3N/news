@@ -1,0 +1,813 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>[ Day 6 ] 初探設計模式 - 深入工廠、策略與單例模式</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9757c5c3-22ae-49a0-b5ae-0d66903258c4" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🪵</span></div><h1 class="page-title">[ Day 6 ] 初探設計模式 - 深入工廠、策略與單例模式</h1></header><div class="page-body"><p id="7955370b-2833-477f-a820-383cc4f8dcdb" class="">昨天討論了單例模式，發現了一些事情，在不同語言實現同樣設計模式中，非常有可能遇到個別的特殊問題，但其中需要注意的基礎是一樣的，因此對於語言的熟悉程度，以及所選擇的語言，很容易的會引響到我們在程式撰寫的時候的思考模式。</p><p id="6562796e-e411-4dde-b9c2-a56b7afac003" class="">今天稍微複習一下我們前幾天學習到的三種模式，他們的定義和應用場景</p><ul id="58f677a3-3848-4c22-9312-994255ab3f65" class="bulleted-list"><li style="list-style-type:disc">工廠模式<ul id="47ac28a3-d8cd-4e4e-9b4c-0edba69ae6f4" class="bulleted-list"><li style="list-style-type:circle">主要的角色有<code>工廠</code>和<code>產品</code>。</li></ul><ul id="3c2175d7-8aab-4df0-988e-17ee8f975022" class="bulleted-list"><li style="list-style-type:circle">利用一個工廠的開放給<code>想要商品的人</code>。</li></ul><ul id="75c9d1b7-20db-4f13-ba91-a726de242175" class="bulleted-list"><li style="list-style-type:circle">使用者需要透過工廠取得商品。</li></ul></li></ul><ul id="8f7f03a4-5f0a-42cf-9e84-50ca0d3714cf" class="bulleted-list"><li style="list-style-type:disc">策略模式<ul id="e639100b-f2bd-43cf-9609-6676c7d8a8d7" class="bulleted-list"><li style="list-style-type:circle">將一系列演算法封裝起來。</li></ul><ul id="6db55338-5564-420f-9f18-f9bb8f0fcd76" class="bulleted-list"><li style="list-style-type:circle">使用者可以<code>根據狀況選擇自己需要的演算法</code>。</li></ul></li></ul><ul id="8f5a4439-7f4f-49e3-a12a-a566a7d6d899" class="bulleted-list"><li style="list-style-type:disc">單例模式<ul id="bf997abc-4e5b-4856-9abf-8352ad25bdc9" class="bulleted-list"><li style="list-style-type:circle">一個單一的類別。</li></ul><ul id="ab0ef148-b7bd-4826-9153-e00deddd1849" class="bulleted-list"><li style="list-style-type:circle">確保只有一個實例被創建。</li></ul><ul id="e0a4446f-fde1-43c9-931d-386ffdde3e23" class="bulleted-list"><li style="list-style-type:circle">使用者透過<code>開放的方法</code>取得該實例。</li></ul></li></ul><blockquote id="83cb576f-7800-43e6-8c81-5abd5eb39018" class="">題外話：關於UML類別圖。可能有些人覺得奇怪怎麼都沒有畫出類別圖之類的，以我本身的經驗來說，在之前也有斷斷續續學習關於設計模式相關的架構、UML圖、定義解釋，甚至也看過實現的code，但是的掌握也沒有非常的好。後來換了種方式學習，了解定義和運用場景後，再經由寫程式碼的過程更深入的內化，這時候回去看類別圖，會有「啊～原來如此～」的感受。(抽象的東西看了自以為懂了，後來才覺得遠遠不足啊)</blockquote><p id="727537e4-c283-455f-9e55-4d54259da15c" class="">另外在學習了設計模式之後，當然會希望能夠用到現有的專案中，會找機會透過各種方式運用，這時候非常有可能會出現<code>過度設計(Over Design)</code>的狀況，在不需要的狀況下使用設計模式，很有可能會花很多時間，實作出一個可以滿足各種狀況的程式碼，甚至用了錯誤的模式在不適合的狀況下（<del>＝浪費時間</del>）。</p><blockquote id="d45d70f0-bac4-4b9e-9259-3b515092fe83" class="">相反的為了求快而不顧程式碼的品質，就會累積下程式債。有時候為了快速開發需求程式債是必要之惡，因為有些需求是有時效性的（在商業上或系統重大bug），如果慢了可能會導致重大損失，這時候勇敢欠債，未來還債也是必要的選擇！（如果你是能夠瞬間設計的大神等級當然可以不用欠債也在時限內開發完成，但相信只有少數人能達到...）</blockquote><p id="05c07aa0-4b92-4f81-aa2a-86f9f274287a" class="">最後還是要寫一些程式碼當成練習</p><blockquote id="ec6dfa28-805a-4623-9b00-39f6f8bd6389" class="">現在飲料店常常特價，但是有各種特價方式，悠遊卡特價、單品特價、買一送一、加五元多一件之類的...，有沒有辦法漂亮實現？</blockquote><p id="1c4cd0ed-54fa-42a7-b7ba-1e2dd04eba24" class="">分析一下特價的種類，悠遊卡特價是結帳方式的特價，因此應該是屬於<code>結帳策略的一種</code>，結帳的策略應該有很多種（悠遊卡、現金、各種支付....），所以這邊用策略模式，另外單品特價、買一送一應該是屬於<code>商品屬性之一</code>，可以做設定的特價策略，策略的種類應該也有限，也是策略模式的樣子，那這樣子在結帳和商品可以用同樣的介面實現。</p><blockquote id="2fece3d7-dae2-49e4-a680-22fe535384a0" class="">關於特價策略三種，減價、打折、不折價。</blockquote><pre id="6d9d7bb4-183a-4087-9e45-4ae3bce440a6" class="code code-wrap"><code>//折價策略的介面public abstract class IDiscountStrategy {
+
+    double discount;
+
+    private IDiscountStrategy(){}
+
+    public IDiscountStrategy(double discount){
+        this.discount = discount;
+    }
+
+    abstract public double getValue(double value);
+
+}
+//減價策略public class MinusDiscount extends IDiscountStrategy {
+
+    public MinusDiscount(double discount) {
+        super(discount);
+    }
+
+    @Override
+    public double getValue(double value) {
+        return value - discount;
+    }
+}
+//打折策略public class MultiplyStrategy extends IDiscountStrategy {
+    public MultiplyStrategy(double discount) {
+        super(discount);
+    }
+
+    @Override
+    public double getValue(double value) {
+        return value * discount;
+    }
+}
+//不折價public class NoneDiscount extends IDiscountStrategy {
+
+
+    public NoneDiscount(double discount) {
+        super(discount);
+    }
+
+    @Override
+    public double getValue(double value) {
+        return value;
+    }
+}
+</code></pre><blockquote id="e050c312-7c2f-4ac8-bc20-419be3001802" class="">關於飲料的商品類</blockquote><pre id="abea4732-bd9f-4627-93d2-f16db9b7ffda" class="code code-wrap"><code>//飲料介面public abstract class Drink {
+
+    IDiscountStrategy discountStrategy = new NoneDiscount(1);
+
+    double value;
+
+    private Drink(){}
+
+    public Drink(double value) {
+        this.value = value;
+    }
+
+    public Drink(double value , IDiscountStrategy discountStrategy) {
+        this.value = value;
+        this.discountStrategy = discountStrategy;
+    }
+
+    public double getValue() {
+        return discountStrategy.getValue(value);
+    }
+
+}
+//奶茶public class MilkTea extends Drink {
+    public MilkTea(double value) {
+        super(value);
+    }
+
+    public MilkTea(double value, IDiscountStrategy discountStrategy) {
+        super(value, discountStrategy);
+    }
+
+    @Override
+    public double getValue() {
+        return super.getValue();
+    }
+}
+//咖啡public class Coffee extends Drink {
+    public Coffee(double value) {
+        super(value);
+    }
+
+    public Coffee(double value, IDiscountStrategy discountStrategy) {
+        super(value, discountStrategy);
+    }
+
+    @Override
+    public double getValue() {
+        return super.getValue();
+    }
+}
+</code></pre><blockquote id="244b55dd-db62-4733-b18e-d89c8b5ab1d5" class="">實現一下飲料的訂單</blockquote><pre id="632d8880-7a35-437b-bc51-6dd1d6948eee" class="code code-wrap"><code>public class DrinkOrder {
+
+//放飲料的listprivate List&lt;Drink&gt; drinkList = new ArrayList&lt;Drink&gt;();
+
+//加入飲料public void addDrink(Drink drink){
+        drinkList.add(drink);
+    }
+//移除飲料public void removeDrink(Drink drink){
+        drinkList.remove(drink);
+    }
+
+//飲料總價錢（私有方法）private double totalPrice(){
+
+        double totalPrice = 0 ;
+
+        for(Drink d:drinkList){
+            totalPrice += d.getValue();
+        }
+
+        return totalPrice;
+
+    }
+
+//訂單總價錢public double getTotalPrice(IDiscountStrategy discountStrategy){
+
+        double totalPrice = totalPrice() ;
+
+        return discountStrategy.getValue(totalPrice);
+
+    }
+
+}
+</code></pre><blockquote id="0d30164d-4688-4470-a709-a274f20b71b3" class="">稍微測試一下跟預計的一不一樣</blockquote><pre id="d4b07574-5abf-40ee-873b-cb1d7687b985" class="code code-wrap"><code>public class Test {
+    @org.junit.jupiter.api.Test
+    public void test(){
+
+        DrinkOrder drinkOrder = new DrinkOrder();
+        drinkOrder.addDrink(new Coffee(165));
+        drinkOrder.addDrink(new MilkTea(55,new MinusDiscount(20)));
+        double price = drinkOrder.getTotalPrice(new NoneDiscount(1));
+//200
+        System.out.println(price);
+        price = drinkOrder.getTotalPrice(new MultiplyStrategy(0.9));
+//打九折
+        System.out.println(price);
+
+    }
+}
+</code></pre></div></article></body></html>

@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>[ Day 28 ] 初探設計模式 - 結構型模式</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="673e6eb4-6cce-49c2-aa13-6167e9f4656b" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⛸️</span></div><h1 class="page-title">[ Day 28 ] 初探設計模式 - 結構型模式</h1></header><div class="page-body"><h3 id="9538cbc7-5e8e-4b0e-81d6-74c30e5b772e" class=""><strong>定義</strong></h3><p id="15a45c1b-792d-4969-a503-7c25d95415a8" class="">結構型模式整理既有的類別，並且將這些類別做一些適當的轉換，最終達到<code>更容易使用</code>、<code>更加靈活</code>、<code>變化他們的表示</code>···等等的效果。</p><ul id="0fd23209-c704-4514-9d43-b264f19c740a" class="bulleted-list"><li style="list-style-type:disc">轉接器模式 ( Adapter Pattern )</li></ul><ul id="5f3dd0d1-c8f6-4461-b92e-02649678e5b5" class="bulleted-list"><li style="list-style-type:disc">橋接模式 ( Bridge Patern )</li></ul><ul id="14be9d47-3292-45c4-9b58-16bc92472ca7" class="bulleted-list"><li style="list-style-type:disc">組合模式 ( Composite Pattern )</li></ul><ul id="9b564947-027d-4e5f-ae22-2065e8fbd035" class="bulleted-list"><li style="list-style-type:disc">裝飾模式 ( Decorator Pattern )</li></ul><ul id="e9e2346e-ee49-420f-aa2a-23f8b6e4f0ac" class="bulleted-list"><li style="list-style-type:disc">外觀模式 ( Facade Pattern )</li></ul><ul id="74b53fc8-138b-4784-b45a-1ad47c0d4cfd" class="bulleted-list"><li style="list-style-type:disc">享元模式 ( Flyweight Pattern )</li></ul><ul id="6d9d96e0-fbd5-4909-b6fb-c18073b55983" class="bulleted-list"><li style="list-style-type:disc">代理模式 ( Proxy Pattern )</li></ul><h3 id="ed97f894-6ce1-4d12-b6c2-98de7578b224" class=""><a href="https://ithelp.ithome.com.tw/articles/10205321"><strong>轉接器模式 ( Adapter Pattern )</strong></a></h3><blockquote id="2b51cee6-bb43-45b2-8a5b-d79d5c5a812e" class="">將一個類別的介面轉換為客戶希望的另一個介面。使得原本由於介面不相容而不能一起工作的那些類別可以一起工作。</blockquote><p id="fc8c22f2-faf5-4542-abea-bfac56c2ceda" class="">雖然本來的物件、方法不適合現在使用，但希望建立一個可以重用這個類別的機制，讓這個類別跟其他類別一起共同工作。</p><figure id="e56728ff-7544-442e-b68c-53e6b631c5e3" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181111/201125282MY3uFNKDi.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181111/201125282MY3uFNKDi.png"/></a></figure><h3 id="7095ded1-48fe-4303-94a9-4d662fc386d4" class=""><a href="https://ithelp.ithome.com.tw/articles/10207956"><strong>橋接模式 ( Bridge Patern )</strong></a></h3><blockquote id="2e05f649-9459-45f8-8230-1c844fa92cfe" class="">將抽象的部分和他的實現部分分離，使他們都可以獨立的變化。</blockquote><p id="b7745bb3-e8c7-46d5-a421-3e81bc723009" class="">代替繼承的關係從而使用組合的關係，像是在借用別人所實踐出的方法，使這兩者可以各自獨立實現其獨立的變化。</p><figure id="20e0e209-7085-45a0-a286-8fd56bf313f3" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181111/20112528OgX9Ncy1lD.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181111/20112528OgX9Ncy1lD.png"/></a></figure><h3 id="53dc1984-e07e-446a-a745-c834f55da83c" class=""><a href="https://ithelp.ithome.com.tw/articles/10207478"><strong>組合模式 ( Composite Pattern )</strong></a></h3><blockquote id="c5269708-3685-44bd-ab50-f3116eb27ae1" class="">將物件組合成樹形結構以表示「部分-整體」結構，組合模式使得用戶對單個物件和組合物件的使用具有一致性。</blockquote><p id="e88aa89d-ecb0-4c4e-a37b-0c225c2d5633" class="">適合用來表示一種不論是個體，或是組合起來一個部分(整體)，都需要做一些相同的運算(工作)的模式，例如公司(團體)的組織。</p><p id="2109987e-33e0-43dd-a3e1-3484b04d925e" class="">動態的添加職責像是在事後(程式碼中)才定義各個在基本之外需要具備的其他功能(在android中有關於view的實踐是使用這種方式)。</p><figure id="60745866-ddf6-4df2-8a79-3860e6c2c4db" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181111/201125280UE94GsiAD.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181111/201125280UE94GsiAD.png"/></a></figure><h3 id="c09cd784-dc54-4404-895e-eeccfa129882" class=""><a href="https://ithelp.ithome.com.tw/articles/10203738"><strong>裝飾模式 ( Decorator Pattern )</strong></a></h3><blockquote id="8b545ced-0d96-4d5a-b31f-f507bfb360a2" class="">動態的給一個物件添加一下額外的職責。就增加功能性來說，裝飾模式比產生子類別更加靈活。</blockquote><p id="1c94f376-e0ad-40ec-80b8-fb95b5003b4a" class="">組合模式是一種樹狀的結構，而裝飾模式像是將一個Component經過各個Decorator包裹起來，核心是Component、而Decorator像是糖果或是巧克力一般一層一層包裹的結構。</p><figure id="c5ae57b6-d94d-484d-a308-f0ccd1bb54f1" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181111/201125280s03FMgb2v.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181111/201125280s03FMgb2v.png"/></a></figure><h3 id="2c9dc07a-fd5b-4b84-a3eb-969a42a3f759" class=""><a href="https://ithelp.ithome.com.tw/articles/10206318"><strong>外觀模式 ( Facade Pattern )</strong></a></h3><blockquote id="1a500d4a-6b9f-433f-a466-78f2850904bf" class="">為子系統中的一組介面提供一致的介面，外觀模式定義了一個高層介面，這個介面使得這一子系統更加容易使用。</blockquote><p id="e31f8bcb-1b27-41fc-80d3-1a4e32c4f35c" class="">常常會是重構過程中第一步驟所做的模式。為子系統引入了這個單一的屏障，讓程式碼更容易被理解而且依賴關係較小。</p><figure id="ed5af461-20b6-4a9f-80e6-9d2b4820d212" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181111/20112528hPq5ZfZ6kK.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181111/20112528hPq5ZfZ6kK.png"/></a></figure><h3 id="7d439363-5ea9-41e4-9cad-680c5f242ce5" class=""><a href="https://ithelp.ithome.com.tw/articles/10207215"><strong>享元模式 ( Flyweight Pattern )</strong></a></h3><blockquote id="e52862f7-857d-41a8-ae14-bd5c9ebf59e5" class="">為運用共同的技術有效地支援大量細粒度的物件。</blockquote><p id="e79144ec-91fe-4f40-833d-811c7ac85422" class="">最早期的應用有各個字元(文字)的顯示···等等，為了避免佔用資源過多，透過相同物件共享的機制增加效能。</p><figure id="0b0c01e6-dcec-455c-9bd7-797a4d528254" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181111/20112528tw1Ue5J2uv.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181111/20112528tw1Ue5J2uv.png"/></a></figure><h3 id="0d528e42-4834-4cb5-a988-75afa4ebe944" class=""><a href="https://ithelp.ithome.com.tw/articles/10205659"><strong>代理模式 ( Proxy Pattern )</strong></a></h3><blockquote id="32693824-4447-4f0a-8519-7846ca4f012e" class="">為其他物件提供一種代理以控制對這個物件的存取。</blockquote><p id="81e7800c-7064-4c91-9dc8-c45444cfa5e1" class="">單一另一個物件的代理人。</p><figure id="406a963a-7b48-43b3-9f88-76481980accc" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181111/201125281IpUDYmAP8.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181111/201125281IpUDYmAP8.png"/></a></figure><p id="780bfd54-1c6e-4da2-9c92-4ec4b3345f18" class=""><strong>參考資料</strong><em>-- 大話設計模式</em><em>-- Android源碼設計模式解析與實戰</em><em>-- </em><a href="https://www.youtube.com/playlist?list=PLrhzvIcii6GNjpARdnO4ueTUAVR9eMBpc"><em>Design Patterns in Object Oriented Programming</em></a></p></div></article></body></html>

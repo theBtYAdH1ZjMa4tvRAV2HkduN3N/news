@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Add user</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="faf30103-8ac8-4758-8086-fb3ce969881d" class="page sans"><header><h1 class="page-title">Add user</h1></header><div class="page-body"><div><p id="6ba1e627-7610-4fad-896d-16d445f360c6" class="">
+</p></div><p id="8f4a563b-a06b-46c2-9421-aae883b7758d" class="">
+</p><ul id="71250321-036e-44ad-be59-582bd7a3350c" class="bulleted-list"><li style="list-style-type:disc">add user
+adduser xxxxx</li></ul><ul id="44d20248-9a1b-4632-9cc2-928b0ab40da2" class="bulleted-list"><li style="list-style-type:disc">add sudo
+sudo usermod -a -G sudo xxxxx</li></ul><ul id="0a3e32a3-20ac-4173-b648-44c6c3e3e954" class="bulleted-list"><li style="list-style-type:disc">show group of user
+id xxxxx</li></ul><p id="d357f098-1cb0-4efe-af2d-1f9df162fb58" class="">
+</p><p id="0d8af682-0167-400c-b7e0-ba90d731d070" class="">
+</p><p id="dae5cec0-4670-4479-958d-3080c6874f5a" class="">useradd
+指令新增使用者帳號。</p><p id="a093b8a6-8b53-4548-989c-58d4be97ceaf" class="">在 Linux 系統之下若要新增使用者帳號，做基本的方式就是使用 useradd 指令來新增帳號，以下是這個指令個用法教學以及常用的範例。</p><p id="19e1b6ee-4bec-4b34-8ebf-d16e28b33fb8" class="">有些 Linux 發行版（例如 Ubuntu）則還會有一個 adduser 指令，這個指令是一個 Perl 指令稿，將新增使用者帳號的動作包裝起來，可讓管理者更容易使用，但其實它內部一樣是呼叫 useradd 指令來新增使用者。</p><p id="042b22ca-08de-433e-a863-fe33612c4885" class="">由於 adduser 指令並不是每一種 Linux 發行版都有，像 CentOS 中的 adduser 指令只是一個指向 useradd 指令的連結而已，所以這裡我們還是以 useradd 的用法與範例為主。</p><p id="1a570529-8ebc-4a68-96be-ffc98b48c8a8" class="">在 Linux 系統上新增使用者的時候，通常要處理三件事情：</p><pre id="f46e14fd-bf5c-4fe3-9d06-28b52d36d42c" class="code code-wrap"><code>編輯 /etc/passwd、/etc/shadow、/etc/group 與 /etc/gshadow，新增使用者帳號的資訊。
+建立新使用者的家目錄。
+設定家目錄的權限。
+</code></pre><p id="1cda0c35-936f-4527-8180-f0c273df34df" class="">這些動作通常都會直接使用 useradd 指令來統一處理（當然若要手動處理亦可）。
+新增使用者</p><p id="30ac9207-2459-40ea-8f2b-0f669a241a21" class="">若要在系統上新增一個使用者帳號，只要執行 useradd 並指定使用者帳號的名稱即可：</p><h1 id="36fbe075-1fa2-4443-9b35-378579cc863f" class="">新增使用者</h1><p id="5b5d8387-d8da-4755-aca2-8d12e52fe1c4" class="">sudo useradd gtwang</p><p id="e96967cf-aa42-42ba-98a2-a83a82e7ab03" class="">帳號在新增之後，會處於停用的狀態，必須使用 passwd 設定密碼之後，才能開始使用這個帳號：</p><h1 id="3c27134b-4a2c-4276-9701-ff545824132c" class="">設定密碼</h1><p id="1aff387a-d76c-4da8-be5b-d3810ca7aa08" class="">sudo passwd gtwang</p><p id="2655f580-ed9c-4c50-840f-7fe3ffd4417e" class="">指定家目錄</p><p id="9bfaf074-eb2a-4835-ac63-6a753d50abbd" class="">在預設的狀況下，useradd 在新增使用者帳號時，會依照帳號名稱在 /home 之下建立使用者的家目錄，例如 gtwang 的預設家目錄就是 /home/gtwang。</p><p id="3b6d25aa-434a-4533-9d7c-3e5571e09bcc" class="">若要改變預設的家目錄，可以加上 -d 參數並指定家目錄的路徑：</p><h1 id="a8264855-699e-4368-8be1-b25a8533ac3a" class="">指定家目錄</h1><p id="dc409f19-0cd8-4f41-81a1-3914355492ad" class="">sudo useradd -d /data/gtwang gtwang</p><p id="bc38d59a-64cb-460f-93ae-b96e84421e3b" class="">若要讓 useradd 在新增使用者時不要自動建立家目錄（通常用於某些有安全性考量的系統特殊帳號），可以加上 -M 參數：</p><h1 id="5f4d507e-59bc-43b0-9f3a-92f445687ddc" class="">不建立家目錄</h1><p id="780395f0-04a0-482a-ba31-dd89697f95f4" class="">sudo useradd -M gtwang</p><p id="d77c12b1-3123-493e-a103-2a0f49d544c3" class="">指定使用者 ID</p><p id="34913bf0-4123-4b3d-b935-beab1244ed7b" class="">每一位 Linux 系統上的使用者都有一個專屬的使用者 ID（UID），在新增使用者時，useradd 預設會自動以遞增的方式指定一個尚未被使用的 ID 給新的使用者，如果我們想要自行指定使用者的 ID，可以使用 -u 參數：</p><h1 id="92455a40-26a3-4851-951a-c89a02c301c4" class="">指定使用者 ID</h1><p id="f487cd2a-e5ca-4282-88da-1e0fc45dae18" class="">sudo useradd -u 1500 gtwang</p><p id="f479d8ff-e221-445c-8861-ece8df466f2f" class="">這樣就可以將 gtwang 這個新使用者的 ID 設定為 1500。
+指定群組</p><p id="ba6aac40-73bc-43e5-8bce-95c9d837c230" class="">每一位 Linux 使用者都會有一個主要的群組，預設的狀況下 useradd 會自動新增一個跟帳號相同名稱的群組，並設定為該帳號主要的群組。</p><p id="cd2194be-f87c-4299-a6ca-e36387eaba12" class="">如果要將新的使用者加入既有的群組中，可以加上 -g 參數，並指定群組的名稱或群組 ID：</p><h1 id="58ba05f9-88ed-464b-8f7a-c3d0fd05b888" class="">指定主要群組</h1><p id="76bd540a-0cb1-4f98-944a-38b9e02f4e28" class="">sudo useradd -g team gtwang</p><p id="2f5cda85-bbc4-4b02-a6bc-a02307fc65c8" class="">這樣就會將 gtwang 這個新使用者的主要群組設定為 team（team 這個群組必須事先建立好）。</p><p id="2ae7b1e5-c764-4f7f-add6-06fe16c301be" class="">除了主要的群組之外，每一位使用者也可以同時隸屬於其他多個不同的群組，如果要在新增使用者時，一起加入其群組內，可以加上 -G 參數，並以逗號分隔的方式指定每一個要加入的群組：</p><h1 id="9e6b0a30-d260-4713-8e7f-f9b33291cb6d" class="">加入其他群組</h1><p id="0ded7da5-e0fc-4cf8-8a2b-9749fd795845" class="">sudo useradd -g team -G admin,developer,leader gtwang</p><p id="155c8bcc-71c0-4434-a1cf-d115765498cc" class="">這樣新增的 gtwang 帳號的主要群組是 team，同時也是 admin、developer、leader 三個群組的成員。
+帳號使用期限</p><p id="207c4a31-647b-459c-beff-b94f0b7199f3" class="">Linux 的使用者帳號可以設定使用期限，讓帳號過期之後就無法使用，若要在建立帳號時就設定使用期限，可以加上 -e 參數並指定使用的期限：</p><h1 id="538401c0-252d-4bb9-8ada-b9adb2c2a44d" class="">設定帳號使用期限</h1><p id="013a6eda-c198-41f9-8173-11ce585a7a48" class="">sudo useradd -e 2019-03-17 gtwang</p><p id="a023808f-be06-4093-afd1-7d32f2565ca1" class="">這樣新增的 gtwang 帳號就只能使用到 2019 年 3 月 17 日，過了這個日期就無法再使用了。</p><p id="29b5767b-d444-4668-856d-d4a90d42648f" class="">若要查詢帳號的使用期限，可以使用 chage 指令：</p><h1 id="adb2a431-d5e3-4735-8a24-3275e6470e3a" class="">查詢帳號使用期限</h1><p id="f01813f6-c78e-4e13-a1db-2b0458cdf882" class="">sudo chage -l gtwang</p><p id="30155d2e-eccc-45f3-9e9e-ad28d462f648" class="">另一個會產生帳號停用的狀況就是密碼過期，-f 參數可以指定在密碼過期多少天之後，才真正停用帳號：</p><h1 id="87e184a6-fdc2-4deb-81a5-849d25c30e5c" class="">設定帳號使用期限</h1><p id="33974aef-7d65-47a2-a16a-958683f7e47c" class="">sudo useradd -f 45 gtwang</p><p id="e36ccee3-461e-41f6-a76d-f16a191385f2" class="">這樣就是設定當 gtwang 的密碼過期 45 天之後，就停用該帳號。
+使用者姓名</p><p id="2d54fddd-0015-4af2-8387-fda487180a64" class="">新增使用者的時候，可以用 -c 參數加上帳號的註解說明文字，通常管理者都會填入使用者的真實姓名：</p><h1 id="6801e920-2786-4049-aa09-657f5c248b1d" class="">設定使用者真實姓名</h1><p id="27de7218-b324-4e52-88a9-1919402322b3" class="">sudo useradd -c &quot;G. T. Wang&quot; gtwang</p><p id="e2e021fc-39ad-44ea-8bb6-3c8a28ae0953" class="">指定登入 Shell</p><p id="09183a41-1e0e-4d20-9b7a-6ca252173882" class="">正常的 Linux 使用者帳號不需要特別更改登入的 shell，不過對於某些特殊的系統帳號來說，因為安全性的因素，我們不希望它可以像正常帳號依樣登入使用，這時候就可以更改預設的登入 shell。</p><p id="e1d8bf01-5bfc-44b4-8b44-e97d966480e2" class="">若要更改預設的登入 shell，可以加上 -s 參數並指定 shell 的路徑：</p><h1 id="f01d0192-b2cd-41af-9626-c96648a7aff9" class="">指定登入 Shell</h1><p id="fb08b095-f80a-4ca5-b663-f721ab8a6e11" class="">sudo useradd -s /sbin/nologin gtwang</p><p id="08de1c99-ab62-406d-a02d-eb9bc83c5c92" class="">nologin 是一個特殊的 shell，可以讓該帳號登入後立即登出，無法做任何事，大部分不允許登入的系統帳號都會將登入 shell 設定為 nologin。
+骨架目錄</p><p id="832942f5-0467-4593-a9e5-9ed987d8cdf9" class="">所謂的骨架目錄（skeleton directory）就是一個家目錄的預設範本，裡面包含各種預設的設定檔或目錄（例如 .bashrc 這類的設定檔），在新增使用者並建立家目錄時，就會把骨架目錄中的所有檔案複製過來。</p><p id="73615477-3384-47c4-bfee-c86c9575a66e" class="">系統上預設的骨架目錄是 /etc/skel，若要更改骨架目錄，則可使用 -k 參數：</p><h1 id="2f5721d9-2fd9-426a-8574-e0da6066ff8d" class="">更改骨架目錄</h1><p id="d3f27a18-9678-4ccd-b421-dfb077b869fe" class="">sudo useradd -k /etc/custom.skel gtwang</p><p id="e1715915-2409-4b53-a2ac-75c0a5a2d75d" class="">這樣在建立 gtwang 的家目錄時，就會將 /etc/custom.skel 目錄中所有的檔案複製過來。</p><p id="d8ba2d0e-eb6b-45ca-9eb2-7eb5563d460b" class=""><a href="https://blog.gtwang.org/linux/linux-useradd-command-tutorial-examples/">https://blog.gtwang.org/linux/linux-useradd-command-tutorial-examples/</a></p></div></article></body></html>

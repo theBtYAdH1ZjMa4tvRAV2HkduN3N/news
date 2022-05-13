@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Ventoy – 免費USB多重系統選單開機碟的新世代製作工具</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0f6bd75e-dd72-4fb2-933c-2fc7c0035779" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🥇</span></div><h1 class="page-title">Ventoy – 免費USB多重系統選單開機碟的新世代製作工具</h1></header><div class="page-body"><figure id="20f3830f-2788-49d6-b124-30f6ea4922ce"><a href="https://walker-a.com/archives/6571" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Ventoy - 免費USB多重系統選單開機碟的新世代製作工具 - 挨踢路人甲</div><div class="bookmark-description">自從雲端與隨身碟普及後，光碟的使用率就一直下降中，連安裝也都使用虛擬光碟方式來掛載ISO檔，為了小巧化，我也都使用迷你機殼且不安裝光碟機，如果你的和我一樣，電腦或筆電沒有裝光碟機，當想要重灌系統Windows 7/8/10或Linux時，怎麼辦？這時USB隨身碟將是你的救星，讓挨踢路人甲來告訴你使用 Ventoy 來製作多重系統選單的USB安裝隨身碟。 用 Telegram ...</div></div><div class="bookmark-href"><img src="https://i1.wp.com/walker-a.com/wp-content/uploads/2017/02/988cf43a2f652a9c1a8b61dc6b5f7245.png?fit=120%2C120&amp;ssl=1" class="icon bookmark-icon"/>https://walker-a.com/archives/6571</div></div><img src="https://walker-a.com/wp-content/uploads/2021/01/ventoy-01.jpg" class="bookmark-image"/></a></figure><p id="7003d4a4-fb71-4913-bf01-36d975c5cf17" class="">
+</p><p id="74e55b77-15e0-4679-9a0d-c485ad93551c" class="">自從雲端與隨身碟普及後，光碟的使用率就一直下降中，連安裝也都使用虛擬光碟方式來掛載ISO檔，為了小巧化，我也都使用迷你機殼且不安裝光碟機，如果你的和我一樣，電腦或筆電沒有裝光碟機，當想要重灌系統Windows 7/8/10或Linux時，怎麼辦？這時USB隨身碟將是你的救星，讓挨踢路人甲來告訴你使用 Ventoy 來製作多重系統選單的USB安裝隨身碟。</p><figure id="1e5a331f-8acd-4512-a294-731c7454b051" class="image"><a href="https://i1.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-01.jpg?ssl=1"><img src="https://i1.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-01.jpg?ssl=1"/></a></figure><blockquote id="9ea67953-b295-4eee-a28f-cce3a022eb90" class="">用 Telegram 訂閱【挨踢路人甲】最新文章：https://t.me/itwshare</blockquote><p id="9ac6c78f-8948-45f9-b197-b43fbcb4fbc9" class="">製作USB安裝碟的工具不少，之前微軟有推出一套「<a href="https://www.microsoftstore.com/store/msusa/html/pbPage.Help_Win7_usbdvd_dwnTool">Windows 7 USB/DVD Download Tool</a>」工具程式，此工具主要是將ISO映像檔轉至USB隨身碟或光碟上，被轉移的媒體會建立可啟動的bootable，這樣就可以使用USB隨身碟來安裝Windows系統。至於筆者常用的是使用<a href="https://walker-a.com/archives/5865">麻雀雖小五臟俱全的USB開機工具 Rufus</a>，還可支援直接下載 Windows 10，如果只有有開機隨身碟的使用需求或單系統的安裝，當然Rufus絕對是首選。</p><p id="2d8096a4-d11c-4d63-a2cb-83a3f815a629" class="">Ventoy是一套新興的開機啟動載入的碟製工具，就是讓USB磁碟擁有多重開機選單的功能，可說是新世代的USB重灌工具，Ventoy會為USB製作出兩個分割區，一個分割區放引導開機程式，另一個來放不同系統的iso檔案，你只需要把 ISO/WIM/IMG/VHD(x)/EFI 等類型的文件拷貝到USB碟內就可以啟動了選單了，無需其他的操作。</p><p id="43cbc2ea-2aca-4a97-a3e6-51015fd7e17d" class="">Ventoy是一套開源軟體， 支援 Legacy BIOS 與 UEFI 模式，且讓沒有相關背景知識的使用者也可輕鬆多重開機隨身碟，因此在 Github 上釋出，來看看挨踢路人甲的操作教學。首先到<a href="https://www.ventoy.net/en/download.html">官方網站的下載頁面</a>即可看到檔案清單，筆者使用的是Windows 10，所以下載對應的壓縮檔。</p><figure id="acc8a42d-b92f-4a4d-aff1-4617c18eda90" class="image"><a href="https://i2.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-02.jpg?ssl=1"><img src="https://i2.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-02.jpg?ssl=1"/></a></figure><p id="c432ddac-bdb1-42bd-800e-20621d5cec0e" class="">目前的最新版本是1.0.32。</p><figure id="2832cd40-9f23-4309-b927-26c0ab4ee4b5" class="image"><a href="https://i1.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-04.jpg?ssl=1"><img src="https://i1.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-04.jpg?ssl=1"/></a></figure><p id="01ec2735-01f1-43d1-a223-fc81ce9666af" class="">解壓縮後找到目錄內的Ventoy2Disk.exe來執行，筆者習慣以滑鼠右鍵的「以系統管理員身分執行」。</p><figure id="941f6b99-3bf8-4a2c-8e26-86fd1d0bb608" class="image"><a href="https://i2.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-05.jpg?ssl=1"><img src="https://i2.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-05.jpg?ssl=1"/></a></figure><p id="18dd8cf2-5462-42c9-b24a-0dda63e43177" class="">執行後只有一個視窗畫面，一般來說會自動抓取目前USB裝置的資訊，下圖自動偵測到筆者的32G隨身碟，沒有的話請插入USB隨身碟吧！</p><figure id="03a04bfd-9b9a-4fb9-b72c-09d2c1c7d271" class="image"><a href="https://i0.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-06.jpg?ssl=1"><img src="https://i0.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-06.jpg?ssl=1"/></a></figure><p id="1feb3b94-7ea1-46b5-9afc-e654e85fa5e4" class="">不喜歡英文介面，也可以改成中文。</p><figure id="fb4e1fe5-11f7-4128-bab6-b1d582d8de0b" class="image"><a href="https://i0.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-07.jpg?ssl=1"><img src="https://i0.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-07.jpg?ssl=1"/></a></figure><p id="df8e9eee-31d6-4fea-8217-4608d3ecb086" class="">製作時很簡單，只要按下〔安裝〕即可。</p><figure id="262cf576-6957-4170-b2ca-b9f77cc4dabb" class="image"><a href="https://i1.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-08.jpg?ssl=1"><img src="https://i1.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-08.jpg?ssl=1"/></a></figure><p id="42985fed-0cc5-4a72-a357-73feb41e6938" class="">接著會詢問隨身碟背格式化的警告訊息，由於製作過程有兩個分割區，所以詢問兩次。</p><figure id="e61f8198-f421-4bfc-b5ff-e49d6bd2e1b2" class="image"><a href="https://i1.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-09.gif?ssl=1"><img src="https://i1.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-09.gif?ssl=1"/></a></figure><p id="c4d1fe7c-cb7e-45e7-a4d3-ceb22dac3425" class="">可以看到製作中的過程進度，很不用多久時間，很快就完成。</p><figure id="3830e565-4b26-48d9-835c-5899d43bea4f" class="image"><a href="https://i2.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-11.jpg?ssl=1"><img src="https://i2.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-11.jpg?ssl=1"/></a></figure><p id="4e73ce44-7704-4015-b9c2-2fc2e43d4a32" class="">當看到此視窗表示多重開機隨身碟已經製作完成。</p><figure id="fb1e8dd3-18a9-4f20-b912-e2af611dd906" class="image"><a href="https://i0.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-12.jpg?ssl=1"><img src="https://i0.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-12.jpg?ssl=1"/></a></figure><p id="b0e39659-8927-4f87-9011-e9e2dcde567d" class="">此時畫面上會顯示目前隨身碟所安裝的軟體版本，日後有看到新版職接案下〔升級〕即可。</p><figure id="3fbeab02-c08d-4334-948f-77f2b80d26d3" class="image"><a href="https://i1.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-13.jpg?ssl=1"><img src="https://i1.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-13.jpg?ssl=1"/></a></figure><p id="9b096cdd-3b6c-4f84-94dd-8fadade8bffa" class="">來驗證一下，使用磁碟管理來查看，發現隨身碟上有兩個分割區，一個是Ventoy分割區，就是ISO所要存放的位置，另一個是佔比較小的VentoyEFI分割區，這個分割區主要是來開機用的。</p><figure id="15e3b2d5-3b9e-4dbb-bb35-413a66322037" class="image"><a href="https://i0.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-14.jpg?ssl=1"><img src="https://i0.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-14.jpg?ssl=1"/></a></figure><p id="cdd3718b-1894-4f0f-98c9-29f4c73faa52" class="">最後要將作業系統的ISO映像檔放入Ventoy分割區內，也可建立資料夾，Ventoy程式會讀取此磁碟下所有檔案，不過有點要注意，不管是檔案或資料夾名稱，都不可以有空白或中文字元。</p><figure id="69f670ab-ee00-4e98-ab30-67d525d40c12" class="image"><a href="https://i2.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-16.jpg?ssl=1"><img src="https://i2.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-16.jpg?ssl=1"/></a></figure><p id="45db38f0-25e4-4015-8c5f-6d45fd3332d9" class="">終於來到結果測試的步驟了，準備一台PC且將剛剛製作的隨身碟插入機器的USB孔上。</p><figure id="74db3399-8452-4972-a44b-99fb5fd20768" class="image"><a href="https://i2.wp.com/image.walker-a.com/2018/08/rufus/ru-15.jpg?ssl=1"><img src="https://i2.wp.com/image.walker-a.com/2018/08/rufus/ru-15.jpg?ssl=1"/></a></figure><p id="d663db6d-7b62-4a5a-a391-8498da24750f" class="">接著開機進入電腦BIOS內調整開機順序的設定，每個電腦的BIOS設定都有些差異，下圖是我測試機器的BIOS設定的畫面，重點就將USB隨身碟調成開機時的第一個啟動裝置。</p><figure id="a3590521-ba82-4932-94cd-7c7e7a4209b4" class="image"><a href="https://i2.wp.com/image.walker-a.com/2016/01/ros/ros-19.jpg?ssl=1"><img src="https://i2.wp.com/image.walker-a.com/2016/01/ros/ros-19.jpg?ssl=1"/></a></figure><p id="ae3412fb-f515-4342-9856-bdccf22c5a77" class="">果然出現選單畫面，只要偵測到映像檔都會出現在選單上，如下圖筆者刻意放入Office 2016的img檔，結果被撈出變成選單了（第二項）。</p><figure id="23a7e254-a77d-4a11-84a9-2052a857e86f" class="image"><a href="https://i2.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-17.jpg?ssl=1"><img src="https://i2.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-17.jpg?ssl=1"/></a></figure><p id="0051a0f7-50fa-406b-a6d1-1f36998df45b" class="">比者選擇Windows 10 2004版的映象檔來安裝。</p><figure id="85d5c50a-2ff9-444c-a7d1-dbbead0bd4ec" class="image"><a href="https://i1.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-18.jpg?ssl=1"><img src="https://i1.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-18.jpg?ssl=1"/></a></figure><p id="ba46d31a-5fa3-42cc-8f92-4be6b8d32d77" class="">開始進入Windows 10的安裝過程，因為第一次進入如同一個全新的Windows 10安裝環境，之後的動作如同一般Windows安裝方式。</p><figure id="630a4049-ceee-4ff4-a0bd-d2140c2cd8d2" class="image"><a href="https://i1.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-19.jpg?ssl=1"><img src="https://i1.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-19.jpg?ssl=1"/></a></figure><p id="d56bc797-92b2-497a-b4e6-a112c3f7a47f" class="">Ventoy選單畫面下方有幾個功能快速鍵，F1(Memdisk)是使用記憶體來提高成功安裝的機率，一般是從隨身碟中來讀取ISO檔，若開起 Memdisk 模式後，會先將 ISO 中的讀到至建立的虛擬記憶體磁碟中再執行，對於老舊的機器是個不錯的方式。</p><figure id="2cffbdea-34e7-4fdf-bf98-8bc9c28d148a" class="image"><a href="https://i0.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-20.jpg?ssl=1"><img src="https://i0.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-20.jpg?ssl=1"/></a></figure><p id="7850be52-57f6-41a1-bb8a-7a81ec891461" class="">F2(Power)就是重新啟動電腦或關機，不多解釋。F3(TreeView)就是檢視隨身碟中的ISO映像檔詳細資訊，此時也會看到資料夾的資訊。</p><figure id="4e30ff2a-ffd7-42b3-bb83-ed98fca40554" class="image"><a href="https://i0.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-21.jpg?ssl=1"><img src="https://i0.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-21.jpg?ssl=1"/></a></figure><p id="3fc69401-b42a-4e3a-8376-3357d7dd3d08" class="">F4(Localboot)是使用本機開機，F5(Tools)是內建的一些工具，如設定螢幕解析度、文字或圖形介面模式的選單、UEFI等。</p><figure id="e21dd10d-5634-4fba-bb39-a9acaf019adf" class="image"><a href="https://i2.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-22.jpg?ssl=1"><img src="https://i2.wp.com/image.walker-a.com/2021/01/ventoy/ventoy-22.jpg?ssl=1"/></a></figure></div></article></body></html>

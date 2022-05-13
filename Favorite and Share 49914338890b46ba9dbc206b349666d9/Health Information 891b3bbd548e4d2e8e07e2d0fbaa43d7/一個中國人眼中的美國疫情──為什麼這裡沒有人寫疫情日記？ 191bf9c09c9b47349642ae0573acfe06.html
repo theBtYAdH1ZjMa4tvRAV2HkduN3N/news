@@ -1,0 +1,727 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>一個中國人眼中的美國疫情──為什麼這裡沒有人寫疫情日記？</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="191bf9c0-9c9b-4734-9642-ae0573acfe06" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">♣️</span></div><h1 class="page-title">一個中國人眼中的美國疫情──為什麼這裡沒有人寫疫情日記？</h1></header><div class="page-body"><p id="25275287-b585-471a-a353-94e9c6ab88b4" class="">一個中國人眼中的美國疫情──為什麼這裡沒有人寫疫情日記？</p><p id="6477d2a0-5ace-4e69-990b-45457c575e77" class="">人類歷史告訴我們，如果需要交出自由才能換來保障，那麼最終的結果一定是既沒有自由，也沒有保障。（湯森路透）</p><p id="9fc46082-eae7-4a96-9059-fc6ffa0a46d3" class="">一</p><p id="d8598062-c640-434b-af44-b2a8af0d7430" class="">新年伊始，剛過完聖誕假期的美國人，再一次迎來每日感染人數突破百萬的緊張時刻。甚至在我經常踢球的華人群裡，也不斷出現有人中招的消息。但所幸的是感染雖多，症狀卻普遍很輕，以至於感覺美國上上下下，對此已經毫不在乎，大部分人曬個消息，自己隔離就算完了。</p><p id="f2f17ec3-4b1b-4b1e-b9af-3f52879c5aaf" class="">央視連篇累牘的報導，以及「美國抗疫從失敗走向失敗」的論調，讓我在國內的家人十分擔心我。家姐又一次打電話給我，電視上說美國太嚴重了，你要保重啊。我當時正在好萊塢人來人往的大街上拍照，隨手就拍了一段視頻給她。</p><p id="3d23c163-b5bd-48e3-b070-b24d5b9a241d" class="">家人其實不是第一次引用國內媒體的描述來關心我了。我大多數時候都非常理解，不怎麼解釋。只有一次是在忍不住對家姐說：我來美國也有一段時間了，你為什麼從來不問問我真實的美國是什麼樣子，到底亂不亂差不差。難道親弟弟的見聞都不如你看到的新聞可信嗎？</p><p id="109f4d55-d8cd-4c74-8903-1a985102d1a9" class="">但其實我知道，就算我說了，家人可能也是半信半疑。我這個單一的資訊源比不過他們平時接觸的異口同聲的環境。</p><p id="dabb71c4-ecfd-4088-abf3-63754ced4dbb" class="">二
+　　
+我正好是在疫情爆發前抵達美國的。從時間線來說，兩年來可以說完整的經歷了美國在本次世紀大疫情中的方方面面。
+　　
+兩年的時光中，作為一個外國人，一個專注於歷史記錄的作者，可能我的觀察和美國人或者中國人都有一些區別。之前有朋友提醒我說，在世界疫情最嚴重的國家，你為什麼沒有寫個疫情日記之類的？
+　　
+因為我真的覺得很難寫。我沒有被鎖在家中，也沒有躺進醫院，怕寫出來別人一看不是國內媒體報導的美國，會以為我拿了多少紓困金。雖然我所在的洛杉磯也是重災區，但實在沒有什麼值得我感慨的慘狀，偶爾有幾個經常踢球的球友感染，也是很快就活蹦亂跳的回來，無處傷感。倒是經常在網上看見普通美國人曬支票，每個月領幾千美金救濟比上班還掙得多……看完我也很鬱悶，這哪裡像水深火熱的樣子嘛。甚至還有鄰居看我有段時間老是在家寫文章，覺得我應該生活很困難，主動提出要帶我去領食品福利的，我謝絕了——這種福利我見過，是不需要核驗身份、收入之類的，也不登記簽字之類的，你去領了就走，全憑自覺。
+　　
+即便是在美國各州相繼發佈居家令，限制社交活動的時期，我的日常生活也沒有特別大的變化——除了因為球場封鎖我沒法踢球外。我如果寫「時間永是流逝，街市依舊太平」，那還算是國人印象中的疫情日記嗎？
+　　
+沒有鐵桶一般冷酷的封城，沒有嚴厲的隔離，也沒有吃不上菜看不上病的窘迫，這樣的日記寫出來，可能只會換來「美狗」的回應。</p><p id="14ef6891-f621-418c-a26b-ef7ab255b61a" class="">美國人對於本國的防疫措施不滿意，但也不願意選擇所謂的優等生模式。（湯森路透）</p><p id="c76072ff-9184-450e-947b-209e474b001a" class="">三
+　　
+大家都知道美國看病很貴，這是事實；美國大部分醫院在疫情中焦頭爛額超負荷運轉，也是事實。但你有沒有聽說過美國有哪個醫院在疫情中拒絕救治病人？
+　　
+沒有。因為違法。1986年美國國會通過急救醫療法（EMTAL），該法規定任何醫院必須接受前來急救的病人，不得因為病人沒有保險或無錢支付醫療費而拒絕治療，也不得因為病人的年齡、種族、宗教、國籍或性別而加以拒絕。
+　　
+也就是說，只要你在美國，不管你是誰什麼情況什麼身份，只要涉及急救，任何一家醫院都得救你。否則在美國這麼一個萬事都可以打官司的國家，你一旦起訴，醫院得賠個底掉。至於急救產生的費用，由「醫療照顧險」墊付。如果這還不夠，則由政府墊付。
+　　
+所以，眼睜睜看著８個月的孕婦流產或者逼著心梗的病患做核酸才能入院救治的事情，在美國不會發生。因為那是犯罪。
+　　
+我有個朋友在科羅拉多州當護士，她經常分享一些疫情中的醫院見聞、人生感悟。比如國內有個上海老太太退休後來美國投奔女兒，確診了癌症，疫情期間住進了醫院。她在美國沒有收入沒有醫保，在醫院的費用，包括天天照顧她的吃喝拉撒的護理費用都是政府全包的，兒女沒有出一分錢。雖然老太太把一生都獻給了中國，對美國毫無貢獻，但還是可以理直氣壯的享受美國給予的福利。這種福利，其實美國各州都有，在我所在的加州，有一種專門針對低收入階層的醫療保障——白卡。如果你的家庭年收入低於某個標準，你就可以申請這種醫療保障，一分錢不用交，醫藥費100%報銷，實際上就是政府全額負擔你的醫療。
+　　
+有時候我看見國內媒體報導美國疫情的熱情，忍不住想說，別管美國人民了，他們隨時躺下都可以無所顧忌的進醫院，你還是操心一下長安人民吧。</p><p id="2744aa22-cc48-4b5e-8997-4b40e7a30998" class="">四
+　　
+美國是個典型的神經大條的國家，因為決策有多個權力部門的牽制，導致什麼東西似乎都會慢半拍。在2020年疫情始發的時候，大部分美國人其實是根本不當一回事的。甚至連戴口罩這件事，因為有悖於他們的日常認知（美國之前是重症患者才會戴口罩），也是經歷了好幾個月，疫情已經十分嚴重的時候，官方醫療部門才意識到今時不同往日，發佈公眾場合的口罩建議，美國人這才開始不情願的帶上口罩。
+　　
+他們為此付出了很大的代價，但是作為自己的選擇，美國人似乎也接受了這樣的代價。天天都有新聞把官方的防疫政策拿出來開罵，但是很少有人埋怨沒有早點提醒戴口罩。加州的第一例新冠確診患者是2020年1月26日「來自武漢的旅行者」，此後迅速成為重災區。但是從始至終，我都沒有在美國媒體上看到「萬里投毒」之類的我們習慣聽到的話，甚至也沒有公開過患者的身份。美國主流媒體對中共政權確實非常反感，但要說對普通的華人，我並不覺得。
+　　
+在2020年美國大選期間，芝加哥大學民意研究中心曾經就疫情做過一個調查，其中有一個問題是問美國民眾怎樣評價中美防疫的差異。出人意料的是，儘管當時中國的「作業」明顯好於美國，但是仍然有將近四分之三的民眾不認可。也就是說，美國人對於本國的防疫措施不滿意，但也不願意選擇所謂的優等生模式。
+　　
+因為猝不及防，在剛開始發佈居家令的時候，美國確實出現過一波搶購潮。但是得益於強大的物資供給能力，加上也沒有封城之類的極端措施，所以並沒有出現過需要敲鑼打鼓才能買菜看病的情況。我就從來沒有囤積過物資——並不是我不怕餓死，而是我每次去超市，發現至少食物是從來沒有缺過的，實在沒有囤的必要。而且餐館的外賣和快遞業務疫情期間也沒有停過，並不會對吃產生緊迫感。
+　　
+而美國的居家令並不是強制性的，建議你無必要不出門，但是你要出門，也絕不會有人攔著你——為了逃離疫區封鎖翻山越嶺玩鐵人三項的故事此處真沒有。也不需要什麼健康碼，更不需要核酸證明。因為無論是政府還是員警，都沒有權力封城。美國從聯邦到地方，政府層面經常宣佈進入緊急狀態——目的只是為了可以從法律層面調動更多的資源——也就是為了可以多花錢，但限制人民自由，這個是哪一條法律都不允許的。出門買個菜被抓住要做公開檢討這種事，說給美國人聽他們是不會相信的。</p><p id="5909706a-bfb6-438b-8d7b-c455ad9cfd5a" class="">美國的居家令並不是強制性的，建議你無必要不出門，但是你要出門，也絕不會有人攔著你。（湯森路透）
+　
+我在疫情中悶得慌，中間自己獨自出去旅行過幾次，和疫情前比較，其實並無區別。就這很多美國人還是很不滿意，認為居家令和口罩令限制了他們生活選擇的自由，好幾個州在疫情中都有類似抗議活動此起彼伏。加州州長紐森因為在加州推行居家令和口罩令以及不准餐飲企業開放堂食，導致加州人極大不滿，部分選民2021年年初發起罷免投票，差一點就把紐森拉下馬。隨後紐森只能妥協，很快就取消了很多疫情限制措施，還又發了一輪支票，這才讓加州人的憤怒平息。
+　　
+他們就是這麼不喜歡「以大局為重」，美國人的慣常思維是，保護個人自由選擇的權利就是比天還大的「大局」。不能為了保護整體的利益，而去犧牲部分的利益，每一個個體都很重要。</p><p id="4c18a579-d02c-477b-8215-29188fe8b1ea" class="">這對於中國人來說，是很難理解的。</p><p id="ee9f9389-0f70-4d81-a165-b82aecf4b7a4" class="">五
+　　
+前段時間有個流行的抖音視頻，無數大叔大媽用同一個語氣說，你知道嗎，咱打得那兩針新冠疫苗夠在三線城市買套房子了 ...說的是國內的疫苗在海外一針十幾萬甚至幾十萬。
+　　
+事實是，我在美國從來沒有見過來自國內的疫苗，因為美國藥物監管部門根本沒批，不僅如此，大叔大媽們說的那幾個所謂的高價買疫苗的西方國家都沒批。
+　　
+在美國打疫苗也是免費的，並不需要大叔大媽所謂的一套房子的價錢。我剛剛打完第三針。而且不看國籍，只要你人在美國，登記一下身份就可以。洛杉磯幾乎每一個藥房都有打針的地方，你進去填個表格就可以打了。有沒有人去國內打疫苗我不知道，但確實有海外華人專門來美國打疫苗的。有三種疫苗可選，摩德納、輝瑞、強生。</p><p id="59cbb59c-fd92-46b4-8162-44d588e8fa20" class="">美國的醫療系統是我們比較少見的分級診療，在一般情況下，普通人生病是先去找自己的家庭醫生，由家庭醫生決定轉診與否。所以一般小病家庭醫生就直接給你開藥打針了，用不著去醫院。在醫療系統最為繁重的時候，大部分美國人染病後家庭醫生都是建議自行居家隔離，把醫療資源讓給重症患者，普通人必要時才去醫院——這在某種程度上避免了醫院的擁堵，所以雖然美國的醫院在疫情中承受了了巨大的壓力，但沒有崩潰也是事實。各州政府也沒有因為龐大的感染人數，而把精力浪費在隔離上。從來沒有官方的強制隔離點，即便你是從疫情重災區過來，只要你符合美國的入境政策，那麼你自己對自己負責就好，官方是不會要求你隔離的。
+　　
+這場世紀大疫情從根本上上來說，想靠嚴防死守、獨善其身的所謂清零，是很難的。美國的政策，其實也是世界上大多數國家目前採取的政策，病毒可怕，但是毀掉正常人的工作、生活和未來更可怕。病毒比人類的歷史還要長很多，接受共存其實本來就是生物界的常態。</p><p id="3b02975f-209b-468f-a172-4fda5a97f1ad" class="">六
+　　
+而今回頭看美國的疫情期間的措施，其實確實有很多缺陷和值得改進的地方，聯邦和地方的政策不同步，防控措施迥異，國內左右勢力互相干擾等。因此可以想見在短時期內，美國的疫情不會那麼容易消停。但它也有別人可以學習的地方。因為卷土複來的疫情並沒有影響強勁的經濟復蘇，不斷下降的失業率和屢創新高的股市，足以說明了一些情況。
+　　
+我來美國兩年，因為沒有出過什麼不適症狀，所以迄今為止沒有做過一次核酸檢測。而且據我所知，並不是我一個人這樣，很多人都沒有測過。因為如果你不出美國的話，根本沒有必須用核酸檢測結果的地方。2020年疫情高峰的時候，美國政府在很多地方開設了免費的檢測點，動員大家去做檢測，但是都是自願，你不去也不會有人攔在路上捅你鼻子或者喉嚨。</p><p id="2dfc912b-c8ff-48bf-ae71-f2a45c1ccfc6" class="">病毒可怕，但是毀掉正常人的工作、生活和未來更可怕。（湯森路透）</p><p id="8abb014e-fb5f-46d0-81d3-05fb3bb1ac49" class="">而且美國作為一個車輪上的國家，測核酸大部分是開車檢測，也就是你坐在車上就可以完成，那種大排長龍擠成一堆的檢測是沒有的。
+　　
+甚至連疫苗接種記錄也是近期也發揮作用——因為某些商家開始規定在室內場合只接納疫苗接種者。但大部分商家並不查驗。
+　　
+兒子來美國後，我曾經問他，美國和國內有什麼區別？他認真想了想說，沒有人捅我的鼻子了。我大笑。
+　　
+如果要問我對於美國疫情最深刻的感受是什麼，我的回答可能不會讓大多數人滿意——那就是真切的自由。不是我想幹什麼就幹什麼的自由，而是我不想幹什麼別人就不能強迫我幹的自由。更關鍵的是，雖然我無須寫疫情日記來抒發情懷，但如果我想寫，我知道肯定不會被定義為信謠傳謠或者尋釁滋事，文章不會被刪除，也不會有員警半夜來敲門請我喝茶。
+　　
+可能每個人對於疫情防控都有自己的看法，甚至可能至今都還對動不動就能封城的強力防控方式洋洋得意。就我個人的感受而言，即便今天美國疫情依然深重，我還是願意生活在這樣的環境中，我寧可染病也絕不願意等著別人施捨白菜。
+　　
+因為人類歷史告訴我們，如果需要交出自由才能換來保障，那麼最終的結果一定是既沒有自由，也沒有保障。</p><p id="80c6043b-bbbd-408f-8cbb-0c1d8df55068" class=""><a href="https://www.upmedia.mg/news_info.php?SerialNo=134794">https://www.upmedia.mg/news_info.php?SerialNo=134794</a></p></div></article></body></html>

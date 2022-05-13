@@ -1,0 +1,694 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>vim</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="89d48877-eb25-486d-9813-344375394eb7" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🪐</span></div><h1 class="page-title">vim</h1></header><div class="page-body"><h1 id="a28fba5f-31ed-463d-bda6-0180cd7132e3" class=""><strong>前置作業</strong></h1><h2 id="93a3d76f-ef32-4fab-8b45-c6a086bff4e2" class="">安裝 <em>vim</em></h2><p id="b1ccb70f-559e-494f-8d70-8f78f0b42b81" class="">剛安裝好的 linux 系統上只有 vi，vi 預設不支援方向鍵移動光標，還有自動上色等功能。但是 <em>vim</em> 比 vi 強大很多很多很多 ( 真的很多，所以說三次 )，除了以上功能不用另外設定外，還支援多步復原/取消復原、同時編輯多個檔案等。</p><ul id="6b3bedaf-05cb-4578-8f2d-92d5e53cbeaa" class="bulleted-list"><li style="list-style-type:disc"><code>$ sudo apt-get install vim</code> # linux的安裝指令(常用)</li></ul><h2 id="3c1adb7f-bc0b-4fb9-82ba-f72c9490f5c0" class="">建立 vim 設定檔 .vimrc</h2><ul id="631128aa-371d-4f64-b396-ebdc1bb8aac1" class="bulleted-list"><li style="list-style-type:disc"><code>$ cd</code> # 移動到使用者的家目錄</li></ul><ul id="2df72ef1-963d-4632-b1ff-29ea14e17423" class="bulleted-list"><li style="list-style-type:disc"><code>$ vi .vimrc</code> # 建立新的vim設定檔</li></ul><h1 id="3cb86f49-c73e-4884-821a-d9221e23539c" class=""><strong>基本設定</strong></h1><p id="5a5e9400-85a1-4750-b807-a94533f7bcc6" class="">所有設定都可以在 vim 的 command-mode 中作即時變更，像是如果要關閉自動縮排對齊功能時，先按 <code>Esc</code> 離開 insert-mode，輸入 <code>:set noai</code> 就可以了。</p><h2 id="883bed94-06d4-464b-8475-ce75572b5ac9" class="">介面優化</h2><ul id="ca4b793e-a82d-4360-88d8-50dca1166034" class="bulleted-list"><li style="list-style-type:disc"><code>:set nu</code><ul id="70fc1f41-21c2-4afc-a082-e0ba79d71928" class="bulleted-list"><li style="list-style-type:circle"><strong>顯示行號：</strong>對於 debug 相當有幫助!</li></ul></li></ul><ul id="2c29e637-ced3-4f3a-b2b0-f9931c4fce79" class="bulleted-list"><li style="list-style-type:disc"><code>:set ai</code><ul id="fd7e89be-1708-4e54-b723-72babac750eb" class="bulleted-list"><li style="list-style-type:circle"><strong>自動對齊縮排：</strong>如果上一行有兩個 tab 的寬度，按 enter 繼續編輯下一行時會自動保留兩個 tab 鍵的寬度。</li></ul></li></ul><ul id="f7bfd471-1a38-4b82-b77e-a6e6979b6754" class="bulleted-list"><li style="list-style-type:disc"><code>:set cursorline</code><ul id="3d5160fb-c6a6-4fcc-a3aa-b3fae5e8fbf7" class="bulleted-list"><li style="list-style-type:circle"><strong>光標底線：</strong>光標所在的那一行會有底線，幫助尋找光標位置</li></ul></li></ul><ul id="8636d2d3-f401-4b0b-9ee7-435c84587b45" class="bulleted-list"><li style="list-style-type:disc"><code>:set bg=light</code><ul id="9338c1ce-e3ec-41d4-8192-7370b59289f5" class="bulleted-list"><li style="list-style-type:circle"><strong>上色模式-針對亮背景上色</strong></li></ul><ul id="39e6a8b1-0372-4d49-a25d-428be7d2fa4c" class="bulleted-list"><li style="list-style-type:circle">預設為亮背景(白色等)上色，但是終端機的初始背景色為深紫色，會出現文字失蹤 ( 例如註解為深藍色 ) 的情況。將這一行換成 <code>:set bg=dark</code> 即可。</li></ul></li></ul><ul id="35295b5e-290d-49aa-a5b5-b1818b90259f" class="bulleted-list"><li style="list-style-type:disc"><code>:set tabstop=4</code><ul id="a4713ed2-e11c-42df-8977-1a425b193499" class="bulleted-list"><li style="list-style-type:circle"><strong>縮排間隔數</strong> ( 預設為 8 個空白對齊 )</li></ul><ul id="3a9aae42-7696-4fe0-a067-e73633dce376" class="bulleted-list"><li style="list-style-type:circle">也就是說按一次 tab 鍵，游標會自動跳 4 格空白字元的寬度。雖有多個空格但實際上只有<strong>一個 tab 字元</strong>。</li></ul><ul id="e298dc3d-e1e3-467b-8da8-fa3f919dbc78" class="bulleted-list"><li style="list-style-type:circle">注意：也就是說，在其他環境下，看到 tab 字元，依舊是 8 個空白寬</li></ul></li></ul><ul id="ab18f7db-1702-4215-b82d-454b3dceb16f" class="bulleted-list"><li style="list-style-type:disc"><code>:set shiftwidth=4</code><ul id="5143171d-a6b0-42b3-8e0e-226909bf965d" class="bulleted-list"><li style="list-style-type:circle"><strong>自動縮排對齊間隔數：</strong>向右或向左一個縮排的寬度</li></ul></li></ul><p id="f100616c-c82c-41b8-9315-6a8199ca6a25" class="">以下可以斟酌使用</p><ul id="6f8a675c-b698-4f60-a9c7-3e27894c3e22" class="bulleted-list"><li style="list-style-type:disc"><code>:set mouse=a</code><ul id="61ffe61b-1625-4325-beac-29b284d167b1" class="bulleted-list"><li style="list-style-type:circle"><strong>啟用游標選取：</strong>游標可以直接選取文字，滾輪可以直接滑動頁面 ( 非移動游標 )。</li></ul><ul id="17427f7e-7c0d-40d0-baec-b08d1be6b522" class="bulleted-list"><li style="list-style-type:circle">可以取代用 <code>v</code> 選取字元的功能，配合 <code>ctrl+insert</code> ( 複製 ) 及 <code>shift+inset</code> ( 貼上 )，相當方便</li></ul></li></ul><ul id="b5bfe762-3c9a-465d-a8f2-9f5987d3bdd3" class="bulleted-list"><li style="list-style-type:disc"><code>:set mouse=&quot;&quot;</code><ul id="ac864b78-4510-4d2b-8e3e-ff9f6777f7ee" class="bulleted-list"><li style="list-style-type:circle"><strong>停用游標選取：</strong>游標無法選取文字，滾輪只會移動光標的位置。</li></ul></li></ul><ul id="53487d73-ab2f-4138-a021-875fdc179d25" class="bulleted-list"><li style="list-style-type:disc"><code>:set ruler</code><ul id="10e42ea3-6ff4-42eb-acb5-c0f0598eed6e" class="bulleted-list"><li style="list-style-type:circle">( 預設就有 ) 顯示右下角的 <code>行,列 目前在文件的位置 %</code> 的資訊</li></ul></li></ul><ul id="94ac2027-4c4d-4502-b97c-1f6cd298dc48" class="bulleted-list"><li style="list-style-type:disc"><code>:set backspace=2</code><ul id="1492afdd-e46d-4a63-b6bb-5a46ce0f00bf" class="bulleted-list"><li style="list-style-type:circle">( 預設就有 ) 在 insert 模式啟用 backspace 鍵</li></ul></li></ul><ul id="2ee1130b-fb4e-4e72-bd8c-ef5892f8b016" class="bulleted-list"><li style="list-style-type:disc"><code>:set formatoptions+=r</code><ul id="b511bd8a-64d9-4c08-8fed-63a5522aae67" class="bulleted-list"><li style="list-style-type:circle">自動註解(注意：若要貼上的文件某一行有註解，會因為此項設定而讓其以下每一行都變成註解)</li></ul></li></ul><ul id="ab7f2774-49ea-47cc-911e-1f53fab18ae7" class="bulleted-list"><li style="list-style-type:disc"><code>:set history=100</code><ul id="c0ea4b24-edac-4246-b0ea-1d51f965022b" class="bulleted-list"><li style="list-style-type:circle">保留 100 個使用過的指令</li></ul></li></ul><ul id="0e9de23a-2d53-4e5e-826f-8bde7af682c0" class="bulleted-list"><li style="list-style-type:disc"><code>:set incsearch</code><ul id="e28e1732-b14e-42cc-86ce-22adaece57ad" class="bulleted-list"><li style="list-style-type:circle">在關鍵字尚未完全輸入完畢前就顯示結果</li></ul><ul id="ed5a808a-0eaa-48ab-8d30-2fed350c53ca" class="bulleted-list"><li style="list-style-type:circle">如果覺得這功能太過<strong>熱心</strong>的話，可以使用 <code>ctrl+n</code> 來達成自動補完的功能</li></ul></li></ul><h2 id="b7e2d0b7-56eb-419c-b3bb-0d67f611d160" class="">Key Mapping</h2><p id="d36fb8ec-c8a6-44df-a0b4-4fc54d29dd37" class="">如果有使用過其他IDE，就會發現有個好用的功能，括號自動對齊，例如：只輸入左括號，IDE自動幫你完成右括號。可以使用key mapping來完成。</p><ul id="3c71db9f-2ed4-4619-8bbb-76c0345edbbf" class="bulleted-list"><li style="list-style-type:disc"><code>:inoremap ( ()&lt;Esc&gt;i</code><ul id="35b9493d-ba3d-4e7c-94a2-c85cf08bfd2e" class="bulleted-list"><li style="list-style-type:circle">在insert-mode下，只要輸入 <code>(</code> ，vim會先執行輸入 <code>()</code> → <code>&lt;Esc&gt;</code> 進入 Command-mode → <code>i</code> 進入 Insert-mode → 就會發現游標在 “(” “)” 之間了</li></ul><ul id="c9de12d4-ae4b-4bdd-83c7-32ffd9d3408e" class="bulleted-list"><li style="list-style-type:circle">其他類似應用還有：<ul id="611ca88e-84a4-4027-bead-29d8abbf8e4f" class="bulleted-list"><li style="list-style-type:square"><code>:inoremap &quot; &quot;&quot;&lt;Esc&gt;i</code></li></ul><ul id="6c408de4-518c-4dad-a5f1-ed721d62dacf" class="bulleted-list"><li style="list-style-type:square"><code>:inoremap &#x27; &#x27;&#x27;&lt;Esc&gt;i</code></li></ul><ul id="b195c8ab-3224-4582-9f94-3c035a3ceea7" class="bulleted-list"><li style="list-style-type:square"><code>:inoremap [ []&lt;Esc&gt;i</code></li></ul></li></ul></li></ul><ul id="34bad605-2343-44e3-ad8f-841095854d7a" class="bulleted-list"><li style="list-style-type:disc"><code>:inoremap {&lt;CR&gt; {&lt;CR&gt;}&lt;Esc&gt;ko</code><ul id="800b91b9-f679-4927-bbda-5c086d84b70c" class="bulleted-list"><li style="list-style-type:circle">在 coding 的過程中 <code>{}</code> 的使用量很大，所以這個 key mapping 對於 coding 相當有幫助!</li></ul><ul id="f1315335-7c7b-491c-8437-5ed19d3b46ee" class="bulleted-list"><li style="list-style-type:circle">在 insert-mode 時，當輸入 <code>{</code> ，vim會輸入 <code>{</code> → <code>&lt;CR&gt;</code> 換行 → 輸入 <code>}</code> → 進入command-mode → <code>k</code> 光標上移 → <code>o</code> 插入新的一行 → 自動增加縮排</li></ul></li></ul><ul id="13a806e1-642b-49e5-b46d-1ffe64a6c520" class="bulleted-list"><li style="list-style-type:disc"><code>:inoremap {{ {}&lt;ESC&gt;i</code><ul id="36fa8734-1ae3-4f58-aa1e-3db42dfa1908" class="bulleted-list"><li style="list-style-type:circle">另外一個用到 <code>{}</code> 的時機為陣列的宣告，為了避免跟用於函式宣告之類的大括號混淆，所以故意設成兩個連續鍵。也就是，如果輸入 <code>{</code> 後按 <code>Enter</code> 會執行 <code>:inoremap {&lt;CR&gt; {&lt;CR&gt;}&lt;Esc&gt;ko</code> ，而如果是按 <code>{{</code> 就會執行 <code>:inoremap {{ {}&lt;ESC&gt;i</code> 。如果在 <code>{</code> 後按其他未設定的組合鍵，則視為一般輸入。</li></ul></li></ul><h2 id="21c36db4-8632-4cfd-83a3-080df8a82b9b" class="">tab 與 space</h2><ul id="1cd1ea7c-98e9-45be-b175-3411905591e6" class="bulleted-list"><li style="list-style-type:disc"><code>:set expandtab</code><ul id="b0ca3149-d31c-435b-9947-dd9c1d1b8e04" class="bulleted-list"><li style="list-style-type:circle">輸入 <code>tab</code> 都會被轉換成 space，而對應的 space 數量由 <code>:set tabstop=x</code> 決定</li></ul><ul id="23960e89-f9e3-482f-88c7-1ebe787fa4c5" class="bulleted-list"><li style="list-style-type:circle">但是文件中已經存在的 <code>tab</code> 鍵不會受到影響，必須在 command mode 下輸入 <code>:retab</code> ，才會被替換掉</li></ul><ul id="1580ccfd-b190-49b9-b91d-5a8c98ba1c8a" class="bulleted-list"><li style="list-style-type:circle">如果只有當下那一行的 tab 要被替換成 space，則輸入 <code>:.retab</code></li></ul></li></ul><h1 id="4982eeda-7c3d-4591-b039-51be8dc2d300" class=""><strong>更多設定</strong></h1><h2 id="ae92e5ce-36b8-43b4-9657-07f46d9d9b5a" class="">輸入優化</h2><ul id="9ac3bba3-345b-4060-8edb-b904cd144c22" class="bulleted-list"><li style="list-style-type:disc"><code>filetype indent on</code> ( 好用! )<ul id="fa13e797-3a53-46db-8d63-3f0b68f88d41" class="bulleted-list"><li style="list-style-type:circle"><strong>啟用依照檔案類型，決定自動縮排樣式的功能</strong></li></ul><ul id="6132baf7-cafd-4a7f-8d1b-29e6a7a90543" class="bulleted-list"><li style="list-style-type:circle">例如：如果正在編輯的檔案是 <code>.c</code> 或 <code>.cpp</code> 檔，遇到 <code>{</code> 按下 <code>enter</code> ，會自動往右一縮排。如果是 <code>Makefile</code>，輸入完 target 按下 <code>enter</code> ，為了 rule 而自動往右一縮排。</li></ul></li></ul><h2 id="5564332a-65ab-40da-bc8e-6f9430bf0198" class="">行號顏色</h2><ul id="9a1c45c7-c950-4dd7-b594-2656d3f9c62c" class="bulleted-list"><li style="list-style-type:disc"><code>:hi LineNr cterm=bold ctermfg=DarkGrey ctermbg=NONE</code><ul id="efe1de01-082e-4721-bc09-711d33012e47" class="bulleted-list"><li style="list-style-type:circle"><strong>設定行號為：粗體，前景色為深灰色，沒有背景色</strong></li></ul><ul id="0f86d45e-c8a8-4dfb-9df2-4beba912ed54" class="bulleted-list"><li style="list-style-type:circle"><code>hi</code> 為 <code>highlight</code> 指令的縮寫，擁有同樣的效果</li></ul><ul id="c022d679-61f8-4a65-be03-dc608f59121a" class="bulleted-list"><li style="list-style-type:circle"><code>LineNr</code> 指定為 line number 的顏色設定</li></ul><ul id="b5cc02cf-766b-4671-b249-0d8f40fd1cf2" class="bulleted-list"><li style="list-style-type:circle"><code>cterm</code> 指的是爲 color terminal 的環境 ( 在 linux 桌面環境所開的 terminal ) 做設定，其他還有 <code>term</code> ( 一般 terminal，例如透過 putty 連上的工作環境 )、<code>gui</code>。</li></ul><ul id="cc7d0e54-0408-4318-a70e-83c367c508e7" class="bulleted-list"><li style="list-style-type:circle"><code>cterm</code> 支援的顏色列表，<a href="http://vimdoc.sourceforge.net/htmldoc/syntax.html#highlight-cterm">一共有 16 色</a></li></ul></li></ul><pre id="189793cd-789e-4cbc-a36a-71c68f7bbdcf" class="code code-wrap"><code>  NR-16   NR-8    COLOR NAME
+   0	    0	    Black
+   1	    4	    DarkBlue
+   2	    2	    DarkGreen
+   3	    6	    DarkCyan
+   4	    1	    DarkRed
+   5	    5	    DarkMagenta
+   6	    3	    Brown, DarkYellow
+   7	    7	    LightGray, LightGrey, Gray, Grey
+   8	    0*	    DarkGray, DarkGrey
+   9	    4*	    Blue, LightBlue
+   10	    2*	    Green, LightGreen
+   11	    6*	    Cyan, LightCyan
+   12	    1*	    Red, LightRed
+   13	    5*	    Magenta, LightMagenta
+   14	    3*	    Yellow, LightYellow
+   15	    7*	    White</code></pre><ul id="99c44fc5-9fae-4679-b642-bd6523b34a65" class="bulleted-list"><li style="list-style-type:disc"><code>:hi CursorLineNr cterm=bold ctermfg=Green ctermbg=NONE</code><ul id="d641aa7e-692c-4116-a43f-00f9137ed22b" class="bulleted-list"><li style="list-style-type:circle"><strong>設定游標所在的行號為：粗體，前景色為綠色，沒有背景色</strong></li></ul><ul id="c93544ac-df80-48ea-a015-19f7905f9945" class="bulleted-list"><li style="list-style-type:circle">配合 <code>:hi LineCr</code> 就可以很清楚的知道現在游標所在的位置</li></ul></li></ul><h1 id="7b56e6a8-c7d7-4e3b-a16d-beb1903c59aa" class=""><strong>例子</strong></h1><h2 id="ea6f56e6-7390-4560-ae93-4e4125da9300" class="">vim sublime Theme</h2><ul id="c0799a59-7606-4f62-878e-92d8bc0cb7b9" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/sickill/vim-monokai">vim-monokai</a></li></ul><ul id="3f79d91a-f5b4-4b37-b4b5-4174023a0aa8" class="bulleted-list"><li style="list-style-type:disc">Screenshot<figure id="3aac48a6-5646-439e-af82-3de256ae5096" class="image"><a href="https://camo.githubusercontent.com/66d46739895bdea648a10e286a6381943f876d04/68747470733a2f2f636c6f75642e6769746875622e636f6d2f646f776e6c6f6164732f7369636b696c6c2f76696d2d6d6f6e6f6b61692f76696d2d6d6f6e6f6b61692e706e67"><img src="https://camo.githubusercontent.com/66d46739895bdea648a10e286a6381943f876d04/68747470733a2f2f636c6f75642e6769746875622e636f6d2f646f776e6c6f6164732f7369636b696c6c2f76696d2d6d6f6e6f6b61692f76696d2d6d6f6e6f6b61692e706e67"/></a></figure></li></ul><h2 id="b6edd132-638c-4cb3-98c7-ef16459c5ed4" class="">微 Sublime 風</h2><ul id="efb511ca-9fe1-4892-9856-0fc88fa6569b" class="bulleted-list"><li style="list-style-type:disc">Screenshot<figure id="cca9fc6d-8030-4b5c-ad5c-5feefb24c514" class="image"><a href="http://wiki.csie.ncku.edu.tw/vimrc/highlight_ex1.PNG"><img src="http://wiki.csie.ncku.edu.tw/vimrc/highlight_ex1.PNG"/></a></figure></li></ul><ul id="b40320e7-dee5-4026-b377-d92447bdc36f" class="bulleted-list"><li style="list-style-type:disc">額外設定<ul id="398761a7-c4e3-4cc4-9688-106ee1a54486" class="bulleted-list"><li style="list-style-type:circle"><a href="https://github.com/octol/vim-cpp-enhanced-highlight">Additional vim c++ syntax-highlighting</a></li></ul><ul id="6d34db47-c4e5-4168-8c87-83b4f873c819" class="bulleted-list"><li style="list-style-type:circle">terminal 背景色設為 #002B36 ( solarized dark，很棒的配色，google 圖片可以找到很多漂亮的上色 )</li></ul></li></ul><ul id="769e6836-2c50-4a32-b542-f5572535410b" class="bulleted-list"><li style="list-style-type:disc">.vimrc</li></ul><pre id="32e18715-2f30-4b26-97ad-a030f5829f83" class="code code-wrap"><code>set nu
+set cursorline
+set tabstop=4
+set shiftwidth=4
+
+&quot; Color configuration
+set bg=dark
+color evening  &quot; Same as :colorscheme evening
+hi LineNr cterm=bold ctermfg=DarkGrey ctermbg=NONE
+hi CursorLineNr cterm=bold ctermfg=Green ctermbg=NONE</code></pre></div></article></body></html>

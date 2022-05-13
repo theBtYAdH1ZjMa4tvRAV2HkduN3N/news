@@ -1,0 +1,673 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>lsof</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="edc77db1-8e73-40f2-8fe3-40a5a3375f56" class="page sans"><header><h1 class="page-title">lsof</h1></header><div class="page-body"><p id="b8f9bed1-279e-4768-80ac-0876926e969f" class="">lsof
+指令，查詢系統上各行程所開啟的檔案。</p><p id="b6842aab-390d-46d7-bb00-65596e25d969" class="">在 Linux 系統之下，幾乎所有的系統資源都是以檔案的形式呈現的（包含一般檔案、目錄、連結檔、裝置檔、管線檔、網路 socket 等），所以對於管理者來說，若要查詢一個程式使用了哪些系統資源，就可以透過它開啟的檔案來得知。</p><p id="cc514031-7a58-4b54-b057-3f8a69b5404a" class="">lsof 指令可以用來查詢行程所開啟的檔案列表，這個小工具對於系統管理者來說非常實用，而且也非常重要，以下是這個工具的使用方式與範例。</p><p id="b2f66598-b838-4a0c-a8a1-b098d6f44cd1" class="">列出所有行程所開啟的檔案</p><p id="c898cfdd-2dcb-4142-bab3-4a6c46c7e5db" class="">直接執行 lsof 指令的話，可以列出系統上每一個行程所開啟的檔案列表：</p><h1 id="e84595a4-33f4-4ce5-9256-b7b696bf3a64" class="">列出所有行程所開啟的檔案</h1><p id="83fc8e04-495f-4d75-be50-7669c28e8a4e" class="">lsof</p><p id="f76e114d-972a-4c20-88ca-5bbaaea3e250" class="">不過由於輸出的資料量太大了，通常我們不太會這樣使用。
+查詢開啟指定檔案的行程</p><p id="c2cd5d88-084a-41b2-bd9d-122189ab1158" class="">如果想要查詢目前正在開啟指定檔案的行程，可以在執行 lsof 時直接加上檔案的名稱與路徑。</p><p id="3c339924-2862-44da-a612-09fde8fb9725" class="">以 GVim 編輯器來說，當它開啟檔案進行編輯時，會自動開啟一個 .swp 的隱藏檔，我們可以使用以下指令來驗證：</p><h1 id="f7ef8f42-5157-44b8-9c6f-94e44b19b36d" class="">列出所有行程所開啟的檔案</h1><p id="b18f5ffd-1d7e-4d19-a794-431f7c3e2538" class="">lsof .my_file.txt.swp</p><p id="1fe70784-cfd3-4b4b-aef3-158d490a8f92" class="">COMMAND  PID   USER   FD   TYPE DEVICE SIZE/OFF   NODE NAME
+gvim    7167 gtwang   14u   REG    8,6    12288 786944 .my_file.txt.swp</p><p id="b17e392f-b812-474b-9803-5634563d0a36" class="">列出指定使用者所開啟的檔案</p><p id="1f905444-260f-4326-9143-0fbc5aefb2c7" class="">若要讓 lsof 列出指定用者所開啟的所有檔案，可以使用 -u 參數指定使用者名稱：</p><h1 id="4b3076a9-7e75-4448-9409-227ccf86cd50" class="">列出 gtwang 使用者所開啟的檔案</h1><p id="72131ebe-8de3-46c3-808d-507450a8e464" class="">lsof -u gtwang</p><p id="6e94d020-c0a7-46d1-a1cc-765c10b7fd58" class="">若要一次列出多位使用者所開啟的檔案，可以使用逗號分隔，或是使用多個 -u 參數來指定：</p><h1 id="5050e851-aacc-4cd2-9a6a-5f82a77b4529" class="">列出多位使用者所開啟的檔案</h1><p id="082c3079-cc0f-41a3-bc90-e49d087cfe02" class="">lsof -u user1,user2,user3</p><h1 id="f61e1986-ce7b-4f66-a711-4cf7f337121e" class="">列出多位使用者所開啟的檔案</h1><p id="ee2e40fa-e73e-4792-812f-aecfe95660a8" class="">lsof -u user1 -u user2 -u user3</p><p id="ddd16f68-133c-4742-9b4c-f6db9b9a6a20" class="">列出指定程式所開啟的檔案</p><p id="7c7d4371-d7fe-4a6b-9a53-21130938e7a9" class="">如果想要列出指定程式所開啟的檔案，可以使用 -c 參數指定程式的名稱，例如列出 httpd 這個網頁伺服器所開啟的檔案：</p><h1 id="aba99839-8f41-4c80-afb3-fb67f7288994" class="">列出 httpd 伺服器所開啟的檔案</h1><p id="ce178452-0fb8-4661-9cd9-21501929eac4" class="">lsof -c httpd</p><p id="c225dd30-4f30-4306-b118-cad2344eb36e" class="">若要列出多個程式所開啟的檔案，可以使用多個 -c 參數來指定：</p><h1 id="29209d54-e0d2-4bad-8f30-4a3f0fe94bbf" class="">列出多個程式所開啟的檔案</h1><p id="3ac2cb9f-2207-4f44-aa9b-b187bac88949" class="">lsof -c java -c httpd</p><p id="3021f2eb-f31d-4901-b122-75c907dcef2f" class="">多條件 AND 運算</p><p id="224fc17c-29b9-46cb-8af3-f499719ef6fb" class="">lsof 可以同時指定多個篩選條件，預設的狀況下多個條件之間會以 OR 運算來結合，假設我們想要列出 root 使用者所開啟的檔案，或是 java 這個應用程式所開啟的檔案，就可以這樣寫：</p><h1 id="ea83534b-2703-4ab7-8974-246ce3ebed2b" class="">多個條件（OR 運算）</h1><p id="7d965e81-a87f-4df8-9d1d-64e0f0f9d5b3" class="">lsof -u root -c java</p><p id="5deabe37-f79c-4536-bdd4-b005eb48eff0" class="">而如果我們想要以 AND 運算來結合多個條件，可加上 -a 參數。例如若要列出 root 使用者執行 java 程式所開啟的檔案，可以這樣寫：</p><h1 id="b76905cd-2b2f-4b20-a5ca-fef97491b399" class="">多個條件（AND 運算）</h1><p id="2321e575-db18-449f-87ce-e5907a47bb45" class="">lsof -a -u root -c java</p><p id="78f3fb5e-7330-48fe-a764-25406de974b9" class="">排除條件</p><p id="9b0fd3e6-12ec-42b9-a86f-18725ec63111" class="">如果想要排除特定的使用者所開啟的檔案，可以在使用者名稱之前加上 ^ 符號：</p><h1 id="2d2afccf-a3c6-49f3-9c2c-a8ecc9748069" class="">列出非 root 使用者所開啟的檔案</h1><p id="782585ee-7c19-4247-9a2a-a73f8a778625" class="">lsof -u ^root</p><p id="6a58a7b7-0906-44a5-8b89-86d2fb1a8cd4" class="">這樣就會列出除了 root 之外，所有使用者所開啟的檔案。
+根據 PID 列出所開啟的檔案</p><p id="7efb81d1-dadd-4524-be69-ba48c9cae1e9" class="">若要列出指定 PID 的行程所開啟的檔案，可以使用 -p 參數來指定 PID：</p><h1 id="3a7d2c53-c965-40c4-a3f6-1174b8fcbbda" class="">列出 PID 為 14662 的行程，所開啟的檔案</h1><p id="83ce07af-796a-4d1a-87d2-a408f0fea356" class="">lsof -p 14662</p><p id="6356c86e-f0da-443d-bb86-b74d56288dba" class="">若要同時根據多個 PID 列出開啟的檔案，一樣可以用逗號分隔多個 PID：</p><h1 id="a4e77017-05ad-47ae-9fe9-fefecd40caa1" class="">根據多個 PID 列出開啟的檔案</h1><p id="64867e7a-2751-49a4-a5fc-01ea8e67f8ad" class="">lsof -p 14662,14678,14979</p><p id="5ace79e5-515e-4398-867d-efdec8e93651" class="">網路連線</p><p id="c3a79b90-4671-4b99-ad3f-58263b918b49" class="">lsof 的 -i 參數可以用來查詢所有的網路連線：</p><h1 id="881ee135-111c-45b9-806d-cd781ef78a67" class="">列出所有網路連線</h1><p id="9f0dfa91-e689-47c7-b689-b3e2ae27f37a" class="">lsof -i</p><p id="d35570b5-c201-4342-a127-427e067e1337" class="">若想只想要列出 TCP 或 UDP 的網路連線，可以在 -i 參數之後指定 tcp 或 udp：</p><h1 id="af109b45-7f10-4f87-bc86-b5679c401a35" class="">列出所有 TCP 網路連線</h1><p id="0b8c66c1-fdc6-4bf6-9b62-9cb6a61ca229" class="">lsof -i tcp</p><h1 id="446f505f-7e9d-4e3d-9c6f-e66b7568c444" class="">列出所有 UDP 網路連線</h1><p id="3294930d-408d-4382-8ff8-27e20f91e13b" class="">lsof -i udp</p><p id="5a7d7416-13e7-486f-9ec1-4989e03128b7" class="">亦可指定連接埠，例如列出網頁伺服器的網路連線：</p><h1 id="8b0d635d-aa73-4df6-8e99-110a91cd7a2e" class="">列出 80 連接埠的網路連線</h1><p id="9f619d0a-95c0-4ec9-ab3a-cf2b5d559745" class="">lsof -i :80</p><p id="73bd8ea5-0953-448b-87c3-d74948426026" class="">這是一些其他的範例：</p><h1 id="3d0776c2-f5d7-4e03-be5b-3cb946a1d2c2" class="">列出 SMTP 的網路連線</h1><p id="6b879f4e-49ed-4c1d-ba2b-e119e80ed947" class="">lsof -i :smtp</p><h1 id="f685eaa9-e67c-4a88-8bca-5509e44dae9d" class="">列出 3642 連接埠的 TCP 連線</h1><p id="3b84c010-3919-4e15-871b-853c5622f48d" class="">lsof -i tcp:3642</p><h1 id="a349d2b3-32b8-4e99-b1ce-49594f8d239a" class="">列出 1 到 1024 連接埠的 TCP 網路連線</h1><p id="d9ad4a63-4982-4bdf-8eab-7dadcf97fc08" class="">lsof -i :1-1024</p><p id="527bf994-a75a-4914-bda0-fa5966f2b13e" class="">若要列出所有處於 LISTEN 狀態的 TCP 網路連線，可以執行：</p><h1 id="578a46a7-6da7-474c-bad2-a2da92fbaa52" class="">列出所有處於 LISTEN 狀態的 TCP 網路連線</h1><p id="4a078858-bc52-4295-bd3b-057cf3322ed7" class="">lsof -i TCP -s TCP:LISTEN</p><p id="85253f31-9e6f-4d25-827e-98033ae397cd" class="">列出已建立的 TCP 網路連線：</p><h1 id="ca3c8b8c-264c-4a3a-9c1e-fb0455121de1" class="">列出已建立的 TCP 網路連線</h1><p id="b00b0d44-bf6b-4f85-b165-a99f111a4a66" class="">lsof -i TCP -s TCP:ESTABLISHED</p><p id="1cd4e7ce-3854-4f0f-86f1-013cfd27ed99" class=""><a href="https://blog.gtwang.org/linux/linux-lsof-command-list-open-files-tutorial-examples/">https://blog.gtwang.org/linux/linux-lsof-command-list-open-files-tutorial-examples/</a></p></div></article></body></html>

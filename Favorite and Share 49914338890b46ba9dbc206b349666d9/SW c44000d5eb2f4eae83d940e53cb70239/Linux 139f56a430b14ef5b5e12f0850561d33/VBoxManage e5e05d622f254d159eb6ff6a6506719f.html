@@ -1,0 +1,1186 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>VBoxManage</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e5e05d62-2f25-4d15-9eb6-ff6a6506719f" class="page sans"><header><h1 class="page-title">VBoxManage</h1></header><div class="page-body"><h1 id="7303b02f-c8c3-4e81-815b-d7e2d285a876" class="">VBoxManage</h1><ul id="fa4741f7-4cff-427e-87c4-fa8b17d02d8a" class="bulleted-list"><li style="list-style-type:disc">cmd<ul id="6eef5507-6e16-4d83-8e34-9353689f5117" class="bulleted-list"><li style="list-style-type:circle">VBoxManage list runningvms<ul id="c52076e2-f19b-499f-91f2-92d3ea1cf141" class="bulleted-list"><li style="list-style-type:square">VBoxManage list -l runningvms</li></ul></li></ul><ul id="b00a4488-bc4a-41b5-81de-4fb2b218c405" class="bulleted-list"><li style="list-style-type:circle">VBoxManage list vms</li></ul><ul id="f2d8aeae-34a2-4c74-9cd1-ef4127b8a740" class="bulleted-list"><li style="list-style-type:circle">VBoxManage startvm U2 --type headless</li></ul></li></ul><ul id="d29adbd3-ce33-4c3a-80d8-64c72c29dc9b" class="bulleted-list"><li style="list-style-type:disc">create<ul id="679ae122-a7fe-4e29-96d0-8da7bbcf7f76" class="bulleted-list"><li style="list-style-type:circle">VBoxManage list ostypes</li></ul><ul id="97fae05a-cf30-4d00-aa3d-ee6e96845989" class="bulleted-list"><li style="list-style-type:circle">VBoxManage createvm --name OracleLinux6Test --ostype Oracle_64 --register</li></ul><ul id="3f9965e3-94c7-403c-9b3c-81c61417f8a2" class="bulleted-list"><li style="list-style-type:circle">VBoxManage showvminfo OracleLinux6Test</li></ul><ul id="f8e904ce-a026-4e2f-b5ee-6b2a5baf7508" class="bulleted-list"><li style="list-style-type:circle">VBoxManage modifyvm OracleLinux6Test --cpus 2 --memory 2048 --vram 12</li></ul><ul id="2914eaa1-924d-4d3d-9724-6337e5d60e9a" class="bulleted-list"><li style="list-style-type:circle">VBoxManage showvminfo OracleLinux6Test | grep &quot;Memory size&quot;</li></ul><ul id="b722dc06-e9b8-49af-981d-db88f0cd08e0" class="bulleted-list"><li style="list-style-type:circle">VBoxManage modifyvm OracleLinux6Test --nic1 bridged --bridgeadapter1 eth0</li></ul><ul id="47c226b0-8ce0-4cbe-b6be-d1e22072fb2c" class="bulleted-list"><li style="list-style-type:circle">VBoxManage createhd --filename /path/to/hard_drive_image/OracleLinux6Test.vdi --size 5120
+--variant Standard</li></ul><ul id="d38537df-eb8f-441d-ad75-7ce1681aa36d" class="bulleted-list"><li style="list-style-type:circle">VBoxManage storagectl OracleLinux6Test --name &quot;SATA Controller&quot; --add sata --bootable on</li></ul><ul id="3f9a7e38-b959-4ea8-b64b-a55e9170c208" class="bulleted-list"><li style="list-style-type:circle">VBoxManage storageattach OracleLinux6Test --storagectl &quot;SATA Controller&quot;
+--port 0 --device 0 --type hdd
+--medium /path/to/hard_drive_image/OracleLinux6Test.vdi</li></ul><ul id="47200030-9db4-48c2-a133-8a0e1bc7924c" class="bulleted-list"><li style="list-style-type:circle">VBoxManage storagectl OracleLinux6Test --name &quot;IDE Controller&quot; --add ide</li></ul><ul id="73735d32-1acc-4bdb-9470-2f6ad23d87b4" class="bulleted-list"><li style="list-style-type:circle">VBoxManage storageattach OracleLinux6Test --storagectl &quot;IDE Controller&quot;
+--port 0 --device 0 --type dvddrive --medium host:/dev/dvd</li></ul><ul id="de08886d-0dca-4192-965e-bef4bd8ebc80" class="bulleted-list"><li style="list-style-type:circle">VBoxManage showvminfo OracleLinux6Test | grep &quot;IDE Controller&quot;</li></ul><ul id="5d00ef1e-9a83-478f-8206-c4a98a96b8b1" class="bulleted-list"><li style="list-style-type:circle">VBoxManage startvm OracleLinux6Test</li></ul><ul id="cb52576e-6471-48dc-b58e-d65aaaa96faf" class="bulleted-list"><li style="list-style-type:circle">VBoxManage controlvm OracleLinux6Test acpipowerbutton</li></ul><ul id="6ed3d0fa-7d54-433a-b3c9-4bba286a5f36" class="bulleted-list"><li style="list-style-type:circle">VBoxManage controlvm OracleLinux6Test poweroff</li></ul><ul id="1016beb2-d981-41d9-a9c2-c1284249623f" class="bulleted-list"><li style="list-style-type:circle">VBoxManage storageattach OracleLinux6Test --storagectl &quot;IDE Controller&quot;
+--port 0 --device 0 --type dvddrive --medium none</li></ul><ul id="eaf76dda-9d86-4e9b-b4b7-dff56f12b964" class="bulleted-list"><li style="list-style-type:circle">VBoxManage modifyvm OracleLinux6Test --vrde on</li></ul><ul id="3c28f9a9-8a6a-462d-a753-ebeb0a005e73" class="bulleted-list"><li style="list-style-type:circle">VBoxManage showvminfo testMachine | grep VRDE</li></ul><ul id="62315c53-5797-4205-81a7-cba4173e40bf" class="bulleted-list"><li style="list-style-type:circle">VBoxManage startvm OracleLinux6Test --type headless</li></ul><ul id="505ef64b-b80a-44fa-bbec-4f669b03a820" class="bulleted-list"><li style="list-style-type:circle">VBoxManage import /path/to/OracleLinux65.ova --dry-run</li></ul><ul id="4fa8b550-0fae-49a5-87b8-a8cdc3f58be6" class="bulleted-list"><li style="list-style-type:circle">VBoxManage import /path/to/OracleLinux65.ova --vsys 0 --memory 1024 --cpus 2 --eula accept</li></ul><ul id="726a91c4-556f-41c1-979b-9d5fcaa20bad" class="bulleted-list"><li style="list-style-type:circle">VBoxManage controlvm OracleLinux6Test acpipowerbutton</li></ul></li></ul><ul id="7e6eeef8-d03f-440c-8f8f-9fbc1c2a61e2" class="bulleted-list"><li style="list-style-type:disc">(<a href="https://www.oracle.com/technetwork/articles/servers-storage-admin/manage-vbox-cli-2264359.html">https://www.oracle.com/technetwork/articles/servers-storage-admin/manage-vbox-cli-2264359.html</a>)</li></ul><p id="4e6da139-7640-4d10-b80f-b6f23795239e" class="">Usage:</p><p id="edbd7eb5-2661-4fb2-960f-1bb70f5ed095" class="">VBoxManage [&lt;general option&gt;] &lt;command&gt;</p><p id="3b9aaf3e-b51b-4fbd-b729-f03365cb4085" class="">General Options:</p><p id="979f3369-b358-480b-9809-3d8d097ee6e9" class="">[-v|--version]            print version number and exit
+[-q|--nologo]             suppress the logo
+[--settingspw &lt;pw&gt;]       provide the settings password
+[--settingspwfile &lt;file&gt;] provide a file containing the settings password
+[@&lt;response-file&gt;]        load arguments from the given response file (bourne style)</p><p id="67375c20-61a0-4e3d-8e62-3b913e767dcc" class="">Commands:</p><p id="7095d395-f41c-486c-909b-f7e59fd91ffd" class="">list [--long|-l] [--sorted|-s]          vms|runningvms|ostypes|hostdvds|hostfloppies|
+intnets|bridgedifs|hostonlyifs|natnets|dhcpservers|
+hostinfo|hostcpuids|hddbackends|hdds|dvds|floppies|
+usbhost|usbfilters|systemproperties|extpacks|
+groups|webcams|screenshotformats</p><p id="8368bce9-d9f5-48bc-8e27-bdfe0e84532a" class="">showvminfo                &lt;uuid|vmname&gt; [--details]
+[--machinereadable]
+showvminfo                &lt;uuid|vmname&gt; --log &lt;idx&gt;</p><p id="7f04687e-fa6e-4c4a-b931-b5cee6531067" class="">registervm                &lt;filename&gt;</p><p id="97e3477d-a70a-488c-8c98-cc9d0ccee69a" class="">unregistervm              &lt;uuid|vmname&gt; [--delete]</p><p id="e5f605f4-4669-4e78-b428-c776b0f877d5" class="">createvm                  --name &lt;name&gt;
+[--groups &lt;group&gt;, ...]
+[--ostype &lt;ostype&gt;]
+[--register]
+[--basefolder &lt;path&gt;]
+[--uuid &lt;uuid&gt;]</p><p id="3e52a2c3-c45e-4811-8126-46afcbe95a99" class="">modifyvm                  &lt;uuid|vmname&gt;
+[--name &lt;name&gt;]
+[--groups &lt;group&gt;, ...]
+[--description &lt;desc&gt;]
+[--ostype &lt;ostype&gt;]
+[--iconfile &lt;filename&gt;]
+[--memory &lt;memorysize in MB&gt;]
+[--pagefusion on|off]
+[--vram &lt;vramsize in MB&gt;]
+[--acpi on|off]
+[--pciattach 03:04.0]
+[--pciattach 03:04.0@02:01.0]
+[--pcidetach 03:04.0]
+[--ioapic on|off]
+[--hpet on|off]
+[--triplefaultreset on|off]
+[--apic on|off]
+[--x2apic on|off]
+[--paravirtprovider none|default|legacy|minimal|
+hyperv|kvm]
+[--paravirtdebug &lt;key=value&gt; [,&lt;key=value&gt; ...]]
+[--hwvirtex on|off]
+[--nestedpaging on|off]
+[--largepages on|off]
+[--vtxvpid on|off]
+[--vtxux on|off]
+[--pae on|off]
+[--longmode on|off]
+[--ibpb-on-vm-exit on|off]
+[--ibpb-on-vm-entry on|off]
+[--spec-ctrl on|off]
+[--l1d-flush-on-sched on|off]
+[--l1d-flush-on-vm-entry on|off]
+[--cpu-profile &quot;host|Intel 80[86|286|386]&quot;]
+[--cpuid-portability-level &lt;0..3&gt;
+[--cpuid-set &lt;leaf[:subleaf]&gt; &lt;eax&gt; &lt;ebx&gt; &lt;ecx&gt; &lt;edx&gt;]
+[--cpuid-remove &lt;leaf[:subleaf]&gt;]
+[--cpuidremoveall]
+[--hardwareuuid &lt;uuid&gt;]
+[--cpus &lt;number&gt;]
+[--cpuhotplug on|off]
+[--plugcpu &lt;id&gt;]
+[--unplugcpu &lt;id&gt;]
+[--cpuexecutioncap &lt;1-100&gt;]
+[--rtcuseutc on|off]
+[--graphicscontroller none|vboxvga|vmsvga]
+[--monitorcount &lt;number&gt;]
+[--accelerate3d on|off]
+[--accelerate2dvideo on|off]
+[--firmware bios|efi|efi32|efi64]
+[--chipset ich9|piix3]
+[--bioslogofadein on|off]
+[--bioslogofadeout on|off]
+[--bioslogodisplaytime &lt;msec&gt;]
+[--bioslogoimagepath &lt;imagepath&gt;]
+[--biosbootmenu disabled|menuonly|messageandmenu]
+[--biosapic disabled|apic|x2apic]
+[--biossystemtimeoffset &lt;msec&gt;]
+[--biospxedebug on|off]
+[--boot&lt;1-4&gt; none|floppy|dvd|disk|net&gt;]
+[--nic&lt;1-N&gt; none|null|nat|bridged|intnet|hostonly|
+generic|natnetwork]
+[--nictype&lt;1-N&gt; Am79C970A|Am79C973|
+82540EM|82543GC|82545EM|
+virtio]
+[--cableconnected&lt;1-N&gt; on|off]
+[--nictrace&lt;1-N&gt; on|off]
+[--nictracefile&lt;1-N&gt; &lt;filename&gt;]
+[--nicproperty&lt;1-N&gt; name=[value]]
+[--nicspeed&lt;1-N&gt; &lt;kbps&gt;]
+[--nicbootprio&lt;1-N&gt; &lt;priority&gt;]
+[--nicpromisc&lt;1-N&gt; deny|allow-vms|allow-all]
+[--nicbandwidthgroup&lt;1-N&gt; none|&lt;name&gt;]
+[--bridgeadapter&lt;1-N&gt; none|&lt;devicename&gt;]
+[--hostonlyadapter&lt;1-N&gt; none|&lt;devicename&gt;]
+[--intnet&lt;1-N&gt; &lt;network name&gt;]
+[--nat-network&lt;1-N&gt; &lt;network name&gt;]
+[--nicgenericdrv&lt;1-N&gt; &lt;driver&gt;
+[--natnet&lt;1-N&gt; &lt;network&gt;|default]
+[--natsettings&lt;1-N&gt; [&lt;mtu&gt;],[&lt;socksnd&gt;],
+[&lt;sockrcv&gt;],[&lt;tcpsnd&gt;],
+[&lt;tcprcv&gt;]]
+[--natpf&lt;1-N&gt; [&lt;rulename&gt;],tcp|udp,[&lt;hostip&gt;],
+&lt;hostport&gt;,[&lt;guestip&gt;],&lt;guestport&gt;]
+[--natpf&lt;1-N&gt; delete &lt;rulename&gt;]
+[--nattftpprefix&lt;1-N&gt; &lt;prefix&gt;]
+[--nattftpfile&lt;1-N&gt; &lt;file&gt;]
+[--nattftpserver&lt;1-N&gt; &lt;ip&gt;]
+[--natbindip&lt;1-N&gt; &lt;ip&gt;
+[--natdnspassdomain&lt;1-N&gt; on|off]
+[--natdnsproxy&lt;1-N&gt; on|off]
+[--natdnshostresolver&lt;1-N&gt; on|off]
+[--nataliasmode&lt;1-N&gt; default|[log],[proxyonly],
+[sameports]]
+[--macaddress&lt;1-N&gt; auto|&lt;mac&gt;]
+[--mouse ps2|usb|usbtablet|usbmultitouch]
+[--keyboard ps2|usb
+[--uart&lt;1-N&gt; off|&lt;I/O base&gt; &lt;IRQ&gt;]
+[--uartmode&lt;1-N&gt; disconnected|
+server &lt;pipe&gt;|
+client &lt;pipe&gt;|
+tcpserver &lt;port&gt;|
+tcpclient hostname:port|
+file &lt;file&gt;|
+&lt;devicename&gt;]
+[--lpt&lt;1-N&gt; off|&lt;I/O base&gt; &lt;IRQ&gt;]
+[--lptmode&lt;1-N&gt; &lt;devicename&gt;]
+[--guestmemoryballoon &lt;balloonsize in MB&gt;]
+[--audio none|null|oss|alsa|pulse]
+[--audioin on|off]
+[--audioout on|off]
+[--audiocontroller ac97|hda|sb16]
+[--audiocodec stac9700|ad1980|stac9221|sb16]
+[--clipboard disabled|hosttoguest|guesttohost|
+bidirectional]
+[--draganddrop disabled|hosttoguest]
+[--vrde on|off]
+[--vrdeextpack default|&lt;name&gt;
+[--vrdeproperty &lt;name=[value]&gt;]
+[--vrdeport &lt;hostport&gt;]
+[--vrdeaddress &lt;hostip&gt;]
+[--vrdeauthtype null|external|guest]
+[--vrdeauthlibrary default|&lt;name&gt;
+[--vrdemulticon on|off]
+[--vrdereusecon on|off]
+[--vrdevideochannel on|off]
+[--vrdevideochannelquality &lt;percent&gt;]
+[--usb on|off]
+[--usbehci on|off]
+[--usbxhci on|off]
+[--usbrename &lt;oldname&gt; &lt;newname&gt;]
+[--snapshotfolder default|&lt;path&gt;]
+[--teleporter on|off]
+[--teleporterport &lt;port&gt;]
+[--teleporteraddress &lt;address|empty&gt;
+[--teleporterpassword &lt;password&gt;]
+[--teleporterpasswordfile &lt;file&gt;|stdin]
+[--tracing-enabled on|off]
+[--tracing-config &lt;config-string&gt;]
+[--tracing-allow-vm-access on|off]
+[--usbcardreader on|off]
+[--autostart-enabled on|off]
+[--autostart-delay &lt;seconds&gt;]
+[--videocap on|off]
+[--videocapscreens all|&lt;screen ID&gt; [&lt;screen ID&gt; ...]]
+[--videocapfile &lt;filename&gt;]
+[--videocapres &lt;width&gt; &lt;height&gt;]
+[--videocaprate &lt;rate&gt;]
+[--videocapfps &lt;fps&gt;]
+[--videocapmaxtime &lt;ms&gt;]
+[--videocapmaxsize &lt;MB&gt;]
+[--videocapopts &lt;key=value&gt; [,&lt;key=value&gt; ...]]
+[--defaultfrontend default|&lt;name&gt;]</p><p id="3ce68679-7415-49bd-9f8f-790eecf10e8c" class="">clonevm                   &lt;uuid|vmname&gt;
+[--snapshot &lt;uuid&gt;|&lt;name&gt;]
+[--mode machine|machineandchildren|all]
+[--options link|keepallmacs|keepnatmacs|
+keepdisknames]
+[--name &lt;name&gt;]
+[--groups &lt;group&gt;, ...]
+[--basefolder &lt;basefolder&gt;]
+[--uuid &lt;uuid&gt;]
+[--register]</p><p id="5e9518fa-4aa4-4f4c-b476-7e09c65dc62c" class="">import                    &lt;ovfname/ovaname&gt;
+[--dry-run|-n]
+[--options keepallmacs|keepnatmacs|importtovdi]
+[more options]
+(run with -n to have options displayed
+for a particular OVF)</p><p id="aae3c743-1138-4086-ab68-6cb0fa3864de" class="">export                    &lt;machines&gt; --output|-o &lt;name&gt;.&lt;ovf/ova/tar.gz&gt;
+[--legacy09|--ovf09|--ovf10|--ovf20|--opc10]
+[--manifest]
+[--iso]
+[--options manifest|iso|nomacs|nomacsbutnat]
+[--vsys &lt;number of virtual system&gt;]
+[--product &lt;product name&gt;]
+[--producturl &lt;product url&gt;]
+[--vendor &lt;vendor name&gt;]
+[--vendorurl &lt;vendor url&gt;]
+[--version &lt;version info&gt;]
+[--description &lt;description info&gt;]
+[--eula &lt;license text&gt;]
+[--eulafile &lt;filename&gt;]</p><p id="cce958b1-c40a-4486-a6f9-a098c357a3de" class="">startvm                   &lt;uuid|vmname&gt;...
+[--type gui|sdl|headless|separate]
+[-E|--putenv &lt;NAME&gt;[=&lt;VALUE&gt;]]</p><p id="9f8308f7-548a-48b8-8e26-8de595ad2307" class="">controlvm                 &lt;uuid|vmname&gt;
+pause|resume|reset|poweroff|savestate|
+acpipowerbutton|acpisleepbutton|
+keyboardputscancode &lt;hex&gt; [&lt;hex&gt; ...]|
+keyboardputstring &lt;string1&gt; [&lt;string2&gt; ...]|
+keyboardputfile &lt;filename&gt;|
+setlinkstate&lt;1-N&gt; on|off |
+nic&lt;1-N&gt; null|nat|bridged|intnet|hostonly|generic|
+natnetwork [&lt;devicename&gt;] |
+nictrace&lt;1-N&gt; on|off |
+nictracefile&lt;1-N&gt; &lt;filename&gt; |
+nicproperty&lt;1-N&gt; name=[value] |
+nicpromisc&lt;1-N&gt; deny|allow-vms|allow-all |
+natpf&lt;1-N&gt; [&lt;rulename&gt;],tcp|udp,[&lt;hostip&gt;],
+&lt;hostport&gt;,[&lt;guestip&gt;],&lt;guestport&gt; |
+natpf&lt;1-N&gt; delete &lt;rulename&gt; |
+guestmemoryballoon &lt;balloonsize in MB&gt; |
+usbattach &lt;uuid&gt;|&lt;address&gt;
+[--capturefile &lt;filename&gt;] |
+usbdetach &lt;uuid&gt;|&lt;address&gt; |
+audioin on|off |
+audioout on|off |
+clipboard disabled|hosttoguest|guesttohost|
+bidirectional |
+draganddrop disabled|hosttoguest |
+vrde on|off |
+vrdeport &lt;port&gt; |
+vrdeproperty &lt;name=[value]&gt; |
+vrdevideochannelquality &lt;percent&gt; |
+setvideomodehint &lt;xres&gt; &lt;yres&gt; &lt;bpp&gt;
+[[&lt;display&gt;] [enabled:yes|no |
+[&lt;xorigin&gt; &lt;yorigin&gt;]]] |
+screenshotpng &lt;file&gt; [display] |
+videocap on|off |
+videocapscreens all|none|&lt;screen&gt;,[&lt;screen&gt;...] |
+videocapfile &lt;file&gt;
+videocapres &lt;width&gt;x&lt;height&gt;
+videocaprate &lt;rate&gt;
+videocapfps &lt;fps&gt;
+videocapmaxtime &lt;ms&gt;
+videocapmaxsize &lt;MB&gt;
+setcredentials &lt;username&gt;
+--passwordfile &lt;file&gt; | &lt;password&gt;
+&lt;domain&gt;
+[--allowlocallogon &lt;yes|no&gt;] |
+teleport --host &lt;name&gt; --port &lt;port&gt;
+[--maxdowntime &lt;msec&gt;]
+[--passwordfile &lt;file&gt; |
+--password &lt;password&gt;] |
+plugcpu &lt;id&gt; |
+unplugcpu &lt;id&gt; |
+cpuexecutioncap &lt;1-100&gt;
+webcam &lt;attach [path [settings]]&gt; | &lt;detach [path]&gt; | &lt;list&gt;
+addencpassword &lt;id&gt;
+&lt;password file&gt;|-
+[--removeonsuspend &lt;yes|no&gt;]
+removeencpassword &lt;id&gt;
+removeallencpasswords</p><p id="9eceedf7-f3e2-4ffe-8698-ac2660f8f245" class="">discardstate              &lt;uuid|vmname&gt;</p><p id="faf3d8af-d647-46b9-8baf-2688252f0fe1" class="">adoptstate                &lt;uuid|vmname&gt; &lt;state_file&gt;</p><p id="9ebd57d1-ecfb-472e-b5a8-40970dd59b89" class="">snapshot                  &lt;uuid|vmname&gt;
+take &lt;name&gt; [--description &lt;desc&gt;] [--live]
+[--uniquename Number,Timestamp,Space,Force] |
+delete &lt;uuid|snapname&gt; |
+restore &lt;uuid|snapname&gt; |
+restorecurrent |
+edit &lt;uuid|snapname&gt;|--current
+[--name &lt;name&gt;]
+[--description &lt;desc&gt;] |
+list [--details|--machinereadable] |
+showvminfo &lt;uuid|snapname&gt;</p><p id="b4d50f71-cb52-4a36-8aab-8a977e5aad46" class="">closemedium               [disk|dvd|floppy] &lt;uuid|filename&gt;
+[--delete]</p><p id="327b1c10-4f0a-4d7f-946b-fdfa2addbed3" class="">storageattach             &lt;uuid|vmname&gt;
+--storagectl &lt;name&gt;
+[--port &lt;number&gt;]
+[--device &lt;number&gt;]
+[--type dvddrive|hdd|fdd]
+[--medium none|emptydrive|additions|
+&lt;uuid|filename&gt;|host:&lt;drive&gt;|iscsi]
+[--mtype normal|writethrough|immutable|shareable|
+readonly|multiattach]
+[--comment &lt;text&gt;]
+[--setuuid &lt;uuid&gt;]
+[--setparentuuid &lt;uuid&gt;]
+[--passthrough on|off]
+[--tempeject on|off]
+[--nonrotational on|off]
+[--discard on|off]
+[--hotpluggable on|off]
+[--bandwidthgroup &lt;name&gt;]
+[--forceunmount]
+[--server &lt;name&gt;|&lt;ip&gt;]
+[--target &lt;target&gt;]
+[--tport &lt;port&gt;]
+[--lun &lt;lun&gt;]
+[--encodedlun &lt;lun&gt;]
+[--username &lt;username&gt;]
+[--password &lt;password&gt;]
+[--passwordfile &lt;file&gt;]
+[--initiator &lt;initiator&gt;]
+[--intnet]</p><p id="5685e5c2-e2f8-4c1f-b542-4bbbe6f5c591" class="">storagectl                &lt;uuid|vmname&gt;
+--name &lt;name&gt;
+[--add ide|sata|scsi|floppy|sas|usb|pcie]
+[--controller LSILogic|LSILogicSAS|BusLogic|
+IntelAHCI|PIIX3|PIIX4|ICH6|I82078|
+[             USB|NVMe]
+[--portcount &lt;1-n&gt;]
+[--hostiocache on|off]
+[--bootable on|off]
+[--rename &lt;name&gt;]
+[--remove]</p><p id="19e13fd6-d7f0-4cb2-a464-50637c16ee65" class="">bandwidthctl              &lt;uuid|vmname&gt;
+add &lt;name&gt; --type disk|network
+--limit &lt;megabytes per second&gt;[k|m|g|K|M|G] |
+set &lt;name&gt;
+--limit &lt;megabytes per second&gt;[k|m|g|K|M|G] |
+remove &lt;name&gt; |
+list [--machinereadable]
+(limit units: k=kilobit, m=megabit, g=gigabit,
+K=kilobyte, M=megabyte, G=gigabyte)</p><p id="990816ec-53d1-40d1-830c-746ba1b6e79c" class="">showmediuminfo            [disk|dvd|floppy] &lt;uuid|filename&gt;</p><p id="446aea81-bbbd-41eb-a926-97c8420ccb4d" class="">createmedium              [disk|dvd|floppy] --filename &lt;filename&gt;
+[--size &lt;megabytes&gt;|--sizebyte &lt;bytes&gt;]
+[--diffparent &lt;uuid&gt;|&lt;filename&gt;
+[--format VDI|VMDK|VHD] (default: VDI)
+[--variant Standard,Fixed,Split2G,Stream,ESX]</p><p id="15cd34f7-e41e-4114-bf15-32242bd724b1" class="">modifymedium              [disk|dvd|floppy] &lt;uuid|filename&gt;
+[--type normal|writethrough|immutable|shareable|
+readonly|multiattach]
+[--autoreset on|off]
+[--property &lt;name=[value]&gt;]
+[--compact]
+[--resize &lt;megabytes&gt;|--resizebyte &lt;bytes&gt;]
+[--move &lt;path]
+[--description &lt;description string&gt;]
+clonemedium               [disk|dvd|floppy] &lt;uuid|inputfile&gt; &lt;uuid|outputfile&gt;
+[--format VDI|VMDK|VHD|RAW|&lt;other&gt;]
+[--variant Standard,Fixed,Split2G,Stream,ESX]
+[--existing]</p><p id="130ea7a1-5649-4a08-8d90-480c4e996000" class="">mediumproperty            [disk|dvd|floppy] set &lt;uuid|filename&gt;
+&lt;property&gt; &lt;value&gt;</p><pre id="51c4bc00-ca20-42be-bc7d-d68dc46c130d" class="code code-wrap"><code>                        [disk|dvd|floppy] get &lt;uuid|filename&gt;
+                        &lt;property&gt;
+
+                        [disk|dvd|floppy] delete &lt;uuid|filename&gt;
+                        &lt;property&gt;
+</code></pre><p id="0579c907-cae7-45b6-a1e7-8c70ea4a1a47" class="">encryptmedium             &lt;uuid|filename&gt;
+[--newpassword &lt;file&gt;|-]
+[--oldpassword &lt;file&gt;|-]
+[--cipher &lt;cipher identifier&gt;]
+[--newpasswordid &lt;password identifier&gt;]</p><p id="53321fb4-93cd-4aa0-930a-17424bbd1e5a" class="">checkmediumpwd            &lt;uuid|filename&gt;
+&lt;pwd file&gt;|-</p><p id="80380257-2321-4755-81b0-ed35c00ce150" class="">convertfromraw            &lt;filename&gt; &lt;outputfile&gt;
+[--format VDI|VMDK|VHD]
+[--variant Standard,Fixed,Split2G,Stream,ESX]
+[--uuid &lt;uuid&gt;]
+convertfromraw            stdin &lt;outputfile&gt; &lt;bytes&gt;
+[--format VDI|VMDK|VHD]
+[--variant Standard,Fixed,Split2G,Stream,ESX]
+[--uuid &lt;uuid&gt;]</p><p id="25c8bfed-5200-46e5-a4e7-455a894202f4" class="">getextradata              global|&lt;uuid|vmname&gt;
+&lt;key&gt;|enumerate</p><p id="7245300d-7ef7-4d5c-b85c-f01249f01e68" class="">setextradata              global|&lt;uuid|vmname&gt;
+&lt;key&gt;
+[&lt;value&gt;] (no value deletes key)</p><p id="a1be4834-c3ce-4c2f-a5c7-5ad9a9dad7c4" class="">setproperty               machinefolder default|&lt;folder&gt; |
+hwvirtexclusive on|off |
+vrdeauthlibrary default|&lt;library&gt; |
+websrvauthlibrary default|null|&lt;library&gt; |
+vrdeextpack null|&lt;library&gt; |
+autostartdbpath null|&lt;folder&gt; |
+loghistorycount &lt;value&gt;
+defaultfrontend default|&lt;name&gt;
+logginglevel &lt;log setting&gt;</p><p id="78f8adbb-a952-4fd6-baf8-35c84d261cdf" class="">usbfilter                 add &lt;index,0-N&gt;
+--target &lt;uuid|vmname&gt;|global
+--name &lt;string&gt;
+--action ignore|hold (global filters only)
+[--active yes|no] (yes)
+[--vendorid &lt;XXXX&gt;] (null)
+[--productid &lt;XXXX&gt;] (null)
+[--revision &lt;IIFF&gt;] (null)
+[--manufacturer &lt;string&gt;] (null)
+[--product &lt;string&gt;] (null)
+[--remote yes|no] (null, VM filters only)
+[--serialnumber &lt;string&gt;] (null)
+[--maskedinterfaces &lt;XXXXXXXX&gt;]</p><p id="2c391fec-6dbc-4d13-9ed8-8a2ee7a7f759" class="">usbfilter                 modify &lt;index,0-N&gt;
+--target &lt;uuid|vmname&gt;|global
+[--name &lt;string&gt;]
+[--action ignore|hold] (global filters only)
+[--active yes|no]
+[--vendorid &lt;XXXX&gt;|&quot;&quot;]
+[--productid &lt;XXXX&gt;|&quot;&quot;]
+[--revision &lt;IIFF&gt;|&quot;&quot;]
+[--manufacturer &lt;string&gt;|&quot;&quot;]
+[--product &lt;string&gt;|&quot;&quot;]
+[--remote yes|no] (null, VM filters only)
+[--serialnumber &lt;string&gt;|&quot;&quot;]
+[--maskedinterfaces &lt;XXXXXXXX&gt;]</p><p id="3233985f-1515-4347-ad99-d22e9788d684" class="">usbfilter                 remove &lt;index,0-N&gt;
+--target &lt;uuid|vmname&gt;|global</p><p id="16ae57ff-0bf4-4666-a3ff-ff9cf27ec8e2" class="">sharedfolder              add &lt;uuid|vmname&gt;
+--name &lt;name&gt; --hostpath &lt;hostpath&gt;
+[--transient] [--readonly] [--automount]</p><p id="4cdf3451-a7f6-4419-a3f9-7ab3201eefbc" class="">sharedfolder              remove &lt;uuid|vmname&gt;
+--name &lt;name&gt; [--transient]</p><p id="d5536b82-7be4-4332-a3e1-67883461ec74" class="">guestproperty             get &lt;uuid|vmname&gt;
+&lt;property&gt; [--verbose]</p><p id="6a9b172f-3f9d-4cac-b580-1a13e802b7ce" class="">guestproperty             set &lt;uuid|vmname&gt;
+&lt;property&gt; [&lt;value&gt; [--flags &lt;flags&gt;]]</p><p id="f6e84721-34fd-4572-a0b1-b6fde5fc212d" class="">guestproperty             delete|unset &lt;uuid|vmname&gt;
+&lt;property&gt;</p><p id="028494ed-3c6c-47bd-b962-b1e00344f670" class="">guestproperty             enumerate &lt;uuid|vmname&gt;
+[--patterns &lt;patterns&gt;]</p><p id="5b7fd343-24ad-4375-95a0-2f2764596926" class="">guestproperty             wait &lt;uuid|vmname&gt; &lt;patterns&gt;
+[--timeout &lt;msec&gt;] [--fail-on-timeout]</p><p id="b58cf9ca-a86b-4981-a0d8-a1e99aa38d35" class="">guestcontrol              &lt;uuid|vmname&gt; [--verbose|-v] [--quiet|-q]
+[--username &lt;name&gt;] [--domain &lt;domain&gt;]
+[--passwordfile &lt;file&gt; | --password &lt;password&gt;]</p><pre id="8069a1e5-463e-4236-b3a5-3f2b8078ae74" class="code code-wrap"><code>                          run [common-options]
+                          [--exe &lt;path to executable&gt;] [--timeout &lt;msec&gt;]
+                          [-E|--putenv &lt;NAME&gt;[=&lt;VALUE&gt;]] [--unquoted-args]
+                          [--ignore-operhaned-processes] [--profile]
+                          [--no-wait-stdout|--wait-stdout]
+                          [--no-wait-stderr|--wait-stderr]
+                          [--dos2unix] [--unix2dos]
+                          -- &lt;program/arg0&gt; [argument1] ... [argumentN]]
+
+                          start [common-options]
+                          [--exe &lt;path to executable&gt;] [--timeout &lt;msec&gt;]
+                          [-E|--putenv &lt;NAME&gt;[=&lt;VALUE&gt;]] [--unquoted-args]
+                          [--ignore-operhaned-processes] [--profile]
+                          -- &lt;program/arg0&gt; [argument1] ... [argumentN]]
+
+                          copyfrom [common-options]
+                          [--dryrun] [--follow] [-R|--recursive]
+                          &lt;guest-src0&gt; [guest-src1 [...]] &lt;host-dst&gt;
+
+                          copyfrom [common-options]
+                          [--dryrun] [--follow] [-R|--recursive]
+                          [--target-directory &lt;host-dst-dir&gt;]
+                          &lt;guest-src0&gt; [guest-src1 [...]]
+
+                          copyto [common-options]
+                          [--dryrun] [--follow] [-R|--recursive]
+                          &lt;host-src0&gt; [host-src1 [...]] &lt;guest-dst&gt;
+
+                          copyto [common-options]
+                          [--dryrun] [--follow] [-R|--recursive]
+                          [--target-directory &lt;guest-dst&gt;]
+                          &lt;host-src0&gt; [host-src1 [...]]
+
+                          mkdir|createdir[ectory] [common-options]
+                          [--parents] [--mode &lt;mode&gt;]
+                          &lt;guest directory&gt; [...]
+
+                          rmdir|removedir[ectory] [common-options]
+                          [-R|--recursive]
+                          &lt;guest directory&gt; [...]
+
+                          removefile|rm [common-options] [-f|--force]
+                          &lt;guest file&gt; [...]
+
+                          mv|move|ren[ame] [common-options]
+                          &lt;source&gt; [source1 [...]] &lt;dest&gt;
+
+                          mktemp|createtemp[orary] [common-options]
+                          [--secure] [--mode &lt;mode&gt;] [--tmpdir &lt;directory&gt;]
+                          &lt;template&gt;
+
+                          stat [common-options]
+                          &lt;file&gt; [...]
+</code></pre><p id="de7cc9f4-1a4c-4826-ad2f-0dbf387355e5" class="">guestcontrol              &lt;uuid|vmname&gt; [--verbose|-v] [--quiet|-q]</p><pre id="83e2231c-b5dc-4254-a3de-4e8a519f0bdd" class="code code-wrap"><code>                          list &lt;all|sessions|processes|files&gt; [common-opts]
+
+                          closeprocess [common-options]
+                          &lt;   --session-id &lt;ID&gt;
+                            | --session-name &lt;name or pattern&gt;
+                          &lt;PID1&gt; [PID1 [...]]
+
+                          closesession [common-options]
+                          &lt;  --all | --session-id &lt;ID&gt;
+                            | --session-name &lt;name or pattern&gt; &gt;
+
+                          updatega|updateguestadditions|updateadditions
+                          [--source &lt;guest additions .ISO&gt;]
+                          [--wait-start] [common-options]
+                          [-- [&lt;argument1&gt;] ... [&lt;argumentN&gt;]]
+
+                          watch [common-options]
+</code></pre><p id="0bf1a9ff-9a5f-48a9-811c-d49ae9e8ed1f" class="">metrics                   list [*|host|&lt;vmname&gt; [&lt;metric_list&gt;]]
+(comma-separated)</p><p id="5e6da277-be88-4630-8db1-f011790e072a" class="">metrics                   setup
+[--period &lt;seconds&gt;] (default: 1)
+[--samples &lt;count&gt;] (default: 1)
+[--list]
+[*|host|&lt;vmname&gt; [&lt;metric_list&gt;]]</p><p id="24711d3e-a958-4e30-bb3b-954981e49bde" class="">metrics                   query [*|host|&lt;vmname&gt; [&lt;metric_list&gt;]]</p><p id="f22bdb57-55ac-472d-a87f-bfa00baa52c1" class="">metrics                   enable
+[--list]
+[*|host|&lt;vmname&gt; [&lt;metric_list&gt;]]</p><p id="c1cf5cda-809f-48f8-a318-630a4e530af9" class="">metrics                   disable
+[--list]
+[*|host|&lt;vmname&gt; [&lt;metric_list&gt;]]</p><p id="c800ee6a-b42c-4e1a-bb89-d6e2ac5c29ea" class="">metrics                   collect
+[--period &lt;seconds&gt;] (default: 1)
+[--samples &lt;count&gt;] (default: 1)
+[--list]
+[--detach]
+[*|host|&lt;vmname&gt; [&lt;metric_list&gt;]]</p><p id="c39a326b-ae17-4ec8-9f49-b6e1aaa5bf0f" class="">natnetwork                add --netname &lt;name&gt;
+--network &lt;network&gt;
+[--enable|--disable]
+[--dhcp on|off]
+[--port-forward-4 &lt;rule&gt;]
+[--loopback-4 &lt;rule&gt;]
+[--ipv6 on|off]
+[--port-forward-6 &lt;rule&gt;]
+[--loopback-6 &lt;rule&gt;]</p><p id="83272a46-d2d3-4099-896b-4152156d7c3f" class="">natnetwork                remove --netname &lt;name&gt;</p><p id="20ab894f-ad88-459b-b207-0f5f7e7c1776" class="">natnetwork                modify --netname &lt;name&gt;
+[--network &lt;network&gt;]
+[--enable|--disable]
+[--dhcp on|off]
+[--port-forward-4 &lt;rule&gt;]
+[--loopback-4 &lt;rule&gt;]
+[--ipv6 on|off]
+[--port-forward-6 &lt;rule&gt;]
+[--loopback-6 &lt;rule&gt;]</p><p id="92b31586-e3ba-43f7-8af2-9e0f9de193c1" class="">natnetwork                start --netname &lt;name&gt;</p><p id="bcfdba42-f247-41de-bfac-3113ebf09de5" class="">natnetwork                stop --netname &lt;name&gt;</p><p id="73128767-a15b-4ed2-8646-a7133751c896" class="">natnetwork                list [&lt;pattern&gt;]</p><p id="58182e8b-f2e6-43ac-a471-5368e6262893" class="">hostonlyif                ipconfig &lt;name&gt;
+[--dhcp |
+--ip&lt;ipv4&gt; [--netmask&lt;ipv4&gt; (def: 255.255.255.0)] |
+--ipv6&lt;ipv6&gt; [--netmasklengthv6&lt;length&gt; (def: 64)]]
+create |
+remove &lt;name&gt;</p><p id="6b4c2235-048e-47e6-89c9-270b6460d741" class="">dhcpserver                add|modify --netname &lt;network_name&gt; |
+--ifname &lt;hostonly_if_name&gt;
+[--ip &lt;ip_address&gt;
+--netmask &lt;network_mask&gt;
+--lowerip &lt;lower_ip&gt;
+--upperip &lt;upper_ip&gt;]
+[--enable | --disable]</p><p id="e8481a5d-0e8e-499e-b863-774167c12887" class="">dhcpserver                remove --netname &lt;network_name&gt; |
+--ifname &lt;hostonly_if_name&gt;</p><p id="292216e7-72c1-44dd-b341-c89e4f7f4166" class="">usbdevsource              add &lt;source name&gt;
+--backend &lt;backend&gt;
+--address &lt;address&gt;
+usbdevsource              remove &lt;source name&gt;</p><p id="433166ea-06be-4ba9-a319-dae91e109491" class="">Introspection and guest debugging:</p><p id="df21583e-637c-4207-bff7-ecf04a6bce8b" class="">VBoxManage debugvm &lt;uuid|vmname&gt; dumpvmcore [--filename=name]</p><p id="1c91bc81-5514-4feb-be8d-75e14fcfe7c1" class="">VBoxManage debugvm &lt;uuid|vmname&gt; info &lt;item&gt; [args...]</p><p id="8170c2c1-e327-42e0-bc86-45e3a0f5876b" class="">VBoxManage debugvm &lt;uuid|vmname&gt; injectnmi</p><p id="2802cac2-6cd7-4a65-885f-6edcf96d8772" class="">VBoxManage debugvm &lt;uuid|vmname&gt; log [[--release] | [--debug]] [group-settings...]</p><p id="8008ba91-60ba-4d9c-a56f-b077add774ed" class="">VBoxManage debugvm &lt;uuid|vmname&gt; logdest [[--release] | [--debug]] [destinations...]</p><p id="cff77639-9421-4c43-8929-b96609afac25" class="">VBoxManage debugvm &lt;uuid|vmname&gt; logflags [[--release] | [--debug]] [flags...]</p><p id="bc3a6a93-0049-4c53-a6ce-d8a9bf7e48bd" class="">VBoxManage debugvm &lt;uuid|vmname&gt; osdetect</p><p id="1a7057ba-f858-4647-939d-bcaa0a4f88fa" class="">VBoxManage debugvm &lt;uuid|vmname&gt; osinfo</p><p id="20a46765-78aa-4748-9e84-9c0057ab56af" class="">VBoxManage debugvm &lt;uuid|vmname&gt; osdmesg [--lines=lines]</p><p id="1c401890-3aa0-4539-8d70-4c5fbb442784" class="">VBoxManage debugvm &lt;uuid|vmname&gt; getregisters [--cpu=id] [reg-set.reg-name...]</p><p id="a22e3499-4981-41bd-9e46-8302522b2e56" class="">VBoxManage debugvm &lt;uuid|vmname&gt; setregisters [--cpu=id] [reg-set.reg-name=value...]</p><p id="7b8a7373-841d-46a9-890a-7e5995414e57" class="">VBoxManage debugvm &lt;uuid|vmname&gt; show [[--human-readable] | [--sh-export] | [--sh-eval] | [--cmd-set]]
+[settings-item...]</p><p id="b6522a53-810d-4c3a-a0fe-69d09357d4bc" class="">VBoxManage debugvm &lt;uuid|vmname&gt; stack [--cpu=id]</p><p id="74154575-f475-4b71-9216-e76a356929a9" class="">VBoxManage debugvm &lt;uuid|vmname&gt; statistics [--reset] [--descriptions] [--pattern=pattern]</p><p id="9a7e9800-8a6d-4506-9cd0-be0cde4c6c3d" class="">Extension package management:</p><p id="c5d399eb-23b7-4b0d-9330-412bd1d673f3" class="">VBoxManage extpack install [--replace] &lt;tarball&gt;</p><p id="724bfb57-9ef5-4442-8a6f-90ae38f9d32a" class="">VBoxManage extpack uninstall [--force] &lt;name&gt;</p><p id="4a0c00b7-4795-4ea1-bf5a-478d4e68ec98" class="">VBoxManage extpack cleanup</p><p id="c81412eb-3313-496a-9d09-035faeff3445" class="">Unattended guest OS installation:</p><p id="0a484bb7-f064-4242-bdc6-1645ad5227ad" class="">VBoxManage unattended detect &lt;--iso=install-iso&gt; [--machine-readable]</p><p id="f5f5125d-e14c-4fe8-b1d5-587ad9be6351" class="">VBoxManage unattended install &lt;uuid|vmname&gt; &lt;--iso=install-iso&gt; [--user=login] [--password=password]
+[--password-file=file] [--full-user-name=name] [--key=product-key] [--install-additions]
+[--no-install-additions] [--additions-iso=add-iso] [--install-txs] [--no-install-txs]
+[--validation-kit-iso=testing-iso] [--locale=ll_CC] [--country=CC] [--time-zone=tz] [--hostname=fqdn]
+[--package-selection-adjustment=keyword] [--dry-run] [--auxiliary-base-path=path] [--image-index=number]
+[--script-template=file] [--post-install-template=file] [--post-install-command=command]
+[--extra-install-kernel-parameters=params] [--language=lang] [--start-vm=session-type]</p></div></article></body></html>

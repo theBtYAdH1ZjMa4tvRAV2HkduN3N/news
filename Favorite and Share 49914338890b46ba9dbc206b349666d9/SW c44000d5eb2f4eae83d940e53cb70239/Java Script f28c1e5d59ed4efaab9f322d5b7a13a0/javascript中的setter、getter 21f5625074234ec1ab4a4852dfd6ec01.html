@@ -1,0 +1,807 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>javascript中的setter、getter</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="21f56250-7423-4ec1-ab4a-4852dfd6ec01" class="page sans"><header><h1 class="page-title">javascript中的setter、getter</h1></header><div class="page-body"><p id="58fedd10-e6ce-4f5b-aa2c-67ff2eca6815" class="">javascript中的setter、getter是平時接觸比較少的方法，其本身也並不是標準方法，只在非ie瀏覽器裡支援（ie核心也許有其他方法可以做到呢？暫時不知其解），但是加以利用可以做許多事情，比如：</p><p id="07a88790-d9e7-484d-a395-7b0816141520" class=""><strong>1、對資料的訪問限制：</strong></p><p id="1d2cea3f-db80-4dfb-a3e8-bbe526b67994" class="">a.value是對value變數的getter方法呼叫，如果在getter方法實現中丟擲異常，可以阻止對value變數的訪問</p><p id="740fac28-16c7-4363-9d9d-22382dc1dccf" class=""><strong>2、對dom變數進行監聽：</strong></p><p id="736bd7b5-09a6-40b3-88ec-b89ddac482f3" class="">window.name是一個跨域非常好用的dom屬性（大名鼎鼎，詳見百度），如果覆蓋window.name的setter實現則可以實現跨頁面的記憶體非同步通訊</p><p id="ea9b98aa-15f1-4a90-a932-c5eca5f2dc0d" class=""><strong>3、自己發揮想象力，能做的事情好多滴</strong></p><p id="8477aa6f-dfd4-4b44-86d9-bea418182c77" class="">以下皆轉： 首先，我們先來快速瞭解什麼是Getters和Setters，以及它們為什麼很有用。然後，我們來看看現在都有哪些平臺支援Gettets和Setters。</p><p id="4294e7b7-3ab0-4c93-b208-648f82f701cf" class=""><strong>Getters和Setters</strong></p><p id="3aa0dd7a-2115-43f6-9a34-367aea84a129" class="">Getters和Setters使你可以快速獲取或設定一個物件的資料。一般來說，一個物件擁有兩個方法，分別用於獲取和設定某個值，比如：</p><pre id="a5eaf139-01c0-4db1-a260-16a0a8f840f0" class="code code-wrap"><code>
+{
+getValue: function(){
+return this._value;
+},
+setValue: function(val){
+this._value = val;
+}
+}</code></pre><p id="f4d60276-4695-4570-9457-85d5a1d9e8d3" class="">用這種方式寫JavaScript的一個明顯的好處是：你可以用它來隱藏那些不想讓外界直接訪問的屬性。最終的程式碼看起來就像下面這樣（用閉包儲存新建立的Filed物件的value）：</p><pre id="03145662-d3b4-4bf8-a412-d62cc055cc83" class="code code-wrap"><code>function Field(val){
+var value = val;
+this.getValue = function(){
+return value;
+};
+this.setValue = function(val){
+value = val;
+};
+}</code></pre><p id="d10ff77d-02da-46a5-b18b-5c687395e482" class="">於是我們可以這樣使用：</p><pre id="bd38fcf9-f667-47e9-97af-df79043363d7" class="code code-wrap"><code>var field = new Field(&quot;test&quot;);
+field.value
+// =&gt; undefined
+field.setValue(&quot;test2&quot;)
+field.getValue()
+// =&gt; &quot;test2&quot;</code></pre><p id="28ae689e-2563-4293-896b-25363c8ffec2" class="">我們來模擬上例中的 “隱藏的value屬性”，我們的程式碼就像這樣：</p><pre id="8df1952e-586e-4bfe-b07c-9ee01f171c24" class="code code-wrap"><code>function Field(val){
+var value = val;
+this.__defineGetter__(&quot;value&quot;, function(){
+return value;
+});
+this.__defineSetter__(&quot;value&quot;, function(val){
+value = val;
+});
+}</code></pre><p id="a4a84b90-4bd0-4e1b-be31-7798b66f24a5" class="">但是呢，你不喜歡這樣寫，而傾向在物件的prototype中定義getters和setters（私有變數寫在哪並不重要），我們可以用另一種語法。</p><pre id="49532b39-0464-4d60-84d7-3452a8717718" class="code code-wrap"><code>function Field(val){
+this.value = val;
+}
+Field.prototype = {
+get value(){
+return this._value;
+},
+set value(val){
+this._value = val;
+}
+};</code></pre><p id="34e52289-f963-4e42-b4cb-730155702a4f" class="">這種語法看起來很不可思議，但是使用過一段時間之後，接受它也很容易。</p><p id="50462ab0-616c-4410-b079-74413976fe0f" class="">接下來是另一個例子，它允許外界獲取一個username陣列，但是卻不能獲取原始的，隱藏的user物件。</p><pre id="9076be01-7e5e-4251-a32f-13bb0f63f247" class="code code-wrap"><code>function Site(users){
+this.__defineGetter__(&quot;users&quot;, function(){
+// JS 1.6 Array map()
+return users.map(function(user){
+return user.name;
+});
+};
+}</code></pre><p id="4f858a6a-16aa-4231-b7c0-3e2b734eba16" class=""><strong>記住以下幾點：</strong></p><p id="411d77e5-720b-4f57-9315-e7bfef7e911d" class="">一個物件內，每個變數只能有一個getter或setter。（因此value可以有一個getter和一個setter，但是value絕沒有兩個getters） 刪除getter或setter的唯一方法是：delete object[name]。delete可以刪除一些常見的屬性，getters和setters。 如果使用__defineGetter__或__defineSetter__，它會重寫之前定義的相同名稱的getter或setter，甚至是屬性(property)。</p><p id="f7fc8434-2e42-49ed-9171-a31316818c15" class=""><strong>平臺</strong></p><p id="7c5b2c26-89ab-4192-be4f-5c295d01b16d" class="">支援的瀏覽器有：</p><p id="09183c17-c217-431a-ac65-901e2eca791b" class="">Firefox Safari 3  Opera 9.5</p><p id="081b0ba0-f677-48a7-8acc-3c0e909c9afd" class="">javascript中的setter、getter是平時接觸比較少的方法，其本身也並不是標準方法，只在非ie瀏覽器裡支援（ie核心也許有其他方法可以做到呢？暫時不知其解），但是加以利用可以做許多事情，比如：</p><p id="ae8788b3-b6cf-4624-ab58-6c817b9fdae8" class=""><strong>1、對資料的訪問限制：</strong></p><p id="f1f574cc-f3f2-488a-aaf6-09d51331b0fb" class="">a.value是對value變數的getter方法呼叫，如果在getter方法實現中丟擲異常，可以阻止對value變數的訪問</p><p id="1b0e452e-ea77-4927-9e71-7b521d4d350c" class=""><strong>2、對dom變數進行監聽：</strong></p><p id="ef3ef810-1608-4759-82fb-cbc530dfecdc" class="">window.name是一個跨域非常好用的dom屬性（大名鼎鼎，詳見百度），如果覆蓋window.name的setter實現則可以實現跨頁面的記憶體非同步通訊</p><p id="99e63c53-d5a9-4dcf-9b69-9f2bc4ffcdbc" class=""><strong>3、自己發揮想象力，能做的事情好多滴</strong></p><p id="05a003f8-d384-44ac-9b17-66d78f598aee" class="">以下皆轉： 首先，我們先來快速瞭解什麼是Getters和Setters，以及它們為什麼很有用。然後，我們來看看現在都有哪些平臺支援Gettets和Setters。</p><p id="f5471bb2-0500-4e0a-9d85-abcaadd91a17" class=""><strong>Getters和Setters</strong></p><p id="587d501f-7db3-41a8-9d7c-64b0ba8b632c" class="">Getters和Setters使你可以快速獲取或設定一個物件的資料。一般來說，一個物件擁有兩個方法，分別用於獲取和設定某個值，比如：</p><pre id="1ce4eaba-4717-41ec-a2e9-d7899263c4ec" class="code code-wrap"><code>
+{
+getValue: function(){
+return this._value;
+},
+setValue: function(val){
+this._value = val;
+}
+}</code></pre><p id="070502c1-7ca1-41db-ba2b-57ccbb7dbab8" class="">用這種方式寫JavaScript的一個明顯的好處是：你可以用它來隱藏那些不想讓外界直接訪問的屬性。最終的程式碼看起來就像下面這樣（用閉包儲存新建立的Filed物件的value）：</p><pre id="9dfd6ae1-578b-4150-8ebf-2c4626dd7584" class="code code-wrap"><code>function Field(val){
+var value = val;
+this.getValue = function(){
+return value;
+};
+this.setValue = function(val){
+value = val;
+};
+}</code></pre><p id="00368c2d-8606-4285-ae4f-5dacb139cb04" class="">於是我們可以這樣使用：</p><pre id="8da027d9-56c2-4c91-8461-3f03b3e52070" class="code code-wrap"><code>var field = new Field(&quot;test&quot;);
+field.value
+// =&gt; undefined
+field.setValue(&quot;test2&quot;)
+field.getValue()
+// =&gt; &quot;test2&quot;</code></pre><p id="0c363415-04b1-465f-a106-862384ccccea" class="">我們來模擬上例中的 “隱藏的value屬性”，我們的程式碼就像這樣：</p><pre id="ef08e725-581f-494c-acd7-f15778b88b57" class="code code-wrap"><code>function Field(val){
+var value = val;
+this.__defineGetter__(&quot;value&quot;, function(){
+return value;
+});
+this.__defineSetter__(&quot;value&quot;, function(val){
+value = val;
+});
+}</code></pre><p id="d20ef7db-47bb-4365-9d60-0181764bccdd" class="">但是呢，你不喜歡這樣寫，而傾向在物件的prototype中定義getters和setters（私有變數寫在哪並不重要），我們可以用另一種語法。</p><pre id="1a8d0b9c-b1ab-487a-b08b-124b533924fa" class="code code-wrap"><code>function Field(val){
+this.value = val;
+}
+Field.prototype = {
+get value(){
+return this._value;
+},
+set value(val){
+this._value = val;
+}
+};</code></pre><p id="56fbcb42-dca6-47fe-bd5a-4d7c9dd9dbfa" class="">這種語法看起來很不可思議，但是使用過一段時間之後，接受它也很容易。</p><p id="c3a5fe15-5742-4b8e-b158-e02803baaf2f" class="">接下來是另一個例子，它允許外界獲取一個username陣列，但是卻不能獲取原始的，隱藏的user物件。</p><pre id="1999e514-c0bf-4333-923e-7605320c8849" class="code code-wrap"><code>function Site(users){
+this.__defineGetter__(&quot;users&quot;, function(){
+// JS 1.6 Array map()
+return users.map(function(user){
+return user.name;
+});
+};
+}</code></pre><p id="22352e3f-7aeb-4b41-ba30-4524668d57a2" class=""><strong>記住以下幾點：</strong></p><p id="accfe7d7-d44c-4469-88c5-ea5407d08357" class="">一個物件內，每個變數只能有一個getter或setter。（因此value可以有一個getter和一個setter，但是value絕沒有兩個getters） 刪除getter或setter的唯一方法是：delete object[name]。delete可以刪除一些常見的屬性，getters和setters。 如果使用__defineGetter__或__defineSetter__，它會重寫之前定義的相同名稱的getter或setter，甚至是屬性(property)。</p><p id="dbb2bc66-70f8-4fdb-997b-4c72081a6ee9" class=""><strong>平臺</strong></p><p id="9d3bfd1f-dce9-4120-a197-3a3b0b3da72b" class="">支援的瀏覽器有：</p><p id="531af860-40bb-419e-8ac9-90873b8f59cf" class="">Firefox Safari 3  Opera 9.5</p><p id="881f2205-a285-42b9-aecf-9599a133f13f" class="">javascript中的setter、getter是平時接觸比較少的方法，其本身也並不是標準方法，只在非ie瀏覽器裡支援（ie核心也許有其他方法可以做到呢？暫時不知其解），但是加以利用可以做許多事情，比如：</p><p id="bd4244f5-09b1-4534-8f19-89451cda951e" class=""><strong>1、對資料的訪問限制：</strong></p><p id="0cd80848-5b5d-495b-a7a7-3afa7993c73e" class="">a.value是對value變數的getter方法呼叫，如果在getter方法實現中丟擲異常，可以阻止對value變數的訪問</p><p id="c72e9f7f-394f-4d42-b11a-dc66b834c3c5" class=""><strong>2、對dom變數進行監聽：</strong></p><p id="e37d8cb6-75ad-4336-a002-74da916cbc6d" class="">window.name是一個跨域非常好用的dom屬性（大名鼎鼎，詳見百度），如果覆蓋window.name的setter實現則可以實現跨頁面的記憶體非同步通訊</p><p id="7bff6aba-347b-429a-95aa-6585516d282e" class=""><strong>3、自己發揮想象力，能做的事情好多滴</strong></p><p id="48a41f99-c960-4e0f-811e-b186dc187738" class="">以下皆轉： 首先，我們先來快速瞭解什麼是Getters和Setters，以及它們為什麼很有用。然後，我們來看看現在都有哪些平臺支援Gettets和Setters。</p><p id="9662912d-d06b-423d-b225-67c91292d15b" class=""><strong>Getters和Setters</strong><strong></strong></p><p id="dd4bbe67-188b-453b-bb35-113c56436b52" class="">Getters和Setters使你可以快速獲取或設定一個物件的資料。一般來說，一個物件擁有兩個方法，分別用於獲取和設定某個值，比如：</p><pre id="38d55469-8cb2-4413-9edb-4ee97458d971" class="code code-wrap"><code>
+{
+getValue: function(){
+return this._value;
+},
+setValue: function(val){
+this._value = val;
+}
+}</code></pre><p id="860950bb-2407-48bb-ac9c-a5e6347d6f4a" class="">用這種方式寫JavaScript的一個明顯的好處是：你可以用它來隱藏那些不想讓外界直接訪問的屬性。最終的程式碼看起來就像下面這樣（用閉包儲存新建立的Filed物件的value）：</p><pre id="cf3639f6-ffaa-4b71-874b-a3c28d55761c" class="code code-wrap"><code>function Field(val){
+var value = val;
+this.getValue = function(){
+return value;
+};
+this.setValue = function(val){
+value = val;
+};
+}</code></pre><p id="515b47ad-6034-425c-af25-9b5a82f6a156" class="">於是我們可以這樣使用：</p><pre id="3afecc23-d533-46a5-b930-2e82ed39a80e" class="code code-wrap"><code>var field = new Field(&quot;test&quot;);
+field.value
+// =&gt; undefined
+field.setValue(&quot;test2&quot;)
+field.getValue()
+// =&gt; &quot;test2&quot;</code></pre><p id="f3ba2b56-aee1-4efb-821e-b2170f8da7f5" class="">我們來模擬上例中的 “隱藏的value屬性”，我們的程式碼就像這樣：</p><pre id="8e470a93-f53d-410a-af4a-9548fb6f3552" class="code code-wrap"><code>function Field(val){
+var value = val;
+this.__defineGetter__(&quot;value&quot;, function(){
+return value;
+});
+this.__defineSetter__(&quot;value&quot;, function(val){
+value = val;
+});
+}</code></pre><p id="033ca56b-a27d-4c25-9cfd-aaa6404d2716" class="">但是呢，你不喜歡這樣寫，而傾向在物件的prototype中定義getters和setters（私有變數寫在哪並不重要），我們可以用另一種語法。</p><pre id="06109acf-c99c-4459-8e3e-d369cae677a3" class="code code-wrap"><code>function Field(val){
+this.value = val;
+}
+Field.prototype = {
+get value(){
+return this._value;
+},
+set value(val){
+this._value = val;
+}
+};</code></pre><p id="21a22a5a-6dfa-42f5-9843-844463219df8" class="">這種語法看起來很不可思議，但是使用過一段時間之後，接受它也很容易。</p><p id="9cb534ba-df8c-49da-877c-297bf3588e0a" class="">接下來是另一個例子，它允許外界獲取一個username陣列，但是卻不能獲取原始的，隱藏的user物件。</p><pre id="8cf2e8d6-6532-4243-96fb-5053ad7fcf6b" class="code code-wrap"><code>function Site(users){
+this.__defineGetter__(&quot;users&quot;, function(){
+// JS 1.6 Array map()
+return users.map(function(user){
+return user.name;
+});
+};
+}</code></pre><p id="a2422446-9821-46a6-8f54-4b0973987946" class=""><strong>記住以下幾點：</strong></p><p id="fbb8c6cd-e1c7-4bd1-8987-b9b026d41e0a" class="">一個物件內，每個變數只能有一個getter或setter。（因此value可以有一個getter和一個setter，但是value絕沒有兩個getters） 刪除getter或setter的唯一方法是：delete object[name]。delete可以刪除一些常見的屬性，getters和setters。 如果使用__defineGetter__或__defineSetter__，它會重寫之前定義的相同名稱的getter或setter，甚至是屬性(property)。</p><p id="2a0e2088-5710-413d-b838-41c422b8c3e7" class=""><strong>平臺</strong></p><p id="7f18fc37-d8d9-4de2-997f-a245f5f4e4ad" class="">支援的瀏覽器有：</p><p id="eaa9e196-ffcd-4356-8e4b-5c3b9f38a44b" class="">Firefox Safari 3  Opera 9.5</p></div></article></body></html>

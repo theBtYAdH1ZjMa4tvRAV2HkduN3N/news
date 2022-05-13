@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>黑群辉DSM 6.2.3 系统安装图文教程 (2020-12-27更新)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="43c881ec-0ecf-4455-a97a-f2a23317580f" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">👖</span></div><h1 class="page-title">黑群辉DSM 6.2.3 系统安装图文教程 (2020-12-27更新)</h1></header><div class="page-body"><p id="ffc9c424-1b88-43c6-ae35-b5f738930584" class=""><a href="https://www.openos.org/threads/dsm-6-2-3-2020-12-27.29/">https://www.openos.org/threads/dsm-6-2-3-2020-12-27.29/</a></p><p id="907a994a-c3ec-4461-b062-353830ad3f14" class="">
+</p><p id="f70fcbd9-20dc-4697-b148-e8bb9eb6f905" class="">黑群晖系统其实是指在普通电脑运行Synology DSM系统, 事实上在普通PC电脑上安装黑群晖(Synology DSM)也非常方便, 现在把教程简单写一下。</p><p id="d61ec215-b8c0-47fa-af95-056fe6616ba6" class=""><strong>引导系统装哪里？</strong></p><p id="9631e748-0eab-4569-8b11-0dcee7632b22" class="">非常关键的问题，DSM采用系统和数据相分离的结构，也就是说引导系统需要独立安装在一个设备上，通常是U盘/SD/TF卡、或者SSD硬盘上。数据需要额外安装独立的硬盘上。</p><p id="68938dda-1074-4caa-876e-1c94c707c615" class="">引导系统安装盘 (U盘/USB flash drive/随身碟)</p><p id="a4817599-069a-4a09-b031-0e70e565a485" class="">无论是U盘还是TF卡，其实128MB或以上就足够了，USB 2.0/3.0都可以，推荐SanDisk 酷豆系列小U盘。</p><p id="97919306-f584-4c8a-a8d5-da584396b182" class="">数据存储硬盘 (硬盘)</p><p id="f61dad4d-b29a-4d4f-b259-ccefeb1f970b" class="">机械硬盘或者固态硬盘都可以，这个没有限制，容量当然越大越好。</p><p id="98f59d72-351e-4b6e-827d-63bceb1dad80" class=""><strong>黑群晖DSM系统版本选择</strong></p><p id="50df2cb4-db06-4e00-a04a-e806f67610da" class="">首先根据您的电脑主板选择合适的黑群晖系统版本, 一般强烈推荐使用v1.03b引导版本的DSM 6.2.x (针对DS3615xs机型)。</p><p id="c2065078-54a0-449b-894d-529b9cc0264d" class="">一般来说安装黑群晖至少需要两个文件, 一个是黑群晖的引导文件, 一个是群晖DSM的系统文件.</p><ul id="5c14f197-c5c6-4114-88eb-4b475aebabac" class="bulleted-list"><li style="list-style-type:disc">******************************************************************************</li></ul><p id="8e93ea1d-70da-4d17-a1f7-5c01cfcecf4a" class="">黑群晖系统: DSM 6.2.0--6.2.3</p><p id="71c1a8ac-6f65-4698-9d24-2b34f9ae77db" class="">引导版本: 1.04b (首选推荐版本)</p><p id="c8c0202f-ff74-4224-81be-d28c146f13c2" class="">针对机型: DS918+</p><p id="282fee40-4187-4c4d-acda-95db17d220f6" class="">引导方式: 传统BIOS和UEFI</p><p id="f0f62a65-dd22-4722-bb21-28a77bbd7e82" class="">引导下载地址</p><p id="671f4477-7501-4dcf-ac2b-cbf0a817e1fd" class=""><a href="https://www.openos.org/downloads/synology-dsm-6-2-1-loader-v1-04b.15/">https://www.openos.org/downloads/synology-dsm-6-2-1-loader-v1-04b.15/</a></p><p id="d939a9a0-5953-4911-93e5-11804eb1e7c1" class="">DS918+ DSM 6.2.3-25426 Update2 系统</p><p id="ed44cb16-d378-4f7d-9c74-f103a3ef40f9" class=""><a href="https://global.download.synology.com/download/DSM/release/6.2.3/25426/DSM_DS918+_25426.pat">https://global.download.synology.com/download/DSM/release/6.2.3/25426/DSM_DS918+_25426.pat</a></p><p id="e642cd6a-997b-41e9-9b05-56108683729e" class="">其他DSM系统版本请看这里</p><p id="42a9213c-da53-4db8-a60d-10295decfa88" class=""><a href="https://archive.synology.com/download">https://archive.synology.com/download</a></p><ul id="9eb476a4-2e5a-4a01-b855-5e3674109671" class="bulleted-list"><li style="list-style-type:disc">******************************************************************************</li></ul><p id="1385461a-80df-4dbc-8efa-51ee3b01b677" class="">黑群晖系统: DSM 6.2.0--6.2.3 ( 6.2.3 update 3通过测试)</p><p id="a6104716-7ba9-4dfe-b61c-e61050b04709" class="">引导版本: 1.03b</p><p id="9db5cfb5-211a-4f43-9337-dedf42e05e3f" class="">针对机型: DS3615+ (如果主板只支持BIOS引导, 那么建议选择这个版本)</p><p id="a1ed2fc9-00e6-47e3-ab03-06d1905b68fb" class="">针对机型: DS3617+</p><p id="c91d5f47-b449-4f34-adb7-501914236879" class="">引导方式: 传统BIOS</p><p id="d4d6918a-4e1f-4a75-883c-cd1a79519843" class="">引导下载地址</p><p id="c4459064-667b-41d2-b296-15e0a5035d14" class=""><a href="https://www.openos.org/downloads/synology-dsm-6-2-1-loader-v1-04b.15/history">https://www.openos.org/downloads/synology-dsm-6-2-1-loader-v1-04b.15/history</a></p><p id="5df9cfdf-10d5-4aa0-ab7b-e19364e8a9c1" class="">DS3615xs DSM 6.2.3-25426 Update2 系统</p><p id="8f416dfd-4ca3-498a-b282-361906628f6f" class=""><a href="https://global.download.synology.com/download/DSM/release/6.2.3/25426/DSM_DS3615xs_25426.pat">https://global.download.synology.com/download/DSM/release/6.2.3/25426/DSM_DS3615xs_25426.pat</a></p><p id="fffd3cd8-d572-406d-a49d-ea3d6831edd1" class="">DS3617xs. DSM 6.2.3-25426 Update2 系统</p><p id="5cf3b69a-aba9-4291-b322-8196a97e97aa" class=""><a href="https://global.download.synology.com/download/DSM/release/6.2.3/25426/DSM_DS3617xs_25426.pat">https://global.download.synology.com/download/DSM/release/6.2.3/25426/DSM_DS3617xs_25426.pat</a></p><p id="b3ac8157-f0c2-474d-8377-3683d11562d2" class="">其他DSM系统版本请看这里</p><p id="52f315b9-6ded-4bcd-a165-1329a651e7fe" class=""><a href="https://global.download.synology.com/download/DSM/release/">https://global.download.synology.com/download/DSM/release/</a></p><ul id="42b0ec2e-0b9a-4eda-ab04-c046c8348315" class="bulleted-list"><li style="list-style-type:disc">******************************************************************************</li></ul><p id="837138fd-39e6-4c35-8b7a-2f05959ba353" class="">黑群晖系统: DSM 6.1.7-15284 Update3</p><p id="e64781f5-7d4c-4126-ba39-0d7a8f3e27ad" class="">引导版本: 1.02b</p><p id="392956c3-ebe8-4d37-881a-6189e11bfc02" class="">针对机型: DS3617+</p><p id="e8c49fa3-2b78-41c4-812c-a15421cbf4d4" class="">引导方式: UEFI</p><p id="f01c9192-1167-4cd0-83dd-4180a140fd96" class="">引导下载地址</p><p id="27be5b57-a85f-45fb-8476-d883928fa52a" class=""><a href="https://www.openos.org/downloads/xpenology-dsm-6-2-0.8/history">https://www.openos.org/downloads/xpenology-dsm-6-2-0.8/history</a></p><p id="c4834ccc-859f-4e96-a34e-b913354e6913" class="">DS3617xs. DSM 6.1.7-15284 系统</p><p id="beed07d1-d3b6-4894-84ea-152bbaa424f8" class=""><a href="https://global.download.synology.com/download/DSM/release/6.1.7/15284/DSM_DS3617xs_15284.pat">https://global.download.synology.com/download/DSM/release/6.1.7/15284/DSM_DS3617xs_15284.pat</a></p><ul id="1a4cd278-36de-4928-9b12-4e8b9a2128ae" class="bulleted-list"><li style="list-style-type:disc">******************************************************************************</li></ul><p id="e4c6682b-45fb-40ad-8cb0-90e50df6e912" class="">黑群晖系统: DSM 5.2-5967.1 (次选推荐版本)</p><p id="e39e67b9-80d6-4664-9019-cb8d49e5a337" class="">引导版本: XPEnoboot for DSM 5.2-5967.1 x64</p><p id="e48a47d2-0aed-4307-8b4f-1073fb2a46b5" class="">针对机型: DS3615+</p><p id="fb84f544-4d1a-4040-bf1a-24df68bf1847" class="">引导方式: 传统BIOS</p><p id="82f16904-92dd-4128-abe5-d8d32932725d" class="">引导下载地址</p><p id="cda6589e-adf4-4498-8c0e-a6d430f70dd3" class=""><a href="https://www.openos.org/threads/xpenoboot-for-dsm-5-2-5967-1.13/">https://www.openos.org/threads/xpenoboot-for-dsm-5-2-5967-1.13/</a></p><p id="4a0c33d4-4b6a-4956-896c-4f3690e9cc5b" class="">DS3615xs. DSM 5.2-5967 系统</p><p id="a535a72e-3d7f-4868-971f-a980ee4807d2" class=""><a href="https://global.download.synology.com/download/DSM/release/5.2/5967/DSM_DS3615xs_5967.pat">https://global.download.synology.com/download/DSM/release/5.2/5967/DSM_DS3615xs_5967.pat</a></p><p id="bb6097c2-5cb6-4e1e-8cc8-563822cace39" class="">###############################################################</p><p id="f1c44145-4d36-4984-b59d-6ed472698383" class=""><strong>修改引导程序配置文件</strong></p><p id="e971f708-fd67-40ad-a046-5b0db36d828f" class="">首先我们可以使用</p><p id="f9fc1efe-fa5b-4e6c-b822-81abd52d5910" class=""><a href="https://www.openos.org/downloads/chipeasy-en-chs.10/">ChipEasy芯片无忧</a></p><p id="d18103de-31dd-4df3-a969-a20410b68d34" class="">查找U盘的VID和PID。</p><p id="e1d10004-bb16-45ff-be95-917784117714" class="">以下图为例，这个U盘的VID是0930，PID是6544。</p><p id="1b81d10f-f8cf-41a1-aed0-5bbff342f2e6" class="">请记录好这两个值。下面修改配置文件需要用到。</p><figure id="a0271b9c-1282-4bd8-a06a-86340bbf9ed3" class="image"><a href="https://s1.ax1x.com/data/nas2x/2017/04/22/07.png"><img src="https://s1.ax1x.com/data/nas2x/2017/04/22/07.png"/></a></figure><p id="0a36b087-fbca-4d7c-b8ff-e2fb1b9a282a" class="">使用DiskGenius编辑配置文件grub.cfg</p><p id="2b5c93b6-5628-4f1c-befa-a93c1453f65e" class=""><a href="https://www.openos.org/downloads/diskgenius-4-9-6-564.17/">https://www.openos.org/downloads/diskgenius-4-9-6-564.17/</a></p><p id="2930343e-8661-4919-be46-7cee8e48fde8" class="">打开DiskGenius, 在顶部选择硬盘-打开虚拟硬盘文件, 选择刚刚下载的.img引导文件并打开</p><figure id="81f8bc76-fa3a-445f-9fc9-cd9dc4de6761" class="image"><a href="https://s2.ax1x.com/2019/02/18/kc6jjx.md.png"><img src="https://s2.ax1x.com/2019/02/18/kc6jjx.md.png"/></a></figure><p id="cd9f59e1-ec89-4898-907f-ea1789450b37" class="">在左边找到刚刚打开的img文件, 点击ESP-grub, 在右边找到grub.cfg, 选择复制到桌面.</p><figure id="53b72aad-a04e-4f3b-806e-b25f2313471c" class="image"><a href="https://s2.ax1x.com/2019/02/18/kccTMt.md.png"><img src="https://s2.ax1x.com/2019/02/18/kccTMt.md.png"/></a></figure><figure id="fd4432c3-cd9b-4bba-a7be-f3311cc37ee1" class="image"><a href="https://s2.ax1x.com/2019/02/18/kcczzn.md.png"><img src="https://s2.ax1x.com/2019/02/18/kcczzn.md.png"/></a></figure><p id="f327cbf6-7c83-40e3-936e-c0183e95bd5e" class="">再去桌面编辑刚刚复制过来的grub.cfg文件</p><p id="26cd5e1a-e392-472f-ae2f-27b03a7f4631" class="">建议使用EditPlus或VS Code</p><figure id="c59ecbf8-cdcd-45ad-850b-a8918eee29e1" class="image"><a href="https://s1.ax1x.com/data/nas2x/2017/04/22/06.png"><img src="https://s1.ax1x.com/data/nas2x/2017/04/22/06.png"/></a></figure><p id="73971263-cb93-42a8-b768-801892a67063" class="">这个根据自己的要求填写。</p><p id="c088523f-3a31-43ef-b22a-79327a5061bb" class="">set vid=0x058f U盘的VID 实体机必须修改，虚拟机无需修改set pid=0x6387 U盘的PID 实体机必须修改，虚拟机无需修改set sn=A8ODN02468 序列号 可以不修改set mac1=0011322CA603 mac地址 可以不修改</p><p id="9078daaf-885f-48e3-8806-92d8e5d84a01" class="">填写正确的U盘 VID和PID可以在DSM界面隐藏U盘，修改sn和mac地址可以用于&quot;洗白&quot;</p><p id="2e035099-50d6-4f15-ba28-3073d15b160c" class="">注意:vid和pid的0x不要修改，只需要修改后面的4位</p><p id="d7208070-0d82-4ee5-ae24-93b2a8f11133" class="">再把已经编辑好的grub.cfg文件拖动到DiskGenius刚刚的位置, 并且替换之前的文件.</p><p id="81c859c2-7528-4013-8eb6-15dcfae58211" class="">然后记得关闭DiskGenius</p><figure id="7af10df5-7a07-4c45-998b-e6f0856825f7" class="image"><a href="https://s2.ax1x.com/2019/02/18/kcg9s0.md.png"><img src="https://s2.ax1x.com/2019/02/18/kcg9s0.md.png"/></a></figure><p id="857e546a-fef4-48a6-9095-b4a8a13742f7" class=""><strong>制作引导U盘</strong></p><p id="d53cfe65-52a7-4a5a-a9a3-8dc5d47e4eb7" class="">运行Win32 Disk Imager磁盘映像工具，如下图所示。</p><p id="6da4696a-d5a5-4cfd-993c-d35190547de0" class="">下载地址:</p><p id="8a9539e5-ab9c-4f99-8e95-8419dd675ea7" class=""><a href="https://sourceforge.net/projects/win32diskimager/">https://sourceforge.net/projects/win32diskimager/</a></p><p id="9974ffc0-27d4-42eb-9c4a-a76dbc64681a" class="">国内镜像:</p><p id="6231065b-69bb-45c4-8e3f-461d032ba0e0" class=""><a href="https://www.openos.org/downloads/win32-disk-imager.2/">https://www.openos.org/downloads/win32-disk-imager.2/</a></p><p id="bf663036-9f81-4732-b4ac-1799ccacc9db" class="">1,先在软件界面右侧设备(Device) 部分选择U盘的盘符。</p><p id="df03d86e-5c55-45e0-8af2-0012f2c0c57d" class="">（建议在操作前移除所有其他的USB存储设备，以防选择错误导致其他U盘或移动硬盘数据丢失）。</p><p id="3b0e91d4-c2ca-49ff-bd27-ca499cdb62c9" class="">2,再点击软件界面 映像文件(Image File)右侧蓝色文件夹图标，选择之前下载的synoboot.img文件。</p><p id="410dc5e7-4647-4a42-b48f-6e9e832e7676" class="">3,最后再点击写入(Write)。</p><figure id="d0eb13bb-a07f-4b04-a1b8-4e3f1c735398" class="image"><a href="https://s1.ax1x.com/data/nas2x/2017/04/01/w11.png"><img src="https://s1.ax1x.com/data/nas2x/2017/04/01/w11.png"/></a></figure><figure id="6ab8fd23-8c5d-4a0b-acdc-1d0c340d1684" class="image"><a href="https://s1.ax1x.com/data/nas2x/2017/04/01/w12jpj.png"><img src="https://s1.ax1x.com/data/nas2x/2017/04/01/w12jpj.png"/></a></figure><figure id="e539634f-16bc-4a03-b5ad-1b6afa973e30" class="image"><a href="https://s1.ax1x.com/data/nas2x/2017/04/01/w14.png"><img src="https://s1.ax1x.com/data/nas2x/2017/04/01/w14.png"/></a></figure><p id="3140ebf4-e898-4a05-9240-3cdd5a8d57ee" class="">(截图是之前XPEnobbot 5.2的，DSM 6.1请选择synoboot.img文件)</p></div></article></body></html>

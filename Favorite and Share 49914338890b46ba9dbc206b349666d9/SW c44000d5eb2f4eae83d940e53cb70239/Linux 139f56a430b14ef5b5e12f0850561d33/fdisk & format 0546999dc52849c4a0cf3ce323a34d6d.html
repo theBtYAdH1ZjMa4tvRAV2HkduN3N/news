@@ -1,0 +1,800 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>fdisk &amp; format</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0546999d-c528-49c4-a0cf-3ce323a34d6d" class="page sans"><header><h1 class="page-title">fdisk &amp; format</h1></header><div class="page-body"><h2 id="abf8e119-d605-4e29-953e-1da15630fb5d" class=""></h2><h1 id="8867412e-504f-44ed-a805-d27ee16a28f5" class="">fdisk -l</h1><p id="a80331c1-85c5-4d97-b494-d52ea34ae0d7" class="">Disk /dev/sda: 12.9 GB, 12884901888 bytes
+255 heads, 63 sectors/track, 1566 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00010897</p><p id="71972b6f-dad2-428d-bf92-3e706a0e90e0" class="">Device Boot Start End Blocks Id System
+/dev/sda1 * 1 64 512000 83 Linux
+Partition 1 does not end on cylinder boundary.
+/dev/sda2 64 1567 12069888 8e Linux LVM</p><p id="8be46bb9-2e67-414b-baad-1298905c21e1" class="">Disk /dev/sdb: 12.9 GB, 12884901888 bytes
+Units = cylinders of 16065 * 512 = 8225280 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000</p><p id="05bffbe3-8b3b-4603-afeb-3e3a1434e1e0" class="">
+</p><p id="56d4f0ad-cab3-4e66-b72b-d79d393602c0" class="">
+</p><p id="cc79f143-96f9-487a-a2a2-3c3bdfc93ff9" class="">
+</p><p id="51bd9348-5c3d-436a-8ec2-a80d1b14c418" class="">Fdisk/Format</p><p id="5d555012-ce45-4bf1-9a06-6656d9af3ed3" class="">Linux Fdisk 磁碟分割及格式化 Sam Tang  27 July 2015  Linux  No Comments</p><p id="dee7a69b-3d81-4772-8dcd-fc0f27328186" class="">fdisk 是 Linux 的硬碟分割區管理工具, 可以用作檢視、建立、修改及刪除硬碟分割區。以下會介紹一些 fdisk 的常用例子及格式化分割區的方法。</p><p id="cc813e15-1c4a-4328-b4d7-d1d73cfc80fc" class="">fdisk 列出現有分割區</p><p id="b80ced04-943b-4b2b-8d47-861becf25f95" class="">要列出硬碟內的現有分割區, 只要直接執行 “fdisk -l [硬碟名稱]” 指令, “fdisk -l” 會列指定硬碟的分割區, 如果無指定硬碟名稱, 會顯示 /proc/partitions 的分割區。例如:</p><h1 id="47a9b380-d551-4d58-af23-12af7bbad34f" class="">fdisk -l /dev/sda</h1><p id="f572db35-886c-45a8-b4ee-92b04b26b1a4" class="">Disk /dev/sda: 499.5 GB, 499558383616 bytes
+255 heads, 63 sectors/track, 60734 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes</p><p id="69586947-5e2f-4eed-9b0b-62e3c6f2f752" class="">Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *           1          63      506016   83  Linux
+/dev/sda2              64         313     2008125   83  Linux
+/dev/sda3             314        6539    50010345   83  Linux
+/dev/sda4            6540       60734   435321337+  83  Linux
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</p><h1 id="45cde987-e1a0-44b0-9ddc-e3730496facc" class="">fdisk -l /dev/sda</h1><p id="7e4a49bb-d544-4f66-9bed-a7ae57356e26" class="">Disk /dev/sda: 499.5 GB, 499558383616 bytes
+255 heads, 63 sectors/track, 60734 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes</p><p id="e519e2b9-a778-4ff7-b6da-b161da99e323" class="">Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *           1          63      506016   83  Linux
+/dev/sda2              64         313     2008125   83  Linux
+/dev/sda3             314        6539    50010345   83  Linux
+/dev/sda4            6540       60734   435321337+  83  Linux
+可以看到上面的例子, 硬碟 /dev/sda 的容量是 500GB, 裡面有 4 個分割區, 分別是 /dev/sda1, /dev/sda2, /dev/sda3 及 /dev/sda4.</p><p id="beca259f-a84f-41b5-bf6c-c1c44300b4f8" class="">如果沒有指定硬碟名稱, fdisk 會讀取 /proc/partitions 檔案以讀出分割區資料, 例如:</p><h1 id="dcae7918-6b3a-411c-8530-b97d07edba43" class="">fdisk -l</h1><p id="97320b8b-365c-4c35-a489-a8e3d8c5a4db" class="">Disk /dev/sda: 499.5 GB, 499558383616 bytes
+255 heads, 63 sectors/track, 60734 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes</p><p id="5455c605-4f1e-4bdc-bb4f-c333c862c6c0" class="">Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *           1          63      506016   83  Linux
+/dev/sda2              64         313     2008125   83  Linux
+/dev/sda3             314        6539    50010345   83  Linux
+/dev/sda4            6540       60734   435321337+  83  Linux</p><p id="34479317-779f-4711-978e-17826000c32e" class="">Disk /dev/sdb: 499.5 GB, 499558383616 bytes
+255 heads, 63 sectors/track, 60734 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes</p><p id="b5063b08-f3bc-4924-8326-5deb85ad35bf" class="">Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1   *           1       60734   487845823+  83  Linux
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</p><h1 id="7c2bdeee-6912-47d6-b01a-10254d187068" class="">fdisk -l</h1><p id="93db64e5-5804-4005-a8ca-ac2fd0d4c8f7" class="">Disk /dev/sda: 499.5 GB, 499558383616 bytes
+255 heads, 63 sectors/track, 60734 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes</p><p id="e16cf208-2393-4831-a584-72ee7c372433" class="">Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *           1          63      506016   83  Linux
+/dev/sda2              64         313     2008125   83  Linux
+/dev/sda3             314        6539    50010345   83  Linux
+/dev/sda4            6540       60734   435321337+  83  Linux</p><p id="04b230cb-e5cb-49cf-a24c-077c7f1ae5c7" class="">Disk /dev/sdb: 499.5 GB, 499558383616 bytes
+255 heads, 63 sectors/track, 60734 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes</p><p id="ee6031c1-6e51-46b5-bfa8-b123f290a469" class="">Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1   *           1       60734   487845823+  83  Linux
+上面看到, 系統內除了 /dev/sda 外, 還有另一個硬碟 /dev/sdb, 而 /dev/sdb 只有一個分割區。</p><p id="f031a800-0f32-4719-b1b6-a1ba9f253698" class="">fdisk 建立新分割區</p><p id="b35d7222-f74f-46fc-9156-be174c39087f" class="">fdisk 建立分割區的是令是 “fdisk [硬碟名稱]”, 例如:</p><h1 id="dba21fed-13e8-41ad-88ae-f97757b57657" class="">fdisk /dev/sdb</h1><p id="690d1c91-f30c-4e2a-b602-55057454dc13" class="">Command (m for help): m
+Command action
+a toggle a bootable flag
+b edit bsd disklabel
+c toggle the dos compatibility flag
+d delete a partition
+l list known partition types
+m print this menu
+n add a new partition
+o create a new empty DOS partition table
+p print the partition table
+q quit without saving changes
+s create a new empty Sun disklabel
+t change a partition&#x27;s system id
+u change display/entry units
+v verify the partition table
+w write table to disk and exit
+x extra functionality (experts only)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</p><h1 id="24394ebc-ce5f-4696-8029-0edab32b94b4" class="">fdisk /dev/sdb</h1><p id="03d27028-ca29-416f-bd24-a20e56a4aab2" class="">Command (m for help): m
+Command action
+a toggle a bootable flag
+b edit bsd disklabel
+c toggle the dos compatibility flag
+d delete a partition
+l list known partition types
+m print this menu
+n add a new partition
+o create a new empty DOS partition table
+p print the partition table
+q quit without saving changes
+s create a new empty Sun disklabel
+t change a partition&#x27;s system id
+u change display/entry units
+v verify the partition table
+w write table to disk and exit
+x extra functionality (experts only)
+這時要根據需要輸入選項, 上面輸入了 “m”, 作用是顯示所有可能選項。</p><p id="562e9049-3043-48f2-8e24-a7877468cd76" class="">建立新分割區輸入 “n” 選項, 然後要選擇建立 primary partition 或者 logical partition, “l” 是 logical; “p” 是 primary.</p><p id="48c98411-8f60-4499-9fb3-e7cdd435cf71" class="">下一步是定義分割區開始的磁區, 直接按 “Enter” 用預設值即可。然後是定義最後的磁區或大小, 如果要使用所有可用空間, 直接按 “Enter” 即可。如果要自訂分割區大小, 例如 50G 可輸入 “+50G”; 500M 可輸入 “+500M”。</p><p id="a20033da-fdf7-435f-a065-916573b9ecd0" class="">最後輸入 “w” 儲存變更, 及按 “q” 離開 fdisk。</p><p id="bbb3f0d2-d110-47f1-ae19-0a42af508959" class="">fdisk 刪除分割區</p><p id="81c52e3b-4f4a-4d10-be38-96b6f93dd3e4" class="">fdisk 刪除分割區, 先要用 “p” 選項檢視要刪除的分割區。知道要刪除的分割區的代號後, 輸入 “d” 選擇, 再輸入分割區的代號即可。這個過程要很小心, 刪除錯了會很麻煩的。</p><p id="b7573c90-92fc-46e0-9932-e521d23c7740" class="">最後輸入 “w” 儲存變更, 及按 “q” 離開 fdisk。</p><p id="0c4f6fd3-eda2-4036-857c-be9fd1ece09f" class="">格式化分割區</p><p id="83d56944-72d1-448e-844c-795542b4c133" class="">當建立了新分割區後, 需要將分割區格式化。格式化分割區可以用 mkfs 指令, 例如要將 /dev/sda5 格代化到 ext4 檔案系統, 可以用以下指令:</p><h1 id="70384bbf-a595-4571-a662-00528d065079" class="">mkfs.ext4 /dev/sda5</h1><p id="52a42224-6379-4ad5-9240-1e6fb3f1fc7a" class="">1</p><h1 id="68b894c4-1fbc-4ddc-b91d-8cd338f28a68" class="">mkfs.ext4 /dev/sda5</h1><p id="020abb40-2c2f-4383-8a73-fecaa65175d3" class="">如果要將分割區格式化到 swap 分割區, 用 mkswap 指令:</p><h1 id="be5ee9a1-7ea3-48ee-a2bc-91c157d431a1" class="">mkswap /dev/sda5</h1><p id="5889b921-0e9c-4667-8491-9dc5d755edb6" class="">1</p><h1 id="00149ff0-0851-4247-a40e-4124aafa4dc2" class="">mkswap /dev/sda5</h1></div></article></body></html>

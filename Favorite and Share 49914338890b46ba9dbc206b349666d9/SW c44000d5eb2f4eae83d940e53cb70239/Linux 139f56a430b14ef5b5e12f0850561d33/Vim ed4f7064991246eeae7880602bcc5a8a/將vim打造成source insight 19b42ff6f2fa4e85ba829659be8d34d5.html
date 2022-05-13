@@ -1,0 +1,758 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>將vim打造成source insight</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="19b42ff6-f2fa-4e85-ba82-9659be8d34d5" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🛴</span></div><h1 class="page-title">將vim打造成source insight</h1></header><div class="page-body"><h3 id="b4d5dde0-310c-48e4-ad77-fed230d3c2ed" class="">將vim打造成source insight發表於 <time>@July 12, 2016 12:48 AM</time> </h3><p id="ff696ba0-93d8-4304-a0f2-9d4e1774d594" class="">vim是套在Linux上非常好用的編輯軟體，但在trace code的能力上卻比不上Windows上的source insight，但我們可以另外安裝套件，讓vim接近於source insight的使用方式</p><p id="5bbe04f4-e8e8-43ff-8010-ca1813125e8f" class="">以下使用了ctags + cscope + taglist + nerdtree + srcexpl + trinity來達成此目標</p><h2 id="8aacd75d-fc7f-450d-8fac-7c36b26c13f3" class=""><strong>ctags</strong></h2><p id="0f817637-8185-41b6-9931-f546b4a0167e" class="">ctags可以在函式、變數之間自由進行切換，例如某主函式call了funca()，ctags可以直接跳到funca的函式裡面、也可使用在變數上</p><ul id="d4bb6a58-48fd-4979-9d6f-a5a1e77afa48" class="bulleted-list"><li style="list-style-type:disc"><strong>安裝</strong></li></ul><p id="74875458-a828-490a-b08a-e1e84f417288" class="">第一步先安裝ctags</p><pre id="dd1c1f7c-5916-4098-bbd5-11b51ea90863" class="code code-wrap"><code>sudo apt-get install ctags
+or
+sudo apt-get install exuberant-ctags
+</code></pre><ul id="db129dc1-605d-4b9c-ab85-a708c3bd20bb" class="bulleted-list"><li style="list-style-type:disc"><strong>使用</strong></li></ul><p id="04e1c2ea-4a2b-4580-9e49-d745d000fc6c" class="">進入程式目錄當中，若是多層的目錄則進到最上層的目錄，接著輸入</p><pre id="0d3c4045-2c04-40cf-85ce-8405e2c8d624" class="code code-wrap"><code>ctags -R
+</code></pre><p id="3bc6d923-91d8-4fad-97f2-0a6661fbb5b0" class="">接著必須讓vim知道tags需要到哪裡找到，先用vim打開vimrc，之後把下面第二段的資訊加進去</p><pre id="2d4bc2a0-c33f-4439-a8bf-1f0ff19f9ab2" class="code code-wrap"><code>vim ~/.vimrc
+set tags=./tags,./TAGS,tags;~,TAGS;~
+</code></pre><p id="6be6d292-a030-4d04-9878-35ee1d34e7db" class="">用vim進到.c .h檔之後移到函式或變數上即可使用快捷鍵找到該函式或變數的定義，也可跳回到使用此函式的地方</p><pre id="b4fbce77-5e41-4cbb-a15d-589925e07f8c" class="code code-wrap"><code>&quot;跳至該函式或變數定義
+Ctrl + ]
+&quot;跳回使用此函式或變數處
+Ctrl + t
+</code></pre><h2 id="fa57784d-785d-486c-b6eb-0a2ba0d29025" class=""><strong>cscope</strong></h2><p id="496a57ec-d6ae-41e6-a2b1-b0e385860532" class="">cscope可以查詢函式或變數在哪些地方被使用過，或是函式當中使用了哪些函式</p><ul id="bdaac4f9-a2f4-4658-a7f3-49b45d41b2b8" class="bulleted-list"><li style="list-style-type:disc"><strong>安裝</strong></li></ul><p id="f1c697b2-f345-493a-96cf-f17a6291259f" class="">第一步先安裝cscope</p><pre id="f9a20229-6edd-40c9-bf06-c3ea81d10301" class="code code-wrap"><code>sudo apt-get install cscope
+</code></pre><ul id="3bddf192-ecb5-4cdb-a584-017663a5b799" class="bulleted-list"><li style="list-style-type:disc"><strong>使用</strong></li></ul><p id="95599f60-fdb7-4e5d-a1d7-dac434af4623" class="">進入程式目錄當中，若是多層的目錄則進到最上層的目錄，接著輸入</p><pre id="935afda0-6a65-4ee4-b991-9211455f1128" class="code code-wrap"><code>cscope -Rbqk
+</code></pre><p id="114113da-d401-43ea-974f-d6d5cd49644d" class="">參數說明如下</p><ol type="1" id="d5010033-fec9-421c-a2c8-edc5b317d183" class="numbered-list" start="1"><li>R : 將目錄及子目錄底下的所有文件都建立索引</li></ol><ol type="1" id="52c1c524-04a9-46dd-8517-293588c2dd2b" class="numbered-list" start="2"><li>b : 僅建立關聯數據庫，不導入使用者介面</li></ol><ol type="1" id="c00a2dcc-608f-4ef9-95c9-c2e744534ea3" class="numbered-list" start="3"><li>q : 建立cscope.in.out和cscope.po.out，可增快搜尋速度</li></ol><ol type="1" id="64ae4017-8897-4368-b862-8eeaeee125b8" class="numbered-list" start="4"><li>k : 不搜尋預設會include進來的函式(/usr/include)</li></ol><p id="ed5647a1-3c84-4575-ac48-8f4d1b342473" class="">進入vim的一般指令模式之後必須將cscope.out加入</p><pre id="5860c410-bb27-467e-b873-b7a7c6919e55" class="code code-wrap"><code>:cs add cscope.out
+</code></pre><p id="1cdd8340-386a-4f1b-a67a-667593897836" class="">為了避免每次使用都必須重複輸入，因此可將此段加入vimrc裡，讓vim自動執行，另外cscope的官方網站也提供了建議的vimrc設定<a href="http://cscope.sourceforge.net/cscope_maps.vim">http://cscope.sourceforge.net/cscope_maps.vim</a></p><p id="65f0d03b-66e8-4994-a5a7-bf100c740522" class="">我挑了部分較常使用的加入vimrc<code>vim ~/.vimrc</code>，將以下設定加入vimrc，另外建議自行將註解加入</p><pre id="64f26565-8bb7-44ce-a11b-c0422c20eb56" class="code code-wrap"><code>set cscopetag
+set csto=0
+
+if filereadable(&quot;cscope.out&quot;)
+   cs add cscope.out
+elseif $CSCOPE_DB != &quot;&quot;
+    cs add $CSCOPE_DB
+endif
+set cscopeverbose
+
+nmap zs :cs find s &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+nmap zg :cs find g &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+nmap zc :cs find c &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+nmap zt :cs find t &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+nmap ze :cs find e &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+nmap zf :cs find f &lt;C-R&gt;=expand(&quot;&lt;cfile&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+nmap zi :cs find i ^&lt;C-R&gt;=expand(&quot;&lt;cfile&gt;&quot;)&lt;CR&gt;$&lt;CR&gt;
+nmap zd :cs find d &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+</code></pre><p id="16b83baa-4273-4302-9fb8-712a92508b8a" class="">其中最後的nmap部分為快捷鍵，其中的第一行指的是可使用zs取代在vim裡輸入<code>:cs find s {name}</code>的指令，後面依此類拖官網給的設定檔快捷鍵為Ctrl+/+s的組合，不過我是用VIM7.4，對於三個以上的組合鍵似乎有使用上的問題，這部分還沒找到解決方式，因此就先用兩個的組合鍵</p><p id="9f631530-3811-45e2-8ce8-f2c4960e5545" class="">最後附上各指令的用途</p><ol type="1" id="51b62b21-7cf1-4e10-8114-0160b7b7f22d" class="numbered-list" start="1"><li>:cs find s {name} : 找出C語言name的符號</li></ol><ol type="1" id="4fda9f70-66d1-436a-a7e6-e3b3c70ca3d3" class="numbered-list" start="2"><li>:cs find g {name} : 找出name定義的地方</li></ol><ol type="1" id="1e5d32fa-271e-4e42-b50e-2758918d2707" class="numbered-list" start="3"><li>:cs find c {name} : 找出使用name的地方</li></ol><ol type="1" id="47f21c1f-0e78-4dea-b5ce-6b6d908cde3f" class="numbered-list" start="4"><li>:cs find t {name} : 找出name的字串</li></ol><ol type="1" id="43a42886-3e21-4120-b8a3-fd3bb8536545" class="numbered-list" start="5"><li>:cs find e {name} : 相當於egrep功能，但速度更佳</li></ol><ol type="1" id="0fce93b9-cc2c-4023-b56b-b95e5361ea49" class="numbered-list" start="6"><li>:cs find f {name} : 尋找檔案</li></ol><ol type="1" id="6856b787-0b13-4334-86aa-ab85e5f73e90" class="numbered-list" start="7"><li>:cs find i {name} : 尋找include此檔案的檔案</li></ol><ol type="1" id="a6eb990f-1296-46de-b812-7efce587d2f4" class="numbered-list" start="8"><li>:cs find d {name} : 尋找name裡面使用到的函式</li></ol><h2 id="6d52bfad-3849-4fe9-a75e-454c3b56154b" class=""><strong>taglist</strong></h2><p id="2a0355a6-e29f-4084-b78e-ab1249941886" class="">taglist可在切出一區塊，顯示此檔案裡的macro，global variable，函式等資訊，且會隨著瀏覽到哪個地方便以不同顏色標示</p><ul id="dc3cfe41-5299-4d0c-bb83-1d4baa12fd61" class="bulleted-list"><li style="list-style-type:disc"><strong>安裝</strong></li></ul><p id="122e4ce9-ed5a-4bab-8365-054b309e86ef" class="">下載plugin file，下載地址如下，請自行選擇最新版本下載</p><p id="4ce15c22-2756-4d29-bc7c-eb31f5a94332" class=""><a href="http://sourceforge.net/projects/vim-taglist/files/vim-taglist">http://sourceforge.net/projects/vim-taglist/files/vim-taglist</a></p><p id="8d0d552a-2aa8-4d11-b6ed-654c0043ce3f" class="">將plugin/taglist.vim複製到~/.vim/plugin/，doc/taglist.txt複製到~/.vim/doc</p><ul id="38efa95d-8480-4c02-9c8a-035a2559b75e" class="bulleted-list"><li style="list-style-type:disc"><strong>使用</strong></li></ul><p id="1ab9f06d-2eaa-411a-bcd3-dc8f68c39d7c" class="">可在~/.vimrc裡配置相關設定，其他配置選項請參考官網說明</p><pre id="befada34-9194-46c0-872e-cb9dca2d9c22" class="code code-wrap"><code>nmap &lt;F8&gt; :TlistToggle&lt;CR&gt;&lt;CR&gt;
+let Tlist_Show_One_File=1
+let Tlist_Exit_OnlyWindow=1
+set ut=100
+</code></pre><ol type="1" id="f688bfee-e1dc-43fe-802f-95d89ffc3e16" class="numbered-list" start="1"><li>nmap : 將F8設為開啟taglist的快捷鍵</li></ol><ol type="1" id="f56fdf0c-a2dd-4276-af8b-90a1a27a67c3" class="numbered-list" start="2"><li>Tlist_Show_One_File : 只顯示當下瀏覽檔案的func，不顯示之前瀏覽的檔案</li></ol><ol type="1" id="beb8dba1-a8e1-4075-96d5-c7b13ab24c86" class="numbered-list" start="3"><li>Tlist_Exit_OnlyWindow : 如果taglist區塊是最後一個，則退出vim</li></ol><ol type="1" id="8b7c005d-dd4a-4612-aef8-06f0f1075895" class="numbered-list" start="4"><li>ut=100 : taglist會標示目前在操作哪個function or variable，但更新速度很慢，這裡把更新速度設成100ms</li></ol><h2 id="298585c1-baec-4228-a40c-d1f9eb246381" class=""><strong>nerdtree</strong></h2><p id="1b805119-4dd0-40a7-9a67-5f8ec4bc3749" class="">NERD tree可切出一區塊，顯示根目錄開始的檔案結構，且可由list直接跳到選取的檔案</p><ul id="e5aa097a-d4ab-41c1-b1c7-6038ddd16854" class="bulleted-list"><li style="list-style-type:disc"><strong>安裝</strong></li></ul><p id="e873c2cc-cfee-484c-a224-6aaaaaa57bea" class="">下載plugin file，下載地址如下，請自行選擇最新版本下載</p><p id="cac86a87-88af-4388-8886-714c38a811f3" class=""><a href="http://www.vim.org/scripts/script.php?script_id=1658">http://www.vim.org/scripts/script.php?script_id=1658</a></p><p id="cc68837b-e8e2-4f6c-847e-98dae2ff9a29" class="">將plugin/NERD_tree.vim複製到~/.vim/plugin/，doc/NERD_tree.txt複製到~/.vim/doc剩下的資料夾autoload, lib, nerdtree_plugin, syntax全部複製到~/.vim底下</p><ul id="d18ba0a1-ceb1-46e1-ac4d-b6e7a7e279f8" class="bulleted-list"><li style="list-style-type:disc"><strong>使用</strong></li></ul><p id="23c65b87-55da-4552-86fa-d68ac573b7ad" class="">可在~/.vimrc裡配置相關設定，其他配置選項請參考官網說明</p><pre id="05c09bbf-d84a-4b88-9a0f-41ac7351d005" class="code code-wrap"><code>nmap &lt;F9&gt; :NERDTreeFind&lt;CR&gt;&lt;CR&gt;
+let NERDTreeWinPos=1
+</code></pre><ol type="1" id="049a2f3b-2187-44aa-a5dc-d2b671fc805f" class="numbered-list" start="1"><li>nmap : 將F9設為開啟nerdtree的快捷鍵</li></ol><ol type="1" id="31dc26b5-f0d0-47c3-b4ea-83550f086e8b" class="numbered-list" start="2"><li>NERDTreeWinPos : 將nerdtree區塊放在右邊</li></ol><h2 id="4e098b2e-5db9-4078-807c-d3fddfe66b7c" class=""><strong>SrcExpl(Source Explorer)</strong></h2><p id="13342aac-6ebd-4d00-ace3-ca5a918c8648" class="">SrcExpl可以將當下function的定義顯示出來，或是將當下的變數宣告處顯示出來</p><ul id="4b2e89b0-7c21-45ff-b5c7-af427e51f490" class="bulleted-list"><li style="list-style-type:disc"><strong>安裝</strong></li></ul><p id="88e5fc29-0998-4ed9-87b6-676dc65ff3ae" class="">使用git下載plugin檔</p><pre id="4687bfa0-a85a-4691-8fc3-ae29c6c09795" class="code code-wrap"><code>git clonehttps://github.com/wesleyche/SrcExpl</code></pre><p id="efdb8d1f-ae92-4c0e-8d0e-8130a6e9020c" class="">將plugin/srcexpl.vim複製到~/.vim/plugin/，doc/srcexpl.txt複製到~/.vim/doc</p><ul id="00398838-9198-4f4f-9531-9e0ef3706ab6" class="bulleted-list"><li style="list-style-type:disc"><strong>使用</strong></li></ul><p id="0698e390-5ab0-4105-92d6-f77d675add91" class="">官方網站有詳細介紹在.vimrc可用的設定，這裡只列出我有用到的設定</p><pre id="49154f6b-448b-46a8-9040-4f7adb587aee" class="code code-wrap"><code>nmap &lt;F10&gt; :SrcExplToggle&lt;CR&gt;
+let g:SrcExpl_pluginList = [
+    \&quot;__Tag_List__&quot;,
+    \&quot;_NERD_tree_&quot;
+    \
+]
+</code></pre><ol type="1" id="8a41fe3f-d666-467b-a391-55c347b7a670" class="numbered-list" start="1"><li>nmap : 將F10設為開啟srcexpl的快捷鍵</li></ol><ol type="1" id="71f5280d-ad98-4b94-9daf-edafd7a02776" class="numbered-list" start="2"><li>若有安裝taglist or nerdtree則需輸入</li></ol><h2 id="d9672731-adce-49db-8801-afe71539d421" class=""><strong>trinity</strong></h2><p id="8defe26a-1b8b-4190-bf86-4b0541436f3f" class="">trinity用來整合taglist, nerdtree, srcexpl，使可以一鍵開啟三個plgin的功能</p><ul id="4d415888-91e5-4e9c-89fc-859c308dc180" class="bulleted-list"><li style="list-style-type:disc"><strong>安裝</strong></li></ul><p id="75be5eb0-b771-4397-99b9-71159f1e3c9e" class="">使用git下載plugin檔</p><pre id="c582c55d-899b-43c1-bedb-88a394978916" class="code code-wrap"><code>git clonehttps://github.com/wesleyche/Trinity</code></pre><p id="9a3f54c1-6f3c-4755-a6cf-ac6d7725ecce" class="">將plugin/trinity.vim複製到~/.vim/plugin/</p><ul id="cf4c1638-dc72-45d6-9a78-556dd8bbc227" class="bulleted-list"><li style="list-style-type:disc"><strong>使用</strong></li></ul><p id="67e3e133-8efa-4053-a000-304947aa3b7b" class="">接著設定vimrc</p><pre id="e4dd341f-da45-4b46-b73d-8830401d5cee" class="code code-wrap"><code>nmap &lt;F7&gt; :TrinityToggleAll
+</code></pre><ol type="1" id="acb0b36a-26b8-458f-9028-33e48bb4a32f" class="numbered-list" start="1"><li>nmap : 將F7設為一次打開taglist, nerdtree, srcexpl的快捷鍵</li></ol><p id="fe6d7544-d2e1-41be-8054-c110b51bfa1d" class="">一次打開之後，畫面如下</p><figure id="893dee2e-7f3f-4292-9932-7e008a6fd45e" class="image"><a href="https://ivan7645.github.io/images/trinity.png"><img src="https://ivan7645.github.io/images/trinity.png"/></a></figure><h3 id="6bb21fc7-5c90-4e1c-b84b-bf5ce8d66e4f" class="">將vim打造成source insight發表於 <time>@July 12, 2016 12:48 AM</time> | <a href="https://ivan7645.github.io/2016/07/12/vim_to_si/#comments">1 Comment</a></h3><p id="7842ba5c-a734-472d-bdaa-d23ce6f6d326" class="">vim是套在Linux上非常好用的編輯軟體，但在trace code的能力上卻比不上Windows上的source insight，但我們可以另外安裝套件，讓vim接近於source insight的使用方式</p><p id="09ef714e-bc4b-4f3c-9c1e-c282524e3507" class="">以下使用了ctags + cscope + taglist + nerdtree + srcexpl + trinity來達成此目標</p><h2 id="ab0b0f70-1086-448a-9eda-f9ff75bc3a52" class=""><strong>ctags</strong></h2><p id="997a500b-5980-49da-9e93-6759ba90c738" class="">ctags可以在函式、變數之間自由進行切換，例如某主函式call了funca()，ctags可以直接跳到funca的函式裡面、也可使用在變數上</p><ul id="8e8c996b-356f-4faa-b8fc-da5ade1803b1" class="bulleted-list"><li style="list-style-type:disc"><strong>安裝</strong></li></ul><p id="5c978ad2-1fc3-43a8-af4d-ca4d8be99264" class="">第一步先安裝ctags</p><pre id="db92f9e4-4cf3-4cee-91eb-df3c23bf6c37" class="code code-wrap"><code>sudo apt-get install ctags
+or
+sudo apt-get install exuberant-ctags
+</code></pre><ul id="85edd621-f94b-4743-8d5d-92fa385f7ed2" class="bulleted-list"><li style="list-style-type:disc"><strong>使用</strong></li></ul><p id="b413d1e9-65df-40f6-a8c6-d1cfab17c120" class="">進入程式目錄當中，若是多層的目錄則進到最上層的目錄，接著輸入</p><pre id="f0cc077e-1ef1-47bd-8162-882ec4a684b7" class="code code-wrap"><code>ctags -R
+</code></pre><p id="e059d5cc-9862-4150-9509-f6204e48799d" class="">接著必須讓vim知道tags需要到哪裡找到，先用vim打開vimrc，之後把下面第二段的資訊加進去</p><pre id="4066c56b-989e-4edf-85df-6b8236514088" class="code code-wrap"><code>vim ~/.vimrc
+set tags=./tags,./TAGS,tags;~,TAGS;~
+</code></pre><p id="2445f8a7-3286-4cbe-b388-d6b2b5266ee3" class="">用vim進到.c .h檔之後移到函式或變數上即可使用快捷鍵找到該函式或變數的定義，也可跳回到使用此函式的地方</p><pre id="cae8c601-6005-45dc-b97d-ff2f917087e8" class="code code-wrap"><code>&quot;跳至該函式或變數定義
+Ctrl + ]
+&quot;跳回使用此函式或變數處
+Ctrl + t
+</code></pre><h2 id="8a7d3cc1-91bd-4bf7-8182-1b939f0c903e" class=""><strong>cscope</strong></h2><p id="c53a9031-1422-436f-b2fe-a4c7aaf3e4b4" class="">cscope可以查詢函式或變數在哪些地方被使用過，或是函式當中使用了哪些函式</p><ul id="ebec90ad-030c-44ce-be6e-14a6389ed78d" class="bulleted-list"><li style="list-style-type:disc"><strong>安裝</strong></li></ul><p id="c4271258-e381-4beb-9f7c-56252113dcf2" class="">第一步先安裝cscope</p><pre id="3658dad5-d6bd-4696-849e-f94950032772" class="code code-wrap"><code>sudo apt-get install cscope
+</code></pre><ul id="ac5a456c-c463-434e-b4b1-1be47ec19414" class="bulleted-list"><li style="list-style-type:disc"><strong>使用</strong></li></ul><p id="21e03c02-c38f-4522-9b29-fe9d8c81eb47" class="">進入程式目錄當中，若是多層的目錄則進到最上層的目錄，接著輸入</p><pre id="4fdda6f2-5686-4832-aff3-9be05ce35853" class="code code-wrap"><code>cscope -Rbqk
+</code></pre><p id="2db941a7-f8b9-41f8-9342-ac8e92fa5ed3" class="">參數說明如下</p><ol type="1" id="ed337d53-8eaf-47f7-a28f-6be75f241845" class="numbered-list" start="1"><li>R : 將目錄及子目錄底下的所有文件都建立索引</li></ol><ol type="1" id="1dd84d7a-6114-4cb7-89e6-586743f02a18" class="numbered-list" start="2"><li>b : 僅建立關聯數據庫，不導入使用者介面</li></ol><ol type="1" id="3d0c10e0-3ac7-45ea-a324-92499b1031cd" class="numbered-list" start="3"><li>q : 建立cscope.in.out和cscope.po.out，可增快搜尋速度</li></ol><ol type="1" id="49f7198a-45fc-4f53-b3b6-ac8098ded904" class="numbered-list" start="4"><li>k : 不搜尋預設會include進來的函式(/usr/include)</li></ol><p id="cbb9720c-9f98-47b0-b7da-eca7676716d2" class="">進入vim的一般指令模式之後必須將cscope.out加入</p><pre id="949f7bd4-8fc3-4a13-9030-7862a76f46d0" class="code code-wrap"><code>:cs add cscope.out
+</code></pre><p id="f1afaf51-725f-4337-a657-d0e5b98028d0" class="">為了避免每次使用都必須重複輸入，因此可將此段加入vimrc裡，讓vim自動執行，另外cscope的官方網站也提供了建議的vimrc設定<a href="http://cscope.sourceforge.net/cscope_maps.vim">http://cscope.sourceforge.net/cscope_maps.vim</a></p><p id="efbdf715-8d38-4034-b78a-917b754510df" class="">我挑了部分較常使用的加入vimrc<code>vim ~/.vimrc</code>，將以下設定加入vimrc，另外建議自行將註解加入</p><pre id="e25a0c9e-2507-42bd-826e-23a92b859b9e" class="code code-wrap"><code>set cscopetag
+set csto=0
+
+if filereadable(&quot;cscope.out&quot;)
+   cs add cscope.out
+elseif $CSCOPE_DB != &quot;&quot;
+    cs add $CSCOPE_DB
+endif
+set cscopeverbose
+
+nmap zs :cs find s &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+nmap zg :cs find g &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+nmap zc :cs find c &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+nmap zt :cs find t &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+nmap ze :cs find e &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+nmap zf :cs find f &lt;C-R&gt;=expand(&quot;&lt;cfile&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+nmap zi :cs find i ^&lt;C-R&gt;=expand(&quot;&lt;cfile&gt;&quot;)&lt;CR&gt;$&lt;CR&gt;
+nmap zd :cs find d &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;&lt;CR&gt;
+</code></pre><p id="823ea9ca-2032-4695-afdc-848289b4dbc2" class="">其中最後的nmap部分為快捷鍵，其中的第一行指的是可使用zs取代在vim裡輸入<code>:cs find s {name}</code>的指令，後面依此類拖官網給的設定檔快捷鍵為Ctrl+/+s的組合，不過我是用VIM7.4，對於三個以上的組合鍵似乎有使用上的問題，這部分還沒找到解決方式，因此就先用兩個的組合鍵</p><p id="63719240-cb49-46f4-b966-9a59f4fe18da" class="">最後附上各指令的用途</p><ol type="1" id="de898187-dc17-48d1-85f2-cd4c32d9c948" class="numbered-list" start="1"><li>:cs find s {name} : 找出C語言name的符號</li></ol><ol type="1" id="a9cf45cf-29fb-4a93-a17a-829898892727" class="numbered-list" start="2"><li>:cs find g {name} : 找出name定義的地方</li></ol><ol type="1" id="f77f7d78-5ce5-4aaa-b647-a6d59901463d" class="numbered-list" start="3"><li>:cs find c {name} : 找出使用name的地方</li></ol><ol type="1" id="4cf4bb20-c4a8-4a31-afcf-6bffc77c81a1" class="numbered-list" start="4"><li>:cs find t {name} : 找出name的字串</li></ol><ol type="1" id="44b5c0ed-fa2f-41e4-9073-bc1b6201f144" class="numbered-list" start="5"><li>:cs find e {name} : 相當於egrep功能，但速度更佳</li></ol><ol type="1" id="810b9c0f-09dc-4682-8237-93e0cbdabbb8" class="numbered-list" start="6"><li>:cs find f {name} : 尋找檔案</li></ol><ol type="1" id="3a1ea43b-5c54-48f3-8639-afab61a14bfe" class="numbered-list" start="7"><li>:cs find i {name} : 尋找include此檔案的檔案</li></ol><ol type="1" id="54520904-6217-4a5c-8640-fc95d6dc867e" class="numbered-list" start="8"><li>:cs find d {name} : 尋找name裡面使用到的函式</li></ol><h2 id="6077ea54-c76c-4263-8ec5-66ab2f752f67" class=""><strong>taglist</strong></h2><p id="7201d384-4612-4404-b806-c6f685b612d5" class="">taglist可在切出一區塊，顯示此檔案裡的macro，global variable，函式等資訊，且會隨著瀏覽到哪個地方便以不同顏色標示</p><ul id="af0d40a4-c2a0-47c7-8db3-248a5f36d8b0" class="bulleted-list"><li style="list-style-type:disc"><strong>安裝</strong></li></ul><p id="66fb1d10-2ef0-4e28-bc99-9dbe9b11dc38" class="">下載plugin file，下載地址如下，請自行選擇最新版本下載</p><p id="9fa9ceab-19f3-4b4f-93f9-0356ffe3d3c3" class=""><a href="http://sourceforge.net/projects/vim-taglist/files/vim-taglist">http://sourceforge.net/projects/vim-taglist/files/vim-taglist</a></p><p id="7f8ae184-8884-4d0f-8c2a-0bfdc6f066b3" class="">將plugin/taglist.vim複製到~/.vim/plugin/，doc/taglist.txt複製到~/.vim/doc</p><ul id="f524113f-74ca-4fdb-ad8f-b1a52252be52" class="bulleted-list"><li style="list-style-type:disc"><strong>使用</strong></li></ul><p id="c648ffa6-5ef2-428a-ae81-4114eb2e9197" class="">可在~/.vimrc裡配置相關設定，其他配置選項請參考官網說明</p><pre id="9241646b-0b00-42b1-b937-4642f1770e4d" class="code code-wrap"><code>nmap &lt;F8&gt; :TlistToggle&lt;CR&gt;&lt;CR&gt;
+let Tlist_Show_One_File=1
+let Tlist_Exit_OnlyWindow=1
+set ut=100
+</code></pre><ol type="1" id="db08d8e5-e7bd-4e26-908a-6119bd1f2d42" class="numbered-list" start="1"><li>nmap : 將F8設為開啟taglist的快捷鍵</li></ol><ol type="1" id="1dcbd3bf-2c6e-447e-ae41-5f26f8dbb1ce" class="numbered-list" start="2"><li>Tlist_Show_One_File : 只顯示當下瀏覽檔案的func，不顯示之前瀏覽的檔案</li></ol><ol type="1" id="36120dd6-000b-40db-8c6d-64a4ece6b672" class="numbered-list" start="3"><li>Tlist_Exit_OnlyWindow : 如果taglist區塊是最後一個，則退出vim</li></ol><ol type="1" id="13006d0d-244d-4641-975b-7a521d6c750d" class="numbered-list" start="4"><li>ut=100 : taglist會標示目前在操作哪個function or variable，但更新速度很慢，這裡把更新速度設成100ms</li></ol><h2 id="ef820775-2b27-478c-870f-2811f2ffb64f" class=""><strong>nerdtree</strong></h2><p id="0961ae38-b932-4155-aa92-ab256672aafd" class="">NERD tree可切出一區塊，顯示根目錄開始的檔案結構，且可由list直接跳到選取的檔案</p><ul id="fe6e2f6f-9d40-47da-97a5-8f1046f21741" class="bulleted-list"><li style="list-style-type:disc"><strong>安裝</strong></li></ul><p id="fb8688b7-409a-43ef-9a1c-1f80b39b888d" class="">下載plugin file，下載地址如下，請自行選擇最新版本下載</p><p id="7c167baf-102e-496b-8ef6-0bebdd83d8a4" class=""><a href="http://www.vim.org/scripts/script.php?script_id=1658">http://www.vim.org/scripts/script.php?script_id=1658</a></p><p id="94888aa3-7d7d-4044-921d-8b558c7eb0c5" class="">將plugin/NERD_tree.vim複製到~/.vim/plugin/，doc/NERD_tree.txt複製到~/.vim/doc剩下的資料夾autoload, lib, nerdtree_plugin, syntax全部複製到~/.vim底下</p><ul id="0b31caf1-4d03-435c-9780-c8a04ee27cd2" class="bulleted-list"><li style="list-style-type:disc"><strong>使用</strong></li></ul><p id="bf3a2e1f-dfdf-44ae-8ade-b9e8f01e4838" class="">可在~/.vimrc裡配置相關設定，其他配置選項請參考官網說明</p><pre id="dd8781cb-bd82-4e5e-b3a9-b200aefa8a8e" class="code code-wrap"><code>nmap &lt;F9&gt; :NERDTreeFind&lt;CR&gt;&lt;CR&gt;
+let NERDTreeWinPos=1
+</code></pre><ol type="1" id="88cad16a-e8ea-4fd4-919e-e60eb0acd494" class="numbered-list" start="1"><li>nmap : 將F9設為開啟nerdtree的快捷鍵</li></ol><ol type="1" id="31645ef1-a51f-4f53-bbcf-ff6a2f775c52" class="numbered-list" start="2"><li>NERDTreeWinPos : 將nerdtree區塊放在右邊</li></ol><h2 id="f0d58639-4328-4330-92ce-61e8400a0e5f" class=""><strong>SrcExpl(Source Explorer)</strong></h2><p id="ce26e133-fd4d-4182-9e99-db66b5c22f92" class="">SrcExpl可以將當下function的定義顯示出來，或是將當下的變數宣告處顯示出來</p><ul id="a41cadbc-5c35-4838-9b23-b26e808e2d19" class="bulleted-list"><li style="list-style-type:disc"><strong>安裝</strong></li></ul><p id="20cb6262-6520-4bbb-8dcc-4d1060183c67" class="">使用git下載plugin檔</p><pre id="bcc03b99-b0d0-40e1-9f2a-6bc96642a9f6" class="code code-wrap"><code>git clonehttps://github.com/wesleyche/SrcExpl</code></pre><p id="bc03b9dd-ec4c-4d1b-a189-31c61cf08eb8" class="">將plugin/srcexpl.vim複製到~/.vim/plugin/，doc/srcexpl.txt複製到~/.vim/doc</p><ul id="4af59a26-c586-4134-a226-2d9853156e0c" class="bulleted-list"><li style="list-style-type:disc"><strong>使用</strong></li></ul><p id="f6ff09de-5089-44a4-8687-90d7a686d2f7" class="">官方網站有詳細介紹在.vimrc可用的設定，這裡只列出我有用到的設定</p><pre id="093e331a-8c08-4cbd-aa56-c370527d7b91" class="code code-wrap"><code>nmap &lt;F10&gt; :SrcExplToggle&lt;CR&gt;
+let g:SrcExpl_pluginList = [
+    \&quot;__Tag_List__&quot;,
+    \&quot;_NERD_tree_&quot;
+    \
+]
+</code></pre><ol type="1" id="9b300384-2a90-44fd-a8c4-22d8b9c1c6cf" class="numbered-list" start="1"><li>nmap : 將F10設為開啟srcexpl的快捷鍵</li></ol><ol type="1" id="edb1fbe7-6640-48e5-8cf7-3a2bdd0489d6" class="numbered-list" start="2"><li>若有安裝taglist or nerdtree則需輸入</li></ol><h2 id="92476cdd-89d5-4cc8-80cf-9219e2480baa" class=""><strong>trinity</strong></h2><p id="30a89d6a-cfd8-4169-af7f-b49be28ad31e" class="">trinity用來整合taglist, nerdtree, srcexpl，使可以一鍵開啟三個plgin的功能</p><ul id="8f1511ea-3261-40a4-94a9-d7926b624734" class="bulleted-list"><li style="list-style-type:disc"><strong>安裝</strong></li></ul><p id="ddef1a0c-99c5-4596-b447-a51c8c110345" class="">使用git下載plugin檔</p><pre id="5a2f8c0c-8e15-4c6c-9867-ff7d90a3b1e2" class="code code-wrap"><code>git clonehttps://github.com/wesleyche/Trinity</code></pre><p id="0a942125-4fae-42f2-b43f-4704e55feac2" class="">將plugin/trinity.vim複製到~/.vim/plugin/</p><ul id="d925c036-17d7-428e-8210-c10f7822f78b" class="bulleted-list"><li style="list-style-type:disc"><strong>使用</strong></li></ul><p id="b62f4be5-65e5-4c11-a4db-67a4038497e2" class="">接著設定vimrc</p><pre id="df86d4b4-75bd-4803-9067-d20b825a37f4" class="code code-wrap"><code>nmap &lt;F7&gt; :TrinityToggleAll
+</code></pre><ol type="1" id="13e0dbd9-a18a-4ed3-aa35-7381c2d16941" class="numbered-list" start="1"><li>nmap : 將F7設為一次打開taglist, nerdtree, srcexpl的快捷鍵</li></ol><p id="9ab38dd5-7d38-43d3-aa85-73d49f93cf3e" class="">一次打開之後，畫面如下</p><figure id="4f30c777-08ed-4a01-bc7a-a1ccc40a7b96" class="image"><a href="https://ivan7645.github.io/images/trinity.png"><img src="https://ivan7645.github.io/images/trinity.png"/></a></figure><p id="6385ba5e-a0ec-495a-ba4e-c79e21c5f990" class="">
+</p></div></article></body></html>

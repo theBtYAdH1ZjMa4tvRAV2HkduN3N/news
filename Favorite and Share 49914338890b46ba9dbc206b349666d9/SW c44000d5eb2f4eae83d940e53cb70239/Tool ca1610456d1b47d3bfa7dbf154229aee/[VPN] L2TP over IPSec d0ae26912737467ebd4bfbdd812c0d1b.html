@@ -1,0 +1,704 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>[VPN] L2TP over IPSec</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d0ae2691-2737-467e-bd4b-fbdd812c0d1b" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎆</span></div><h1 class="page-title"><a href="https://danielhuang030.pixnet.net/blog/post/268697168">[VPN] L2TP over IPSec</a></h1></header><div class="page-body"><h2 id="68a48850-c64a-47e5-af77-ea69e0e3bee7" class=""><a href="https://danielhuang030.pixnet.net/blog/post/268697168">[VPN] L2TP over IPSec</a></h2><h2 id="698ea9ab-bea6-4405-b650-c0528df522ed" class="">Info</h2><ul id="af8b144a-703a-4f2b-9fb4-76d3a3e47966" class="bulleted-list"><li style="list-style-type:disc">L2TP 協定自身不提供加密與可靠性驗證的功能，可以和安全協定搭配使用，從而實現資料的加密傳輸。經常與 L2TP 協定搭配的加密協定是IPsec，當這兩個協定搭配使用時，通常合稱L2TP/IPsec</li></ul><h2 id="076a9606-fbb3-48bc-a5c9-69aeeee8733d" class="">Installation</h2><pre id="7be9ebec-f1a0-47f9-9ae1-376b7bcb3e55" class="code code-wrap"><code>git clone https://github.com/hwdsl2/docker-ipsec-vpn-server.git
+cd docker-ipsec-vpn-server</code></pre><pre id="97359eda-06e0-4fd0-9e44-460c3212c8bf" class="code code-wrap"><code>sudo cp vpn.env.example vpn.env
+sudo vi ~/docker-ipsec-vpn-server/vpn.env</code></pre><pre id="1fca15c6-e3be-457c-aef3-f843f3a96ed1" class="code code-wrap"><code># IPSec 的公鑰，建議字串長度長一點
+VPN_IPSEC_PSK=PASS
+
+# 預設使用者名稱
+VPN_USER=tester
+
+# 預設使用者密碼（明碼）
+VPN_PASSWORD=aaaaaa
+
+# 分配 L2TP 私人 IP 網段範圍
+VPN_L2TP_NET=172.16.0.013
+VPN_L2TP_LOCAL=172.16.0.1
+VPN_L2TP_POOL=172.16.0.10-172.23.255.250
+
+# 分配 XAUTH 私人 IP 網段範圍
+VPN_XAUTH_NET=172.24.0.013
+VPN_XAUTH_POOL=172.24.0.10-172.31.255.250
+
+# 指定 DNS 位置
+VPN_DNS_SRV1=XXX.XXX.XXX.XXX
+VPN_DNS_SRV2=XXX.XXX.XXX.XXX
+DNS_SRV1=XXX.XXX.XXX.XXX
+DNS_SRV2=XXX.XXX.XXX.XXX</code></pre><pre id="b199a1c2-7bd9-466d-9e81-28894ef3cddd" class="code code-wrap"><code>    - ./users/ppp:/etc/ppp
+    - ./users/ipsec.d:/etc/ipsec.d</code></pre><pre id="756606fd-5ccb-45ad-9c83-e38eb1949efe" class="code code-wrap"><code># 建議先不要背景執行，有錯誤可以比較容易發現
+docker-compose up</code></pre><ul id="5d575772-b70e-4828-954b-533c237b65ef" class="bulleted-list"><li style="list-style-type:disc">網路上常見的安裝方式：<ul id="291e4cd4-d0da-43cc-bdaa-d252819c6758" class="bulleted-list"><li style="list-style-type:circle"><a href="https://blog.toright.com/posts/5176/ubuntu-%E6%9E%B6%E8%A8%AD-l2tp-ipsec-vpn-server-mac-%E7%9B%B8%E5%AE%B9.html">Ubuntu 14.04: pptpd, openswan, xl2tpd</a></li></ul><ul id="14fee266-49fe-462c-a737-bfe6ec0383b8" class="bulleted-list"><li style="list-style-type:circle"><a href="https://bill.tt/2017/01/14/Ubuntu-16-04-%E9%85%8D%E7%BD%AEL2TP-VPN-Server/">Ubuntu 16.04: ppp, lsof, strongswan, xl2tpd</a></li></ul></li></ul><ul id="935f97c4-bbbd-42fb-8a91-c380d7292eec" class="bulleted-list"><li style="list-style-type:disc">二種方法我都試過，但是安裝的程式與設定也很多；不意外的又卡關了。這時候我又想起了 docker，果然網路上又有大大提供整合好的 docker images，測試使用 <a href="https://github.com/hwdsl2/docker-ipsec-vpn-server">hwdsl2/docker-ipsec-vpn-server</a></li></ul><ul id="b2a4d57d-9e88-4c38-8976-05258a4c3b10" class="bulleted-list"><li style="list-style-type:disc">docker 相關安裝請參考<a href="http://blog.roodo.com/danielhuang030/archives/62144457.html">之前的說明</a></li></ul><ul id="9c0c0b71-06dd-4174-b0ae-6ea27deafb5f" class="bulleted-list"><li style="list-style-type:disc">AWS 新增 Security groups，開啟 port UDP 1701, UDP 4500, UDP 500</li></ul><ul id="4660f1b4-e986-4d33-9ac4-31939a7e5349" class="bulleted-list"><li style="list-style-type:disc">git clone project</li></ul><ul id="d10e9316-4dd9-4cf6-b70e-104191f4800a" class="bulleted-list"><li style="list-style-type:disc">複製並調整環境變數（其他變數請參考 <a href="https://github.com/hwdsl2/docker-ipsec-vpn-server/blob/master/run.sh">run.sh</a>）</li></ul><ul id="3493dd99-4f2c-48bd-a5c1-368b5c3b54cd" class="bulleted-list"><li style="list-style-type:disc">~/docker-ipsec-vpn-server/vpn.env</li></ul><ul id="b166bc53-df3d-464f-8186-f64249bf61bf" class="bulleted-list"><li style="list-style-type:disc">網段計算方式可以參考<a href="http://www.ipaddressguide.com/cidr">這裡</a></li></ul><ul id="375c9578-1ccf-4818-86a0-e987c1809156" class="bulleted-list"><li style="list-style-type:disc">volume 使用者設定檔目錄，在 volumes 區塊新增</li></ul><ul id="2aba1374-9141-46ba-9a89-980ab74075d5" class="bulleted-list"><li style="list-style-type:disc">~/docker-ipsec-vpn-server/docker-compose.yml</li></ul><ul id="abad821e-a69b-4a56-983b-c4d20f443728" class="bulleted-list"><li style="list-style-type:disc">建立 docker container</li></ul><ul id="8e7d7b71-cfb7-499b-8576-ea67b5609f87" class="bulleted-list"><li style="list-style-type:disc">如果沒有問題，應該會看到下面的畫面；包含 IP、公鑰、預設的使用者帳號與密碼</li></ul><ul id="09c66e81-d6f2-4ad5-95c2-3189283dde64" class="bulleted-list"><li style="list-style-type:disc"><figure id="7cedc9ec-6ebd-40e1-a26e-8d76a5ff2fbb" class="image"><a href="https://pic.pimg.tw/danielhuang030/1545966029-1852650191_n.jpg"><img src="https://pic.pimg.tw/danielhuang030/1545966029-1852650191_n.jpg"/></a></figure></li></ul><h2 id="c5db96b3-52b7-4b8e-92d7-98a41281e7ec" class="">Setting</h2><h3 id="401a447c-5c04-4c0d-ae93-1add7a0f3602" class="">管理使用者</h3><pre id="e682a863-53fc-4423-8e18-d68bfca5c7c5" class="code code-wrap"><code>sudo vi ~/docker-ipsec-vpn-server/users/ppp/chap-secrets</code></pre><pre id="ed87c92c-4a40-4079-a657-b40d1715aafa" class="code code-wrap"><code># Secrets for authentication using CHAP
+# client  server  secret  IP addresses
+&quot;tester&quot; l2tpd &quot;aaaaaa&quot; *
+&quot;test2&quot; l2tpd &quot;aaaaaa&quot; *</code></pre><pre id="2fbeb82a-2bae-4047-b689-095b030615e9" class="code code-wrap"><code># $1$x2I2244y$mWuO1pmeYNwpdOqow5xbo.
+openssl passwd -1 &quot;aaaaaa&quot;</code></pre><pre id="6e5d867c-a9b2-44a4-8853-722cd75436a8" class="code code-wrap"><code>sudo vi ~/docker-ipsec-vpn-server/users/ipsec.d/passwd</code></pre><pre id="174b2018-13e0-4ef6-beaf-daf1a629c0b5" class="code code-wrap"><code># Secrets for authentication using CHAP
+# client  server  secret  IP addresses
+tester:$1$x2I2244y$mWuO1pmeYNwpdOqow5xbo.:xauth-psk
+test2:$1$x2I2244y$mWuO1pmeYNwpdOqow5xbo.:xauth-psk</code></pre><ul id="cd6ae526-817b-4575-99cd-1c5978db7cda" class="bulleted-list"><li style="list-style-type:disc">修改 L2TP/IPsec 設定檔（明碼），新增使用者 test2</li></ul><ul id="642c4a5f-8b57-4f13-965b-f31d81ca50eb" class="bulleted-list"><li style="list-style-type:disc">~/docker-ipsec-vpn-server/users/ppp/chap-secrets</li></ul><ul id="7bd43e92-b4c1-4cfa-8541-2e8309cfc0a1" class="bulleted-list"><li style="list-style-type:disc">修改 Cisco IPsec 設定檔（password），新增使用者 test2</li></ul><ul id="e8113416-cc91-4ffd-9c3f-1fe221357f62" class="bulleted-list"><li style="list-style-type:disc">Password</li></ul><ul id="aa9fdc11-1421-4601-8360-d93ec80182fd" class="bulleted-list"><li style="list-style-type:disc">~/docker-ipsec-vpn-server/users/ipsec.d/passwd</li></ul><ul id="bfc32ae1-4c8e-4781-b25f-7051a5e0df43" class="bulleted-list"><li style="list-style-type:disc">不需要重新啟動 IPSec，儲存後新帳號即可使用</li></ul><h3 id="5ebb1a40-6d32-42b8-9fdb-e001a00d9641" class="">管理使用者 in container</h3><pre id="c49e705c-0ed3-45e9-a5c4-da30079d887c" class="code code-wrap"><code>docker exec -it ipsec-vpn-server env TERM=xterm bash -l</code></pre><pre id="f2103dda-5c3e-403a-b35f-ccb58b920524" class="code code-wrap"><code>apt-get update &amp;&amp; apt-get -y install vim</code></pre><ul id="927c6d12-e88d-4ca6-9b3c-9339ad077d77" class="bulleted-list"><li style="list-style-type:disc">進入 docker container</li></ul><ul id="eae0d011-5026-4236-a815-79aafbd889e1" class="bulleted-list"><li style="list-style-type:disc">安裝編輯器 vim</li></ul><ul id="184457b6-795b-4856-a7d3-e927ddb5b780" class="bulleted-list"><li style="list-style-type:disc">修改設定檔</li></ul><ul id="ffbeff47-089d-460c-8d10-48d31fe9aa55" class="bulleted-list"><li style="list-style-type:disc">不需要重新啟動 IPSec，儲存後新帳號即可使用</li></ul><h3 id="348327a4-9a43-4bbe-9e0d-4092488a99e3" class="">修改 PSK 設定</h3><pre id="53421f5d-49e9-4c99-8883-053d186af1a7" class="code code-wrap"><code>%any  %any  : PSK &quot;PASS&quot;</code></pre><ul id="7f0b5748-2aab-4afd-b115-7ca00918ed98" class="bulleted-list"><li style="list-style-type:disc">/etc/ipsec.secrets</li></ul><h3 id="261affba-f86e-43ab-871c-cf016d6c7739" class="">修改 Private IP 設定</h3><pre id="60b331da-5fe0-4fa3-97ce-050cc4c2b68f" class="code code-wrap"><code>ip range = 172.16.0.10-172.31.255.250
+local ip = 172.16.0.1</code></pre><ul id="1ed20f0f-7bd7-4ec8-b56a-61f496b96429" class="bulleted-list"><li style="list-style-type:disc">/etc/xl2tpd/xl2tpd.conf</li></ul><h3 id="238ae434-5850-40b0-90f5-90cf763c2fdd" class="">修改 DNS 設定</h3><pre id="ebd5dc42-aa1c-418e-8fd6-c7f73ca0975c" class="code code-wrap"><code>ms-dns XXX.XXX.XXX.XXX # 同一台主機可以設定為 local ip</code></pre><ul id="97523af4-2568-432d-b395-bf256716e808" class="bulleted-list"><li style="list-style-type:disc">/etc/ppp/options.xl2tpd</li></ul><h3 id="938ce48e-bf30-481c-bb8f-bb2156cbf932" class="">重啟服務</h3><pre id="186128f0-ca18-4a1a-97b8-27ff73823195" class="code code-wrap"><code>sudo ipsec restart
+sudo service xl2tpd restart</code></pre><h2 id="d65c9e69-91a2-4be9-a6e0-5dd781b71069" class="">Other</h2><h3 id="4f3e2343-cb6a-4318-ae06-a3500da4e360" class="">Windows 10 連線發生錯誤</h3><pre id="116bb132-eeef-4691-9d40-9359305faead" class="code code-wrap"><code>REG ADD HKLM\SYSTEM\CurrentControlSet\Services\PolicyAgent /v AssumeUDPEncapsulationContextOnSendRule /t REG_DWORD /d 0x2 /f</code></pre><ul id="85206b60-b7ac-48f6-86f2-b692160e8ee5" class="bulleted-list"><li style="list-style-type:disc"><strong>Q</strong>: 如果連線發生錯誤，要特別<a href="https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/docs/clients.md#windows-error-809">修改登錄檔</a>，似乎跟路由器有關係</li></ul><ul id="a0a5a52d-9d5a-4866-b838-a1a4391d4ed0" class="bulleted-list"><li style="list-style-type:disc"><strong>A</strong>: 以系統管理員身分執行命令提示字元 cmd，輸入以下指令並執行</li></ul><h3 id="273ed049-e072-492f-8e86-802d23e8da19" class="">無法使用 VPN 指定 DNS</h3><ul id="7b979d93-fe37-4f47-8102-e9ddce1ece16" class="bulleted-list"><li style="list-style-type:disc"><strong>Q</strong>: Windows 10 VPN 連線成功，但「自動取得DNS 伺服器位址」時卻沒有透過 VPN 指定的 DNS 解析網址，只有在指定DNS 伺服器位址後才會有效</li></ul><ul id="a595dbfb-d2fc-4acc-9322-aec73a62b859" class="bulleted-list"><li style="list-style-type:disc"><strong>A</strong>: 網路連線 &gt; VPN &gt; 右鍵「內容」 &gt; 分頁「網路功能」 &gt; 網際網路通訊協定第 4 版 (TCP/IPv4) &gt; 內容 &gt; 進階 &gt; 自動計量不勾選 &gt; 輸入框設定值: 15</li></ul><h2 id="e4e95e04-0ff2-4c78-9ac6-07e785469b6c" class="">Reference</h2><ul id="85e19d9f-43bb-4283-a537-b1290ababf2f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://zh.wikipedia.org/zh-tw/%E7%AC%AC%E4%BA%8C%E5%B1%82%E9%9A%A7%E9%81%93%E5%8D%8F%E8%AE%AE">wikipedia: 第二層隧道協定</a></li></ul><ul id="45892f86-d095-4b17-99c0-d406cfdaa3e6" class="bulleted-list"><li style="list-style-type:disc"><a href="https://blog.toright.com/posts/5176/ubuntu-%E6%9E%B6%E8%A8%AD-l2tp-ipsec-vpn-server-mac-%E7%9B%B8%E5%AE%B9.html">Ubuntu 架設 L2TP IPSec VPN Server (Mac 相容)</a></li></ul><ul id="d174bf9c-0e09-43df-8dbe-5bf2f1a070e5" class="bulleted-list"><li style="list-style-type:disc"><a href="https://bill.tt/2017/01/14/Ubuntu-16-04-%E9%85%8D%E7%BD%AEL2TP-VPN-Server/">Ubuntu 16.04 配置L2TP VPN Server</a></li></ul><ul id="b5097af2-4186-445f-8ec9-f7106629d1d8" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/hwdsl2/docker-ipsec-vpn-server">IPsec VPN Server on Docker</a></li></ul></div></article></body></html>

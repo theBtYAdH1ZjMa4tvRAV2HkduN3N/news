@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>BBC 5 days to become a better listener</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4f9d6832-c46c-4ef3-88f5-77fbd8841f30" class="page sans"><header><h1 class="page-title">BBC <strong>5 days to become a better listener</strong></h1></header><div class="page-body"><h1 id="64a55de3-d7d5-422f-b8d7-8fe354c16fa6" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks/ep-201005"><strong>5 days to become a better listener</strong></a></h1><p id="5a13d886-4086-4c7b-9904-1c673bc7769c" class=""><strong>LEVEL</strong></p><p id="c99c4ce0-f9ff-4b4f-ab5b-8c6ddbc626e7" class=""><strong><strong>Day 1. What&#x27;s Tim&#x27;s tip?</strong></strong></p><p id="fce0ab8b-68d6-4a23-af07-f8a09bbf4771" class=""><strong><strong>EPISODE 201005</strong></strong><strong> / 05 OCT 2020</strong></p><h3 id="3b949521-713b-458e-ab73-d191c1217a35" class="">Welcome to Day 1</h3><p id="58add939-1ce1-4599-89a5-6f501d7e4d80" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/6-minute-english/ep-190912"><strong>THIS IS THE PROGRAMME YOU NEED TO LISTEN TO TO COMPLETE TIM&#x27;S TASK</strong></a></p><h3 id="0c9891af-b2d8-4ac3-9582-6fd737fca913" class="">Tim&#x27;s homework</h3><p id="94e17ea4-284e-4793-8ea6-7d7174e7a72c" class="">Did you hear Tim&#x27;s listening tip? When you know what the topic is you are about to listen to, make a list of words and expressions you expect to hear. Then check to see whether those words were mentioned.</p><p id="286356dc-56f8-4e5c-86e4-6afb21c9759d" class=""><a href="http://downloads.bbc.co.uk/learningenglish/features/themed_weeks/day_1_better_listener.pdf"><strong>DOWNLOAD THE TIP AND WORKSHEET FOR MAKING NOTES</strong></a></p><h3 id="b49b8e70-2fb3-48d5-8dfd-39e5576629ee" class=""><strong>Listening task</strong></h3><p id="4ecee047-4e47-4fc9-b66b-5fe9feda6da4" class="">You&#x27;re going to hear a 6 Minute English programme about tourism. Have ready your list of words and expressions you have predicted will be used in the programme.</p><p id="b13ec1a8-09a0-46a5-8e7c-3783a05a568a" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/6-minute-english/ep-190912"><strong>NOW LISTEN TO THE PROGRAMME</strong></a></p><h3 id="372d7aad-5759-4e94-8ea9-cdaba219d7f3" class="">Next</h3><p id="c7be90c6-f1dc-407d-9cd1-d871bb37c4b0" class="">Do you like special weeks of content on just one theme? Let us know what you think of &#x27;5 days to become a better listener&#x27; at <strong>learningenglish@bbc.co.uk</strong></p><p id="39c91511-9352-4de0-a733-28f8ae4c6a47" class="">How many of your words and expressions did you hear in the programme? Join Tim for his answers and more listening tips and activities on <a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks/ep-201006"><strong>Day 2</strong></a>. Is Tuesday badge day...?</p><p id="88d4dc81-cf1f-4ce2-91b2-d19622ba60f5" class="">For more listening practice, try other episodes of <a href="https://www.bbc.co.uk/learningenglish/english/features/6-minute-english"><strong>6 Minute English</strong></a>.</p><h2 id="c670347d-c6d7-4331-9d77-f396fb159c9a" class="">Latest 5 days to become a better listener</h2><ul id="7e047214-f30a-4e2f-8ea8-a63c0ed7a67c" class="bulleted-list"><li style="list-style-type:disc"><figure id="de9069ba-7424-437b-a2d8-5ff160ef5925" class="image"><a href="https://ichef.bbci.co.uk/images/ic/480xn/p09576my.jpg"><img src="https://ichef.bbci.co.uk/images/ic/480xn/p09576my.jpg"/></a></figure><h3 id="42739d0d-91ac-494c-9347-902a094447c7" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks_speaking/ep-210129">Day 5 - Final thoughts</a></h3><h3 id="73235a66-1bb2-4392-87fc-3d1442bdc885" class=""><strong>EPISODE 210129 </strong>/ 29 JAN 2021</h3><p id="c4a08fa6-f0e5-420d-aaf5-26601f283209" class="">Day five of Tim&#x27;s 5-day guide to better speaking.</p></li></ul><ul id="7f371906-80f0-48a7-9059-3df1c2d40141" class="bulleted-list"><li style="list-style-type:disc"><figure id="c57bd931-155a-446a-af2f-9f6d5ebb540b" class="image"><a href="https://ichef.bbci.co.uk/images/ic/480xn/p09544q0.jpg"><img src="https://ichef.bbci.co.uk/images/ic/480xn/p09544q0.jpg"/></a></figure><h3 id="d814a5ec-e343-4cae-a7a7-5608e5e1eee5" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks_speaking/ep-210128">Day 4 - Listening &amp; Badge Day!</a></h3><h3 id="4a44581d-2bf0-4cf6-a23c-5e9f2f960776" class=""><strong>EPISODE 210128 </strong>/ 28 JAN 2021</h3><p id="bcfd1ea5-bc5d-41d5-9d33-ae723aff711d" class="">Day one of Tim&#x27;s 5-day guide to better speaking.</p></li></ul><ul id="8f4a898f-c469-497e-acd8-696cd6e4f041" class="bulleted-list"><li style="list-style-type:disc"><figure id="5c998bb4-e1be-47af-9e42-2389a5718095" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p0951mfk.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p0951mfk.jpg"/></a></figure><h3 id="d0e62a1e-d97b-42c8-a0f2-b22215252584" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks_speaking/ep-210127">Day 3 - Shadow Speaking</a></h3><h3 id="0eaed566-d7a7-4018-8350-72d0ff165f65" class=""><strong>EPISODE 210127 </strong>/ 27 JAN 2021</h3><p id="d7f4c899-9133-4209-8f3e-11da85221d98" class="">Day three of Tim&#x27;s 5-day guide to better speaking.</p></li></ul><ul id="a4718a27-9a91-4b1d-bf80-3237164f9a2f" class="bulleted-list"><li style="list-style-type:disc"><figure id="fb18f932-fdc2-44ed-965f-e0abdc55d191" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p094zvsg.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p094zvsg.jpg"/></a></figure><h3 id="129f52e2-114e-4c03-8435-b5558478f6b9" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks_speaking/ep-210126">Day 2 - Vocabulary</a></h3><h3 id="6e2a4d57-fd1d-4f5c-b6b6-1348bca36c1c" class=""><strong>EPISODE 210126 </strong>/ 26 JAN 2021</h3><p id="1db10666-6a78-47b4-aa80-bc155f5e7773" class="">Day two of Tim&#x27;s 5-day guide to better speaking.</p></li></ul><ul id="97756a2e-ddd5-4391-99b9-3b6dd6af0dc7" class="bulleted-list"><li style="list-style-type:disc"><figure id="6bba1a08-25db-4767-80c6-bfb99f854161" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p094y79w.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p094y79w.jpg"/></a></figure><h3 id="40b0a22e-21ad-49d9-b5b8-3e2acf33a707" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks_speaking/ep-210125">Day 1</a></h3><h3 id="3a268d7d-8357-4c39-81ee-a66d5f778a54" class=""><strong>EPISODE 210125 </strong>/ 25 JAN 2021</h3><p id="cec9c526-7f7b-49cd-89fc-4415c6bd5b37" class="">Day one of Tim&#x27;s 5-day guide to better speaking.</p></li></ul><ul id="c2697d88-5a53-46b5-931b-7efe207f37c2" class="bulleted-list"><li style="list-style-type:disc"><figure id="4d3966c6-64b8-42d3-a574-5833d493da18" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p08zdbps.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p08zdbps.jpg"/></a></figure><h3 id="efd91ec6-add4-47a2-b221-f0d6a4949707" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks_pronunciation/ep-201127">Day 5 - You&#x27;ve earned your certificate</a></h3><h3 id="6a67487c-1265-4ae5-8954-125aeeb17504" class=""><strong>EPISODE 201127 </strong>/ 27 NOV 2020</h3><p id="d5ea9c35-64ad-4f0f-9243-cfb59c5204a8" class="">Day five of Tim&#x27;s 5-day guide to better pronunciation.</p></li></ul><ul id="c8c7efe9-7929-4ee3-8e8c-ebaa0cbfd9d3" class="bulleted-list"><li style="list-style-type:disc"><figure id="caf1ebe1-9f96-4686-9976-939ebe480f8d" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p08z5tc3.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p08z5tc3.jpg"/></a></figure><h3 id="12b786c3-9af6-43b7-a7d9-5aa71a36981e" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks_pronunciation/ep-201126">Day 4 - Happy Badge Day</a></h3><h3 id="070649cf-8ecf-4d38-b734-9fc8bb215ea5" class=""><strong>EPISODE 201126 </strong>/ 26 NOV 2020</h3><p id="87bdd5d3-b2d0-4ea2-b84f-82e9f8c8b4ae" class="">Day four of Tim&#x27;s 5-day guide to better pronunciation.</p></li></ul><ul id="c84730c1-886b-458b-8de4-8377dd70b75d" class="bulleted-list"><li style="list-style-type:disc"><figure id="7e21fcf7-270e-456c-baee-495d8810d2ff" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p08z2lwm.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p08z2lwm.jpg"/></a></figure><h3 id="b5cf3782-e7d0-4869-b54f-161bf069feb1" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks_pronunciation/ep-201125">Day 3 - When sounds collide</a></h3><h3 id="31bc3d3f-2d9e-4ade-b98b-0c3769a7b791" class=""><strong>EPISODE 201125 </strong>/ 25 NOV 2020</h3><p id="98120293-1544-44df-9797-b6de98bb0467" class="">Day one of Tim&#x27;s 5-day guide to better pronunciation.</p></li></ul><ul id="1a769395-c1e8-4406-ad02-9f4c6445f2ea" class="bulleted-list"><li style="list-style-type:disc"><figure id="2b107bd4-8338-4b53-945e-71f1b495a295" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p08z238q.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p08z238q.jpg"/></a></figure><h3 id="4dbcaf38-2f19-44d6-ac7e-bcb43926e1ad" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks_pronunciation/ep-201124">Day 2. The most important sound</a></h3><h3 id="ab9e1fc7-8685-4c63-b552-900983d311db" class=""><strong>EPISODE 201124 </strong>/ 24 NOV 2020</h3><p id="11bd34f0-9a48-4eb2-97d4-8b0c4da21f56" class="">Day two of Tim&#x27;s 5-day guide to better pronunciation.</p></li></ul><ul id="a1d5e53d-7784-46da-b1fb-c205ffff5005" class="bulleted-list"><li style="list-style-type:disc"><figure id="8f73db6f-176b-41c3-859e-1969d89730b7" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p08yrxyz.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p08yrxyz.jpg"/></a></figure><h3 id="33798fc9-4f7a-4366-a356-7319556455b5" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks_pronunciation/ep-201123">Day 1. What&#x27;s Tim&#x27;s tip?</a></h3><h3 id="de463f80-79de-453d-b827-2487b401cebf" class=""><strong>EPISODE 201123 </strong>/ 23 NOV 2020</h3><p id="aa85d65b-731c-4978-a005-96aeb6fbd9c9" class="">Day one of Tim&#x27;s 5-day guide to better pronunciation.</p></li></ul><ul id="d68ad5e9-1428-4446-8d8f-cefabe945dad" class="bulleted-list"><li style="list-style-type:disc"><figure id="b91d8683-ecca-4096-8857-5194c79506bc" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p08z3p28.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p08z3p28.jpg"/></a></figure><h3 id="f38a821b-7a8e-4438-be8f-5760ab100dca" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks_pronunciation/ep-201120">Join Tim from 23rd to 27th November</a></h3><h3 id="22cee059-9ae2-4a3a-ad0f-2f6dc1f7c40d" class=""><strong>EPISODE 201120 </strong>/ 20 NOV 2020</h3></li></ul><ul id="fa6a0938-fb53-410d-98c3-2ccea0f887b7" class="bulleted-list"><li style="list-style-type:disc"><figure id="2d3c6bc8-3331-4f42-a3bd-1960cae723cd" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p08tr6sc.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p08tr6sc.jpg"/></a></figure><h3 id="d59ffb3c-f5f6-48c3-a54f-86c8945ea75b" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks/ep-201009">Day 5. Download your certificate!</a></h3><h3 id="7ccb3238-cebb-4879-b6f9-ddff0f58b445" class=""><strong>EPISODE 201009 </strong>/ 09 OCT 2020</h3><p id="c7330359-c05a-49a0-bd8b-4f10aaefa3c9" class="">Day 5 of Tim&#x27;s &#x27;better listening&#x27; course</p></li></ul><ul id="454f2934-21b1-4574-a12f-d4605aad7705" class="bulleted-list"><li style="list-style-type:disc"><figure id="3f4f7914-b1cf-4be6-81f1-699616e77d95" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p08tm34v.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p08tm34v.jpg"/></a></figure><h3 id="14b2d7cc-5c69-43f6-9ff6-9678e668b7ff" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks/ep-201008">Day 4. Get Tim&#x27;s latest tip!</a></h3><h3 id="2d991fe0-9036-45e0-a957-021dce8c3d5f" class=""><strong>EPISODE 201008 </strong>/ 08 OCT 2020</h3><p id="f128b9d6-b874-4390-b21e-ddcfbd798111" class="">Day 4 of Tim&#x27;s &#x27;better listening&#x27; course</p></li></ul><ul id="c8744f27-687b-45ff-881e-1d5706a4b105" class="bulleted-list"><li style="list-style-type:disc"><figure id="0faa2c3a-c3ff-4104-b07e-044b5a7ef33f" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p08tj7np.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p08tj7np.jpg"/></a></figure><h3 id="3ed53cc3-d392-446d-9e68-e6f88ce91e0d" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks/ep-201007">Day 3. Get Tim&#x27;s tip and earn a badge!</a></h3><h3 id="0b68b9d7-a21c-4dc1-84e5-0233b1ceb51f" class=""><strong>EPISODE 201007 </strong>/ 07 OCT 2020</h3><p id="4ad9c057-9698-4589-a69a-8d581a106602" class="">Day three of Tim&#x27;s &#x27;better listening&#x27; course</p></li></ul><ul id="2ac6ed4e-24a6-4dc2-b524-091eac79c558" class="bulleted-list"><li style="list-style-type:disc"><figure id="ee4b3b02-a928-4fa8-85a2-875c0c67a6f1" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p08thn91.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p08thn91.jpg"/></a></figure><h3 id="fdf4ed95-189d-4d2d-903d-1e9374b4b18c" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks/ep-201006">Day 2. Learn Tim&#x27;s tip for today</a></h3><h3 id="d530ec3f-1d04-426f-b9a3-cb76ddb6827e" class=""><strong>EPISODE 201006 </strong>/ 06 OCT 2020</h3><p id="4125ac38-4a18-48fb-abde-36037b219349" class="">Day two of Tim&#x27;s &#x27;better listening&#x27; course</p></li></ul><ul id="0ca4b61e-9522-4967-860b-8d2d17ec3a2c" class="bulleted-list"><li style="list-style-type:disc"><figure id="e9ca4a7e-9516-40b3-8b54-b8ef9a3d0307" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p08t5zbc.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p08t5zbc.jpg"/></a></figure><h3 id="07aaed92-825e-416e-8eb2-be5b85567d5b" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks/ep-201005">Day 1. What&#x27;s Tim&#x27;s tip?</a></h3><h3 id="52d2daf6-70a4-4911-a8e6-18322957dc80" class=""><strong>EPISODE 201005 </strong>/ 05 OCT 2020</h3><p id="faf9caa6-f956-4866-9034-19c93db56e09" class="">Day one of Tim&#x27;s &#x27;better listening&#x27; course</p></li></ul><ul id="5e4232fb-7f76-4c96-a0ca-3c2e186fa0b2" class="bulleted-list"><li style="list-style-type:disc"><figure id="5d8e3a40-9dfe-4cfb-8d1c-9fb6b15083e4" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p08synv6.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p08synv6.jpg"/></a></figure><h3 id="d0f1e29e-b298-45d7-837c-94f10c43750e" class=""><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks/ep-201002">Join Tim from 5th to 9th October</a></h3><h3 id="ac605790-0998-4247-bd1e-d6e8d5da346e" class=""><strong>EPISODE 201002 </strong>/ 02 OCT 2020</h3></li></ul><ul id="40835d15-e061-4e8d-9bae-ac6664f2018b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.bbc.co.uk/learningenglish/english/features/themed_weeks">View all 5 days to become a better listener</a></li></ul><h2 id="23275524-3348-4e54-b22a-2a5941c7be55" class="">Takeaways</h2><p id="f1622f3f-26af-40e1-82fa-a6f6398f3f47" class=""><a href="http://downloads.bbc.co.uk/learningenglish/features/themed_weeks/day_1_better_listener.pdf"><strong>Download PDF</strong></a></p><ul id="6b2fe512-bbc4-467c-9947-f7ea35a8bc48" class="bulleted-list"><li style="list-style-type:disc"><figure id="5208a536-0ae3-48a9-abea-8ccdfe95d128" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p09038g3.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p09038g3.jpg"/></a></figure></li></ul><ul id="c602a37c-747e-4c5d-872d-2623f1986b00" class="bulleted-list"><li style="list-style-type:disc"><figure id="27d72400-6379-493d-8210-ae0c680a13a6" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p090395m.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p090395m.jpg"/></a></figure></li></ul><ul id="2fc9e0e8-674c-4308-82ef-99b5307c7beb" class="bulleted-list"><li style="list-style-type:disc"><figure id="3c0d9161-8da6-4045-92c1-11d923fb61f6" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p09038bb.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p09038bb.jpg"/></a></figure></li></ul><ul id="9ce99b97-1607-4d52-9d2b-501b6fd436b0" class="bulleted-list"><li style="list-style-type:disc"><figure id="8061ecdd-d307-45a6-8159-7c8d42060e57" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p09038hy.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p09038hy.jpg"/></a></figure></li></ul><ul id="edeea07a-23f3-4cf2-ab0b-5ce41dc447e7" class="bulleted-list"><li style="list-style-type:disc"><figure id="e339c32e-b3b2-4110-b18c-11d65e8e7adb" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p09038nd.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p09038nd.jpg"/></a></figure></li></ul><ul id="e4ef89f6-649d-48e4-a49c-712d00a6c6eb" class="bulleted-list"><li style="list-style-type:disc"><figure id="77f1ca07-4e1c-4427-8046-86c4782c270d" class="image"><a href="https://ichef.bbci.co.uk/images/ic/256xn/p09038sc.jpg"><img src="https://ichef.bbci.co.uk/images/ic/256xn/p09038sc.jpg"/></a></figure></li></ul></div></article></body></html>

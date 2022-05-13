@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Health Information</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="891b3bbd-548e-4d2e-8e07-e2d0fbaa43d7" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧬</span></div><h1 class="page-title">Health Information</h1></header><div class="page-body"><figure id="0e303a77-f445-4ea5-acbd-894fad412718" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E4%BD%A0%E9%9C%80%E8%A6%81%E4%BA%86%E8%A7%A3%E7%9A%84%E6%9B%B4%E5%B9%B4%E6%9C%9F%E3%80%8C%E8%85%A6%E9%9C%A7%E3%80%8D%E7%8F%BE%E8%B1%A1%200e303a77f4454ea5acbd894fad412718.html"><span class="icon">⚓</span>你需要了解的更年期「腦霧」現象</a></figure><figure id="38a7dc4c-d43d-42dc-bd37-f6959369e4a9" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E5%85%A9%E5%8A%91%E4%B9%8B%E9%96%93%E9%9A%94%E5%BE%88%E4%B9%85%E6%80%8E%E9%BA%BC%E8%BE%A6%EF%BC%9F%E6%B7%B7%E6%89%93%E5%8F%AF%E8%A1%8C%EF%BC%9F%E5%8F%AA%E6%89%931%E5%8A%91%E6%9C%89%E4%BF%9D%E8%AD%B7%E5%8A%9B%E5%97%8E%EF%BC%9F%2038a7dc4cd43d42dcbd37f6959369e4a9.html"><span class="icon">👖</span>兩劑之間隔很久怎麼辦？混打可行？只打1劑有保護力嗎？</a></figure><figure id="38e3b228-8323-4c57-a215-d565ead2d022" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E7%B4%85%E4%BA%86%E7%9C%BC%E6%80%8E%E9%BA%BC%E8%BE%A6%EF%BC%9F%E8%AB%87%E3%80%8C%E7%B5%90%E8%86%9C%E4%B8%8B%E5%87%BA%E8%A1%80%E3%80%8D%2038e3b22883234c57a215d565ead2d022.html"><span class="icon">⏰</span>紅了眼怎麼辦？談「結膜下出血」</a></figure><figure id="63dd0c0f-f5c2-4b17-b049-a42f79814c3f" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E5%B8%B8%E8%A6%BA%E5%BE%97%E7%B4%AF%E3%80%81%E6%B2%AE%E5%96%AA%E6%81%90%E6%98%AF%E7%BC%BA%E7%B6%AD%E7%94%9F%E7%B4%A0D%EF%BC%81%2063dd0c0ff5c24b17b049a42f79814c3f.html"><span class="icon">📈</span>常覺得累、沮喪恐是缺維生素D！ </a></figure><figure id="597a7ad2-01d3-4d87-bb6e-d5765e1b9b9e" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E9%81%8E%E5%BA%A6%E5%91%BC%E5%90%B8%E5%8F%8D%E8%80%8C%E6%9C%83%E8%85%A6%E9%83%A8%E7%BC%BA%E6%B0%A7%EF%BC%9F%20597a7ad201d34d87bb6ed5765e1b9b9e.html"><span class="icon">🕢</span>過度呼吸反而會腦部缺氧？</a></figure><figure id="439c94f7-1e1d-4bff-8c1e-b5131c33783e" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E9%81%87%E5%88%B0%E6%AD%A6%E6%BC%A2%E8%82%BA%E7%82%8E%E7%9A%84%E7%97%85%E6%AF%92%EF%BC%8C%E4%BD%A0%E6%9C%83%E6%80%8E%E9%BA%BC%E6%A8%A3%EF%BC%9F%20439c94f71e1d4bff8c1eb5131c33783e.html"><span class="icon">⛽</span>遇到武漢肺炎的病毒，你會怎麼樣？</a></figure><figure id="bf98749a-7248-47db-963f-4b47a25019cc" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E6%B2%BB%E7%99%82%E6%8A%91%E9%AC%B1%E7%97%87%E6%96%B0%E6%96%B9%E2%80%94%E2%80%94%E5%8F%96%E8%87%AA%E8%98%91%E8%8F%87%E7%9A%84%E8%BF%B7%E5%B9%BB%E8%97%A5%20bf98749a724847db963f4b47a25019cc.html"><span class="icon">🕹️</span>治療抑鬱症新方——取自蘑菇的迷幻藥</a></figure><figure id="20a8b81a-af89-4ffe-be67-d3ff47fea997" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E8%B6%85%E6%85%A2%E8%B7%91%2020a8b81aaf894ffebe67d3ff47fea997.html"><span class="icon">🏃🏻</span>超慢跑</a></figure><figure id="5938077f-61d3-4c9b-8076-621d688c9b10" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/CT%E5%80%BC%205938077f61d34c9b8076621d688c9b10.html"><span class="icon">🛏️</span>CT值</a></figure><figure id="191bf9c0-9c9b-4734-9642-ae0573acfe06" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E4%B8%80%E5%80%8B%E4%B8%AD%E5%9C%8B%E4%BA%BA%E7%9C%BC%E4%B8%AD%E7%9A%84%E7%BE%8E%E5%9C%8B%E7%96%AB%E6%83%85%E2%94%80%E2%94%80%E7%82%BA%E4%BB%80%E9%BA%BC%E9%80%99%E8%A3%A1%E6%B2%92%E6%9C%89%E4%BA%BA%E5%AF%AB%E7%96%AB%E6%83%85%E6%97%A5%E8%A8%98%EF%BC%9F%20191bf9c09c9b47349642ae0573acfe06.html"><span class="icon">♣️</span>一個中國人眼中的美國疫情──為什麼這裡沒有人寫疫情日記？</a></figure><figure id="4adf7985-47c0-4f57-b912-25d3bb34f64b" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E5%91%BC%E5%90%B8%204adf798547c04f57b91225d3bb34f64b.html"><span class="icon">📓</span>呼吸</a></figure><figure id="ea214d3d-d979-453b-9610-b7a889f231f8" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E5%A6%82%E4%BD%95%E5%88%A4%E5%AE%9A%E6%98%AF%E6%84%9F%E5%86%92%E7%97%87%E7%8B%80%E9%82%84%E6%98%AF%E5%A5%A7%E5%AF%86%E5%85%8B%E6%88%8E%20ea214d3dd979453b9610b7a889f231f8.html"><span class="icon">🕓</span>如何判定是感冒症狀還是奧密克戎</a></figure><figure id="2d83ccd0-39a4-4a6f-968a-ad0f173ac00c" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E8%A7%A3%E9%9A%94%E6%A2%9D%E4%BB%B6%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F%202d83ccd039a44a6f968aad0f173ac00c.html"><span class="icon">🛷</span>解隔條件是什麼？</a></figure><figure id="58176671-3af0-46f9-a1b0-c9176fc573c6" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E5%A5%A7%E5%AF%86%E5%85%8B%E6%88%8E%E6%84%9F%E6%9F%93%E8%80%85%E7%9A%84%E5%82%B3%E6%9F%93%E6%9C%9F%E6%9C%89%E5%A4%9A%E9%95%B7%EF%BC%9F%20581766713af046f9a1b0c9176fc573c6.html"><span class="icon">📜</span>奧密克戎感染者的傳染期有多長？</a></figure><figure id="211252a9-5e0f-4400-91de-168955c6f438" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/2%20%E9%BB%9E%E8%B7%9F%E6%B5%81%E6%84%9F%E6%9C%80%E4%B8%8D%E4%B8%80%E6%A8%A3%E3%80%81Omicron%20%E8%AE%8A%E7%95%B0%E6%A0%AA%E6%9B%B4%E5%83%8F%E6%84%9F%E5%86%92%20211252a95e0f440091de168955c6f438.html"><span class="icon">🗼</span>2 點跟流感最不一樣、Omicron 變異株更像感冒</a></figure><figure id="b8e29b42-f86b-45a6-91a9-6500886e9d73" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E6%88%91%E6%98%AF%E4%B8%80%E5%90%8DICU%E9%86%AB%E7%94%9F%EF%BC%8C%E7%96%AB%E6%83%85%E9%9D%A2%E5%89%8D%E6%88%91%E5%80%91%E4%BB%8D%E6%9C%89%E7%90%86%E7%94%B1%E6%8A%B1%E6%9C%89%E5%B8%8C%E6%9C%9B%20b8e29b42f86b45a691a96500886e9d73.html"><span class="icon">🌓</span>我是一名ICU醫生，疫情面前我們仍有理由抱有希望</a></figure><figure id="ef87c031-329d-4593-affe-f2fefe6510c0" class="link-to-page"><a href="Health%20Information%20891b3bbd548e4d2e8e07e2d0fbaa43d7/%E8%A3%9C%E9%88%A3%E4%B8%8D%E4%B8%80%E5%AE%9A%E8%A6%81%E5%96%9D%E7%89%9B%E5%A5%B6%EF%BC%814%E7%A8%AE%E9%AB%98%E9%88%A3%E9%A3%9F%E7%89%A9%E9%88%A3%E5%90%AB%E9%87%8F%E5%AE%8C%E5%8B%9D%E7%89%9B%E5%A5%B6%20ef87c031329d4593affef2fefe6510c0.html"><span class="icon">🛣️</span>補鈣不一定要喝牛奶！4種高鈣食物鈣含量完勝牛奶</a></figure></div></article></body></html>

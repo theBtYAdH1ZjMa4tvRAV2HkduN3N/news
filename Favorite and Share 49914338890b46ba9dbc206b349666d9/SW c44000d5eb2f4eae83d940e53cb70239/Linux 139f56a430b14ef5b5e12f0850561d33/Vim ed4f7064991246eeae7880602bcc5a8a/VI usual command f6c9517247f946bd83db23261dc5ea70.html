@@ -1,0 +1,790 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>VI usual command</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f6c95172-47f9-46bd-83db-23261dc5ea70" class="page mono"><header><div class="page-header-icon undefined"><span class="icon">📝</span></div><h1 class="page-title">VI usual command</h1></header><div class="page-body"><h2 id="dce3d81a-84ed-4263-b16b-21dd89f1acae" class="">In normal mode</h2><ul id="6394fb7b-2f3a-4138-9f92-0ad46ddd0f37" class="bulleted-list"><li style="list-style-type:disc">hjkl :direct step</li></ul><ul id="538de8c1-f888-4135-832e-babd8e9f992e" class="bulleted-list"><li style="list-style-type:disc">^u,^d :page up / down</li></ul><ul id="9c9fb43d-eeec-4fbf-8a0d-03c811a4c35f" class="bulleted-list"><li style="list-style-type:disc">gg :goto top</li></ul><ul id="c61f3b68-924f-458f-9d5b-5deaa71014a3" class="bulleted-list"><li style="list-style-type:disc">G :goto end of file</li></ul><ul id="d1727245-e623-46f4-9a2f-d3d673fd83b5" class="bulleted-list"><li style="list-style-type:disc"><code>:#</code> :jump to line #</li></ul><ul id="2e60b4de-e921-4168-9be9-fbf203049cf7" class="bulleted-list"><li style="list-style-type:disc">u :undo</li></ul><ul id="50eec7b3-0762-4eb4-a5a2-fd91cc9f498d" class="bulleted-list"><li style="list-style-type:disc">^r :redo</li></ul><ul id="882d7fdc-25e3-485e-9815-7dd82afff1e0" class="bulleted-list"><li style="list-style-type:disc"><code>:q</code> :quit</li></ul><ul id="126d7177-6a1f-4f97-a720-a317f2717e09" class="bulleted-list"><li style="list-style-type:disc"><code>:w</code> :write</li></ul><ul id="001b0d37-6e65-4c8c-a46b-ad58fae842c6" class="bulleted-list"><li style="list-style-type:disc">dd :delete one line</li></ul><ul id="2439be31-1da5-4e6e-af67-b90f5da22caf" class="bulleted-list"><li style="list-style-type:disc">d#d :delete # lines</li></ul><ul id="a87ab722-f606-45b9-ac63-da3955d5c505" class="bulleted-list"><li style="list-style-type:disc">x :detete char</li></ul><ul id="7712bced-80c0-4f86-a71e-9a0f8d21ecd4" class="bulleted-list"><li style="list-style-type:disc">^f :find file</li></ul><ul id="232ba351-a673-4fc6-a337-af44127e2313" class="bulleted-list"><li style="list-style-type:disc">:?, :/ =search backward/forward</li></ul><ul id="efcd2be0-147a-4664-b313-0347ab120aeb" class="bulleted-list"><li style="list-style-type:disc">:%s/$A/$B/gc =replace $A to $B</li></ul><ul id="c4519cbd-b11d-4e0d-8610-7cf5b3ec32e0" class="bulleted-list"><li style="list-style-type:disc"><code>:terminal</code> : open a terminal window ( same ^w N )<ul id="f7c322b6-b368-4ba9-acde-6cccf10a7f47" class="bulleted-list"><li style="list-style-type:circle">^w^w: back to normal mode<ul id="28a0e359-2e44-4a88-80b1-b929334aafa7" class="bulleted-list"><li style="list-style-type:square">^\ ^n :back to normail mode</li></ul></li></ul><ul id="c890a847-a10e-44fc-ab19-258cfb3c3e46" class="bulleted-list"><li style="list-style-type:circle">i : back to terminal mode</li></ul><ul id="ca99aeee-207f-4207-9fb1-b3ddde052a8f" class="bulleted-list"><li style="list-style-type:circle"><code>^w &quot;&quot;</code> : paste</li></ul><ul id="5ebbd96e-e84d-445f-8d06-b8d1f724d074" class="bulleted-list"><li style="list-style-type:circle"><code>^w :</code> =goto command</li></ul></li></ul><h2 id="dea8c43c-e798-4005-8f93-89ff37d41367" class="">Tab</h2><ul id="ff61225b-669b-4838-add9-75636d6ef7f3" class="bulleted-list"><li style="list-style-type:disc">:tabe =create new tab with $file<ul id="1ee0e252-d8b7-49b9-8dc5-02b13be4e9f8" class="bulleted-list"><li style="list-style-type:circle">:tabe $FileName</li></ul></li></ul><ul id="1089148c-c835-4048-a6fb-c326d98d667d" class="bulleted-list"><li style="list-style-type:disc">gt :next tab</li></ul><ul id="ea4d9ca6-4661-4dd3-93fb-7d13adf7969f" class="bulleted-list"><li style="list-style-type:disc">gT :previous tab</li></ul><ul id="f9d1ed7a-ee48-4e42-be9e-ca80c40a00d7" class="bulleted-list"><li style="list-style-type:disc">#gt :goto # tab</li></ul><ul id="ab5d160a-fe2c-4868-a396-c52ae417d47d" class="bulleted-list"><li style="list-style-type:disc"><code>:close</code> : close<ul id="1d8236a9-ec9a-42d6-8609-55fd778a8d4d" class="bulleted-list"><li style="list-style-type:circle">^w c :close</li></ul></li></ul><ul id="e5f8bbd8-024e-428d-b87a-51ebb2b2003f" class="bulleted-list"><li style="list-style-type:disc">:tab ball =show all buffer in tab</li></ul><h2 id="0e080435-1977-4380-aa77-fe9da8b67673" class="">Selection mode :Delete ,copy &amp; paste</h2><ol type="1" id="6985cea1-27f9-4d18-908a-89cc8fe1bcca" class="numbered-list" start="1"><li>v :enter selection mode<ol type="a" id="e1a5eb21-ed49-4245-a085-b90dc73d1d96" class="numbered-list" start="1"><li>V :enter linewise selection mode</li></ol><ol type="a" id="efab2cdc-d789-4006-a0a5-13f7455b2d50" class="numbered-list" start="2"><li>^v : enter block selection mode</li></ol></li></ol><ol type="1" id="aa331ce9-7cd4-4f28-a80b-d08aa2e95331" class="numbered-list" start="2"><li>h, j, k and l :to move left, down, up, right respectively</li></ol><ol type="1" id="2a5d16ab-2535-473f-a44d-30798852b1b5" class="numbered-list" start="3"><li>d :cut (delete)</li></ol><ol type="1" id="f0222388-7ee0-43ab-9aa0-85bd892b3e0b" class="numbered-list" start="4"><li>y :copy (yank)</li></ol><ol type="1" id="ff177cf3-eeb9-4d41-859a-f8ce19e7e781" class="numbered-list" start="5"><li>p :paste</li></ol><h2 id="8971c352-932b-4e8b-9ba1-533719936d26" class="">Split</h2><ul id="7970b111-63b3-4d36-8f57-c6851ff0dec6" class="bulleted-list"><li style="list-style-type:disc">^W,<ul id="ae732550-5806-462d-895d-0e0598cfc818" class="bulleted-list"><li style="list-style-type:circle">s :create a horizontal split.</li></ul><ul id="025c1da7-24cf-4002-8f08-8ae9c850624e" class="bulleted-list"><li style="list-style-type:circle">v :create a vertical split.</li></ul><ul id="aa87e7fa-00a8-4a71-831f-c4e900a4dbfc" class="bulleted-list"><li style="list-style-type:circle">jkhl :switch split<ul id="0cfaf92a-0f00-4838-9e76-51c66418bc24" class="bulleted-list"><li style="list-style-type:square">also ^jkhl same</li></ul><ul id="19dd5ca8-392a-4bf8-bf4b-1fe0d2d3b286" class="bulleted-list"><li style="list-style-type:square">also direction key</li></ul></li></ul><ul id="fdb48b2c-d78f-4f31-8642-2b434e5d87d3" class="bulleted-list"><li style="list-style-type:circle">,+ :horizental smaller/bigger</li></ul><ul id="d033a2c2-7ff8-4c52-b652-80b4865b3697" class="bulleted-list"><li style="list-style-type:circle">&lt;,&gt; :vertical smaller/bigger</li></ul><ul id="fb2b6c71-0a76-42f1-a83f-cf4379e8ac32" class="bulleted-list"><li style="list-style-type:circle"><code>:resize x</code> :horizental size change<ul id="9e1ce151-f81b-4411-b01a-3aaf08ddebeb" class="bulleted-list"><li style="list-style-type:square"><code>res +/-x</code> : add or decress horizental size</li></ul></li></ul><ul id="a29a2309-1d57-42fb-81c8-25a21c0d58fe" class="bulleted-list"><li style="list-style-type:circle"><code>:vertical resize x</code> :vertical size change to x<ul id="f0bc6446-4693-4496-9196-f4cc8ff80838" class="bulleted-list"><li style="list-style-type:square"><code>:vertical resze +x</code> : vertical size add x</li></ul></li></ul><ul id="39114748-9232-4b56-af47-90eb053a59e2" class="bulleted-list"><li style="list-style-type:circle">| :maximum vertical</li></ul><ul id="e16130fd-d375-4b02-9a57-d65452cc8fcc" class="bulleted-list"><li style="list-style-type:circle">_ :maximum horizental</li></ul><ul id="a92e0c3b-374c-43b0-8f47-76051ea3b239" class="bulleted-list"><li style="list-style-type:circle">= :equal all size</li></ul><ul id="3c6085d0-cf38-456c-b213-246b49c43531" class="bulleted-list"><li style="list-style-type:circle">r,R :swap</li></ul><ul id="9c1a542b-38b5-45cf-9d2c-d4a8a973ff08" class="bulleted-list"><li style="list-style-type:circle">T :current to new window</li></ul><ul id="b59dea82-d6a1-4ccb-818c-246251bbf589" class="bulleted-list"><li style="list-style-type:circle">c :close split</li></ul><ul id="0fdb5dd2-00d7-4489-acf5-df4f400d8157" class="bulleted-list"><li style="list-style-type:circle">o :close all split except current</li></ul></li></ul><h2 id="d639e2f4-8819-4f1e-a73e-ef7a42603249" class="">In insert mode</h2><ul id="32958502-9af5-4491-b037-bd5d1866c6df" class="bulleted-list"><li style="list-style-type:disc">alt-u :undo</li></ul><ul id="98fc73e5-019f-47ce-8e51-c6699aa9b843" class="bulleted-list"><li style="list-style-type:disc">alt-jkhl :move direct</li></ul><h2 id="6a16997f-bc4f-4516-ae9c-2be2c8c7d0b7" class="">New &amp; Open</h2><ul id="8ad19705-6d44-4640-82d0-f8b0299b9aa6" class="bulleted-list"><li style="list-style-type:disc">:e $FileName =edit file</li></ul><ul id="5712844b-691c-4fe7-8b99-ef835f7ec418" class="bulleted-list"><li style="list-style-type:disc">:new =create a new file</li></ul><ul id="19ec205f-762a-4148-b14c-4664907ff35c" class="bulleted-list"><li style="list-style-type:disc">:ls =list all opened files</li></ul><ul id="1e63450b-37e7-4c8d-ad0e-7dbb620c948b" class="bulleted-list"><li style="list-style-type:disc">:ls will show your open buffers.<ul id="cf90852d-573f-4c9c-b77e-16ff4f918b8c" class="bulleted-list"><li style="list-style-type:circle">:buffers =as :ls</li></ul></li></ul><ul id="cd683601-f446-469c-9287-ad3c22f6e617" class="bulleted-list"><li style="list-style-type:disc">:b $number =open the specified buffer in the current pane.</li></ul><ul id="c43fedbf-94ec-4021-bb9a-4defbb7500ca" class="bulleted-list"><li style="list-style-type:disc">:b $FileNamePrefix =open relative file buffer</li></ul><ul id="61691d31-17c3-4b2e-984d-d1863a8f4f86" class="bulleted-list"><li style="list-style-type:disc">:bn =buffer next</li></ul><ul id="66e27ef9-9bdb-433f-ae1c-ce952f8b276e" class="bulleted-list"><li style="list-style-type:disc">:bp =buffer previous</li></ul><h2 id="6b413967-2f3a-48a7-8bb1-ec3f6b828806" class="">Search &amp; Replace(substitute)</h2><ul id="28526644-740c-4fbd-931d-084fad0b811e" class="bulleted-list"><li style="list-style-type:disc">:s/foo/bar/g :substitute
+Find each occurrence of &#x27;foo&#x27; (in the <em><strong>current line only</strong></em>), and replace it with &#x27;bar&#x27;.</li></ul><ul id="effc990a-1337-4081-a1a6-a684f794a602" class="bulleted-list"><li style="list-style-type:disc">:%s/foo/bar/g
+Find each occurrence of &#x27;foo&#x27; (in <em><strong>all</strong></em> lines), and replace it with &#x27;bar&#x27;.</li></ul><ul id="168b3f10-c5c5-413b-b232-79dbf9387164" class="bulleted-list"><li style="list-style-type:disc">:%s/foo/bar/gc
+Change each &#x27;foo&#x27; to &#x27;bar&#x27;, but <em><strong>ask</strong></em> for confirmation first.</li></ul><ul id="5906e9bb-7915-4e01-bcbd-e379feff7223" class="bulleted-list"><li style="list-style-type:disc">:%s/\&lt;foo\&gt;/bar/gc
+Change only whole words <em><strong>exactly matching</strong></em> &#x27;foo&#x27; to &#x27;bar&#x27;; ask for confirmation.</li></ul><ul id="7df2e20b-37b2-4a6f-86b8-4da4b0dbb00e" class="bulleted-list"><li style="list-style-type:disc">:%s/foo/bar/gci
+Change each &#x27;foo&#x27; (<em><strong>case insensitive</strong></em> due to the i flag) to &#x27;bar&#x27;; ask for confirmation.</li></ul><ul id="0b843ef3-df53-4a5a-8877-47ec2d4e3f2a" class="bulleted-list"><li style="list-style-type:disc">:%s/foo\c/bar/gc is the same because \c makes the search <em><strong>case insensitive</strong></em>.
+This may be wanted after using :set noignorecase to make searches case sensitive (the default).</li></ul><ul id="a5e49616-3250-476b-b945-d737d2ee59d6" class="bulleted-list"><li style="list-style-type:disc">:%s/foo/bar/gcI
+Change each &#x27;foo&#x27; (case sensitive due to the I flag) to &#x27;bar&#x27;; ask for confirmation.</li></ul><ul id="880b1a99-d742-4778-af9b-2f078948d49e" class="bulleted-list"><li style="list-style-type:disc">:%s/foo\C/bar/gc is the same because \C makes the search case sensitive.
+This may be wanted after using :set ignorecase to make searches case insensitive.</li></ul><h2 id="2f6c9c85-e678-43f6-a510-aed057427eed" class="">You Complete Me</h2><p id="bde93e02-a528-4903-8418-ed6f1601cbf6" class="">In insert mode</p><ul id="d932bb0a-4469-413a-b486-3d032a0baf7c" class="bulleted-list"><li style="list-style-type:disc">^p :basic tab completion, pulling from a variety of sources</li></ul><ul id="fee02ef9-2976-4331-9af6-b7c60a218ebf" class="bulleted-list"><li style="list-style-type:disc">^n :the same as ^P but backward</li></ul><ul id="c6d7b282-db77-4ae6-8abf-5653641284e5" class="bulleted-list"><li style="list-style-type:disc">^X ^L	:whole line completion</li></ul><ul id="41d448d2-c577-4890-ad8b-597bfc39004c" class="bulleted-list"><li style="list-style-type:disc">^X ^O	:syntax-aware omnicompletion</li></ul><h2 id="c48eb07a-ffd8-4001-8784-93210dac41f0" class="">NerdTree</h2><ul id="ffbe343a-9801-4ab9-ae64-95d0286c7386" class="bulleted-list"><li style="list-style-type:disc">,nn :toggle tool</li></ul><ul id="0e8052a0-c644-4c82-b90f-677c5b6fc438" class="bulleted-list"><li style="list-style-type:disc"><code>:NERDTree</code> :open this tool</li></ul><ul id="736e9020-67d6-42a2-b043-bdd3efb70177" class="bulleted-list"><li style="list-style-type:disc"><code>:NERDTreeClose</code> :close</li></ul><ul id="f769cab8-9930-4288-b835-57239948302e" class="bulleted-list"><li style="list-style-type:disc">t :open the file in a new tab.</li></ul><ul id="549d3a85-6a3d-494e-a8dd-db8f96721fc0" class="bulleted-list"><li style="list-style-type:disc">o :open the file in a new buffer or open/close directory.</li></ul><ul id="a85169db-49d6-46c2-894a-4196fcefa0ad" class="bulleted-list"><li style="list-style-type:disc">i :open the file in a new horizontal split.</li></ul><ul id="82cd149f-766a-49dd-bafb-8d4f6c8606d9" class="bulleted-list"><li style="list-style-type:disc">s :open the file in a new vertical split.</li></ul><ul id="2ef7a582-2190-46e8-b2e7-4d3f7af30801" class="bulleted-list"><li style="list-style-type:disc">p :go to parent directory.</li></ul><ul id="a91d324d-3ce0-4f94-b9c0-e8c3994c7cd6" class="bulleted-list"><li style="list-style-type:disc">r :refresh the current directory.</li></ul><ul id="c2718a7e-6270-4239-a674-639be0c2dfa3" class="bulleted-list"><li style="list-style-type:disc">I: Toggle hidden files</li></ul><ul id="601ca9e4-b8c3-487f-9de5-8ab4e7a93dbd" class="bulleted-list"><li style="list-style-type:disc">m: Show the NERD Tree menu</li></ul><ul id="b5add916-167b-4215-aef4-3c768370b0be" class="bulleted-list"><li style="list-style-type:disc">R: Refresh the tree, useful if files change outside of Vim</li></ul><ul id="5db28d72-60e4-4b6d-9b31-19bd5abe884d" class="bulleted-list"><li style="list-style-type:disc">?: Toggle NERD Tree&#x27;s quick help</li></ul><h2 id="13282db1-f6b4-4c90-a567-c2f8423f832d" class="">Other</h2><ul id="924ad45d-6773-4428-9307-47b72a4dfbd3" class="bulleted-list"><li style="list-style-type:disc">^- :smaller font</li></ul><ul id="48fe97c7-757e-4ec1-8839-dc4add300eb8" class="bulleted-list"><li style="list-style-type:disc">^+ :lager font</li></ul><ul id="f0c2e217-4b13-46c5-87d4-94adf54f0c30" class="bulleted-list"><li style="list-style-type:disc">:w =write</li></ul><ul id="265c1311-9e1c-46ee-bd22-51493d8bad73" class="bulleted-list"><li style="list-style-type:disc">:q =quit</li></ul><ul id="61d65df9-ceb6-435a-9cb3-619dc2c02805" class="bulleted-list"><li style="list-style-type:disc">:map : show all mappings</li></ul><ul id="1729e804-cb56-4c78-9b07-efde273317bf" class="bulleted-list"><li style="list-style-type:disc">:nmap for normal mode mappings</li></ul><ul id="3ce680c0-1f3d-49a2-8149-ea5e4159e9ae" class="bulleted-list"><li style="list-style-type:disc">:vmap for visual mode mappings</li></ul><ul id="b6374a78-8ddf-440a-8396-fe937c77f7fb" class="bulleted-list"><li style="list-style-type:disc">:imap for insert mode mappings</li></ul><h2 id="7f5c9769-769a-491b-b797-0f99a41b7c25" class="">other</h2><p id="9aa1b8dd-fb28-4f99-bcbc-5ddc0916cea6" class="">In .vimrc</p><ul id="e20cbe51-e1e8-45a2-bc34-431c080ac1e8" class="bulleted-list"><li style="list-style-type:disc"><code>set nu</code> :show line number</li></ul><h2 id="85ec1c69-6c76-409f-98c3-662ce4f38fb6" class="">Install commands as:</h2><pre id="dfc8dc9b-0318-4189-a056-d0fb92dc8803" class="code code-wrap"><code>    git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+    sh ~/.vim_runtime/install_awesome_vimrc.sh
+</code></pre><h2 id="3b853fdb-4b7d-4528-8ff1-3216830bbc63" class="">ps:Copy from easynote(vi)</h2><p id="1f553461-0ea4-4c47-b982-01fb3a815d90" class="">
+</p><h2 id="457007b6-0a73-4257-b66b-aedc5e9a7eb6" class="">Included Plugins</h2><p id="15ed827c-a4eb-4c4b-ad70-ec7f397d1a57" class="">I recommend reading the docs of these plugins to understand them better. Each plugin provides a much better Vim experience!</p><ul id="e6f4b530-aa2e-4d0d-b274-e4ad0fd3abd7" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/mileszs/ack.vim">ack.vim</a>: Vim plugin for <code>the_silver_searcher</code> (ag) or ack -- a wicked fast grep</li></ul><ul id="ce2e9b51-aada-424f-a586-e3e401ea4483" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/vim-scripts/bufexplorer.zip">bufexplorer.zip</a>: Quickly and easily switch between buffers. This plugin can be opened with <code>&lt;leader+o&gt;</code></li></ul><ul id="cb106492-620f-464f-a563-364c04cd84a7" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/ctrlpvim/ctrlp.vim">ctrlp.vim</a>: Fuzzy file, buffer, mru and tag finder. It&#x27;s mapped to <code>&lt;Ctrl+F&gt;</code></li></ul><ul id="46096443-d139-44ea-8171-896edf0e5495" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/junegunn/goyo.vim">goyo.vim</a> and <a href="https://github.com/amix/vim-zenroom2">vim-zenroom2</a>:</li></ul><ul id="f4bfee54-812c-4a45-a122-21700556198d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/itchyny/lightline.vim">lightline.vim</a>: A light and configurable statusline/tabline for Vim</li></ul><ul id="9d577119-d8c8-4c26-9328-14181bf7a2ff" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/preservim/nerdtree">NERD Tree</a>: A tree explorer plugin for vim</li></ul><ul id="69a2f6c1-eece-4a0a-839d-bf3b089a5839" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/amix/open_file_under_cursor.vim">open_file_under_cursor.vim</a>: Open file under cursor when pressing <code>gf</code></li></ul><ul id="74481f45-5897-412a-9dfc-171648ae4351" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/tpope/vim-pathogen">pathogen.vim</a>: Manage your vim runtimepath</li></ul><ul id="ab61fddf-df17-4ccc-8461-5775ad09785e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/garbas/vim-snipmate">snipmate.vim</a>: snipmate.vim aims to be a concise vim script that implements some of TextMate&#x27;s snippets features in Vim</li></ul><ul id="08bb9778-2385-4110-9b93-2331098bb964" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/dense-analysis/ale">ale</a>: Syntax and lint checking for vim (ALE requires NeoVim &gt;= 0.2.0 or Vim 8 with +timers +job +channel)</li></ul><ul id="1c0b4168-80eb-446d-a6b8-8886fbd70089" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/tpope/vim-commentary">vim-commentary</a>: Comment stuff out. Use <code>gcc</code> to comment out a line (takes a count), <code>gc</code> to comment out the target of a motion. <code>gcu</code> uncomments a set of adjacent commented lines.</li></ul><ul id="6b76d92d-027e-48cc-8e01-be3e1dd6d7db" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/terryma/vim-expand-region">vim-expand-region</a>: Allows you to visually select increasingly larger regions of text using the same key combination</li></ul><ul id="e6bdb8ff-bd5a-4083-813a-6256c1cf729d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/tpope/vim-fugitive">vim-fugitive</a>: A Git wrapper so awesome, it should be illegal</li></ul><ul id="f11e9826-5f07-4fb6-b801-bf2cd15d4f67" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/michaeljsmith/vim-indent-object">vim-indent-object</a>: Defines a new text object representing lines of code at the same indent level. Useful for python/vim scripts</li></ul><ul id="2c69d00b-8aa8-4106-b492-0f7168252072" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/terryma/vim-multiple-cursors">vim-multiple-cursors</a>: Sublime Text style multiple selections for Vim, CTRL+N is remapped to CTRL+S (due to YankRing)</li></ul><ul id="f5715b8f-f7d2-4721-a8bb-ac6619450885" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/maxbrunsfeld/vim-yankstack">vim-yankstack</a>: Maintains a history of previous yanks, changes and deletes</li></ul><ul id="3cff5012-1673-42ef-9d51-67a7c4b21ff6" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/amix/vim-zenroom2">vim-zenroom2</a> Remove all clutter and focus only on the essential. Similar to iA Writer or Write Room</li></ul><ul id="0f55736a-59e2-4341-a7f0-53ceb31038c0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/mattn/gist-vim">gist-vim</a> Easily create gists from Vim using the <code>:Gist</code> command</li></ul><ul id="e212dfd1-492b-4914-a918-ba1a553b5a2c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/nathanaelkane/vim-indent-guides">vim-indent-guides</a> Is a plugin for visually displaying indent levels in Vim</li></ul><ul id="95b3d572-a528-4906-bb47-2f930b44643a" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/editorconfig/editorconfig-vim">editorconfig-vim</a> EditorConfig helps maintain consistent coding styles for multiple developers working on the same project across various editors and IDEs.</li></ul><h2 id="32474f5c-da74-456f-b54d-ff6b42b039e7" class="">Included color schemes</h2><ul id="fe927391-23d9-409e-86eb-d592b9eba6e2" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/vim-scripts/peaksea">peaksea</a>: The default</li></ul><ul id="af93114b-1a01-4c36-8fae-78c2fa178d44" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/dracula/vim">dracula</a></li></ul><ul id="7a292c3a-e1a1-4e75-8dba-32ab3c24ff87" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/altercation/vim-colors-solarized">vim-colors-solarized</a></li></ul><ul id="41a0c2d9-470e-47c7-af13-37d695653ec7" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/wgibbs/vim-irblack">vim-irblack</a></li></ul><ul id="8e6063fe-e144-4de8-a21a-45dd72b93fc1" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/vim-scripts/mayansmoke">mayansmoke</a></li></ul><ul id="f6c69811-4b2d-41f6-b036-8c87930ef8af" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/therubymug/vim-pyte">vim-pyte</a></li></ul><h2 id="d5322639-ed95-4804-ae1d-f7cebb23735f" class="">Included modes</h2><ul id="417e4ffb-9a66-458e-8d2d-07185f79be23" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/kchmck/vim-coffee-script">vim-coffee-script</a></li></ul><ul id="07e21648-07c5-4c51-a6f0-6253a76572a0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/groenewege/vim-less">vim-less</a></li></ul><ul id="34e5063a-68f2-470d-a834-c2adfd9bd8e5" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/sophacles/vim-bundle-mako">vim-bundle-mako</a></li></ul><ul id="c2d7e02e-0be2-4ebf-925c-4d11e4eb7240" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/plasticboy/vim-markdown">vim-markdown</a></li></ul><ul id="ac802b07-1e5d-44c5-a416-884a6f8c38e8" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/vim-scripts/nginx.vim">nginx.vim</a>: Highlights configuration files for nginx</li></ul><ul id="d2fd5af7-771e-467d-83fd-2c2a09ee1683" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/rust-lang/rust.vim">rust.vim</a></li></ul><ul id="6ec96219-e558-4381-a615-1aee1157306f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/vim-ruby/vim-ruby">vim-ruby</a></li></ul><ul id="bc327a71-206d-40e4-9ccd-fc806b084126" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/leafgarland/typescript-vim">typescript-vim</a></li></ul><ul id="fc0b5271-f9fd-4bc0-844a-c5d77281ba42" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/pangloss/vim-javascript">vim-javascript</a></li></ul><ul id="7ab01779-143d-44d5-bb1b-d270880ac459" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/Vimjas/vim-python-pep8-indent">vim-python-pep8-indent</a></li></ul><h2 id="91a66d8a-e8c9-494b-8331-9a3769331257" class="">How to include your own stuff?</h2><p id="ec050b9c-888b-46a5-9967-9b3a6fa01acb" class="">After you have installed the setup, you can create <strong>~/.vim_runtime/my_configs.vim</strong> to fill in any configurations that are important for you. For instance, my <strong>my_configs.vim</strong> looks like this:</p><pre id="f9f3e82b-9261-4aec-a33e-2435fe88dae2" class="code code-wrap"><code>~/.vim_runtime (master)&gt; cat my_configs.vim
+map &lt;leader&gt;ct :cd ~/Desktop/Todoist/todoist&lt;cr&gt;
+map &lt;leader&gt;cw :cd ~/Desktop/Wedoist/wedoist&lt;cr&gt;
+</code></pre><p id="56dbd239-70a1-4619-8d1a-35597164f6fc" class="">You can also install your plugins, for instance, via pathogen you can install <a href="https://github.com/tpope/vim-rails">vim-rails</a>:</p><pre id="ea505d0c-8e5c-4837-a94d-e34d403f0572" class="code code-wrap"><code>cd ~/.vim_runtime
+git clone git://github.com/tpope/vim-rails.git my_plugins/vim-rails
+</code></pre><p id="ed4a8783-a8dc-4b1d-8d46-9bad0064bc6c" class="">You can also install plugins without any plugin manager (vim 8+ required):
+Add <code>packloadall</code> to your .vimrc file
+Create pack plugin directory:<code>mkdir -p ~/.vim/pack/plugins/start</code>
+Clone the plugin that you want in that directory, for example:<code>git clone --depth=1 git://github.com/maxmellon/vim-jsx-pretty  ~/.vim/pack/plugins/vim-jsx-pretty</code></p><h2 id="0bb941d9-23dc-406f-b95e-4be398f8580b" class="">Key Mappings</h2><p id="9e97564c-3ec5-4707-b861-85906419be0c" class="">The <a href="http://learnvimscriptthehardway.stevelosh.com/chapters/06.html#leader">leader</a> is <code>,</code>, so whenever you see <code>&lt;leader&gt;</code> it means <code>,</code>.</p><h2 id="8a3412bc-0eed-4f2a-9227-4ea31808a7b3" class="">Normal mode mappings</h2><p id="9ea99b16-acc0-440f-94c2-2d75e0e6ea94" class="">Fast saving of a buffer (<code>&lt;leader&gt;w</code>):</p><pre id="f63ef772-8dc1-4ed2-8fa6-edde92a90ed9" class="code code-wrap"><code>nmap &lt;leader&gt;w :w!&lt;cr&gt;
+</code></pre><p id="f145d1ad-8446-49a9-96f3-26878e4f12d3" class="">Map <code>&lt;Space&gt;</code> to <code>/</code> (search) and <code>&lt;Ctrl&gt;+&lt;Space&gt;</code> to <code>?</code> (backwards search):</p><pre id="1791d131-38e9-4e5a-be13-96ad12feaf4d" class="code code-wrap"><code>map &lt;space&gt; /
+map &lt;C-space&gt; ?
+map &lt;silent&gt; &lt;leader&gt;&lt;cr&gt; :noh&lt;cr&gt;
+</code></pre><p id="a95883ba-321a-4e9e-b97f-91b2bff9ebf1" class="">Disable highlights when you press <code>&lt;leader&gt;&lt;cr&gt;</code>:</p><pre id="90b380de-36d3-4963-bae9-4e38689f523a" class="code code-wrap"><code>map &lt;silent&gt; &lt;leader&gt;&lt;cr&gt; :noh&lt;cr&gt;
+</code></pre><p id="a23fb04d-ebcf-4b13-9283-22a3ea24c075" class="">Smart way to move between windows (<code>&lt;ctrl&gt;j</code> etc.):</p><pre id="fb3f992e-ec84-46ef-a3b0-29b35538e4ff" class="code code-wrap"><code>map &lt;C-j&gt; &lt;C-W&gt;j
+map &lt;C-k&gt; &lt;C-W&gt;k
+map &lt;C-h&gt; &lt;C-W&gt;h
+map &lt;C-l&gt; &lt;C-W&gt;l
+</code></pre><p id="deab6af9-d649-4540-9629-16e738908ba9" class="">Closing of the current buffer(s) (<code>&lt;leader&gt;bd</code> and (<code>&lt;leader&gt;ba</code>)):</p><pre id="09529276-847b-4bcb-b971-b7a0b87ab733" class="code code-wrap"><code>&quot; Close current buffer
+map &lt;leader&gt;bd :Bclose&lt;cr&gt;
+
+&quot; Close all buffers
+map &lt;leader&gt;ba :1,1000 bd!&lt;cr&gt;
+</code></pre><p id="cbec9a47-ef0e-47df-8749-b3ddb17ce75e" class="">Useful mappings for managing tabs:</p><pre id="8c5836e3-c488-42e8-a6c8-ce3935f1a487" class="code code-wrap"><code>map &lt;leader&gt;tn :tabnew&lt;cr&gt;
+map &lt;leader&gt;to :tabonly&lt;cr&gt;
+map &lt;leader&gt;tc :tabclose&lt;cr&gt;
+map &lt;leader&gt;tm :tabmove
+
+&quot; Opens a new tab with the current buffer&#x27;s path
+&quot; Super useful when editing files in the same directory
+map &lt;leader&gt;te :tabedit &lt;C-r&gt;=expand(&quot;%:p:h&quot;)&lt;cr&gt;/
+</code></pre><p id="49d10423-3ee8-4007-a93b-38966c7de45a" class="">Switch <a href="http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file">CWD</a> to the directory of the open buffer:</p><pre id="14f01c21-bdca-4ed1-90a7-8de323b13895" class="code code-wrap"><code>map &lt;leader&gt;cd :cd %:p:h&lt;cr&gt;:pwd&lt;cr&gt;
+</code></pre><p id="c4617d33-9acf-4dae-9f0b-70e43e75dc08" class="">Open <code>ack.vim</code> for fast search:</p><pre id="0d3d2902-99bf-4279-9e84-4d74eaf6ee35" class="code code-wrap"><code>map &lt;leader&gt;g :Ack
+</code></pre><p id="97b4e689-639a-4d52-a756-5357721807d6" class="">Quickly open a buffer for scripbble:</p><pre id="15cc8b58-0699-43fb-858d-07d4a94d8c80" class="code code-wrap"><code>map &lt;leader&gt;q :e ~/buffer&lt;cr&gt;
+</code></pre><p id="925daf69-9dd7-4c03-8c12-67af1bc06bc3" class="">Toggle paste mode on and off:</p><pre id="2acc5d09-92b1-463c-a24a-e1fd56b3f805" class="code code-wrap"><code>map &lt;leader&gt;pp :setlocal paste!&lt;cr&gt;
+</code></pre><h2 id="ca400982-9851-440f-a6e5-b55aa49a92ef" class="">Visual mode mappings</h2><p id="028e854a-cf74-40d9-92fb-c3350ac2fa02" class="">Visual mode pressing <code>*</code> or <code>#</code> searches for the current selection:</p><pre id="ebcad979-c2c6-41a2-9326-195aa2dd158d" class="code code-wrap"><code>vnoremap &lt;silent&gt; * :call VisualSelection(&#x27;f&#x27;)&lt;CR&gt;
+vnoremap &lt;silent&gt; # :call VisualSelection(&#x27;b&#x27;)&lt;CR&gt;
+</code></pre><p id="f3303471-aecc-403a-82f3-31be35c0529e" class="">When you press gv you <code>Ack.vim</code> after the selected text:</p><pre id="45d4d162-6007-4780-8183-a30f21278545" class="code code-wrap"><code>vnoremap &lt;silent&gt; gv :call VisualSelection(&#x27;gv&#x27;, &#x27;&#x27;)&lt;CR&gt;
+</code></pre><p id="ad5179a6-bbe9-4b91-adee-e4de020b2800" class="">When you press <code>&lt;leader&gt;r</code> you can search and replace the selected text:</p><pre id="84752306-e035-41a2-98f7-3e559879672c" class="code code-wrap"><code>vnoremap &lt;silent&gt; &lt;leader&gt;r :call VisualSelection(&#x27;replace&#x27;)&lt;CR&gt;
+</code></pre><p id="a8cbd495-1977-4865-9fdd-08dad6de528a" class="">Surround the visual selection in parenthesis/brackets/etc.:</p><pre id="46c3c2b5-2b5b-48e2-a7b3-4cb154e658fe" class="code code-wrap"><code>vnoremap $1 &lt;esc&gt;`&gt;a)&lt;esc&gt;`&lt;i(&lt;esc&gt;
+vnoremap $2 &lt;esc&gt;`&gt;a]&lt;esc&gt;`&lt;i[&lt;esc&gt;
+vnoremap $3 &lt;esc&gt;`&gt;a}&lt;esc&gt;`&lt;i{&lt;esc&gt;
+vnoremap $$ &lt;esc&gt;`&gt;a&quot;&lt;esc&gt;`&lt;i&quot;&lt;esc&gt;
+vnoremap $q &lt;esc&gt;`&gt;a&#x27;&lt;esc&gt;`&lt;i&#x27;&lt;esc&gt;
+vnoremap $e &lt;esc&gt;`&gt;a`&lt;esc&gt;`&lt;i`&lt;esc&gt;
+</code></pre><h2 id="92078c4a-8665-49e2-ab67-3b035ce7a6be" class="">Insert mode mappings</h2><p id="87a52689-48a1-4b76-93c0-0953bddeb700" class="">Quickly insert parenthesis/brackets/etc.:</p><pre id="f39d708b-832b-457f-8db9-1d0ffa7581c2" class="code code-wrap"><code>inoremap $1 ()&lt;esc&gt;i
+inoremap $2 []&lt;esc&gt;i
+inoremap $3 {}&lt;esc&gt;i
+inoremap $4 {&lt;esc&gt;o}&lt;esc&gt;O
+inoremap $q &#x27;&#x27;&lt;esc&gt;i
+inoremap $e &quot;&quot;&lt;esc&gt;i
+inoremap $t &lt;&gt;&lt;esc&gt;i
+</code></pre><p id="fb7e4c9a-3f86-47e4-adfe-9219f8a64b50" class="">Insert the current date and time (useful for timestamps):</p><pre id="0b5f8499-18d3-4c86-807c-e1e1a2e0085c" class="code code-wrap"><code>iab xdate &lt;C-r&gt;=strftime(&quot;%d/%m/%y %H:%M:%S&quot;)&lt;cr&gt;
+</code></pre><h2 id="e48266ca-b40e-4c55-913a-1cacb25e093f" class="">Command line mappings</h2><p id="4427b532-e189-4772-9e96-0717b857c75e" class="">$q is super useful when browsing on the command line. It deletes everything until the last slash:</p><pre id="24cbb227-35aa-4cc2-9bdc-cc263298cd08" class="code code-wrap"><code>cno $q &lt;C-\\&gt;eDeleteTillSlash()&lt;cr&gt;
+</code></pre><p id="12167802-a8a5-4898-a60e-5b0bac558bd4" class="">Bash like keys for the command line:</p><pre id="2af1f02c-3fa7-4c07-8a51-47bb97e99616" class="code code-wrap"><code>cnoremap &lt;C-A&gt;		&lt;Home&gt;
+cnoremap &lt;C-E&gt;		&lt;End&gt;
+cnoremap &lt;C-K&gt;		&lt;C-U&gt;
+
+cnoremap &lt;C-P&gt; &lt;Up&gt;
+cnoremap &lt;C-N&gt; &lt;Down&gt;
+</code></pre><p id="a9c51c77-cb13-4348-9c24-8a2d1f4cd87b" class="">Write the file as sudo (works only on Unix). Super useful when you open a file and you don&#x27;t have permissions to save your changes. <a href="http://vim.wikia.com/wiki/Su-write">Vim tip</a>:</p><pre id="effb3907-766c-4e8c-a022-06ea1c148e56" class="code code-wrap"><code>:W
+</code></pre><h2 id="15f7be3e-5ec6-478f-a89a-8e85eb5129f8" class="">Plugin related mappings</h2><p id="11dce12a-a680-49d5-a89b-327565ab013a" class="">Open <a href="https://github.com/vim-scripts/bufexplorer.zip">bufexplorer</a> to see and manage the current buffers (<code>&lt;leader&gt;o</code>):</p><pre id="fbf81712-1132-43d4-9d5c-160608d1287b" class="code code-wrap"><code>map &lt;leader&gt;o :BufExplorer&lt;cr&gt;
+</code></pre><p id="63f309a0-2df4-4eed-b293-0a7bb811c6e3" class="">Open <a href="https://github.com/kien/ctrlp.vim">ctrlp.vim</a> plugin to quickly find a file or a buffer (<code>&lt;leader&gt;j</code> or <code>&lt;ctrl&gt;f</code>):</p><pre id="b3679027-6ae9-4e52-b761-d63c41f98f92" class="code code-wrap"><code>&quot; Quickly find and open a file in the CWD
+let g:ctrlp_map = &#x27;&lt;C-f&gt;&#x27;
+
+&quot; Quickly find and open a recently opened file
+map &lt;leader&gt;f :MRU&lt;CR&gt;
+
+&quot; Quickly find and open a buffer
+map &lt;leader&gt;b :CtrlPBuffer&lt;cr&gt;
+</code></pre><p id="db441f8b-19bf-4913-a125-730e3aba913b" class=""><a href="https://github.com/preservim/nerdtree">NERD Tree</a> mappings:</p><pre id="113d21c7-8d28-4746-b771-802f32f9fab5" class="code code-wrap"><code>map &lt;leader&gt;nn :NERDTreeToggle&lt;cr&gt;
+map &lt;leader&gt;nb :NERDTreeFromBookmark
+map &lt;leader&gt;nf :NERDTreeFind&lt;cr&gt;
+</code></pre><p id="9b3bf0fd-1b96-453e-b997-759ebed7ae95" class=""><a href="https://github.com/junegunn/goyo.vim">goyo.vim</a> and <a href="https://github.com/amix/vim-zenroom2">vim-zenroom2</a> lets you only focus on one thing at a time. It removes all the distractions and centers the content. It has a special look when editing Markdown, reStructuredText and textfiles. It only has one mapping. (<code>&lt;leader&gt;z</code>)</p><pre id="86694f65-e962-4ddf-b5fd-5e37bda7fc08" class="code code-wrap"><code>map &lt;leader&gt;z :Goyo&lt;cr&gt;
+</code></pre><p id="0a55c959-168c-44a0-b3dc-8403d0e7f0de" class=""><a href="https://github.com/terryma/vim-multiple-cursors">vim-multiple-cursors</a> mappings to manage multiple cursors at once:</p><pre id="0b5661b7-cc17-410c-8717-ee283c868cf4" class="code code-wrap"><code>let g:multi_cursor_start_word_key      = &#x27;&lt;C-s&gt;&#x27;
+let g:multi_cursor_select_all_word_key = &#x27;&lt;A-s&gt;&#x27;
+let g:multi_cursor_start_key           = &#x27;g&lt;C-s&gt;&#x27;
+let g:multi_cursor_select_all_key      = &#x27;g&lt;A-s&gt;&#x27;
+let g:multi_cursor_next_key            = &#x27;&lt;C-s&gt;&#x27;
+let g:multi_cursor_prev_key            = &#x27;&lt;C-p&gt;&#x27;
+let g:multi_cursor_skip_key            = &#x27;&lt;C-x&gt;&#x27;
+let g:multi_cursor_quit_key            = &#x27;&lt;Esc&gt;&#x27;
+</code></pre><p id="e12b4cf2-1f68-4d5a-9775-02090a845aa2" class=""><a href="https://github.com/maxbrunsfeld/vim-yankstack">vim-yankstack</a> mappings to manage the kill-ring (clipboard):</p><pre id="ecbcf2b8-073e-4b34-b8a8-1f6f0b25d917" class="code code-wrap"><code>nmap &lt;C-p&gt; &lt;Plug&gt;yankstack_substitute_older_paste
+nmap &lt;C-n&gt; &lt;Plug&gt;yankstack_substitute_newer_paste
+</code></pre><p id="e31dc656-f76b-49f4-934d-080b0e4dd0d5" class=""><a href="https://github.com/ctrlpvim/ctrlp.vim">ctrl-p</a> mappings to easily find and open a file, buffer, etc.:</p><pre id="78526e66-eeef-4301-96aa-8f4b92b9fae4" class="code code-wrap"><code>let g:ctrlp_map = &#x27;&lt;C-f&gt;&#x27;
+map &lt;leader&gt;j :CtrlP&lt;cr&gt;
+map &lt;C-b&gt; :CtrlPBuffer&lt;cr&gt;
+</code></pre><p id="392ac606-b33c-44dc-a69d-b08c3f2c4a85" class=""><a href="https://github.com/garbas/vim-snipmate">vim-snipmate</a> mappings to autocomplete via snippets:</p><pre id="91587d76-b60b-4214-b40c-663622a65947" class="code code-wrap"><code>ino &lt;C-j&gt; &lt;C-r&gt;=snipMate#TriggerSnippet()&lt;cr&gt;
+snor &lt;C-j&gt; &lt;esc&gt;i&lt;right&gt;&lt;C-r&gt;=snipMate#TriggerSnippet()&lt;cr&gt;
+</code></pre><p id="c4a898c8-32d1-4d94-9856-2cdbc2d3c583" class=""><a href="https://github.com/tpope/vim-surround">vim-surround</a> mappings to easily surround a string with <code>_()</code> gettext annotation:</p><pre id="1447e1de-3e8c-48cb-833a-be89defc123c" class="code code-wrap"><code>vmap Si S(i_&lt;esc&gt;f)
+au FileType mako vmap Si S&quot;i${ _(&lt;esc&gt;2f&quot;a) }&lt;esc&gt;
+</code></pre><p id="210e3004-c834-42c9-820d-cbc3b0eaca01" class=""><a href="https://github.com/dense-analysis/ale">ale</a> to easily go to the next Ale syntax/lint error:</p><pre id="bb1a820c-5db1-4a62-866e-aec8669fa6af" class="code code-wrap"><code>nmap &lt;silent&gt; &lt;leader&gt;a &lt;Plug&gt;(ale_next_wrap)
+</code></pre><p id="62e10e48-c06b-44f5-81a8-1b3f14ab1428" class=""><a href="https://github.com/nathanaelkane/vim-indent-guides">vim-indent-guides</a> the default mapping to toggle the plugin is (<code>&lt;leader&gt;ig</code>)</p><pre id="48e7aeb5-2df2-4ca6-ade7-b4513f5a0f9d" class="code code-wrap"><code>You can also use the following commands inside Vim:
+:IndentGuidesEnable
+:IndentGuidesDisable
+:IndentGuidesToggle
+</code></pre><p id="062052e8-ee2d-44d3-b0f7-68be33c87265" class=""><a href="https://github.com/tpope/vim-fugitive">vim-fugitive</a> to copy the link to the line of a Git repository to the clipboard:</p><pre id="15662a56-0803-4b16-b995-d36834426c90" class="code code-wrap"><code>nnoremap &lt;leader&gt;v :.GBrowse!&lt;CR&gt;
+xnoremap &lt;leader&gt;v :&#x27;&lt;&#x27;&gt;GBrowse!&lt;CR&gt;
+</code></pre><h2 id="c3301b97-a667-43d8-b335-715e669a061d" class="">Spell checking</h2><p id="58fd62ef-faff-47e9-8bf6-78e6a3494f80" class="">Pressing <code>&lt;leader&gt;ss</code> will toggle spell checking:</p><pre id="e5515f92-60ac-4b56-9788-6f5c0f614919" class="code code-wrap"><code>map &lt;leader&gt;ss :setlocal spell!&lt;cr&gt;
+</code></pre><p id="934d69d7-9c81-4ecf-b97a-83b7d0fc8102" class="">Shortcuts using <code>&lt;leader&gt;</code> instead of special characters:</p><pre id="1c8113c9-a3aa-4872-ac52-0c9bf0e2ae80" class="code code-wrap"><code>map &lt;leader&gt;sn ]s
+map &lt;leader&gt;sp [s
+map &lt;leader&gt;sa zg
+map &lt;leader&gt;s? z=
+</code></pre><h2 id="1e145479-82ee-47e7-9492-41d966a4d92e" class="">Running Code</h2><p id="129ff643-bc96-46c8-9782-2bfaade037c3" class="">To run code directly from vim, press <code>F5</code>. The currently open code will execute without you having to type anything.</p><p id="9b84c8e9-aeb9-41a1-bf96-c59c736a5993" class="">Can be used to execute code written in C, C++, Java, Python, Go, Octave, Bash scripts and HTML. To edit how you want your code to be executed, make changes in the file</p><pre id="fa9fcc33-3fc4-45c5-8381-b08bccb079f5" class="code code-wrap"><code>~/vim_runtime/vimrcs/extended.vim
+</code></pre><h2 id="e78e1cbd-06de-4528-a2b6-4512caf5347e" class="">Cope</h2><p id="e18e4ce6-76d6-4bd9-8faa-4871079f98c1" class="">Query <code>:help cope</code> if you are unsure what cope is. It&#x27;s super useful!</p><p id="63455f96-79cf-4c9c-9bf9-277c26aa220f" class="">When you search with <code>Ack.vim</code>, display your results in cope by doing:
+<code>&lt;leader&gt;cc</code></p><p id="6f85e568-2d2c-4cab-aa13-8cec2c481fe3" class="">To go to the next search result do:
+<code>&lt;leader&gt;n</code></p><p id="adb1bbbb-2d92-4795-b79a-716d5e93d0fc" class="">To go to the previous search results do:
+<code>&lt;leader&gt;p</code></p><p id="ed395020-82a8-45df-994c-de8074674386" class="">Cope mappings:</p><pre id="931bd894-4a11-406e-be18-e544953de77f" class="code code-wrap"><code>map &lt;leader&gt;cc :botright cope&lt;cr&gt;
+map &lt;leader&gt;co ggVGy:tabnew&lt;cr&gt;:set syntax=qf&lt;cr&gt;pgg
+map &lt;leader&gt;n :cn&lt;cr&gt;
+map &lt;leader&gt;p :cp&lt;cr&gt;
+</code></pre><h2 id="86abc835-63bc-4041-9a28-a5e5a02a5883" class="">How to uninstall</h2><p id="21325c98-4872-4dbd-8e0a-51a132f5c8e9" class="">Just do following:</p><ul id="b6654a45-0773-4584-ace8-5c61e9c1410a" class="bulleted-list"><li style="list-style-type:disc">Remove <code>~/.vim_runtime</code></li></ul><ul id="7c80259f-e800-48da-84dc-919e4a425f30" class="bulleted-list"><li style="list-style-type:disc">Remove any lines that reference <code>.vim_runtime</code> in your <code>~/.vimrc</code></li></ul></div></article></body></html>

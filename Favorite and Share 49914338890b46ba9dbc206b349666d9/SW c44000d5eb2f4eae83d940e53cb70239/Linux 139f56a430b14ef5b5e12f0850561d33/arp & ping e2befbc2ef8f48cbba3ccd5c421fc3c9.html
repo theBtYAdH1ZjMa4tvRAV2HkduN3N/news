@@ -1,0 +1,686 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>arp &amp; ping</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e2befbc2-ef8f-48cb-ba3c-cd5c421fc3c9" class="page sans"><header><h1 class="page-title">arp &amp; ping</h1></header><div class="page-body"><p id="a187854c-0e5f-48dc-9ca0-26e1a896d233" class="">List IP by shell
+使用 ping 與 arp 指令快速清查區域網路的電腦與網路設備，建立 IP 位址與網路卡 MAC 卡號對應表。</p><p id="0e34ff1a-537f-43a6-a5eb-2231452b79c3" class="">對於網路管理者（網管）來說，掃描區域網路設備、取得所有電腦的 IP 位址與 MAC 卡號對應表是基本的技能，而且也是一項時常需要做的工作，如果剛好臨時遇到需要掃描 IP 與 MAC 卡號，手上又沒有適合的軟體時，就可以使用各種作業系統都有內建的 ping 與 arp 指令來處理，以下是使用教學以及範例指令稿。</p><p id="c9baa867-85db-4286-9522-0174bb6b088b" class="">ping 與 arp 指令</p><p id="a1dd6e32-87de-4a99-9eaf-5dfc45640bad" class="">ping 與 arp 指令是一般的 Windows、Mac OS X 與 Linux 系統都會內建的指令，所以使用這種方法掃描網路，完全不需要安裝任軟體，只需要撰寫一個簡單的指令稿即可，對於網管來說相當方便而且實用。
+Linux 系統</p><p id="785823b0-703e-4ec3-9789-3f1bcb664a43" class="">這是適用於 Linux 系統的 bash 指令稿，執行後可以掃描整個 Class C 區域網路的 IP 與 MAC 卡號對應表：</p><p id="d43ee5c4-0db1-4ed2-884f-1af632fa4e74" class="">#!/bin/bash</p><h1 id="b3748ab3-2c80-455b-9c95-96576cb6a4d8" class="">Ping 區域網路中所有的 IP 位址</h1><p id="963fa94c-24af-4e7a-b7fd-2b8c4898b089" class="">for ip in 192.168.1.{1..254}; do</p><h1 id="4c4180cc-ba0b-46eb-b473-8d8e59d848cc" class="">刪除舊的 arp 記錄</h1><p id="8a46d115-1d1f-4051-b188-d014c4d67c89" class="">sudo arp -d $ip &gt; /dev/null 2&gt;&amp;1</p><h1 id="a1ade737-b977-4b5b-bfac-05815868a578" class="">藉由 ping 取得新的 arp 資訊</h1><p id="dcf9c355-b191-4106-bfef-daa0c45bc640" class="">ping -c 5 $ip &gt; /dev/null 2&gt;&amp;1 &amp;
+done</p><h1 id="a59584bb-bed3-450c-84b6-6a4c56979c78" class="">等待所有背景的 Ping 結束</h1><p id="a696bbf3-2641-4fa8-baec-4aed53145ac5" class="">wait</p><h1 id="3c650ce0-8029-431f-9b68-596bddfb3437" class="">輸出 ARP table</h1><p id="9296d28a-512f-4c44-b673-62aa21b95c9c" class="">arp -n | grep -v incomplete</p><p id="22980a2e-0a9f-43a8-b414-3f32c84b0659" class="">我們使用 bash 的 for 迴圈，配合背景子行程的方式同時 ping 所有的網路設備，這樣可以讓程式大幅加速，幾秒鐘就可以 ping 完整個 Class C 網路，關於這種平行化 bash 指令稿的撰寫方式，可以參考 Bash 平行執行背景子行程與 wait 的教學。</p><p id="6264d3ec-2fb2-4ac0-9d15-80c01951188d" class="">執行之後，輸出會類似這樣：</p><p id="f1e1db27-1f61-4f5f-90f8-d3ec719f7285" class="">Address                  HWtype  HWaddress           Flags Mask            Iface
+192.168.1.1              ether   10:7b:ef:12:4f:af   C                     wlan0
+192.168.1.102            ether   74:23:44:23:d3:96   C                     wlan0
+192.168.1.105            ether   28:e3:1f:50:b9:94   C                     wlan0</p><p id="36dd43a8-1e75-482d-bf3c-ac46cc2800bc" class="">Mac OS X 系統</p><p id="cce1d749-da91-4ff4-829e-9f432317cf42" class="">在 Mac OS X 中使用 ping 與 arp 的 bash 指令稿與 Linux 幾乎相同，只是在 arp 指令的參數有些差異：</p><p id="5f9c4358-f949-48d0-bb01-ce78eb89c597" class="">#!/bin/bash</p><h1 id="f7154f15-6917-4469-91a9-aa0968b2f680" class="">Ping 區域網路中所有的 IP 位址</h1><p id="f6ca770b-1222-4878-b281-572e1df2c991" class="">for ip in 140.110.99.{1..254}; do</p><h1 id="e8fb81e6-6863-4edc-84ba-f688533de21f" class="">刪除舊的 arp 記錄</h1><p id="2757dea9-f8f1-422e-a9d9-f3d689e407d7" class="">sudo arp -d $ip &gt; /dev/null 2&gt;&amp;1</p><h1 id="e86a0df4-65cc-44e3-ae00-77287ea67dc2" class="">藉由 ping 取得新的 arp 資訊</h1><p id="e46fca94-5c33-45ad-973e-02dbc73b8156" class="">ping -c 5 $ip &gt; /dev/null 2&gt;&amp;1 &amp;
+done</p><h1 id="c2b39fa9-3f53-4870-8b4b-c9eaaf3eadb6" class="">等待所有背景的 Ping 結束</h1><p id="29d4f86f-287c-4d10-9a56-ffd621261b87" class="">wait</p><h1 id="56d274d5-21af-46b0-a325-7e2d75af7414" class="">輸出 ARP table</h1><p id="64423bc2-a975-45da-8bb2-14942632efaa" class="">arp -na | grep -v incomplete</p><p id="899eba3a-3b9c-4776-899c-5385808fa4ef" class="">輸出的格式有些不同：</p><p id="3eb600ed-a6c8-4467-808b-7b085690add5" class="">? (192.168.1.4) at 70:28:8b:26:1b:ba on en1 ifscope [ethernet]
+? (192.168.1.11) at 60:e3:27:14:a5:dc on en1 ifscope [ethernet]
+? (192.168.1.12) at 84:c9:b2:78:cd:ee on en1 ifscope [ethernet]</p><p id="31600483-3245-4434-a139-205620251a52" class="">Windows 系統</p><p id="2bb6562d-508b-4022-b561-a926a1d4db15" class="">Windows 系統上使用 ping 與 arp 指令的方式比較不同，不過大原則是一樣的，都是用 ping 指令掃過一輪之後，執行 arp 指令輸出 arp table，請開啟命令提示字元，執行以下的指令。</p><p id="6aae8f94-c209-4f94-bba6-b952567f135f" class="">首先刪除舊的 arp table，這一行需要用管理者權限執行：</p><p id="33b90c6a-21e9-40f4-8ca9-3257d116245b" class="">arp -d</p><p id="6f235d78-f649-4f4a-a747-784a576ff34e" class="">使用 for 迴圈將每一個 IP 位址都 ping 過一次：</p><p id="14f7d821-365d-4d47-8f6e-ceff665512a7" class="">for /L %i in (1,1,254) do ping 192.168.1.%i -n 1 -w 300 &gt; NUL</p><p id="e30ecead-c47d-4511-bdd7-784ce3a26ce1" class="">執行 arp 指令，輸出 arp table：</p><p id="222f9a68-81c2-4b69-9150-e58b1c61b3fd" class="">arp -a | find &quot;192.168&quot; | find &quot;動態&quot;</p><p id="fdf98680-8163-436c-8145-7aa9102896f1" class="">命令提示字元
+arping 指令</p><p id="809a571e-f74b-43d1-ba87-b33c15077d87" class="">arping 是一個類似 ping 的小工具，可以對區域網路中的設備送出 arp 請求封包，用更低階的方式檢查網路連線狀況，這裡我們示範使用 arping 取得 IP 位址與網路卡 MAC 卡號對應表的作法。</p><p id="3851e9dd-0444-47dc-813d-6ad44163797a" class="">arping 只適用於 Linux 與 Mac OS X，Windows 系統則要使用 cygwin 安裝。</p><p id="e108a965-d073-44ee-abc8-afa145e983b3" class="">在 Debian 系列的 Linux，可以使用 apt 安裝 apring 工具：</p><p id="76af8fec-ad3d-480d-b038-42deac50c078" class="">sudo apt-get install arping</p><p id="22ba9390-737f-4703-a8ce-1084ff68902c" class="">使用 arping ping 特定的 IP 位址：</p><p id="18b5fa3c-aab9-4d9c-889b-f6d88184970f" class="">arping -I wlp3s0 -w 3 -f 192.168.1.1</p><p id="5c1abe70-7cb8-4ca0-a76e-88040598c783" class="">ARPING 192.168.1.1 from 192.168.1.104 wlp3s0
+Unicast reply from 192.168.1.1 [10:7B:EF:12:4F:AF]  2.749ms
+Sent 1 probes (1 broadcast(s))
+Received 1 response(s)</p><p id="923e09b6-91a6-49b0-97a3-9dd10bdc7423" class="">arping 輸出訊息中就有包含 IP 與 MAC 卡號的資訊，所以只要掃過每個 IP 位址，再用 grep 整理一下即可，以下是使用 arping 來 ping 整個區域網路所有 IP 位址的 bash 指令稿：</p><p id="49489d70-0781-4b14-936a-87c49ad89dbb" class="">#!/bin/bash</p><h1 id="87f94e7a-fc0a-43a9-a5c1-1671d9f17439" class="">用 arping 來 ping 區域網路中所有的 IP 位址</h1><p id="97d66cda-0d83-491f-9a15-91ae14a2a858" class="">for ip in 192.168.1.{1..254}; do
+arping -I wlp3s0 -w 3 -f $ip | grep reply &amp;
+done</p><h1 id="d33abdb0-ad68-4218-bb25-b0e5bb14bbd9" class="">等待所有背景的 arping 結束</h1><p id="193bd5c0-78fb-4cf8-9b30-fa4bd9c2d327" class="">wait</p><p id="e8c94b4f-1de1-49fb-a35a-f97c9fc7499f" class="">Unicast reply from 192.168.1.1 [10:7B:EF:12:4F:AF]  7.072ms
+Unicast reply from 192.168.1.103 [74:23:44:23:D3:96]  179.119ms
+Unicast reply from 192.168.1.102 [28:E3:1F:50:B9:94]  219.907ms</p><p id="d876b69a-0b85-4fa6-897c-1e5477f0fc35" class=""><a href="https://blog.gtwang.org/linux/ping-and-arp-scan-ip-mac-address-script/">https://blog.gtwang.org/linux/ping-and-arp-scan-ip-mac-address-script/</a></p><p id="3be42163-b9e4-412d-883d-88523f6609f4" class="">參考資料：<a href="http://linux.com/">Linux.com</a>、PCNET、StackOverflow、Haoming</p></div></article></body></html>

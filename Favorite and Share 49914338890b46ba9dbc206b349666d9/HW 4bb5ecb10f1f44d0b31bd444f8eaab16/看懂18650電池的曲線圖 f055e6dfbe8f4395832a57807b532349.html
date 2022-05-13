@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>看懂18650電池的曲線圖</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f055e6df-be8f-4395-832a-57807b532349" class="page sans"><header><h1 class="page-title">看懂18650電池的曲線圖</h1></header><div class="page-body"><p id="092768cd-9e0a-4e49-bd91-e5d409aa2a71" class="block-color-gray"><a href="http://ken77kuo.blogspot.com/2017/11/18650.html">http://ken77kuo.blogspot.com/2017/11/18650.html</a></p><p id="a98aee19-4d95-435e-928b-89b97b57ba32" class="">這篇引用<a href="https://engineering.tamu.edu/media/4247819/ds-battery-panasonic-18650ncr.pdf">Panasonic NCR18650 </a><a href="https://engineering.tamu.edu/media/4247819/ds-battery-panasonic-18650ncr.pdf">規格書</a></p><p id="ae99cae1-63f1-4216-ac2c-4172e0f16399" class="">先用充電圖說明:</p><p id="f6036447-8d97-4858-9670-ad883a78fcab" class="">下圖中Charge: CC-CV 0.7C(max) 4.2V,55mA cut-off 25⁰C廠商充電設定, 是說充電時先定電流(CC)0.7C到電壓升到4.2V時改定電壓(CV),之後電流(綠線)會一直減少到55mA時停止充電,電池充飽約在2900mAh左右(紅線).</p><p id="1d54fb25-7b1e-438c-bdd2-bf5cbc1a78e5" class="">圖中紅線是隨著電池充電時間增加容量(mAh)增加,藍線是隨著電池充電時間增加電壓(V)增加,在4.2V固定改CV充電,綠線是電池充電電流一開始CC模式0.7C到電壓至4.2V,改CV模式會開始減少一直到55mA時停止充電.</p><figure id="97807622-3f79-407c-a638-2521d89c60ae" class="image"><a href="https://3.bp.blogspot.com/-fqevl-W66OE/WhLpgd7gjhI/AAAAAAAAAXg/cGmn9tBDo2k1t-vwoK287reIMCmUMu-gQCLcBGAs/s280/000_18650.jpg"><img src="https://3.bp.blogspot.com/-fqevl-W66OE/WhLpgd7gjhI/AAAAAAAAAXg/cGmn9tBDo2k1t-vwoK287reIMCmUMu-gQCLcBGAs/s280/000_18650.jpg"/></a></figure><p id="08e2ad93-b184-441a-9976-401149a43d57" class="">下圖棕色線是我晝在電池電壓4.2V時,充電轉為CV模式電流開始減少</p><figure id="d5e8f710-49fb-40f4-a62a-f8e9641ada23" class="image"><a href="https://3.bp.blogspot.com/-1YFvEibOQcc/WhLwRF3N3zI/AAAAAAAAAXw/kYJLYkYiLQwaMH4aFEaG67FlZrM1BUbzgCLcBGAs/s280/000_18650_1.jpg"><img src="https://3.bp.blogspot.com/-1YFvEibOQcc/WhLwRF3N3zI/AAAAAAAAAXw/kYJLYkYiLQwaMH4aFEaG67FlZrM1BUbzgCLcBGAs/s280/000_18650_1.jpg"/></a></figure><p id="fd87d390-1d99-462a-9c55-de112e3ae74d" class="">下圖棕色線是我晝在充電1小時的電池容量約19xxmAh, 這可以方便看出充電時間--&gt;容量.(這常用來評估需要求固定的充電時間時的電池容量,另外可以發現2900mAh電池在充電1小時(0.7C)計算應為2900mAhx0.7=2030mAh的容量呀?這是電池內阻/溫度/電流等影響容量,也可以用來做各家電池的特性比較!)</p><figure id="5ef1a808-b599-4973-835b-4f37a4a8188e" class="image"><a href="https://2.bp.blogspot.com/-KU_oolKcQMs/WhLnCvfXI1I/AAAAAAAAAXQ/NRF9vaM_ttIcRkGg11ntBDNXKvSsVNK9ACLcBGAs/s280/001_18650.jpg"><img src="https://2.bp.blogspot.com/-KU_oolKcQMs/WhLnCvfXI1I/AAAAAAAAAXQ/NRF9vaM_ttIcRkGg11ntBDNXKvSsVNK9ACLcBGAs/s280/001_18650.jpg"/></a></figure><p id="d9dc237b-7405-4e1a-892b-72df21289254" class="">放電要考慮你設備的最低使用電壓,電池最小放電電壓,最大放電的電流和使用溫度等.</p><p id="a6e24230-2e7f-446c-b148-8742ae57b993" class="">下圖左是電池放電在1C時溫度影響曲線, 紅線-10度時電池容量減少到2500mAh以下,-20度時電池容量極少</p><p id="bca53778-4dd0-4181-aa0d-7eb9aac597c9" class="">下圖右不同的放電電流0.2C~2C影響,在圖中以放電1000mAh時,紫色(2C)電壓會低到3.5V, 而紅色線(0.5C)的電壓約3.8V, 注意! 放電大越容易到達你的設備的最低使用電壓哦!</p><p id="04f9cb21-683d-4f10-8900-2ae3b3b113ff" class="">例:我用圖中紫線(放電2C)和綠線(放電1C)說明:假如你的設備要求電池電壓不可低於3.3V左右,紫線(放電2C)在放電2000mAh時會碰到,而綠線(放電1C)約在2500mAh時會碰到,所以放電1C比放電2C在你的設備上電池可以多用500mAh量. (這也常用做各家電池的放電特性比較!)</p><figure id="44b4064a-c9c1-4efe-837c-e042a6a03b67" class="image"><a href="https://3.bp.blogspot.com/-4FzhUK3gSkI/WhLnC6KrqcI/AAAAAAAAAXY/fUFDTi119KM54fl0_oQcbZtmD6Ge1gzOgCEwYBhgL/s280/002_18650.jpg"><img src="https://3.bp.blogspot.com/-4FzhUK3gSkI/WhLnC6KrqcI/AAAAAAAAAXY/fUFDTi119KM54fl0_oQcbZtmD6Ge1gzOgCEwYBhgL/s280/002_18650.jpg"/></a></figure><p id="cd9397aa-b679-4e3f-883a-d36c52608d47" class="">下圖是充放電500次cycle life圖,廠商設定: 充電CC-CV 0.7C(max) 4.2V,55mA cut-off 25⁰C,放電定電流 1C到2.5V時停止,充放電500次後電池容量剩下約2100~2200mAh.</p><figure id="19bd085d-39ca-4cce-a132-e2c9f05d0c07" class="image"><a href="https://4.bp.blogspot.com/-oxykallKagI/WhL86ygkytI/AAAAAAAAAYA/PucumXBWvNMajBNG8UU5tVAKC1z-o6tYgCLcBGAs/s280/003_18650.jpg"><img src="https://4.bp.blogspot.com/-oxykallKagI/WhL86ygkytI/AAAAAAAAAYA/PucumXBWvNMajBNG8UU5tVAKC1z-o6tYgCLcBGAs/s280/003_18650.jpg"/></a></figure><p id="9046599e-c21a-44b8-a76e-e03b13ae165c" class="">如果你用定電流0.7C放電剩下容量會高一些! 你可以測試自己的電池看看!</p><ul id="a13a5983-d1f5-4316-be2e-441cc55a3646" class="bulleted-list"><li style="list-style-type:disc">**一定要注意18650鋰電池的最小放電電壓和最大充電電壓規格,溫度,尤其在設計充電電路時要考慮其他零件的誤差值影響.***</li></ul><p id="5ee0fa9d-936d-4f3c-a858-5be6c11b9e13" class="">==================================================================</p><p id="694bc4d6-54be-46d6-8fb9-76789b2ed04b" class="">2017/11/25 補充</p><p id="05caeb84-4416-4e50-b748-aa2fd432171a" class="">============</p><p id="55375a2f-da26-459d-95cf-8185ff019654" class="">有網友問: 放電圖為何沒用到2900mAh ?....?.....?等問題說明如下:</p><p id="868a12d9-8d35-4282-a4f6-8cf62f7ad586" class="">沒用到2900mAh是因為充電圖的電壓是由2V開始計錄,而放電的電壓只計錄到2.5V，電池保留些容量沒有放完電! 這顆電池在放電86%(2500mAh)以後電壓降很大,電池在2.5V之後持續用很快會頂到電池的最小電壓,所以放電的電壓只計錄到2.5V.</p><figure id="efeba029-22dc-457e-a2f8-93b10343fc77" class="image"><a href="https://4.bp.blogspot.com/-fsxnrH1n78E/WhjVIAAQRqI/AAAAAAAAAYY/RDGBOFsvqRMTvWR13aNCzoisiF092mGeQCLcBGAs/s280/20171125_01.jpg"><img src="https://4.bp.blogspot.com/-fsxnrH1n78E/WhjVIAAQRqI/AAAAAAAAAYY/RDGBOFsvqRMTvWR13aNCzoisiF092mGeQCLcBGAs/s280/20171125_01.jpg"/></a></figure><p id="67830aa7-468e-456c-9df4-9ec545dcdc08" class="">下圖右,不同放電電流曲缐圖是在環境溫度25度時計錄，電池容量2900mAh在放電2500mAh時約用掉86%是使用在缐性區域,之後是非缐性區電池電壓降很快變動大.考慮系統穏定性和電池使用效率，通常捨棄非缐性區部分容量只使用86%的電池容量。</p><p id="16cfab78-d317-4bee-8b0e-344eac8eddb0" class="">舉例說明電池電壓變動: 如果你的系統最大負載是2C最小負載是0.2C,在放電曲缐中可以看出在1000mAh時電壓的變動幅度約為：3.8v-3.5v=0.3v 有這樣的電壓變動在系統上.  (要注意系統負載和電池供電的關係)</p><figure id="e4d34b3e-c4e2-4507-94c4-2e74c87c7a25" class="image"><a href="https://2.bp.blogspot.com/-1K1GV0byGdI/WhjVIj3xzXI/AAAAAAAAAYc/qeuncrt6fLEtKXwOqe76rQjridBd_vaXwCLcBGAs/s280/20171125_02.jpg"><img src="https://2.bp.blogspot.com/-1K1GV0byGdI/WhjVIj3xzXI/AAAAAAAAAYc/qeuncrt6fLEtKXwOqe76rQjridBd_vaXwCLcBGAs/s280/20171125_02.jpg"/></a></figure><p id="f29e4178-437f-4b87-83b7-f33ac24396c5" class="">溫度曲線圖是電池同樣以1C(不同溫度)放電，這是溫度影響電池放電(同一些電容材質特性)曲線圖.</p><p id="296c6d0a-beff-494d-abc9-f1b08b6947b3" class="">圖中看到紅線(-10度)一開始電壓降很大，在放電一段時間後因為本身電池發熱電壓開始回升了！大約在300mAh左右電壓在3.5V以上，但和其他温度放電比較電壓是低了一些,所以低溫下電池電流流動慢電壓變動大(電子學...),</p><p id="affec8e8-cf15-4856-8b91-41e54686864d" class="">簡單的說，溫度曲線圖它表示這個電池最佳使用溫度在25～40度之間(電壓變動幅度最穩定)。</p><p id="148145bf-ab77-456f-b3ac-4b535744f8ae" class="">
+</p></div></article></body></html>

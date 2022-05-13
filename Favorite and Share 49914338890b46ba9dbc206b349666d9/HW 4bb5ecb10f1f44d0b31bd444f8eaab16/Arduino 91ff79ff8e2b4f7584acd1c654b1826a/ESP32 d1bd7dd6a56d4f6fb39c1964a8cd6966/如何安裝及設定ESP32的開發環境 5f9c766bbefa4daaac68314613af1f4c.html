@@ -1,0 +1,672 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>如何安裝及設定ESP32的開發環境</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5f9c766b-befa-4daa-ac68-314613af1f4c" class="page sans"><header><h1 class="page-title">如何安裝及設定ESP32的開發環境</h1></header><div class="page-body"><figure id="b2f18013-1f15-4048-b742-ea1c01392964"><a href="https://makerpro.cc/2020/06/how-to-install-and-configure-esp32-development-environment/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">【ESP32專欄】如何安裝及設定ESP32的開發環境 - 引領創新的科技實作社群媒體</div><div class="bookmark-description">上一篇文章 介紹了ESP32的特點與種類，並與目前常見的UNO、上一代的ESP8266進行比較，也說明了推薦NodeMCU的理由。如果你已決定採用ESP32並已入手，那就接下來當然就是要來安裝和設定ESP32的開發環境了，本文將帶你搞定這些動作。 若還沒安裝Arduino IDE，必須先至原廠網站下載並安裝，請依照以下步驟完成安裝。 1. 下載Arduino IDE 請至 ...</div></div><div class="bookmark-href"><img src="https://makerpro.cc/wp-content/uploads/2018/06/favicon.png" class="icon bookmark-icon"/>https://makerpro.cc/2020/06/how-to-install-and-configure-esp32-development-environment/</div></div><img src="https://i1.wp.com/makerpro.cc/wp-content/uploads/2020/06/ESP32-in-one-minute-Copy.jpg?fit=1024%2C576&amp;ssl=1" class="bookmark-image"/></a></figure><p id="4d39ef77-8a51-4869-8935-84df9ab56551" class=""><a href="https://makerpro.cc/2020/06/esp32-review-and-why-recommend-nodemcu-32s/">上一篇文章</a>介紹了ESP32的特點與種類，並與目前常見的UNO、上一代的ESP8266進行比較，也說明了推薦NodeMCU的理由。如果你已決定採用ESP32並已入手，那就接下來當然就是要來安裝和設定ESP32的開發環境了，本文將帶你搞定這些動作。</p><h3 id="fa469ab0-195a-4b1a-bec2-80def16df0c2" class=""><strong>ESP32 Arduino IDE開發核心安裝</strong></h3><p id="f7acb670-12da-47e2-93d5-71dcfb8e1113" class="">若還沒安裝Arduino IDE，必須先至原廠網站下載並安裝，請依照以下步驟完成安裝。</p><h3 id="ae4a0695-707f-42a1-a2a5-b804d278d6b6" class=""><strong>1. 下載Arduino IDE</strong></h3><p id="10b7cd64-aebc-4170-806e-23e4ee65449b" class="">請至<a href="https://www.arduino.cc/en/Main/Software">https://www.arduino.cc/en/Main/Software</a>網站下載，筆者比較建議直接下載免安裝檔（如下圖：Windows ZIP for non admin install），解壓縮後直接可用。</p><figure id="adb575ae-e8d1-4e8b-a2a3-f43753b39510" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/7.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/7.png"/></a></figure><p id="7982ba46-6ffe-4f55-bb45-1de1c67addb7" class="">此處選擇Just Download，另外一個選項則是捐獻Arduino基金會。</p><figure id="e62809cc-fff8-4adc-b357-17ca1b23cfac" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/8.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/8.png"/></a></figure><p id="5efd554c-7cd7-4493-b8cd-edab2253fc3c" class="">下載完成後，找到下載的壓縮檔，選擇解「壓縮所有檔案」，直接將壓縮檔解壓縮到C:\或D:\跟目錄下，例如筆者常放在C:\之下。</p><figure id="d8e42cd5-5453-45e0-8b83-c24472091e26" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/9.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/9.png"/></a></figure><p id="0faa4dbc-be0d-44be-8c16-ba1bf04c1b3f" class="">等候3~5分鐘解壓縮完畢之後，我們可以在C:\Arduino1.8.x下找到主程式Arduino.exe，這樣主程式就算安裝完畢，接下來準備安裝ESP32開發核心。</p><figure id="6a0be3e7-521c-4f50-9663-a81024e1836b" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/10.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/10.png"/></a></figure><h3 id="8b09d343-efd6-4ab0-b183-13f032e44f55" class=""><strong>2. 安裝ESP32開發核心</strong></h3><p id="f5788632-9aed-425d-87a3-db75083b3d2f" class="">至C:\arduino1.8.x目錄中，找到主程式arduino.exe，直接點兩下執行主程式，開啟主程式後，選擇功能表的檔案/偏好設定，開啟偏好設定視窗。</p><figure id="ab2c47a5-dc90-498e-b0e7-8094086d4a07" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/11.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/11.png"/></a></figure><p id="97de2ce7-32fa-4845-b014-59372f77318f" class="">在偏好設定視窗中下方的額外開發板管理員輸入以下網址後，按確定。<a href="https://dl.espressif.com/dl/package_esp32_index.json">https://dl.espressif.com/dl/package_esp32_index.json</a></p><p id="83a517ce-3042-4288-879c-61fc55855f59" class="">接著點選工具/開發板/開發板管理員，即會出現開發板管理員視窗，在開發板管理員視窗中，輸入關鍵字ESP32後，即可篩選出ESP32核心套件，目前（2020/02月）最新版本為1.0.4，直接點選右側的安裝按鈕，並等候5~10分鐘讓系統下載核心套件並完成安裝，最後再關閉開發板管理員視窗。</p><figure id="a2c0b344-97ee-4dd7-b79f-993b665ed250" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/12.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/12.png"/></a></figure><p id="5a4a4e73-c64e-4cfe-bdad-fb218c38360d" class="">完成以上步驟，再次選擇工具/開發板，並往下拉即可在下方找到最新的ESP32系列主板，接下來就看您買的是哪一種ESP32主板來選擇。</p><figure id="87f2c56a-ad10-4eee-8fc4-954aa46b955c" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/13.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/13.png"/></a></figure><p id="b3155ff6-d956-4cc0-9056-7dbbfab3bf68" class="">若您購買的是NodeMCU-32s，選擇正確的版本後會出現以下畫面，除了序列埠稍後要更改之外，其餘都請保留預設值不要更動。</p><figure id="87903e38-6d61-40d3-8679-c2f38f2c18ca" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/14.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/14.png"/></a></figure><h3 id="c0c31c86-2a26-476c-bd7a-0e24d9daffb7" class=""><strong>ESP32 USB驅動程式安裝</strong></h3><p id="01fbecab-84b1-4b8b-943b-2f2ebe0bc8ea" class="">完成環境設定後，我們將購買的ESP32插入USB，會發現需要安裝USB驅動程式，大部分的ESP32都是採用CP210x與電腦溝通並上傳程式，傳統UNO則是CH340，目前windows或MAC系統都沒有內建驅動，因此當您接上ESP32的USB後，還需要安裝驅動。</p><p id="438d8319-59ae-4c75-ab63-ae20318a428b" class="">開啟檔案總管，並在本機上按右鍵/管理，可以進入裝置管理員。由於尚未安裝驅動程式，因此會列在其他裝置，使用者應該能找到這個前方有驚嘆號「!」的CP2102 USB to UART裝置，就是Arduino ESP32負責讓訊號轉成USB來與電腦溝通上傳程式碼。</p><figure id="0afb8c3c-2f6a-4f35-8f83-fc57ca25508a" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/15.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/15.png"/></a></figure><p id="4274bdf3-36d5-4240-91f3-513a8ae54a14" class="">由於剛剛下載的Arduino 資料夾內已經有CP210x驅動（MAC電腦請至<a href="https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers">CP210x原廠網站下載</a> ），因此安裝時只需要指定驅動程式路徑到Arduino安裝資料夾即可，首先快點兩次CP2102 USB to UART裝置，開啟內容視窗，點選更新驅動程式。</p><p id="bb90482f-0312-49e1-a200-b3cdae446c16" class="">點選瀏覽電腦上的驅動程式軟體。</p><figure id="4fc7eea9-a3a2-4d57-b252-038561d0c588" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/16.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/16.png"/></a></figure><figure id="67bc70cf-bba2-4606-a3ef-ce5d33ca6e23" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/17.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/17.png"/></a></figure><p id="53505c1c-17e7-42bc-99f3-2ef131fb39cd" class="">點選瀏覽，然後在瀏覽資料夾視窗中選擇一開始您解壓縮Arduino資料夾位置，例如C:\Arduino-1.8.12\driver資料夾，按下確定後，點選下一步。</p><figure id="3924746e-badf-43ec-b0d5-e137c0987797" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/18.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/18.png"/></a></figure><p id="d3067a22-257f-416c-a51c-fe91647170a4" class="">稍等一會電腦即會找到驅動程式，並完成安裝。</p><figure id="e1a88504-c789-424c-8bc3-df9607cb97e5" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/19.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/19.png"/></a></figure><p id="089afcd1-8eb4-4a21-b6cd-d66ffa53123e" class="">安裝正確的話，前方的驚嘆號會消失，並會將裝置放在連接埠下，此時要記得紀錄一下最後方的COM編號喔。</p><figure id="78f446ee-6a0b-4618-8f58-1dbe561e3d05" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/20.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/20.png"/></a></figure><p id="5395bee3-0b81-4605-8235-d91c386a77db" class="">完成驅動程式安裝，再回到Arduino IDE中，此時在工具/開發板的序列埠選擇取得正確的COM編號（本例為COM3）。</p><figure id="e0b7334d-a13f-48fd-a195-bdbf7eb44245" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/21.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/21.png"/></a></figure><h3 id="7fcbaa6d-dd2c-4120-8639-51a5faff40b5" class=""><strong>程式上傳測試HelloWorld</strong></h3><p id="00a08c51-3378-4d1a-99a2-a7a3fb4b334f" class="">完成環境設定後，就可以來寫程式測試看看，由於ESP32的語法幾乎與Arduino UNO相同 ，因此這裡就先用HelloWorld先做個簡單練習。</p><p id="e9e3cadf-bf3b-4280-bd84-5657bf6e09ac" class="">首先在Setup()中輸入Serial.begin(115200); 
+此為宣告序列傳輸鮑率是115200（Baud），接著在Loop()中輸入Serial.println(“Hello World!”); 
+及delay(1000);，代表每1000ms（=1 second）就會在序列視窗印出Hello World!。完整程式如下圖。</p><figure id="caae46d0-b9ce-4ef5-8ad1-8f83a3e4ddb0" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/22.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/22.png"/></a></figure><p id="18978a06-6b70-4cb9-88c8-be81b92afa49" class="">接著我們將程式上傳到ESP32，點選左上的→符號，先會跳出一個存檔視窗，我們先按取消略過存檔，然後等候下方訊息列出現連線訊息時：
+Connecting……____……___……</p><p id="cfa5de5b-b0be-4e87-b928-27f942c5a132" class="">長按ESP32主板上右下的IO0按鈕（有些會標示為BOOT），直到出現上傳開始再放開IO0，此按鈕為工作模式切換鈕，上傳程式時都需要按這個按鈕將ESP32的「工作模式」轉換成「下載模式」，不過有些ESP32已經取消這個機制，稱為一鍵下載（或一鍵燒錄）。</p><figure id="2c6ce1d2-d012-4ff5-8872-48bcd6d1ad48" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/23.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/23.png"/></a></figure><p id="d54e2db0-f7a8-46cc-ad56-c447e1fbfa64" class="">程式更新中，會出現程式上傳的%數，提示使用者程式上傳進度。</p><figure id="8b20224a-c3a5-4b83-961c-02707211d026" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/24.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/24.png"/></a></figure><p id="56319f91-aa0d-412f-ac07-805bad3d63c4" class="">上傳完畢則會出現Hard resetting via RTS pin…，意思是利用左側的RST按鈕重開機，讓ESP32重新開機來執行程式，不過一般按RST這個步驟是可以省略。</p><figure id="916549e2-1eb3-4bef-b501-250e1436d0ab" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/25.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/25.png"/></a></figure><p id="68f9f4bf-d4e5-4c1e-8306-9ce728cc5376" class="">完成HelloWorld程式上傳後，點選右上角的放大鏡圖示開啟序列視窗，即可看到一秒一次的「HelloWorld!」出現。這裡要注意的是序列視窗的baud率必須與Serial.begin的數字相同，才有辦法顯示，否則可能會空白，或是亂碼。</p><figure id="2d33145b-77e4-44a4-8c1c-476f51ccc767" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/26.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/26.png"/></a></figure><p id="f1877730-5d2e-4840-9668-1c70422fb6de" class="">經由上述的說明，ESP32確實可以由Arduino IDE進行開發，而且語法、感測器都相同，非常建議立即無痛移轉到ESP32陣營，大量的WiFi及藍牙專案等著您慢慢開發，由於篇幅有限，後續的WiFi及藍牙應用，將於下一期再詳述，敬啟期待。</p><figure id="17a8288b-e7dd-452a-b9d8-2209180290bd" class="image"><a href="https://makerpro.cc/wp-content/uploads/2020/06/27.png"><img src="https://makerpro.cc/wp-content/uploads/2020/06/27.png"/></a></figure></div></article></body></html>

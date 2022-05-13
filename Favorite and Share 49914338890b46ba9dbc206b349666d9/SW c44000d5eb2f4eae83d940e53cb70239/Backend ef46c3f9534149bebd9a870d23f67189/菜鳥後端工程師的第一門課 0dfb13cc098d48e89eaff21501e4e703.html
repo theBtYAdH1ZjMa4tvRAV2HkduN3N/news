@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>菜鳥後端工程師的第一門課</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0dfb13cc-098d-48e8-9eaf-f21501e4e703" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🚐</span></div><h1 class="page-title">菜鳥後端工程師的第一門課</h1></header><div class="page-body"><p id="dc16a1bf-d183-4b17-b433-6af4c5f9bd04" class="">現在非常多人對工程師有興趣，因此也有很多針對新手族群的教學文章，但是在我的觀察下，發現有許多前端的入門文章與課程，卻似乎沒有好的後端完整新手入門免費文章，因此我想嘗試利用 30 天內，針對非工程師族群，撰寫淺顯易懂，讓外行能輕鬆讀懂的後端知識文章，讓新手們，能快速建構程式基礎知識以及 Web 後端邏輯概念，更有興趣加入後端工程的行列～</p><p id="e24203c3-40dd-463f-bfc1-74013e34e092" class="">
+</p><h1 id="03fa4dda-035c-407e-8c12-45ad7f406738" class=""><strong>[Day1] 語言的選擇與比較( 1 ) 與前言</strong></h1><p id="95fd0550-dd69-4623-894d-409cb98cfdc7" class=""><a href="https://ithelp.ithome.com.tw/tags/articles/2019%E9%90%B5%E4%BA%BA%E8%B3%BD">2019鐵人賽</a> <a href="https://ithelp.ithome.com.tw/tags/articles/backend">backend</a> <a href="https://ithelp.ithome.com.tw/tags/articles/junior">junior</a> <a href="https://ithelp.ithome.com.tw/tags/articles/web">web</a></p><h1 id="b27d546a-c5b9-49d3-a6af-86ca59ab7c59" class=""><strong>前言</strong></h1><p id="fd3e0760-3eec-4bb8-98cf-e69e42c37f75" class="">這是一個後端工程師入門的系列文章，至於為甚麼會寫這個系列呢，起因在於筆者最近有在進行一個小的活動，是提供軟體工程領域的 Beginner 一些軟體學習方向的建議，和生態系的介紹，那在途中，我發現大家對於後端領域的興趣較為缺乏，不只是在活動中看到的，在線上教學的平台，或是各大社群裡，對於後端的初階課程，是缺乏的。我的意思不是指，缺乏 PHP, C# 等後端語言的初階課程，而是針對 “Web 後端” 這個知識領域的缺乏。現在後端的開發工具、語言很多，但他們都有一些共同的知識，而一直很少有相關的資源，去整合這些知識，因為我認為，當一個人具備這些共通的知識後，他能真正的把程式語言當作工具來使用，可以自由地在 Ruby, Java 不同的開發環境中切換，這也是我目前正在努力進行中的目標。歡迎讀者搭配某個程式語言的基礎課程，會有事半功倍的效果喔！！</p><h1 id="1b371dc5-e30c-420d-a3c9-65d66bc62131" class=""><strong>大綱</strong></h1><p id="f1506329-de9f-4941-969e-11b1232ccd83" class="">以下會是我的鐵人文章的大綱，可能會在我的撰寫過程中有所調整，但大方向不會有所改變。</p><ol type="1" id="1bfa1552-bbaa-4ed6-8b18-665b96ea9275" class="numbered-list" start="1"><li>語言的選擇與比較1</li></ol><ol type="1" id="7b956d62-98f0-4bf3-a15c-78729cf55b89" class="numbered-list" start="2"><li>語言的選擇與比較2</li></ol><ol type="1" id="386650c0-432c-4b6f-8d67-cd3bf3e42aba" class="numbered-list" start="3"><li>程式基本邏輯(1)</li></ol><ol type="1" id="0182a257-14d6-47ff-b418-30e4b01e2447" class="numbered-list" start="4"><li>程式基本邏輯(2)</li></ol><ol type="1" id="0865dc84-5b52-4bb6-9ae9-6f57d50ce858" class="numbered-list" start="5"><li>程式基本邏輯(3)</li></ol><ol type="1" id="aa492f9d-94e8-4894-adc0-b74ac8342d10" class="numbered-list" start="6"><li>HTTP 概念</li></ol><ol type="1" id="1be2203c-a83b-4daa-907b-2fc0706378fe" class="numbered-list" start="7"><li>XML 和 Json</li></ol><ol type="1" id="a8d7ae3b-d159-4546-a131-d2e87b2b367e" class="numbered-list" start="8"><li>API Server (導論)</li></ol><ol type="1" id="1e1f9bc4-0413-4310-bd2d-d143e0cbd9d2" class="numbered-list" start="9"><li>API Server (實務)</li></ol><ol type="1" id="e493f4d8-3c09-4522-8e81-134606054f84" class="numbered-list" start="10"><li>物件導向與函式</li></ol><ol type="1" id="810a4a27-56b6-49e0-9084-7633d310fea4" class="numbered-list" start="11"><li>資料結構 1</li></ol><ol type="1" id="cbcfc286-df7b-4ced-831f-6ab28cd3fe71" class="numbered-list" start="12"><li>資料結構 2</li></ol><ol type="1" id="7b49da83-1efd-4022-8bd7-ed7265db5488" class="numbered-list" start="13"><li>演算法</li></ol><ol type="1" id="0743b5e1-f3c3-46d5-befb-c21d0a5039c8" class="numbered-list" start="14"><li>資料庫介紹與比較</li></ol><ol type="1" id="63769fd1-d02d-4dcf-b62f-d9086e8658b9" class="numbered-list" start="15"><li>SQL 基礎語句 - SIUD</li></ol><ol type="1" id="24e9a473-963f-41ce-bfe6-f2c29cbd0f0a" class="numbered-list" start="16"><li>SQL 進階語句 - like, order, distinct, sum, count</li></ol><ol type="1" id="9d192f85-e6df-47c6-acca-d84a0fcfd9f6" class="numbered-list" start="17"><li>SQL 關聯語句 - join(Left, inner…)</li></ol><ol type="1" id="17eb4e80-43ad-4ad7-941f-0641d500812d" class="numbered-list" start="18"><li>ORM</li></ol><ol type="1" id="1abb2b71-a6ef-48f0-8d5c-396a32bc6d97" class="numbered-list" start="19"><li>MVC</li></ol><ol type="1" id="67726ec7-1ea5-4221-9707-626b11872d72" class="numbered-list" start="20"><li>Router</li></ol><ol type="1" id="ed1f91a9-818b-47b5-859b-260b03425d81" class="numbered-list" start="21"><li>Linux (1)</li></ol><ol type="1" id="be330747-31ee-4049-83e0-23322d63a31b" class="numbered-list" start="22"><li>Linux (2)</li></ol><ol type="1" id="e0c542b7-2d97-4e46-8727-d901884d1787" class="numbered-list" start="23"><li>版本控制</li></ol><ol type="1" id="67f9773c-d9d2-4e02-9155-710937cc98ef" class="numbered-list" start="24"><li>Devops - Platform</li></ol><ol type="1" id="4e783f2d-6e29-4bd3-b941-5d5540883016" class="numbered-list" start="25"><li>Devops - web server (Nginx, Apache)</li></ol><ol type="1" id="c103fd64-fc65-4c3c-be1d-4a3098299d77" class="numbered-list" start="26"><li>Devops - Server Cache</li></ol><ol type="1" id="74a84a57-040f-47f2-8cbd-d112e5998764" class="numbered-list" start="27"><li>資安</li></ol><ol type="1" id="a19e2e01-7a87-44a0-924b-618f93bedc1d" class="numbered-list" start="28"><li>後端工作類型區分</li></ol><ol type="1" id="402709d5-8f3b-4b04-8e9a-574eb1f7775f" class="numbered-list" start="29"><li>後端找工作平台</li></ol><ol type="1" id="4e2cd30e-a9cc-48c0-be57-7fa923e96344" class="numbered-list" start="30"><li>後端學習資源分享</li></ol><h1 id="2809614b-2add-414b-aaf8-015acd5b89cb" class=""><strong>什麼是語言 ?</strong></h1><p id="aecaae0d-dad3-44d8-9698-e30f0114eaaa" class="">首先要提到的觀念是語言和框架，相信對於初心者來說，語言和框架的定義是有點模糊的，下面是維基百科裡，程式語言的定義:</p><p id="312efec6-6e32-4b8f-92b2-289366c46e3d" class="">用來定義電腦程式的形式語言</p><p id="becfb2ec-7e87-48cb-b84c-caf6434e0fdf" class="">我認為程式語言就像是我們人類一般說的”話”是人類跟電腦溝通的基礎文字，因此不同的程式語言，就只是用不同的文字在跟電腦溝通，但最後要達到的目的地是一樣的。而有些語言又擅長不同的工作，就像國文適合用簡短的縮寫代替許多意義，英文簡潔流暢，適合人類快速學會與他人溝通。Ruby 擅長快速的網站原型開發，適合做 MVP，C# 適合建構複雜的商業應用程式等等...</p><h1 id="883abcaf-98ae-4bab-b105-f8895d12c3d8" class=""><strong>什麼是框架 ?</strong></h1><p id="f43f2665-70f3-4820-9c1a-fedb88a86528" class="">框架，是一種程式語言開發的模式，目的是有助於減輕網頁開發時，共通性活動的工作負荷，並提升代碼的可複用性。</p><p id="67f129b7-54f5-4a1e-9baf-082c1234487e" class="">在現代的網頁開發中，基本上很難脫離框架的架構，因為透過框架，可以讓整個軟體工程的進行更有效率，並把一些較為抽象化，或難以理解的概念，簡單包裝成易於使用的函式或類別。</p><p id="d234bcfe-d464-47d3-b5dd-180b86bb9361" class="">在人類的語言系統中，就很像是作文文體的設計，基本的作文格式就是起承轉合，在這樣的格式架構下，我們能快速寫出一篇邏輯通順，有起伏的文章，而不是從頭慢慢推敲組裝，每個字的意義。在軟體開發工程中，也是透過框架，能更有效率的寫出能 work 的 web 應用程式。</p><h1 id="24b19d9a-404a-411c-b968-77abae1a1313" class=""><strong>語言比較和框架推薦</strong></h1><h3 id="12a3abfc-cb5a-4cc6-8b4f-58f90c420088" class=""><strong>PHP</strong></h3><figure id="bdb7d93f-405a-43d3-a2a9-d775552c19d1" class="image"><a href="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Webysther_20160423_-_Elephpant.svg/200px-Webysther_20160423_-_Elephpant.svg.png"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Webysther_20160423_-_Elephpant.svg/200px-Webysther_20160423_-_Elephpant.svg.png"/></a></figure><p id="ac57f573-7b10-4577-8df3-5eaa6a0a5287" class="">首先提到的就是Web 後端語言王 - The ~ P~H~P~~</p><p id="fb1dee1a-0c50-4a2f-9d23-f64ae691076f" class="">至於他為什麼會是語言王呢，因為從 w3techs 的資料中，</p><p id="95a22fbc-d96a-459c-bb2c-8bb40c6479c6" class="">我們可以發現， PHP 的市佔率高達 83.5% !!!!!</p><figure id="d162794d-6a2b-47d5-b6d1-9d31c7101257" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181015/20107758QN3XNuB2nb.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181015/20107758QN3XNuB2nb.png"/></a></figure><p id="504a2992-46a9-471a-896f-bcdf01032ab4" class="">這個數字可以說是非常驚人，因此基本上會寫 PHP 就一定找得到工作( 茶</p><p id="4f51d32a-fb73-449a-af49-e96cb64d8d30" class="">主要的原因就是在，他非常的易學易懂易開發，</p><p id="47ce53b4-1734-475f-9755-9cedc764479d" class="">只要理解簡單的程式設計基礎邏輯，就能馬上上手開發。</p><p id="62490f92-1575-417d-83b2-32a4cc3556ac" class="">目前台灣許多中小企業和接案公司，都選用 PHP 作為他們網站的開發語言，</p><p id="201b99c4-55d3-44fd-9e49-0afef0373f46" class="">優點: 學習曲線低，跨平台開發、語法簡單、開發社群純熟缺點: 語法嚴謹度低，複雜程序執行支援差</p><h3 id="a7f118f0-3ddd-4735-833e-831e61d7a9f6" class=""><strong>Laravel</strong></h3><figure id="019c7448-50bf-440c-8272-b43fe51bde21" class="image"><a href="https://i1.wp.com/farm2.staticflickr.com/1655/23493872563_4f01a9c336_o.png?resize=400%2C400&amp;ssl=1"><img src="https://i1.wp.com/farm2.staticflickr.com/1655/23493872563_4f01a9c336_o.png?resize=400%2C400&amp;ssl=1"/></a></figure><p id="3e7e9332-f860-43f9-acd3-a046b987bec2" class="">PHP 目前最熱門的框架，約於 2011 年發布，目前穩定的版本為 5.5</p><p id="5925557f-1f31-49d6-b3e2-e887bcf5c0c4" class="">他是一種 MVC 的架構，MVC 的說明我會在之後的文章中解說，</p><p id="cb813f9d-5b01-4a6d-bfaf-49fa2b7681d1" class="">目前可以提到的，這是一種現代最主流的網站設計模式，</p><p id="b39505a9-d1dd-41f5-8164-fb76fccfd356" class="">Laravel 基本上具備所有網站開發工程全方面的優化，</p><p id="1d270e3f-ec3a-41e3-8962-3633aa452343" class="">架構漂亮，社群也非常活躍，且持續進步，</p><figure id="2879f94d-5af1-41ff-99bc-5eabc8a97ed5" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181015/20107758vMp0SNUftv.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181015/20107758vMp0SNUftv.png"/></a></figure><p id="f9da58d8-b8c0-41d1-8192-6e3d10bf00fb" class="">但架構漂亮換來的，就是會有很多初學者開發還不會碰到的資料夾塊，且編譯執行上比較緩慢。但是基本上跟他所降低的維護成本比起來，還是瑕不掩瑜的！</p><h3 id="d735dc3b-584d-477e-9951-7c2e5d28acf9" class=""><strong>C#</strong></h3><figure id="d9167d55-12e2-4d41-b6d5-7117bfc92336" class="image"><a href="https://pluralsight.imgix.net/paths/path-icons/csharp-e7b8fcd4ce.png"><img src="https://pluralsight.imgix.net/paths/path-icons/csharp-e7b8fcd4ce.png"/></a></figure><p id="a5ed0ff5-6c7e-4fa4-adbd-b1c1c2928551" class="">緊接著 PHP 呢，是我們偉大的微軟公司在背後支持的，C#(唸作 C Sharp)C# 市佔率在第二名，約佔 13% 左右，C# 除了用在網站開發外，還有用在一個遊戲界大家耳熟能詳的引擎 - unity，但我對遊戲開發生態系不熟悉，所以我們只專注在網站開發這端，C# 是個跟 Java 接近 87 % 相似的程式語言，當初推動 C# 的 Anders Hejlsberg 也說，這個語言是為了取代 Java 而生。由於是微軟推動的程式語言，因此具有非常完整的技術支援團隊、文件和社群，至少台灣 C# 相關技術社群本身幾乎都有微軟的協助支持，而且也有一群被認證為微軟技術專家的 [ MVP ] ，推動整個開發生態與解決許多商業問題。</p><p id="9efa0c72-75e9-4ed7-ba18-ccdefa032411" class="">這個語言開發上由於繼承 Java 的特性，對於從學校體系出身的工程師們來說，十分容易上手，且身為強語言類別，具有較嚴謹的開發規範，會在本地開發時期就出現錯誤，提升新手開發程式的程式品質。目前國內有許多大公司和公家單位使用 C# 作為他們網站的開發語言，以及很多接案公司也會使用 C# 作為他們的第二開發語言。</p><p id="18887b32-701d-4989-83e9-5a7ad3a8f864" class="">優點: 完整的開發生態系，先進的語法功能，大公司技術支持，擁有貼身打造的地表最強 IDE - Visual Studio缺點: 複雜的程式碼結構，本地編譯測試速度稍慢些</p><h3 id="1151f995-d133-4298-b49a-3b76e6225f8e" class=""><strong>ASP .NET</strong></h3><figure id="6acfb8bb-d3d3-4537-adc9-84a7f2adf4dc" class="image"><a href="http://cdn.differencebetween.net/wp-content/uploads/2017/07/Difference-between-.asp-and-.jpg"><img src="http://cdn.differencebetween.net/wp-content/uploads/2017/07/Difference-between-.asp-and-.jpg"/></a></figure><p id="3959a027-c23b-4d9c-9e21-da4d656505c0" class="">過去 C# 的網頁框架為 ASP, Asp .net 等等...在 2014 年時推出這個框架的原型，Asp .net vNext，因此這是一個非常新穎的框架，他的核心引擎是 .net core，也是具有 MVC 設計概念的架構，此框架的系統設定方向從原始的 xml 檔案轉變為 json 此較大眾化的資料格式，而函式庫的部分，不過目前大部分的 C# 網站還是以 Asp .net framework( 4.0 ) 或 Asp .net MVC 的框架進行開發，Asp .net MVC 和 Asp .net Core MVC 兩個框架十分相似，因此兩者的開發方式也很雷同，值得注意的是，Asp .net framework 就跟其餘兩者有較大的差別，是屬於較舊的網頁開發模式，因此學習上建議是當作不同的框架預期心理，才比較容易估好學成所會花費的時間。</p><p id="8b2dc3fe-aed3-43cb-80f7-9bf493e940d5" class="">如果有任何問題，或是指證文中的錯誤，歡迎寄信給我或留言在下面喔～</p><p id="fe7d1e4b-24c0-4022-90a1-74a244affd91" class="">參考資料：</p><p id="392b818d-4e86-4599-bd89-81d868dd570f" class=""><a href="https://w3techs.com/">https://w3techs.com/</a><a href="https://oomusou.io/laravel/laravel-for-newbie/">https://oomusou.io/laravel/laravel-for-newbie/</a><a href="https://www.glassdoor.com/">https://www.glassdoor.com/</a></p><p id="f9c5b348-6a34-48c5-94da-bef871c772b7" class=""><a href="https://ithelp.ithome.com.tw/articles/10201473"><strong>下一篇</strong></a><a href="https://ithelp.ithome.com.tw/articles/10201473">[Day2] 語言的選擇與比較( 2 )</a></p><p id="c79cb976-6cbb-42c5-8e5a-4a6abecf3c20" class=""><strong>系列文</strong></p><p id="8c8e4579-8d93-4f94-b2f5-5dea63116a1e" class=""><a href="https://ithelp.ithome.com.tw/users/20107758/ironman/1656"><strong>菜鳥後端工程師的第一門課</strong></a> 共 30 篇</p><p id="da422a04-a6e2-4dfc-aecf-0ad2d5e95e65" class=""><strong>目錄</strong></p><p id="c19aff56-f2ad-429b-99ee-90630e14d30f" class=""><a href="https://ithelp.ithome.com.tw/rss/series/1656">RSS系列文</a></p><p id="438e0874-d822-4447-9d44-2ddc6b255136" class=""><a href="https://ithelp.ithome.com.tw/users/login">訂閱系列文</a></p><p id="71aab940-8b19-49ab-8605-dfb4c3de48b4" class="">196 人訂閱</p><ol type="1" id="981d5b85-79fc-4707-910c-686ff33ed47c" class="numbered-list" start="1"><li>26<a href="https://ithelp.ithome.com.tw/articles/10208902">[Day26] Devops - Web Server</a></li></ol><ol type="1" id="1004e440-41d0-41e8-8094-508c7d613419" class="numbered-list" start="2"><li>27<a href="https://ithelp.ithome.com.tw/articles/10209092">[Day27] Devops - 快取( Cache ) 和 CICD</a></li></ol><ol type="1" id="86f96adc-6c20-4c93-a9db-1bbc38511535" class="numbered-list" start="3"><li>28<a href="https://ithelp.ithome.com.tw/articles/10209227">[Day28] 資安常見攻擊( Web ) 與學習方法</a></li></ol><ol type="1" id="32fd1e21-4981-45f2-bdff-6d8b58d2613e" class="numbered-list" start="4"><li>29<a href="https://ithelp.ithome.com.tw/articles/10209460">[Day29] 工程師求職資源分享</a></li></ol><ol type="1" id="57a2bff8-d6f6-4b60-80ac-a338e9b02fa7" class="numbered-list" start="5"><li>30<a href="https://ithelp.ithome.com.tw/articles/10209629">[Day30] 程式學習步驟與資源推薦</a></li></ol><p id="fc475827-5b65-4605-b1d2-4e4c67159687" class=""><a href="https://ithelp.ithome.com.tw/users/20107758/ironman/1656">完整目錄</a></p></div></article></body></html>

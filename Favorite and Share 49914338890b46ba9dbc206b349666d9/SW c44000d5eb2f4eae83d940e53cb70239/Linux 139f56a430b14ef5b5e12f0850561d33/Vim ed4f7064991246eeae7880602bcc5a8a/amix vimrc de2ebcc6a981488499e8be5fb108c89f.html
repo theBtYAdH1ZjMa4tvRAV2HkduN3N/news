@@ -1,0 +1,751 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>amix/vimrc</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="de2ebcc6-a981-4884-99e8-be5fb108c89f" class="page sans"><header><h1 class="page-title">amix/vimrc</h1></header><div class="page-body"><figure id="76533837-34a7-419b-a5f9-2a4b9713c326"><a href="https://github.com/amix/vimrc" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">GitHub - amix/vimrc: The ultimate Vim configuration (vimrc)</div><div class="bookmark-description">Over the last 10 years, I have used and tweaked Vim. This configuration is the ultimate vimrc (or at least my version of it). There are two versions: The Basic: If you want something small just copy basic.vim into your ~/.vimrc and you will have a good basic setup The Awesome: Includes a ton of useful plugins, color schemes, and configurations I would, of course, recommend using the awesome version.</div></div><div class="bookmark-href"><img src="https://github.com/favicon.ico" class="icon bookmark-icon"/>https://github.com/amix/vimrc</div></div><img src="https://opengraph.githubassets.com/f7316818d43f0a4c7a1aff2c817f50cb6efc6fa8f2ab2fb4bc6e7fcaa92b20e0/amix/vimrc" class="bookmark-image"/></a></figure><p id="cee500d4-79ce-4f2d-9bc4-96386374161d" class="">
+</p><h3 id="b56e319d-f27e-4aed-9c1d-f34ac27ad7c6" class=""><strong>Install for your own user only</strong></h3><p id="3c5fe666-fd3b-4dc7-b475-5b771494bfd4" class="">The awesome version includes a lot of great plugins, configurations and color schemes that make Vim a lot better. To install it simply do following from your terminal:</p><p id="6031f894-d164-4efd-8b01-001818de7ada" class=""><code>git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_awesome_vimrc.sh</code></p><h3 id="8bbbdf3c-4575-4f78-8391-ba4860d23cbf" class=""><strong>Install for multiple users</strong></h3><p id="0df4b0af-e6cb-49f9-b4fb-274727fd5840" class="">To install for multiple users, the repository needs to be cloned to a location accessible for all the intended users.</p><p id="a36adfdf-4fca-4a43-bd74-36e5913eaf4a" class=""><code>git clone --depth=1 https://github.com/amix/vimrc.git /opt/vim_runtime
+sh ~/.vim_runtime/install_awesome_parameterized.sh /opt/vim_runtime user0 user1 user2
+# to install for all users with home directories
+sh ~/.vim_runtime/install_awesome_parameterized.sh /opt/vim_runtime --all</code></p><p id="e1f45d84-bff7-4286-b551-af9f5c24e11f" class="">Naturally, <code>/opt/vim_runtime</code> can be any directory, as long as all the users specified have read access.</p><p id="2c6fef90-225e-49ec-b3cd-846d6d8ecd48" class="">
+</p><p id="d58432c2-5242-4010-8bd8-91b29999c6d5" class="">
+</p><h1 id="d61186d6-c19c-42da-b747-c59e8f726755" class=""><strong>The Ultimate vimrc</strong></h1><p id="45ba5f89-b895-4409-9221-b0ae00aae77a" class="">Over the last 10 years, I have used and tweaked Vim. This configuration is the ultimate vimrc (or at least my version of it).</p><p id="54e1938d-eb8d-44a1-86fd-3515eb8587db" class="">There are two versions:</p><ul id="5963c279-62fa-4393-bdc7-62e1520544d1" class="bulleted-list"><li style="list-style-type:disc"><strong>The Basic</strong>: If you want something small just copy <a href="https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim">basic.vim</a> into your ~/.vimrc and you will have a good basic setup</li></ul><ul id="d023d76a-3778-498b-9fbd-6a9909072737" class="bulleted-list"><li style="list-style-type:disc"><strong>The Awesome</strong>: Includes a ton of useful plugins, color schemes, and configurations</li></ul><p id="7e53f9ba-77b7-46ce-a930-46a8893ef8dc" class="">I would, of course, recommend using the awesome version.</p><h2 id="18b7fcc0-a4b7-45f6-b9e3-916313abb373" class=""><strong>How to install the Awesome version?</strong></h2><h3 id="9c4eaf85-b23c-43b3-9f26-5211a8cb1330" class=""><strong>Install for your own user only</strong></h3><p id="2ec98748-7ab9-45d5-a8a7-48caa7d6b5e9" class="">The awesome version includes a lot of great plugins, configurations and color schemes that make Vim a lot better. To install it simply do following from your terminal:</p><p id="10b55741-89c4-40c5-8e5b-149443a88470" class=""><code>git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_awesome_vimrc.sh</code></p><h3 id="1f3a354f-37cb-47cf-9dd6-7071e6e68319" class=""><strong>Install for multiple users</strong></h3><p id="ed634ff0-2ac4-4ab3-86e8-e1300d8f45f6" class="">To install for multiple users, the repository needs to be cloned to a location accessible for all the intended users.</p><p id="b517ce47-2a52-4d31-a00e-ddd6caa2862d" class=""><code>git clone --depth=1 https://github.com/amix/vimrc.git /opt/vim_runtime
+sh ~/.vim_runtime/install_awesome_parameterized.sh /opt/vim_runtime user0 user1 user2
+# to install for all users with home directories
+sh ~/.vim_runtime/install_awesome_parameterized.sh /opt/vim_runtime --all</code></p><p id="81af38a4-911c-4d75-a6e2-c83c7b122ac1" class="">Naturally, <code>/opt/vim_runtime</code> can be any directory, as long as all the users specified have read access.</p><h2 id="176cd5c3-93de-4e3d-93b6-7591dbc10a93" class=""><strong>Fonts</strong></h2><p id="1dd8dd3b-b198-4ead-900b-eb92fd28d095" class="">I recommend using <a href="https://github.com/IBM/plex">IBM Plex Mono font</a> (it&#x27;s an open-source and awesome font that can make your code look beautiful). The Awesome vimrc is already setup to try to use it.</p><p id="86b2ebc7-15b6-4566-9c8b-299a9de8aa51" class="">Some other fonts that Awesome will try to use:</p><ul id="2e0032c6-e4c5-4d67-8c5e-54b7d81c1c2a" class="bulleted-list"><li style="list-style-type:disc"><a href="http://sourcefoundry.org/hack/">Hack</a></li></ul><ul id="7de8bb26-55df-412c-8d9d-6c931999de3c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://adobe-fonts.github.io/source-code-pro/">Source Code Pro</a></li></ul><h2 id="d9a6e24a-e9d0-4bf2-9a81-75195d13a3ab" class=""><strong>How to install the Basic version?</strong></h2><p id="c1402750-f5d1-457c-9bf5-8c1d23bd36ce" class="">The basic version is just one file and no plugins. Just copy <a href="https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim">basic.vim</a> and paste it into your vimrc.</p><p id="0c09505c-5603-4313-9c05-9af92fd11683" class="">The basic version is useful to install on remote servers where you don&#x27;t need many plugins, and you don&#x27;t do many edits.</p><p id="850fa02e-072d-4a8e-9bd0-aa9bbb81c375" class=""><code>git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_basic_vimrc.sh</code></p><h2 id="e9b05e38-cf62-4aca-84ec-0cda35922eb7" class=""><strong>How to install on Windows?</strong></h2><p id="cde19487-8744-4785-9668-e632bd169de2" class="">Use <a href="http://gitforwindows.org/">gitforwindows</a> to checkout the repository and run the installation instructions above. No special instructions needed ;-)</p><h2 id="177082ba-86db-4d1f-b633-6a1e1b8b9964" class=""><strong>How to install on Linux</strong></h2><p id="4c87a5f0-54ff-4741-9dab-cb7fbe68fdae" class="">If you have vim aliased as <code>vi</code> instead of <code>vim</code>, make sure to either alias it: <code>alias vi=vim</code>. Otherwise, <code>apt-get install vim</code></p><h2 id="7c58f096-5d4b-41c6-81aa-44426c905e58" class=""><strong>How to update to latest version?</strong></h2><p id="7157e72d-9567-4a2e-be25-3cc70dd6e9c4" class="">Just do a git rebase!</p><p id="fe36589f-64a5-4174-8025-da01781aae7b" class=""><code>cd ~/.vim_runtime
+git reset --hard
+git clean -d --force
+git pull --rebase
+python update_plugins.py  # use python3 if python is unavailable</code></p><p id="c490a569-be79-448f-aac9-8a2412ced149" class="">NOTE: If you get <code>ModuleNotFoundError: No module named &#x27;requests&#x27;</code>, you must first install the <code>requests</code> python module using <code>pip</code>, <code>pip3</code>, or <code>easy_install</code>.</p><p id="e5f69185-c7b7-4e81-909b-f9ca317eda0b" class=""><code>pip install requests</code></p><h2 id="fc7e27dc-0daf-406e-81cd-4d5ed0345e34" class=""><strong>Some screenshots</strong></h2><p id="24fc7ece-f36b-4976-b08b-6e9b8060ac7f" class="">Colors when editing a Python file:</p><figure id="c6cde2d9-d730-449d-bf7f-439663acd30c" class="image"><a href="https://camo.githubusercontent.com/af46ebaa947257888b69f6e078c3b71bfbc259bd92d2c2ab05d871d268e52217/68747470733a2f2f646e70347065686b766f6f366e2e636c6f756466726f6e742e6e65742f30373538333030386534646138383538303136353765383738313737373834342f61732f507974686f6e25323065646974696e672e706e67"><img src="https://camo.githubusercontent.com/af46ebaa947257888b69f6e078c3b71bfbc259bd92d2c2ab05d871d268e52217/68747470733a2f2f646e70347065686b766f6f366e2e636c6f756466726f6e742e6e65742f30373538333030386534646138383538303136353765383738313737373834342f61732f507974686f6e25323065646974696e672e706e67"/></a></figure><p id="9cdc7f64-1c46-41a1-a83c-63dfad641691" class=""><a href="https://github.com/scrooloose/nerdtree">NERD Tree</a> plugin in a terminal window:</p><figure id="38d185c1-939b-4d7c-9af0-42f1b532df72" class="image"><a href="https://camo.githubusercontent.com/c376ca83783b46dac37876cd662038c547c0a76f3786bc1ce44e4e5b6851d098/68747470733a2f2f646e70347065686b766f6f366e2e636c6f756466726f6e742e6e65742f61653731393230333136363538356436343732386632383339386634623162372f61732f5465726d696e616c25323075736167652e706e67"><img src="https://camo.githubusercontent.com/c376ca83783b46dac37876cd662038c547c0a76f3786bc1ce44e4e5b6851d098/68747470733a2f2f646e70347065686b766f6f366e2e636c6f756466726f6e742e6e65742f61653731393230333136363538356436343732386632383339386634623162372f61732f5465726d696e616c25323075736167652e706e67"/></a></figure><p id="81f3da73-3ae6-43b0-850f-ab4c2bdd91a3" class="">Distraction free mode using <a href="https://github.com/junegunn/goyo.vim">goyo.vim</a> and <a href="https://github.com/amix/vim-zenroom2">vim-zenroom2</a>:</p><figure id="26eada79-72bc-4c38-8d68-6d1f66f32c07" class="image"><a href="https://camo.githubusercontent.com/dd60b5522b9323ce67b90869f03e2093fd32cd53de9476cb02e4cc7598ff7752/68747470733a2f2f646e70347065686b766f6f366e2e636c6f756466726f6e742e6e65742f66306463633463393733393134386335366362663832383561393130616334312f61732f5a656e2532306d6f64652e706e67"><img src="https://camo.githubusercontent.com/dd60b5522b9323ce67b90869f03e2093fd32cd53de9476cb02e4cc7598ff7752/68747470733a2f2f646e70347065686b766f6f366e2e636c6f756466726f6e742e6e65742f66306463633463393733393134386335366362663832383561393130616334312f61732f5a656e2532306d6f64652e706e67"/></a></figure><h2 id="b1af2dd5-a266-4e8e-bc48-e3cb4b8cef6a" class=""><strong>Included Plugins</strong></h2><p id="6bfda5bd-7312-4c28-a2c9-9555a8f8a0d7" class="">I recommend reading the docs of these plugins to understand them better. Each plugin provides a much better Vim experience!</p><ul id="e738de73-5cf2-44bb-bfa2-27dfea6df49a" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/mileszs/ack.vim">ack.vim</a>: Vim plugin for <code>the_silver_searcher</code> (ag) or ack -- a wicked fast grep</li></ul><ul id="bcd7711e-f942-41b6-af51-554547778725" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/vim-scripts/bufexplorer.zip">bufexplorer.zip</a>: Quickly and easily switch between buffers. This plugin can be opened with <code>&lt;leader+o&gt;</code></li></ul><ul id="66e6dd48-148b-4701-bc92-a3873c07d40f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/ctrlpvim/ctrlp.vim">ctrlp.vim</a>: Fuzzy file, buffer, mru and tag finder. It&#x27;s mapped to <code>&lt;Ctrl+F&gt;</code></li></ul><ul id="474fcd92-996b-4cfb-b8bf-c21a094e5b3f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/junegunn/goyo.vim">goyo.vim</a> and <a href="https://github.com/amix/vim-zenroom2">vim-zenroom2</a>:</li></ul><ul id="14b14dbb-9b9c-48b6-a401-e92955a5fd0e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/itchyny/lightline.vim">lightline.vim</a>: A light and configurable statusline/tabline for Vim</li></ul><ul id="c987a6f9-e79f-4b1a-8a39-906bb04ad895" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/scrooloose/nerdtree">NERD Tree</a>: A tree explorer plugin for vim</li></ul><ul id="b42e7676-98ac-4601-a449-827d6eb39eba" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/amix/open_file_under_cursor.vim">open_file_under_cursor.vim</a>: Open file under cursor when pressing <code>gf</code></li></ul><ul id="3ece1567-d37e-4e55-886b-98b4520e09e0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/tpope/vim-pathogen">pathogen.vim</a>: Manage your vim runtimepath</li></ul><ul id="d085e4eb-d788-42cf-b21b-92f59d4afe25" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/garbas/vim-snipmate">snipmate.vim</a>: snipmate.vim aims to be a concise vim script that implements some of TextMate&#x27;s snippets features in Vim</li></ul><ul id="a2240617-9c30-4097-8509-9a0bd5dcdc5a" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/w0rp/ale">ale</a>: Syntax and lint checking for vim (ALE requires NeoVim &gt;= 0.2.0 or Vim 8 with +timers +job +channel)</li></ul><ul id="75f23a4c-4dcf-4461-bf46-90539db7b7e7" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/tpope/vim-commentary">vim-commentary</a>: Comment stuff out. Use <code>gcc</code> to comment out a line (takes a count), <code>gc</code> to comment out the target of a motion. <code>gcu</code> uncomments a set of adjacent commented lines.</li></ul><ul id="d878b62c-e2f4-47ee-bfb7-d7e4a2e26eec" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/terryma/vim-expand-region">vim-expand-region</a>: Allows you to visually select increasingly larger regions of text using the same key combination</li></ul><ul id="bbb5388e-36d0-494b-a007-00e0d24647e7" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/tpope/vim-fugitive">vim-fugitive</a>: A Git wrapper so awesome, it should be illegal</li></ul><ul id="ce6613f5-734e-4318-8ea0-5fa4cc83ac1c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/michaeljsmith/vim-indent-object">vim-indent-object</a>: Defines a new text object representing lines of code at the same indent level. Useful for python/vim scripts</li></ul><ul id="d7edefb9-d33a-4e4b-a7c4-77a9a4007ad5" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/terryma/vim-multiple-cursors">vim-multiple-cursors</a>: Sublime Text style multiple selections for Vim, CTRL+N is remapped to CTRL+S (due to YankRing)</li></ul><ul id="b2eb9adf-4d3f-4406-aaf0-f0132951eafc" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/maxbrunsfeld/vim-yankstack">vim-yankstack</a>: Maintains a history of previous yanks, changes and deletes</li></ul><ul id="7f7984b6-de92-4659-a2cf-643627fc4a24" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/amix/vim-zenroom2">vim-zenroom2</a> Remove all clutter and focus only on the essential. Similar to iA Writer or Write Room</li></ul><ul id="0d4412ad-8900-4f61-8475-684df9fac500" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/mattn/gist-vim">gist-vim</a> Easily create gists from Vim using the <code>:Gist</code> command</li></ul><ul id="23290c07-72f8-4edc-a941-d317f8ea7f77" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/nathanaelkane/vim-indent-guides">vim-indent-guides</a> Is a plugin for visually displaying indent levels in Vim</li></ul><ul id="793ff9b2-df7d-4764-9e89-ff1f983633db" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/editorconfig/editorconfig-vim">editorconfig-vim</a> EditorConfig helps maintain consistent coding styles for multiple developers working on the same project across various editors and IDEs.</li></ul><h2 id="8b6c4235-acb0-427d-b8af-c4f469f07d5f" class=""><strong>Included color schemes</strong></h2><ul id="93d89e93-16e5-4661-b45b-148af37580c1" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/vim-scripts/peaksea">peaksea</a>: The default</li></ul><ul id="e15df4f2-7a87-4d07-a86a-e04844b311e8" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/dracula/vim">dracula</a></li></ul><ul id="c8be75c8-9f0d-4e28-abf6-302a245a5097" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/altercation/vim-colors-solarized">vim-colors-solarized</a></li></ul><ul id="8f066f9e-055b-42b5-a2ec-982a7cde92a5" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/wgibbs/vim-irblack">vim-irblack</a></li></ul><ul id="ce7b81d1-9acd-4468-8a37-b6f10f3325bb" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/vim-scripts/mayansmoke">mayansmoke</a></li></ul><ul id="280ab3f7-9e8e-4624-8cc7-ce2e34eceeed" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/therubymug/vim-pyte">vim-pyte</a></li></ul><h2 id="70f1778f-52a4-4543-b857-9d1c57e71f61" class=""><strong>Included modes</strong></h2><ul id="d05a5c0a-0824-4068-9cef-94a507f101e4" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/kchmck/vim-coffee-script">vim-coffee-script</a></li></ul><ul id="a2c60299-a5c2-438c-9aed-98d644a2777f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/groenewege/vim-less">vim-less</a></li></ul><ul id="e3909d7a-6f4d-4ba5-b035-7dd96a2a7625" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/sophacles/vim-bundle-mako">vim-bundle-mako</a></li></ul><ul id="03e2f444-2421-4b8e-8ff9-37d683d068e3" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/plasticboy/vim-markdown">vim-markdown</a></li></ul><ul id="1afeafdf-7a32-4ee0-9c84-73c61235e654" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/vim-scripts/nginx.vim">nginx.vim</a>: Highlights configuration files for nginx</li></ul><ul id="f6dd6b02-ce79-48e4-83e0-05030d52c31b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/rust-lang/rust.vim">rust.vim</a></li></ul><ul id="578d33d2-814b-4265-91b5-a30989dae7df" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/vim-ruby/vim-ruby">vim-ruby</a></li></ul><ul id="bbb5f822-a9c7-4eb4-a239-643a0861a07e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/leafgarland/typescript-vim">typescript-vim</a></li></ul><ul id="b6f49a48-5ba7-4f0c-b668-a7c8fcf97483" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/pangloss/vim-javascript">vim-javascript</a></li></ul><ul id="b5826e1b-2ed4-4897-a281-43189bec73ae" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/Vimjas/vim-python-pep8-indent">vim-python-pep8-indent</a></li></ul><h2 id="34264c5e-a6bd-4f92-a1ba-df23616107a2" class=""><strong>How to include your own stuff?</strong></h2><p id="1a9dcf9f-5699-4f21-b7d3-277129975bef" class="">After you have installed the setup, you can create <strong>~/.vim_runtime/my_configs.vim</strong> to fill in any configurations that are important for you. For instance, my <strong>my_configs.vim</strong> looks like this:</p><p id="0c2efa3e-457d-4a04-a3c0-866934f410a9" class=""><code>~/.vim_runtime (master)&gt; cat my_configs.vim
+map &lt;leader&gt;ct :cd ~/Desktop/Todoist/todoist&lt;cr&gt;
+map &lt;leader&gt;cw :cd ~/Desktop/Wedoist/wedoist&lt;cr&gt;</code></p><p id="237fb311-ac71-49d8-8b86-6a6091e562eb" class="">You can also install your plugins, for instance, via pathogen you can install <a href="https://github.com/tpope/vim-rails">vim-rails</a>:</p><p id="74c9f6c7-face-4ca8-a097-1c033d88a2e6" class=""><code>cd ~/.vim_runtime
+git clone git://github.com/tpope/vim-rails.git my_plugins/vim-rails</code></p><p id="fc4ba89f-d769-475a-9ca2-6fc67749cb9a" class="">You can also install plugins without any plugin manager (vim 8+ required):Add <code>packloadall</code> to your .vimrc fileCreate pack plugin directory:<code>mkdir -p ~/.vim/pack/plugins/start</code>Clone the plugin that you want in that directory, for example:<code>git clone --depth=1 git://github.com/maxmellon/vim-jsx-pretty ~/.vim/pack/plugins/vim-jsx-pretty</code></p><h2 id="99347187-8731-43c3-ba03-72149584dbb9" class=""><strong>Key Mappings</strong></h2><p id="6b4dc423-f2b9-4463-8166-ea870649a6f8" class="">The <a href="http://learnvimscriptthehardway.stevelosh.com/chapters/06.html#leader">leader</a> is <code>,</code>, so whenever you see <code>&lt;leader&gt;</code> it means <code>,</code>.</p><h3 id="3b206551-e19d-4881-9ffc-561f9c7f2e39" class=""><strong>Normal mode mappings</strong></h3><p id="a1328688-f7bc-434c-8c83-42dcc85dbaae" class="">Fast saving of a buffer (<code>&lt;leader&gt;w</code>):</p><p id="feacc729-818d-452f-8e90-31733cab90a4" class=""><code>nmap &lt;leader&gt;w :w!&lt;cr&gt;</code></p><p id="1f05f033-963e-4400-96bb-c6a2700d725b" class="">Map <code>&lt;Space&gt;</code> to <code>/</code> (search) and <code>&lt;Ctrl&gt;+&lt;Space&gt;</code> to <code>?</code> (backwards search):</p><p id="f2560716-6162-497b-a13f-c1c410e156ae" class=""><code>map &lt;space&gt; /
+map &lt;C-space&gt; ?
+map &lt;silent&gt; &lt;leader&gt;&lt;cr&gt; :noh&lt;cr&gt;</code></p><p id="66444777-3c9e-4e8d-be26-dce402db5d0f" class="">Disable highlights when you press <code>&lt;leader&gt;&lt;cr&gt;</code>:</p><p id="1430373d-3572-48b2-9ea6-822c8d67f23f" class=""><code>map &lt;silent&gt; &lt;leader&gt;&lt;cr&gt; :noh&lt;cr&gt;</code></p><p id="0eb8c91b-e17b-48d2-b89b-01b524a5f0a0" class="">Smart way to move between windows (<code>&lt;ctrl&gt;j</code> etc.):</p><p id="3fe71c54-2cfa-474c-a579-e2d206ac0588" class=""><code>map &lt;C-j&gt; &lt;C-W&gt;j
+map &lt;C-k&gt; &lt;C-W&gt;k
+map &lt;C-h&gt; &lt;C-W&gt;h
+map &lt;C-l&gt; &lt;C-W&gt;l</code></p><p id="f64b4075-a35e-4816-be11-22d71e5aeb53" class="">Closing of the current buffer(s) (<code>&lt;leader&gt;bd</code> and (<code>&lt;leader&gt;ba</code>)):</p><p id="a4627722-9936-4b30-b6c8-8341a63a8d5f" class=""><code>&quot; Close current buffer
+map &lt;leader&gt;bd :Bclose&lt;cr&gt;
+
+&quot; Close all buffers
+map &lt;leader&gt;ba :1,1000 bd!&lt;cr&gt;</code></p><p id="45e104c7-d78e-4c44-bedb-5619c3f5f0ff" class="">Useful mappings for managing tabs:</p><p id="96bc1252-ebfd-4fee-82c9-83d58c366c2a" class=""><code>map &lt;leader&gt;tn :tabnew&lt;cr&gt;
+map &lt;leader&gt;to :tabonly&lt;cr&gt;
+map &lt;leader&gt;tc :tabclose&lt;cr&gt;
+map &lt;leader&gt;tm :tabmove 
+
+&quot; Opens a new tab with the current buffer&#x27;s path
+&quot; Super useful when editing files in the same directory
+map &lt;leader&gt;te :tabedit &lt;C-r&gt;=expand(&quot;%:p:h&quot;)&lt;cr&gt;/</code></p><p id="52cf524f-0c30-47f3-9f9c-e80433b70339" class="">Switch <a href="http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file">CWD</a> to the directory of the open buffer:</p><p id="0fd2cd83-cb66-4c65-a7a7-6046fdc18e9d" class=""><code>map &lt;leader&gt;cd :cd %:p:h&lt;cr&gt;:pwd&lt;cr&gt;</code></p><p id="26f2587b-385c-45d4-b963-53aa73edc0a1" class="">Open <code>ack.vim</code> for fast search:</p><p id="8f3c6787-d214-415b-afd2-86066cdb6f1f" class=""><code>map &lt;leader&gt;g :Ack</code></p><p id="2cb49f93-b7a6-4d63-a868-94d99f27e130" class="">Quickly open a buffer for scripbble:</p><p id="ae1414f5-c56a-44f4-9812-73f52984ec92" class=""><code>map &lt;leader&gt;q :e ~/buffer&lt;cr&gt;</code></p><p id="3495e135-5117-4ff6-a943-7292b7c8095d" class="">Toggle paste mode on and off:</p><p id="af8d9367-2951-4aaf-ae77-d871b8bc8350" class=""><code>map &lt;leader&gt;pp :setlocal paste!&lt;cr&gt;</code></p><h3 id="7f6f70bd-19e8-4a2b-aaed-eb367e967969" class=""><strong>Visual mode mappings</strong></h3><p id="3e287a56-dec7-4b42-907e-1f9901721a88" class="">Visual mode pressing <code>*</code> or <code>#</code> searches for the current selection:</p><p id="dae7f842-7b63-411c-afec-6c085f069a76" class=""><code>vnoremap &lt;silent&gt; * :call VisualSelection(&#x27;f&#x27;)&lt;CR&gt;
+vnoremap &lt;silent&gt; # :call VisualSelection(&#x27;b&#x27;)&lt;CR&gt;</code></p><p id="2bf27597-e980-4414-a4c0-36ce2c33d057" class="">When you press gv you <code>Ack.vim</code> after the selected text:</p><p id="a87fd665-279a-4e67-a0be-6e12a5672974" class=""><code>vnoremap &lt;silent&gt; gv :call VisualSelection(&#x27;gv&#x27;, &#x27;&#x27;)&lt;CR&gt;</code></p><p id="9f7e5c54-9421-4900-bce2-a3185b09800c" class="">When you press <code>&lt;leader&gt;r</code> you can search and replace the selected text:</p><p id="dff7b9a9-2ade-46ec-b481-8d438ad0343e" class=""><code>vnoremap &lt;silent&gt; &lt;leader&gt;r :call VisualSelection(&#x27;replace&#x27;)&lt;CR&gt;</code></p><p id="6f8f16a2-9d3a-4f1a-9963-a53d3d7c3ac9" class="">Surround the visual selection in parenthesis/brackets/etc.:</p><p id="a6d3db33-ca51-4cbe-9dbe-8e9af1170a6c" class=""><code>vnoremap $1 &lt;esc&gt;`&gt;a)&lt;esc&gt;`&lt;i(&lt;esc&gt;
+vnoremap $2 &lt;esc&gt;`&gt;a]&lt;esc&gt;`&lt;i[&lt;esc&gt;
+vnoremap $3 &lt;esc&gt;`&gt;a}&lt;esc&gt;`&lt;i{&lt;esc&gt;
+vnoremap $$ &lt;esc&gt;`&gt;a&quot;&lt;esc&gt;`&lt;i&quot;&lt;esc&gt;
+vnoremap $q &lt;esc&gt;`&gt;a&#x27;&lt;esc&gt;`&lt;i&#x27;&lt;esc&gt;
+vnoremap $e &lt;esc&gt;`&gt;a`&lt;esc&gt;`&lt;i`&lt;esc&gt;</code></p><h3 id="ff218f0b-2c3c-47f3-973c-c0a97e379cf3" class=""><strong>Insert mode mappings</strong></h3><p id="2fd6eed2-ab0b-483a-ab13-1726f4183553" class="">Quickly insert parenthesis/brackets/etc.:</p><p id="b2f963d3-574a-410d-bd74-72e884be7927" class=""><code>inoremap $1 ()&lt;esc&gt;i
+inoremap $2 []&lt;esc&gt;i
+inoremap $3 {}&lt;esc&gt;i
+inoremap $4 {&lt;esc&gt;o}&lt;esc&gt;O
+inoremap $q &#x27;&#x27;&lt;esc&gt;i
+inoremap $e &quot;&quot;&lt;esc&gt;i
+inoremap $t &lt;&gt;&lt;esc&gt;i</code></p><p id="a19b0f59-2bb9-4138-b86e-c19198a6a180" class="">Insert the current date and time (useful for timestamps):</p><p id="cde4101d-b5e7-438c-8fc2-a261c7fd1e17" class=""><code>iab xdate &lt;C-r&gt;=strftime(&quot;%d/%m/%y %H:%M:%S&quot;)&lt;cr&gt;</code></p><h3 id="71d8ef3d-a3ec-4405-b840-d3ff71bee0f1" class=""><strong>Command line mappings</strong></h3><p id="9025ad36-d6eb-443a-be69-8ff735cfec2c" class="">$q is super useful when browsing on the command line. It deletes everything until the last slash:</p><p id="b74c0563-d88f-473a-bbbf-86937d624c62" class=""><code>cno $q &lt;C-\&gt;eDeleteTillSlash()&lt;cr&gt;</code></p><p id="78783b3b-c2d2-428f-806a-f5eb7c3e91c5" class="">Bash like keys for the command line:</p><p id="7ef1a12c-34d8-468f-86be-9bacfb4539ec" class=""><code>cnoremap &lt;C-A&gt;		&lt;Home&gt;
+cnoremap &lt;C-E&gt;		&lt;End&gt;
+cnoremap &lt;C-K&gt;		&lt;C-U&gt;
+
+cnoremap &lt;C-P&gt; &lt;Up&gt;
+cnoremap &lt;C-N&gt; &lt;Down&gt;</code></p><p id="0db0bb60-da09-450c-ae68-fbabf70fc74c" class="">Write the file as sudo (works only on Unix). Super useful when you open a file and you don&#x27;t have permissions to save your changes. <a href="http://vim.wikia.com/wiki/Su-write">Vim tip</a>:</p><p id="ff5b0b85-636a-4a51-b744-9a7e0a61e59b" class=""><code>:W</code></p><h3 id="8417d87c-68d2-4f54-9c2f-98f399cd9044" class=""><strong>Plugin related mappings</strong></h3><p id="a24f906a-4f42-4a31-a155-20492fc9f1bb" class="">Open <a href="https://github.com/vim-scripts/bufexplorer.zip">bufexplorer</a> to see and manage the current buffers (<code>&lt;leader&gt;o</code>):</p><p id="df37e5c4-b78d-4d1d-8cd8-058b5f631972" class=""><code>map &lt;leader&gt;o :BufExplorer&lt;cr&gt;</code></p><p id="709ba729-57f3-4840-b4a5-12148dc57d92" class="">Open <a href="https://github.com/kien/ctrlp.vim">ctrlp.vim</a> plugin to quickly find a file or a buffer (<code>&lt;leader&gt;j</code> or <code>&lt;ctrl&gt;f</code>):</p><p id="2a53011b-f85c-4846-9325-1a7854ed0d8a" class=""><code>&quot; Quickly find and open a file in the CWD
+let g:ctrlp_map = &#x27;&lt;C-f&gt;&#x27;
+
+&quot; Quickly find and open a recently opened file
+map &lt;leader&gt;f :MRU&lt;CR&gt;
+
+&quot; Quickly find and open a buffer
+map &lt;leader&gt;b :CtrlPBuffer&lt;cr&gt;</code></p><p id="97751af0-2722-490b-bd67-2279d1352ca1" class=""><a href="https://github.com/scrooloose/nerdtree">NERD Tree</a> mappings:</p><p id="e5cad51b-b836-4f10-8f58-dc0df8099df3" class=""><code>map &lt;leader&gt;nn :NERDTreeToggle&lt;cr&gt;
+map &lt;leader&gt;nb :NERDTreeFromBookmark 
+map &lt;leader&gt;nf :NERDTreeFind&lt;cr&gt;</code></p><p id="5907b8f9-88c0-4eb5-b0bc-6069e77e7870" class=""><a href="https://github.com/junegunn/goyo.vim">goyo.vim</a> and <a href="https://github.com/amix/vim-zenroom2">vim-zenroom2</a> lets you only focus on one thing at a time. It removes all the distractions and centers the content. It has a special look when editing Markdown, reStructuredText and textfiles. It only has one mapping. (<code>&lt;leader&gt;z</code>)</p><p id="ac87499b-d6be-41b0-923d-fdef16712e87" class=""><code>map &lt;leader&gt;z :Goyo&lt;cr&gt;</code></p><p id="8696006d-e6e3-4726-8128-0575d989fb6a" class=""><a href="https://github.com/terryma/vim-multiple-cursors">vim-multiple-cursors</a> mappings to manage multiple cursors at once:</p><p id="ced076b7-9e04-4aca-ae1e-c83ddce8c4ce" class=""><code>let g:multi_cursor_start_word_key      = &#x27;&lt;C-s&gt;&#x27;
+let g:multi_cursor_select_all_word_key = &#x27;&lt;A-s&gt;&#x27;
+let g:multi_cursor_start_key           = &#x27;g&lt;C-s&gt;&#x27;
+let g:multi_cursor_select_all_key      = &#x27;g&lt;A-s&gt;&#x27;
+let g:multi_cursor_next_key            = &#x27;&lt;C-s&gt;&#x27;
+let g:multi_cursor_prev_key            = &#x27;&lt;C-p&gt;&#x27;
+let g:multi_cursor_skip_key            = &#x27;&lt;C-x&gt;&#x27;
+let g:multi_cursor_quit_key            = &#x27;&lt;Esc&gt;&#x27;</code></p><p id="c39dd32b-85dc-42c6-bfc9-cef03bc5a3be" class=""><a href="https://github.com/maxbrunsfeld/vim-yankstack">vim-yankstack</a> mappings to manage the kill-ring (clipboard):</p><p id="473a97f3-580c-4e7b-a433-b057d7697525" class=""><code>nmap &lt;C-p&gt; &lt;Plug&gt;yankstack_substitute_older_paste
+nmap &lt;C-n&gt; &lt;Plug&gt;yankstack_substitute_newer_paste</code></p><p id="c4deaf26-816b-4819-afda-22ef8ae3b955" class=""><a href="https://github.com/ctrlpvim/ctrlp.vim">ctrl-p</a> mappings to easily find and open a file, buffer, etc.:</p><p id="9546637c-345e-4ccb-b80e-2d9ac3f6bee2" class=""><code>let g:ctrlp_map = &#x27;&lt;C-f&gt;&#x27;
+map &lt;leader&gt;j :CtrlP&lt;cr&gt;
+map &lt;C-b&gt; :CtrlPBuffer&lt;cr&gt;</code></p><p id="5a7695c5-ab41-46d9-86a8-2f26a5613d83" class=""><a href="https://github.com/garbas/vim-snipmate">vim-snipmate</a> mappings to autocomplete via snippets:</p><p id="d45ca94b-3cea-42d2-b228-ed34c7bc5a24" class=""><code>ino &lt;C-j&gt; &lt;C-r&gt;=snipMate#TriggerSnippet()&lt;cr&gt;
+snor &lt;C-j&gt; &lt;esc&gt;i&lt;right&gt;&lt;C-r&gt;=snipMate#TriggerSnippet()&lt;cr&gt;</code></p><p id="74b46dcc-f7f9-4fd0-b1e6-0cc462118569" class=""><a href="https://github.com/tpope/vim-surround">vim-surround</a> mappings to easily surround a string with <code>_()</code> gettext annotation:</p><p id="f21458da-af26-4256-b756-a67c0cacaae6" class=""><code>vmap Si S(i_&lt;esc&gt;f)
+au FileType mako vmap Si S&quot;i${ _(&lt;esc&gt;2f&quot;a) }&lt;esc&gt;</code></p><p id="ee5afd3d-1c54-4ac7-b682-6ee97c5fb6ae" class=""><a href="https://github.com/dense-analysis/ale">ale</a> to easily go to the next Ale syntax/lint error:</p><p id="5a0d6e1b-1f8e-4a31-a198-d45733816fca" class=""><code>nmap &lt;silent&gt; &lt;leader&gt;a &lt;Plug&gt;(ale_next_wrap)</code></p><p id="cd1ae09f-ad62-4e08-95be-4397774fac6f" class=""><a href="https://github.com/nathanaelkane/vim-indent-guides">vim-indent-guides</a> the default mapping to toggle the plugin is (<code>&lt;leader&gt;ig</code>)</p><p id="57306094-56c1-4a52-a220-d23d33c1772e" class=""><code>You can also use the following commands inside Vim:
+:IndentGuidesEnable
+:IndentGuidesDisable
+:IndentGuidesToggle</code></p><h3 id="81cf3135-af14-41a0-bc8a-de2b843774e5" class=""><strong>Spell checking</strong></h3><p id="09a8390b-860c-44a7-9413-6a264e17e609" class="">Pressing <code>&lt;leader&gt;ss</code> will toggle spell checking:</p><p id="b2a67baa-ce69-4f2a-8304-e58ee9459bf7" class=""><code>map &lt;leader&gt;ss :setlocal spell!&lt;cr&gt;</code></p><p id="a809b62c-1197-4b17-8e91-2df88e69124f" class="">Shortcuts using <code>&lt;leader&gt;</code> instead of special characters:</p><p id="c2e566b6-3fce-4eba-ab5e-f34629c45c9c" class=""><code>map &lt;leader&gt;sn ]s
+map &lt;leader&gt;sp [s
+map &lt;leader&gt;sa zg
+map &lt;leader&gt;s? z=</code></p><h3 id="78854fc2-1e9f-42ed-9875-56f2ff692ab1" class=""><strong>Running Code</strong></h3><p id="cb7d2c87-0a61-4e0e-8e39-b5fb9dfccbb6" class="">To run code directly from vim, press <code>F5</code>. The currently open code will execute without you having to type anything.</p><p id="8400c731-ae8b-46cb-a5d7-531f26a5781c" class="">Can be used to execute code written in C, C++, Java, Python, Go, Octave, Bash scripts and HTML. To edit how you want your code to be executed, make changes in the file</p><p id="6a1b03b2-390a-4711-99a8-7666409ba9c4" class=""><code>~/vim_runtime/vimrcs/extended.vim</code></p><h3 id="5b8c279f-74cf-47c0-8a14-1a449b010762" class=""><strong>Cope</strong></h3><p id="663dc2c9-01bf-4634-86e7-4338d7585c07" class="">Query <code>:help cope</code> if you are unsure what cope is. It&#x27;s super useful!</p><p id="72609cf3-1817-4a7d-a513-362e693e85dd" class="">When you search with <code>Ack.vim</code>, display your results in cope by doing: <code>&lt;leader&gt;cc</code></p><p id="459237dc-fe8e-4182-805c-ee09bc6fb72e" class="">To go to the next search result do: <code>&lt;leader&gt;n</code></p><p id="6cfe240c-771d-453d-8b18-75bbe56be89f" class="">To go to the previous search results do: <code>&lt;leader&gt;p</code></p><p id="c973d6e3-8568-4a75-b1d3-9999b006ce30" class="">Cope mappings:</p><p id="664ccfdd-e18f-41e7-8baf-268fd0e86442" class=""><code>map &lt;leader&gt;cc :botright cope&lt;cr&gt;
+map &lt;leader&gt;co ggVGy:tabnew&lt;cr&gt;:set syntax=qf&lt;cr&gt;pgg
+map &lt;leader&gt;n :cn&lt;cr&gt;
+map &lt;leader&gt;p :cp&lt;cr&gt;</code></p><h2 id="c38a1ec7-7780-454e-b86d-0476a35a0a2f" class=""><strong>How to uninstall</strong></h2><p id="f8b64720-d8c9-401c-9a18-8acf0d8f2a3a" class="">Just do following:</p><ul id="190b3d33-f348-4a43-80a2-91e1cf3afeca" class="bulleted-list"><li style="list-style-type:disc">Remove <code>~/.vim_runtime</code></li></ul><ul id="586fd81c-e67f-4a9c-85f7-f107d00f7e12" class="bulleted-list"><li style="list-style-type:disc">Remove any lines that reference <code>.vim_runtime</code> in your <code>~/.vimrc</code></li></ul><h2 id="a2c510ec-0ff3-4f9c-b869-977ce3ae91fa" class=""><strong>Looking for a remote-first job?</strong></h2><p id="6499d1c4-8430-4aed-82e7-dafb30800e2f" class="">Maintaining this Vim configuration isn&#x27;t my day job. Daily I am the founder/CEO of</p><p id="d1da2ba1-4499-452b-a3bc-ec229d8ab84c" class=""><a href="https://doist.com/">Doist</a></p><p id="63836052-556d-4efc-a6f1-2165894c8e49" class="">. You could come and help us build the workplace of the future while living a balanced life (anywhere in the world</p><figure id="d8d66b82-f908-4d2b-8a47-ea3a22cc1dad" class="image"><a href="https://github.githubassets.com/images/icons/emoji/unicode/1f30d.png"><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f30d.png"/></a></figure><figure id="97341193-24f9-4124-9456-a6122a83f69f" class="image"><a href="https://github.githubassets.com/images/icons/emoji/unicode/1f30e.png"><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f30e.png"/></a></figure><figure id="9907f866-95ca-42fc-a135-e343632b5748" class="image"><a href="https://github.githubassets.com/images/icons/emoji/unicode/1f30f.png"><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f30f.png"/></a></figure><p id="30a87ff7-5ddd-429a-a0d9-6e22ac7fa68d" class="">).PS: Using Vim isn&#x27;t a requirement</p><figure id="01cc7d33-719d-4874-a714-1ad097223732" class="image"><a href="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png"><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png"/></a></figure></div></article></body></html>

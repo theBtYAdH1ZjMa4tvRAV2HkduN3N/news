@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Git 10 commands</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="51c5b12a-6821-47cd-8d48-ebff202e9d13" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📷</span></div><h1 class="page-title">Git 10 commands</h1></header><div class="page-body"><p id="7a795bf1-2a1f-4e40-8d04-35ca07ee0086" class="">Git is an important part of daily programming (especially if you&#x27;re working with a team) and is widely used in the software industry.</p><p id="7ea7c7e1-497d-484d-853a-7dbf886ad545" class="">Since there are many various commands you can use, mastering Git takes time. But some commands are used more frequently (some daily). So in this post, I will share and explain the 10 most used Git commands that every developer should know.</p><p id="bc4917ac-260c-47b8-b502-a16133a08da4" class=""><strong>Note: To understand this article, you need to know the basics of Git.</strong></p><h1 id="41a3b9f4-06ed-477c-bd1a-51a9f3f2c067" class=""><strong>1. Git clone</strong></h1><p id="87f20d46-f325-4122-9d20-7315f83b0487" class="">Git clone is a command for downloading existing source code from a remote repository (like Github, for example). In other words, Git clone basically makes an identical copy of the latest version of a project in a repository and saves it to your computer.</p><p id="4b4e8a91-4481-488b-9a8e-b9894de25b8e" class="">There are a couple of ways to download the source code, but mostly I prefer the <strong>clone with https</strong> way:</p><pre id="a6552575-a398-4185-9e4a-6f7976eb76c7" class="code code-wrap"><code>git clone &lt;https://name-of-the-repository-link&gt;</code></pre><p id="34a103c3-989f-4e8c-a9ca-e2ea61e45aa6" class="">For example, if we want to download a project from Github, all we need to do is click on the green button (clone or download), copy the URL in the box and paste it after the git clone command that I&#x27;ve shown right above.</p><figure id="cbe05d59-9d18-4e9a-b86d-3a13055a0cfd" class="image"><a href="https://www.freecodecamp.org/news/content/images/2020/01/resim-4.png"><img src="https://www.freecodecamp.org/news/content/images/2020/01/resim-4.png"/></a></figure><p id="7b913048-0114-48ce-8d9e-40dee88dbaa2" class=""><strong>Bootstrap source code example from Github</strong></p><p id="82183d4e-1027-4a1b-b652-dd7ed55882ac" class="">This will make a copy of the project to your local workspace so you can start working with it.</p><h1 id="1432a2a8-3314-4b41-8346-a473a6808f9e" class=""><strong>2. Git branch</strong></h1><p id="49e04f8b-4ab6-47c6-ac05-1bcc790ad76c" class="">Branches are highly important in the git world. By using branches, several developers are able to work in parallel on the same project simultaneously. We can use the git branch command for creating, listing and deleting branches.</p><p id="fa98fab3-524e-4492-8072-5bd32268e9cf" class=""><strong>Creating a new branch:</strong></p><pre id="fb41de70-2f8c-4f2a-8766-33cf531b192a" class="code code-wrap"><code>git branch &lt;branch-name&gt;</code></pre><p id="7ca77789-b534-4d17-919b-d96286a3b375" class="">This command will create a branch <strong>locally</strong>. To push the new branch into the remote repository, you need to use the following command:</p><pre id="40a1e463-b21a-472f-8d54-8d5032d4d351" class="code code-wrap"><code>git push -u &lt;remote&gt; &lt;branch-name&gt;</code></pre><p id="8ca11c54-db1a-4202-854c-2e1a28c13d1f" class=""><strong>Viewing branches:</strong></p><pre id="38da9821-0358-4a87-bb3b-b06ecbc981b7" class="code code-wrap"><code>git branch or git branch --list</code></pre><p id="fa94d2aa-8fd1-4355-b5ba-9183266da151" class=""><strong>Deleting a branch:</strong></p><pre id="cd19b8c1-2e8e-4c20-a607-c4611036ca79" class="code code-wrap"><code>git branch -d &lt;branch-name&gt;</code></pre><h1 id="3259a6e1-8a77-4e0f-b2f0-242cffe4b587" class=""><strong>3. Git checkout</strong></h1><p id="c4208e58-fce6-4592-848e-db491fbdc3cb" class="">This is also one of the most used Git commands. To work in a branch, first you need to switch to it. We use <strong>git checkout</strong> mostly for switching from one branch to another. We can also use it for checking out files and commits.</p><pre id="710b4199-ed54-4801-b387-b4d938bd914a" class="code code-wrap"><code>git checkout &lt;name-of-your-branch&gt;</code></pre><p id="a5bc9687-3c85-44ea-97c1-8b97a11a79d9" class="">There are some steps you need to follow for successfully switching between branches:</p><ul id="c88c3cce-9bc4-4f53-88b2-3d9000a5488d" class="bulleted-list"><li style="list-style-type:disc">The changes in your current branch must be committed or stashed before you switch</li></ul><ul id="c73c41aa-77b5-41d6-a97a-f61b6016a7ba" class="bulleted-list"><li style="list-style-type:disc">The branch you want to check out should exist in your local</li></ul><p id="41a0cb55-9606-46a4-a35d-4a7dc7b55a73" class=""><strong>There is also a shortcut command that allows you to create and switch to a branch at the same time:</strong></p><pre id="aab97de1-7011-4715-9e65-26ca7fa9a1d1" class="code code-wrap"><code>git checkout -b &lt;name-of-your-branch&gt;</code></pre><p id="0b0515d9-f0da-4cbf-a16f-027d8e7c52f3" class="">This command creates a new branch in your local (-b stands for branch) and checks the branch out to new right after it has been created.</p><h1 id="934e1b31-002c-4882-965e-0fcccf1cd249" class=""><strong>4. Git status</strong></h1><p id="7c5de031-773f-4a79-b1bf-785ba59c1391" class="">The Git status command gives us all the necessary information about the current branch.</p><pre id="c6eef8d6-ed16-4154-93cf-8a1a6462def1" class="code code-wrap"><code>git status</code></pre><p id="4e26345d-11f2-4c73-bf4a-1a8ab5f0407f" class="">We can gather information like:</p><ul id="3f3973ab-64d1-4ab6-8d36-ad06517362de" class="bulleted-list"><li style="list-style-type:disc">Whether the current branch is up to date</li></ul><ul id="db41a614-9339-47f1-848c-b8a3120b3190" class="bulleted-list"><li style="list-style-type:disc">Whether there is anything to commit, push or pull</li></ul><ul id="6982cabf-7afd-4142-ba42-d965637f1e99" class="bulleted-list"><li style="list-style-type:disc">Whether there are files staged, unstaged or untracked</li></ul><ul id="2b7d36e3-7f9e-4c96-93bb-14abd5ed47a3" class="bulleted-list"><li style="list-style-type:disc">Whether there are files created, modified or deleted</li></ul><figure id="54bb4dc6-fa40-42ca-a3d9-26b4fbf96b13" class="image"><a href="https://www.freecodecamp.org/news/content/images/2020/01/resim-5.png"><img src="https://www.freecodecamp.org/news/content/images/2020/01/resim-5.png"/></a></figure><p id="4f15cd2a-04bd-41b8-93ff-e72fb7fd180d" class=""><strong>Git status gives information about the branch &amp; files</strong></p><h1 id="a5de1ba2-afda-44cb-84fd-2e5bbc2cb0dc" class=""><strong>5. Git add</strong></h1><p id="129a3073-8462-40c7-94f3-244ae8b2714c" class="">When we create, modify or delete a file, these changes will happen in our local and won&#x27;t be included in the next commit (unless we change the configurations).</p><p id="b6a6be7b-8406-4b9f-b9b3-2043cf487fb9" class="">We need to use the git add command to include the changes of a file(s) into our next commit.</p><p id="55956e9b-33fa-409e-84a3-ee81e8f40bf4" class=""><strong>To add a single file:</strong></p><pre id="a93fa838-0349-4f58-a7b3-00d4ec45a57d" class="code code-wrap"><code>git add &lt;file&gt;</code></pre><p id="9756859e-1fb3-46c2-999f-6253f706156d" class=""><strong>To add everything at once:</strong></p><pre id="865f2602-38ee-4582-8dc6-f65390f4b964" class="code code-wrap"><code>git add -A</code></pre><p id="c007cbed-b6df-4ed3-b7fc-d426e79fd06d" class="">When you visit the screenshot above in the 4th section, you will see that there are file names that are red - this means that they&#x27;re unstaged files. The unstaged files won&#x27;t be included in your commits.</p><p id="bd0070d1-f877-4ce9-a1db-a8097eb34969" class=""><strong>To include them, we need to use git add:</strong></p><figure id="1c280d1c-847b-430b-bab5-08a6e8859cf0" class="image"><a href="https://www.freecodecamp.org/news/content/images/2020/01/resim-6.png"><img src="https://www.freecodecamp.org/news/content/images/2020/01/resim-6.png"/></a></figure><p id="a83b903d-7f83-4c8e-a853-f6b3eb180c67" class=""><strong>Files with green are now staged with git add</strong></p><p id="82b5a7e1-921c-43f8-afa2-f527a8ec67ae" class=""><strong>Important: The git add command doesn&#x27;t change the repository and the changes are not saved until we use git commit.</strong></p><h1 id="408a19a6-7e68-4c5d-ae01-0b9351ec8618" class=""><strong>6. Git commit</strong></h1><p id="2c41c5aa-7acb-40c1-a359-0b4dc56f54c6" class="">This is maybe the most-used command of Git. Once we reach a certain point in development, we want to save our changes (maybe after a specific task or issue).</p><p id="0eb1b2ca-a33b-4fe3-91cc-bd2854bf66a7" class="">Git commit is like setting a checkpoint in the development process which you can go back to later if needed.</p><p id="1cba71b4-cf9c-4ddc-82b6-271a436fe310" class="">We also need to write a short message to explain what we have developed or changed in the source code.</p><pre id="a7dd51d0-a557-4d36-b2fe-02c96c19b197" class="code code-wrap"><code>git commit -m &quot;commit message&quot;</code></pre><p id="1b130575-0c64-4fc7-9a5c-6f7056aec008" class=""><strong>Important: Git commit saves your changes only locally.</strong></p><h1 id="1e832cb6-251f-490d-bd7a-cfe440c673eb" class=""><strong>7. Git push</strong></h1><p id="216f69fb-859e-4384-abf4-56e1183d5a9d" class="">After committing your changes, the next thing you want to do is send your changes to the remote server. Git push uploads your commits to the remote repository.</p><pre id="9d402e84-c146-4056-bd53-ca220977a3a3" class="code code-wrap"><code>git push &lt;remote&gt; &lt;branch-name&gt;</code></pre><p id="69f7df50-959e-48e9-9407-3abd14b9afe3" class="">However, if your branch is newly created, then you also need to upload the branch with the following command:</p><pre id="3f778f9b-a42e-4241-9164-653e9bae6050" class="code code-wrap"><code>git push --set-upstream &lt;remote&gt; &lt;name-of-your-branch&gt;</code></pre><p id="aee4d8e3-e11f-407d-829a-44e25c25038b" class="">or</p><pre id="a9589090-fc2e-43d3-944e-3407f0a457a0" class="code code-wrap"><code>git push -u origin &lt;branch_name&gt;</code></pre><p id="d5593cc3-3719-456d-8ffd-59fe317e4da3" class=""><strong>Important: Git push only uploads changes that are committed.</strong></p><h1 id="16749259-53df-47f9-8ca8-813479762422" class=""><strong>8. Git pull</strong></h1><p id="e9fe20f0-cee8-423c-b610-76151b1efc3a" class="">The <strong>git pull </strong>command is used to get updates from the remote repo. This command is a combination of <strong>git fetch</strong> and <strong>git merge</strong> which means that, when we use git pull, it gets the updates from remote repository (git fetch) and immediately applies the latest changes in your local (git merge).</p><pre id="629b14bc-a099-4e4d-a4a2-451925506354" class="code code-wrap"><code>git pull &lt;remote&gt;</code></pre><p id="af94f30e-d28e-42f8-a9d2-6993652f252b" class=""><strong>This operation may cause conflicts that you need to solve manually.</strong></p><h1 id="90e45eeb-7866-4f0a-8ea6-14517947c277" class=""><strong>9. Git revert</strong></h1><p id="daf3ff8d-40f9-444c-82d9-19cc5e3f7301" class="">Sometimes we need to undo the changes that we&#x27;ve made. There are various ways to undo our changes locally or remotely (depends on what we need), but we must carefully use these commands to avoid unwanted deletions.</p><p id="befa99b8-ced4-431f-9b38-81f5f7c491eb" class="">A safer way that we can undo our commits is by using <strong>git revert</strong>. To see our commit history, first we need to use <strong>git log -- oneline:</strong></p><figure id="d845722b-59ac-4609-8072-08ff3f17c328" class="image"><a href="https://www.freecodecamp.org/news/content/images/2020/01/resim.png"><img src="https://www.freecodecamp.org/news/content/images/2020/01/resim.png"/></a></figure><p id="7d556b61-3309-4ab0-b346-ebc7407f23e5" class=""><strong>commit history of my master branch</strong></p><p id="c49288bf-fec9-41dd-834a-a9e3bfdfcb08" class="">Then we just need to specify the hash code next to our commit that we would like to undo:</p><pre id="c5db2687-e68c-48cd-a9b4-82634584a491" class="code code-wrap"><code>git revert 3321844</code></pre><p id="63b37dcc-0b90-4753-8a8c-e77ab702a30e" class="">After this, you will see a screen like below - just press <strong>shift + q</strong> to exit:</p><figure id="2cf360b8-f0ac-43ab-bac2-aa0e4b51c335" class="image"><a href="https://www.freecodecamp.org/news/content/images/2020/01/resim-2.png"><img src="https://www.freecodecamp.org/news/content/images/2020/01/resim-2.png"/></a></figure><p id="14fffa0f-4d7e-4675-9c3f-9d6713c43bb3" class="">The Git revert command will undo the given commit, but will create a new commit without deleting the older one:</p><figure id="dc92987b-10e8-4e88-a760-092446edc326" class="image"><a href="https://www.freecodecamp.org/news/content/images/2020/01/resim-3.png"><img src="https://www.freecodecamp.org/news/content/images/2020/01/resim-3.png"/></a></figure><p id="c4ee1212-223d-4b5a-bb8b-1ad058d14936" class=""><strong>new &quot;revert&quot; commit</strong></p><p id="7e8d336d-9d90-447f-abad-443664823aee" class="">The advantage of using <strong>git revert</strong> is that it doesn&#x27;t touch the commit history. This means that you can still see all of the commits in your history, even the reverted ones.</p><p id="fc6bee50-4151-40f8-b272-603e78caf4a3" class="">Another safety measure here is that everything happens in our local system unless we push them to the remote repo. That&#x27;s why git revert is safer to use and is the preferred way to undo our commits.</p><h1 id="be32ed06-9df6-47e2-8dce-ee564e214c02" class=""><strong>10. Git merge</strong></h1><p id="74648ce8-4a5a-415a-8a0f-3b7a6dbcadf0" class="">When you&#x27;ve completed development in your branch and everything works fine, the final step is merging the branch with the parent branch (dev or master). This is done with the <code>git merge</code> command.</p><p id="1d37d768-a6c6-4e00-b05b-a31e4528bba6" class="">Git merge basically integrates your feature branch with all of its commits back to the dev (or master) branch. It&#x27;s important to remember that you first need to be on the specific branch that you want to merge with your feature branch.</p><p id="97703cc3-8082-4dfe-acba-bc9796fdc213" class="">For example, when you want to merge your feature branch into the dev branch:</p><p id="c8cd52e6-5db6-49cf-be3e-b9512ccd0630" class=""><strong>First you should switch to the dev branch:</strong></p><pre id="f0b98b1a-16f4-4c32-b8e8-af056e39cd5e" class="code code-wrap"><code>git checkout dev</code></pre><p id="fc9244bf-6f6f-4fd3-bf8c-8110dc095db0" class=""><strong>Before merging, you should update your local dev branch:</strong></p><pre id="e5610131-6558-4751-9c12-ac06e45bf846" class="code code-wrap"><code>git fetch</code></pre><p id="b32f8d9a-31ca-442c-877b-20558e207664" class=""><strong>Finally, you can merge your feature branch into dev:</strong></p><pre id="fc71b264-1a46-4e0b-96a5-5ed1c3c55c7d" class="code code-wrap"><code>git merge &lt;branch-name&gt;</code></pre><p id="55391bd9-b809-4f17-b316-2af5175396c5" class=""><strong>Hint: Make sure your dev branch has the latest version before you merge your branches, otherwise you may face conflicts or other unwanted problems.</strong></p><p id="1883a2b2-ebd8-4228-8da8-7f68681fcf37" class="">So these are my 10 most-used git commands that I come across in my daily programming. There are many more things to learn about Git and I will explain them later in separate articles.</p><p id="133245fd-48a9-4071-a1ac-fed8b317b955" class=""><strong>If you want to learn more about web development, feel free to </strong><a href="https://www.youtube.com/channel/UC1EgYPCvKCXFn8HlpoJwY3Q"><strong>follow me on Youtube</strong></a><strong>!</strong></p><p id="77935dc3-0534-4add-81b2-499e59d664c7" class="">Thank you for reading!</p><p id="0e128cbd-4b49-4ada-b6b9-4e4932514074" class="">
+</p></div></article></body></html>

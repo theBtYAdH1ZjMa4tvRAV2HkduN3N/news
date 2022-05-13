@@ -1,0 +1,679 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Grep</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f0c9c45f-2bc5-4c34-84f8-49ce5c025396" class="page sans"><header><h1 class="page-title">Grep</h1></header><div class="page-body"><p id="80d6e335-956b-4374-990b-cf353b24e565" class="">
+</p><h1 id="7e2cf76a-dafe-4013-b22e-f78afbdaadb5" class="">or</h1><p id="31cf7f3c-ebf9-4773-bd74-70f0e3218bbf" class="">grep -E &quot;a|b&quot;
+grep &quot;a\|b&quot;
+grep -e a -e b</p><h1 id="ac64a97c-6bc6-418a-adb2-0c4367d95c70" class="">and</h1><p id="1a4c00a9-469d-43a9-8632-f92c335ea567" class="">grep -E &quot;a.*b&quot; # aeeeeeb
+grep &quot;a.*b&quot;</p><h1 id="151778ab-d3fe-406b-b2a0-db9f6daddf5d" class="">not</h1><p id="dc28bdb7-6f55-4bf3-a2f8-ef872ff02476" class="">grep -v &quot;a&quot;</p><h1 id="eba8f276-43b1-4378-9b8c-b6b7d53d0b6e" class="">find many file</h1><p id="930b3f80-0758-448a-990b-b7702517e90b" class="">grep network /etc/*.conf</p><h1 id="34c4c092-45c3-4af7-800a-ff383f3135a4" class="">show line number</h1><p id="42b9566b-977d-418d-a99d-ff102b50d9b9" class="">grep -n a</p><h1 id="fce4b033-7e35-4409-8643-0c9d14c3c2f6" class="">non care up case or low case</h1><p id="78094d29-0f55-4e96-86f8-11f9f02bb91b" class="">grep -i ABCD</p><h1 id="04a1acb1-7b46-4203-acb2-f6118d6c9ffb" class="">parse all file</h1><p id="772813f8-6f1a-4540-b5e5-eb719caf74fe" class="">grep -r AA  /etc/</p><h1 id="757e6d68-fef4-4ade-b187-90d1ed93e61c" class="">多顯示後一行</h1><p id="b5072a0a-7902-4753-8915-eaa645d42218" class="">grep -A 1 Ubuntu /etc/os-release</p><h1 id="28cbc18e-24a6-4bca-9f9c-2ff3b495bcb3" class="">多顯示前一行</h1><p id="6cb80129-7d97-4617-b0c3-ec5aa822147f" class="">grep -B 1 Ubuntu /etc/os-release</p><h1 id="d7080f07-e07b-4925-a2f0-63a18c3951d1" class="">多顯示前後各一行</h1><p id="62e4c1d6-cb6e-4af5-8d23-7a34a005e736" class="">grep -C 1 Ubuntu /etc/os-release</p><h1 id="7e406ed0-eb40-459a-8299-d8524e6a6267" class="">show color</h1><ul id="d79f5225-fc9f-432e-8262-a6a70a6affd8" class="bulleted-list"><li style="list-style-type:disc">-color=always</li></ul><h1 id="7f61a209-fd0c-4fe8-9d84-29e4291d4166" class="">a begin</h1><p id="ef793eb4-86c4-44ad-bdbd-2c698c792c60" class="">ls | grep &quot;^a&quot;</p><h1 id="85c53852-8c16-4c33-a315-2a7449031196" class="">b 結尾</h1><p id="c7d5e1a8-90e7-4f42-bd91-025c7b40590f" class="">ls | grep &quot;b$&quot;</p><h1 id="0aa36994-3296-4a78-b9a4-888a6efbd4e1" class="">a 或 b 開頭</h1><p id="a307f0c2-9680-46df-be26-027b9aff4144" class="">ls | grep &quot;^[ab]&quot;</p><h1 id="666f0067-85ae-4299-a805-27154d1824fa" class="">a 或 b 結尾</h1><p id="9ae17c76-35ec-48ac-85dd-e968a641e7d3" class="">ls | grep &quot;[ab]$&quot;</p><h1 id="357b1ce1-644d-49be-a9ce-23bb7bfbbd94" class="">a 開頭，接著 b 出現零次以上</h1><p id="4016a3d0-61d9-4942-a73f-7ec79c94d2d8" class="">ls | grep &quot;^ab*&quot;</p><h1 id="0e367f7d-5484-493e-9f31-ed06a50dc7e7" class="">a 開頭，接著 b 出現零次或一次</h1><p id="f47c4e67-14ef-449c-86d3-c20231a58c9f" class="">ls | grep &quot;^ab\?&quot;</p><h1 id="d7b9a1c6-b354-4eee-86e7-1df839ce23ad" class="">a 開頭，接著 b 出現一次以上</h1><p id="c2a2b891-427c-4ec9-b482-88b376ce145d" class="">ls | grep &quot;^ab\+&quot;</p><h1 id="25ac95eb-45ff-43c9-8fcd-57bc1fb79c3a" class="">含有 ab 或 cd</h1><p id="605cb083-eba4-49c4-a508-1d201657d372" class="">ls | grep &quot;ab\|cd&quot;</p><h1 id="e758e1eb-1410-42a2-9ac7-f9481df1ee84" class="">含有 ab 或 cd（另一種寫法，作用相同）</h1><p id="8339990d-4562-488f-abec-76e158ac536b" class="">ls | grep -E &quot;ab|cd&quot;</p><h1 id="1827c45f-5f3b-44b0-9edc-9c817e19de55" class="">含有 net 這個單字</h1><p id="b9d2aecc-7062-4756-8a9e-ca693516c73d" class="">ls | grep &quot;\&lt;net\&gt;&quot;
+像是 network 這樣的字眼就會被排除。</p><p id="9889f736-6149-4948-9a91-93feffa25c95" class="">
+</p><p id="681136c9-9d60-4f6f-a7c0-f5ca52d7727f" class="">
+</p><hr id="202ff28e-7ee5-4826-8b68-f9cfaa67e8b0"/><p id="5ec41545-c980-43c0-9ec7-6296a0b80194" class="">
+</p><p id="9add06f7-48b9-4097-9395-c508c57dd0cb" class="">grep -E &quot;FAIL|SUCCESS&quot;
+grep -E -A2 -B4 &quot;FAIL|SUCCESS&quot;</p><p id="8db2c27b-3c27-4a40-9b6e-af4108415210" class="">Linux Grep Tips – 搜尋有指定字串的列</p><p id="109b8246-07f0-449f-b99e-073219ec38fa" class="">在 Linux 裡面有時我們會需要從檔案中快速的搜尋帶有關鍵字的「列」，例如在看 log 時可能會想找出某個時間發生的錯誤，打開檔案一行行找實在不怎麼經濟實惠，這時你就會需要 grep 的幫助啦！</p><p id="e2e4a399-3ed4-4063-bad9-df8f18254689" class="">grep 不難學，他可以搭配指定的關鍵字，快速的將帶有該關鍵字的那列印出來，下面假設我想從 syslog 中找出所有帶有 CRON 的紀錄，提供幾種不同的寫法，可以因地制宜使用：</p><p id="2f35d528-e344-40b8-bb1b-d122c3fab288" class="">cat /var/log/syslog* | grep &quot;CRON&quot;</p><p id="77fadd15-9966-4e63-bac9-61a0cd606c10" class="">grep &quot;CRON&quot; /var/log/syslog*</p><p id="f8b33c0a-9ef0-418e-86ae-fd5100628d39" class="">grep &quot;CRON&quot; /var/log/syslog* &gt; result.txt</p><p id="ea2d4f64-f32f-41ea-9b6e-028c45a13762" class="">要注意，大小寫有差！</p><p id="f094da26-816c-485a-9d5b-892d893f8313" class="">但光是這樣還不夠，下面整理 grep 的各種技巧給大家
+關鍵字標出顏色</p><p id="e1c31b3c-dda9-4da5-8017-2405d19fa8f3" class="">預設 grep 找出的結果是沒有顏色的，但如果你希望他幫你用顏色標出關鍵字的話，可以用加上 –color 參數</p><p id="fba427e8-161b-4cc4-9cfc-1a9762656566" class="">grep &quot;CRON&quot; --color /var/log/syslog*</p><p id="2069d44b-5922-479f-ac9b-6f6967523f7b" class="">A or B 搜尋</p><p id="32fb896e-5ebe-4b42-9484-4b8736f41ec8" class="">如果想搜尋符合 A 或 B 的資料，不用分兩次執行，可以任選一種寫法：</p><p id="07948ffd-99af-4aa9-966a-60c254d79714" class="">grep -E &quot;A|B&quot; /var/log/syslog*</p><p id="7c0f2e28-1580-4f15-8e7a-19fd32f16e95" class="">grep -e &quot;A&quot; -e &quot;B&quot; /var/log/syslog*</p><p id="ccfd8828-fcac-4597-96b1-e3ffced358a8" class="">A and B 搜尋</p><p id="00c5be22-e842-4bff-8995-4a3ec74d3872" class="">如果你希望找到 A 和 B 都符合，例如字串中帶有 CRON 同時也有 apache 的紀錄，但不用串再一起，那你可以輸入：</p><p id="9ca40aa7-5c3d-46a7-86bf-180290e6374f" class="">grep &quot;CRON&quot; /var/log/syslog* | grep &quot;apache&quot;</p><p id="7c442884-aa70-4c45-879d-307c6130927c" class="">相同原理加以應用，可以有三個、四個甚至更多關鍵字，或是和 A or B 結合使用：</p><h1 id="72dadec7-24c4-44dc-b6a3-2e68ce7ddaa1" class="">CRON、apache、command 都要有才會被搜尋到</h1><p id="ec85c89d-e86b-4ccb-9f60-ca6c163c5eba" class="">grep &quot;CRON&quot; /var/log/syslog* | grep &quot;apache&quot; | grep &quot;command&quot;</p><h1 id="6e0b73d0-1d07-43ae-9e4a-aaff070c2b5b" class="">CRON+apache or CRON+backup</h1><p id="58e2ecf6-596f-48fd-8369-911c8062ab49" class="">grep &quot;CRON&quot; /var/log/syslog* | grep -E &quot;apache|backup&quot;</p><p id="b4f93467-a1d7-4502-ac67-5e4077e14711" class="">前後 N 行</p><p id="59097563-f423-4321-bdca-0daef9805448" class="">grep 預設只顯示搜尋到的那行資料，但有的時候我們可能會需要前後幾行資料來了解前因後果，這時可以用 -A 參數代表後 N 行，以及 -B 參數代表前 N 行：</p><h1 id="852a8627-e364-4365-bf4f-dcac944c2ae9" class="">前後各三行</h1><p id="4cd40842-1dd7-474b-b003-9988c40f4e40" class="">grep &quot;CRON&quot; -A3 -B3 /var/log/syslog*</p></div></article></body></html>

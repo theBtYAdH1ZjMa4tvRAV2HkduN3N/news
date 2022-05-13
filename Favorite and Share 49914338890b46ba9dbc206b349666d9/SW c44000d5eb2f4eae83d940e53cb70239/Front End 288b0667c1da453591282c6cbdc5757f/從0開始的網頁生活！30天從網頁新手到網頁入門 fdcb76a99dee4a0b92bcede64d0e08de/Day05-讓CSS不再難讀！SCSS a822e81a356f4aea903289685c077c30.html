@@ -1,0 +1,712 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Day05-讓CSS不再難讀！SCSS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a822e81a-356f-4aea-9032-89685c077c30" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎠</span></div><h1 class="page-title">Day05-讓CSS不再難讀！SCSS</h1></header><div class="page-body"><h1 id="01f20380-6904-4e81-8f89-cb2ad6c7c24f" class=""><strong>什麼是SCSS</strong></h1><p id="2150e6dc-0dab-42fa-9c4f-efaa64104919" class="">在開始介紹 <strong>SCSS</strong> 之前先來介紹一下 <a href="https://zh.wikipedia.org/wiki/Sass">SASS</a>，在前一篇的 <strong>CSS 選擇器</strong> 中相信大家寫久之後會有一個感想，每次都要寫一大串的選擇器真的是非常麻煩，有時候寫太快還會不小心寫錯，於是 <strong>SASS</strong> 就被創造出來了，而 <strong>SASS</strong> 的寫法有分為舊版的 <strong>縮排語法</strong> 以及新的 <strong>SCSS</strong> ，由於 <strong>SCSS</strong> 為 <strong>CSS</strong> 的超集合，此一特性不但讓 <strong>SCSS</strong> 能兼容全部的 <strong>CSS</strong> 語法也讓大多數的人都選擇寫 <strong>SCSS</strong> ，而且 <strong>Codepen</strong> 也有支援 <strong>SCSS</strong> 的寫法喔！只要在設定的地方選擇 <strong>CSS Preprocessor</strong> 就可以了。</p><figure id="7f9be589-7223-4d56-80c2-89ae5aa45bea" class="image"><a href="https://i.imgur.com/T7thS2W.jpg"><img src="https://i.imgur.com/T7thS2W.jpg"/></a></figure><h1 id="57739fc0-d682-4195-a607-dd20b2ff6489" class=""><strong>範例</strong></h1><p id="316e1262-d2f1-448e-a45d-d8506f58e43c" class="">在開始介紹下方的範例之前，筆者提供一個非常適合練習 <strong>SCSS</strong> 的<a href="https://www.sassmeister.com/">網站</a>，大家不妨可以到這個網站練習看看 <strong>SCSS</strong> 的語法。</p><ul id="3dadd84e-465e-423c-bcc7-a42b8df0e10e" class="bulleted-list"><li style="list-style-type:disc"><strong>變數與運算</strong><p id="d87e7458-994f-4113-965e-19eb84989302" class="">變數最大的好處在於只要改變變數的值就可以直接改變全部有用到此變數的內容，最常被拿來當變數的就是顏色了，有了變數宣告就不用一直複製顏色代碼了，而且也不用擔心未來修改顏色時可能會忘記修改到某些元素的顏色。</p><p id="2dc4989c-8928-41ab-8193-28525fd98906" class="">變數的宣告相當簡單，只要加個 <code>$</code> 而 <code>:</code> 後方接上變數的值即可，寫法跟 <strong>CSS</strong> 很像，如下圖。</p><figure id="d0fcd1ad-8eab-449d-9ec1-71a32f9ca994" class="image"><a href="https://i.imgur.com/9Uz35AJ.jpg"><img src="https://i.imgur.com/9Uz35AJ.jpg"/></a></figure><p id="0c44294b-5075-458b-bf61-e664569824c3" class="">宣告完之後只要在有需要引用此變數的地方寫上此變數的名稱即可，如下圖。</p><figure id="bc7f331d-9410-4acc-a017-c29bfefb734e" class="image"><a href="https://i.imgur.com/QYMh1SA.jpg"><img src="https://i.imgur.com/QYMh1SA.jpg"/></a></figure><p id="97271062-6159-4017-9ef9-441f7c806176" class="">既然都可以宣告變數了，當然也可以進行變數的四則運算，如下圖。</p><figure id="1c22c86e-d4dc-4355-8cf9-99cb27d05512" class="image"><a href="https://i.imgur.com/w7KWJLH.jpg"><img src="https://i.imgur.com/w7KWJLH.jpg"/></a></figure></li></ul><ul id="72700060-0592-44e8-b7b5-2da984300792" class="bulleted-list"><li style="list-style-type:disc"><strong>巢狀結構(Nesting)</strong><p id="9e940b1b-04bc-4b36-be78-f033cbd93de5" class="">寫 <strong>SCSS</strong> 最厲害的地方就在於他的巢狀結構了，有了巢狀結構就不用花一堆心力寫一堆選擇器了，大家不妨可以猜猜看以下程式碼轉換成 <strong>CSS</strong> 後會長成什麼樣式，這邊附上轉換後的<a href="https://www.sassmeister.com/gist/2320e8bb9dc70623df1e979b462caad7">解答</a>。</p><pre id="fa7dc03b-4821-4411-9ab9-cebde2adcfe4" class="code code-wrap"><code>.container {
+  display: block;
+
+  .box {
+    width: 50px;
+    height: 50px;
+  }
+
+  + .container2 {
+    display: inline-block;
+  }
+
+  &amp;:hover {
+    color: red;
+    cursor: pointer;
+  }
+}
+</code></pre><p id="287329f3-a66c-4768-9332-b4bddeec6d5a" class="">可以發現巢狀結構的解析就是一層一層往下累加選擇器的 <strong>class</strong> ，如果沒有指定選擇器則預設為 <strong>空白</strong> ，而 <code>&amp;:</code> 這個符號就是給 <strong>偽類別</strong> 以及 <strong>偽元素</strong> 使用，這種寫法讓選擇器不再那麼麻煩而且也變得直觀許多。</p></li></ul><ul id="55712a1c-99fa-4df6-bf68-e4e05be1117b" class="bulleted-list"><li style="list-style-type:disc"><strong>匯入其他SCSS檔案(@import)</strong><p id="59befe03-04d3-4a94-b9f5-b060ce519d87" class=""><strong>SCSS</strong> 的檔案是可以互相被引用的，只要寫上 <code>@import &#x27;file.scss&#x27;</code> 即可，引用的好處在於假如我有一個 <code>base.scss</code> 裡面就是定義一些基本的 <strong>style</strong> ，之後在寫其他的 <strong>SCSS</strong> 時就不用重新在寫一次基本的樣式。</p></li></ul><ul id="a54658a1-54bc-42b4-a5b1-4188a3ef46be" class="bulleted-list"><li style="list-style-type:disc"><strong>混合(@mixin)</strong><p id="47fce7dd-9989-493a-9538-1fa5bded57cb" class="">混合就如其名，就是要讓一個自訂的樣式可以融入指定的元素，概念有點像是變數但不一樣的是混合是要寫完整的樣式而非只有單純的值而已，也因此 <code>@mixin</code> 的樣式在轉換成 <strong>CSS</strong> 後是不會存在的，如果要引用混合所宣告的組合則需使用 <code>@include</code>，通常用於大量且基本的樣式以減少開發時的 <strong>CSS</strong> 程式碼， <code>@mixin</code> 寫法如下。</p><pre id="29764d6f-3512-4664-acbd-f0657d310bb3" class="code code-wrap"><code>@mixin block {
+  display: block;
+  width: 100px;
+  height: 100px;
+}
+
+.container {
+  @include block;
+}
+</code></pre><p id="5aceac40-0e02-4266-a59a-caf97ea75bc3" class="">轉換的結果可以參考<a href="https://www.sassmeister.com/gist/2d0dc30db2914e5fc99e818b396da577">這裡</a>。</p></li></ul><ul id="58096d54-2826-473c-a222-ef3d6ad2fe20" class="bulleted-list"><li style="list-style-type:disc"><strong>延展(@extend)</strong><p id="84845a92-8934-4d6c-88ef-f5b73f82b945" class="">延展的概念跟混合可以說是一模一樣，不一樣的地方在於 <code>@extend</code> 只能用在已存在的 <strong>class</strong> ，這邊用選擇器的觀念去思考的話可以把 <code>@extend</code> 想成逗號這個選擇器，所以轉換後樣式不但都會被保留而且都會共用一樣的樣式，這點就跟 <code>@mixin</code> 有著非常大的差別了， <code>@extend</code> 的寫法如下。</p><pre id="27ead404-9054-412e-ada6-2904c9c3cb7c" class="code code-wrap"><code>.container {
+  display: block;
+  width: 100px;
+  height: 100px;
+}
+
+.container2 {
+  @extend .container;
+  background-color: blue;
+}
+</code></pre><p id="2eb3f072-b377-4ccd-8c12-d3932211a974" class="">轉換後的結果可以參考<a href="https://www.sassmeister.com/gist/ad19036405e7b188bb8ad325af8e146c">這裡</a>。</p></li></ul><ul id="1f89fa9c-1df5-4153-b606-2e23b1a76faf" class="bulleted-list"><li style="list-style-type:disc"><strong>函式(@function)</strong><p id="efb4f428-f4b3-4164-b8c8-6bcc9b733895" class=""><strong>SCSS</strong> 也可以寫函式來進行簡單的運算，而且也具備一些基本的程式語法像是： <code>@if</code> 、 <code>@return</code> 、 <code>@for</code> 等等，而 <strong>SCSS</strong> 也內建了許多函式可以使用，詳細的函式庫可以參考這個<a href="http://sass-lang.com/documentation/Sass/Script/Functions.html">網站</a>， <code>@function</code> 的寫法如下。</p><pre id="b7cb9f0d-d762-4c49-af54-756e24007505" class="code code-wrap"><code>@function calc-margin($value) {
+  @return $value * 2;
+}
+
+.container {
+  margin: calc-margin(5);
+}
+</code></pre><p id="9f65155f-cad1-437c-ad95-43d2fa889e3b" class="">轉換後的結果可以參考<a href="https://www.sassmeister.com/gist/a6d18deb2a6a889ae6d1071ad1bd0ec4">這裡</a>。</p></li></ul><h1 id="d7da05aa-7e4f-493b-b824-42ad855d79b4" class=""><strong>總結</strong></h1><p id="655cbc4a-ccb8-40a0-a9db-980c1c917b55" class="">今天的<a href="https://codepen.io/Andy-Chen/pen/yRoyRO">範例</a>就來把昨天的範例改寫成 <strong>SCSS</strong> 的寫法吧！寫習慣 <strong>SCSS</strong> 後真的會回不去原本的 <strong>CSS</strong> 寫法，巢狀結構不但讓 <strong>CSS</strong> 的可讀性變更高同時也讓選擇器不再過於冗長，未來在寫 <strong>CSS</strong> 時不妨利用 <strong>SCSS</strong> 來增加開發速度吧！</p></div></article></body></html>

@@ -1,0 +1,690 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>VSCode - 好用插件 feat. 開發小技巧</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e7a6543a-2c85-44ee-8d9c-ba98388cb57f" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">☀️</span></div><h1 class="page-title">VSCode - 好用插件 feat. 開發小技巧</h1></header><div class="page-body"><p id="0a144eb5-b7e2-4403-be8e-da9473c8a3b5" class="">VSCode 吸引人的原因除了本身內建的功能相當多，VSCode 能夠安裝的插件也是又多又好用又方便呀～使用插件可以更有品質或是更快速的進行開發，前一篇為大家介紹的是內建的功能，內建功能包含的範圍是比較基礎的，而在規模更大或是更完整的開發上會需要使用的功能就更多元，根據選擇的技術或是專案的要求都會有所不同，而要滿足這些需求，就必須要了解有哪些實用的插件可以更有效率且更快速的輔助開發，這邊就來介紹幾個好用的插件吧！</p><h1 id="b2a8758f-bb25-4363-8576-e69668d88b9f" class=""><strong>VSCode 好用插件</strong></h1><h3 id="cd5c51c9-4772-4bc3-8d8e-74ddd905e057" class=""><strong>ESLint - 提升程式碼品質 ( 之後會有一篇介紹 ESLint 的文章 )</strong></h3><ul id="e1a81dba-c806-4f06-9b81-e2570b2752a1" class="bulleted-list"><li style="list-style-type:disc"><a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint</a></li></ul><h3 id="31f7c6db-5e5c-4837-b8ad-aa170e9246c6" class=""><strong>prettier - 格式化工具</strong></h3><ul id="4f41852b-15da-49bc-98ac-52fd03a489f7" class="bulleted-list"><li style="list-style-type:disc">快速格式化整個 Javascript 和 CSS 文檔</li></ul><ul id="3568e1f5-663e-4dca-9d8d-f066965e31e0" class="bulleted-list"><li style="list-style-type:disc"><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode</a></li></ul><ul id="2327e781-d231-4de1-aef2-6d04dcf17b0e" class="bulleted-list"><li style="list-style-type:disc">widows: ctrl + shift + F / mac: alt + shift + F 自動調整樣式</li></ul><h3 id="69771da8-e899-45aa-828f-a34afd5f53c9" class=""><strong>Live Sass Compiler</strong></h3><ul id="bb400504-93c5-4231-97c2-710560a92644" class="bulleted-list"><li style="list-style-type:disc"><a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.live-sass">https://marketplace.visualstudio.com/items?itemName=ritwickdey.live-sass</a></li></ul><ul id="c6d35848-fc49-4603-a1c0-ca80c5498625" class="bulleted-list"><li style="list-style-type:disc">點一下下方的 Watch Sass：</li></ul><figure id="d36cd124-2b5f-4124-bfce-138b187dcb9b" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181018/20111449nLFKQOxjUa.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181018/20111449nLFKQOxjUa.png"/></a></figure><p id="6c99c8c8-2668-4e18-bd78-e244c3c51444" class="">就會開始幫你編譯，接著檔案中就會多了 style.css 跟 style.css.map 囉！</p><figure id="602d9328-30c4-4a5f-8ba7-70b3e7839d36" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181018/20111449NLOIgSe7Yy.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181018/20111449NLOIgSe7Yy.png"/></a></figure><p id="317f9000-cd9f-470c-933b-12f46c3463ba" class="">在編譯的時候，如果有錯誤也會顯示提示，包含行數與錯誤的內容是什麼。</p><figure id="c86350b2-702f-4822-be25-5709f4b6e0d4" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181018/20111449Mg8RKDc1ow.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181018/20111449Mg8RKDc1ow.png"/></a></figure><p id="f598c3ad-052e-4c1b-a3b7-22831d57e90c" class="">有些人會希望產生的 css 檔案另外放在 css 的資料夾，這時候可以到 vscode 裡的工作區更改設定。Live Sass Compiler 更改設定的文件：<a href="https://github.com/ritwickdey/vscode-live-sass-compiler/blob/master/docs/settings.md">https://github.com/ritwickdey/vscode-live-sass-compiler/blob/master/docs/settings.md</a>將語法貼入工作區設定就可以了</p><pre id="e53da1f0-e126-4683-b6fc-b931df893037" class="code code-wrap"><code>&quot;liveSassCompile.settings.formats&quot;:[
+// This is Default.
+    {
+        &quot;format&quot;: &quot;expanded&quot;,
+        &quot;extensionName&quot;: &quot;.css&quot;,
+        &quot;savePath&quot;: &quot;/css&quot;
+    },
+// You can add more
+    {
+        &quot;format&quot;: &quot;compressed&quot;,
+        &quot;extensionName&quot;: &quot;.min.css&quot;,
+        &quot;savePath&quot;: &quot;/css&quot;
+    },
+]
+</code></pre><figure id="c76363cf-35a1-47af-93f4-c6e2db14a84a" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181018/20111449QEm9kj6N7u.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181018/20111449QEm9kj6N7u.png"/></a></figure><p id="631fda29-6426-41b8-9dd9-3bf34e78e072" class="">如果專案中有些外部載入的 scss 不想被編譯，也可以透過這種方式設定，內容就指定到不編譯的資料夾即可。</p><pre id="595f0345-bf4f-41ec-a56c-f0751d61799e" class="code code-wrap"><code>&quot;liveSassCompile.settings.excludeList&quot;: [
+        &quot;**/node_modules/**&quot;,
+        &quot;.vscode/**&quot;
+]
+</code></pre><h3 id="360d5ac9-7316-42e8-8fce-56043b0aaea3" class=""><strong>Live server</strong></h3><ul id="f1ff7ed5-ef24-4964-aa63-27defbca20cb" class="bulleted-list"><li style="list-style-type:disc"><a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer</a></li></ul><ul id="1e3b45cc-6d3b-4b2d-b2cd-2a26d4d477ae" class="bulleted-list"><li style="list-style-type:disc">點一下下方的 Go Live，就會開啟 server</li></ul><figure id="2aa1b3e2-f8f5-4005-8e42-79a54c4fbdac" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181018/20111449s0eweHVkCf.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181018/20111449s0eweHVkCf.png"/></a></figure><p id="882a3b72-74ee-451f-8cdc-2c87f185ee88" class="">開啟後會自動顯示網頁，在 VSCode 也可以看到是開啟哪一個 port，所以如果找不到或是不小心關掉它自動幫你開啟的網頁，只要在這個 Live server 沒有被關閉的情況之下，也可以直接在網址中輸入 localhost:5500/檔案名稱。</p><figure id="0fc44b54-9f75-4cda-b0db-c549c359a3cf" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181018/20111449CE8OlcXA3t.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181018/20111449CE8OlcXA3t.png"/></a></figure><p id="30ce175e-d8b4-44c4-9970-bafde733480b" class="">開啟 Live server 的畫面</p><figure id="6080a32e-4091-4b53-ac7d-6de0f39898b4" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181018/20111449WEfGYzGeWE.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181018/20111449WEfGYzGeWE.png"/></a></figure><h3 id="34be6550-f5a1-441d-b988-00775ef7714e" class=""><strong>GitLens</strong></h3><ul id="836982cd-384f-44d8-9acd-1ccaad780065" class="bulleted-list"><li style="list-style-type:disc"><a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens</a></li></ul><ul id="41b47675-128f-4a4f-bb79-b67dabdd218f" class="bulleted-list"><li style="list-style-type:disc">如下圖，安裝 GitLens 後，左方會出現 GitLens 的 icon，點一下就會出現這個檔案的所有 Git 紀錄：<ul id="728e182a-cf54-4a0c-a82f-1068549a3fb5" class="bulleted-list"><li style="list-style-type:circle">查看目前的專案變更的檔案以及歷史紀錄</li></ul><ul id="b440ac6a-d1b3-4196-9b74-6f14c6a1d6d7" class="bulleted-list"><li style="list-style-type:circle">Branchs：查看專案中有哪些分支，以及每個分支的歷史紀錄</li></ul><ul id="5e4e47d7-4ef0-4753-9b5c-fc5013770ade" class="bulleted-list"><li style="list-style-type:circle">Remotes：查看遠端協同的內容</li></ul><ul id="0819bd84-0002-489c-ae80-46395cdbc38a" class="bulleted-list"><li style="list-style-type:circle">Stashes：查看工作區被儲藏的內容</li></ul><ul id="35f4d5f6-e860-4ecf-9962-974a6d1d33e8" class="bulleted-list"><li style="list-style-type:circle">Tags：查看所有標籤紀錄，所有分支上新增過的標籤都可以看到</li></ul></li></ul><figure id="86267a18-a286-4406-ab0e-765c6fd0d37d" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181018/20111449DMxsAfMHHQ.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181018/20111449DMxsAfMHHQ.png"/></a></figure><p id="8df64d2e-83a9-4467-87f7-7e98b1cf4312" class="">安裝 GitLens 就可以在 VSCode 中直接查看這個檔案的所有 Git 紀錄，點一下 Remote 的 Commit 紀錄，也會顯示每一次的修改記錄與檔案比較。</p><h1 id="2d2ab149-d054-4155-8f66-076e8b74bd1d" class=""><strong>同場加映 &gt; 前端開發小技巧 - Emmet 常用語法大全</strong></h1><p id="bbf79bb9-4b12-4adb-b571-b19dcaea74be" class="">之所以特別介紹 Emmet 是因為使用 Emmet 可以加速開發，由系統自動產生標籤，一方面是可以減少手動輸入的時間，也可以避免輸入時的錯誤。先附上完整的文件：<a href="https://docs.emmet.io/cheat-sheet/">https://docs.emmet.io/cheat-sheet/</a>公式：</p><ol type="1" id="671b5586-3fd6-4d36-ad76-15637cd754a4" class="numbered-list" start="1"><li><code>! &gt; tab</code></li></ol><ol type="1" id="8deee196-b417-4848-aedb-7f682b53547c" class="numbered-list" start="2"><li><code>標籤名稱.class名稱*數量&gt;要包覆的標籤1+要包覆的標籤2</code></li></ol><p id="2d0e739b-b6c5-451b-8e31-1c6eda41ac8f" class="">例如：</p><pre id="b2781431-404c-44b5-9675-7ae6025f1962" class="code code-wrap"><code>div.test*2&gt;p+img</code></pre><p id="a129e988-53b9-47fa-b862-1d80ec798762" class="">然後按下 tab，很快速的就會生成一段所需的標籤：</p><figure id="8d2e4e13-0799-4208-9734-8910bebe8c58" class="image"><a href="https://ithelp.ithome.com.tw/upload/images/20181018/20111449QiRhUoxpE1.png"><img src="https://ithelp.ithome.com.tw/upload/images/20181018/20111449QiRhUoxpE1.png"/></a></figure><p id="854184c2-3d0b-49b7-8124-0234511cd596" class="">只要記住每個屬性所要加上的符號為何，就可以超快速的進行開發且不怕手誤！</p><p id="341b4061-b2ab-4f0e-a68b-1585d6f5b9f4" class="">要使用 Emmet 要特別注意，一開始開啟檔案時要先將檔案儲存為 HTML 檔案，也要注意編輯器的語言模式是不是有正確的讀取為 HTML，才可以正確啟用 Emmet。</p><p id="a2d33e5c-755e-4dcf-ad60-d7118e03f248" class="">有時後我們會利用 javascript 來新增 HTML 樣板至 HTML 檔案中，但 VSCode 的預設在 javascript 檔案中是無法使用 Emmet，因此我們要更改設定，在 VSCode 的 setting.json 中加上這一段，就可以在 javascript 檔案中使用 Emmet。</p><pre id="fea87c6a-f363-484b-9221-31422fbaeea6" class="code code-wrap"><code>&quot;emmet.includeLanguages&quot;: {
+  &quot;javascript&quot;: &quot;html&quot;
+}
+</code></pre><p id="698a4346-535f-45ea-823e-0cc815db0644" class="">VS Code 擁有很多的高質量插件，這讓它在編輯器界越來越受歡迎。使用這些插件可以讓專案開發變得質感更高速度也更快，除了上面介紹的插件以外，VSCode 還有非常多插件提供使用，大家還有推薦什麼插件呢？歡迎來分享！</p></div></article></body></html>

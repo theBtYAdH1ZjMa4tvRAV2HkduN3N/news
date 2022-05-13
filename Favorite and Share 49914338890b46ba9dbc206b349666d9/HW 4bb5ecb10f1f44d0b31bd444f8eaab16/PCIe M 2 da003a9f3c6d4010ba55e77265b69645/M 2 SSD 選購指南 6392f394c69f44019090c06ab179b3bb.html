@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>M.2 SSD 選購指南</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6392f394-c69f-4401-9090-c06ab179b3bb" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎼</span></div><h1 class="page-title">M.2 SSD 選購指南</h1></header><div class="page-body"><p id="cebf8319-cfba-4c6c-a316-aa0c0d483e17" class="">伴隨著固態硬碟的逐漸普及，以及初代 M.2 PCIe SSD 曾因價格定位到達甜蜜點，得以其高性能價格比而襲捲市場之故，傳統 SATA 介面於頻寬上逐漸顯露其捉襟見肘之態勢。在各種因素之交互作用之下，M.2 SSD 遂成為市場之新風潮。然而關於 M.2 SSD 其規格型式（至少有兩種主流介面型式，以及與其相關的兩種不同插槽類型，而其中一種插槽尚有三種不同之 介面/協定 相容性），卻成為令消費者困擾不已之難題。在此我們特別以專文來介紹 M.2 SSD 其規格與相容性之相關知識，如此讓消費者於採買時，可擁有更明確之選購資訊。</p><h3 id="4c545a3b-7af4-4b47-a528-09113113b3fe" class="">關於 M.2：不僅僅專屬於 SSD 之硬體規範</h3><p id="d492c7a4-7464-4d59-ac69-4c6a6e87d7cd" class="">M.2 原先被稱為 NGFF（Next Generation Form Factor，字面意義為次世代硬體規範）。而 NGFF 於其原生定義中，廣泛涵蓋了 PCIe、SATA 以及 USB 等硬體介面之各類裝置。亦即，一件原本為標準 PCIe 或 SATA 或 USB 介面之裝置，可依循 NGFF 之外型尺寸規範及腳位定義，來加以重行設計，以此化身為一 M.2 型式之同款裝置。</p><figure id="9c6be55b-242a-48e6-936f-98eb2cae1988" class="image"><a href="https://i.imgur.com/tPCqrS6.png"><img src="https://i.imgur.com/tPCqrS6.png"/></a></figure><p id="f98a4c7b-d373-4c7b-bf84-be036594d848" class="">此外，考量到 PCIe/SATA/USB 等不同介面之裝置，各自之腳位訊號與電氣特性皆存在著極大差異。M.2/NGFF 為此定義了多組的插槽防呆位置（或稱防呆鍵位，目前存在於實體產品之型式計有 A/B/E/M key），來避免不同硬體介面裝置因位腳座尺寸相近，而產生混插或誤插之情事，最後導致不正常運作或損壞之困擾。</p><figure id="b82076eb-01ba-43cf-b96e-207974dabb02" class="image"><a href="https://i.imgur.com/ZmLYaoj.png"><img src="https://i.imgur.com/ZmLYaoj.png"/></a></figure><p id="c953c08b-bef1-476e-8fad-98358c3895ed" class="">承上，由於原有 PCIe、SATA 或 USB 之裝置皆可以轉設計為 M.2 之型式，以此 M.2 其並非專屬於 SSD 之格式規範。其他諸如 Wi-Fi/Bluetooth、GPS 或 NFC 介面卡等，目前皆已有 M.2 格式之產品。而這些裝置原先多屬於 USB 介面，若依循 M.2/NGFF 之設計規範，其金手指防呆鍵位與 M.2 SSD 將會有著顯著之不同（彼等主要採用 A/E key）。整體而言，不同的金手指防呆位置，可讓消費者於安裝使用 M.2 裝置時，可獲得最低程度之依循法則。以實例來說，我們因為防呆鍵位的限制，而無法將 M.2 Wi-Fi 網卡硬塞到 M.2 SSD 的插槽之中。</p><p id="baaf8fc5-a10e-4ccd-8701-0ccb97d11791" class="">但僅憑防呆位置，仍不足以達成無痛安裝。比如同為 M.2 SSD 的各項產品，對消費者而言就存在著不少相容性之疑慮。為此，我們將針對 M.2 SSD 其硬體介面與傳輸協定上不同之處，來進行說明。此外，本文將進一步地整理出 M.2 插槽於不同設備（主機板、筆記型電腦，以及擴充介面卡）中之相容性分野，讓使用者可以透過歸納整理之結果，來獲得更多協助。</p><h3 id="bc2d00e5-c02b-494e-ac3c-1ceee27a6bfb" class="">M.2 SSD之兩種主要插槽類型：B key 及 M key</h3><p id="56b3d112-bb0c-45ac-8196-bd89a9433f9d" class="">目前普及在市的各類 3C 產品中，支援 M.2 SSD 之插槽共計有兩種類型：B key（另稱socket 2）以及 M key（另稱socket 3）。如下圖所示，B key 之防呆鍵位位於面對插槽方面之左方，M key 則偏於右方。不同類型之插槽其短邊接腳數量有所差異（B key 短邊為 6 pin，M key 為 5 pin），以此若使用者翻面插入時，將會有所阻礙。</p><figure id="6f0bb50d-ef03-48df-898c-a2233b8e76e1" class="image"><a href="https://i.imgur.com/B4kgWKJ.jpg"><img src="https://i.imgur.com/B4kgWKJ.jpg"/></a></figure><h3 id="d80289f8-07e9-4035-9d74-c949e03ef0bc" class="">M.2 SSD之兩種主要腳位型式：B+M key 及 M key</h3><p id="de64fc35-d8a5-44b3-8c31-bfde9e3e175a" class="">而令消費者困擾的第一道關卡是，對應以上插槽之 M.2 SSD，其腳位並非一個蘿蔔一個坑的 B key 與 M key，而是具有兩個防呆缺口的 B+M key 型式，以及僅有一個缺口的 M key 型式。</p><figure id="b9bdd740-bafd-4c5d-bd84-e80a4ae982e7" class="image"><a href="https://i.imgur.com/E6nlSGT.jpg"><img src="https://i.imgur.com/E6nlSGT.jpg"/></a></figure><p id="4bbd2d65-bbf6-463d-b682-3c445510097d" class="">以此，兩種插槽對應兩種腳位型式，共有四種排列組合。對於 B key 插槽而言，B+M key 之 SSD 可以順利插入，而 M key 腳位之 SSD 則無法順利安裝。</p><figure id="7f17f4d6-43f4-4083-95a3-ab45cd1b1308" class="image"><a href="https://i.imgur.com/ylCd9fw.jpg"><img src="https://i.imgur.com/ylCd9fw.jpg"/></a></figure><p id="7ec44340-30e2-4fd2-b272-4b9ab0cddc9d" class="">而在 M key 插槽之前提下，無論是 B+M key 或 M key 之 SSD，皆可順利安裝。但許多消費者此時會遭遇到第二道關卡：不是裝上去了就可以正常使用。也因為種種諸如硬體介面或通訊協定所造成不相容之遭遇，造就了 M.2 SSD 使用者之進場門檻，也使得不少初心者心存猶豫。</p><figure id="576533b5-9a06-4191-b23e-ee4ed46767a3" class="image"><a href="https://i.imgur.com/QOSTANY.jpg"><img src="https://i.imgur.com/QOSTANY.jpg"/></a></figure><h3 id="0fd80497-a76c-435c-9631-e52d499b87c9" class="">並非腳座相契合必然能夠相容運作</h3><p id="34474df2-4366-4852-9a00-566d684b8d9d" class="">造成 M.2 SSD 無法正常運作之第一層原因，在於「硬體介面」之不同。上文已說明了 M.2 可以涵蓋原本 PCIe、SATA 或 USB 之裝置，而 SSD 原本採用硬體介面的不同（PCIe 或 SATA），形成了 M.2 SSD 安裝後無法相容運作之主因。我們在此整理出市面上流通之 M.2 PCIe SSD 以及 M.2 SATA SSD，來加以歸納探討。</p><h3 id="198dce1b-c701-4ec0-94e7-8a2d3418a6f9" class="">M.2 PCIe SSD 之衍生問題：NVMe 與 AHCI 支援</h3><p id="9bee7dfc-66b2-4369-89f1-aa513c76ca8d" class="">有不少消費者在選購 PCIe/NVMe 之 SSD 之後，尚且會產生一衍生性之困擾：剛剛安裝好之 M.2 PCIe/NVMe SSD 雖可以正常動作，但僅能夠當作資料碟（俗稱之 D 碟），而無法安裝主開機磁區。此一無法開機之問題主要發生於第四代 Core™ 處理器（或更早期）之主機板之上。究其原因，是因為這些主機板之 BIOS 缺乏對於 NVMe 協定之支援，而這必須透過主機板製造商釋出內含 NVMe 模組之 BIOS 來加以克服 [8]。</p><p id="3cfb7032-2938-45f7-ae71-42ca129b6fcb" class="">而若消費者於四代主機板上安裝較舊規格之 PCIe/AHCI 之 M.2 SSD 時，則因主機板皆已支援 AHCI 協定，以此不會遭遇到無法做為系統碟之問題。此外，有部分廠商生產之 M.2 PCIe/NVMe SSD 自帶有 legacy option rom（如Plextor M8Pe系列），此自帶之 BIOS 亦可讓該產品於不支援 NVMe 之主機板上做為系統碟來使用。</p><p id="f5e2d0ab-5eb9-48a5-84e7-4d893aca32ed" class="">當然，若消費者所擁有之主機板為支援第六代以上 Core™ 處理器之晶片組，則其 BIOS 皆有包含 NVMe 模組，而不需要顧慮此一問題 [9]。</p><p id="47c98de4-e7f6-46aa-9472-e0aacc1fabb0" class="">註[8]：由網路上可尋求之經驗文件可知，使用者亦可以透過特殊工具程式來 DIY 內含 NVMe 模組之 BIOS。但此舉有其潛在風險，更新失敗可能會造成裝置故障並失去保固。</p><p id="fa602513-9192-4bb7-b26c-1536d58ee1ed" class="">註[9]：使用 NVMe 裝置作為主開機磁區時，主機板必須設定為 UEFI 開機，並關閉 legacy 開機模式。</p><h3 id="816c5c27-d421-45a7-802e-9f1c7fe58578" class="">過渡時期後迎接曙光</h3><p id="60bca057-e318-4086-9cb2-c340a37ddfe1" class="">誠然目前 M.2 在普及化階段因應舊有較慢速之規格，而讓消費者產生選購上之困擾。但伴隨著技術之世代更新（300系列晶片組主機板之問世，以及 PCIex4/NVMe SSD 形成主流化），許多特殊之例外規則將逐漸被留存於歷史之中。以此，可見於不久之未來，因裝置不相容而無法正常運作之困擾，將成為絕響。而目前持有前一世代設備之使用者們，亦可以參考以上列表歸納之建議，來選擇適用於自身設備之產品。</p></div></article></body></html>

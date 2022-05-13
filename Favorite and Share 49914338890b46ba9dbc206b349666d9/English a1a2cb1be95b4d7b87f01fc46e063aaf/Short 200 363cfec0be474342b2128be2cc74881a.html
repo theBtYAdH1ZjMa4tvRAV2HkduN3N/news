@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Short 200</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="363cfec0-be47-4342-b212-8be2cc74881a" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🗺️</span></div><h1 class="page-title">Short 200</h1></header><div class="page-body"><p id="07f46fea-6c57-4a88-a791-bbadaae1d74f" class="">
+</p><p id="fcba448a-64dd-4e1d-a745-82a496b784c0" class="">take your time 不急，慢慢來</p><p id="fb225cda-fbb8-4d40-a190-8b74e24107c4" class="">where were you 剛才我們聊到那裡</p><p id="15702faf-43af-4380-a65e-82e7d79f8156" class="">up to you 由你</p><p id="23bde60f-ccb0-4923-a3c9-87173180e02c" class="">knock it off 別再講了</p><p id="d6bf43a1-7fea-49e9-afdc-e187592563f0" class="">it`s my turn 輪到我了</p><p id="8693d63c-b9bb-4430-a11f-03f2ba08c1eb" class="">don`t make fun of me 別拿我開玩笑</p><p id="6be9c962-84f6-426c-bb03-0ea9bac0510e" class="">keep the change 不用找零了</p><p id="024a10a7-9b09-44fe-9e69-de98e99d43a5" class="">let`s get take out 我們叫外賣吧</p><p id="5a560967-41d6-4038-95e7-c9a7b0a1de5d" class="">in a nutshell 簡單來說</p><p id="3415a6f2-0460-4837-be94-a1a023203a07" class="">let`s get this straight 我們直說吧</p><p id="7c7a2862-5e81-43d7-960e-155f2cc5bd5f" class="">it`s your call 由你決定</p><p id="ea63dcbf-9e51-4831-9cdf-6eb659cbc92b" class="">leave me alone 別管我</p><p id="b23b7165-1c3f-4f23-957e-a3ae8bf0c642" class="">I don`s think so 我不這樣認為</p><p id="35d17d29-369d-4faf-9ee6-d33fc3950d04" class="">just in case 以防萬一</p><p id="de4d5297-e5bb-4bfb-a9a0-e38eb0e202e8" class="">one more thing 還有一件事</p><p id="78e22d21-538a-41de-9521-fd4be0b15295" class="">it`s a deal 一言為定</p><p id="a4046372-4ba4-438e-9ac8-063802f02a1e" class="">it`s on me 我請客</p><p id="d75733b0-bc18-4fa0-80b2-8168dc34930e" class="">I am all ears 洗耳恭聽</p><p id="1fe57b85-6086-4971-8a93-40ca08d1963d" class="">I`ll will be right back 我馬上回來</p><p id="be742f89-2779-4e87-a380-892447e2809a" class="">sure thing 當然</p><p id="60b7e0b0-3a78-494f-879b-37f06cefe4e5" class="">save it 省省吧</p><p id="c73cc58e-50ce-4547-a542-bc59786aff5a" class="">watch out 小心</p><p id="7a2117b8-5122-42bf-95e6-d4364bc97114" class="">hold still 別動</p><p id="7fbea555-8a32-45af-b177-53d4acfb4198" class="">get away from me 給我走開</p><p id="e5e0ec59-67c8-442b-b02a-2f87ea73ccc3" class="">I can`t take it anymore 我再也受不了了</p><p id="7b2140b5-14ad-4d4d-8554-5e90b66875ed" class="">stop following me 別再跟著我</p><p id="83ac5e85-5e78-4ff7-a84e-78cc0dc9167b" class="">your phone is ringing 你的電話響了</p><p id="b2a204e9-0052-47bf-b829-3d18e75b9cb3" class="">you`re waste your time 你在浪費時間</p><p id="414b2198-c970-43b5-9647-16cfa8bba7fb" class="">take a close look 你仔細看看</p><p id="eed91fbb-198f-4c42-a4be-51827c2408a9" class="">who knows 誰知道</p><p id="b85e8983-80a7-4e37-a063-37106b0746d7" class="">are you serious 你認真的？</p><p id="ee24a427-9975-48cb-8a49-3bd288ac8b3e" class="">will you cut it out 你別胡鬧了</p><p id="6e411fa0-c2a1-4185-a1dd-59c6e6a3c18b" class="">I gotta see 我倒要看看。。</p><p id="a7533903-23b9-4994-ae92-1da1f8ae34e8" class="">I`m so full 我吃太飽了</p><p id="08e2c9d4-caf2-49d4-b33d-a6a75132f6ae" class="">get everyone ready 大家準備好</p><p id="9135c7a2-c5ba-4e18-b744-1725832aa873" class="">it`s none of my business 這不關我的事</p><p id="47c0dd15-a1b9-488e-bad5-c88211b4bd6d" class="">you`re man of honor 你是個君子</p><p id="8b6c2428-7971-4e2e-a7bb-907225ff1b2d" class="">see you later 再見</p><p id="1c6c3534-4fb3-40cb-8d3a-d49ef18df426" class="">got you 逮到你了，上當了吧</p><p id="b0f5a369-527a-4956-a0cf-70535a4af61b" class="">I`ll do it 我來吧</p><p id="5b5fd100-2baf-48f4-9abf-cc052ae393b2" class="">is that so 是這樣嗎？</p><p id="8ffaad0c-0f18-4f2a-b5e7-994c10a4da2e" class="">take your pick 隨你挑</p><p id="7af0ee37-f153-4491-8bf0-fbb8e8236256" class="">let`s make a wish 許個願吧</p><p id="93fb68d9-602f-43f5-a173-09cfee991d6f" class="">who cares 誰會在意，我不在意</p><p id="fbc953c5-544a-4066-bc15-57c4610e8f73" class="">my apology 我道歉</p><p id="e262cdbe-f1a1-48e8-b0df-e155a6aa3c7b" class="">take care of yourself 你自己多保重</p><p id="01b082f1-fa97-4293-b26e-a4f9058c8ac7" class="">lead the way 帶路吧</p><p id="facece78-3960-44a4-bb30-024eb068d445" class="">god works 上帝的安排</p><p id="ee56ef9e-3af6-4af7-801e-5e2176cf8149" class="">fair enough 好吧</p><p id="43fbe865-700a-4348-9192-e6b590ef5ac0" class="">give me a break 讓我喘口氣吧</p><p id="d27812ca-a741-4cb1-81af-987b2b0ed9b3" class="">you are killing me 真是笑死我了</p><p id="44905998-2442-4d85-83ae-a1bf5024872a" class="">don`t take me wrong 別誤會我的意思</p><p id="86c5e5b6-a33e-4644-bebc-f0de6ac0b032" class="">will you stop it 別吵了行嗎</p><p id="08cca91d-2983-408a-ba73-8440fb9ca54c" class="">thanks for the advice 謝謝你的建議</p><p id="033bc21b-a1f0-415a-98dd-3dc4fe3e7549" class="">do that again 再做一次</p><p id="bea944a2-55b8-43bc-a337-80aa89e78d34" class="">I`m so touched 我好感動</p><p id="714aaad5-5bac-446b-ba81-9af8a3d6d268" class="">shut up 閉嘴</p><p id="2549d962-ad9a-4b78-b781-6fffed53aef8" class="">I`m starving 我餓壞了</p><p id="ddee6a3f-d5e9-4f19-81c5-e4055de176d3" class="">be quiet 安靜點</p><p id="045ffec9-82b1-45ef-8e41-580fa71721b7" class="">save your energy 省點力氣吧</p><p id="84ad9d10-7d51-4a9d-a3c3-bd20b61cfec7" class="">you`re scaring me 你嚇到我了</p><p id="004d6a31-cc15-419c-814c-5e7791e0e7a1" class="">what a fool 真是個傻瓜</p><p id="5a41e7d3-cf7c-4fa6-b3fa-0854e44296d9" class="">come on. move faster 快，動作快</p><p id="50102d56-5bb1-437a-ac97-d4b5895df759" class="">don`t go down easy 不要輕易屈服</p><p id="b2eb0da7-116b-4a27-b7c9-209ca03fda20" class="">what`s your problem 你到底是哪裡不對勁</p><p id="6dabe0c6-875f-488f-8100-9cbaa58622be" class="">write it down 把它寫下來</p><p id="e0798acd-0889-48e3-95dd-c5b306abf65a" class="">you`re kidding me 你別拿我開玩笑</p><p id="60c4a5c0-d491-4d70-83b4-018745d76627" class="">I don`t believe it 我不相信</p><p id="d4fa69f9-759e-4bec-84df-e1256fcf7ea4" class="">this way 這邊來</p><p id="27e31ef0-5cd1-4f97-a1e0-89c56af3a2da" class="">would you look at that 快看呀</p><p id="6a1300e0-bf94-424c-a0e6-e2352d49ad5e" class="">good job. keep practicing 做得好，接著練吧</p><p id="d0d818f5-4a82-49f0-8c14-dc6293b6ee58" class="">I can make it 我可以做得到</p><p id="ef30c319-7de9-4085-a374-3c03f7612591" class="">what do you think 你怎麼想</p><p id="92d6b425-bde3-44a1-97e1-8c9bb768310a" class="">stop daydreaming 別做白日夢</p><p id="9ab318ed-1863-42f0-806b-ae844ee56de4" class="">will you marry me 你願意嫁給我嗎</p><p id="893f26d4-b5d0-4931-a863-ec5e8d8892fc" class="">don`t try to fool me 別把我當傻子</p><p id="a6ae89e2-c602-4f84-9f9a-437257ab5bf2" class="">what`s going on 怎麼回事</p><p id="79538705-3043-46f1-aa50-eafa88e8f5af" class="">you set me up 你陷害我？</p><p id="ec84b4ad-3a5e-4349-8537-6ac058756093" class="">don`t worry 別擔心</p><p id="5ab28341-fe66-4b51-8b99-2841ed2e18af" class="">forget it 算了吧，忘了它</p><p id="2038bc56-ad7a-45d2-ae47-80bf0ba7275c" class="">I think as you do 我和你想的一樣</p><p id="72f433cc-be5b-4db7-8dcf-740503ba069d" class="">it was like a dream come true 簡直像夢成真了一樣</p><p id="5038f3b3-d103-4200-866d-bf92a9d02f64" class="">give me a chance 給我（一次）機會</p><p id="a31dfb23-38ac-48d0-8cb5-bdcd741612e2" class="">what are you doing 這是幹什麼？</p><p id="3c2a9991-d459-4acb-bb97-9696640312f3" class="">keep eye on him 盯住他</p><p id="26a5f08f-0962-4c1d-9bb3-344c80c5c915" class="">how dare you 你好大的膽子啊</p><p id="d6e24825-4586-44cf-8c75-26bfc9011e38" class="">what do you say 你說呢？</p><p id="8bc30c1b-3925-4795-9313-dfe0e52bc59b" class="">don`t bother me 不要煩我</p><p id="6047090c-2d22-4bfe-b25a-ef5fd26de023" class="">it`s not your business 不關你的事</p><p id="4534b513-1538-4b58-a30e-89907346b43f" class="">no way 不可能</p><p id="59a07c0a-70ff-4d2b-8c67-5ef8ee098506" class="">I owe you once 我欠你一次</p><p id="3c6776c4-2e09-4097-bf4f-dfa246d85cef" class="">hands off 手拿開</p><p id="2295641c-73e3-4c7a-b877-0dfbf6a3da45" class="">put your hands up 舉起你的手</p><p id="e597a1b3-adbe-4400-bf58-af3d6ff85ad4" class="">don`t listen to him 別聽他的</p><p id="542c07d2-85fd-4e1b-b89d-0aabb35fe74e" class="">this doesn`t sound like you 這一點都不像你</p><p id="59244254-2391-442f-9b90-429fd368b929" class="">stop flirting with me 別跟我調情</p><p id="aaaaff1b-f224-46fe-84db-100d188eba6c" class="">I`m begging you 我求你了</p><p id="dc0ef5fe-ca37-440b-9d4c-552b86fc3f98" class="">I watch my money 我視財如命</p><p id="807e7a28-ad38-47b6-a0cb-92f83315ce28" class="">easy now. easy does it. 放輕鬆 慢慢來</p><p id="36d9f676-f39c-45b4-8b48-dc20a1845a0e" class="">you bet 一定 當然</p><p id="df9ef478-5667-4fdf-940e-16e07b85759f" class="">I am on my way 我在路上了</p><p id="3f51c314-aab2-48b4-a97f-06d02adf87f6" class="">I can`t believe it 我不敢相信</p><p id="4e1e614c-8433-482e-b3ad-193d8cb04863" class="">I can`t wait 我等不及了</p><p id="5fcdf681-4a97-452f-b15e-886839f6440a" class="">I don`t think so 我不這麼認為</p><p id="74d094a2-f80a-4b42-b03a-0b3c42e5ef62" class="">I feel much better 我感覺好多了</p><p id="b0a269d2-88e3-4aff-8afc-d07f02ad09dc" class="">I hopes so 但願如此</p><p id="bfa20847-2195-4c64-9ea3-1c5ebd47b9d2" class="">I noticed that 我注意到了</p><p id="c35674ef-2883-4e9c-825d-2df52cc15167" class="">the triumphant return 凱旋歸來了</p><p id="61e10172-1f6f-4e5b-a795-f57a1d33d3e8" class="">I want to speak with him 我想跟他談談</p><p id="4a0f4a75-e544-41dd-9e9a-ce6548c3651c" class="">I won 我贏了</p><p id="eb6d23bf-1fde-422b-94b3-198fcda4a8ed" class="">I`ll miss you 我會想你的</p><p id="e7c0978a-1ccd-4458-b287-8d498c1aae73" class="">I`ll try 我試試</p><p id="24ecd566-f7b8-43f4-b825-28304c579eb7" class="">I`m bored 我很無聊</p><p id="f9773ae4-86a6-42c7-b4f4-639bc26164e6" class="">I`m having fun 我玩得很開心</p><p id="415a8470-1672-4311-8405-b454c52884d5" class="">I`m used to it 我習慣了</p><p id="79b7d39e-29c6-45b4-be6e-4fd5019ddd2a" class="">I`ve had it 我受夠了</p><p id="4a2ead33-f6ce-41d9-a13a-aade5b5e2658" class="">I`m busy 我很忙</p><p id="ef4235cb-777b-4e13-9e9e-8809dfc43b68" class="">Is it far 很遠嗎？</p><p id="62602b93-6414-4441-aee1-73ea15cc66ff" class="">it doesn`t matter 沒關係</p><p id="3b849c6b-9857-4a65-afee-7a2588ddba98" class="">it smells good 聞起來很好</p><p id="219aa483-9671-4a90-9cf8-2f0ef40f13d7" class="">it`s about time 時間差不多了</p><p id="fa33e17d-f8b3-46b2-8d05-b7c63469afde" class="">it`s all right 沒關係</p><p id="59b4cba4-d853-426b-9c75-eda1a029d9c5" class="">it`s incredible 真是難以置信</p><p id="41fb8cb9-f6df-4515-9429-3348d2f9e578" class="">it`s nothing 小事情</p><p id="69436c3e-f9c0-43b9-8b7e-346c0ef11c88" class="">it`s near here 就在附近</p><p id="c6f50531-c705-4e64-a307-03edb408ec4f" class="">it`s time to go 該走了</p><p id="adf48d70-d3d7-4f0f-9cf5-9c3d69876873" class="">i`ve got it 我明白了</p><p id="0293566d-83cf-43f2-998b-dc8a6ae3ac44" class="">it`s not a big deal 沒午麼大不了的</p><p id="59a4f418-2e26-4ec6-854a-6617b68c43dc" class="">absolutely not 絕對不行</p><p id="248f14a7-da17-49ef-9cce-7922c1d99b51" class="">are you coming with me 你要一起來嗎？</p><p id="323813a0-978e-41a2-a342-bb85a571a24e" class="">are you sure 你確定嗎？</p><p id="bca1c66d-eabc-4ba5-bff2-9cae1a234db1" class="">as soon as possible 儘快</p><p id="e00b1f2d-525c-4ed9-9688-92ae043e025a" class="">believe me 相信我</p><p id="63c01ade-4a4f-4c92-805c-ed1541966779" class="">call me tomorrow 明天打電話給我</p><p id="1858e615-1973-4d30-9740-000bfdcb62f0" class="">can yo speak slowly 你能說慢點嗎</p><p id="7767e837-5144-4fc2-b497-893e1bb525e7" class="">come with me 跟我來</p><p id="55f20e16-3bb0-4e89-a4dd-3b8f6609ca73" class="">congratulations 恭喜</p><p id="38c0d70a-4f0d-4eee-8577-3ef9c3b2a781" class="">do it right 把它做好</p><p id="be4e99d8-efc4-4fdc-b2df-98ea921347ac" class="">do you mean it 你當真嗎？</p><p id="27d96488-8dae-44f5-a448-9926a591a20d" class="">do you want it 你想要嗎？</p><p id="7200315e-c2ed-4cfa-a7a4-7226bc8d6f35" class="">don`t do it 不要這樣做</p><p id="d4601408-1350-47e3-a09d-5ab29e5ae45c" class="">please don`t exaggerate 請不要誇大其辭</p><p id="078436c7-5c5c-4dcc-8d6c-74261c6762f6" class="">give me a hand 幫我一下</p><p id="0a5145e9-44b7-4c4a-ace5-e3112a47b516" class="">go ahead 去做吧</p><p id="b7277a84-873c-4897-a1be-91815c1b2cf6" class="">go right ahead 一直往前走</p><p id="f69a0439-d34f-4569-b574-87c3e350b4b8" class="">have a good trip 祝旅途愉快</p><p id="2ba6639e-0d19-4ed3-a14c-70907778f0b3" class="">have a nice day 有愉快的一天</p><p id="9a8888a5-fe20-4463-963e-87953adfeb95" class="">have you finished 你完成了嗎？</p><p id="ff2f15f1-defd-49df-9874-c3a5a9933ae6" class="">he doesn`t have time 他沒空</p><p id="3cf0ed59-c17a-48f4-a128-4b7408b00176" class="">how long are you staying 你會停留多久</p><p id="605ff8f5-2736-4299-8e95-b5e52d8cf45f" class="">I am crezy about her 我為她瘋狂</p><p id="93fae4a0-31a1-4cf1-b2f8-580975ea4bcc" class="">I can make it 我能</p><p id="7bac2428-b803-444b-915b-b573a82ac7e8" class="">I don`t have time 我沒時間了</p><p id="e5dc8c2d-d274-42b5-a2e3-47ed28bd9a81" class="">I`m in a hurry 我在趕時間</p><p id="a1677a68-b842-4b48-9aa9-b113ef06465c" class="">I knew it 我就知道</p><p id="943e53e1-0d19-48c4-9e54-4fc3c9e2a8d2" class="">I found it 我找到了</p><p id="1a38d7b8-e7f3-4829-94e0-d08f29344c92" class="">I`m ready 我準備好了</p><p id="ba4d520e-d37d-4a40-9f3f-91a556651478" class="">I am dead tired 我累死了</p><p id="17b6feae-abd4-4347-9794-b340c2426000" class="">I`ll get you 我會抓到你的</p><p id="d0e999fb-7c85-43b0-b003-9d1ce39d81f6" class="">it`s different 那是不一樣的</p><p id="8874b08c-5bd9-45b7-a8de-adb008538779" class="">it`s funny 有趣</p><p id="def64429-e2a9-4dfd-8fd2-62cf3a7ae3c6" class="">it`s impossible 這是不可能的</p><p id="3996b089-6fc1-40fe-92f9-bd2406a361e8" class="">It`s not bad 還不錯</p><p id="c6ceabb1-642b-4e20-97c4-2229bf709976" class="">it`s not difficult 這並不難</p><p id="5ecce1ed-b23b-42a1-962e-36a4b6557372" class="">it`s not worth it 不值得</p><p id="d0d3b342-511b-495a-b1ac-930b6ffc562c" class="">it` obvious 顯而易見的</p><p id="8125514b-bdaf-4454-9d9d-683ab4cab840" class="">it`s your turn 輪到你了</p><p id="775b9537-80b1-43c5-b23f-381ab3124152" class="">let me know 告訴我</p><p id="653aa32b-b6f2-4d1c-8435-7c8917232459" class="">let me think about it 讓我想想</p><p id="f857e5fe-2ab3-44ee-9dba-156212c2e3b2" class="">me too 我也是</p><p id="69d2bb58-dfd8-4c63-aec5-aa191e987a21" class="">not yet 還沒有</p><p id="fc2e8362-d9f8-4283-84cc-31bba4985192" class="">see you tomorrow 明天見</p><p id="c7e6d6c4-8d78-40b6-b8c0-c375f75e9f55" class="">show me 給我看看</p><p id="24025894-b49c-46a4-9e08-8aa96785c1fb" class="">tell me 告訴我</p><p id="02eb9e9d-385f-4c02-a0ca-b158ec17db62" class="">that happens 是會有這樣發生</p><p id="9e545ef4-f48d-41ea-848d-b841150e5378" class="">that`s enough 夠了</p><p id="1a17b27c-f937-427f-8699-3aad93ba3502" class="">thats interesting 真有趣</p><p id="85649e8e-0dfe-4a9d-85a9-55f3006bfe89" class="">that`s right 說得對</p><p id="284e36ca-1bf0-43a8-9d54-0bc184842a28" class="">that`s true 那倒是真的</p><p id="b0d8c9a7-2902-4c5e-8625-25b15502a3ca" class="">wait for me 等等我</p><p id="71593f57-e714-448a-bec0-c6dcc9ac860b" class="">we have a problem 我們有麻煩了</p><p id="49e8f8ed-5b4a-42c0-b398-4527e75c117f" class="">what did you say 你剛才說什麼</p><p id="bd55f51f-97dd-4d54-a373-817f83672aaf" class="">what do you think 你覺得如何？</p><p id="f65d2b82-76de-4982-9886-bc0eed7a80fe" class="">what are you talking about 你在說什麼</p><p id="20070be1-1d73-41dc-9923-6762370be351" class="">what`s wrong with you 你是那裡不對勁</p><p id="5c853be2-d254-4d50-8def-596a42e9a3e0" class="">where are you going 你要去那裡</p><p id="9837a94e-d6ae-4cc5-b8b0-89c310c3e377" class="">where is he 他在那裡</p><p id="64958701-6147-46df-92af-777880d8d028" class="">you surprise me 你讓我大吃一驚</p><p id="d3f3d139-9dc0-48cf-97fd-3c76f8d38ebf" class="">you scaring me 你嚇到我了</p><p id="4dac44cc-b088-4ddd-bb5f-a552e408f6fa" class="">you look tired 你看起來很累了</p><p id="54fd3dac-3548-4017-bb98-2aa95fe1e446" class="">you`re always right 你總是對的</p><p id="6186fe56-912a-42b6-bbd0-a9b28f2bbf61" class="">you`re lying 你說謊</p><p id="24e61d5a-3eca-4e99-9edf-ef31a6ec7cdc" class="">you`re welcome 不客氣</p><p id="f5884b11-da99-4747-ba86-49f6fd1f26e8" class="">my pleasure 我的榮幸 ， 不用客氣</p><p id="4f802042-0e76-4eb0-af16-5b2ac1346028" class="">don`t mention it 不用客氣</p><p id="e3cfab1b-ac23-4933-81e8-0804bebbd037" class="">I am proud of you 我為你感到驕傲</p><p id="fee94fb9-0b84-4e72-8536-27732cfbea41" class="">have fun 玩得開心</p><p id="c322d03a-894b-4648-b057-8a43cb34f0f7" class="">it doesn`t make sense to me 我無法理解</p><p id="dd9538a6-3cfa-47a0-ac60-ab740875d6b5" class="">you are wasting my time 你在浪費我時間</p><p id="41cd5fe7-d6db-4916-a140-a20a1539d340" class="">I`m going to go 我這就去</p><p id="1945989c-ebb7-4a36-9a1f-0e1e0dad41be" class="">take your time 慢慢來</p></div></article></body></html>

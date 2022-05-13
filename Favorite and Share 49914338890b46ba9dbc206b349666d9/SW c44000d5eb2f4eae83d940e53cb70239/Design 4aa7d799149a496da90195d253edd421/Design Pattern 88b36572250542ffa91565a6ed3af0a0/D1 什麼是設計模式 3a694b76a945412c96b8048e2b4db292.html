@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>D1 什麼是設計模式</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3a694b76-a945-412c-96b8-048e2b4db292" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🌃</span></div><h1 class="page-title">D1 <strong>什麼是設計模式</strong></h1></header><div class="page-body"><p id="8975bf64-c426-42ab-99cf-d3dd69175c18" class=""><a href="https://ithelp.ithome.com.tw/articles/10201706">https://ithelp.ithome.com.tw/articles/10201706</a></p><h3 id="43ba3f62-73ac-49d5-acbf-066bf2ffa0e9" class=""><strong>什麼是設計模式</strong></h3><blockquote id="bf9ef6b3-8541-42ef-b3c0-d50e6ac8c36d" class="">在軟體工程中，設計模式（design pattern）是對軟體設計中普遍存在（反覆出現）的各種問題，所提出的解決方案。這個術語是由埃里希·伽瑪（Erich Gamma）等人在1990年代從建築設計領域引入到電腦科學的。設計模式並不直接用來完成程式碼的編寫，而是描述在各種不同情況下，要怎麼解決問題的一種方案。物件導向設計模式通常以類別或物件來描述其中的關係和相互作用，但不涉及用來完成應用程式的特定類別或物件。設計模式能使不穩定依賴於相對穩定、具體依賴於相對抽象，避免會引起麻煩的緊耦合，以增強軟體設計面對並適應變化的能力。並非所有的軟體模式都是設計模式，設計模式特指軟體「設計」層次上的問題。還有其他非設計模式的模式，如架構模式。同時，演算法不能算是一種設計模式，因為演算法主要是用來解決計算上的問題，而非設計上的問題。-- by wikipedia 設計模式 (電腦)</blockquote><p id="7b659f75-7b81-444e-86b5-5b9a8146fa83" class="">上面這段文章摘錄是wikipedia對於設計模式的說明。</p><p id="eedebb4d-62eb-4d5f-b26a-0d56e2ac4cad" class="">接下來的30天會針對設計模式做各個pattern的介紹和實作，分享自己有關於設計模式的理解，並且期望在熟悉之後對於整個軟體設計的過程，和程式碼的邏輯有一個通盤性的了解，期望未來在接觸到相似的軟體架構或是程式碼時，可以快速的理解別人編寫程式碼的概念。</p><p id="1391bc38-dc68-4f85-ae0a-3217f932da9f" class="">除了閱讀別人的程式碼、函式庫外，期望未來在軟體設計上，有一個可以依據的程式架構概念，讓自己所撰寫的程式碼容易閱讀，並且可以簡單的修改擴充，另外對於軟體架構上有更近一步的理解，而一步一步的提升自己抽象化程式碼的能力，也就是提升自己對於程式設計、系統設計、架構設計的觀念，和程式思維的訓練。</p><h3 id="a9fb998c-dde7-4005-ad7b-e60b8424bfd1" class=""><strong>文章摘錄</strong></h3><p id="9fd7e0b7-9c41-4a63-ab8e-3b7ced5ff2e7" class="">其中各個模式的實作會以Java來實現。</p><p id="1089cf69-88d4-45a5-ad12-518aa3bfd066" class="">設計模式一共分為下面三種：</p><h3 id="8f0c1b12-07f3-41c4-a133-3b552e572103" class=""><strong>建立型模式</strong></h3><ul id="545d2d20-9567-4be3-b328-33cf7488b090" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10202075">[ Day 2 ] 初探設計模式 - 工廠方法模式 (Factory Method Pattern)</a></li></ul><ul id="db8b396b-1e9d-428b-aee3-99e16315f900" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10203092">[ Day 5 ] 初探設計模式 - 單例模式 (Singleton)</a></li></ul><ul id="386ac22f-7698-43ec-b80b-50a648cfd122" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10204732">[ Day 10 ] 隨著自己想要的客製化 - 建造者模式 ( Builder Pattern)</a></li></ul><ul id="def422b5-3aea-464d-b928-a7cd83b26e0b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10205989">[ Day 14 ] 設定一次一勞永逸～原形模式 ( Prototype Pattern )</a></li></ul><ul id="38817cc1-9490-4dba-86a7-2e9e6a982944" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10208955">[ Day 26 ] 做好自己會做的就好啦 ～抽象工廠模式 ( Abstract Factory )</a></li></ul><ul id="df1247db-0c1b-451f-8617-371ec87d8b57" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10209153">[ Day 27 ] 初探設計模式 - 建立型模式</a></li></ul><h3 id="99947ea7-68f8-4140-9a2c-d3386b3db75a" class=""><strong>結構型模式</strong></h3><ul id="0fc698d7-504f-41ff-898a-f9e0983af4b5" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10203738">[ Day 7 ] 初探設計模式 - 裝飾模式(Decorator)</a></li></ul><ul id="97359f79-619d-4e28-9508-5b92a40c7b4e" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10205321">[ Day 12 ] 隨心所欲地重用不相容的類別～ - 轉接器模式 ( Adapter Pattern )</a></li></ul><ul id="dec4b8b7-d899-48b4-b20f-e5b912e429db" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10205659">[ Day 13 ] 自己不會沒關係～找一個代理人幫忙處理 - 代理模式 ( Proxy Pattern )</a></li></ul><ul id="7448ecc7-c1ec-42f9-a662-cc54842672c4" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10206318">[ Day 15 ] 整理出漂亮的介面 - 外觀模式 ( Facade Pattern )</a></li></ul><ul id="dae3762c-4a10-47d5-b89c-5bb8116cab24" class="bulleted-list"><li style="list-style-type:disc">[<a href="https://ithelp.ithome.com.tw/articles/10207215"> Day 18 ] 共用程式碼和物件～享元模式 ( Flyweight Pattern )</a></li></ul><ul id="a6f883c2-be70-4dbf-82db-0f5177c19b68" class="bulleted-list"><li style="list-style-type:disc">[<a href="https://ithelp.ithome.com.tw/articles/10207478"> Day 19 ] 一個是全部的部分～部分一個的集合 - 組合模式 ( Composite Pattern)</a></li></ul><ul id="842828a3-2305-46fb-b3e6-3bf44592274c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10207956">[ Day 21 ] 你的東西就是我的東西！ - 橋接模式 ( Bridge Pattern )</a></li></ul><ul id="b042ac13-3453-4fa9-96b8-47f62a19ea74" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10209403">[ Day 28 ] 初探設計模式 - 結構型模式</a></li></ul><h3 id="52de38cd-513a-430a-8cbc-5efc2da03be4" class=""><strong>行為型模式</strong></h3><ul id="99336322-7a8f-43b5-ab25-d9ece6ddb554" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10202506">[ Day 3 ] 初探設計模式 - 策略模式 (Strategy Pattern)</a><a href="https://ithelp.ithome.com.tw/articles/10204117">[ Day 8 ] 初探設計模式 - 觀察者模式 ( Observer Pattern )</a></li></ul><ul id="732bf8d5-2865-40c7-a3d3-27c7bfa39357" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10204425">[ Day 9 ] 初探設計模式 - 命令模式 ( Command Pattern )</a></li></ul><ul id="2344f186-e50f-423d-be13-e174e4d9b113" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10205036">[ Day 11 ] 老闆這這樣說～你照著做就對了 - 範本方法模式 ( TemplateMethod Pattern )</a></li></ul><ul id="88d00967-3800-479c-96af-6bbac8ff0699" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10206608">[ Day 16 ] 根據想要的(?)狀況自由選擇 - 狀態模式 ( State Pattern )</a></li></ul><ul id="753c9d59-9083-4ef2-bbf4-07cd4b8341bb" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10206939">[ Day 17 ] 簡單的Undo和Redo - 備忘錄模式 ( Memoto Pattern )</a></li></ul><ul id="135c3264-b56c-4336-b33d-acfc3410a6f3" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10207704">[ Day 20 ] 這樣每個月發薪水就輕鬆啦！迭代器模式 ( Iterator Pattern )</a></li></ul><ul id="ffe87b32-3905-452b-b758-8a78c67e46ba" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10208172">[ Day 22 ] 這件事誰能作主！ - 責任鍊模式 ( Chain of Responsibility Pattern )</a></li></ul><ul id="70b0811f-2e01-473b-9fa6-01afb55a806b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10208389">[ Day 23 ] 幫我跟那個誰喬一下 - 仲介者模式 ( Mediator Pattern )</a></li></ul><ul id="ab81cd97-ecde-40e4-8d13-bb5b950d3c7c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10208556">[ Day 24 ] 解釋一下這是什麼意思··· - 解譯器模式 ( Interpreter Pattern)</a></li></ul><ul id="8073fc91-2f5a-4efa-be0a-8c45968bbf80" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10208766">[ Day 25 ] 每個人關心的點都不同 - 訪問者模式 (Visitor Pattern)</a></li></ul><ul id="5f71dbdb-26b2-4e48-8ec7-4d2a564848f6" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10209510">[ Day 29 ] 初談設計模式 - 行為型模式(1)</a></li></ul><ul id="9b9889dc-52f1-4f14-9ca7-76d60dc0b62b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10209695">[ Day 30 ] 初探設計模式 - 行為型模式(2) &amp; 完賽感言</a></li></ul><h3 id="948e3129-32c5-4a7a-84cc-457ca140fc0f" class=""><strong>雜談</strong></h3><p id="499ff10c-0ee1-4c18-9ec3-25262fb51464" class="">另外還有一些沒辦法被分類的文章</p><ul id="993cc300-8bfb-4276-9e1a-0285d87ffeca" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10201706">[ Day 1 ] 我為什麼想學設計模式 ( Design Pattern )</a></li></ul><ul id="3fe7060d-457b-4181-b36b-40acbcfa635d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10202864">[ Day 4 ] 初探設計模式 - 關於那些更基本的事情...系統架構(System Architecture)</a></li></ul><ul id="d0a6f3d5-0f06-4f93-b00c-747c60d6e24c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10203503">[ Day 6 ] 初探設計模式 - 深入工廠、策略與單例模式</a></li></ul><ul id="d670d2a9-f69c-4649-ad85-b81e1b139435" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10212969">MVC/Model 2模式、MVP模式和MVVM模式</a></li></ul></div></article></body></html>

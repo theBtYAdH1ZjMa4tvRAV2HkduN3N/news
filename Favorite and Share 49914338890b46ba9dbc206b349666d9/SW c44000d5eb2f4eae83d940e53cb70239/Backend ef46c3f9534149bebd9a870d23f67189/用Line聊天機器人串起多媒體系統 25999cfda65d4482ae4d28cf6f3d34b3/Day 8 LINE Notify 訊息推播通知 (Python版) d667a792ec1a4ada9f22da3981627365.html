@@ -1,0 +1,689 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Day 8 : LINE Notify 訊息推播通知 (Python版)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d667a792-ec1a-4ada-9f22-da3981627365" class="page sans"><header><h1 class="page-title">Day 8 : LINE Notify 訊息推播通知 (Python版)</h1></header><div class="page-body"><ul id="ff4c2181-ad1e-4027-8080-6562baa8c41a" class="bulleted-list"><li style="list-style-type:disc">有了用 Google Apps Script(GAS) 創建 LINE Notify 訊息推播通知的寶貴經驗，本篇直接提供 Python 程式碼，直接替換您的權杖即可。但也提供兩中方式，一是用 Google Colab ，如果測試成功可以加到瀏覽器我的最愛吧! 另一種是使用VS CODE在本機執行。如果有疑問， LINE Notify 的權杖申請方式可參考系列文 <a href="https://ithelp.ithome.com.tw/users/20121130/articles">Day 6 : 歐逆醬早安，建立LINE Notify推播通知</a> 、安裝Python可參考系列文 <a href="https://ithelp.ithome.com.tw/articles/10233530">Day 3 : Python開發環境及工具介紹</a>，如無疑問我們接著進行。</li></ul><ul id="be712b13-ac7d-4aa3-ac7e-37339f0ee593" class="bulleted-list"><li style="list-style-type:disc">Python 版的 LINE Notify 訊息推播流程與 Google Apps Script(GAS) 的LINE Notify 權杖可以共用，意思是即使您用不同程式開發， LINE Notify API 收到正確格式就會傳送推播訊息囉。</li></ul><h1 id="c20ce53d-9548-44bc-95c4-d3f06583d5e6" class=""><strong>方法1. 使用Colab執行</strong></h1><figure id="b8121376-9cbb-4d77-8ef8-64f555a352d7" class="image"><a href="https://i.imgur.com/pQnQ4tG.png"><img src="https://i.imgur.com/pQnQ4tG.png"/></a></figure><ul id="63ab6aec-5b89-4646-affe-678ebab2974b" class="bulleted-list"><li style="list-style-type:disc">延續第6天已經設定好的 LINE Notify ， Python 程式碼以 Colab 執行，請<a href="https://is.gd/DxYF2P">點此連結</a>或上方圖示開啟已經為您設定好的 Colab。<ul id="e1cf1c06-bf66-414e-94ff-2d9c19aaca24" class="bulleted-list"><li style="list-style-type:circle">Colab 為 Google 服務，一般為免費，需登入您的 Google 帳號。</li></ul><ul id="5df960bb-59bf-4c99-a1ee-e0f3e4f33b2c" class="bulleted-list"><li style="list-style-type:circle">記得下方更換為您自己的權杖<code>token= &#x27;你的權杖內容&#x27;</code> 。</li></ul><ul id="9d16ae93-2932-4d5f-9519-814933f811b8" class="bulleted-list"><li style="list-style-type:circle">按 Play 鈕或 Shift + Enter 即可執行程式碼。</li></ul><ul id="ecb2cc79-703a-4d61-bceb-e715f5d6e7ca" class="bulleted-list"><li style="list-style-type:circle">這份 Colab 可另存至您的雲端硬碟，或在畫面左上方選擇以 Playground 模式體驗，體驗後此虛擬環境Google 將不記憶自動回收。您也可以加入瀏覽器我的最愛。<figure id="09be5557-d3e0-4a35-9034-f485bc1ff9f6" class="image"><a href="https://i.imgur.com/7vblaCz.png"><img src="https://i.imgur.com/7vblaCz.png"/></a></figure></li></ul></li></ul><h1 id="0ef8c97d-cbb7-4c4c-94e1-b21ad6370abf" class=""><strong>方法2. 使用Visual Studio Code本機執行</strong></h1><ul id="ad83d9b7-edb8-4a8c-ae21-20fd1fd9b0fc" class="bulleted-list"><li style="list-style-type:disc">你可以在本機電腦創建一個<code>.py</code>檔案複製下方程式碼執行，當然您至少去<a href="https://www.python.org/downloads/">安裝個Python</a>。</li></ul><ul id="3da80397-d58b-4aec-ac79-53770a987962" class="bulleted-list"><li style="list-style-type:disc">以下為Python code<pre id="a7546dc2-ccff-4abb-9ec1-081c730e8966" class="code code-wrap"><code>#基本功能測試import requests
+
+def lineNotifyMessage(token, msg):
+
+    headers = {
+        &quot;Authorization&quot;: &quot;Bearer &quot; + token,
+        &quot;Content-Type&quot; : &quot;application/x-www-form-urlencoded&quot;
+    }
+
+    payload = {&#x27;message&#x27;: msg }
+    r = requests.post(&quot;https://notify-api.line.me/api/notify&quot;, headers = headers, params = payload)
+    return r.status_code
+
+
+if __name__ == &quot;__main__&quot;:
+  token = &#x27;你的權杖內容&#x27;
+  message = &#x27;基本功能測試&#x27;
+  lineNotifyMessage(token, message)
+
+</code></pre></li></ul><ul id="0ec4e839-016a-477c-b9d2-948870997294" class="bulleted-list"><li style="list-style-type:disc">用VS CODE的話:<ul id="662eb893-02ea-4b6f-a401-18f7594a50db" class="bulleted-list"><li style="list-style-type:circle">右上方按下執行，下方會跳出 terminal 終端機的執行結果。</li></ul><ul id="748a9623-54f7-4804-bbe8-16c997e66b02" class="bulleted-list"><li style="list-style-type:circle">記得更換你自己權杖(可以跟前幾篇 GAS 版同個權杖，沒問題)。你收到的訊息會跟 GAS 版一致!(可自行修改<code>message</code>內容)<figure id="b90cf001-2979-4ec0-ad87-be0873925c71" class="image"><a href="https://i.imgur.com/LfUm10X.png"><img src="https://i.imgur.com/LfUm10X.png"/></a></figure><figure id="5b4e22b8-9f77-4fb7-8cde-96d489a38c69" class="image"><a href="https://i.imgur.com/67YUZ7k.png"><img src="https://i.imgur.com/67YUZ7k.png"/></a></figure></li></ul><ul id="b0bdb42a-a3e7-408b-b7d0-8457a1cc344e" class="bulleted-list"><li style="list-style-type:circle">對了，如果終端機訊息顯示尚未安裝 requests ，請在 terminal 終端機輸入以下指令<code>pip install requests</code>，在Windows系統搜尋CMD(命令提示字元)輸入以下指令，再次執行你的<code>.py</code>主程式就沒問題了。以下是裝過後的執行畫面，訊息會說相依套件 already satisfied ，若未安裝則會執行安裝。<pre id="0b1bef33-f400-4a29-b6ba-29fa7c96b383" class="code code-wrap"><code>$ pip install requests
+</code></pre><figure id="1c0b61cd-16d2-4168-810b-ed2c7f7a3741" class="image"><a href="https://i.imgur.com/5P0JfAu.png"><img src="https://i.imgur.com/5P0JfAu.png"/></a></figure></li></ul></li></ul><h1 id="d7fa2970-1e24-42b3-98df-f89d01c76207" class=""><strong>小結</strong></h1><ul id="098c24fb-483e-409e-b679-7484b189a582" class="bulleted-list"><li style="list-style-type:disc">實作傳送一個 LINE Notify 推播訊息相當有成就感，如果對您有幫助不妨按個 Like 或留言讓我知道，後續將再對 LINE Notify 訊息格式及運用說明，我們下篇見!</li></ul><ul id="f9e5c620-dadc-4907-8273-ebb4b5457c05" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/articles/10234115#reply">留言1</a></li></ul><ul id="ba1dc5e3-9e4b-4ae5-9801-53fdbad61a7d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/users/login">追蹤</a></li></ul><ul id="1077d841-f291-49ad-9c5b-d8d18819883f" class="bulleted-list"><li style="list-style-type:disc"><a href="https://ithelp.ithome.com.tw/users/login">檢舉</a></li></ul><ul id="b0fd28db-f59d-44d4-888b-70e54d818275" class="bulleted-list"><li style="list-style-type:disc"></li></ul><ul id="4b2940cb-8a14-42a3-8995-09074f11abf5" class="bulleted-list"><li style="list-style-type:disc"></li></ul><ul id="343e14d5-14f8-48f6-b7ac-dd83c8477286" class="bulleted-list"><li style="list-style-type:disc"></li></ul><p id="c566036f-2265-4a9c-800f-b3df5b32f3b0" class=""><a href="https://ithelp.ithome.com.tw/articles/10234097"><strong>上一篇</strong></a><a href="https://ithelp.ithome.com.tw/articles/10234097">Day 7 : 讓彌豆子妹妹每日喚醒你 ( LINE Notify with GAS )</a></p><p id="1ed2d275-5d0b-4068-9dbc-07a5c04f1a3a" class=""><a href="https://ithelp.ithome.com.tw/articles/10234576"><strong>下一篇</strong></a><a href="https://ithelp.ithome.com.tw/articles/10234576">Day 9 : 從 LINE Notify 學習查看API文件</a></p><p id="5a343ba4-bee2-482e-b3f6-0ad875e2c24a" class=""><strong>系列文</strong></p><p id="04b5a3b5-0c4a-44f9-a322-ec145d242598" class=""><a href="https://ithelp.ithome.com.tw/users/20121130/ironman/3131"><strong>用Line聊天機器人串起多媒體系統</strong></a> 共 30 篇</p><p id="89a7e8fd-abcb-40cb-af31-a541ec38e80b" class=""><strong>目錄</strong></p><p id="f66d80c6-b978-40d0-8108-e30dac75ebed" class=""><a href="https://ithelp.ithome.com.tw/rss/series/3131">RSS系列文</a></p><p id="3a5dfa70-e969-4f49-9213-b22816e2a5df" class=""><a href="https://ithelp.ithome.com.tw/users/login">訂閱系列文</a></p><p id="e609da05-1155-4b7e-ae41-54345c42e8f9" class="">47 人訂閱</p><ol type="1" id="5d183976-a3a2-45f5-aa9e-f385761873d9" class="numbered-list" start="1"><li>26<a href="https://ithelp.ithome.com.tw/articles/10241006">Day 26 : 用 Python 上傳圖片至 Imgur 圖床</a></li></ol><ol type="1" id="d707124e-837c-4d7e-afb0-9ea63d9f969b" class="numbered-list" start="2"><li>27<a href="https://ithelp.ithome.com.tw/articles/10241574">Day 27 : 股市 K 線 LINE 聊天機器人實作 (功能實作)</a></li></ol><ol type="1" id="b7c65ec9-51b3-43e5-9867-07379384b61c" class="numbered-list" start="3"><li>28<a href="https://ithelp.ithome.com.tw/articles/10242519">Day 28 : 股市 K 線 LINE 聊天機器人實作 (佈署篇)</a></li></ol><ol type="1" id="bfa46714-6296-41dc-aac5-d159e5d6ce02" class="numbered-list" start="4"><li>29<a href="https://ithelp.ithome.com.tw/articles/10243224">Day 29 : 換個 LINE 回應的其他口味 - Flex Message</a></li></ol><ol type="1" id="ac9c066a-2eaa-4bb0-bca4-c3cd81eb5304" class="numbered-list" start="5"><li>30<a href="https://ithelp.ithome.com.tw/articles/10242827">Dya 30 : 完結灑花</a></li></ol><p id="c6f4037e-4562-4d2d-9e60-505e79222a66" class=""><a href="https://ithelp.ithome.com.tw/users/20121130/ironman/3131">完整目錄</a></p></div></article></body></html>
