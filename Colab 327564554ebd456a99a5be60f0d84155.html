@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Colab</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="32756455-4ebd-456a-99a5-be60f0d84155" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🏒</span></div><h1 class="page-title">Colab</h1></header><div class="page-body"><p id="2d2bd044-43e5-43b6-be6b-2de9c7db0bf6" class="block-color-gray"><a href="https://ithelp.ithome.com.tw/m/articles/10234527">https://ithelp.ithome.com.tw/m/articles/10234527</a></p><p id="187abcfa-81ef-46f3-91e7-a57ef068328e" class="">
+</p><p id="d52f66a5-a7a7-4a88-b109-839e071ea090" class="">程式入門者對程式環境設定一直是個不小的坑與門檻，如果有頻繁在各種桌機、筆電、 OS 系統執行 Python 程式，設定環境費時費力。 Colab 是以雲端網頁呈現的 Python 筆記本形式，類似 Jupyter Notebook，但開啟時其實是幫你開啟一個 Linux 虛擬機，加上可以調用免費 GPU 算力，可以輕鬆達到跨平台使用的目的，也不只是可用於資料科學領域，對於程式日常開發而言也是好幫手。</p><ul id="6bbb51c4-388d-4247-bca6-58145c28676a" class="bulleted-list"><li style="list-style-type:disc">優點 <ul id="b68212cb-f121-48c7-ab53-48a075e5ab8e" class="bulleted-list"><li style="list-style-type:circle">使用雲端空間，不用自己的電腦空間。</li></ul><ul id="78ef9f36-3280-4bc8-80f5-e29fe9c6d1a0" class="bulleted-list"><li style="list-style-type:circle">可免費用 Colab 的 GPU 算力，執行深度學習速度有感。</li></ul><ul id="d492610d-9468-4d13-b247-ad62de0da9d7" class="bulleted-list"><li style="list-style-type:circle">可以跳過 Mac 、 Win 的各種坑，設定省心。</li></ul><ul id="4fefa97c-77cd-453e-a561-c22b31b7ef10" class="bulleted-list"><li style="list-style-type:circle">手機平板也可以執行，但建議只用來看成果，因為容易斷線且優化待加強。</li></ul></li></ul><ul id="4c145cd6-5958-4e6a-9644-e22016aff36e" class="bulleted-list"><li style="list-style-type:disc">缺點 <ul id="d6f9b9fa-b5af-41ab-ab47-23f9fc9cefde" class="bulleted-list"><li style="list-style-type:circle">佔用 Google 雲端硬碟容量，有些學校有提供學生/校友免費申請 Gmail 教育帳號，使用空間無限大(更新:Google 2022年7月取消該政策改有限額度)。如需自行付費資訊參閱<a href="https://one.google.com/about">Google說明</a>。</li></ul><ul id="55dd6551-2221-40e4-8ee0-215604500c41" class="bulleted-list"><li style="list-style-type:circle">Colab 設定其實也有不少坑，下一篇會分享實用的填坑技巧。</li></ul><ul id="c8444b2a-8ee3-4277-85b5-9c91ca076873" class="bulleted-list"><li style="list-style-type:circle">雲端服務一定要有網路。</li></ul></li></ul><h2 id="5f743821-61f2-42c1-988e-e723bd9862d5" class="">如何開啟 Colab 筆記本?</h2><h3 id="4d9f4ef8-daf4-491d-b772-1568dc8ac18e" class="">從Google搜尋Colab新增或開啟檔案</h3><ul id="4da13d09-09e8-4627-992a-b34b64336762" class="bulleted-list"><li style="list-style-type:disc">將 <code>colab</code> 關鍵字餵狗(Google)後出現的 Google Colab 即是，歡迎頁面目前已經改為繁體中文介面，或直接依提示視窗選擇用範例、 Google 雲端硬碟、 GitHub 或本機上傳。 <figure id="02f06978-5747-41ee-9d34-8eb61ef31ad1" class="image"><a href="IkX1tK7.png"><img style="width:700px" src="IkX1tK7.png"/></a></figure></li></ul><h3 id="b15bd951-6c0d-4333-8567-973914a64511" class="">從 Google 雲端資料夾開啟 Colab</h3><ol type="1" id="e605d6f5-2a4e-4fd4-b123-1bab08b2335d" class="numbered-list" start="1"><li>至您的雲端資料夾，如果有任何副檔名是 <code>.ipynb</code> 的檔案，就可以用 Colab 服務開啟此筆記本。</li></ol><ol type="1" id="e7c19f73-dabd-484b-8441-24c93d225517" class="numbered-list" start="2"><li>以滑鼠右鍵點選 <code>.ipynb</code> 檔案，選擇開啟工具，如果先前有「連結」過，就會有「Google Colaboratory」的選項 <ul id="f74e4462-61d4-4301-9fd8-ad2445e8ea65" class="bulleted-list"><li style="list-style-type:disc"><figure id="59c885df-2571-43bb-9daf-7b73ebfdbb0a" class="image"><a href="AfAsIwl.png"><img style="width:700px" src="AfAsIwl.png"/></a></figure></li></ul></li></ol><h3 id="d66f2e35-7a0a-4366-b714-1092f78f72b1" class="">從超連結開啟 Colab</h3><ul id="b123f309-572e-4d8f-bec6-836312e7c4b8" class="bulleted-list"><li style="list-style-type:disc">如果在 Google 雲端硬碟的 <code>.ipynb</code> 沒有出現像上圖的 Colab 選項，可以進行以下步驟： <ul id="db8ecbc3-d714-43a1-b3d1-4f150dc25898" class="bulleted-list"><li style="list-style-type:circle">點選「連結更多應用程式」，搜尋 <code>Colab</code> 並連結 Colab。  <figure id="7d96815c-ac8f-428d-ba3b-1d9f40bb1986" class="image"><a href="Yw96xLN.png"><img style="width:700px" src="Yw96xLN.png"/></a></figure><figure id="d79b81e3-449b-48b1-966f-c0ee35ea7ba2" class="image"><a href="Cn90jT6.png"><img style="width:700px" src="Cn90jT6.png"/></a></figure><p id="c6cf8272-42cf-49a8-bcf6-ac894714aecc" class="">如果連結 Colab 仍未切換開啟目標 *ipynb 檔案，很有可能是您本來就尚未登入Google帳戶，請登入即可。</p></li></ul></li></ul><h2 id="fb099ed3-6c05-481a-aa5f-794837f31a68" class="">常用相關配置</h2><h3 id="1e8369e4-ec61-4051-bd48-61e05d03672e" class="">更改為GPU運算</h3><p id="07e20dab-29f7-4dbd-9ccf-435c9bf79d4a" class="">Colab 有意提供 GPU 運算資源給願意投入深度學習領域的開發者，如需使用免費 GPU 資源可依下方式更換。但如果您的程式未用到 GPU 資源，目前 Golab 版本會在右下方提示建議您改回 CPU 運算(當然也可以不改，目前)。</p><ul id="eabcc6b9-7b36-4c03-a69a-7b7b85f96434" class="bulleted-list"><li style="list-style-type:disc">點選「執行階段」-「變更執行階段類型」 <ul id="ff7fc30f-5347-4ebb-96e5-5127858a5ed5" class="bulleted-list"><li style="list-style-type:circle"><figure id="9c9cd72e-64fe-4114-92f8-abf63d50befa" class="image"><a href="Fasesyk.png"><img style="width:700px" src="Fasesyk.png"/></a></figure></li></ul></li></ul><ul id="87cc731d-e5a9-4461-b558-16fc5431d690" class="bulleted-list"><li style="list-style-type:disc">選擇變更為 GPU 運算 選單下方有提示&quot;如要發揮 Colab 的最大效益，請避免在不必要的情況下使用 GPU &quot;。(如非深度學習其實沒必要使用 GPU 喔) <ul id="cc39e067-ec05-419e-b3a2-115978e6f667" class="bulleted-list"><li style="list-style-type:circle"><figure id="bb36a644-6dce-4417-9dda-1f183c9ace14" class="image"><a href="AK92WM1.png"><img style="width:451px" src="AK92WM1.png"/></a></figure></li></ul></li></ul><ul id="b2471272-72e8-4fe0-aa85-33e413311807" class="bulleted-list"><li style="list-style-type:disc">查看 GPU 資訊 <ul id="4408f13d-b1e1-4f38-bfee-651311a0e794" class="bulleted-list"><li style="list-style-type:circle"><code>!nvidia-smi</code> 嘿嘿這次要到Tesla P100，以前常開到Tesla K80，Google也有不斷升級超佛心! <figure id="42dc0ebe-12d4-41a8-b7d7-70b54493479d" class="image"><a href="twdGwyc.png"><img style="width:700px" src="twdGwyc.png"/></a></figure></li></ul></li></ul><h3 id="9160c46a-9980-4dd9-a7e5-8ccf3b963cff" class="">更改為英文版(選用)</h3><ul id="db9e9423-4231-46cf-aefb-42d04d3f7b9e" class="bulleted-list"><li style="list-style-type:disc">建議改成英文版，原因有2: <ul id="778831d9-86af-4109-a9a2-96864c572e8c" class="bulleted-list"><li style="list-style-type:circle">預設繁體中文翻譯不見得看得懂。</li></ul><ul id="a1ca50b5-70e9-4593-9a58-c1ee5c142a0e" class="bulleted-list"><li style="list-style-type:circle">繁體中文目前排版不是等間距字元!!(希望以後會改) <figure id="aabeb7ed-4cea-4736-8432-1d83796c34d0" class="image"><a href="P7004qM.png"><img style="width:700px" src="P7004qM.png"/></a></figure></li></ul></li></ul><h2 id="a98a6a16-0f48-4163-a7f0-3704b50952c9" class="">Colab 操作指南</h2><ul id="8025ab05-4c23-4fbe-b7cc-98366d7d4f82" class="bulleted-list"><li style="list-style-type:disc">當您 Google 搜尋 Colab ，<a href="https://colab.research.google.com/notebooks/intro.ipynb">歡迎頁面</a>介紹了該應用的用途與多種範例。 <figure id="2a1a6e24-d43f-4011-9721-1eeebd747784" class="image"><a href="FIvE7I3.png"><img style="width:700px" src="FIvE7I3.png"/></a></figure></li></ul><ul id="b1e3d971-5363-4d12-9d55-d54bd468340d" class="bulleted-list"><li style="list-style-type:disc">文字欄位使用 MarkDown 語法編輯， 程式碼欄位可輸入程式，按下 <code>Play</code>按鍵或<code>Shift + Enter</code>，執行結果會在程式碼下方顯示。 <figure id="2b4baa2c-6cfe-45fc-81b2-b8335f220d71" class="image"><a href="yQ9hMa2.png"><img style="width:700px" src="yQ9hMa2.png"/></a></figure></li></ul><ul id="90f7f4fb-29a1-400a-80f9-6ffd6ef7e5c1" class="bulleted-list"><li style="list-style-type:disc">側邊欄目前有三個功能 <ol type="1" id="de7f12e4-f05e-4884-a6c6-ce84330ca16a" class="numbered-list" start="1"><li>目錄，目錄的產生來自您文字欄位的 MarkDown 語法設定的<code># 大標</code>、 <code># 次標</code>，另外您文字 Cell 也可以依照您的標題次序展開/收合。 <figure id="bb1467d3-a58c-4935-aaa5-2531cc7f3f93" class="image"><a href="TWPjhZQ.png"><img style="width:700px" src="TWPjhZQ.png"/></a></figure><p id="17082e48-808d-40d0-b8f1-be213acf4ad3" class="">程式碼片段，Colab 有許多奇技淫巧，在此處您可以搜尋、閱讀解說、將範例插入程式碼區塊。建議可以花時間逐一瀏覽，讓腦海有這些用途概念以便伺機採用。</p></li></ol><ol type="1" id="7b3433d2-1e6d-46ed-b6bb-b993fa75ff33" class="numbered-list" start="2"><li><figure id="0515a311-aa25-41d7-81de-84d591c95bef" class="image"><a href="mwYRJIs.png"><img style="width:700px" src="mwYRJIs.png"/></a></figure></li></ol><ol type="1" id="881590ac-eeeb-4e30-b4ce-28ff117d0b0d" class="numbered-list" start="3"><li>檔案，前面提到每個 Colab 其實是 Google 幫您開了雲端虛擬 Linux 主機，如果您有 Linux 基礎則您運用時如虎添翼，終端機（Terminal）指令只要在前方加入<code>!</code>+<code>指令</code> 即可，例如<code>!pip install Flask</code>，並且支援 <code>!cp</code> 、 <code>!mv</code> 、 <code>!git clone</code> 等指令。上傳/下載檔案也可直接在此側分頁操作，或設計按鈕介面在 Colab 的 Cell 供使用者操作(程式碼片段的分頁有範例)。 <figure id="7471a2d8-58a8-4183-a0f7-e51560469530" class="image"><a href="mwrCOAr.png"><img style="width:700px" src="mwrCOAr.png"/></a></figure></li></ol></li></ul><ul id="650206de-8fc8-4221-afac-6fa655c43113" class="bulleted-list"><li style="list-style-type:disc">更多功能仍請參閱<a href="https://colab.research.google.com/notebooks/intro.ipynb">歡迎頁面</a>，下方很多範例有關機械學習/深度學習，有興趣可以開啟執行，或許會開啟您邁向AI領域之路。</li></ul><h2 id="727c139d-af33-4c84-bdb5-f4e9b14ff534" class="">小結</h2><ul id="bcae6e5d-9205-40eb-b632-491116973495" class="bulleted-list"><li style="list-style-type:disc">Colab 還有不少有趣的設定，包含實用的深色主題模式、柯基與貓咪模式則是 Colab 頁面有狗或貓咪跑來跑去、連續打字還會集氣 COMBO 放煙火( Google 到底嗑了什麼)。</li></ul><ul id="01a71325-5e13-437e-9158-a9ffe20c6278" class="bulleted-list"><li style="list-style-type:disc">下篇會介紹 Colab 在連結硬碟、繪圖中文顯示問題的實用解法，我們下篇見!</li></ul><h2 id="c3c13c79-ff45-4aad-b098-e2ad3095a976" class="">補充更新</h2><ul id="0b1df54e-7fea-4bf6-ae4f-cd2da1df0496" class="bulleted-list"><li style="list-style-type:disc">Google雲端硬碟教育版預計預計2022年7月之後將限制100TB 的使用上限。</li></ul></div></article></body></html>

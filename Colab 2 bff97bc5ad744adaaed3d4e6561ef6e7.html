@@ -1,0 +1,720 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Colab 2</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="bff97bc5-ad74-4ada-aed3-d4e6561ef6e7" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🥇</span></div><h1 class="page-title">Colab 2</h1></header><div class="page-body"><p id="d84faa8e-b2c7-41ff-9ad0-bf2766ce7261" class="block-color-gray"><a href="https://ithelp.ithome.com.tw/m/articles/10234373">https://ithelp.ithome.com.tw/m/articles/10234373</a></p><p id="1129a155-6f4d-4029-9241-ee36a9ea7acb" class="">
+</p><p id="0729d36b-0b14-48f3-96a7-69017a435bc7" class="">延續 <a href="https://ithelp.ithome.com.tw/articles/10234527">Day 10</a> 的 Colab 介紹文，本篇分享自己踩過的坑與填坑，並期待 Colab 真正能成為您程式開發的助力。</p><h3 id="c0114c58-0ccb-4aca-ae4d-8a3017928fed" class="">方法1. 先來懶人包</h3><ul id="d1d0a4bf-b35f-4786-b4a5-f80da48a529c" class="bulleted-list"><li style="list-style-type:disc">以下為執行碼複製貼上，將<code>os.chdir()</code>改您的Google雲端硬碟資料夾位址即可)</li></ul><pre id="bc94d6bb-d1ac-475c-880e-dafd1d4517be" class="code code-wrap"><code>#Colab資料夾設定方法
+#!pip install google.colab #如未安裝取消註解後執行
+import os
+
+from google.colab import drive
+drive.mount(&#x27;/content/drive&#x27;)
+
+##出現提示欄進行授權
+
+os.chdir(&#x27;/content/drive/My Drive/{你的google雲端硬碟資料夾位址}&#x27;) #切換該目錄
+os.listdir() #確認目錄內容
+</code></pre><h3 id="024aca0f-7e20-47ea-9de4-ce1b5a5f5404" class="">拆解說明</h3><ul id="b3624840-3114-4b55-bd98-cfd68823681e" class="bulleted-list"><li style="list-style-type:disc"> <p id="9a23033b-131d-4272-a40c-28581faf676f" class="">當你開啟 Colab 互動環境，其實是開啟了一個虛擬機，你可以透過與雲端硬碟連結。在 Colab 左側程式碼的提示為下方兩行，執行後授權Colab與你的google雲端硬碟帳戶連結。</p><pre id="a2c1497b-4a93-441e-8c3e-403fb5c1c13f" class="code code-wrap"><code>from google.colab import drive
+drive.mount(&#x27;/content/drive&#x27;)
+</code></pre></li></ul><ul id="e418da7d-d907-4ff8-baa0-c48778b2017a" class="bulleted-list"><li style="list-style-type:disc"><p id="5d666f73-2a66-46db-9d0c-75a855e60da2" class="">過程中會出現等待您的授權碼，請點選連結，複製授權碼貼回 Colab 等待的對話框即可。</p><figure id="b5ac28b2-a092-4f33-8b39-aa8c507cfdf1" class="image"><a href="LnQ0sC4.png"><img style="width:700px" src="LnQ0sC4.png"/></a></figure></li></ul><ul id="0024257d-9a11-41ec-94c9-755550430d44" class="bulleted-list"><li style="list-style-type:disc"> <p id="059e6218-11db-4372-9bc2-e51fb12fd931" class="">進一步讓 Colab 能存取你指定的 Google 雲端硬碟路徑，你需要執行以下程式碼，讓 <code>os</code> 模組切換至您的 Google 雲端硬碟資料夾位址:</p><pre id="f20d621b-7f5d-4b24-a1fc-ceb34fce4b0a" class="code code-wrap"><code>import os
+os.chdir(&#x27;/content/drive/My Drive/{Google雲端硬碟資料夾位址}&#x27;)
+</code></pre></li></ul><ul id="e6ac3d8f-1362-45a3-b43d-5725fd1ab518" class="bulleted-list"><li style="list-style-type:disc"> <p id="526caacd-304c-40f2-b5a3-3c777cebeff2" class="">要確定是否順利切換到指定目錄，可以用<code>os.listdir()</code>檢查目錄之下檔案是否如預期，如果看到自己的資料夾目錄代表成功。</p><pre id="127f407f-a566-4a3d-b63a-7f5bcd608a1a" class="code code-wrap"><code>os.listdir() #確認目錄內容
+</code></pre></li></ul><ul id="8c84cef7-c645-49ce-8a28-74e78b0f8e39" class="bulleted-list"><li style="list-style-type:disc"><p id="fda5accd-22ab-491c-974e-a42a70501e6f" class="">注意事項:如果 Colab 要從外部下載安裝第三方套件(如Talib)，<strong>記得先安裝好Talib再切換到自己的雲端硬碟目錄</strong>，不然執行時可能會有錯誤狀況，發生錯誤也別緊張，重啟服務即可。</p></li></ul><h3 id="f3459c4c-e918-48ed-929e-85bc104eb845" class="">方法2. 直接點圖示完成連線 (NEW!)</h3><ul id="d6fd0e14-5c06-4a47-b67e-5119a92671ea" class="bulleted-list"><li style="list-style-type:disc">因為 Google Colab 為雲端服務持續更新，介面更新也不會特別更您說，目前的最新狀態是: 側邊欄的 Google 雲端硬碟圖示點下去，確認您授權操作Google 雲端硬碟，就大功告成了! <figure id="6abe7a5c-202c-4e88-98ad-9b97aa45a987" class="image"><a href="YYYi1zW.png"><img style="width:528px" src="YYYi1zW.png"/></a></figure></li></ul><h2 id="032fa0ac-1ff5-42de-80ed-466378015336" class="">超前填坑? Colab 繪圖如何正常顯示繁體中文?</h2><h3 id="675d9b37-c125-4dea-bc1f-07d920b04428" class="">懶人包</h3><pre id="afc8c4fd-b2ba-493d-ad35-fee9787fc320" class="code code-wrap"><code># Colab 進行matplotlib繪圖時顯示繁體中文
+# 下載台北思源黑體並命名taipei_sans_tc_beta.ttf，移至指定路徑
+!wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&amp;export=download
+!mv taipei_sans_tc_beta.ttf /usr/local/lib/python3.7/dist-packages/matplotlib//mpl-data/fonts/ttf
+
+from matplotlib.font_manager import FontProperties
+import matplotlib.pyplot as plt
+
+# 自定義字體變數
+myfont = FontProperties(fname=r&#x27;/usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf/taipei_sans_tc_beta.ttf&#x27;)
+
+# !!!!後續在相關函式中增加fontproperties=myfont屬性即可!!!!
+
+</code></pre><h3 id="f9460130-2354-4770-a96e-c03d855bde0c" class="">拆解說明</h3><p id="72e4bc4a-5269-46df-aa29-3b656262b6ca" class="">Python 的 <code>matplotlib</code> 是常用的數據分析/資料視覺化模組，因 <code>matplotlib</code> 預設字體不支援中文，中文顯示會出現一堆口口，繪圖要顯示中文需要修改相關設定，經過一番苦心找到解法，並且使用開源且可商用的「台北黑體」(感謝 <a href="https://sites.google.com/view/jtfoundry/">翰字鑄造JT Foundry</a>開源如此美觀大方的字體）。</p><ol type="1" id="c27f67b9-3d0d-460e-bf94-d52b423604e1" class="numbered-list" start="1"><li>下載指定字體置於 Colab 指定位置 2. 以 <code>!wget</code> 下載字體 3. 存置 Colab 路徑： <code>/usr/local/lib/python3.6/dist-packages/matplotlib/mpl-data/fonts/ttf</code></li></ol><ol type="1" id="ab27718d-a57b-4ad4-a2e4-a08dce5ec3f3" class="numbered-list" start="2"><li>各種文字輸出的函數加入 <code>fontproperties</code> 屬性，如: <pre id="b743907d-5eda-408d-9094-7dfbe5bd6ef8" class="code code-wrap"><code>plt.title(&quot;自訂標題&quot;,fontproperties=myfont)
+plt.ylabel(&quot;自訂y軸&quot;,fontproperties=myfont)
+plt.xlabel(&quot;自訂x軸&quot;,fontproperties=myfont)
+ax.annotate(&#x27;註解說明&#x27;,fontproperties=myfont)
+ax.set_title(&#x27;自訂標題&#x27;,fontproperties=myfont)
+ax.set_xlabel(&#x27;自訂x軸&#x27;,fontproperties=myfont)
+ax.set_ylabel(&#x27;自訂y軸&#x27;,fontproperties=myfont)
+複製以下cell並執行即可
+</code></pre></li></ol><ol type="1" id="d14aaa29-915f-4fba-b8cc-ce3f01b8c6b5" class="numbered-list" start="3"><li>這邊貼上<a href="https://colab.research.google.com/github/willismax/matplotlib_show_chinese_in_colab/blob/master/matplotlib_show_chinese_in_colab.ipynb">本文 Colab 範例</a>執行 matplotlib 繪圖的中文顯示成果:   中文可以正常顯示囉。<figure id="84214dc8-7817-49f3-8442-a873bfc69d86" class="image"><a href="iLoarLN.png"><img style="width:570px" src="iLoarLN.png"/></a></figure><figure id="8a4be83a-4e30-4828-b669-6ad30bbb1cfb" class="image"><a href="BwsiquZ.png"><img style="width:484px" src="BwsiquZ.png"/></a></figure></li></ol><h2 id="571750c8-7f4f-4726-bee5-c2c16bae17b2" class="">最後，用 Colab 建立自己的軍火庫吧!</h2><ul id="b07e0ac0-8e84-41ba-b250-8c4dd4f68525" class="bulleted-list"><li style="list-style-type:disc">Colab 可以雲端建立 <code>.ipynb</code> 的筆記本檔案，而且他是個具有專屬 URL 的服務，你可以做到以下事情: <ul id="a32c16cf-7cd1-4b64-a210-20f46b3cfa78" class="bulleted-list"><li style="list-style-type:circle">透過權限設定分享 Colab 的 URL ，就跟 Google 雲端硬碟檔案分享方式一樣。</li></ul><ul id="1beb637f-6104-4b47-ad63-701fd3b6d65b" class="bulleted-list"><li style="list-style-type:circle">把寫好的 Python 小程式加入你的 Chrome 瀏覽器我的最愛，跨裝置都可以開啟變成行動軍火庫! <figure id="c0a268c3-bd1c-4550-898e-e334b39f974c" class="image"><a href="cL3Tjgq.png"><img style="width:480px" src="cL3Tjgq.png"/></a></figure></li></ul></li></ul><h2 id="50472492-50f6-4e9c-88eb-171eedc48e61" class="">小結</h2><ul id="354d0b79-a048-4af1-bf96-442ee28f9d93" class="bulleted-list"><li style="list-style-type:disc">透過 Colab 雲端環境、是個 linux 虛擬機的特性，就可以幫助程式開發且不怕弄髒環境，髒了再開就好。</li></ul><ul id="1296ed44-0730-46fd-869a-85b115920d8d" class="bulleted-list"><li style="list-style-type:disc">連結硬碟我們多了一個 <code>os.listdir()</code> 指令確認資料夾已經能順利讀取， matplotlib 要更改環境變數才能繪圖顯示中文，本文的方法也試圖克服了 Colab 顯示結果。</li></ul><ul id="ffeaf824-c456-4eed-83cf-9ed5a9c5da96" class="bulleted-list"><li style="list-style-type:disc">本系列文主要功能會透過 Python 將 LINE 聊天機器人功能以 Flask 佈署在 Heroku 伺服器，聽起來就會有不少環節需要注意，故後續為 LINE ChatBOT 新增的功能，會先以 Colab 實作與介紹，再轉移到 Heroku 佈署，謝謝您的堅持，我們下篇見!</li></ul><h2 id="a2ee9494-6a54-4b83-9a48-09790f947ab2" class="">參考</h2><ul id="14ecfeb2-5d9b-4b5c-acff-be021c0af1b2" class="bulleted-list"><li style="list-style-type:disc"><a href="https://medium.com/marketingdatascience/%E8%A7%A3%E6%B1%BApython-3-matplotlib%E8%88%87seaborn%E8%A6%96%E8%A6%BA%E5%8C%96%E5%A5%97%E4%BB%B6%E4%B8%AD%E6%96%87%E9%A1%AF%E7%A4%BA%E5%95%8F%E9%A1%8C-f7b3773a889b">解決Python 3 Matplotlib與Seaborn視覺化套件中文顯示問題</a></li></ul><h2 id="873a8b7e-7851-4cc9-93d4-2d07220dc5c6" class="">責任更新!</h2><p id="6d488eb9-2ad2-4a98-9dcc-b8499afc3d00" class="">因Colab所使用的Python版本迄今(2021/4/4)已更新為3.7版(原文章為3.6版)，請使用指令時確認版本狀況，懶人包修正如下，後續如有類似情形即可自行排除，謝謝:</p><pre id="e895dabb-4593-434d-a748-9ed8629cec58" class="code code-wrap"><code># Colab 進行matplotlib繪圖時顯示繁體中文
+# 下載台北思源黑體並命名taipei_sans_tc_beta.ttf，移至指定路徑
+!wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&amp;export=download
+!mv taipei_sans_tc_beta.ttf /usr/local/lib/python3.7/dist-packages/matplotlib//mpl-data/fonts/ttf![](http://)
+
+from matplotlib.font_manager import FontProperties
+import matplotlib.pyplot as plt
+
+# 自定義字體變數
+myfont = FontProperties(fname=r&#x27;/usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf/taipei_sans_tc_beta.ttf&#x27;)
+
+# !!!!後續在相關函式中增加fontproperties=myfont屬性即可!!!!
+
+</code></pre></div></article></body></html>

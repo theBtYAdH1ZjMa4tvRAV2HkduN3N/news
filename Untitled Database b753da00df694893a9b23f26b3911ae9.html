@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Untitled Database</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b753da00-df69-4893-a9b2-3f26b3911ae9" class="page sans"><header><h1 class="page-title"></h1></header><div class="page-body"><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesNumber"><path d="M4.46191,0 C3.8667,0 3.38428,0.482422 3.38428,1.07751 L3.38428,3.38425 L1.07764,3.38425 C0.482422,3.38425 0,3.86667 0,4.46179 C0,5.05688 0.482422,5.53931 1.07764,5.53931 L3.38428,5.53931 L3.38428,8.46063 L1.07764,8.46063 C0.482422,8.46063 0,8.94308 0,9.53818 C0,10.1333 0.482422,10.6157 1.07764,10.6157 L3.38428,10.6157 L3.38428,12.9224 C3.38428,13.5175 3.8667,13.9999 4.46191,13.9999 C5.05664,13.9999 5.53906,13.5175 5.53906,12.9224 L5.53906,10.6157 L8.46045,10.6157 L8.46045,12.9224 C8.46045,13.5175 8.94287,13.9999 9.53809,13.9999 C10.1333,13.9999 10.6157,13.5175 10.6157,12.9224 L10.6157,10.6157 L12.9224,10.6157 C13.5176,10.6157 14,10.1333 14,9.53818 C14,8.94308 13.5176,8.46063 12.9224,8.46063 L10.6157,8.46063 L10.6157,5.53931 L12.9224,5.53931 C13.5176,5.53931 14,5.05688 14,4.46179 C14,3.86667 13.5176,3.38425 12.9224,3.38425 L10.6157,3.38425 L10.6157,1.07751 C10.6157,0.482422 10.1333,0 9.53809,0 C8.94287,0 8.46045,0.482422 8.46045,1.07751 L8.46045,3.38425 L5.53906,3.38425 L5.53906,1.07751 C5.53906,0.482422 5.05664,0 4.46191,0 Z M5.53906,8.46063 L5.53906,5.53931 L8.46045,5.53931 L8.46045,8.46063 L5.53906,8.46063 Z"></path></svg></span>代號</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>名稱</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesNumber"><path d="M4.46191,0 C3.8667,0 3.38428,0.482422 3.38428,1.07751 L3.38428,3.38425 L1.07764,3.38425 C0.482422,3.38425 0,3.86667 0,4.46179 C0,5.05688 0.482422,5.53931 1.07764,5.53931 L3.38428,5.53931 L3.38428,8.46063 L1.07764,8.46063 C0.482422,8.46063 0,8.94308 0,9.53818 C0,10.1333 0.482422,10.6157 1.07764,10.6157 L3.38428,10.6157 L3.38428,12.9224 C3.38428,13.5175 3.8667,13.9999 4.46191,13.9999 C5.05664,13.9999 5.53906,13.5175 5.53906,12.9224 L5.53906,10.6157 L8.46045,10.6157 L8.46045,12.9224 C8.46045,13.5175 8.94287,13.9999 9.53809,13.9999 C10.1333,13.9999 10.6157,13.5175 10.6157,12.9224 L10.6157,10.6157 L12.9224,10.6157 C13.5176,10.6157 14,10.1333 14,9.53818 C14,8.94308 13.5176,8.46063 12.9224,8.46063 L10.6157,8.46063 L10.6157,5.53931 L12.9224,5.53931 C13.5176,5.53931 14,5.05688 14,4.46179 C14,3.86667 13.5176,3.38425 12.9224,3.38425 L10.6157,3.38425 L10.6157,1.07751 C10.6157,0.482422 10.1333,0 9.53809,0 C8.94287,0 8.46045,0.482422 8.46045,1.07751 L8.46045,3.38425 L5.53906,3.38425 L5.53906,1.07751 C5.53906,0.482422 5.05664,0 4.46191,0 Z M5.53906,8.46063 L5.53906,5.53931 L8.46045,5.53931 L8.46045,8.46063 L5.53906,8.46063 Z"></path></svg></span>股價</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesNumber"><path d="M4.46191,0 C3.8667,0 3.38428,0.482422 3.38428,1.07751 L3.38428,3.38425 L1.07764,3.38425 C0.482422,3.38425 0,3.86667 0,4.46179 C0,5.05688 0.482422,5.53931 1.07764,5.53931 L3.38428,5.53931 L3.38428,8.46063 L1.07764,8.46063 C0.482422,8.46063 0,8.94308 0,9.53818 C0,10.1333 0.482422,10.6157 1.07764,10.6157 L3.38428,10.6157 L3.38428,12.9224 C3.38428,13.5175 3.8667,13.9999 4.46191,13.9999 C5.05664,13.9999 5.53906,13.5175 5.53906,12.9224 L5.53906,10.6157 L8.46045,10.6157 L8.46045,12.9224 C8.46045,13.5175 8.94287,13.9999 9.53809,13.9999 C10.1333,13.9999 10.6157,13.5175 10.6157,12.9224 L10.6157,10.6157 L12.9224,10.6157 C13.5176,10.6157 14,10.1333 14,9.53818 C14,8.94308 13.5176,8.46063 12.9224,8.46063 L10.6157,8.46063 L10.6157,5.53931 L12.9224,5.53931 C13.5176,5.53931 14,5.05688 14,4.46179 C14,3.86667 13.5176,3.38425 12.9224,3.38425 L10.6157,3.38425 L10.6157,1.07751 C10.6157,0.482422 10.1333,0 9.53809,0 C8.94287,0 8.46045,0.482422 8.46045,1.07751 L8.46045,3.38425 L5.53906,3.38425 L5.53906,1.07751 C5.53906,0.482422 5.05664,0 4.46191,0 Z M5.53906,8.46063 L5.53906,5.53931 L8.46045,5.53931 L8.46045,8.46063 L5.53906,8.46063 Z"></path></svg></span>漲跌</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>漲跌幅</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>市值(百萬)</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesNumber"><path d="M4.46191,0 C3.8667,0 3.38428,0.482422 3.38428,1.07751 L3.38428,3.38425 L1.07764,3.38425 C0.482422,3.38425 0,3.86667 0,4.46179 C0,5.05688 0.482422,5.53931 1.07764,5.53931 L3.38428,5.53931 L3.38428,8.46063 L1.07764,8.46063 C0.482422,8.46063 0,8.94308 0,9.53818 C0,10.1333 0.482422,10.6157 1.07764,10.6157 L3.38428,10.6157 L3.38428,12.9224 C3.38428,13.5175 3.8667,13.9999 4.46191,13.9999 C5.05664,13.9999 5.53906,13.5175 5.53906,12.9224 L5.53906,10.6157 L8.46045,10.6157 L8.46045,12.9224 C8.46045,13.5175 8.94287,13.9999 9.53809,13.9999 C10.1333,13.9999 10.6157,13.5175 10.6157,12.9224 L10.6157,10.6157 L12.9224,10.6157 C13.5176,10.6157 14,10.1333 14,9.53818 C14,8.94308 13.5176,8.46063 12.9224,8.46063 L10.6157,8.46063 L10.6157,5.53931 L12.9224,5.53931 C13.5176,5.53931 14,5.05688 14,4.46179 C14,3.86667 13.5176,3.38425 12.9224,3.38425 L10.6157,3.38425 L10.6157,1.07751 C10.6157,0.482422 10.1333,0 9.53809,0 C8.94287,0 8.46045,0.482422 8.46045,1.07751 L8.46045,3.38425 L5.53906,3.38425 L5.53906,1.07751 C5.53906,0.482422 5.05664,0 4.46191,0 Z M5.53906,8.46063 L5.53906,5.53931 L8.46045,5.53931 L8.46045,8.46063 L5.53906,8.46063 Z"></path></svg></span>權重(%)</th></tr></thead><tbody><tr id="88734f66-dd36-4d56-8791-f28be8b25e84"><td class="cell-KHzA">2330</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2330">台積電</a></td><td class="cell-EF|s">605</td><td class="cell-&gt;;Jl">6</td><td class="cell-title"><a href="%E2%96%B21%2000%25%2088734f66dd364d568791f28be8b25e84.html">▲1.00%</a></td><td class="cell-RTwp">15,687,900</td><td class="cell-G=Cq">44.76</td></tr><tr id="8d57635b-e033-4063-9b9b-1cc89079b380"><td class="cell-KHzA">2454</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2454">聯發科</a></td><td class="cell-EF|s">912</td><td class="cell-&gt;;Jl">16</td><td class="cell-title"><a href="%E2%96%B21%2079%25%208d57635be03340639b9b1cc89079b380.html">▲1.79%</a></td><td class="cell-RTwp">1,420,200</td><td class="cell-G=Cq">4.14</td></tr><tr id="d78a30dd-3ef4-4950-bc5c-0f06ac4c0ab4"><td class="cell-KHzA">2317</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2317">鴻海</a></td><td class="cell-EF|s">109</td><td class="cell-&gt;;Jl">1</td><td class="cell-title"><a href="%E2%96%B20%2093%25%20d78a30dd3ef44950bc5c0f06ac4c0ab4.html">▲0.93%</a></td><td class="cell-RTwp">1,511,100</td><td class="cell-G=Cq">4.08</td></tr><tr id="406fb711-7467-4c6c-8184-6e407f52e328"><td class="cell-KHzA">2303</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2303">聯電</a></td><td class="cell-EF|s">62.8</td><td class="cell-&gt;;Jl">1.1</td><td class="cell-title"><a href="%E2%96%B21%2078%25%20406fb71174674c6c81846e407f52e328.html">▲1.78%</a></td><td class="cell-RTwp">771,500</td><td class="cell-G=Cq">2.23</td></tr><tr id="b48267c8-38e1-414a-90c3-aa78a88a693f"><td class="cell-KHzA">2881</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2881">富邦金</a></td><td class="cell-EF|s">84.8</td><td class="cell-&gt;;Jl">1.3</td><td class="cell-title"><a href="%E2%96%B21%2056%25%20b48267c838e1414a90c3aa78a88a693f.html">▲1.56%</a></td><td class="cell-RTwp">863,700</td><td class="cell-G=Cq">1.69</td></tr><tr id="1e4524d1-6f4d-4620-8043-658640ef4683"><td class="cell-KHzA">2308</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2308">台達電</a></td><td class="cell-EF|s">279.5</td><td class="cell-&gt;;Jl">0.5</td><td class="cell-title"><a href="%E2%96%B20%2018%25%201e4524d16f4d46208043658640ef4683.html">▲0.18%</a></td><td class="cell-RTwp">694,800</td><td class="cell-G=Cq">1.64</td></tr><tr id="853c0795-f6cf-42f7-9a86-2ecc4e5eee93"><td class="cell-KHzA">2882</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2882">國泰金</a></td><td class="cell-EF|s">59.5</td><td class="cell-&gt;;Jl">1.8</td><td class="cell-title"><a href="%E2%96%B23%2012%25%20853c0795f6cf42f79a862ecc4e5eee93.html">▲3.12%</a></td><td class="cell-RTwp">780,900</td><td class="cell-G=Cq">1.41</td></tr><tr id="a316542c-4564-4da2-ba08-22e825a16b6d"><td class="cell-KHzA">1303</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/1303">南亞</a></td><td class="cell-EF|s">87.6</td><td class="cell-&gt;;Jl">1.3</td><td class="cell-title"><a href="%E2%96%B21%2051%25%20a316542c45644da2ba0822e825a16b6d.html">▲1.51%</a></td><td class="cell-RTwp">690,000</td><td class="cell-G=Cq">1.36</td></tr><tr id="4829eed7-6960-4703-873c-bea56386220e"><td class="cell-KHzA">2002</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2002">中鋼</a></td><td class="cell-EF|s">37.5</td><td class="cell-&gt;;Jl">0.6</td><td class="cell-title"><a href="%E2%96%B21%2063%25%204829eed769604703873cbea56386220e.html">▲1.63%</a></td><td class="cell-RTwp">600,300</td><td class="cell-G=Cq">1.33</td></tr><tr id="2a1dd0a4-23e1-4e3c-abec-2597448676fe"><td class="cell-KHzA">2412</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2412">中華電</a></td><td class="cell-EF|s">111</td><td class="cell-&gt;;Jl">1</td><td class="cell-title"><a href="%E2%96%B20%2091%25%202a1dd0a423e14e3cabec2597448676fe.html">▲0.91%</a></td><td class="cell-RTwp">868,800</td><td class="cell-G=Cq">1.27</td></tr><tr id="6924663b-6fb4-4e3a-8e53-238362561aca"><td class="cell-KHzA">2891</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2891">中信金</a></td><td class="cell-EF|s">22.9</td><td class="cell-&gt;;Jl">0.15</td><td class="cell-title"><a href="%E2%96%B20%2066%25%206924663b6fb44e3a8e53238362561aca.html">▲0.66%</a></td><td class="cell-RTwp">445,500</td><td class="cell-G=Cq">1.27</td></tr><tr id="cc0c09f5-c921-44ae-8d11-9450bec6bb2b"><td class="cell-KHzA">3711</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/3711">日月光投控</a></td><td class="cell-EF|s">129</td><td class="cell-&gt;;Jl">2</td><td class="cell-title"><a href="%E2%96%B21%2057%25%20cc0c09f5c92144ae8d119450bec6bb2b.html">▲1.57%</a></td><td class="cell-RTwp">550,100</td><td class="cell-G=Cq">1.26</td></tr><tr id="14b0b0e1-4bf9-43bc-878c-19d2c6d3fe92"><td class="cell-KHzA">1301</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/1301">台塑</a></td><td class="cell-EF|s">102.5</td><td class="cell-&gt;;Jl">2</td><td class="cell-title"><a href="%E2%96%B21%2099%25%2014b0b0e14bf943bc878c19d2c6d3fe92.html">▲1.99%</a></td><td class="cell-RTwp">642,900</td><td class="cell-G=Cq">1.18</td></tr><tr id="bf18bbf5-e2cd-4734-9c1a-7004844c3546"><td class="cell-KHzA">2603</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2603">長榮</a></td><td class="cell-EF|s">140</td><td class="cell-&gt;;Jl">-1</td><td class="cell-title"><a href="%E2%96%BC0%2071%25%20bf18bbf5e2cd47349c1a7004844c3546.html">▼0.71%</a></td><td class="cell-RTwp">740,700</td><td class="cell-G=Cq">1.1</td></tr><tr id="d6491a46-561c-4f84-9ab2-dd0d857eeeae"><td class="cell-KHzA">2886</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2886">兆豐金</a></td><td class="cell-EF|s">32.45</td><td class="cell-&gt;;Jl">0.45</td><td class="cell-title"><a href="%E2%96%B21%2041%25%20d6491a46561c4f849ab2dd0d857eeeae.html">▲1.41%</a></td><td class="cell-RTwp">438,600</td><td class="cell-G=Cq">1.06</td></tr><tr id="84b34cff-d3c7-4577-b896-ccb009319e5a"><td class="cell-KHzA">5871</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/5871">中租-KY</a></td><td class="cell-EF|s">266</td><td class="cell-&gt;;Jl">3</td><td class="cell-title"><a href="%E2%96%B21%2014%25%2084b34cffd3c74577b896ccb009319e5a.html">▲1.14%</a></td><td class="cell-RTwp">381,500</td><td class="cell-G=Cq">1.04</td></tr><tr id="dbd71551-d124-4f5a-b41e-862762710a5c"><td class="cell-KHzA">1216</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/1216">統一</a></td><td class="cell-EF|s">71.6</td><td class="cell-&gt;;Jl">1.1</td><td class="cell-title"><a href="%E2%96%B21%2056%25%20dbd71551d1244f5ab41e862762710a5c.html">▲1.56%</a></td><td class="cell-RTwp">405,700</td><td class="cell-G=Cq">1.04</td></tr><tr id="96b9c6a5-4f92-43b0-8c8f-b6f1a24bb35a"><td class="cell-KHzA">2884</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2884">玉山金</a></td><td class="cell-EF|s">27.85</td><td class="cell-&gt;;Jl">0.15</td><td class="cell-title"><a href="%E2%96%B20%2054%25%2096b9c6a54f9243b08c8fb6f1a24bb35a.html">▲0.54%</a></td><td class="cell-RTwp">328,600</td><td class="cell-G=Cq">0.95</td></tr><tr id="056f47ab-3ef1-45fc-a9a9-3981ebe21276"><td class="cell-KHzA">6415</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/6415">矽力-KY</a></td><td class="cell-EF|s">3965</td><td class="cell-&gt;;Jl">215</td><td class="cell-title"><a href="%E2%96%B25%2073%25%20056f47ab3ef145fca9a93981ebe21276.html">▲5.73%</a></td><td class="cell-RTwp">367,300</td><td class="cell-G=Cq">0.94</td></tr><tr id="398d89b2-9ea9-4b85-89d2-26c40253a77a"><td class="cell-KHzA">1326</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/1326">台化</a></td><td class="cell-EF|s">83.9</td><td class="cell-&gt;;Jl">1.4</td><td class="cell-title"><a href="%E2%96%B21%2070%25%20398d89b29ea94b8589d226c40253a77a.html">▲1.70%</a></td><td class="cell-RTwp">487,100</td><td class="cell-G=Cq">0.89</td></tr><tr id="22ea5e6c-f5c3-4be0-8778-061915a4deb8"><td class="cell-KHzA">3008</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/3008">大立光</a></td><td class="cell-EF|s">2605</td><td class="cell-&gt;;Jl">-25</td><td class="cell-title"><a href="%E2%96%BC0%2095%25%2022ea5e6cf5c34be08778061915a4deb8.html">▼0.95%</a></td><td class="cell-RTwp">357,500</td><td class="cell-G=Cq">0.79</td></tr><tr id="a5b4871e-9bcd-422b-8634-7854d0505861"><td class="cell-KHzA">3034</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/3034">聯詠</a></td><td class="cell-EF|s">454.5</td><td class="cell-&gt;;Jl">8.5</td><td class="cell-title"><a href="%E2%96%B21%2091%25%20a5b4871e9bcd422b86347854d0505861.html">▲1.91%</a></td><td class="cell-RTwp">273,200</td><td class="cell-G=Cq">0.79</td></tr><tr id="8acf6191-7c83-48bd-8c48-e8cc98a6f2c1"><td class="cell-KHzA">2379</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2379">瑞昱</a></td><td class="cell-EF|s">548</td><td class="cell-&gt;;Jl">8</td><td class="cell-title"><a href="%E2%96%B21%2048%25%208acf61917c8348bd8c48e8cc98a6f2c1.html">▲1.48%</a></td><td class="cell-RTwp">279,900</td><td class="cell-G=Cq">0.76</td></tr><tr id="6a07501a-53da-49d1-b589-b31a6c5ab383"><td class="cell-KHzA">2885</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2885">元大金</a></td><td class="cell-EF|s">25</td><td class="cell-&gt;;Jl">0.4</td><td class="cell-title"><a href="%E2%96%B21%2063%25%206a07501a53da49d1b589b31a6c5ab383.html">▲1.63%</a></td><td class="cell-RTwp">298,600</td><td class="cell-G=Cq">0.73</td></tr><tr id="7356ea2a-599c-4a7e-8e46-30d156317f1e"><td class="cell-KHzA">2892</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2892">第一金</a></td><td class="cell-EF|s">22.8</td><td class="cell-&gt;;Jl">0.35</td><td class="cell-title"><a href="%E2%96%B21%2056%25%207356ea2a599c4a7e8e4630d156317f1e.html">▲1.56%</a></td><td class="cell-RTwp">290,100</td><td class="cell-G=Cq">0.71</td></tr><tr id="2c85d841-42f4-4687-a9bb-457b010c7392"><td class="cell-KHzA">1101</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/1101">台泥</a></td><td class="cell-EF|s">47.6</td><td class="cell-&gt;;Jl">0.15</td><td class="cell-title"><a href="%E2%96%B20%2032%25%202c85d84142f44687a9bb457b010c7392.html">▲0.32%</a></td><td class="cell-RTwp">283,000</td><td class="cell-G=Cq">0.71</td></tr><tr id="bb8480e1-753a-4c0f-9a67-506a71484a15"><td class="cell-KHzA">2357</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2357">華碩</a></td><td class="cell-EF|s">319</td><td class="cell-&gt;;Jl">1.5</td><td class="cell-title"><a href="%E2%96%B20%2047%25%20bb8480e1753a4c0f9a67506a71484a15.html">▲0.47%</a></td><td class="cell-RTwp">238,800</td><td class="cell-G=Cq">0.68</td></tr><tr id="da748713-df28-4382-ac36-a63e922f0631"><td class="cell-KHzA">2609</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2609">陽明</a></td><td class="cell-EF|s">136</td><td class="cell-&gt;;Jl">-1</td><td class="cell-title"><a href="%E2%96%BC0%2073%25%20da748713df284382ac36a63e922f0631.html">▼0.73%</a></td><td class="cell-RTwp">473,200</td><td class="cell-G=Cq">0.65</td></tr><tr id="3a63975b-38c2-4e06-a084-b60ca8780759"><td class="cell-KHzA">2382</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2382">廣達</a></td><td class="cell-EF|s">77.5</td><td class="cell-&gt;;Jl">0.7</td><td class="cell-title"><a href="%E2%96%B20%2091%25%203a63975b38c24e06a084b60ca8780759.html">▲0.91%</a></td><td class="cell-RTwp">300,100</td><td class="cell-G=Cq">0.63</td></tr><tr id="088ca9f0-37d9-43d4-9cd7-4d3ceedee28c"><td class="cell-KHzA">5880</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/5880">合庫金</a></td><td class="cell-EF|s">22.15</td><td class="cell-&gt;;Jl">0.3</td><td class="cell-title"><a href="%E2%96%B21%2037%25%20088ca9f037d943d49cd74d3ceedee28c.html">▲1.37%</a></td><td class="cell-RTwp">294,700</td><td class="cell-G=Cq">0.62</td></tr><tr id="7896b500-f7a4-4992-bbc1-e8b844143c08"><td class="cell-KHzA">2887</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2887">台新金</a></td><td class="cell-EF|s">19.6</td><td class="cell-&gt;;Jl">1.2</td><td class="cell-title"><a href="%E2%96%B26%2052%25%207896b500f7a44992bbc1e8b844143c08.html">▲6.52%</a></td><td class="cell-RTwp">209,500</td><td class="cell-G=Cq">0.58</td></tr><tr id="38aadf64-c7e1-4cd9-9f12-bc8b68a0ea42"><td class="cell-KHzA">2883</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2883">開發金</a></td><td class="cell-EF|s">14.2</td><td class="cell-&gt;;Jl">0.4</td><td class="cell-title"><a href="%E2%96%B22%2090%25%2038aadf64c7e14cd99f12bc8b68a0ea42.html">▲2.90%</a></td><td class="cell-RTwp">209,600</td><td class="cell-G=Cq">0.57</td></tr><tr id="e69fba1f-bb33-406e-ab8c-853dc928e174"><td class="cell-KHzA">6488</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/6488">環球晶</a></td><td class="cell-EF|s">873</td><td class="cell-&gt;;Jl">24</td><td class="cell-title"><a href="%E2%96%B22%2083%25%20e69fba1fbb33406eab8c853dc928e174.html">▲2.83%</a></td><td class="cell-RTwp">379,500</td><td class="cell-G=Cq">0.57</td></tr><tr id="5a7e6dd2-7a00-4174-bb23-c55aa165db43"><td class="cell-KHzA">3037</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/3037">欣興</a></td><td class="cell-EF|s">148</td><td class="cell-&gt;;Jl">3.5</td><td class="cell-title"><a href="%E2%96%B22%2042%25%205a7e6dd27a004174bb23c55aa165db43.html">▲2.42%</a></td><td class="cell-RTwp">220,400</td><td class="cell-G=Cq">0.54</td></tr><tr id="a3304f61-833d-4254-929a-756059725d2e"><td class="cell-KHzA">2327</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2327">國巨</a></td><td class="cell-EF|s">484.5</td><td class="cell-&gt;;Jl">7.5</td><td class="cell-title"><a href="%E2%96%B21%2057%25%20a3304f61833d4254929a756059725d2e.html">▲1.57%</a></td><td class="cell-RTwp">234,600</td><td class="cell-G=Cq">0.54</td></tr><tr id="7fe2fbde-2014-4819-9dcf-2dc97da93efa"><td class="cell-KHzA">2207</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2207">和泰車</a></td><td class="cell-EF|s">580</td><td class="cell-&gt;;Jl">17</td><td class="cell-title"><a href="%E2%96%B23%2002%25%207fe2fbde201448199dcf2dc97da93efa.html">▲3.02%</a></td><td class="cell-RTwp">308,000</td><td class="cell-G=Cq">0.52</td></tr><tr id="503810ad-3b86-419f-8a10-926cc7dcdc75"><td class="cell-KHzA">2880</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2880">華南金</a></td><td class="cell-EF|s">20.7</td><td class="cell-&gt;;Jl">0.25</td><td class="cell-title"><a href="%E2%96%B21%2022%25%20503810ad3b86419f8a10926cc7dcdc75.html">▲1.22%</a></td><td class="cell-RTwp">265,500</td><td class="cell-G=Cq">0.52</td></tr><tr id="4acd746c-5ba8-4122-aea0-ec9bfbe69ecc"><td class="cell-KHzA">3045</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/3045">台灣大</a></td><td class="cell-EF|s">99.7</td><td class="cell-&gt;;Jl">0.6</td><td class="cell-title"><a href="%E2%96%B20%2061%25%204acd746c5ba84122aea0ec9bfbe69ecc.html">▲0.61%</a></td><td class="cell-RTwp">350,200</td><td class="cell-G=Cq">0.49</td></tr><tr id="b8e10437-59e3-44e6-b5db-e5777efec7bf"><td class="cell-KHzA">2912</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2912">統一超</a></td><td class="cell-EF|s">285.5</td><td class="cell-&gt;;Jl">1</td><td class="cell-title"><a href="%E2%96%B20%2035%25%20b8e1043759e344e6b5dbe5777efec7bf.html">▲0.35%</a></td><td class="cell-RTwp">295,800</td><td class="cell-G=Cq">0.49</td></tr><tr id="0d00d16a-5901-4f26-b114-e2713690ddbc"><td class="cell-KHzA">5876</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/5876">上海商銀</a></td><td class="cell-EF|s">44.3</td><td class="cell-&gt;;Jl">0.4</td><td class="cell-title"><a href="%E2%96%B20%2091%25%200d00d16a59014f26b114e2713690ddbc.html">▲0.91%</a></td><td class="cell-RTwp">199,000</td><td class="cell-G=Cq">0.48</td></tr><tr id="e4caa965-64e0-4320-b26c-5a3f00745d57"><td class="cell-KHzA">3481</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/3481">群創</a></td><td class="cell-EF|s">17.35</td><td class="cell-&gt;;Jl">-0.2</td><td class="cell-title"><a href="%E2%96%BC1%2014%25%20e4caa96564e04320b26c5a3f00745d57.html">▼1.14%</a></td><td class="cell-RTwp">174,200</td><td class="cell-G=Cq">0.46</td></tr><tr id="1e12025a-90f5-40ea-86c1-932480ce8b06"><td class="cell-KHzA">2395</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2395">研華</a></td><td class="cell-EF|s">385</td><td class="cell-&gt;;Jl">10</td><td class="cell-title"><a href="%E2%96%B22%2067%25%201e12025a90f540ea86c1932480ce8b06.html">▲2.67%</a></td><td class="cell-RTwp">292,800</td><td class="cell-G=Cq">0.45</td></tr><tr id="6f5f0bcc-708a-403c-a78e-8d9efb30c327"><td class="cell-KHzA">2409</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2409">友達</a></td><td class="cell-EF|s">18</td><td class="cell-&gt;;Jl">-0.1</td><td class="cell-title"><a href="%E2%96%BC0%2055%25%206f5f0bcc708a403ca78e8d9efb30c327.html">▼0.55%</a></td><td class="cell-RTwp">169,900</td><td class="cell-G=Cq">0.44</td></tr><tr id="8aa17e09-aef1-4f39-b95f-b6893e71a924"><td class="cell-KHzA">2345</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2345">智邦</a></td><td class="cell-EF|s">287</td><td class="cell-&gt;;Jl">-4.5</td><td class="cell-title"><a href="%E2%96%BC1%2054%25%208aa17e09aef14f39b95fb6893e71a924.html">▼1.54%</a></td><td class="cell-RTwp">154,800</td><td class="cell-G=Cq">0.43</td></tr><tr id="da47c6c4-c6bd-4046-90af-62867a97a534"><td class="cell-KHzA">2890</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2890">永豐金</a></td><td class="cell-EF|s">14.25</td><td class="cell-&gt;;Jl">0.2</td><td class="cell-title"><a href="%E2%96%B21%2042%25%20da47c6c4c6bd404690af62867a97a534.html">▲1.42%</a></td><td class="cell-RTwp">159,500</td><td class="cell-G=Cq">0.43</td></tr><tr id="fef6551b-7bc1-427e-91e1-f8a20aa92a61"><td class="cell-KHzA">2615</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2615">萬海</a></td><td class="cell-EF|s">249</td><td class="cell-&gt;;Jl">-3</td><td class="cell-title"><a href="%E2%96%BC1%2019%25%20fef6551b7bc1427e91e1f8a20aa92a61.html">▼1.19%</a></td><td class="cell-RTwp">555,700</td><td class="cell-G=Cq">0.41</td></tr><tr id="129d4d00-0966-4357-b7cc-462c1fec2dfc"><td class="cell-KHzA">5347</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/5347">世界</a></td><td class="cell-EF|s">149</td><td class="cell-&gt;;Jl">0.5</td><td class="cell-title"><a href="%E2%96%B20%2034%25%20129d4d0009664357b7cc462c1fec2dfc.html">▲0.34%</a></td><td class="cell-RTwp">239,300</td><td class="cell-G=Cq">0.4</td></tr><tr id="5d8ce84e-afdd-42a0-a304-eb08904b5f28"><td class="cell-KHzA">4938</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/4938">和碩</a></td><td class="cell-EF|s">64.6</td><td class="cell-&gt;;Jl">-0.1</td><td class="cell-title"><a href="%E2%96%BC0%2015%25%205d8ce84eafdd42a0a304eb08904b5f28.html">▼0.15%</a></td><td class="cell-RTwp">173,300</td><td class="cell-G=Cq">0.39</td></tr><tr id="124553e6-4f2c-4680-b0c1-bee77b2c460d"><td class="cell-KHzA">2301</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2301">光寶科</a></td><td class="cell-EF|s">61</td><td class="cell-&gt;;Jl">1.3</td><td class="cell-title"><a href="%E2%96%B22%2018%25%20124553e64f2c4680b0c1bee77b2c460d.html">▲2.18%</a></td><td class="cell-RTwp">143,600</td><td class="cell-G=Cq">0.39</td></tr><tr id="cc10ad75-b7d9-45bd-ad77-bd5cc1199266"><td class="cell-KHzA">2474</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2474">可成</a></td><td class="cell-EF|s">179</td><td class="cell-&gt;;Jl">1.5</td><td class="cell-title"><a href="%E2%96%B20%2085%25%20cc10ad75b7d945bdad77bd5cc1199266.html">▲0.85%</a></td><td class="cell-RTwp">125,700</td><td class="cell-G=Cq">0.37</td></tr><tr id="f3cc5c50-f575-4d0b-bbc8-71621e908561"><td class="cell-KHzA">1590</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/1590">亞德客-KY</a></td><td class="cell-EF|s">853</td><td class="cell-&gt;;Jl">6</td><td class="cell-title"><a href="%E2%96%B20%2071%25%20f3cc5c50f5754d0bbbc871621e908561.html">▲0.71%</a></td><td class="cell-RTwp">158,800</td><td class="cell-G=Cq">0.34</td></tr><tr id="9908937a-25da-4d2c-a03b-3ec5f21af2f3"><td class="cell-KHzA">6505</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/6505">台塑化</a></td><td class="cell-EF|s">98.5</td><td class="cell-&gt;;Jl">2.2</td><td class="cell-title"><a href="%E2%96%B22%2028%25%209908937a25da4d2ca03b3ec5f21af2f3.html">▲2.28%</a></td><td class="cell-RTwp">925,000</td><td class="cell-G=Cq">0.34</td></tr><tr id="fbe234e4-aaa8-430f-adc1-3564576e087f"><td class="cell-KHzA">1476</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/1476">儒鴻</a></td><td class="cell-EF|s">565</td><td class="cell-&gt;;Jl">23</td><td class="cell-title"><a href="%E2%96%B24%2024%25%20fbe234e4aaa8430fadc13564576e087f.html">▲4.24%</a></td><td class="cell-RTwp">150,900</td><td class="cell-G=Cq">0.33</td></tr><tr id="6f86cbae-688d-4b78-8f70-ebc8b335d5b2"><td class="cell-KHzA">2888</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2888">新光金</a></td><td class="cell-EF|s">9.55</td><td class="cell-&gt;;Jl">0.31</td><td class="cell-title"><a href="%E2%96%B23%2035%25%206f86cbae688d4b788f70ebc8b335d5b2.html">▲3.35%</a></td><td class="cell-RTwp">123,000</td><td class="cell-G=Cq">0.33</td></tr><tr id="936b5162-264e-43e7-a142-654dbed35bef"><td class="cell-KHzA">3105</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/3105">穩懋</a></td><td class="cell-EF|s">327.5</td><td class="cell-&gt;;Jl">2.5</td><td class="cell-title"><a href="%E2%96%B20%2077%25%20936b5162264e43e7a142654dbed35bef.html">▲0.77%</a></td><td class="cell-RTwp">139,100</td><td class="cell-G=Cq">0.33</td></tr><tr id="80ad1fed-49a8-40a1-9361-1fc427b3f788"><td class="cell-KHzA">9921</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/9921">巨大</a></td><td class="cell-EF|s">332.5</td><td class="cell-&gt;;Jl">11</td><td class="cell-title"><a href="%E2%96%B23%2042%25%2080ad1fed49a840a193611fc427b3f788.html">▲3.42%</a></td><td class="cell-RTwp">123,400</td><td class="cell-G=Cq">0.3</td></tr><tr id="99fcae2a-9e82-4c51-a6e8-5e5c94977bfa"><td class="cell-KHzA">8046</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/8046">南電</a></td><td class="cell-EF|s">420.5</td><td class="cell-&gt;;Jl">7.5</td><td class="cell-title"><a href="%E2%96%B21%2082%25%2099fcae2a9e824c51a6e85e5c94977bfa.html">▲1.82%</a></td><td class="cell-RTwp">269,100</td><td class="cell-G=Cq">0.29</td></tr><tr id="763493c7-a585-45f1-9eac-626d4a0169b4"><td class="cell-KHzA">4904</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/4904">遠傳</a></td><td class="cell-EF|s">61.4</td><td class="cell-&gt;;Jl">0.2</td><td class="cell-title"><a href="%E2%96%B20%2033%25%20763493c7a58545f19eac626d4a0169b4.html">▲0.33%</a></td><td class="cell-RTwp">199,400</td><td class="cell-G=Cq">0.29</td></tr><tr id="9a21d627-89c3-42bd-ae90-40b496d4bc25"><td class="cell-KHzA">1102</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/1102">亞泥</a></td><td class="cell-EF|s">44.7</td><td class="cell-&gt;;Jl">0.5</td><td class="cell-title"><a href="%E2%96%B21%2013%25%209a21d62789c342bdae9040b496d4bc25.html">▲1.13%</a></td><td class="cell-RTwp">150,400</td><td class="cell-G=Cq">0.29</td></tr><tr id="d4355263-28fa-4565-92cb-88ac668b2829"><td class="cell-KHzA">2324</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2324">仁寶</a></td><td class="cell-EF|s">22.7</td><td class="cell-&gt;;Jl">0.1</td><td class="cell-title"><a href="%E2%96%B20%2044%25%20d435526328fa456592cb88ac668b2829.html">▲0.44%</a></td><td class="cell-RTwp">100,000</td><td class="cell-G=Cq">0.29</td></tr><tr id="de093f80-793f-4f46-9a09-cb0970eebc42"><td class="cell-KHzA">9910</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/9910">豐泰</a></td><td class="cell-EF|s">215</td><td class="cell-&gt;;Jl">4.5</td><td class="cell-title"><a href="%E2%96%B22%2014%25%20de093f80793f4f469a09cb0970eebc42.html">▲2.14%</a></td><td class="cell-RTwp">188,200</td><td class="cell-G=Cq">0.28</td></tr><tr id="a7a1e623-002f-406e-a206-8ba4b11fdbed"><td class="cell-KHzA">2344</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2344">華邦電</a></td><td class="cell-EF|s">29.65</td><td class="cell-&gt;;Jl">0.5</td><td class="cell-title"><a href="%E2%96%B21%2072%25%20a7a1e623002f406ea2068ba4b11fdbed.html">▲1.72%</a></td><td class="cell-RTwp">117,800</td><td class="cell-G=Cq">0.27</td></tr><tr id="1f59b785-c50f-4bf7-b637-44fb816b0ec8"><td class="cell-KHzA">2377</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2377">微星</a></td><td class="cell-EF|s">130</td><td class="cell-&gt;;Jl">2.5</td><td class="cell-title"><a href="%E2%96%B21%2096%25%201f59b785c50f4bf7b63744fb816b0ec8.html">▲1.96%</a></td><td class="cell-RTwp">109,400</td><td class="cell-G=Cq">0.26</td></tr><tr id="38fc2008-3494-44d3-a772-a06ac39be6d4"><td class="cell-KHzA">2049</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2049">上銀</a></td><td class="cell-EF|s">329</td><td class="cell-&gt;;Jl">-1</td><td class="cell-title"><a href="%E2%96%BC0%2030%25%2038fc2008349444d3a772a06ac39be6d4.html">▼0.30%</a></td><td class="cell-RTwp">106,900</td><td class="cell-G=Cq">0.26</td></tr><tr id="616a730d-c0f8-4ce5-9ea7-f09d0a39f783"><td class="cell-KHzA">1402</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/1402">遠東新</a></td><td class="cell-EF|s">29.9</td><td class="cell-&gt;;Jl">0.25</td><td class="cell-title"><a href="%E2%96%B20%2084%25%20616a730dc0f84ce59ea7f09d0a39f783.html">▲0.84%</a></td><td class="cell-RTwp">159,800</td><td class="cell-G=Cq">0.26</td></tr><tr id="dc6d718c-a3bc-4024-8d55-2165cf05fb69"><td class="cell-KHzA">2408</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2408">南亞科</a></td><td class="cell-EF|s">66.4</td><td class="cell-&gt;;Jl">1.4</td><td class="cell-title"><a href="%E2%96%B22%2015%25%20dc6d718ca3bc40248d552165cf05fb69.html">▲2.15%</a></td><td class="cell-RTwp">203,800</td><td class="cell-G=Cq">0.25</td></tr><tr id="a9551363-3864-4565-88a9-bedb751b4184"><td class="cell-KHzA">3702</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/3702">大聯大</a></td><td class="cell-EF|s">48.3</td><td class="cell-&gt;;Jl">0.65</td><td class="cell-title"><a href="%E2%96%B21%2036%25%20a95513633864456588a9bedb751b4184.html">▲1.36%</a></td><td class="cell-RTwp">80,600</td><td class="cell-G=Cq">0.23</td></tr><tr id="77e43b15-a592-4c86-9c7d-59ee8b40b71c"><td class="cell-KHzA">9904</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/9904">寶成</a></td><td class="cell-EF|s">32.6</td><td class="cell-&gt;;Jl">0.25</td><td class="cell-title"><a href="%E2%96%B20%2077%25%2077e43b15a5924c869c7d59ee8b40b71c.html">▲0.77%</a></td><td class="cell-RTwp">95,800</td><td class="cell-G=Cq">0.23</td></tr><tr id="ffb1be57-0195-40ed-bebd-02cc382f75f4"><td class="cell-KHzA">6239</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/6239">力成</a></td><td class="cell-EF|s">111.5</td><td class="cell-&gt;;Jl">3</td><td class="cell-title"><a href="%E2%96%B22%2076%25%20ffb1be57019540edbebd02cc382f75f4.html">▲2.76%</a></td><td class="cell-RTwp">86,500</td><td class="cell-G=Cq">0.23</td></tr><tr id="fa591a7c-e0b4-4156-b5ce-e3052bb9e1c4"><td class="cell-KHzA">6669</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/6669">緯穎</a></td><td class="cell-EF|s">983</td><td class="cell-&gt;;Jl">30</td><td class="cell-title"><a href="%E2%96%B23%2015%25%20fa591a7ce0b44156b5cee3052bb9e1c4.html">▲3.15%</a></td><td class="cell-RTwp">171,000</td><td class="cell-G=Cq">0.23</td></tr><tr id="1948b457-5fac-4da9-8415-e729355dab08"><td class="cell-KHzA">3231</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/3231">緯創</a></td><td class="cell-EF|s">27.65</td><td class="cell-&gt;;Jl">0.15</td><td class="cell-title"><a href="%E2%96%B20%2055%25%201948b4575fac4da98415e729355dab08.html">▲0.55%</a></td><td class="cell-RTwp">79,800</td><td class="cell-G=Cq">0.22</td></tr><tr id="22ead287-7d88-4dc7-b16d-684123779f94"><td class="cell-KHzA">2353</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2353">宏碁</a></td><td class="cell-EF|s">25</td><td class="cell-&gt;;Jl">0</td><td class="cell-title"><a href="0%2000%25%2022ead2877d884dc7b16d684123779f94.html">0.00%</a></td><td class="cell-RTwp">76,000</td><td class="cell-G=Cq">0.22</td></tr><tr id="3ea05840-d6d7-4ca5-a0ec-b9362b2c5391"><td class="cell-KHzA">2347</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2347">聯強</a></td><td class="cell-EF|s">52.9</td><td class="cell-&gt;;Jl">0.7</td><td class="cell-title"><a href="%E2%96%B21%2034%25%203ea05840d6d74ca5a0ecb9362b2c5391.html">▲1.34%</a></td><td class="cell-RTwp">88,200</td><td class="cell-G=Cq">0.21</td></tr><tr id="5b7ff789-e20a-472a-b878-533981c21da5"><td class="cell-KHzA">2801</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2801">彰銀</a></td><td class="cell-EF|s">17</td><td class="cell-&gt;;Jl">0.05</td><td class="cell-title"><a href="%E2%96%B20%2029%25%205b7ff789e20a472ab878533981c21da5.html">▲0.29%</a></td><td class="cell-RTwp">171,900</td><td class="cell-G=Cq">0.21</td></tr><tr id="01544e83-fcdb-43ba-a388-23b02f356beb"><td class="cell-KHzA">2356</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2356">英業達</a></td><td class="cell-EF|s">24.35</td><td class="cell-&gt;;Jl">0.15</td><td class="cell-title"><a href="%E2%96%B20%2062%25%2001544e83fcdb43baa38823b02f356beb.html">▲0.62%</a></td><td class="cell-RTwp">86,600</td><td class="cell-G=Cq">0.2</td></tr><tr id="2b60f95e-4f7d-41ee-b173-22dba5c7fe4c"><td class="cell-KHzA">2105</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2105">正新</a></td><td class="cell-EF|s">37.05</td><td class="cell-&gt;;Jl">-1.1</td><td class="cell-title"><a href="%E2%96%BC2%2088%25%202b60f95e4f7d41eeb17322dba5c7fe4c.html">▼2.88%</a></td><td class="cell-RTwp">119,100</td><td class="cell-G=Cq">0.2</td></tr><tr id="2469a745-7d73-487c-8ffc-62f4d8b21066"><td class="cell-KHzA">8299</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/8299">群聯</a></td><td class="cell-EF|s">421.5</td><td class="cell-&gt;;Jl">4</td><td class="cell-title"><a href="%E2%96%B20%2096%25%202469a7457d73487c8ffc62f4d8b21066.html">▲0.96%</a></td><td class="cell-RTwp">82,800</td><td class="cell-G=Cq">0.2</td></tr><tr id="26f452e1-d8d1-44f6-99bf-92e4b306457d"><td class="cell-KHzA">8464</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/8464">億豐</a></td><td class="cell-EF|s">416.5</td><td class="cell-&gt;;Jl">2</td><td class="cell-title"><a href="%E2%96%B20%2048%25%2026f452e1d8d144f699bf92e4b306457d.html">▲0.48%</a></td><td class="cell-RTwp">121,500</td><td class="cell-G=Cq">0.2</td></tr><tr id="127b8edf-81fb-4f52-ace2-66ad5e50c18f"><td class="cell-KHzA">4958</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/4958">臻鼎-KY</a></td><td class="cell-EF|s">96.8</td><td class="cell-&gt;;Jl">-0.5</td><td class="cell-title"><a href="%E2%96%BC0%2051%25%20127b8edf81fb4f52ace266ad5e50c18f.html">▼0.51%</a></td><td class="cell-RTwp">93,100</td><td class="cell-G=Cq">0.19</td></tr><tr id="0dffb783-8f7a-45bb-a0d4-9795bf9eff2c"><td class="cell-KHzA">2633</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2633">台灣高鐵</a></td><td class="cell-EF|s">30</td><td class="cell-&gt;;Jl">0.1</td><td class="cell-title"><a href="%E2%96%B20%2033%25%200dffb7838f7a45bba0d49795bf9eff2c.html">▲0.33%</a></td><td class="cell-RTwp">169,100</td><td class="cell-G=Cq">0.18</td></tr><tr id="ca67e35e-2c77-43dd-aa01-831a6c49e3fb"><td class="cell-KHzA">2354</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2354">鴻準</a></td><td class="cell-EF|s">66.2</td><td class="cell-&gt;;Jl">0</td><td class="cell-title"><a href="0%2000%25%20ca67e35e2c7743ddaa01831a6c49e3fb.html">0.00%</a></td><td class="cell-RTwp">93,100</td><td class="cell-G=Cq">0.18</td></tr><tr id="e05b686e-527b-4dea-b903-a858dc9f0e78"><td class="cell-KHzA">2492</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2492">華新科</a></td><td class="cell-EF|s">183.5</td><td class="cell-&gt;;Jl">-5.5</td><td class="cell-title"><a href="%E2%96%BC2%2091%25%20e05b686e527b4deab903a858dc9f0e78.html">▼2.91%</a></td><td class="cell-RTwp">87,400</td><td class="cell-G=Cq">0.17</td></tr><tr id="71bdabd5-a99b-4833-bbbb-c6f133d2cf7f"><td class="cell-KHzA">5269</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/5269">祥碩</a></td><td class="cell-EF|s">2035</td><td class="cell-&gt;;Jl">175</td><td class="cell-title"><a href="%E2%96%B29%2041%25%2071bdabd5a99b4833bbbbc6f133d2cf7f.html">▲9.41%</a></td><td class="cell-RTwp">145,000</td><td class="cell-G=Cq">0.17</td></tr><tr id="71615b94-db83-474b-ab95-ab15bf857df5"><td class="cell-KHzA">9945</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/9945">潤泰新</a></td><td class="cell-EF|s">67.6</td><td class="cell-&gt;;Jl">0.7</td><td class="cell-title"><a href="%E2%96%B21%2005%25%2071615b94db83474bab95ab15bf857df5.html">▲1.05%</a></td><td class="cell-RTwp">102,000</td><td class="cell-G=Cq">0.17</td></tr><tr id="b626463a-1b91-4738-b7c5-504a2c105bc3"><td class="cell-KHzA">2823</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2823">中壽</a></td><td class="cell-EF|s">29</td><td class="cell-&gt;;Jl">0.3</td><td class="cell-title"><a href="%E2%96%B21%2005%25%20b626463a1b914738b7c5504a2c105bc3.html">▲1.05%</a></td><td class="cell-RTwp">137,000</td><td class="cell-G=Cq">0.16</td></tr><tr id="3e8e98d1-7037-4da1-b6ac-17ab30273997"><td class="cell-KHzA">2834</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/2834">臺企銀</a></td><td class="cell-EF|s">9.75</td><td class="cell-&gt;;Jl">0.19</td><td class="cell-title"><a href="%E2%96%B21%2099%25%203e8e98d170374da1b6ac17ab30273997.html">▲1.99%</a></td><td class="cell-RTwp">72,700</td><td class="cell-G=Cq">0.16</td></tr><tr id="f23afa9d-4d4b-4abd-8e10-4d9bab44a1d2"><td class="cell-KHzA">4743</td><td class="cell-D&gt;Gv"><a href="https://histock.tw/stock/4743">合一</a></td><td class="cell-EF|s">191</td><td class="cell-&gt;;Jl">-4.5</td><td class="cell-title"><a href="%E2%96%BC2%2030%25%20f23afa9d4d4b4abd8e104d9bab44a1d2.html">▼2.30%</a></td><td class="cell-RTwp">72,700</td><td class="cell-G=Cq">0.13</td></tr></tbody></table></div></article></body></html>

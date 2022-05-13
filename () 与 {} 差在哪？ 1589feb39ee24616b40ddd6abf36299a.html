@@ -1,0 +1,761 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>() 与 {} 差在哪？</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1589feb3-9ee2-4616-b40d-dd6abf36299a" class="page sans"><header><h1 class="page-title">() 与 {} 差在哪？</h1></header><div class="page-body"><p id="1c51015e-0ae3-4f34-adf6-a724a99e25d2" class="">
+</p><p id="b40a0b4b-fbda-4e29-b3c7-397c575dae99" class="">
+</p><h1 id="afbb73e8-07c5-4fcb-831b-1ce1792753f3" class="">() 与 {} 差在哪？</h1><p id="f2d63bc3-8c17-413c-bfc6-457761efe9e6" class="">嗯，这次轻松一下，不讲太多... ^_^</p><p id="897b38c6-aa17-40c7-8cb6-f4f6744c6641" class="">先说一下，为何要用 () 或者 {} 好了。</p><p id="074f3b9b-f3f4-4366-8e5d-c0574cae6376" class="">许多时候，我们在 shell 操作上，需要在 一定的条件下执行多个命令，也就是说， 要么不执行，要么就全执行，而不是每次 依序的判断是否要执行下一个命令。</p><p id="d07eb843-45b9-4528-be61-2c9848107edd" class="">或者，要从一些命令执行的先后次序中得到结果， 如算术运算的 2*(3+4) 那样...</p><p id="bf2c6fe2-7415-4f83-961e-759250b7b68b" class="">这时候，我们就可以引入 &quot;<code>命令群组</code>&quot;(<code>command group</code>) 的概念：将许多命令集中处理。</p><p id="49bb8fd2-f3bd-4dae-aa15-a0636f5e63d3" class="">在 shell <code>command line</code>中，一般人或许不太计较<code>()</code>与 <code>{}</code>这两对符号的差异，虽然两者都可以将多个命令当作群组处理， 但若从技术细节上，却是很不一样的：</p><ul id="b617b651-9446-4a65-ab3f-b51e03df081e" class="bulleted-list"><li style="list-style-type:disc"><code>()</code> 将<code>command group</code>置于<code>sub-shell(子shell)</code> 中去执行，也称 <code>nested sub-shell</code>。</li></ul><ul id="ede5e75e-c7b1-4508-8273-3ed3684872a0" class="bulleted-list"><li style="list-style-type:disc"><code>{}</code> 则是在同一个<code>shell</code>内完成，也称<code>non-named command group</code>。</li></ul><p id="586ada49-750b-4608-9e67-2b5add103528" class="">若你对上一章的 fork 与 source 的概念还记得的话， 那就不难理解两者的差异了。</p><p id="44f9926d-f0cc-4d22-bd27-a1ce7a69fdb0" class="">要是在 <code>command group</code>中扯上变量及其他环境的修改， 我们可以根据不同的需求来使用<code>()</code>或<code>{}</code>。 通常而言, 若所作的修改是临时的，且不想影响原有或以后的设定， 那我们就使用<code>nested sub-shell</code>, 即<code>()</code>; 反之，则用<code>non-named command group</code>, 即<code>{}</code>。</p><p id="7f555d01-fb52-4d93-a45c-ee41ad58001f" class="">是的，光从<code>command line</code>来看，<code>()</code>与 <code>{}</code>差别就讲完了，够轻松吧~~~, ^_^</p><p id="ce02bf4e-89f7-4b11-82f4-35732f0e004d" class="">然而，这两个<code>meta</code>用在其他<code>command meta</code>或领域中 (如 Regular Expression)， 还是有很多差别的。 只是，我不打算再去说明了，留给读者慢慢发掘好了...</p><p id="e0cb42f3-1941-48bc-bbc4-a09aa6ac5b5a" class="">我这里只想补充一个概念，就是<code>function</code>。 所谓<code>function</code>，就是用一个名字去命名一个<code>command group</code>, 然后再调用这个名字去执行<code>command group</code>。</p><p id="f97681ff-02f9-458d-bce3-b6fa1028ceba" class="">从<code>non-named command group</code>来推断， 大概你也可以推测到我要说的是<code>{}</code>了吧？(yes! 你真聪明 ^_^)</p><p id="6f50526f-755f-487f-a689-6389885af9d9" class="">在 bash 中，function 的定义方式有两种：</p><ul id="ed3cdf13-3bc2-4240-a067-21920348580b" class="bulleted-list"><li style="list-style-type:disc">方式一：</li></ul><pre id="8b7d4ba1-9e75-42b4-a22a-c0bfba46e6df" class="code code-wrap"><code>function function_name {
+    command1
+    command2
+    command3
+    .....
+}</code></pre><ul id="63356d13-a14b-48bd-ab99-a16f64527def" class="bulleted-list"><li style="list-style-type:disc">方式二：</li></ul><pre id="7b11bb57-a326-4a88-b42c-a99b8d7c3065" class="code code-wrap"><code>function_name () {
+    command1
+    command2
+    command3
+    ......
+}</code></pre><p id="9c8c858b-6f7e-4d98-9137-d8af02c8a99c" class="">用哪一种方式无所谓， 只是碰到所定义的名称与现有的命令或者别名冲突的话， 方式二或许会失败。 但方式二起码可以少打个<code>function</code>这一串英文字符， 对懒人来说 (如我)，有何乐而不为呢？...^_^</p><p id="8291a976-240f-4407-8b7b-69f764b349c0" class=""><code>function</code> 在一定程度上来说，也可以称为 &quot;函数&quot;， 但请不要与传统编程所使用的 &quot;函数&quot;(library) 搞混了， 毕竟两者差异很大。 唯一相同的是，我们都可以随时用 &quot;已定义的名称&quot; 来调用它们...</p><p id="84abd3ce-b7f8-4534-8846-ccde2a8011cb" class="">若我们在 shell 操作中，需要不断地重复某些命令， 我们首先想到的，或许是将命令写成 shell 脚本 (shell script)。
+ 不过，我们也可以写成 function, 然后在 command line 中打上 function_name 就可当一般的 shell 
+script 使用了。</p><p id="4428aeac-7158-4e70-9460-63d33b82baf8" class="">若只是你在 shell 中定义的<code>function</code>, 除了用<code>unset</code> 
+function_name 取消外， 一旦你退出 shell， function 也跟着消失。 然而，在 script 中使用 function
+ 却有许多好处， 除了提高整体 script 的执行性能外 (因为已经载入)， 还可以节省许多重复的代码......</p><p id="9b7712e9-8bd7-4540-9841-a4243577a0e4" class="">简单而言，若你会将多个命令写成 script 以供调用的话， 那你可以将 function 看成 script 中 script。... ^_^</p><p id="82c09828-2a04-45ff-8223-a6a44608dff2" class="">而且通过上一章节介绍的<code>source</code>命令， 我们可以自行定义许许多多好用的 function， 在集中写在特定文件中， 然后，在其他的 script 中用<code>source</code>将它们载入，并反复执行。</p><p id="cc30634b-77c7-4f4e-bdd5-2eb3ae9f1057" class="">若你是<code>RedHat Linux</code>的使用者， 或许，已经猜出 <code>/etc/rc.d/init.d/functions</code>这个文件时啥作用了~~~ ^_^</p><p id="071608bc-2221-4fed-9cc3-09f30f06fb8c" class="">
+</p><h1 id="dd397202-316f-4b82-b1d1-c1d64f009d19" class="">$(())与$()还有${}差在哪？</h1><p id="a45bf0ca-072e-4dea-9195-0416c1cb87f9" class="">我们上一章介绍了()与{}的不同，这次让我们扩展一下，看看更多的变化：$()与${}又是啥玩意儿呢？</p><p id="56f687bc-36d7-4b87-b54b-527974b08e6c" class="">在bash shell中, <code>$()</code>与``(反引号)都是用来做<code>命令替换</code>(command substitution)的。</p><p id="131d18a2-1dad-43e7-be6b-e036ef0b8df4" class="">所谓的<code>命令替换</code>与我们第五章学过的变量替换差不多，都是用来<code>重组命令行</code>：完成 `` 或者<code>$()</code>里面的
+命令，将其结果替换出来，再重组命令行。</p><p id="396f4390-a4ea-40a5-b487-664bb1a21fcb" class="">例如：</p><pre id="1f0e1894-df1e-4c96-b0de-b21294e829e1" class="code code-wrap"><code>$ echo the last sunday is $(date -d &quot;last sunday&quot; +%Y-%m-%d)</code></pre><p id="ececcf48-9b0e-4f34-aeb0-c565014246d1" class="">如此便可方便得到上一个星期天的日期了...^_^</p><p id="88f19368-07e3-4c63-94f9-6e6a7b708e0a" class="">在操作上， 用$()或``都无所谓，
+只是我个人比较喜欢用$()，理由是：</p><ol type="1" id="e014bfa0-db58-4c9d-afa0-32a7057f9985" class="numbered-list" start="1"><li>``(反引号)很容易与&#x27;&#x27;(单引号)搞混乱，尤其对初学者来说。
+有时在一些奇怪的字形显示中，两种符号是一模一样的(只取两点)。
+当然了有经验的朋友还是一眼就能分辨两者。只是，若能更好的避免混乱，
+又何乐而不为呢？ ^_^</li></ol><ol type="1" id="a9c39a1c-0d13-4bc1-b4bd-b7f221209a5c" class="numbered-list" start="2"><li>在多次的复合替换中， ``需要额外的转义(escape, )处理，而$()则比较直观。
+例如，一个错误的使用的例子：</li></ol><pre id="1b7983dc-b922-4b53-abac-b784b7378661" class="code code-wrap"><code>    command1 `command2 `command3` `</code></pre><p id="cb6df8db-6107-49ea-92d7-7dc26148acdd" class="">原来的本意是要在command2 `command3` ,
+先将command3替换出来给command2处理，
+然后再将command2的处理结果，给command1来处理。
+然而真正的结果在命令行中却是分成了`command2`与 ``。</p><p id="0b6cc57c-4097-45ba-9276-1093e8c45f5f" class="">正确的输入应该如下：</p><pre id="ea0ff37a-cf1e-41b6-99d7-4cef1d306cd7" class="code code-wrap"><code>    command1 `command2 \`command3\` `</code></pre><p id="3aa18959-a1fb-4c80-ac36-58da73214995" class="">要不然换成$()就没有问题了：</p><pre id="a48ef68e-6738-4bd9-b79f-a4a63766507e" class="code code-wrap"><code>    command1 $(commmand2 $(command3))</code></pre><p id="f332f138-f744-474c-9df1-678a6eac600c" class="">只要你喜欢，做多少层的替换都没有问题~~~^_^</p><p id="c426fa5c-688e-4ac5-b12c-68a0afe5cb58" class="">不过，$()并不是没有弊端的...
+首先，``基本上可用在所有的unix shell中使用，
+若写成 shell script，其移植性比较高。
+而$()并不是每一种shell都能使用，我只能说，
+若你用bash2的话，肯定没问题... ^_^</p><p id="369f3dea-4dd6-45e8-839e-9c59009f9e2e" class="">接下来，再让我们看看${}吧...它其实就是用来做
+变量替换用的啦。
+一般情况下，$var与${var}并没有啥不一样。
+但是用${}会比较精准的界定变量名称的范围，
+比方说:</p><pre id="681bca2a-e5d1-4bf9-a2e0-7a9dc18f219a" class="code code-wrap"><code>$ A=B
+$ echo $AB</code></pre><p id="a18ba5b1-57fc-49fe-a6ac-8ca4962a6157" class="">原本是打算先将$A的结果替换出来，
+然后在其后补一个字母B；
+但命令行上，
+真正的结果却是替换变量名称为AB的值出来...
+若使用${}就没有问题了：</p><pre id="d84e76a3-29b0-4e5a-97ed-a8a67a11a914" class="code code-wrap"><code>$ A=B
+$ echo ${A}B
+$ BB</code></pre><p id="f10a4d1f-37bc-493c-95c6-0c8516883a1a" class="">不过，假如你只看到<code>${}</code>只能用来界定变量名称的话，
+那你就实在太小看bash了。</p><p id="a3c8d235-1b76-4b62-bea2-8858dd89d162" class="">为了完整起见，我这里再用一些例子加以说明<code>${}</code>的一些
+特异功能：
+假设我们定义了一个变量file为：</p><pre id="7efc8dc8-b642-44ef-87ec-16550767ecc7" class="code code-wrap"><code>file=/dir1/dir2/dir3/my.file.txt</code></pre><p id="81844d45-e045-4861-8775-cb16c87014e0" class="">我们可以用<code>${}</code>分别替换获得不同的值：</p><h2 id="462475b0-b355-450a-9369-f9d053c0e42a" class="">shell 字符串的非贪婪(最小匹配)左删除</h2><pre id="22b886dd-1d8d-414c-bcf3-d6f376c667a1" class="code code-wrap"><code>${file#*/}  #其值为：dir1/dir2/dir3/my.file.txt</code></pre><p id="284ac130-b4f6-438f-b701-e6bd0209bcf5" class="">拿掉第一个<code>/</code>及其左边的字符串，其结果为：
+<code>dir1/dir2/dir3/my.file.txt</code> 。</p><pre id="abb99aeb-820e-4a52-a389-d4ce6194495e" class="code code-wrap"><code>${file#*.}  #其值为：file.txt</code></pre><p id="2dd6e6cb-f18e-481b-ae23-af9198674394" class="">拿掉第一个<code>.</code>及其左边的字符串，其结果为：
+<code>file.txt</code> 。</p><h2 id="14af9a7a-6a96-43b1-b53b-5da8b76e2a83" class="">shell 字符串的贪婪(最大匹配)左删除</h2><pre id="fb4b664d-a7d8-4564-8fa2-0a32ffc551d2" class="code code-wrap"><code>${file##*/} #其值为：my.file.txt</code></pre><p id="9a9ed8f8-2757-4bd1-a243-12b6fdf83eed" class="">拿掉最后一个<code>/</code>及其左边的字符串，其结果为：
+<code>my.file.txt</code></p><pre id="54c14b3a-bcdf-4959-a676-31d028358509" class="code code-wrap"><code>${file##*.} #其值为：txt</code></pre><p id="3376735e-3448-4fb0-857d-0581b7f3d969" class="">拿掉最后一个<code>.</code>及其左边的字符串，其结果为：
+<code>txt</code></p><h2 id="b419783e-47e9-42a8-80d5-bba802e82b3a" class="">shell 字符串的非贪婪(最小匹配)右删除</h2><pre id="d7504e96-bcc9-44c4-8c69-7851395ffc80" class="code code-wrap"><code>${file%/*}  #其值为：/dir1/dir2/dir3</code></pre><p id="2f2d7164-b658-4660-98b6-0c0a6b95c536" class="">拿掉最后一个<code>/</code>及其右边的字符串，其结果为：
+<code>/dir1/dir2/dir3</code>。</p><pre id="6a091027-61b6-45a3-a630-f5e205289afb" class="code code-wrap"><code>${file%.*}  #其值为：/dir1/dir2/dir3/my.file</code></pre><p id="40f786f1-a223-4797-aedb-4fceae0910d5" class="">拿掉最后一个<code>.</code>及其右边的字符串，其结果为：
+<code>/dir1/dir2/dir3/my.file</code>。</p><h2 id="e3b94019-2299-4206-9ca7-9fcc93fd5e8a" class="">shell 字符串的贪婪(最大匹配)右删除</h2><pre id="01bcbfe0-6343-4335-a8bd-c209064fa545" class="code code-wrap"><code>${file%%/*}  #其值为：其值为空。</code></pre><p id="9af8df61-51c0-45d5-99f1-85eab5484d06" class="">拿掉第一个<code>/</code>及其右边的字符串，其结果为：
+空串。</p><pre id="a30285f4-0e7e-44fc-a6ba-9c87a3f1784b" class="code code-wrap"><code>${file%%.*}  #其值为：/dir1/dir2/dir3/my。</code></pre><p id="99576177-b60e-496d-b700-f355a1e91ab6" class="">拿掉第一个<code>.</code>及其右边的字符串，其结果为：
+/dir1/dir2/dir3/my。</p><blockquote id="2c5e1436-3a8b-438c-afd0-957c5538c74d" class="">Tips:<p id="23f7cb60-6d1e-4b54-a73e-1cb197a956a7" class="">记忆方法：</p><p id="3e42e740-ec6d-48a7-a0a3-e3a1e72a7fe1" class=""><code>#</code>是去掉左边(在键盘上<code>#</code>在<code>$</code>的左边);</p><p id="3724f087-88e5-47b9-8a52-09e4e1ac7584" class=""><code>%</code>是去掉右边(在键盘上<code>%</code>在<code>$</code>的右边);</p><p id="8521914f-eff6-4c0b-ae4f-0afb4742e394" class="">单个符号是最小匹配;</p><p id="556f2ff0-3c85-4aba-9314-e92bf4e68a4a" class="">两个符号是最大匹配;</p></blockquote><h2 id="6c7e1391-48f4-4d26-a3ae-724e9b98193d" class="">shell 字符串取子串：</h2><pre id="20eb6b04-bc00-4860-93d2-8d9bbefb12ed" class="code code-wrap"><code> ${file:0:5} #提取最左边的5个字符：/dir1
+ ${file:5:5} #提取第5个字符及其右边的5个字符:/dir2</code></pre><p id="8e313997-f49e-4a4a-ae81-08189be38cc0" class="">shell 字符串取子串的格式：<code>${s:pos:length}</code>,
+取字符串 s 的子串：从 pos 位置开始的字符(包括该字符)的长度为 length 的的子串；
+其中pos为子串的首字符，在 s 中位置；
+length为子串的长度；</p><blockquote id="28ba8858-4d9d-48db-bcb6-8480ecbc5cee" class="">Note: 字符串中字符的起始编号为0.</blockquote><h2 id="e7d9fc69-8e7d-4829-8f8a-31dc8559cb2a" class="">shell 字符串变量值的替换</h2><pre id="5218c022-7d71-4108-a037-8a46fafe7f18" class="code code-wrap"><code>${file/dir/path}  #将第一个dir替换为path：/path1/dir2/dir3/my.file.txt
+${file//dir/path} #将全部的dir替换为path：/path1/path2/path3/my.file.txt</code></pre><p id="a74d3f63-8bbb-4979-9e4b-fee2c330e519" class="">shell 字符串变量值的替换格式：</p><ul id="82680f20-351a-4c75-8b98-284b34fb6360" class="bulleted-list"><li style="list-style-type:disc">首次替换：
+<code>${s/src_pattern/dst_pattern}</code> 将字符串s中的第一个src_pattern替换为dst_pattern。</li></ul><ul id="d772debe-787b-4b6c-b92f-dad97920369c" class="bulleted-list"><li style="list-style-type:disc">全部替换：
+<code>${s//src_pattern/dst_pattern}</code> 将字符串s中的所有出现的src_pattern替换为dst_pattern.</li></ul><h2 id="c64b4fe1-864a-453e-b363-ab5047ff1306" class="">${}还可针对变量的不同状态(没设定、空值、非空值)进行赋值</h2><ul id="492b67d5-3fc2-472f-aa6b-e753ffaa91d4" class="bulleted-list"><li style="list-style-type:disc"><code>${file-my.file.txt}</code> #如果file没有设定，则使用
+使用my.file.txt作为返回值, 否则返回${file};(空值及非空值时，不作处理。);</li></ul><ul id="0bdbe1c4-d38f-4e48-b7e0-f892f0893197" class="bulleted-list"><li style="list-style-type:disc"><code>${file:-my.file.txt}</code> #如果file没有设定或者${file}为空值, 均使用my.file.txt作为其返回值，否则，返回${file}.(${file} 为非空值时，不作处理);</li></ul><ul id="6ea77c4f-a62a-4554-a13f-c3b037469821" class="bulleted-list"><li style="list-style-type:disc"><code>${file+my.file.txt}</code> #如果file已设定(为空值或非空值), 则使用my.file.txt作为其返回值，否则不作处理。(未设定时，不作处理);</li></ul><ul id="0d964add-c929-49e2-82ab-dfa884d27b55" class="bulleted-list"><li style="list-style-type:disc"><code>${file:+my.file.txt}</code> #如果${file}为非空值, 则使用my.file.txt作为其返回值，否则，(未设定或者为空值时)不作处理。</li></ul><ul id="e795c47f-5116-496e-83fa-a3f8c6176719" class="bulleted-list"><li style="list-style-type:disc"><code>${file=my.file.txt}</code> #如果file为设定，则将file赋值为my.file.txt，同时将${file}作为其返回值；否则，file已设定(为空值或非空值)，则返回${file}。</li></ul><ul id="f90903da-d492-45bb-bda7-de8b18789813" class="bulleted-list"><li style="list-style-type:disc"><code>${file:=my.file.txt}</code> #如果file未设定或者${file}为空值, 则my.file.txt作为其返回值，
+同时，将${file}赋值为my.file.txt，否则，(非空值时)不作处理。</li></ul><ul id="46be04aa-a833-4489-96e2-0e8d9a439f4f" class="bulleted-list"><li style="list-style-type:disc"><code>${file?my.file.txt}</code> #如果file没有设定，则将my.file.txt输出至STDERR, 否侧，
+已设定(空值与非空值时)，不作处理。</li></ul><ul id="e208a58e-6fde-4de3-bf8c-97bd0b361ba6" class="bulleted-list"><li style="list-style-type:disc"><code>${file:?my.file.txt}</code> #若果file未设定或者为空值，则将my.file.txt输出至STDERR，否则，
+非空值时，不作任何处理。</li></ul><blockquote id="7d7a7beb-01ad-4a09-8892-e697c1b6eec4" class="">Tips:<p id="885b95d1-604f-4c15-b249-3440883633ea" class="">以上的理解在于，你一定要分清楚，<code>unset</code>与<code>null</code>以及non-null这三种状态的赋值；
+一般而言，与null有关，若不带<code>:</code>, null不受影响；
+若带 <code>:</code>, 则连null值也受影响。</p></blockquote><h2 id="90d99ea2-8b68-469e-a3d9-e15364cbbcda" class="">计算 shell 字符串变量的长度：<code>${#var}</code></h2><pre id="19fa2eda-5666-4246-906d-1af825b3a7f6" class="code code-wrap"><code> ${#file}  #其值为27, 因为/dir1/dir2/dir3/my.file.txt刚好为27个字符。</code></pre><h2 id="08fab5c7-98d0-4411-91ce-361a64890e6d" class="">bash 数组(array)的处理方法</h2><p id="f7c2e430-be5c-402d-8de1-d692e96f6739" class="">接下来，为大家介绍一下bash的数组(array)的处理方法。
+一般而言, <code>A=&quot;a b c def&quot;</code>
+这样的变量只是将<code>$A</code>替换为一个字符串，
+但是改为 <code>A=(a b c def)</code>,
+则是将<code>$A</code>定义为数组....</p><h3 id="5174fd88-6ebb-4541-98a9-975e5739ec99" class="">数组替换方法可参考如下方法</h3><pre id="0be45804-0dbd-4094-97b1-ac093776102e" class="code code-wrap"><code>${A[@]} #方法一
+${A[*]} #方法二</code></pre><p id="8466d4b8-6953-496d-baae-f7da69dbe8f9" class="">以上两种方法均可以得到：a b c def, 即数组的全部元素。</p><h3 id="5b21dbfc-f915-4d45-9201-e93731636bf4" class="">访问数组的成员</h3><pre id="28dfd618-dd8e-4aa3-9831-edb547685cbf" class="code code-wrap"><code>${A[0]}</code></pre><p id="dab64061-b8f9-4daf-b6b5-fb6b82aca059" class="">其中，<code>${A[0]}</code>可得到a, 即数组A的第一个元素，
+而 <code>${A[1]}</code>则为数组A的第二元素，依次类推。</p><h3 id="00194d56-0e76-459d-9373-e18ce42fa692" class="">数组的 length</h3><pre id="3a421371-1bb0-418c-a88d-7af6894b2966" class="code code-wrap"><code>${#A[@]} #方法一
+${#A[*]} #方法二</code></pre><p id="33e31e95-d45f-4f98-a968-d795d27d691b" class="">以上两种方法均可以得到数组的长度: 4, 即数组的所有元素的个数。</p><p id="d86f9472-3412-4aff-9555-58b775a9a12b" class="">回忆一下，针对字符串的长度计算，使用<code>${#str_var}</code>；
+我们同样可以将该方法应用于数组的成员:</p><pre id="baf3b73e-aeff-4d0e-894c-1fe1a3c46af2" class="code code-wrap"><code>${#A[0]}</code></pre><p id="ee6bf683-a67d-4058-9627-ce005329a1eb" class="">其中，<code>${#A[0]}</code>可以得到：1，即数组A的第一个元素(a)的长度；
+同理，<code>${#A[3]}</code>可以得到: 3, 即数组A的第4个元素(def)的长度。</p><h3 id="9b375483-1328-4b72-8669-6f162b2fa6c9" class="">数组元素的重新赋值</h3><pre id="61049d84-b174-4467-86af-654808ba2e35" class="code code-wrap"><code>A[3]=xyz</code></pre><p id="b5c63f05-51c9-472c-a7db-ba6f4a37c288" class="">将数组A的第四个元素重新定义为 xyz。</p><blockquote id="228d42b6-eeee-4c3d-bb0c-dfa8edb03e95" class="">Tips:<p id="bb87792b-7146-4036-a88f-99959a9b9dfa" class="">诸如此类的...</p><p id="a8be35c8-e839-494e-9f44-8fb74a90247b" class="">能够善用bash的$()与${}可以大大提高及
+简化shell在变量上的处理能力哦~~~^_^</p></blockquote><h3 id="fc992db3-405f-406e-a8c3-155d41fd5782" class="">$(())作用</h3><p id="119a9520-2bc8-4ad7-b45c-6185741afae4" class="">好了，最后为大家介绍<code>$(())</code>的用途吧：
+<code><strong>$(())</strong></code><strong>是用来作整数运算的</strong>。</p><p id="ce734224-c878-4c90-b094-c8fa6045205a" class="">在bash中， <code>$(())</code>的整数运算符号大致有这些：</p><ul id="87efe768-62dc-47dc-a523-07570145b420" class="bulleted-list"><li style="list-style-type:disc">+- * / #分别为&quot;加、减、乘、除&quot;。</li></ul><ul id="a8a1be5d-3615-43a0-b9f8-eefd271499d5" class="bulleted-list"><li style="list-style-type:disc">% #余数运算,(模数运算)</li></ul><ul id="03fe1a12-cba2-4fc3-ac19-f3f271a67a21" class="bulleted-list"><li style="list-style-type:disc">&amp; | ^ ! #分别为&quot;AND、OR、XOR、NOT&quot;运算。</li></ul><p id="5976fe9b-b53a-49f5-be88-99d304a063e4" class="">例如：</p><pre id="6cfb6874-9f54-4aab-8c66-28c36642d7b7" class="code code-wrap"><code>$ a=5; b=7; c=2;
+$ echo $(( a + b * c ))
+19
+$ echo $(( (a + b)/c ))
+6
+$ echo $(( (a * b) % c ))
+1</code></pre><p id="d528555d-0d3d-4885-8702-d781ee2b6f34" class="">在<code>$(())</code>中的变量名称，
+可以在其前面加 <code>$</code>符号来替换，
+也可以不用，如：
+<code>$(( $a + $b * $c ))</code> 也可以得到19的结果。</p><p id="3f86e649-15c6-463a-8e31-3eda9d7aea64" class="">此外，<code>$(())</code>还可作不同进制(如二进制、八进制、十六进制)的运算，
+只是输出结果均为十进制的。</p><pre id="c6a3fc96-1628-4999-83f0-05e61539a71e" class="code code-wrap"><code>echo $(( 16#2a )) #输出结果为：42，(16进制的2a)</code></pre><p id="d6f4a466-49d9-4742-9dda-35d2db60cb3e" class="">以一个实用的例子来看看吧 :
+假如当前的umask是022,那么新建文件的权限即为：</p><pre id="acd223cd-84bf-4820-a89a-b460481ca73c" class="code code-wrap"><code>$ umask 022
+$ echo &quot;obase=8; $(( 8#666 &amp; (8#777 ^ 8#$(umask)) ))&quot; | bc
+644</code></pre><p id="5b3e5eb9-9c58-41a7-ba50-a4e7ce8f5f91" class="">事实上，单纯用<code>(())</code>也可以重定义变量值，或作 testing：</p><pre id="97b0b16d-a64b-413e-99d4-7e43b0b15ef1" class="code code-wrap"><code>a=5; ((a++)) #可将$a 重定义为6
+a=5; ((a--)) #可将$a 重定义为4
+a=5; b=7; ((a&lt; b)) #会得到0 (true)返回值。</code></pre><p id="b7500a1a-16b6-4a47-a9e6-0332d8da9d50" class="">常见的用于<code>(())</code>的测试符号有如下这些：</p><div id="3d3a28fb-d9db-404d-a93d-2ad2e304c2f6" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>符号</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>符号名称</th></tr></thead><tbody><tr id="4d42f03d-ef7f-4504-9e34-0235c74d4e03"><td class="cell-title"><a href="Untitled%204d42f03def7f45049e340235c74d4e03.html">&lt;</a></td><td class="cell-Mjqp">小于号</td></tr><tr id="4d0578bc-0228-47ec-a06c-45e4fe92a774"><td class="cell-title"><a href="Untitled%204d0578bc022847eca06c45e4fe92a774.html">&gt;</a></td><td class="cell-Mjqp">大于号</td></tr><tr id="852817ac-7664-4417-9c1c-d523a1e2466a"><td class="cell-title"><a href="=%20852817ac766444179c1cd523a1e2466a.html">&lt;=</a></td><td class="cell-Mjqp">小于或等于</td></tr><tr id="a51683c6-e929-4f97-8096-73315554966d"><td class="cell-title"><a href="=%20a51683c6e9294f97809673315554966d.html">&gt;=</a></td><td class="cell-Mjqp">大于或等于</td></tr><tr id="fca184a3-29c9-467e-9381-93528080bc6d"><td class="cell-title"><a href="==%20fca184a329c9467e938193528080bc6d.html">==</a></td><td class="cell-Mjqp">等于</td></tr><tr id="0119f228-3e68-41bd-b9b5-5ed57d5c86e4"><td class="cell-title"><a href="!=%200119f2283e6841bdb9b55ed57d5c86e4.html">!=</a></td><td class="cell-Mjqp">不等于</td></tr></tbody></table></div><blockquote id="a04cba7e-42bc-4e84-9227-e362aece5170" class="">Note:<p id="41b1ebb0-9011-4173-aa65-97dc2a7b3403" class="">使用<code>(())</code>作整数测试时，
+请不要跟<code>[]</code>的整数测试搞混乱了。</p><p id="de25c854-f246-4c3b-b050-120948e06711" class="">更多的测试，我们将于第10章为大家介绍。</p></blockquote><p id="57847ab4-1c76-4d14-a599-653318097eb1" class="">怎样？ 好玩吧... ^_^</p></div></article></body></html>

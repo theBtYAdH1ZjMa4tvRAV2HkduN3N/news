@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>神奇又美好的 Decorator ，嗷嗚！ | by Jack Cheng | 整個程式都是我的咖啡館 | Medium</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5123cafe-188b-413e-84f3-e54ee451e2a3" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🏸</span></div><h1 class="page-title">神奇又美好的 Decorator ，嗷嗚！ | by Jack Cheng | 整個程式都是我的咖啡館 | Medium</h1></header><div class="page-body"><p id="9700d65b-99cf-4392-be69-bfb1d1e4380d" class="block-color-gray"><a href="https://medium.com/citycoddee/python%E9%80%B2%E9%9A%8E%E6%8A%80%E5%B7%A7-3-%E7%A5%9E%E5%A5%87%E5%8F%88%E7%BE%8E%E5%A5%BD%E7%9A%84-decorator-%E5%97%B7%E5%97%9A-6559edc87bc0">https://medium.com/citycoddee/python%E9%80%B2%E9%9A%8E%E6%8A%80%E5%B7%A7-3-%E7%A5%9E%E5%A5%87%E5%8F%88%E7%BE%8E%E5%A5%BD%E7%9A%84-decorator-%E5%97%B7%E5%97%9A-6559edc87bc0</a></p><p id="93d7fb99-e5ba-42b2-a0e3-60db64880c6a" class="">
+</p><figure id="b60fdb19-0d10-449b-8252-ea254349216f" class="image"><a href="1yr6MAETw6WkPdRwpVVODIg.jpeg"><img style="width:700px" src="1yr6MAETw6WkPdRwpVVODIg.jpeg"/></a></figure><p id="dee89b74-1be1-421e-8a06-96c2df3abce9" class=""><em>「Decorator 是 Python 少數出現的語法糖（Syntax Candy) !」</em></p><p id="205384dd-a1d4-460c-9fcd-102821704e37" class="">難易度：★★☆☆☆</p><p id="28155f6e-9d04-4792-824a-92609999f54f" class="">實用度：★★★★★</p><p id="7dbc89a3-5765-4e26-9895-9915ee34ee42" class="">by pixabay.com</p><h1 id="188de6ee-0e35-41d2-9099-2bbbc03103b0" class="">【導言】</h1><p id="8f501300-9679-40fe-85dc-df58585990da" class="">由於 Python 的基本語法過於簡潔，所以大部分的設計與技巧都會為了強化其架構的依賴性與開發性，而讓 Python 的語法變得比原先的繁複。</p><p id="9282f1f9-ea69-4129-bdc7-ce4b0d8e7062" class="">這次要介紹一個少數「化繁為簡」的語法 — — Decorator ！</p><p id="acfec664-7d3c-40ae-a7f6-55723b9c902c" class="">Decorator 本身的概念非常簡單，但簡單語法與使用背後還有一個<strong>小魔王就是 Closure</strong>！不過 Closure 這個部份較為複雜，不適合一併放入這篇文章，所以會在之後的文章內介紹其原理！<strong>今天大家就著重在 Decorator 如何使用，以及 Decorator 使用時機吧</strong>！</p><h1 id="a06d4b39-362b-4fed-81f0-51f4b205e97b" class="">【本文章節】</h1><ul id="3cd3b205-16e7-4f9f-a170-9650146a6afb" class="bulleted-list"><li style="list-style-type:disc">【壹、什麼是 Decorator ?!】</li></ul><ul id="dc83bf25-cb7b-4328-8b3b-b283f854c2a1" class="bulleted-list"><li style="list-style-type:disc">【貳、Decorator 的 Syntax Candy — @小老鼠】</li></ul><ul id="1a5e7e02-f138-4d34-a399-e41afe1fc6a3" class="bulleted-list"><li style="list-style-type:disc">【參、Decorator 的有序性】</li></ul><ul id="02add804-4b54-495e-adcd-849b9c3ed24b" class="bulleted-list"><li style="list-style-type:disc">【肆、Decorator 如何帶參數 ?】</li></ul><ul id="7eadd935-b515-4b13-9f89-f207f728e679" class="bulleted-list"><li style="list-style-type:disc">【伍、Decorator 也可以是 Class !?】</li></ul><h1 id="3db5f420-3055-434c-849a-0eede7b86cb0" class="">【開發環境與建議先備知識】</h1><p id="2ced3c51-1f30-4add-918d-dfb7d6cf627c" class=""><strong>OS</strong> <em>Ubuntu 16.04</em></p><p id="c992652c-eb1d-40a4-8c1a-ead31c22a371" class=""><strong>Python</strong> <em>3.6</em></p><p id="1fc5d9f2-b609-431c-a03f-d23b9eaf7415" class=""><strong>Required Knowledge</strong></p><ul id="f76c934c-de8f-48bf-a5be-8e5e4688c99f" class="bulleted-list"><li style="list-style-type:disc">First Class Function (一級函數)</li></ul><ul id="9b75747f-8756-435d-a1af-dd69fcfeaf23" class="bulleted-list"><li style="list-style-type:disc">熟悉 Python function 概念</li></ul><h1 id="af319eca-c6de-4a91-b9ff-6b79abcd0de0" class="">【壹、什麼是 Decorator ?!】</h1><p id="5e0cb69c-6291-438e-96ed-9fe284a0002b" class="">長話不如直接看一下範例 code ：</p><p id="200cef69-20f4-4a4d-a3b1-044894bbe8f1" class="">sample-1 <a href="https://gist.github.com/JackInTaiwan/8779504fbcbd0d8420e9996fab3c8641">https://gist.github.com/JackInTaiwan/8779504fbcbd0d8420e9996fab3c8641</a></p><p id="1c35bd0b-b948-44ea-8b13-156efd522499" class="">以上的範例可以看到我們有兩個主要的 functions： <code>dog_bark()</code> 和 <code>cat_miaow()</code> 要執行，但兩個 functions 都有一個共同要做的事情，都想要先 print 出自己的 function name，所以對於共同要做的事情我們抽出來用 function <code>print_func_name(func)</code> 來完成。</p><p id="a7a99915-2335-48e2-b39e-e46d5059bc4d" class="">邏輯是這樣的， <code>print_func_name(func)</code> 會把傳入的 function 再利用一個我們命為 <code>warp()</code> 的內部 function「加工修飾加上一些我們要的功能」，然後在用 <code>return wrap</code> 吐出修飾過的 function <code>wrap</code> ，如此就完成「修飾」的任務啦！最後記得在 <code>print_func_name(dog_bark)</code> 和 <code>print_func_name(cat_miaow)</code> 只會 return function 本身，所以要在後面加上 <code>()</code> 來 call function 喔！！</p><p id="9171f0d8-44c3-48e5-80c4-38238971ad5a" class="">額外要注意，<strong>在 Python 中，function 的地位和 C++、Java等不同，是屬於 ”First-class Citizen” (一等公民)，故稱作 ”First-class function” (一級函數、頭等函數)。</strong>簡單來說，就是 function 也可以當成參數傳遞並執行。另外，JavaScript 等語言也都是採用 First-class Function 的概念喔！</p><p id="dd996ad2-e909-4ea4-8a1f-b3197d7d779f" class="">以上的範例，基本上是一個「藉由抽出相同或相似邏輯來簡化」的簡單到不行的範例（當然現實世界中的例子可複雜得想放棄…）。但這麼簡單的一件事情，我們就稱 function <code>print_func_name(func)</code> 是一個 「Decorator」(裝飾器)！</p><h1 id="c94547e5-b9c1-48a8-8d7e-c35a72ca77ab" class="">【貳、Decorator 的 Syntax Candy — @小老鼠】</h1><p id="3d3f2f87-63d9-408e-9f83-08781fa0e20d" class="">在上一節中明示了什麼叫做 Decorator，這裡就要介紹它的 syntax candy — @小老鼠！</p><p id="e90dc85c-94c2-4d0c-ab23-6231f2ce66ca" class="">這邊簡單快速補充一下，syntax candy（語法糖、語法糖衣）就是讓語法簡化的語法，可能原先要寫數十行的 code，若該語言有提供對應的 syntax candy，很可能寫個幾行或是寫個符號上去，就可以輕鬆完成了。這在多數語言中都是極度常見的語法！</p><p id="295ebf26-20c8-4f02-9590-3cf434906563" class="">補充完畢。老師，範例請下（音樂聲起）：</p><p id="8b3515e7-31d3-4f94-b56f-f46d4b59f7e1" class="">sample-2 <a href="https://gist.github.com/JackInTaiwan/8c27ec000a5ab6f8f4ad124f9b5d9f5e">https://gist.github.com/JackInTaiwan/8c27ec000a5ab6f8f4ad124f9b5d9f5e</a></p><p id="9f075ab4-ff1a-4584-89d3-023a23981c30" class="">上面的範例中，我們在兩個主要的 functions 前面加上 decorator <code>@print_func_name</code> ，如此就發揮了 syntax candy 化簡語法的功效，用更簡單的語法來完成一模一樣的事情囉！</p><p id="21dbd182-c97c-4026-b8a2-5edc4e213f12" class="">或許有沒有使用 syntax candy 對於這兩份範例 code 差不了幾行，但這是因為範例 code 太簡略，而且 function 都只被 call 過一次，所以才會感受不出來。syntax candy 是真實讓人愛不釋手的！</p><p id="f376dd97-4d55-4785-9774-d0c0dfb8e05b" class="">其實對於大部分的讀者來說，最先接觸到 Decorator 的很可能是它的 syntax candy，而不是在上一節【壹、什麼是 Decorator ?!】範例 code 中的形式。不過這地方不需要拘泥於人們口中所說的 decorator 是指原先的形式，還是它的 syntax candy，因為本質真的都一樣啦！所以本篇文章除非特別強調，否則都是指 syntax candy 形式的 decorator 。</p><h1 id="37cd5d25-de22-41e7-be93-15b13de64398" class="">【參、Decorator 的有序性】</h1><p id="391d027b-54fc-4b7d-8ef6-f45efd5fd7ba" class="">如果之前有閱讀過 <a href="https://medium.com/p/1e3b3998bccf/edit">Python進階技巧 (2) — Static/Class/Abstract Methods之實現</a> 的讀者，可能會記得（應該會有人記得的對吧？！）我提醒過 decorator 彼此間是有順序關係的，要額外注意！</p><p id="24189af3-d4f1-4fa3-a1a3-a3ccc870c72f" class="">來，老師下音樂，哦不，是下範例：</p><p id="03cafabc-b3eb-449b-8512-79832dbf6109" class="">sample-3 <a href="https://gist.github.com/JackInTaiwan/15ebaa7abe6312ae12215bf56b6f2d5f">https://gist.github.com/JackInTaiwan/15ebaa7abe6312ae12215bf56b6f2d5f</a></p><p id="c125d2fc-739a-4402-a2fe-a97561bddf71" class="">這裡會有一咪咪的複雜，大家要專心跟著 code 的順序看過一遍喔！</p><p id="d9696074-48c1-47a4-b1df-2918fb926753" class=""><strong>decorators 多層的話是採 ”recursive” 的方式處理，如果一個 function 有兩個以上的 decorators ，邏輯上則會先合併「最靠近」的 decorator 吐出新的 function 再由上面一個的 decorator 吃進去！</strong></p><p id="04ef6d14-183c-4436-bde8-3a85387301de" class="">所以 <code>dog_bark()</code> 會先被 <code>@print_time</code> 吃進去，然後吐出一個叫做 <code>wrap_2</code> 的function，而這個 <code>warp_2</code> function 又會被 <code>@print_func_name</code> 吃進去，吐出一個叫做 <code>wrap_1</code> 的 function。</p><p id="dc36af08-c8a5-409b-81e8-0a25eef0b308" class="">所以最後執行的結果順序是先 print <code>Now use function &#x27;wrap_2&#x27;</code> 再 print <code>Now the Unix time is 1541239747</code> 。而且你會發現由於最外層的 <code>@print_func_name</code> 真正吃進去的 function 是已經被 <code>@print_time</code> 修飾過的 function，所以 print 的是<code>Now use function &#x27;wrap_2&#x27;</code> 而不是 <code>Now use function &#x27;dog_bark&#x27;</code> ！！</p><p id="356e00aa-4262-4283-88df-e9dcbe6fde1d" class="">再來一個範例，檢驗大家是不是有跟上了～建議大家看完 code 先在心裡寫好答案再看結果。</p><p id="35db8f9d-2369-437f-9bfb-dce5892c7937" class="">下一段範例：</p><p id="6d66e0f8-0f44-4967-bde5-515dbf252a26" class="">sample-4 <a href="https://gist.github.com/JackInTaiwan/41ded88d4c8c13c53c56f4455534e71b">https://gist.github.com/JackInTaiwan/41ded88d4c8c13c53c56f4455534e71b</a></p><p id="2b4222d1-ccda-4ef0-9cb3-dd1711850889" class="">和上一個範例（sample-3 ）相同，只是多了 <code>cat_miaow()</code> 而已。這次 <code>cat_miaow()</code> 上的 decorators 順序和 <code>dog_bark()</code> 的順序是相反的。</p><p id="374a5541-cd43-424a-897a-90aa7546f083" class="">範例結果顯示，call <code>cat_miaow()</code> 會先 print <code>Now the Unix time is 1541239747</code> 再 print <code>Now use function&#x27;cat_miaow&#x27;</code> 最後才 print 主要 function 的 <code>Miaow !!!</code> 。</p><p id="01bda0c9-4e8c-40de-abe0-db78c756bd31" class="">如果結果和你所想都完全符合，那恭喜你順利了解 decorator 的順序性問題惹！！！</p><h1 id="67f736cc-47eb-46c0-ae7f-26416787c0f7" class="">【肆、Decorator 如何帶參數 ?】</h1><p id="e25846e9-5494-440f-9cdc-5d4f1fce489e" class="">除了上面最簡單的用法之外，還可以在 decorator 處傳入參數，非常靈活好用！</p><p id="5eb2ecb3-6179-4c4d-bee7-76e2bca1ceb2" class="">請看以下範例：</p><p id="245c8f99-5d4a-4040-8983-e46001f17f50" class="">sample-5 <a href="https://gist.github.com/JackInTaiwan/3fda507a8803d4d30a9a0f13df834f9c">https://gist.github.com/JackInTaiwan/3fda507a8803d4d30a9a0f13df834f9c</a></p><p id="e483526c-0bfe-4a6c-b5a1-fa84f389a2c4" class="">從上面的範例可以知道要讓 decorator 傳入參數，只需要改成 <code>@print_func_name(param=param_variable)</code> 形式即可。此處可用 arguments 的形式也可以用 key arguments 的形式傳入參數。</p><p id="ed208878-9754-4f3c-bc73-f9193e3bddb4" class="">值得注意的是，這種 decorator 帶參的寫法：function 內還有 function，且呈現 recursive 的對稱形式。這種形式就和 “Closure” 有關，之後的文章會詳細解說，這邊先不多加說明。第一層 <code>def print_func_name(time)</code> 是用來解析 decorator 傳入的參數的，第二層 <code>def decorator(func)</code> 是吃進主要要修飾的function，和前面的範例一樣。</p><p id="89dd4853-0686-405b-baa0-ad6d414acc2d" class=""><strong>所以這個寫法的結論是：把原本的 code 外面多加一層用來傳入 decorator 的參數。</strong></p><h1 id="2582d615-c117-4533-b49e-c8dc57d8507e" class="">【伍、Decorator 也可以是 Class !?】</h1><p id="131a7863-2d7f-4eab-8119-26799c507db2" class="">Decorator 除了有 function decorator ，也有 class decorator！畢竟 function 和 class 在 Python 裡頭都屬於 objects 呀！</p><p id="71219578-cf64-4da7-85d6-01395f916bf3" class="">再勞煩客倌看一回範例：</p><p id="3e478ebd-2f1f-4b1b-934a-f471631634b8" class="">sample-6 <a href="https://gist.github.com/JackInTaiwan/6f70279c19ed337a58c875f8f2f75cae">https://gist.github.com/JackInTaiwan/6f70279c19ed337a58c875f8f2f75cae</a></p><p id="bfb43a7e-a312-490e-aaa1-da5b3d604431" class="">由上述範例可以得知，當我們的 decorator 是一個 class decorator 時，要傳入的 function 主體 <code>dog_can_pee</code> 就會從 class 裡頭的 <code>__init__</code> initializer 被吃進去，然後執行你想操作的動作：在這個例子裡，我將傳入的 function <code>dog_can_pee</code> 以 assign<code>self.talent</code> 的方式宣告為 class 的 instance method。</p><p id="c37592bf-7fea-4eb4-93d5-36febb814636" class=""><strong>這是一個非常重要、靈活而優雅的技巧，將 function </strong><code><strong>dog_can_pee</strong></code><strong> 「封裝」到 class </strong><code><strong>Dog</strong></code><strong> 的一種寫法。</strong></p><p id="4401c4e5-2919-47d3-9cff-4553480ddd08" class="">延續這個例子，再稍微完整一點的示範，為什麼這個寫法非常優雅：</p><p id="d1194405-79c5-4b2c-b431-6c36bfc0c880" class="">sample-7 <a href="https://gist.github.com/JackInTaiwan/4557776e4d04a398258d19b5bab4ef08">https://gist.github.com/JackInTaiwan/4557776e4d04a398258d19b5bab4ef08</a></p><p id="2234cc3e-6e94-4e30-bc0c-60e183ea3a37" class="">這個例子透過使用 class decorator 把不同的 function 封裝到這個原本的 class裡頭了。所以 <code>dog_1，</code> <code>dog_2</code> 和<code>dog_3</code> 這三隻狗明明都是 class <code>Dog</code> 會的才藝卻都不同！</p><p id="bc9db99d-c56c-43f3-bd23-442f6505bd23" class="">達到同樣效果的寫法有很多種，其中一種是利用 class 繼承的方式達成，<strong>不過如果在此處使用 class 繼承可能會過於冗餘、臃種且擴充性低，用簡潔的 decorator 反而有簡單、重複率低且擴充高的優點！</strong></p><h1 id="691075e3-168c-4437-957d-5bbd72f7fe37" class="">【結語】</h1><p id="b211388b-dbea-4bec-b5aa-57a2e9e797b7" class="">Decorator 被大量廣泛的使用在各方 library/package 中，具有幾個最主要的優點：</p><ul id="dd913541-9621-47b7-be95-4554e7c51174" class="bulleted-list"><li style="list-style-type:disc">靈活度高</li></ul><ul id="c9ac67d0-5d3c-40cd-93e2-716b600edbd7" class="bulleted-list"><li style="list-style-type:disc">易讀性高</li></ul><ul id="d1d1c4de-aa6e-4974-9d3e-029d5055500c" class="bulleted-list"><li style="list-style-type:disc">協助封裝效果好</li></ul><ul id="fe76c211-3173-4c44-934f-ed7c032cf02d" class="bulleted-list"><li style="list-style-type:disc">程式碼重複率低/簡潔度高</li></ul><p id="8793c65d-06f6-48e3-acf0-ceed5ac14f15" class="">有於篇幅有限，只能提供非常簡單的例子讓大家小酌一下，<strong>decorator 如果大家願意多花點時間結合各種寫法，相信大家一定會更能感受除了上面簡單的範例以外，它帶來的各種優點！</strong></p><p id="40f218b2-3937-4e1a-9412-bda8eb7a5fc1" class="">另外， decorator 中會使用到 closure ，這是一個非常重要的概念，會在下一篇文章中解說，大家稍待一會兒！</p><h1 id="86702859-462d-491b-9410-ace4beb75092" class="">【飯後餐點】</h1><p id="b96318fb-d7f9-4bf8-a97f-3410beec6daf" class="">特別感謝阿玉（<a href="https://medium.com/@chenbingjyue">Jade Chen</a>）校稿斧正本文章。</p><p id="764fc50e-7cc6-4b94-bbd8-a01524434639" class="">最後附上一些延伸相關資料。</p><p id="b3181d06-2981-4e48-893f-3a461420d818" class="">如果你也喜歡我們的文章，幫我們動動手部肌肉，按下掌聲Clap，讓我們有動力繼續煮下一頓料理！</p></div></article></body></html>

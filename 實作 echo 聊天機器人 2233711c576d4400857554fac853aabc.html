@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>實作 echo 聊天機器人</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2233711c-576d-4400-8575-54fac853aabc" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🏀</span></div><h1 class="page-title">實作 echo 聊天機器人</h1></header><div class="page-body"><p id="659a80b5-55bc-4596-94da-df8ae2606736" class="block-color-gray"><a href="https://ithelp.ithome.com.tw/m/articles/10234877">https://ithelp.ithome.com.tw/m/articles/10234877</a></p><p id="e2373ccb-bcde-4922-902b-63279b0a35a9" class="">
+</p><p id="3a926789-50c5-46db-86b3-b9e09d77c2fe" class="">本篇文章將 LINE 官方範例逐步拆解，實作 echo 聊天機器人，完成時您已結合 Python、Flask、LINE Message API 及網路訊息傳遞等基本概念開發個基本多媒體系統雛形，算是不錯開局首抽教學文，以下進行介紹。</p><figure id="aba41f31-3175-435a-aa56-c9ab4af3f8a5" class="image"><a href="iXYIhW2.png"><img style="width:469px" src="iXYIhW2.png"/></a></figure><h2 id="13989b56-44d0-4c65-b744-cc8fef21144f" class="">相關知識點</h2><p id="bcdb2898-1bf5-405b-b926-780d50bea45c" class="">本篇進度為架構聊天機器人學會 echo 你說話的基本程式，這邊相關的知識點:</p><ul id="1accfe0d-cc98-4597-83cc-2713697af4c1" class="bulleted-list"><li style="list-style-type:disc"><strong>HTTPS</strong>。 LINE Message API 只容許<a href="https://zh.wikipedia.org/zh-tw/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE">超文本傳輸協定https</a>作為溝通的方式， https 需要有經過認證安全的網域才行，可採行的作法如下: <ul id="4fc1b427-02ae-40f6-bb83-34ade0530e64" class="bulleted-list"><li style="list-style-type:circle">建立一個雲端伺服器，申請網域及 https 憑證。</li></ul><ul id="e4f631b2-b467-472d-975f-4d529fa884c9" class="bulleted-list"><li style="list-style-type:circle">由本機透過 ngrok 等程式建立具 https 憑證的臨時通道。</li></ul></li></ul><ul id="8ca19bd0-c945-4fb1-b9e9-3b3a83eb3013" class="bulleted-list"><li style="list-style-type:disc"><strong>API</strong>。 LINE、Google、Facebook 等服務為了管理開發者如何存取該服務/伺服器的內容，建立應用程式介面(Application Programming Interface,API)來進行資料交換，現今多半以JSON檔案進行傳輸，有些API需要申請後取得授權token，並且<strong>查閱API文件使用符合規範的呼叫方式</strong>，不然會呼叫失敗。</li></ul><ul id="6c63fe42-1eed-46c5-bb4f-f42edcb1f925" class="bulleted-list"><li style="list-style-type:disc"><strong>webhook URL</strong>。 每個 LINE Bot Channels只能綁定一個webhook URL作為Line bot與你的程式傳遞資訊的橋樑，自學者常遇到 webhook 連結失敗的問題，請試著動手做喔! 參閱官方文件<a href="https://developers.line.biz/zh-hant/docs/messaging-api/building-bot/#setting-webhook-url">設定webhook URL</a>。</li></ul><h2 id="1a064831-d88a-4977-82dc-0153ecc36668" class="">實作 LINE Messaging API</h2><ul id="f2496b78-501f-47fc-95ef-3666d1099c87" class="bulleted-list"><li style="list-style-type:disc">建立<a href="https://www.python.org/">Python</a>環境，請安裝<a href="https://www.python.org/downloads/">安裝Python 3.X版本</a>(Python 2.X版本已於2020年停止維護)，編譯器採用微軟的<a href="https://code.visualstudio.com/">VS CODE</a>或採用JetBrains的<a href="https://www.jetbrains.com/pycharm/">PyCharm</a>，創建本機與外網安全連線通道用的<a href="https://ngrok.com/">ngrok</a>。</li></ul><ul id="9c880605-fa72-4617-a7e0-791581d6a7ea" class="bulleted-list"><li style="list-style-type:disc"><a href="https://developers.line.biz/zh-hant/docs/messaging-api/">官方文件</a>有一步步的Messaging API教學可運用。 <figure id="74370bc3-8467-42f2-8da9-35a6001ce79f" class="image"><a href="98VsY0b.png"><img style="width:700px" src="98VsY0b.png"/></a></figure><p id="acf4c059-67e0-4c33-815c-154809139b7c" class="">瀏覽概要，鎖定用 Messaging API。下圖左方是你架構的程式伺服器、右方是LINE用戶，中間就是LINE提供的中介大平台。</p></li></ul><ul id="2c8208fe-c1cd-4172-9c0e-63b5fef26997" class="bulleted-list"><li style="list-style-type:disc"><figure id="09a6857d-cf2f-4b6b-a7e6-c7b42d1e8985" class="image"><a href="oV23anR.png"><img style="width:650px" src="oV23anR.png"/></a></figure></li></ul><h3 id="96077c60-a1de-46d7-93ae-a7f4bcdf0e61" class="">1. 建立Channel</h3><ul id="b1547063-31ad-4010-b6fd-831e21a3f0d8" class="bulleted-list"><li style="list-style-type:disc">至<a href="https://developers.line.biz/console/"> LINE Developers console</a>建立Channel，以下依官網教學。 <ul id="e71022b7-ed11-4690-bc56-27438b130878" class="bulleted-list"><li style="list-style-type:circle">所謂的Channel想像是在LINE建立一個電視頻道，就像西森幼幼、串天新聞，透過頻道提供服務。 <figure id="5970266b-7e0c-444c-aaf9-08b3c3e093a5" class="image"><a href="73FmaxB.png"><img style="width:700px" src="73FmaxB.png"/></a></figure></li></ul><ul id="f79cb7eb-dc08-4dad-a23d-dbdf2a77f242" class="bulleted-list"><li style="list-style-type:circle">請先登入 <a href="https://developers.line.biz/console/register/messaging-api/provider/">LINE Developers Console</a> <figure id="419f87a9-515d-4efa-9ccc-34af83130350" class="image"><a href="jRG1wPY.png"><img style="width:651px" src="jRG1wPY.png"/></a></figure><p id="45ce1e5e-8f67-4f35-8856-eeb1925c1fca" class="">註冊/登入開發者帳號</p></li></ul><ul id="2715cd36-5bde-487b-868d-9e5077514644" class="bulleted-list"><li style="list-style-type:circle"><figure id="2aca3be8-91c8-4bdd-b2f0-80d8f1d9baf8" class="image"><a href="wz67SIs.png"><img style="width:542px" src="wz67SIs.png"/></a></figure><p id="6d590e61-2485-4355-9bb8-6e2977b6ea82" class="">你的開發者帳號可以設定多個提供者，像是公司跟你個人名稱。</p></li></ul><ul id="289ed85d-00c6-4de8-a915-9642e575eb12" class="bulleted-list"><li style="list-style-type:circle"><figure id="2e8ef6a9-2e6c-4a58-917c-f6c15e576dc1" class="image"><a href="RfdCHGq.png"><img style="width:700px" src="RfdCHGq.png"/></a></figure><p id="546e87fd-55d9-443a-b740-d3711d56c184" class="">建立你的 Channel，別包含LINE關鍵字怕使用者誤會，此名稱也是將來傳送訊息時顯示的名稱(之後可以修改)。</p></li></ul><ul id="8474ef98-2fd1-461e-bfa1-c22911bb8f7b" class="bulleted-list"><li style="list-style-type:circle"><figure id="8fc4fd46-a972-41c6-8469-2e07f2ed909a" class="image"><a href="uiJ8YMU.png"><img style="width:602px" src="uiJ8YMU.png"/></a></figure><p id="60e0ceb4-1516-4bb0-ae43-7340b2385f2e" class="">確認 Channel 建立結果，下圖右邊為Providers，中間是Provider所屬各 Channels。</p></li></ul><ul id="c7313771-5dab-4430-80e4-9d56ec0bf348" class="bulleted-list"><li style="list-style-type:circle"><figure id="e633dc0f-dd54-4899-81bd-925c349834c3" class="image"><a href="YC62Mpm.png"><img style="width:700px" src="YC62Mpm.png"/></a></figure></li></ul><ul id="6c7815cf-5a8c-496a-bae0-1cb36d29d89f" class="bulleted-list"><li style="list-style-type:circle">到 Channel取得 <code>[你的CHANNEL_ACCESS_TOKEN]</code> 及 <code>[你的CHANNEL_SECRET]</code>，如遺忘或新產生按右方<code>Issue</code> / <code>Reissue</code> ，另外 <code>[CHANNEL_SECRET]</code> 可以設定存續時間，預設為永久( long-lived )，算是與安全與便捷的妥協，並讓開發者依需求設定。 <figure id="0f5a5d92-7c11-420b-b40c-65540101efc3" class="image"><a href="S1n0pcY.png"><img style="width:700px" src="S1n0pcY.png"/></a></figure></li></ul><ul id="050f2de5-38b7-4f01-94e1-d248571a29e2" class="bulleted-list"><li style="list-style-type:circle">此 channel 對應的 LINE 官方帳號，可在 <a href="https://manager.line.biz/">LINE Official Account Manager</a> 查閱，也可於此頁開始進行官方帳號設定。  <figure id="6455be8f-2e8f-4f7f-8b50-de63fc3c8440" class="image"><a href="rblffPi.png"><img style="width:700px" src="rblffPi.png"/></a></figure><ul id="fc445868-ee46-4729-aabd-c82ff864128b" class="bulleted-list"><li style="list-style-type:square">我們至 <a href="https://manager.line.biz/">LINE Official Account Manager</a> 的&quot;回應設定&quot;。  <figure id="c40d0433-a2fe-4b7a-8c9c-4e1eca646d90" class="image"><a href="F6uLKmc.png"><img style="width:700px" src="F6uLKmc.png"/></a></figure><p id="6bc5e9a7-4ea8-4e2a-987d-1a60b75b4fd9" class="">&quot;加入好友歡迎訊息&quot;依您需求選擇停用/啟用，這邊設停用。</p><ul id="7d0f7a28-0292-4b65-8a00-aaa9388a66c8" class="bulleted-list"><li style="list-style-type:disc">&quot;自動回應訊息&quot;建議設定停用，不然罐頭訊息太多。</li></ul><ul id="a65ee2c4-5283-48b9-9c96-3f5703520464" class="bulleted-list"><li style="list-style-type:disc">&quot;Webhook&quot;必須為啟用。</li></ul></li></ul></li></ul></li></ul><h2 id="9f3b02d9-0fcf-4aac-82a5-e9d7f9f77c7c" class="">小結</h2><p id="8c4795bb-d745-4ae4-8866-76a300afc13e" class="">本篇依照 <a href="https://developers.line.biz/zh-hant/docs/messaging-api/">LINE Messaging API 官方文件</a>把Channel設定好，下篇會拆解程式範例，我們下篇見!</p><h2 id="7f2dfebd-090b-41ab-9b0a-f3e7eeb7dedb" class="">參考</h2><ul id="002c632b-12be-4045-82a2-a399cccacd36" class="bulleted-list"><li style="list-style-type:disc"><a href="https://developers.line.biz/zh-hant/docs/messaging-api/">LINE Messaging API 官方文件</a></li></ul></div></article></body></html>

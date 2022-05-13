@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>你需要了解的更年期「腦霧」現象</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0e303a77-f445-4ea5-acbd-894fad412718" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⚓</span></div><h1 class="page-title">你需要了解的更年期「腦霧」現象</h1></header><div class="page-body"><p id="210ffe3b-e299-4751-8940-50e15ba606eb" class="block-color-gray"><a href="https://www.bbc.com/zhongwen/trad/science-57762776">https://www.bbc.com/zhongwen/trad/science-57762776</a></p><p id="13f7fa84-1727-4255-a849-1b7c1a2bf69e" class="">
+</p><figure id="9062dd76-02f1-4b1d-b18a-764d6f4d9e28" class="image"><a href="_118788027_gettyimages-887509960.jpg"><img style="width:700px" src="_118788027_gettyimages-887509960.jpg"/></a></figure><p id="ce2780fa-a144-4f27-a443-b80d22709e19" class="">更年期是人生一個重要轉折期。</p><p id="23ed0b76-15cb-453b-91d2-c2c3b173ac16" class=""><strong>德維醫生是紐約林諾克斯山醫院（Lenox Hill Hospital in New York）的一名神經科醫生，在她職業生涯的早期她曾與同事一起犯過一個錯誤：他們把一位更年期婦女誤診為患有阿爾茨海默病（Alzheimer&#x27;s disease）。</strong></p><p id="3245f444-7c48-4107-817f-79ba7bf7c77c" class="">在嘗試了一系列治療後（包括最後使用雌激素），女患者的健康有所改善。德維醫生意識到她最初的症狀 - 記憶力減退以及定向障礙實際上另有原因。</p><p id="5338d015-0aa7-4d01-a1af-0aa88229c57e" class="">該患者的認知能力下降與其雌激素水平驟降直接相關，而雌激素荷爾蒙在女性停經前數年就開始出現波動。在臨牀上，更年期從女性最後一次月經後一年正式開始。</p><p id="34439c0c-053b-494e-aec7-d61ae60e4d64" class="">這一突破對德維醫生來說是一個轉折點，並讓她研究更年期一個較鮮為人知的症狀：「腦霧」（brain fog）。</p><p id="56d1b785-c7af-4d3a-9b7e-dc18282dba07" class="">「腦霧」英文有時也叫mental fog，其表現包括記憶力減退、思維不清、注意力不集中等。</p><p id="5c5818e7-370e-4d1d-8404-ce98246ecc63" class="">關於「腦霧」最令人不安的一點是許多女性都有，但卻不知道是什麼原因。</p><p id="413244ef-a9bc-4834-ba8c-ccc54f482e90" class="">德維醫生對BBC表示，許多經歷圍絶經期（指更年期前後的幾年，有可能持續大約7年左右，英文：perimenopause）的女性開始經歷忘詞和找不到合適詞匯表達的困難，或者無法同時專注幾件事情。</p><p id="16949165-a41c-46e7-ad53-87426ea0a639" class="">她說，這些女性可能出現語言表達問題，這本應是女性的強項。</p><p id="24c5cd66-46c0-43e9-9593-044d6e9e62fd" class="">一些女性說她們說話總忘詞，甚至回憶對話都說了什麼也有困難。</p><p id="a32d4b47-8531-427f-bb17-9ec15cc6e4e4" class="">美國更年期協會前主席、伊利諾伊大學芝加哥分校精神病學、心理學及婦產科教授馬基對BBC表示，它會影響我們的部分記憶力，舉個例子，比如我們去商店、然後努力記起我們要買什麼那部分記憶力。</p><p id="4548ed46-5ac5-401d-bd54-352b10e49dc5" class="">她補充說，它也影響我們講故事的能力，或是參與會話、但事後回憶起我們所說過話的能力。這一問題要比之前所想的更普遍。</p><p id="5ba1c866-831b-4c3c-a913-825a16afe718" class="">馬基教授表示，他們的研究發現臨牀意義上的顯著損傷，比如，有10%女性得分明顯低於她們年齡組的預期值。</p><p id="dd8ec562-f74c-4d14-a8a1-3b9f6b1bcda6" class="">但她表示，也有許多其他女性遇到的一些更微小的困難，也就是說不會影響她們整體工作能力，但她們還是會注意到一些不同。</p><p id="1444c2b3-f20c-4746-8c51-7e3bf01ceee3" class="">據德維醫生說，大約60%圍絶經期或更年期女性能主觀上感覺到認知功能變化，這些變化幾乎總能通過醫學檢查得到證實。</p><p id="124dbb12-3133-4c3e-83c2-99063c96bb81" class="">其中一個關鍵問題是大腦中具有雌激素受體，許多雌激素受體位於大腦海馬體中，該大腦區域對修復和檢索記憶非常重要。</p><p id="e99a6c29-9ad7-4d3e-bbb3-5bd262ba025b" class="">當雌激素水平驟降，大腦的雌激素受體會受到影響。</p><p id="c0939882-d4e1-4f69-b40b-607a7f8dd060" class="">德維醫生解釋說，當雌激素水平突然下降，海馬體的一些活動會受到影響。</p><p id="e68fbb67-8114-4270-a8d9-4e330336e9fd" class="">對卵巢（產生最多雌激素的腺體）切除女性的研究表明，一旦這些女性服用雌激素補充劑，她們的認知能力就會改善。</p><p id="293fd9dc-9531-4e66-a3c9-d13be3ff1039" class="">但並不是所有圍絶經期女性會出現「腦霧」症狀，這是什麼原因呢？</p><p id="5e71168f-b8cf-46f9-8c3d-cde641746806" class="">這是因為每一位女性對雌激素變化的敏感性存在差異。</p><p id="9782919b-baeb-4131-bb67-bfb9da388ff3" class="">順便提一下，「腦霧」這個說法是由英國醫生愛德華·蒂爾（Edward Tilt）在19世紀中葉提出來的。他用它來形容他維多利亞時代的一些更年期女性患者抱怨的「一頭霧水」的症狀，比如，她們記不起把錢包放在哪裏，或是該怎麼回家。</p><p id="7fe6cc76-5e11-4e9b-ba58-99474c22e8e5" class="">美國匹茲堡大學精神病學教授瑟斯頓表示，不光是雌激素水平重要，還必須考慮諸如睡眠干擾等其他因素。</p><p id="86e4eedd-0baa-461a-b67d-9ebece186241" class="">她說，在向更年期過度的過程中，多達60%女性報告有睡眠問題，睡眠也與記憶力有關。</p><p id="36c46b1d-9526-4f77-b9f9-208ec31bbedf" class="">有些女性的潮熱現象一直會持續到六、七十歲。</p><p id="75a8eda0-c883-4bc2-a5d4-ce4da8f5e2f0" class="">因為睡眠不足會干擾記憶力線路，潮熱也能。潮熱是指突然全身發熱，皮膚發紅，並且大量出汗現象。</p><p id="466b75a6-e3c1-4e5e-a91e-84479ff2b990" class="">潮熱不僅會嚴重影響睡眠（有些女性報告說，她們不僅因為潮熱而半夜醒來，而且由於出汗而不得不更換牀單和睡衣），本身也是一個問題。</p><p id="60cb2190-063d-47b9-b930-482de9bd0915" class="">瑟斯頓教授表示，過去人們認為潮熱是女性可以忍受的輕微症狀，但目前已知它與心血管風險有關。瑟斯頓教授說，它們是腦小血管病的標誌。它們影響海馬體兩側的連接，並引起記憶力的改變。</p><p id="977933b5-85cd-48ff-a958-eb28430645b4" class="">此外，在圍絶經期期間增多的情緒波動、焦慮和抑鬱都會影響記憶力。</p><p id="6635179b-9c89-439b-80bb-8825862c4dbc" class="">如果這些症狀如此普遍，那為什麼卻鮮為人知呢？</p><p id="2df13798-4961-49c4-87be-80a7e7fedbb9" class="">首先，似乎是缺乏意識，因為更年期在許多文化中仍然是一個禁忌話題。</p><p id="b00daac1-6508-4da2-9e12-2b67b5c0791d" class="">威斯康星大學密爾沃基分校心理學教授弗裏克表示，問題是這一過程可能會持續許多年，許多女性甚至不知道她們正在經歷圍絶經期。因此，很容易把這些症狀歸因於其他因素。</p><ul id="385f180e-187f-4749-9ba0-23c1868d0f5d" class="bulleted-list"><li style="list-style-type:disc">月經頻率和經期天數出現變化</li></ul><ul id="ac2951af-9f24-4ebf-9537-230346abdaf4" class="bulleted-list"><li style="list-style-type:disc">月經量變化（過多或過少）</li></ul><ul id="60aeb873-2d06-4422-9385-abaff82229d1" class="bulleted-list"><li style="list-style-type:disc">陰道乾燥</li></ul><ul id="c30d5dfe-5a91-4b7a-8600-ef3c5ca2bf57" class="bulleted-list"><li style="list-style-type:disc">入睡困難</li></ul><ul id="81b2b556-501e-4c25-ae43-efcb55c4bd71" class="bulleted-list"><li style="list-style-type:disc">心悸</li></ul><ul id="2b54db56-2d3e-4d10-aee6-39c031b604b9" class="bulleted-list"><li style="list-style-type:disc">關節疼痛並僵硬</li></ul><ul id="4e1e62b3-664d-4615-b868-db035f8e80d8" class="bulleted-list"><li style="list-style-type:disc">情緒波動</li></ul><ul id="37105956-7be5-4bb2-a38f-6c757d540a33" class="bulleted-list"><li style="list-style-type:disc">肌肉減少</li></ul><ul id="d492ca61-a24c-49a3-983b-dca987cca379" class="bulleted-list"><li style="list-style-type:disc">反覆尿道感染</li></ul><p id="eb1c3037-7239-42bf-9fed-38fced99ef15" class="">40多歲的女性上有老，下有小，負擔重。</p><p id="7f2f62f9-edef-44a0-9d7b-fde438d33c23" class="">弗裏克教授表示，40多歲的女性非常繁忙，她們既要工作，還要照顧家庭和不同年齡的孩子。同時，還可能照顧年邁的父母，因此，她們可能把認知能力問題歸因於壓力。</p><p id="e5073850-900c-415c-9f53-fe3d47354bd4" class="">另一方面，許多職業女性害怕談論更年期問題。弗裏克教授補充說，她們工作非常努力才取得職業生涯中的某些成績，不想被人當作老弱病殘對待。</p><p id="88847e46-a4f7-4d6c-9942-aeecd605a24e" class="">BBC所請教的一些專家一致同意，有必要對與更年期相關的認知能力下降進行認真研究。最重要的是要提高認識，以避免全世界數百萬女性遭受不必要的痛苦。</p><p id="eb0aaa31-cfc4-44e4-89d0-9058e1b71d01" class="">馬基教授說，第一步，重要的是女性們不要驚慌，以為自己得了失智症。這不太可能，她們所經歷的一切很正常。</p><p id="7fab38cd-49cc-475a-a3af-6892862e3b9a" class="">儘管研究結果喜憂參半，但有跡象表明，「腦霧」是暫時現象，隨著大腦適應了雌激素很少或完全沒有，這種現象就會好轉或消失。</p><p id="18f96898-7989-4418-a225-86130530fcf9" class="">一些女性接受HRT貼劑治療</p><p id="887848ad-6c53-4837-8cca-3cbf0edfbb8c" class="">馬基教授表示，但如果潮熱讓你整夜無法入睡，還是建議去看醫生。醫生可能在某些情況下會建議使用激素替代療法（也稱荷爾蒙替代療法，HRT，hormone replacement therapy），尤其是對較為年輕的女性，因為其好處還是大於風險。</p><p id="e3a4f960-fb75-4c44-a3bf-bfd6ef8977d1" class="">德維醫生同意許多女性對這種療法反應良好的觀點。但在近20年前所發表的一項有爭議的研究後，HRT療法使用率大幅下降。該研究稱，激素替代療法與乳腺癌有聯繫 - 這一結論後來受到挑戰。</p><p id="fa127863-6413-4530-8cd8-252cbe4fc25e" class="">弗裏克教授表示，現代HRT的使用比過去更具體，而且雌激素的形式也有多種多樣，在許多情況下都是有益的。</p><p id="b922265a-019f-40f6-bc7f-37aa9af6b48c" class="">而對那些症狀較輕、或選擇不接受HRT治療的女性，也有許多其他辦法幫助改善認知功能。</p><p id="b596734f-82ce-4e15-9680-729e6b039470" class="">比如，有氧運動、通過遊戲或是腦部練習來刺激大腦、嚴格遵守睡眠時間、限制酒精攝入量以及採納地中海式飲食等都對緩解更年期不適症狀有幫助。</p></div></article></body></html>
