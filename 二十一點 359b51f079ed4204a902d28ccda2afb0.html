@@ -1,0 +1,678 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>二十一點</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="359b51f0-79ed-4204-a902-d28ccda2afb0" class="page sans"><header><h1 class="page-title"><strong>二十一點</strong></h1></header><div class="page-body"><p id="22580345-2d32-476c-bd8b-e7512aa3671f" class=""><strong>二十一點</strong>（英語：Blackjack；<a href="https://www.wikiwand.com/zh-tw/%E6%BE%B3%E9%96%80">澳門</a>部份賭場寫作<strong>廿一點</strong><a href="https://www.wikiwand.com/zh-tw/%E4%BA%8C%E5%8D%81%E4%B8%80%E9%BB%9E#citenote2">[a]</a>），是使用<a href="https://www.wikiwand.com/zh-tw/%E6%92%B2%E5%85%8B%E7%89%8C">撲克牌</a>玩的<a href="https://www.wikiwand.com/zh-tw/%E8%B3%AD%E5%8D%9A">賭博</a>遊戲。</p><h2 id="2a46c65a-42e8-4cbb-b880-fd66eafd3a5f" class="">歷史</h2><p id="28b48448-ceae-49b9-a022-5ffdb269c9e9" class="">二十一點的前身是在1700年左右起源於<a href="https://www.wikiwand.com/zh-tw/%E6%B3%95%E5%9C%8B">法國</a>賭場的「vingt-et-un」（法文中21之意），當時的遊戲對於兩張牌的二十一點並未提供三比二的賠付<a href="https://www.wikiwand.com/zh-tw/%E5%88%86%E7%BA%A2">分紅</a>。</p><p id="d03c5ec8-667c-4ab5-b660-db9110df3d87" class="">起初二十一點在<a href="https://www.wikiwand.com/zh-tw/%E7%BE%8E%E5%9C%8B">美國</a>並不流行，因此<a href="https://www.wikiwand.com/zh-tw/%E8%B3%AD%E5%A0%B4">賭場</a>試著提供各種額外的獎金吸引賭客參與牌局。其中之一的額外獎金是當玩者手中同時擁有黑桃A和黑色的J（黑桃J或梅花J都可）時，獎金將會變成十倍。這樣的牌稱為「black
+ jack」（黑傑克，二十一點），而這個名字就漸漸成為美國版二十一點遊戲的名稱，即使後來這項額外獎金規則停止，「black 
+jack」名稱還是繼續存在。規則發展至今日，「blackjack」已經不一定需要包含J或黑色的牌了。</p><h2 id="fc082ad5-2585-4f11-9661-1c822c2d6bdc" class="">二十一點的玩法</h2><p id="ccc1f38a-60c3-4578-962f-a81796a0a40e" class="">擁有最高點數的玩家獲勝，其點數必須等於或低於21點；超過21點的玩家稱為爆牌（Bust）。2點至10點的牌以牌面的點數計算，J、Q、K 
+每張為10點。A可記為1點或11點，而2-10則按牌面點數算，若玩家會因A而爆牌則A可算為1點。當一手牌中的A算為11點時，這手牌便稱為「軟牌」（soft
+ hand），因為除非玩者再拿另一張牌，否則不會出現爆牌。</p><p id="33b33a41-5ef7-4c71-9186-37b9960582fc" class="">莊家在取得17點之前必須要牌，因規則不同會有軟17點或硬17點才停牌的具體區分。且莊家如果拿牌五張而沒有爆牌則視為莊家勝利。</p><p id="9f5167c5-c3ee-4ebe-8a21-81be0b07b43c" class="">每位玩家的目的是要取得最接近21點數的牌來擊敗莊家，但同時要避免爆牌。要注意的是，若玩家爆牌在先即為輸，就算隨後莊家爆牌也是如此。若玩家和莊家擁有同樣點數，這樣的狀態稱為「push」，玩家和莊家皆不算輸贏。每位玩者和莊家之間的遊戲都是獨立的，因此在同一局內，莊家有可能會輸給某些玩家，但也同時擊敗另一些玩家。</p><p id="178ce29c-3850-4a1f-9e31-0585ee499d4c" class="">牌桌上通常會印有最小和最大的賭注，每一間賭場的每一張牌桌的限額都可能不同。在第一筆籌碼下注後，莊家開始發牌，若是從一副或兩副牌中發牌，稱為「pitch」牌局；較常見的則是從四副牌中發牌。莊家會發給每位玩家和自己兩張牌，莊家的兩張牌中會有一張是點數朝上的「明牌」，所有玩家皆可看見，另一張則是點數朝下的「暗牌」。若是四副牌時，發牌時點數會朝上，若為「pitch」牌局則發牌時點數朝下。</p><p id="9daced43-fd60-4834-93a9-016e0299256a" class="">在美式的二十一點遊戲中，若莊家的明牌是A或價值10的牌，莊家會確認他的暗牌是否會形成二十一點。這項確認會在所有玩家選擇之前進行，但進行前會先詢問玩家是否需要「保險」（insurance，在明牌是
+ A 的情況下）。若莊家的牌為二十一點（blackjack），則所有的玩家即時算輸，將損失第一筆賭注籌碼，除非玩者本身也是二十一點，形成同點數的
+ push 狀況。（在某些美國的賭場，莊家採用歐式的規則，在全部玩家都出手前不會先去確認暗牌。在這樣的情況下，當莊家的牌揭開後為 
+二十一點時，則所有沒有二十一點的玩家算輸。）</p><p id="cc96b4c0-0544-45b9-b5b0-191747f20a10" class="">兩張牌點數相加為21（一張A再加一張價值10點的牌）稱為「二十一點」（black 
+jack），擁有這副牌的玩家即自動成為贏家（除非莊家也同時持有二十一點，這種點數相同的情形就稱為 
+push）。擁有二十一點的玩家可贏得下注籌碼的1.5倍。部份的賭場僅付給1.2倍的金額；但通常是在僅使用一副牌遊玩的賭局中。</p><p id="d285fad0-25f5-4317-adc4-7942352a580f" class="">通常每次以四至六副<a href="https://www.wikiwand.com/zh-tw/%E6%92%B2%E5%85%8B%E7%89%8C">撲克牌</a>遊玩，直至玩剩一副或一半為止，再重新洗牌。</p><h3 id="8d9f2347-fb46-4db9-b901-d45a175ac881" class="">流程</h3><ol type="1" id="02e4dcb4-b9de-4dfa-bd15-b2d84b05494a" class="numbered-list" start="1"><li><strong>洗牌</strong></li></ol><ol type="1" id="c0347873-0524-4f9f-b97a-db06a8d54bdf" class="numbered-list" start="2"><li>向各玩家分別派發一張<strong>牌</strong></li></ol><ol type="1" id="0daeb34b-db82-44cc-a5bf-f071fea233e8" class="numbered-list" start="3"><li>莊家發給自己一張<strong>牌</strong></li></ol><ol type="1" id="179e0e0d-be69-43e7-9b5b-918dbc9903f3" class="numbered-list" start="4"><li>向各玩家派第二張<strong>牌</strong></li></ol><ol type="1" id="0ac083e1-dce7-4617-b283-fe1e6658beb1" class="numbered-list" start="5"><li>莊家再發給自己一張<strong>牌</strong>（不是所有賭場都會有這個步驟，大部份賭場都是在所有玩家結束要牌後才發第二張明牌給莊家）</li></ol><ol type="1" id="1b9deaa5-8a90-47d4-a302-853d222547e2" class="numbered-list" start="6"><li>如果莊家明牌是A、荷官會詢問玩家是否購買<strong>保險</strong></li></ol><ol type="1" id="8868a9e1-0f17-4ec7-a49d-77550c939d22" class="numbered-list" start="7"><li>玩家可進行<strong>加注</strong>、<strong>投降</strong>、<strong>分牌</strong>等動作</li></ol><ol type="1" id="d2b08038-d7e6-4a19-ab91-6b7f50bb9b14" class="numbered-list" start="8"><li>莊家逐位詢問玩家是否<strong>加牌</strong>、直至閒家不加牌才詢問下一位玩家，輪流詢問玩家直至最後一位玩家加牌完成</li></ol><ol type="1" id="6457620f-7b7e-4950-9eee-bc661d2ff0e0" class="numbered-list" start="9"><li>莊家如不足<strong>17點</strong>便需加牌直至超過或等於<strong>17點</strong></li></ol><ol type="1" id="74d22e74-e15e-49b1-9928-7ca9c2e30de4" class="numbered-list" start="10"><li>對未有<strong>爆牌</strong>的玩家，比點數大小，大者勝，可得賠金; 如莊家<strong>爆牌</strong>、未有<strong>爆牌</strong>的玩家便可得賠金</li></ol><ol type="1" id="58aca0b7-d129-44b2-9108-e721278484ba" class="numbered-list" start="11"><li>回收已使用的牌及給小費</li></ol><ul id="b5770ee6-a3fd-413e-97ce-960a582bba67" class="bulleted-list"><li style="list-style-type:disc">注: 回收已使用的牌必須順序回收。如分開大牌和小牌個別回收等不正常收牌行為，便有<a href="https://www.wikiwand.com/zh-tw/%E5%87%BA%E5%8D%83">出千</a>的可能，並且可能會被請提出異議而被迫離開。</li></ul><h3 id="83862119-c1eb-46ab-9a80-b497ffd0e7d1" class="">點數計算</h3><p id="6ed67ddd-6c2b-40bc-853e-9987ff9e4aba" class="">A可作一點或十一點，2-10作該牌之點數，J、Q、K作10點。</p><h3 id="2c434bd7-6e44-426a-ab4d-6f7b03280d30" class="">發牌</h3><p id="99b3961f-7250-436f-95fb-976203863349" class="">首先由一位荷官作<strong>莊家</strong>負責發牌，其餘玩家為<strong>閒家</strong>。閒家會向莊家投下一定注碼，莊家會以順時鐘方向向眾閒家派發一張明牌，然後向自己派發一張暗，接著莊家會以順時鐘方向向眾閒家派發一張明牌（即掀開的牌），之後又向自己派發一張明牌。</p><p id="96cfc898-c91a-4b0c-ac18-85c09d0aba8f" class="">當閒家手上擁有兩張明牌，莊家手上擁有一張暗牌和一張明牌，莊家就以順時鐘方向逐位閒家詢問是否再要牌（以明牌方式派發），玩家此時要計算是否要牌，因為牌局的最終目的，是要玩家手上擁有的牌總點數達到21點（或最接近又小於21點），然後和莊家比大小。當一位閒家決定不再要牌後，莊家才向下一位閒家詢問是否要牌。</p><p id="aeaab95f-9278-4bb9-865e-6f9aa52f1f69" class="">（按: 在一般賭場的賭局，<strong>莊家</strong>並不一定是發牌者。）</p><h3 id="9861fb56-8fe4-4f8b-8382-62d12adaa3df" class="">爆牌（超過21點）</h3><p id="2a1b6a9f-4886-43f4-9199-6da35db874d5" class="">閒家要牌後，其手上的總點數超過21點，稱為<strong>爆牌</strong>，則直接判定為輸牌。</p><p id="23fa9805-0bcd-496b-914d-7debc1fa19dc" class="">反之若其手上擁有的牌的總點數不超過21點，該閒家可決定是否繼續要牌。</p><p id="78dc04ae-1d8e-47b6-98d4-fe14ac617f13" class="">當最後一位閒家決定不再要牌後，莊家就必須揭開自己所有手上的牌，若總點數少於17點，就必須繼續要牌；如果莊家<strong>爆牌</strong>，便向沒有<strong>爆牌</strong>的閒家，賠出該閒家所投注的同等的注碼。</p><h3 id="1dad8556-3875-4799-8a19-b996fbee658f" class="">點數決勝</h3><p id="78c7aa31-fef6-4cf4-84b6-e819b228d011" class="">如果莊家最終沒有<strong>爆牌</strong>的話，原來沒有<strong>爆牌</strong>的眾閒家便要揭開手上所有的牌，比較點數決定誰勝誰負，點數較大的取勝。（例牌例外）</p><h2 id="5928e36e-f4d1-4c84-9254-3cbe669b0337" class="">特別規例</h2><h3 id="2287d271-9765-4503-8121-1099c5020c14" class="">保險</h3><p id="fe8b48f2-89d8-4b3a-b16e-cc49dc6c0798" class="">當莊家面牌是A，閒家可以注碼的一半選擇是否購買保險，以賭莊家的首二張牌總和會不會是21點，如莊家不是21點便立即沒收保險金；反之若是21點便可獲得保險金額的2倍賠償。</p><h3 id="33c11d88-d74b-4a38-9431-69a0a3302164" class="">雙倍下注</h3><p id="3e986e4f-e840-4c0d-8df8-c82d362009b1" class="">若閒家首兩張牌點數之和為11點，可以選擇加倍投注，但加注後僅獲發1張牌。有些賭局容許閒家在首兩張牌總和為10點（甚至任何點數）時加注。</p><h3 id="15652215-7e2a-4218-b3cd-7979f8dd997f" class="">分牌</h3><p id="6981dd06-2a35-478d-92fb-0d57caf92566" class="">若閒家首兩張牌點數相同，可以選擇分牌，並須加注。分出每門的下注金額須與原注相同。若閒家打兩張A分開，則每張A只獲發1張牌，不可再要牌。有些分牌後不可再分牌</p><h3 id="da64ab62-fa97-4fb8-8150-f648cb78a4b1" class="">對子</h3><p id="fa0ce485-4d74-484f-add9-98f078e4183b" class="">在投注區上的區位，在投注同時可以放對子區，按順方向派發，如果開牌出現相同號碼，可有5倍中；若是同花對子，則30倍中</p><h3 id="250b9361-9f93-481e-a1cc-b8dc16b404b2" class="">「二十一點」Black Jack</h3><p id="6e244d82-0487-4117-b2c2-a28ff86e7f8a" class="">「二十一點」Black Jack 又名為<strong>「自然」Black Jack (Natural Black Jack)</strong>。如果閒家手中的一張暗牌和一張明牌分別是一張A牌（可作11點）和一張十點牌（K、Q、J、10），這副牌叫做<strong>二十一點（Black Jack）</strong>（屬例牌）莊家須向該閒家賠上1.5倍（或1.2倍）注碼。</p><h3 id="2873f54f-0390-4f62-9b86-4b7df465b7a2" class="">五龍（過五關）</h3><p id="fe17fdc6-fc68-4765-8c81-ad94cd911145" class="">如果要牌直至手上有5張牌而又沒有<strong>爆牌</strong>，這副牌叫做<strong>五龍</strong>（屬例牌），該閒家可向莊家收3倍。</p><h3 id="1042af41-9b56-4ecc-b500-c964c99fbbd9" class="">順</h3><p id="a7a073ae-6922-43f0-b91d-458073e4e871" class="">在投注區上的區位，在投注同時可以放21+3區，按順方向派發，如果莊家第一張牌與閒家前兩張牌組成連號的牌型，可有10倍中；</p><h3 id="834865be-76dc-42be-b37f-b141df170375" class="">同花</h3><p id="7168b886-0d59-4a26-8b31-f1a056d687f1" class="">在投注區上的區位，在投注同時可以放21+3區，按順方向派發，如果莊家第一張牌與閒家前兩張牌組成花色相同的牌型，可有5倍中；</p><h3 id="83d41e0f-7e1d-4a52-a311-0472e15f6661" class="">三條</h3><p id="eba07c16-9fb8-49c1-b64f-7c1b837c91e3" class="">在投注區上的區位，在投注同時可以放21+3區，按順方向派發，如果莊家第一張牌與閒家前兩張牌組成三張相同點數的牌型，可有25倍中；</p><h3 id="7e646d70-2697-495b-ab70-c27f453f7a31" class="">同花順</h3><p id="6bd6a0bf-1241-4ee7-970e-723708e9bf8b" class="">在投注區上的區位，在投注同時可以放21+3區，按順方向派發，如果莊家第一張牌與閒家前兩張牌組成花色相同且連號牌型，可有25倍中；</p><h3 id="7c3eeefb-cf72-4dda-a04a-758193311d4c" class="">同花三條</h3><p id="2e5dddaf-4910-4609-90f1-0612277b2a30" class="">在投注區上的區位，在投注同時可以放21+3區，按順方向派發，如果莊家第一張牌與閒家前兩張牌組成花色相同且三張相同點數的牌型，可有50倍中；</p><p id="66494192-6ec5-46c5-aad1-a3a7764d0291" class="">此情形可與剛好二十一點同時並存。</p><h3 id="3245a708-57c5-441c-9688-9fa89f3d1f90" class="">平手</h3><p id="1dbfa10d-f048-4983-a430-53022f68e2cc" class="">若莊家和眾閒家要以點數決勝（各方都沒有出現<strong>爆牌</strong>的情況），若該閒家和莊家手上所擁有的牌的總點數一樣或Black Jack的話，算平手，閒家可拿回原賭注。</p><h3 id="4a50e981-1af1-4f0f-97c2-217d0bad8a4d" class="">投降</h3><p id="c39a3363-370d-469a-8c0c-9a9386112833" class="">在所有閒家未要牌之前閒家可選擇投降，並取回一半注碼，俗稱投降輸一半</p><h2 id="70bd69bc-3d38-4348-902f-147514c65807" class="">數牌及機率</h2><p id="beec3a9a-3683-415a-a8f6-ef55096f298c" class="">由已派發的牌可以推算未使用的牌值的比例，從而調整賭金，使到勝的時候可得到更多; 或在是否要牌方面降低<strong>爆牌</strong>的風險; 或停牌等候莊家<strong>自爆</strong>。</p><h3 id="395a8975-fef3-4d48-9116-cab88bb56fcd" class="">數牌</h3><p id="8bc8116d-2bd4-4f98-be7f-cf10f0d07007" class=""><strong>數牌的流水數字</strong>，流行的H-L法通常由2-6記為<strong>+1</strong>，7、8、9記為 <strong>0</strong>，10、J、Q、K、A記為<strong>-1</strong>(K-O法則是由2-7記為<strong>+1</strong>，8-9記為 <strong>0</strong>，10、J、Q、K、A記為<strong>-1</strong>)，以此加減後便可推算未用的牌會偏向那一方。數出來的和再除以牌靴剩餘牌的副數，稱之為真數(True Count)。藉由參考真數來調整下的賭注和決策，可以削弱莊家的優勢。</p><ul id="e8cb0329-0014-4c06-8470-6264d8391d86" class="bulleted-list"><li style="list-style-type:disc">數牌並不是<a href="https://www.wikiwand.com/zh-tw/%E5%87%BA%E5%8D%83">出千</a>的一種。</li></ul><ul id="b8872c70-a09b-4af8-86ae-fee34a05c054" class="bulleted-list"><li style="list-style-type:disc">使用電子儀器加入賭局則是一種嚴重罪行，而電子儀器除了指計算機之外，其他如以CD音樂通知其他人下注也包括在內。</li></ul><h3 id="4db4de9a-ed46-4df8-b73f-588e941d2295" class="">機率</h3><p id="58fc6bb6-6299-487d-b2e7-f1284b78daed" class="">預知下一張牌將會是大牌或小牌的方向，便可用來減少自身爆牌的風險。（例如: 閒家是12點，莊家面牌是4點，而<strong>數牌的流水數字</strong>是+20、那麼等候莊家自爆便好了）。如果規則本身造成莊家優勢較低且每靴切牌足夠少，玩家便有機會出現正收益，再加上有人會<strong>數牌</strong>依賴真數指導下大注，便會增加莊家的輸率，所以當莊家懷疑有人數牌時往往會使用6副<a href="https://www.wikiwand.com/zh-tw/%E6%92%B2%E5%85%8B%E7%89%8C">撲克牌</a>甚至8副牌，及讓玩家每靴牌只能玩一半來降低穿透率，用於抵消平衡<strong>數牌的優勢</strong>。在澳門的賭場則使用連續洗牌機來讓數牌的優勢完全消失。</p><figure id="80a01f47-d4b5-4fe1-adc7-369254374402" class="link-to-page"><a href="%E4%BA%8C%E5%8D%81%E4%B8%80%E9%BB%9E%2080a01f47d4b54fe1adc7369254374402.html">二十一點</a></figure></div></article></body></html>
