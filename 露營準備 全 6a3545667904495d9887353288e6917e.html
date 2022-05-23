@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>露營準備 全</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6a354566-7904-495d-9887-353288e6917e" class="page sans"><header><h1 class="page-title">露營準備 全</h1></header><div class="page-body"><h1 id="1adafe10-3b9e-4d0f-b2e2-480402a95196" class="">Camp</h1><ul id="80400b0f-6f1c-4ea6-a1bc-8ca66c8f88c6" class="bulleted-list"><li style="list-style-type:disc">住<ul id="dacd12d8-3307-4bdc-8f5f-d5af34a8d77c" class="bulleted-list"><li style="list-style-type:circle">住帳<ul id="c45d70f9-4b67-4ffa-a9bb-53af06ffb6e3" class="bulleted-list"><li style="list-style-type:square">外帳</li></ul><ul id="ce0c7f6c-fec5-4860-944f-271af2429578" class="bulleted-list"><li style="list-style-type:square">地墊</li></ul></li></ul><ul id="1fb1e6fe-23e9-4852-b5c8-06fc81086e6f" class="bulleted-list"><li style="list-style-type:circle">客廳帳<ul id="cfee3bae-c33c-4ef2-8309-6c846d6c8f1b" class="bulleted-list"><li style="list-style-type:square">天幕<ul id="f583ef6b-223a-4fbe-a18d-eb5b2d6f3a58" class="bulleted-list"><li style="list-style-type:disc">棍</li></ul></li></ul></li></ul><ul id="868ff2d1-906b-42ea-b771-85d1693906df" class="bulleted-list"><li style="list-style-type:circle">繩<ul id="be9b3677-26f2-4994-a0c8-0138029fd035" class="bulleted-list"><li style="list-style-type:square">釘</li></ul><ul id="67a9f16b-bc12-46b0-8b97-9efe15d92d49" class="bulleted-list"><li style="list-style-type:square">捶子</li></ul></li></ul><ul id="95bfd61f-29b7-4290-a38d-4a1c6ea12ff6" class="bulleted-list"><li style="list-style-type:circle">床<ul id="c04db369-67ed-4e67-a888-dbed2ee97f16" class="bulleted-list"><li style="list-style-type:square">充氣墊<ul id="4752739a-46f2-482a-8060-ff0b1179a1d2" class="bulleted-list"><li style="list-style-type:disc">大</li></ul><ul id="26911128-b98e-488c-afea-f83529fd585e" class="bulleted-list"><li style="list-style-type:disc">小</li></ul><ul id="822436b9-4a5f-4826-8735-032bc88dc242" class="bulleted-list"><li style="list-style-type:disc">打氣機</li></ul></li></ul><ul id="0604dfbf-ffc3-4b57-aed3-fe8aea34e545" class="bulleted-list"><li style="list-style-type:square">睡袋<ul id="c247cd67-763b-4ccf-99a3-704ec5f04c1e" class="bulleted-list"><li style="list-style-type:disc">枕</li></ul><ul id="03cfbf8f-23e1-4e71-bfde-f7748151f461" class="bulleted-list"><li style="list-style-type:disc">床單</li></ul></li></ul></li></ul><ul id="3e02cb77-ba90-4632-990a-94d0ad5df9d2" class="bulleted-list"><li style="list-style-type:circle">桌椅<ul id="f8427188-933c-4463-ad98-ed98dddf7bcf" class="bulleted-list"><li style="list-style-type:square">高背椅</li></ul><ul id="69c88a04-60a1-48f3-a27d-ca4b869370bc" class="bulleted-list"><li style="list-style-type:square">躺椅</li></ul><ul id="8fc48561-5dc3-45c4-bb64-b5a2efbede41" class="bulleted-list"><li style="list-style-type:square">坐椅</li></ul><ul id="53b8bc98-accd-49e4-87f8-1a1ee256ae13" class="bulleted-list"><li style="list-style-type:square">大桌</li></ul><ul id="eaa0d51e-baaf-4417-b996-7da4f85b2e2c" class="bulleted-list"><li style="list-style-type:square">小桌<ul id="865f90db-4909-44c0-99ff-f2f98d667351" class="bulleted-list"><li style="list-style-type:disc">桌下布</li></ul></li></ul><ul id="b4e300e0-c0d6-4fc4-b50a-9e78a1e8c2cd" class="bulleted-list"><li style="list-style-type:square">料理桌<ul id="184c0095-104e-487a-a9e1-25c45911618e" class="bulleted-list"><li style="list-style-type:disc">網層</li></ul></li></ul></li></ul><ul id="d4576cca-030e-4820-b8f9-699ea1473254" class="bulleted-list"><li style="list-style-type:circle">雨衣<ul id="116fb3a4-5335-479b-a590-6ba8a51b8809" class="bulleted-list"><li style="list-style-type:square">半身</li></ul><ul id="e3a040ae-9675-4618-870b-1b716f0a7644" class="bulleted-list"><li style="list-style-type:square">全身</li></ul><ul id="06fcce46-921f-4eab-8831-c586c13a2267" class="bulleted-list"><li style="list-style-type:square">傘</li></ul></li></ul><ul id="be467674-6acf-4322-a97a-1da8dd71c844" class="bulleted-list"><li style="list-style-type:circle">吊床<ul id="e12650c5-ab09-481d-90f4-7d9807e1d1d6" class="bulleted-list"><li style="list-style-type:square">綁繩</li></ul></li></ul><ul id="33e23004-1e94-4f7b-a640-9ecb201b4688" class="bulleted-list"><li style="list-style-type:circle">電器<ul id="1ba7a40d-42fe-4200-9ea3-34f2dc88f5cd" class="bulleted-list"><li style="list-style-type:square">延長線<ul id="d85f15db-98f6-4a32-84e6-2a442ecabfe0" class="bulleted-list"><li style="list-style-type:disc">主</li></ul><ul id="fc3d4692-ee7c-4e3b-9741-cd10afbbae28" class="bulleted-list"><li style="list-style-type:disc">附</li></ul></li></ul><ul id="b0155c08-3983-4d3b-8dcd-d07c5e26d668" class="bulleted-list"><li style="list-style-type:square">燈<ul id="c1ed6b66-e739-49ba-a8c7-34da578944ad" class="bulleted-list"><li style="list-style-type:disc">線燈</li></ul><ul id="92ff1be9-913a-4300-84c0-c72b367102ab" class="bulleted-list"><li style="list-style-type:disc">燈泡</li></ul><ul id="dd3f8c04-a92e-40ba-9048-ff0441af8d0c" class="bulleted-list"><li style="list-style-type:disc">手電筒<ul id="5075db4f-8c71-496f-8977-710892ac0c5e" class="bulleted-list"><li style="list-style-type:circle">頭燈</li></ul></li></ul></li></ul><ul id="629e229c-5b30-4cf4-9e7d-c67e74c4e7ae" class="bulleted-list"><li style="list-style-type:square">充電<ul id="3b9a7de4-f1ed-4f7e-9fcc-17b9e730df75" class="bulleted-list"><li style="list-style-type:disc">四 USB</li></ul><ul id="732cb5ae-77fd-4a99-b02e-b68316b047bd" class="bulleted-list"><li style="list-style-type:disc">一 USB</li></ul><ul id="074a6d83-ec12-4594-97a2-6014d0a705be" class="bulleted-list"><li style="list-style-type:disc">線<ul id="412301e7-5dfc-4d58-89bb-2bdd0bd32326" class="bulleted-list"><li style="list-style-type:circle">IPHONE</li></ul><ul id="8bfebfe8-ce13-4291-b9fd-4eb3733057cd" class="bulleted-list"><li style="list-style-type:circle">Micro USB</li></ul><ul id="ab0420f6-62f1-4484-b244-681aabe5df13" class="bulleted-list"><li style="list-style-type:circle">USB C</li></ul></li></ul><ul id="65e223ee-ff3f-4caa-9152-4584073cc4ef" class="bulleted-list"><li style="list-style-type:disc">行動電源<ul id="55306967-7c3d-4c68-9196-1e585277c616" class="bulleted-list"><li style="list-style-type:circle">20000</li></ul><ul id="3b68f71c-3f65-44d0-a9bf-cc6a7450029a" class="bulleted-list"><li style="list-style-type:circle">5000</li></ul></li></ul></li></ul></li></ul><ul id="d5bb1afe-ccbb-4340-99e9-eade29c1235c" class="bulleted-list"><li style="list-style-type:circle">工具<ul id="94c682b8-5160-4b11-897c-df08ab55947c" class="bulleted-list"><li style="list-style-type:square">置物網</li></ul><ul id="95bed938-1fb6-4b8b-9125-6ecc1157be0e" class="bulleted-list"><li style="list-style-type:square">夾<ul id="0f6c6009-f55f-4d13-b175-350ea21d639a" class="bulleted-list"><li style="list-style-type:disc">衣夾</li></ul><ul id="bbb8198d-5241-4e14-9f25-5e4785f971bf" class="bulleted-list"><li style="list-style-type:disc">天幕夾</li></ul></li></ul><ul id="271603dd-a3f5-41a9-a643-ad9fdf72aa91" class="bulleted-list"><li style="list-style-type:square">刀<ul id="b6ae8b20-8c0e-42f7-b930-b9f67ebc210e" class="bulleted-list"><li style="list-style-type:disc">瑞士刀</li></ul><ul id="76a9e367-3064-4045-af83-f9a5ed4bda1a" class="bulleted-list"><li style="list-style-type:disc">吊環刀</li></ul></li></ul><ul id="9344bf20-de44-497b-a138-907e1220d4b9" class="bulleted-list"><li style="list-style-type:square">線</li></ul><ul id="0bdaeeea-b12a-44ea-940f-ccad1ba24b97" class="bulleted-list"><li style="list-style-type:square">衣架<ul id="671b9e1d-8ff5-473e-bef7-0f78a75b214b" class="bulleted-list"><li style="list-style-type:disc">晾衣繩</li></ul></li></ul></li></ul></li></ul><ul id="5a0ed29a-5154-4ddb-a1ca-1007be82cbd2" class="bulleted-list"><li style="list-style-type:disc">衣<ul id="df0a5d2b-258d-4f54-8614-14e94bd4ed65" class="bulleted-list"><li style="list-style-type:circle">衣服<ul id="1746b06c-300b-4b0d-b598-5cfc19bf25eb" class="bulleted-list"><li style="list-style-type:square">內衣<ul id="e0e7564a-666d-47c6-8785-e4691de61d6d" class="bulleted-list"><li style="list-style-type:disc">幾天</li></ul></li></ul><ul id="25fece2b-a904-4d46-bc52-8306a33f9f2f" class="bulleted-list"><li style="list-style-type:square">外衣<ul id="f0348e1d-490c-4b98-bb68-5ae2d2a6036c" class="bulleted-list"><li style="list-style-type:disc">幾天</li></ul><ul id="060fd420-1e9e-4241-b16f-2f206f0ea865" class="bulleted-list"><li style="list-style-type:disc">防寒</li></ul></li></ul><ul id="0232b1fd-594d-4db0-bd69-3e40822a66e1" class="bulleted-list"><li style="list-style-type:square">拖鞋</li></ul></li></ul><ul id="2e0b4e2a-1aa0-4bce-b7da-7b1630cf0bd9" class="bulleted-list"><li style="list-style-type:circle">晚上洗澡<ul id="3d8aac6d-1cc5-409e-967c-42afefba21f6" class="bulleted-list"><li style="list-style-type:square">浴巾</li></ul><ul id="5d53e2f4-0ad5-4a6b-b31c-3881fcc4d619" class="bulleted-list"><li style="list-style-type:square">毛巾</li></ul><ul id="98676003-cae2-4142-bdf8-4f07a7944035" class="bulleted-list"><li style="list-style-type:square">肥皂</li></ul><ul id="1fd2b34a-7451-44d7-b57d-476392e24fb7" class="bulleted-list"><li style="list-style-type:square">洗髮精</li></ul></li></ul><ul id="b4fdfa5a-e681-4783-9448-8011f2c7db36" class="bulleted-list"><li style="list-style-type:circle">早上洗臉<ul id="19aa79c5-b3e0-4e08-8621-4118fa436978" class="bulleted-list"><li style="list-style-type:square">牙刷<ul id="e1f72b2b-317b-44b6-8ab7-0b3628640f3d" class="bulleted-list"><li style="list-style-type:disc">沖牙機</li></ul></li></ul><ul id="c1f18b5d-1170-43e4-bc32-136f9630fd8e" class="bulleted-list"><li style="list-style-type:square">牙膏</li></ul><ul id="66afeacc-012b-4d69-8a0a-c803025d8bd7" class="bulleted-list"><li style="list-style-type:square">毛巾</li></ul></li></ul></li></ul><ul id="9e2be34d-11b4-405d-bae6-5f9777cd92c4" class="bulleted-list"><li style="list-style-type:disc">食<ul id="3e23b226-94fe-41fe-84f4-68c48001b625" class="bulleted-list"><li style="list-style-type:circle">食材<ul id="bbb6c239-6bb1-46d2-a595-9c00b4d4f204" class="bulleted-list"><li style="list-style-type:square">一中</li></ul><ul id="cab9dfe0-bc4d-4a74-8e9a-73b1ea2b19a7" class="bulleted-list"><li style="list-style-type:square">一晚</li></ul><ul id="41206025-d530-47f8-b874-26f130ff4b52" class="bulleted-list"><li style="list-style-type:square">二早</li></ul><ul id="c51c993c-8400-4743-a6bb-bc4c2e93f57c" class="bulleted-list"><li style="list-style-type:square">二中</li></ul><ul id="f1e065df-99ae-459d-9ef7-e0d92d63515d" class="bulleted-list"><li style="list-style-type:square">二晚</li></ul><ul id="e1e8b5d1-5363-44ea-bd75-5d77726e2c2f" class="bulleted-list"><li style="list-style-type:square">三早</li></ul><ul id="e09c0438-c85f-44fc-af03-1a7bb56d020c" class="bulleted-list"><li style="list-style-type:square">三中</li></ul></li></ul><ul id="cd526989-518c-4524-94ea-3cb060ae77db" class="bulleted-list"><li style="list-style-type:circle">食具<ul id="c0146f2a-60b6-4e05-8012-9a37a0c96185" class="bulleted-list"><li style="list-style-type:square">鍋<ul id="abd52d01-b62c-4ee4-9c72-4c201c3c2be7" class="bulleted-list"><li style="list-style-type:disc">湯鍋</li></ul><ul id="51d06e91-ce2b-45e9-b8fe-d668e3482806" class="bulleted-list"><li style="list-style-type:disc">煎鍋</li></ul></li></ul><ul id="3ce3d029-ec73-4f3a-b187-157eb3fe788d" class="bulleted-list"><li style="list-style-type:square">爐<ul id="2969c7db-3922-4e59-80c9-3aa3057764e3" class="bulleted-list"><li style="list-style-type:disc">瓦斯爈</li></ul><ul id="203a606f-4428-4fc1-94bd-b19163169f80" class="bulleted-list"><li style="list-style-type:disc">備用瓦斯爐</li></ul><ul id="6e0c6c0f-5943-4d42-a813-de612dcffb92" class="bulleted-list"><li style="list-style-type:disc">擋風板</li></ul><ul id="1874b9a3-22f7-420d-8b65-193f02754c77" class="bulleted-list"><li style="list-style-type:disc">烤爐</li></ul></li></ul><ul id="e1ac85db-9a1c-40d5-8acd-e1ee2c00f004" class="bulleted-list"><li style="list-style-type:square">工具<ul id="7c54a61f-57e1-4e16-8a52-3012eef4b9d4" class="bulleted-list"><li style="list-style-type:disc">碗</li></ul><ul id="78eb19e2-180d-4313-94af-77390ec43245" class="bulleted-list"><li style="list-style-type:disc">筷</li></ul><ul id="349bea41-4043-4c58-a8f2-2f369ee9b180" class="bulleted-list"><li style="list-style-type:disc">湯匙<ul id="fe583505-7365-44d8-9063-8527279b07ed" class="bulleted-list"><li style="list-style-type:circle">大湯匙</li></ul></li></ul><ul id="cafcf868-0c17-4967-9065-19e70d1dc457" class="bulleted-list"><li style="list-style-type:disc">叉</li></ul><ul id="6d5ab110-4a02-4ccc-a783-a213434fc8f4" class="bulleted-list"><li style="list-style-type:disc">杯</li></ul><ul id="0375e0c0-5cf6-4d73-9cf0-0fbc0a47465d" class="bulleted-list"><li style="list-style-type:disc">刀</li></ul><ul id="5a7c76e0-7ebf-4b89-95fe-40d4965e68c6" class="bulleted-list"><li style="list-style-type:disc">剪</li></ul><ul id="f81a55fa-ef98-4dc2-b24d-fd781b42647f" class="bulleted-list"><li style="list-style-type:disc">鍋鏟</li></ul><ul id="3cd1785b-1a7d-4e30-b37d-6f58d217dae0" class="bulleted-list"><li style="list-style-type:disc">夾子</li></ul></li></ul><ul id="f344ca0a-dffb-49a2-962b-210516271157" class="bulleted-list"><li style="list-style-type:square">抺布<ul id="3577d679-eaf7-4d9e-ba2e-cbdffd0097af" class="bulleted-list"><li style="list-style-type:disc">洗碗布</li></ul><ul id="3f0fde43-0415-453e-9bb3-fa3b82da4c93" class="bulleted-list"><li style="list-style-type:disc">菜瓜布</li></ul><ul id="9229ccb0-91fb-4526-8188-a6fb21eca127" class="bulleted-list"><li style="list-style-type:disc">洗碗精</li></ul></li></ul><ul id="62c12aa6-8ff5-4db9-892d-cccc9abf4cda" class="bulleted-list"><li style="list-style-type:square">碗具掛網</li></ul></li></ul><ul id="de20ffcd-e859-4e96-a81d-2fb6bd048b99" class="bulleted-list"><li style="list-style-type:circle">調味料<ul id="48945ce9-a74d-4eb5-908d-5b43df5f7fad" class="bulleted-list"><li style="list-style-type:square">鹽</li></ul><ul id="544da78c-290a-48ab-bc43-e87ddc4e4dc9" class="bulleted-list"><li style="list-style-type:square">醬油</li></ul><ul id="d447c569-28c8-45c8-82f3-f7b0d3be78d7" class="bulleted-list"><li style="list-style-type:square">油</li></ul><ul id="0a058fc4-f345-4567-96c5-876c35ba1289" class="bulleted-list"><li style="list-style-type:square">胡椒</li></ul><ul id="2a023d0f-1c4e-4a2d-8ce4-2f162de01450" class="bulleted-list"><li style="list-style-type:square">䓤</li></ul><ul id="f6a2d663-bbdb-4dce-a933-62d980211505" class="bulleted-list"><li style="list-style-type:square">薑</li></ul><ul id="33d6db4f-7b1e-4d2b-9479-be57c3ef6d6a" class="bulleted-list"><li style="list-style-type:square">糖</li></ul></li></ul><ul id="afb72c3d-5d41-4441-b99e-c23bd8885266" class="bulleted-list"><li style="list-style-type:circle">飲<ul id="65c36d25-89c2-46e0-8f65-8dad176db98d" class="bulleted-list"><li style="list-style-type:square">水</li></ul><ul id="6e1fcdc6-28af-4e7c-b296-b7927d3a8b3a" class="bulleted-list"><li style="list-style-type:square">飲料</li></ul><ul id="4cc5ce85-fbdc-4d20-9491-47852d26b3fe" class="bulleted-list"><li style="list-style-type:square">咖啡<ul id="8c1003db-52d8-4365-9a86-c3db64b5dbbf" class="bulleted-list"><li style="list-style-type:disc">行動咖啡杯</li></ul><ul id="d7377936-0cd5-4dea-bc68-5d2ed145f5ab" class="bulleted-list"><li style="list-style-type:disc">豆子</li></ul></li></ul><ul id="7eea204a-330e-4533-ad9d-e52fa0289802" class="bulleted-list"><li style="list-style-type:square">茶<ul id="3ea6ad8d-6aa4-4bb3-851e-59a3ce25b62c" class="bulleted-list"><li style="list-style-type:disc">茶具</li></ul><ul id="1adab3bc-c938-47d9-b690-dca3761b3d45" class="bulleted-list"><li style="list-style-type:disc">茶葉</li></ul></li></ul></li></ul></li></ul><ul id="44c43963-21e3-4dc5-9f05-1122977ef4f1" class="bulleted-list"><li style="list-style-type:disc">行<ul id="b42f2423-dfb2-4e68-91f1-3831f2ff0d7e" class="bulleted-list"><li style="list-style-type:circle">車子<ul id="c1ec81d8-c1fd-4ffa-98ed-24f5b7fb4cf2" class="bulleted-list"><li style="list-style-type:square">行前檢查</li></ul><ul id="21dfa6d8-321e-4447-98cc-5b2283659bee" class="bulleted-list"><li style="list-style-type:square">行程</li></ul></li></ul><ul id="9a0ffded-7b3c-4948-8cdd-f69d3a479cc3" class="bulleted-list"><li style="list-style-type:circle">小折</li></ul><ul id="1a08bbe5-9878-4228-8c98-99c2a5afe91a" class="bulleted-list"><li style="list-style-type:circle">滑板車</li></ul></li></ul><ul id="389f9d40-ff48-4d74-8ea8-f1a63f2e07fc" class="bulleted-list"><li style="list-style-type:disc">娛<ul id="2c7f7b2d-a4a9-49b7-8879-5bbb2ae9dd67" class="bulleted-list"><li style="list-style-type:circle">桌球</li></ul><ul id="f6f01ef1-e4fd-4141-98f7-9b6599aa8aca" class="bulleted-list"><li style="list-style-type:circle">羽毛球</li></ul><ul id="698b3475-13f0-411d-b5d7-29c9bab122ee" class="bulleted-list"><li style="list-style-type:circle">象棋</li></ul><ul id="cda2c2d7-e3d0-4b22-bc37-dc06f5c9aca8" class="bulleted-list"><li style="list-style-type:circle">跳棋</li></ul><ul id="ce005bee-b14b-4937-a326-85ecc0b628fa" class="bulleted-list"><li style="list-style-type:circle">牌</li></ul><ul id="d5f79ec1-8246-433e-b8c9-6fc72d67c9be" class="bulleted-list"><li style="list-style-type:circle">UNO</li></ul><ul id="6995c44d-2b47-44e8-9c8f-366e0c89b8ad" class="bulleted-list"><li style="list-style-type:circle">風箏</li></ul><ul id="f203834c-0333-4509-85d2-83502c0801d1" class="bulleted-list"><li style="list-style-type:circle">海邊玩具</li></ul><ul id="16830768-089c-46ed-ae79-da1366e59e43" class="bulleted-list"><li style="list-style-type:circle">游泳</li></ul><ul id="253e2f18-bdef-4eac-9157-a1acc8dc0e78" class="bulleted-list"><li style="list-style-type:circle">投影機<ul id="f4cc8e61-6141-4952-954b-f04500296a80" class="bulleted-list"><li style="list-style-type:square">chrome cast</li></ul><ul id="f152fedf-30c2-4e67-838f-d8a49fe05c4f" class="bulleted-list"><li style="list-style-type:square">small AP</li></ul></li></ul></li></ul></div></article></body></html>
